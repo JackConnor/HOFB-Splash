@@ -7,6 +7,10 @@ var app = angular.module('emailController', [])
     var self = this;
     console.log('ououououo');
 
+    navigator.geolocation.getCurrentPosition(function(data){
+      console.log(data);
+    })
+
   ////////end email controller//////
   ////////////////////////////////////
   ////////////////////////////////////
