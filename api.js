@@ -48,7 +48,7 @@ module.exports = function(app){
     mandrill_client.messages.send({
       message: {
         from_email: "thankyou@hofb.com"
-        ,text: "Thank you for your email!"
+        ,text: "Thank you for signing up with HOFB!"
         ,subject: "HOFB Signup Confirmation"
         ,to:[{
           email: req.body.email
