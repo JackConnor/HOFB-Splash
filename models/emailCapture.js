@@ -5,4 +5,4 @@ var emailCaptureSchema = new Schema({
   ,location: String
 })
 
-module.exports = mongoose.model('emailCapture', emailCaptureSchema)
+module.exports = mongoose.model('Emailcapture', emailCaptureSchema)
