@@ -31,8 +31,14 @@ var app = angular.module('emailController', [])
         ,data: {email: emailAddress, location: location}
       })
       .then(function(email){
-        console.log(email);
-        window.location.reload()
+        $http({
+          method: "POST"
+          ,url: "/api/sendemail"
+          ,data: {email: emailAddress}
+        })
+        .then(function(){
+          window.location.reload()
+        })
       })
     })
 

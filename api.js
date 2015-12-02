@@ -3,7 +3,11 @@ var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var cities         = require('cities');
+var mandrill = require('mandrill-api/mandrill');
+var mandrill_client = new mandrill.Mandrill('peYat9DNVGXpYcy2o6bypw');
 var route          = express.Router();
+
+console.log(mandrill_client);
 
 //////bring in models////////
 /////////////////////////////
@@ -36,6 +40,23 @@ module.exports = function(app){
   app.post('/api/cities', function(req, res){
     var cityData = cities.gps_lookup(req.body.long, req.body.lat);
     res.json(cityData.zipcode)
+  })
+
+  /////email stuff
+  app.post('/api/sendemail', function(req, res){
+    console.log(req.body.email);
+    mandrill_client.messages.send({
+      message: {
+        from_email: "thankyou@hofb.com"
+        ,text: "Thank you for your email!"
+        ,subject: "HOFB Signup Confirmation"
+        ,to:[{
+          email: req.body.email
+        }]
+      }
+    }, function(data){
+      res.json(data)
+    })
   })
 
 }
