@@ -18,6 +18,15 @@ var User = require('./models/user.js');
 
 module.exports = function(app){
 
+  //get all users
+  app.get('/api/users', function(req, res){
+    User.find({}, function(err, users){
+      if(err) throw err;
+      res.json(users)
+    })
+  })
+
+
   ////get and list all emails
   app.get('/api/emailcaptures', function(req, res){
     Emailcapture.find({}, function(err, emails){
