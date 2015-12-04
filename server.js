@@ -9,9 +9,8 @@ var http           = require('http');
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
-var variables      = require('./.env');
 var app            = express();
- 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

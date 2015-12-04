@@ -7,6 +7,7 @@ var mandrill = require('mandrill-api/mandrill');
 console.log(process.env);
 var mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_KEY);
 var route          = express.Router();
+
 //////bring in models////////
 /////////////////////////////
 var Emailcapture = require('./models/emailCapture.js');
