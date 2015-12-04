@@ -4,11 +4,12 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
+console.log(process.env);
 var mandrill_client = new mandrill.Mandrill('peYat9DNVGXpYcy2o6bypw');
 var route          = express.Router();
-
-console.log(mandrill_client);
-
+var variables      = require('./.env');
+console.log(variables);
+console.log(variables.DB_URL);
 //////bring in models////////
 /////////////////////////////
 var Emailcapture = require('./models/emailCapture.js');
@@ -199,4 +200,4 @@ module.exports = function(app){
   //////End Emailcapture calls//////
   //////////////////////////////////
 }
-mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
+mongoose.connect(variables.DB_URL)
