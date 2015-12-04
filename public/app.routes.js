@@ -20,6 +20,18 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'dash'
     })
 
+    .when('/designer/dashboard', {
+      templateUrl: 'templates/_designerDashboard.html'
+      ,controller: 'dashCtrl'
+      ,controllerAs: 'dash'
+    })
+
+    .when('/curator/dashboard', {
+      templateUrl: 'templates/_curatorDashboard.html'
+      ,controller: 'dashCtrl'
+      ,controllerAs: 'dash'
+    })
+
     /////////default to home
     .otherwise('/');
 
