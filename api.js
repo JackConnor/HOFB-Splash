@@ -87,6 +87,22 @@ module.exports = function(app){
   /////////////////////////////////
   ////////Begin Product API calls//
 
+  ///////get all products
+  app.get('/api/products', function(req, res){
+    Product.find({}, function(err, products){
+      if(err) throw err;
+      res.json(products)
+    })
+  })
+
+  ///get a single product
+  app.get('/api/products/:id', function(req, res){
+    Product.findOne({"_id":req.params.id}, function(err, product){
+      if(err) throw err;
+      res.json(product);
+    })
+  })
+
   ////////End Product API calls////
   /////////////////////////////////
 
