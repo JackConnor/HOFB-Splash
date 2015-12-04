@@ -5,7 +5,7 @@ var methodOverride = require('method-override');
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
 console.log(process.env);
-var mandrill_client = new mandrill.Mandrill('peYat9DNVGXpYcy2o6bypw');
+var mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_KEY);
 var route          = express.Router();
 //////bring in models////////
 /////////////////////////////
@@ -180,7 +180,7 @@ module.exports = function(app){
     mandrill_client.messages.send({
       message: {
         from_email: "thankyou@hofb.com"
-        ,text: "Thank you for signing up with HOFB!"
+        ,text: "Thank you for signing up with HOFB! ----Jack Test"
         ,subject: "HOFB Signup Confirmation"
         ,to:[{
           email: req.body.email
@@ -193,4 +193,4 @@ module.exports = function(app){
   //////End Emailcapture calls//////
   //////////////////////////////////
 }
-mongoose.connect(process.env.DB_URL)
+mongoose.connect(process.env.DB_URL_HOFB)
