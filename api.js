@@ -212,6 +212,8 @@ module.exports = function(app){
   //////End Emailcapture calls//////
   //////////////////////////////////
 }
-mongoose.connect(process.ENV.DB_URL_HOFB)
+
+var db = process.env.DB_URL_HOFB;
+mongoose.connect(db)
 // mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
 // mongoose.connect(ENV['DB_URL'])
