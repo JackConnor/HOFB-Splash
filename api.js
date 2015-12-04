@@ -198,4 +198,4 @@ module.exports = function(app){
   //////End Emailcapture calls//////
   //////////////////////////////////
 }
-mongoose.connect(process.env.DB_URL_HOFB)
+mongoose.connect("mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash")
