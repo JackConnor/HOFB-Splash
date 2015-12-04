@@ -1,6 +1,9 @@
 # Empty CSS file for your own CSS
 
+.bodyview {
+  height: 100%;
+}
+
 .logoImage {
   height: 173px;
-  outline: 2px solid blue;
 }

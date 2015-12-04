@@ -9,7 +9,7 @@ angular.module('app.routes', ['ngRoute'])
     $routeProvider
 
     .when('/', {
-      templateUrl: 'templates/_home.html'
+      templateUrl: 'templates/_splash.html'
       ,controller: 'emailCtrl'
       ,controllerAs: 'email'
     })

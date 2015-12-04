@@ -17,6 +17,7 @@ var Emailcapture = require('./models/emailCapture.js');
 
 module.exports = function(app){
 
+  ////get and list all emails
   app.get('/api/emailcaptures', function(req, res){
     Emailcapture.find({}, function(err, emails){
       if(err){console.log(err)}
@@ -27,8 +28,18 @@ module.exports = function(app){
     });
   });
 
+  //get and list one email
+  app.get('/api/emailcaptures/:id', function(req, res){
+    Emailcapture.findOne({"_id": req.params.id}, function(err, email){
+      if(err){console.log(err)}
+      else{
+        res.json(email);
+      }
+    });
+  });
+
   app.post('/api/emailcaptures', function(req, res){
-    console.log(req.body);
+    console.log(req.body.email);
     Emailcapture.create(req.body, function(err, emailCapture){
       if(err){console.log(err)}
       else(
@@ -58,8 +69,5 @@ module.exports = function(app){
       res.json(data)
     })
   })
-
 }
-
-
 mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
