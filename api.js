@@ -18,6 +18,9 @@ var User = require('./models/user.js');
 
 module.exports = function(app){
 
+  /////////////////////////////////
+  ////////begin user api requests////
+
   //get all users
   app.get('/api/users', function(req, res){
     User.find({}, function(err, users){
@@ -33,13 +36,52 @@ module.exports = function(app){
     })
   })
 
+  ///create a new user
   app.post('/api/users', function(req, res){
-    console.log(req.body);
     User.create(req.body, function(err, user){
       if(err){console.log(err)}
+      ////json with info of new user we created
       res.json(user)
     })
   })
+
+  /////update a user
+  app.post('/api/users/update', function(req, res){
+    console.log(req.body);
+    User.findOne(req.body.id, function(err, user){
+      if(err){console.log(err)}
+      if(req.body.email){
+        user.email = req.body.email
+      }
+      if(req.body.password){
+        user.email = req.body.password
+      }
+      if(req.body.location){
+        user.email = req.body.location
+      }
+      if(req.body.firstname){
+        user.email = req.body.firstname
+      }
+      if(req.body.lastname){
+        user.email = req.body.lastname
+      }
+      if(req.body.address){
+        user.email = req.body.address
+      }
+      if(req.body.city){
+        user.email = req.body.city
+      }
+      if(req.body.profession){
+        user.email = req.body.profession
+      }
+      user.save(function(err, user){
+        res.json(user)
+      });
+    })
+  })
+
+  ////////end user api requests////
+  /////////////////////////////////
 
   ////get and list all emails
   app.get('/api/emailcaptures', function(req, res){
