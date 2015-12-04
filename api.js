@@ -180,7 +180,11 @@ module.exports = function(app){
     mandrill_client.messages.send({
       message: {
         from_email: "thankyou@hofb.com"
-        ,text: "Thank you for signing up with HOFB! ----Jack Test"
+        ,html:
+        "<divs style='background-color:#E0F8EC'>"+
+          "<h2>Be the first to gain access to HOFB, a FREE new platform allowing the design styles of independent and emerging fashion designers to be discovered by buyers and mass retailers globally."+
+          "HOFB ends the struggles faced by independent and emerging fashion designers who have to cold-call and send line sheets and style guides to countless retailers just hoping for a favorable response. Likewise, buyers and mass retailers no longer have to waste time searching through endless line sheets and products that do not fit the retailer’s merchandising plan. HOFB is a seamless platform for both fashion designers and buyers to capitalize on each other’s work, and it’s FREE!</h2>"+
+        "</div>"
         ,subject: "HOFB Signup Confirmation"
         ,to:[{
           email: req.body.email
