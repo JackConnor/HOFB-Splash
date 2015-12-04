@@ -29,6 +29,7 @@ module.exports = function(app){
     })
   })
 
+  //get a single user
   app.get("/api/users/:id", function(req, res){
     User.findOne({"_id":req.params.id}, function(err, user){
       if(err) throw err;
@@ -79,7 +80,6 @@ module.exports = function(app){
       });
     })
   })
-
   ////////end user api requests////
   /////////////////////////////////
 

@@ -1,13 +1,23 @@
-var app = angular.module('emailController', ['allusersfactory'])
+var app = angular.module('emailController', ['allusersfactory', 'singleuserfactory', 'newuserfactory'])
 
   .controller('emailCtrl', emailCtrl)
 
-  emailCtrl.$inject = ['$http', 'allUsers']
-  function emailCtrl($http, allUsers){
+  emailCtrl.$inject = ['$http', 'allUsers', 'singleUser', 'newUser']
+  function emailCtrl($http, allUsers, singleUser, newUser){
     var self = this;
     console.log('ououououo');
 
+    ///////get all users
     console.log(allUsers());
+
+    //////use factory to search a single user
+    var url = "5660e162312d9bf1f2d2dce6";
+    console.log(singleUser(url));
+
+    /////post a new user
+    var newUserData = {firstname: "trinity", password: "password"}
+    console.log(newUser(newUserData));
+
 
     /////////to autopopulate the location box
     // navigator.geolocation.getCurrentPosition(function(data){
