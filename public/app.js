@@ -1,1 +1,1 @@
-angular.module('hofbsplash', ['emailController', 'app.routes', 'ngRoute'])
+angular.module('hofb', ['emailController', 'app.routes', 'allusersfactory', 'ngRoute'])

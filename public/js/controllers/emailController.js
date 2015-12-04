@@ -1,11 +1,13 @@
-var app = angular.module('emailController', [])
+var app = angular.module('emailController', ['allusersfactory'])
 
   .controller('emailCtrl', emailCtrl)
 
-  emailCtrl.$inject = ['$http']
-  function emailCtrl($http){
+  emailCtrl.$inject = ['$http', 'allUsers']
+  function emailCtrl($http, allUsers){
     var self = this;
     console.log('ououououo');
+
+    console.log(allUsers);
 
     /////////to autopopulate the location box
     // navigator.geolocation.getCurrentPosition(function(data){
