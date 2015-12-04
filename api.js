@@ -200,4 +200,4 @@ module.exports = function(app){
   //////End Emailcapture calls//////
   //////////////////////////////////
 }
-mongoose.connect(variables.DB_URL)
+mongoose.connect(process.env.DB_URL)
