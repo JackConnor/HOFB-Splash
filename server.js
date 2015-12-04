@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var dotenv = require('dotenv').load();
+console.log(process.env);
 // var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -63,9 +64,6 @@ app.get('*', function(req, res){
   res.sendFile( __dirname + '/public/index.html')
 })
 
-var dbUrl = variables.DB_URL;
-console.log("this is it"+dbUrl);
-
-mongoose.createConnection(dbUrl);
+mongoose.createConnection(process.env.DB_URL);
 
 module.exports = app;

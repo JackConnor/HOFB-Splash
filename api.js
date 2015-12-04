@@ -8,8 +8,6 @@ console.log(process.env);
 var mandrill_client = new mandrill.Mandrill('peYat9DNVGXpYcy2o6bypw');
 var route          = express.Router();
 var variables      = require('./.env');
-console.log(variables);
-console.log(variables.DB_URL);
 //////bring in models////////
 /////////////////////////////
 var Emailcapture = require('./models/emailCapture.js');
@@ -50,7 +48,6 @@ module.exports = function(app){
 
   /////update a user
   app.post('/api/users/update', function(req, res){
-    console.log(req.body);
     User.findOne(req.body.id, function(err, user){
       if(err){console.log(err)}
       if(req.body.email){
@@ -150,7 +147,6 @@ module.exports = function(app){
     Emailcapture.find({}, function(err, emails){
       if(err){console.log(err)}
       else{
-        console.log(emails);
         res.json(emails)
       }
     });
@@ -167,7 +163,6 @@ module.exports = function(app){
   });
 
   app.post('/api/emailcaptures', function(req, res){
-    console.log(req.body.email);
     Emailcapture.create(req.body, function(err, emailCapture){
       if(err){console.log(err)}
       else(
@@ -183,7 +178,6 @@ module.exports = function(app){
 
   /////email stuff
   app.post('/api/sendemail', function(req, res){
-    console.log(req.body.email);
     mandrill_client.messages.send({
       message: {
         from_email: "thankyou@hofb.com"
