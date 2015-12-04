@@ -1,9 +1,9 @@
-var app = angular.module('emailController', ['allusersfactory', 'singleuserfactory', 'newuserfactory'])
+var app = angular.module('emailController', ['allusersfactory', 'singleuserfactory', 'newuserfactory', 'newemailfactory'])
 
   .controller('emailCtrl', emailCtrl)
 
-  emailCtrl.$inject = ['$http', 'allUsers', 'singleUser', 'newUser']
-  function emailCtrl($http, allUsers, singleUser, newUser){
+  emailCtrl.$inject = ['$http', 'allUsers', 'singleUser', 'newUser', 'newEmail']
+  function emailCtrl($http, allUsers, singleUser, newUser, newEmail){
     var self = this;
     console.log('ououououo');
 
@@ -18,42 +18,10 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
     var newUserData = {firstname: "trinity", password: "password"}
     console.log(newUser(newUserData));
 
-
-    /////////to autopopulate the location box
-    // navigator.geolocation.getCurrentPosition(function(data){
-    //   console.log(data);
-    //   $http({
-    //     method: "POST"
-    //     ,url: "/api/cities"
-    //     ,data: {long: data.coords.longitude, lat: data.coords.latitude}
-    //   })
-    //   .then(function(zipcode){
-    //     console.log(zipcode);
-    //     $('.locationInput').val(zipcode.data)
-    //   })
-    // })
-
-
+    /////collect all of our emails on splash page
     $('.collectEmail').on('click', function(){
       var emailAddress = $('.emailInput').val();
-      // var location = $('.locationInput').val();
-      $http({
-        method: "POST"
-        ,url: "/api/emailcaptures"
-        ,data: {email: emailAddress, location: location}
-      })
-      .then(function(email){
-        console.log(email);
-        $http({
-          method: "POST"
-          ,url: "/api/sendemail"
-          ,data: {email: emailAddress}
-        })
-        .then(function(email){
-          console.log(email);
-          window.location.reload()
-        })
-      })
+      newEmail(emailAddress)
     })
 
   ////////end email controller//////
