@@ -26,6 +26,20 @@ module.exports = function(app){
     })
   })
 
+  app.get("/api/users/:id", function(req, res){
+    User.findOne({"_id":req.params.id}, function(err, user){
+      if(err) throw err;
+      res.json(user);
+    })
+  })
+
+  app.post('/api/users', function(req, res){
+    console.log(req.body);
+    User.create(req.body, function(err, user){
+      if(err){console.log(err)}
+      res.json(user)
+    })
+  })
 
   ////get and list all emails
   app.get('/api/emailcaptures', function(req, res){
