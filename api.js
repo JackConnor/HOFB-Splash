@@ -111,6 +111,33 @@ module.exports = function(app){
     })
   })
 
+  /////update a product
+  app.post('/api/product/update', function(req, res){
+    Product.findOne(req.body.id, function(err, product){
+      if(err){console.log(err)}
+
+      if(req.body.name){
+        product.name = req.body.name
+      }
+      if(req.body.timestamp){
+        product.email = req.body.timestamp
+      }
+      if(req.body.productType){
+        product.email = req.body.productType
+      }
+      if(req.body.vendor){
+        product.email = req.body.vendor
+      }
+      if(req.body.stitchPattern){
+        product.email = req.body.stitchPattern
+      }
+
+      product.save(function(err, product){
+        res.json(product)
+      });
+    })
+  })
+
   ////////End Product API calls////
   /////////////////////////////////
 
