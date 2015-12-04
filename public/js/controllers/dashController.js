@@ -7,7 +7,6 @@ angular.module('dashController', [])
     var self = this;
     console.log('yoyoyoyoyoyolkjsdflksjdlfkjsdlkfj');
 
-
   /////end dash controller
   ////////////////////////
   ////////////////////////
