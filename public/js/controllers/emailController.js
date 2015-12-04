@@ -5,8 +5,7 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
   emailCtrl.$inject = ['$http', 'allUsers', 'singleUser', 'newUser', 'newEmail']
   function emailCtrl($http, allUsers, singleUser, newUser, newEmail){
     var self = this;
-    console.log('ououououo');
-
+    
     ///////get all users
     console.log(allUsers());
 

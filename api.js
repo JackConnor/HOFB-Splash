@@ -12,7 +12,8 @@ console.log(mandrill_client);
 //////bring in models////////
 /////////////////////////////
 var Emailcapture = require('./models/emailCapture.js');
-var User = require('./models/user.js');
+var User         = require('./models/user.js');
+var Product      = require('./models/product.js');
 ///////finish bringing models////
 /////////////////////////////////
 
@@ -83,6 +84,15 @@ module.exports = function(app){
   ////////end user api requests////
   /////////////////////////////////
 
+  /////////////////////////////////
+  ////////Begin Product API calls//
+
+  ////////End Product API calls////
+  /////////////////////////////////
+
+  //////////////////////////////////
+  //////Begin Emailcapture calls////
+
   ////get and list all emails
   app.get('/api/emailcaptures', function(req, res){
     Emailcapture.find({}, function(err, emails){
@@ -135,5 +145,7 @@ module.exports = function(app){
       res.json(data)
     })
   })
+  //////End Emailcapture calls//////
+  //////////////////////////////////
 }
 mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
