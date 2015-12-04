@@ -63,8 +63,8 @@ app.get('*', function(req, res){
   res.sendFile( __dirname + '/public/index.html')
 })
 
-// mongoose.createConnection(process.env.DB_URL_HOFB);
-mongoose.createConnection(mongoose.connect(ENV['DB_URL'])
+mongoose.createConnection(process.env.DB_URL_HOFB);
+// mongoose.createConnection(mongoose.connect(ENV['DB_URL'])
 );
 
 module.exports = app;
