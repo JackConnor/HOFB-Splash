@@ -103,6 +103,14 @@ module.exports = function(app){
     })
   })
 
+  ////post a single product
+  app.post('/api/products', function(req, res){
+    Product.create(req.body, function(err, product){
+      if(err) throw err;
+      res.json(product);
+    })
+  })
+
   ////////End Product API calls////
   /////////////////////////////////
 
