@@ -62,6 +62,8 @@ app.get('*', function(req, res){
   res.sendFile( __dirname + '/public/index.html')
 })
 
-mongoose.createConnection("mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash");
+// mongoose.createConnection(process.env.DB_URL_HOFB);
+mongoose.createConnection(mongoose.connect(ENV['DB_URL'])
+);
 
 module.exports = app;
