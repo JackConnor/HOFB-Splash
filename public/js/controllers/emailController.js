@@ -7,7 +7,7 @@ var app = angular.module('emailController', ['allusersfactory'])
     var self = this;
     console.log('ououououo');
 
-    console.log(allUsers);
+    console.log(allUsers());
 
     /////////to autopopulate the location box
     // navigator.geolocation.getCurrentPosition(function(data){

@@ -3,13 +3,19 @@ var usersFactory = angular.module('allusersfactory', [])
   .factory('allUsers', allUsers);
 
   allUsers.$inject = ['$http'];
+  function allUsers($http){
 
-    function allUsers($http){
-      $http({
+    function allUsers(){
+      return $http({
         method: "GET"
         ,url: "/api/users"
       })
       .then(function(data){
-        console.log(data);
+        self.data = data;
+        return data;
       })
+    }
+
+    return allUsers;
+    //
   }
