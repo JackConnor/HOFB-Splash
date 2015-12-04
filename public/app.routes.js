@@ -14,6 +14,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'email'
     })
 
+    .when('/admin/dashboard', {
+      templateUrl: 'templates/_adminDashboard.html'
+      ,controller: 'dashCtrl'
+      ,controllerAs: 'dash'
+    })
+
     /////////default to home
     .otherwise('/');
 
