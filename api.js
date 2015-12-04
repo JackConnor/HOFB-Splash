@@ -12,6 +12,7 @@ console.log(mandrill_client);
 //////bring in models////////
 /////////////////////////////
 var Emailcapture = require('./models/emailCapture.js');
+var User = require('./models/user.js');
 ///////finish bringing models////
 /////////////////////////////////
 
