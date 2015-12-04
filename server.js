@@ -68,6 +68,6 @@ app.get('*', function(req, res){
 // mongoose.createConnection(process.env.DB_URL_HOFB);
 mongoose.createConnection('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash');
 // mongoose.createConnection(mongoose.connect(ENV['DB_URL'])
-);
+// );
 
 module.exports = app;
