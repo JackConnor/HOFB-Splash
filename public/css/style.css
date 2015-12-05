@@ -78,6 +78,8 @@
   display: block;
   position: absolute;
 }
+<<<<<<< HEAD
+=======
 
 .newProjectView {
   width: 60%;
@@ -85,3 +87,4 @@
   outline: 4px solid gray;
   height: 400px;
 }
+>>>>>>> master

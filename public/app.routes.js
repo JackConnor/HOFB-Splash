@@ -38,6 +38,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'dash'
     })
 
+    .when('/newproduct', {
+      templateUrl: 'templates/_newproject.html'
+      ,controller: 'projectCtrl'
+      ,controllerAs: 'project'
+    })
+
     /////////default to home
     .otherwise('/');
 
