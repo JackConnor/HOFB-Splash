@@ -11,12 +11,15 @@ var app = angular.module('createProjectController', [])
     var carouselCounter = 0;
     /////end global variables
 
+    ///////////////////////////////////////////
+    //////////begin logic for moving carousel//
     ///function controlling carousel movement forward
     function moveNext(){
       var singleCellDistance = $('.carouselBacking').width()* (0.24) + 4;
       var moveDistance = carouselMargin - singleCellDistance;
       carouselMargin = moveDistance;
-      console.log(moveDistance);
+      carouselCounter ++;
+      console.log(carouselCounter);
       $('.carouselBacking').animate({
         marginLeft: moveDistance
       }, 200)
@@ -27,19 +30,27 @@ var app = angular.module('createProjectController', [])
       var singleCellDistance = $('.carouselBacking').width()* (0.24) + 4;
       var moveDistance = carouselMargin + singleCellDistance;
       carouselMargin = moveDistance;
-      console.log(moveDistance);
+      carouselCounter --;
+      console.log(carouselCounter);
       $('.carouselBacking').animate({
         marginLeft: moveDistance
       }, 200)
     }
 
     $('.carouselRight').on('click', function(){
-      moveNext();
+      if(carouselCounter < 3){
+        moveNext();
+      }
     })
 
     $('.carouselLeft').on('click', function(){
-      movePrevious();
+      if(carouselCounter > 0){
+        movePrevious();
+      }
     })
+
+    //////////end logic for moving carousel////
+    ///////////////////////////////////////////
 
 
   /////end createProject controller
