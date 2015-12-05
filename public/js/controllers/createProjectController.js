@@ -15,7 +15,7 @@ var app = angular.module('createProjectController', [])
     //////////begin logic for moving carousel//
     ///function controlling carousel movement forward
     function moveNext(){
-      var singleCellDistance = $('.carouselBacking').width()* (0.24) + 4;
+      var singleCellDistance = $('.carouselBacking').width()* (0.192) + 4;
       var moveDistance = carouselMargin - singleCellDistance;
       carouselMargin = moveDistance;
       carouselCounter ++;
@@ -27,7 +27,7 @@ var app = angular.module('createProjectController', [])
 
     ///function controlling carousel movement forward
     function movePrevious(){
-      var singleCellDistance = $('.carouselBacking').width()* (0.24) + 4;
+      var singleCellDistance = $('.carouselBacking').width()* (0.192) + 4;
       var moveDistance = carouselMargin + singleCellDistance;
       carouselMargin = moveDistance;
       carouselCounter --;
@@ -36,13 +36,15 @@ var app = angular.module('createProjectController', [])
       }, 200)
     }
 
+    ///on-click, move to next page
     $('.carouselRight').on('click', function(){
-      if(carouselCounter < 3){
+      if(carouselCounter < 4){
         moveNext();
       }
       highlightCounter();
     })
 
+    //on click, move to the last page
     $('.carouselLeft').on('click', function(){
       if(carouselCounter > 0){
         movePrevious();
@@ -92,7 +94,19 @@ var app = angular.module('createProjectController', [])
         $('.circle3').css({
           backgroundColor: 'blue'
         })
+        $('.circle4').css({
+          backgroundColor: "white"
+        })
         for (var i = 0; i < 3; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+      } else if(carouselCounter == 4){
+        $('.circle4').css({
+          backgroundColor: 'blue'
+        })
+        for (var i = 0; i < 4; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
           })
