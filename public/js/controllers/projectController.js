@@ -7,6 +7,8 @@ angular.module('projectController', [])
     var self = this;
     console.log('in the project controller');
 
+    
+
   //////////end project controller////
   ////////////////////////////////////
   ////////////////////////////////////

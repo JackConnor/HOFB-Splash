@@ -31,7 +31,7 @@ body {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;  
+  background-size: cover;
 }
 body {
   color: #fff;
@@ -100,7 +100,7 @@ body {
 
 @media (min-width: 768px) {
   .masthead-brand {
-    
+
   }
   .masthead-nav {
     float: right;
@@ -168,4 +168,3 @@ body {
     width: 700px;
   }
 }
-
