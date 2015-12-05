@@ -7,3 +7,17 @@
 .logoImage {
   height: 173px;
 }
+
+.navigationBar {
+  height: 110px;
+  background-color: blue;
+  display: block;
+}
+
+.newprojectcontainer {
+  background-color: #E0FFFF;
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: absolute;
+}
