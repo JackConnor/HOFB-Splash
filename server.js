@@ -11,7 +11,7 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var variables      = require('./.env');
 var app            = express();
- 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -63,6 +63,6 @@ app.get('*', function(req, res){
   res.sendFile( __dirname + '/public/index.html')
 })
 
-mongoose.createConnection(process.env.DB_URL);
+//mongoose.createConnection(process.env.DB_URL);
 
 module.exports = app;

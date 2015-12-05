@@ -8,6 +8,12 @@ angular.module('app.routes', ['ngRoute'])
 
     $routeProvider
 
+    .when('/create/project', {
+      templateUrl: 'templates/_createProject.html'
+      ,controller: 'createProjectCtrl'
+      ,controllerAs: 'createProject'
+    })
+
     .when('/', {
       templateUrl: 'templates/_splash.html'
       ,controller: 'emailCtrl'
