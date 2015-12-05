@@ -124,22 +124,27 @@ var app = angular.module('createProjectController', [])
       $('.circle0').on('click', function(evt){
         var circlePosition = $(evt.target)[0].className.split('')[13];
         clickDistance(circlePosition);
+        highlightCounter();
       })
       $('.circle1').on('click', function(evt){
         var circlePosition = $(evt.target)[0].className.split('')[13];
         clickDistance(circlePosition);
+        highlightCounter();
       })
       $('.circle2').on('click', function(evt){
         var circlePosition = $(evt.target)[0].className.split('')[13];
         clickDistance(circlePosition);
+        highlightCounter();
       })
       $('.circle3').on('click', function(evt){
         var circlePosition = $(evt.target)[0].className.split('')[13];
         clickDistance(circlePosition);
+        highlightCounter();
       })
       $('.circle4').on('click', function(evt){
         var circlePosition = $(evt.target)[0].className.split('')[13];
         clickDistance(circlePosition);
+        highlightCounter();
       })
     }
     circleClick();
@@ -147,13 +152,10 @@ var app = angular.module('createProjectController', [])
     ////function for calculating distance
     function clickDistance(circlePosition){
       var spaces = circlePosition - carouselCounter;
-      console.log(spaces);
       var singleCellDistance = $('.carouselBacking').width()* (0.192) + 4;
       var moveDistance = carouselMargin + (singleCellDistance*spaces*-1);
       carouselMargin = moveDistance;
-      console.log(circlePosition);
       carouselCounter = circlePosition;
-      console.log(carouselMargin);
       $('.carouselBacking').animate({
         marginLeft: moveDistance
       }, 200)
