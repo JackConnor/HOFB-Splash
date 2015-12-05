@@ -36,6 +36,7 @@ var app = angular.module('createProjectController', [])
       }, 200)
     }
 
+    ///on-click, move to next page
     $('.carouselRight').on('click', function(){
       if(carouselCounter < 4){
         moveNext();
@@ -43,6 +44,7 @@ var app = angular.module('createProjectController', [])
       highlightCounter();
     })
 
+    //on click, move to the last page
     $('.carouselLeft').on('click', function(){
       if(carouselCounter > 0){
         movePrevious();
