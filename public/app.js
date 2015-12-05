@@ -1,1 +1,1 @@
-angular.module('hofb', ['emailController', 'dashController', 'app.routes', 'allusersfactory', 'singleuserfactory', 'newuserfactory', 'ngRoute'])
+angular.module('hofb', ['createProjectController', 'emailController', 'dashController', 'app.routes', 'allusersfactory', 'singleuserfactory', 'newuserfactory', 'ngRoute'])
