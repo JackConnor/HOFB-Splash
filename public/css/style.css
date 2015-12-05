@@ -45,13 +45,12 @@
 .carouselNameEntry {
   position: absolute;
   width: 25%;
-  height: 30px;
   margin-left: 2.5%;
-  height: 25px;
-  font-size: 16px;
+  font-size: 22px;
   font-style: bold;
   margin-top: 100px;
   text-align: center;
+  height: 45px;
 }
 
 .carouselRight {

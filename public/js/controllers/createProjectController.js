@@ -5,7 +5,6 @@ var app = angular.module('createProjectController', [])
   createProjectCtrl.$inject = ['$http']
   function createProjectCtrl($http){
     var self = this;
-
     //////global variables we'll be using for moving the carousel
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
@@ -19,7 +18,7 @@ var app = angular.module('createProjectController', [])
       var moveDistance = carouselMargin - singleCellDistance;
       carouselMargin = moveDistance;
       carouselCounter ++;
-      console.log(carouselCounter);
+      getName();
       $('.carouselBacking').animate({
         marginLeft: moveDistance
       }, 200)
@@ -124,22 +123,27 @@ var app = angular.module('createProjectController', [])
       $('.circle0').on('click', function(evt){
         var circlePosition = $(evt.target)[0].className.split('')[13];
         clickDistance(circlePosition);
+        highlightCounter();
       })
       $('.circle1').on('click', function(evt){
         var circlePosition = $(evt.target)[0].className.split('')[13];
         clickDistance(circlePosition);
+        highlightCounter();
       })
       $('.circle2').on('click', function(evt){
         var circlePosition = $(evt.target)[0].className.split('')[13];
         clickDistance(circlePosition);
+        highlightCounter();
       })
       $('.circle3').on('click', function(evt){
         var circlePosition = $(evt.target)[0].className.split('')[13];
         clickDistance(circlePosition);
+        highlightCounter();
       })
       $('.circle4').on('click', function(evt){
         var circlePosition = $(evt.target)[0].className.split('')[13];
         clickDistance(circlePosition);
+        highlightCounter();
       })
     }
     circleClick();
@@ -147,24 +151,29 @@ var app = angular.module('createProjectController', [])
     ////function for calculating distance
     function clickDistance(circlePosition){
       var spaces = circlePosition - carouselCounter;
-      console.log(spaces);
       var singleCellDistance = $('.carouselBacking').width()* (0.192) + 4;
       var moveDistance = carouselMargin + (singleCellDistance*spaces*-1);
       carouselMargin = moveDistance;
-      console.log(circlePosition);
       carouselCounter = circlePosition;
-      console.log(carouselMargin);
+      getName();
       $('.carouselBacking').animate({
         marginLeft: moveDistance
-      }, 200)
+      }, 300)
       // $('.carouselBacking').css({
       //   marginLeft: carouselMargin
     }
 
-
-
     //////end logic for click to switch page//
     ////////////////////////////////////////////
+
+    function getName(){
+      var name = $('.carouselNameEntry').val();
+      if(name.split('').length > 0){
+        console.log('there something there');
+        $('.productTitle').text(name);
+      }
+    }
+    // getName();
 
   /////end createProject controller
   ////////////////////////
