@@ -1,6 +1,9 @@
 var express        = require('express');
 var path           = require('path');
 var dotenv         = require('dotenv').load();
+console.log(111);
+console.log(process.env);
+console.log(111);
 // var favicon = require('serve-favicon');
 var logger         = require('morgan');
 var cookieParser   = require('cookie-parser');
@@ -9,7 +12,6 @@ var http           = require('http');
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
-var variables      = require('./.env');
 var app            = express();
 
 // view engine setup
@@ -63,6 +65,13 @@ app.get('*', function(req, res){
   res.sendFile( __dirname + '/public/index.html')
 })
 
+<<<<<<< HEAD
 //mongoose.createConnection(process.env.DB_URL);
+=======
+// mongoose.createConnection(process.env.DB_URL_HOFB);
+// // mongoose.createConnection('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash');
+// // mongoose.createConnection(mongoose.connect(ENV['DB_URL'])
+// // );
+>>>>>>> a8cf32b1d72a082613513a48186e1fd1d2714152
 
 module.exports = app;

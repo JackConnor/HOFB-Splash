@@ -4,9 +4,24 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
-console.log(process.env);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
+console.log(process.env.DB_URL_HOFB);
 var mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_KEY);
 var route          = express.Router();
+
 //////bring in models////////
 /////////////////////////////
 var Emailcapture = require('./models/emailCapture.js');
@@ -190,7 +205,11 @@ module.exports = function(app){
     mandrill_client.messages.send({
       message: {
         from_email: "thankyou@hofb.com"
-        ,text: "Thank you for signing up with HOFB! ----Jack Test"
+        ,html:
+        "<divs style='background-color:#E0F8EC'>"+
+          "<h2>Be the first to gain access to HOFB, a FREE new platform allowing the design styles of independent and emerging fashion designers to be discovered by buyers and mass retailers globally."+
+          "HOFB ends the struggles faced by independent and emerging fashion designers who have to cold-call and send line sheets and style guides to countless retailers just hoping for a favorable response. Likewise, buyers and mass retailers no longer have to waste time searching through endless line sheets and products that do not fit the retailer’s merchandising plan. HOFB is a seamless platform for both fashion designers and buyers to capitalize on each other’s work, and it’s FREE!</h2>"+
+        "</div>"
         ,subject: "HOFB Signup Confirmation"
         ,to:[{
           email: req.body.email
@@ -203,5 +222,13 @@ module.exports = function(app){
   //////End Emailcapture calls//////
   //////////////////////////////////
 }
+<<<<<<< HEAD
 //mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
 //mongoose.connect('mongodb://localhost:27017/myproject');
+=======
+
+//var db = process.env.DB_URL_HOFB;
+//mongoose.connect(db)
+// mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
+// mongoose.connect(ENV['DB_URL'])
+>>>>>>> a8cf32b1d72a082613513a48186e1fd1d2714152
