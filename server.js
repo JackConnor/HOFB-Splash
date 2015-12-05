@@ -1,6 +1,6 @@
 var express        = require('express');
 var path           = require('path');
-var dotenv         = require('dotenv').load(); 
+var dotenv         = require('dotenv').load();
 // var favicon = require('serve-favicon');
 var logger         = require('morgan');
 var cookieParser   = require('cookie-parser');
@@ -62,7 +62,6 @@ app.get('*', function(req, res){
   res.sendFile( __dirname + '/public/index.html')
 })
 
-//mongoose.createConnection(process.env.DB_URL);
 // mongoose.createConnection(process.env.DB_URL_HOFB);
 // // mongoose.createConnection('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash');
 // // mongoose.createConnection(mongoose.connect(ENV['DB_URL'])
