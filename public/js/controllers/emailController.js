@@ -6,7 +6,7 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
   function emailCtrl($http, allUsers, singleUser, newUser, newEmail){
     var self = this;
 
-    console.log('development');
+    console.log('production');
 
     ///////get all users
     console.log(allUsers());
