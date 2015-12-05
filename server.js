@@ -1,7 +1,10 @@
 var express        = require('express');
 var path           = require('path');
 var dotenv         = require('dotenv').load();
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 // var favicon = require('serve-favicon');
 var logger         = require('morgan');
 var cookieParser   = require('cookie-parser');
@@ -67,5 +70,4 @@ app.get('*', function(req, res){
 // // mongoose.createConnection('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash');
 // // mongoose.createConnection(mongoose.connect(ENV['DB_URL'])
 // // );
-
 module.exports = app;

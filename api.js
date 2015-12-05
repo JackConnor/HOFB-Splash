@@ -12,6 +12,7 @@ var route          = express.Router();
 var Emailcapture = require('./models/emailCapture.js');
 var User         = require('./models/user.js');
 var Product      = require('./models/product.js');
+var Project      = require('./models/createProject.js');
 ///////finish bringing models////
 /////////////////////////////////
 
@@ -19,6 +20,17 @@ module.exports = function(app){
 
   /////////////////////////////////
   ////////begin user api requests////
+
+  //get all createProjects
+  app.get('/api/createprojects', function(req, res){
+    console.log('creating')
+    Project.find({}, function(err, projects){
+      if(err) console.log(err)
+      console.log(projects)
+      res.json(projects)
+    })
+  })
+
 
   //get all users
   app.get('/api/users', function(req, res){
@@ -198,7 +210,10 @@ module.exports = function(app){
   //////////////////////////////////
 }
 
+//mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
+//mongoose.connect('mongodb://localhost:27017/myproject');
+
 var db = process.env.DB_URL_HOFB;
-mongoose.connect(db)
+mongoose.connect(db) 
 // mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
 // mongoose.connect(ENV['DB_URL'])

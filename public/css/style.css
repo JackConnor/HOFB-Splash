@@ -4,6 +4,63 @@
   height: 100%;
 }
 
+.carouselBacking {
+  width: 416.666%;
+  height: 400px;
+  outline: 4px solid green;
+}
+
+.carouselControl {
+  height: 100px;
+  width: 60%;
+  margin-left: 20%;
+  outline: 4px solid green;
+}
+
+.carouselCount {
+  width: 58%;
+  display: inline-block;
+  height: 50px;
+  outline: 2px solid blue;
+}
+
+.carouselFourth {
+  width: 24%;
+  /*border-right: 2px solid black;*/
+  background-color: blue;
+  display: inline-block;
+  height: 400px;
+}
+
+.carouselLeft {
+  display: inline-block;
+  width: 20%;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  background-color: purple;
+}
+
+.carouselRight {
+  display: inline-block;
+  width: 20%;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  background-color: purple;
+}
+
+.circle {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  margin-left: 10px;
+  outline: 3px solid gray;
+  display: inline-block;
+}
+
 .logoImage {
   height: 173px;
 }
@@ -21,3 +78,13 @@
   display: block;
   position: absolute;
 }
+<<<<<<< HEAD
+=======
+
+.newProjectView {
+  width: 60%;
+  margin-left: 20%;
+  outline: 4px solid gray;
+  height: 400px;
+}
+>>>>>>> master
