@@ -8,12 +8,6 @@ angular.module('app.routes', ['ngRoute'])
 
     $routeProvider
 
-    .when('/create/project', {
-      templateUrl: 'templates/_createProject.html'
-      ,controller: 'createProjectCtrl'
-      ,controllerAs: 'createProject'
-    })
-
     .when('/', {
       templateUrl: 'templates/_splash.html'
       ,controller: 'emailCtrl'
@@ -38,6 +32,24 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'dash'
     })
 
+    //create new project
+    .when('/create/project', {
+      templateUrl: 'templates/_createProject.html'
+      ,controller: 'createProjectCtrl'
+      ,controllerAs: 'createProject'
+    })
+
+    .when('/betasplash', {
+      templateUrl: 'templates/_beta_splash.html'
+      ,controller: 'emailCtrl'
+      ,controllerAs: 'email'
+    })
+
+    .when('/buyer/signup', {
+      templateUrl: 'templates/_signup.html'
+      ,controller: 'signupCtlr'
+      ,contoller: 'signup'
+    })
     /////////default to home
     .otherwise('/');
 
