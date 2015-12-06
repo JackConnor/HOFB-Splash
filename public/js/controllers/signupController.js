@@ -11,6 +11,19 @@ angular.module('signupController', [])
     ///////////////////////////////////////////
     /////////logic for the navbar and toggle///
 
+    /////link to signup function
+    function goToSignup(){
+      if(self.viewToggle == "designer"){
+        window.location.hash = "#/designer/signup"
+      } else if(self.viewToggle == "buyer"){
+        window.location.hash = "#/buyer/signup"
+      }
+    }
+    ////////////link to signup event listener
+    $('.signupButton').on('click', function(){
+      goToSignup();
+    })
+
     ////make links light up on hover
     $('.splashNavLinksText').on('mouseenter', function(){
       $(this).css({
@@ -25,6 +38,15 @@ angular.module('signupController', [])
         });
     })
 
+    //////toggle to designer version
+    $('.splashNavLinksText1').on('click', function(){
+      if(self.viewToggle == "buyer"){
+        self.viewToggle = 'designer';
+        console.log(self.viewToggle);
+        swapToDesigner();
+      }
+    })
+
     //////toggle to buyer version
     $('.splashNavLinksText2').on('click', function(){
       if(self.viewToggle == "designer"){
@@ -34,16 +56,10 @@ angular.module('signupController', [])
       }
     })
 
-    //////toggle to designer version
-    $('.splashNavLinksText1').on('click', function(){
-      if(self.viewToggle == "buyer"){
-        self.viewToggle = 'designer';
-        console.log(self.viewToggle);
-      }
-    })
-
     ///////////////////////////////////////////
     //////////Begin Toggle Logic///////////////
+
+    ///
     function swapToBuyer(){
       ///change image
       $('.splashBackgroundImage').attr('src', 'http://st.depositphotos.com/1037987/2504/i/950/depositphotos_25048555-Meeting-In-Fashion-Design-Studio.jpg')
@@ -54,7 +70,20 @@ angular.module('signupController', [])
       $('.howTo4').attr('src', '/img/buyerstep.jpg');
       $('.howTo5').attr('src', '/img/buyerstep.jpg');
       $('.howTo6').attr('src', '/img/buyerstep.jpg');
+      self.viewToggle = "buyer";
+    }
 
+    function swapToDesigner(){
+      ///change image
+      $('.splashBackgroundImage').attr('src', 'http://www.allfashionstyles.com/wp-content/uploads/2015/01/Top-Fashion-Design-Schools-in-The-World.jpeg')
+      ////change instruction images
+      $('.howTo1').attr('src', '/img/howtofiller.jpg');
+      $('.howTo2').attr('src', '/img/howtofiller.jpg');
+      $('.howTo3').attr('src', '/img/howtofiller.jpg');
+      $('.howTo4').attr('src', '/img/howtofiller.jpg');
+      $('.howTo5').attr('src', '/img/howtofiller.jpg');
+      $('.howTo6').attr('src', '/img/howtofiller.jpg');
+      self.viewToggle = "designer";
     }
     ////////////End Toggle Logic///////////////
     ///////////////////////////////////////////
