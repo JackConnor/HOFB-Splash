@@ -60,7 +60,7 @@ var app = angular.module('createProjectController', [])
         $('.circle0').css({
           backgroundColor: 'blue'
         })
-        for (var i = 1; i < 4; i++) {
+        for (var i = 1; i < 5; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
           })
@@ -72,7 +72,7 @@ var app = angular.module('createProjectController', [])
         $('.circle0').css({
           backgroundColor: "white"
         })
-        for (var i = 2; i < 4; i++) {
+        for (var i = 2; i < 5; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
           })
