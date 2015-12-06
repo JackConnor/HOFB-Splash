@@ -11,6 +11,19 @@ angular.module('signupController', [])
     ///////////////////////////////////////////
     /////////logic for the navbar and toggle///
 
+    /////link to signup function
+    function goToSignup(){
+      if(self.viewToggle == "designer"){
+        window.location.hash = "#/designer/signup"
+      } else if(self.viewToggle == "buyer"){
+        window.location.hash = "#/buyer/signup"
+      }
+    }
+    ////////////link to signup event listener
+    $('.signupButton').on('click', function(){
+      goToSignup();
+    })
+
     ////make links light up on hover
     $('.splashNavLinksText').on('mouseenter', function(){
       $(this).css({
