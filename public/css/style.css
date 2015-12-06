@@ -78,6 +78,18 @@
   display: inline-block;
 }
 
+.howToCell {
+  min-height: 100%;
+  width: 33%;
+  outline: 3px solid yellow;
+  display: inline-block;
+  margin: 0;
+}
+
+.howToCell img{
+  width: 100%;
+}
+
 .logoImage {
   height: 173px;
 }
@@ -123,6 +135,24 @@
   height: 450px;
   background-repeat: no-repeat;
   opacity: .75;
+}
+
+.splashBuyer {
+  outline: 2px solid blue;
+}
+
+.splashBuyerHowTo {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.splashFooter {
+  height: 200px;
+  background-color: orange;
+}
+
+.splashLink {
+  font-size: 27px;
 }
 
 .splashLogoContainer {

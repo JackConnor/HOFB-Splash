@@ -48,13 +48,13 @@ angular.module('app.routes', ['ngRoute'])
     .when('/buyer/signup', {
       templateUrl: 'templates/_signup.html'
       ,controller: 'signupCtrl'
-      ,contoller: 'signup'
+      ,contollerAs: 'signup'
     })
 
     .when('/designer/signup', {
       templateUrl: 'templates/_signup.html'
       ,controller: 'signupCtrl'
-      ,contoller: 'signup'
+      ,contollerAs: 'signup'
     })
     /////////default to home
     .otherwise('/');
