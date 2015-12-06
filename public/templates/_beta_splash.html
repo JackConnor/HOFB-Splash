@@ -1,0 +1,43 @@
+<!-- navbar -->
+<div class="splashNavbar">
+  <div class="splashLogoContainer">
+    <img src="/img/logo-website.png" class="splashLogoContainerImage" alt="" />
+  </div>
+  <div class="splashNavLinks">
+    <h2 class="splashNavLinksText splashNavLinksText1" >Designers</h2>
+    <h2 class="splashNavLinksText splashNavLinksText2">Buyers</h2>
+    <h2 class="splashNavLinksText splashNavLinksText3">Signin</h2>
+    <button type="button" name="button">Sign Up</button>
+  </div>
+</div>
+
+<!-- NG If statement to controler whether buyer or designer is displayed
+///////////////////////////////////-->
+
+<!-- NG-If for designer -->
+<div class="splashSignupContainer" ng-if="signup.userToggle">
+  <div class="splashBackgroundImageContainer">
+    <img class="splashBackgroundImage" src="http://www.allfashionstyles.com/wp-content/uploads/2015/01/Top-Fashion-Design-Schools-in-The-World.jpeg">
+  </div>
+  <div class="splashBuyerHowTo">
+    How To
+  </div>
+</div>
+
+<!-- NG-if for buyer -->
+<div class="splashSignupContainer" ng-if="!signup.userToggle">
+  <div class="splashBackgroundImage">
+
+  </div>
+  <div class="splashBuyerHowTo">
+
+  </div>
+</div>
+
+<!-- End NG If statement to controler whether buyer or designer is displayed
+///////////////////////////////////-->
+
+<!-- Bottom Nav Bar -->
+<div class="splashNavbar">
+  Navbar goes here
+</div>

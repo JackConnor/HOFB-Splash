@@ -41,8 +41,8 @@ angular.module('app.routes', ['ngRoute'])
 
     .when('/betasplash', {
       templateUrl: 'templates/_beta_splash.html'
-      ,controller: 'emailCtrl'
-      ,controllerAs: 'email'
+      ,controller: 'signupCtrl'
+      ,controllerAs: 'signup'
     })
 
     .when('/buyer/signup', {
