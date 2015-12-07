@@ -231,4 +231,3 @@ module.exports = function(app){
 //mongoose.connect(db)
 // mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
 // mongoose.connect(ENV['DB_URL'])
->>>>>>> a8cf32b1d72a082613513a48186e1fd1d2714152
