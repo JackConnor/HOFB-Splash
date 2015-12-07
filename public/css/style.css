@@ -125,6 +125,30 @@
   background-color: white;
 }
 
+.signupContainer {
+  position: absolute;
+  width: 60%;
+  height: 400px;
+  background-color: gray;
+  margin-left: 20%;
+  margin-top: 100px;
+}
+
+.signupContent {
+  display: block;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 35px;
+  outline: 2px solid blue;
+  font-size: 30px;
+  text-align: center;
+  position: relative;
+}
+
+.signupControls {
+  display: block;
+}
+
 .splashBackgroundImageContainer {
   width: 100%;
   min-height: 100%;

@@ -91,6 +91,18 @@ angular.module('signupController', [])
     /////End logic for the navbar and toggle///
     ///////////////////////////////////////////
 
+    //////////////////////////////////////////
+    /////////////Begin logic for signup page//
+
+    /////interpolate text into signup content
+    function intSignup(){
+      var userType = window.location.hash.split('/')[1];
+      $('.signupUserType').text(userType);
+    }
+    intSignup();
+    /////////////End logic for signup page////
+    //////////////////////////////////////////
+
   //////////////End signup controller////
   ///////////////////////////////////////
   ///////////////////////////////////////
