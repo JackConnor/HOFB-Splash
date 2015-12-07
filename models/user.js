@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var bCrypt = require('bcrypt');
 
 var userSchema = new Schema({
   email: String

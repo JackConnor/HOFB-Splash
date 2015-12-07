@@ -4,22 +4,32 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
-var mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_KEY);
+var mandrill_client= new mandrill.Mandrill(process.env.MANDRILL_KEY);
 var route          = express.Router();
-var seed = require('./seed.js');
+var bCrypt         = require('bcrypt');
+
+var hash = bCrypt.hashSync('yoyoyo', 10);
+
+console.log(hash);
+//
+// console.log(bCrypt.hashSync('brown'), function(err, password){
+//   console.log(password);
+// });
+
+var seed           = require('./seed.js');
 console.log(seed);
 
 var User = seed.Users;
-console.log(User[0]);
+// console.log(User[0]);
 
-var Project = seed.Products;
+// var Project = seed.Products;
 
 //////bring in models////////
 /////////////////////////////
-// var Emailcapture = require('./models/emailCapture.js');
-// var User         = require('./models/user.js');
-// var Product      = require('./models/product.js');
-// var Project      = require('./models/createProject.js');
+var Emailcapture = require('./models/emailCapture.js');
+var User         = require('./models/user.js');
+var Product      = require('./models/product.js');
+var Project      = require('./models/createProject.js');
 ///////finish bringing models////
 /////////////////////////////////
 
@@ -30,13 +40,13 @@ module.exports = function(app){
 
   //get all createProjects
   app.get('/api/createprojects', function(req, res){
-    // console.log('creating')
-    // Project.find({}, function(err, projects){
-    //   if(err) console.log(err)
-    //   console.log(projects)
-    //   res.json(projects)
-    // })
-    res.json(Project)
+    console.log('creating')
+    Project.find({}, function(err, projects){
+      if(err) console.log(err)
+      console.log(projects)
+      res.json(projects)
+    })
+    res.json(projects)
   })
 
 
@@ -61,7 +71,7 @@ module.exports = function(app){
     User.create(req.body, function(err, user){
       if(err){console.log(err)}
       ////json with info of new user we created
-      res.json(user)
+      res.json(user);
     })
   })
 
@@ -221,7 +231,7 @@ module.exports = function(app){
 //mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
 //mongoose.connect('mongodb://localhost:27017/myproject');
 
-// var db = process.env.DB_URL_HOFB;
-// mongoose.connect(db)
+var db = process.env.DB_URL_HOFB;
+mongoose.connect(db)
 // mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
 // mongoose.connect(ENV['DB_URL'])
