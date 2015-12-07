@@ -9,11 +9,10 @@ var route          = express.Router();
 var seed = require('./seed.js');
 console.log(seed);
 
-var Users = seed.Users;
-console.log(Users[0]);
+var User = seed.Users;
+console.log(User[0]);
 
-var Products = seed.Products;
-console.log(Products);
+var Project = seed.Products;
 
 //////bring in models////////
 /////////////////////////////
@@ -31,12 +30,13 @@ module.exports = function(app){
 
   //get all createProjects
   app.get('/api/createprojects', function(req, res){
-    console.log('creating')
-    Project.find({}, function(err, projects){
-      if(err) console.log(err)
-      console.log(projects)
-      res.json(projects)
-    })
+    // console.log('creating')
+    // Project.find({}, function(err, projects){
+    //   if(err) console.log(err)
+    //   console.log(projects)
+    //   res.json(projects)
+    // })
+    res.json(Project)
   })
 
 
