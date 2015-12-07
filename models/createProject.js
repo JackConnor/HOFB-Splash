@@ -6,4 +6,4 @@ var createProjectSchema = new Schema({
   ,projectType: String
 })
 
-module.exports = mongoose.model('CreateProject', createProjectSchema)
+module.exports = mongoose.model('Project', createProjectSchema)

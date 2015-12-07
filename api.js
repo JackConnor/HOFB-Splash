@@ -4,30 +4,22 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
-console.log(process.env.DB_URL_HOFB);
 var mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_KEY);
 var route          = express.Router();
+var seed = require('./seed.js');
+console.log(seed);
+
+var User = seed.Users;
+console.log(User[0]);
+
+var Project = seed.Products;
 
 //////bring in models////////
 /////////////////////////////
-var Emailcapture = require('./models/emailCapture.js');
-var User         = require('./models/user.js');
-var Product      = require('./models/product.js');
-var CreateProject = require('./models/createProject.js');
+// var Emailcapture = require('./models/emailCapture.js');
+// var User         = require('./models/user.js');
+// var Product      = require('./models/product.js');
+// var Project      = require('./models/createProject.js');
 ///////finish bringing models////
 /////////////////////////////////
 
@@ -37,11 +29,14 @@ module.exports = function(app){
   ////////begin user api requests////
 
   //get all createProjects
-  app.get('/api/createProjects', function(req, res){
-    CreateProject.find({}, function(err, users){
-      if(err) throw err;
-      res.json(createProjects)
-    })
+  app.get('/api/createprojects', function(req, res){
+    // console.log('creating')
+    // Project.find({}, function(err, projects){
+    //   if(err) console.log(err)
+    //   console.log(projects)
+    //   res.json(projects)
+    // })
+    res.json(Project)
   })
 
 
@@ -222,12 +217,11 @@ module.exports = function(app){
   //////End Emailcapture calls//////
   //////////////////////////////////
 }
-<<<<<<< HEAD
+
 //mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
 //mongoose.connect('mongodb://localhost:27017/myproject');
-=======
 
-//var db = process.env.DB_URL_HOFB;
-//mongoose.connect(db)
+// var db = process.env.DB_URL_HOFB;
+// mongoose.connect(db)
 // mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
 // mongoose.connect(ENV['DB_URL'])
