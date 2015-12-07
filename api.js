@@ -6,13 +6,21 @@ var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_KEY);
 var route          = express.Router();
+var seed = require('./seed.js');
+console.log(seed);
+
+var Users = seed.Users;
+console.log(Users[0]);
+
+var Products = seed.Products;
+console.log(Products);
 
 //////bring in models////////
 /////////////////////////////
-var Emailcapture = require('./models/emailCapture.js');
-var User         = require('./models/user.js');
-var Product      = require('./models/product.js');
-var Project      = require('./models/createProject.js');
+// var Emailcapture = require('./models/emailCapture.js');
+// var User         = require('./models/user.js');
+// var Product      = require('./models/product.js');
+// var Project      = require('./models/createProject.js');
 ///////finish bringing models////
 /////////////////////////////////
 
@@ -213,7 +221,7 @@ module.exports = function(app){
 //mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
 //mongoose.connect('mongodb://localhost:27017/myproject');
 
-var db = process.env.DB_URL_HOFB;
-mongoose.connect(db) 
+// var db = process.env.DB_URL_HOFB;
+// mongoose.connect(db)
 // mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
 // mongoose.connect(ENV['DB_URL'])
