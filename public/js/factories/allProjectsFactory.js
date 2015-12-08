@@ -19,5 +19,4 @@ angular.module('allProjectsFactory', [])
     return {
       allprojects: getAllProjects
     }
-    // return 5555;
   }
