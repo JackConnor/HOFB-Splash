@@ -18,11 +18,17 @@ angular.module('dashController', ['allProjectsFactory'])
 
     }
 
+    /////load all active projects into the dashboard view
     function loadInitialList(){
       for (var i = 0; i < self.allProjects.length; i++) {
         $('.designerDashList').append(
           "<div class='projectCell col-md-4 col-xs-12'>"+
-            self.allProjects[i].name +
+            "<div class='projectCellImageHolder'>"+
+              "<img src='/img/test.png'>"+
+            "<div>"+
+            "<div class='projectCellContent'>"+
+              "<p>"+self.allProjects[i].name+"</p>"+
+            "<div>"+
           "<div>"
           // "<h2>ksdjflksdjflksd</h2>"
         )
@@ -38,18 +44,19 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////see all curated projects
     function toggleCurated(){
-      $('.designerDashListContainer').html();
-      $('.designerDashListContainer').html(
+      $('.designerDashList').html();
+      $('.designerDashList').html(
         "<p>list for curated projects</p>"
       );
     }
 
     ////see all active projects
     function toggleActive(){
-      $('.designerDashListContainer').html();
-      $('.designerDashListContainer').html(
-        "<p>listing projects</p>"
-      );
+      $('.designerDashList').html();
+      // $('.designerDashListContainer').html(
+      //   "<p>listing projects</p>"
+      // );
+      loadProjects(loadInitialList);
     }
 
     /////////////////////////////////////////////////////////
