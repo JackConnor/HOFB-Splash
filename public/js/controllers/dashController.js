@@ -30,7 +30,6 @@ angular.module('dashController', ['allProjectsFactory'])
               "<p>"+self.allProjects[i].name+"</p>"+
             "<div>"+
           "<div>"
-          // "<h2>ksdjflksdjflksd</h2>"
         )
         self.allProjects[i]
       }
@@ -38,25 +37,39 @@ angular.module('dashController', ['allProjectsFactory'])
     ///////will set self.allProjects as all our projects
     loadProjects(loadInitialList);
 
+    ////function for appending active list
+    function loadCuratedList(){
+      for (var i = 0; i < self.allProjects.length; i++) {
+        $('.designerDashList').append(
+          "<div class='projectCell col-md-4 col-xs-12'>"+
+            "<div class='projectCellImageHolder'>"+
+              "<img src='/img/buyerstep.jpg'>"+
+            "<div>"+
+            "<div class='projectCellContent'>"+
+              "<p>"+self.allProjects[i].name+"--curated</p>"+
+            "<div>"+
+          "<div>"
+        )
+        self.allProjects[i]
+      }
+    }
+
 
     ///////////////////////////
     //////Toggle Logic/////////
 
     ////see all curated projects
     function toggleCurated(){
-      $('.designerDashList').html();
-      $('.designerDashList').html(
-        "<p>list for curated projects</p>"
-      );
+      $('.designerDashList').html('');
+      loadCuratedList();
+      $('.sectionTitle').text('listing all curated projects')
     }
 
     ////see all active projects
     function toggleActive(){
-      $('.designerDashList').html();
-      // $('.designerDashListContainer').html(
-      //   "<p>listing projects</p>"
-      // );
+      $('.designerDashList').html('');
       loadInitialList();
+      $('.sectionTitle').text('listing all active projects')
     }
 
     /////////////////////////////////////////////////////////
