@@ -1,15 +1,31 @@
-angular.module('signupController', ['checkStatusFactory'])
+angular.module('signupController', ['checkStatusFactory', 'signupUserFactory'])
 
   .controller('signupCtrl', signupCtrl)
 
-  signupCtrl.$inject = ['$http', 'checkstatus'];
-  function signupCtrl($http, checkstatus){
+  signupCtrl.$inject = ['$http', 'checkstatus', 'signupUser'];
+  function signupCtrl($http, checkstatus, signupUser){
     var self = this;
 
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
 
-    console.log(checkstatus);
+    // console.log(checkstatus);
+    // console.log(signupUser);
 
+    /////event to sign up a new user
+    $('.signupSubmit').on('click', function(){
+      signupUser.signup();
+      // var email = $('.signupEmail').val();
+      // var password = $('.signupPassword').val();
+      // $http({
+      //   method: "POST"
+      //   ,url: "/api/signup"
+      //   ,data: {email: email, password: password}
+      // })
+      // .then(function(newUser){
+      //   console.log(newUser);
+      //   return newUser
+      // })
+    })
 
     ///////////////////////////////////////////
     /////////logic for the navbar and toggle///
