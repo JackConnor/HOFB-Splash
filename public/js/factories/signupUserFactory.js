@@ -5,7 +5,7 @@ angular.module('signupUserFactory', [])
   signupUser.$inject = ['$http'];
   function signupUser($http){
 
-    function signUp(){
+    function signUp(callback){
       var email = $('.signupEmail').val();
       var password = $('.signupPassword').val();
       var rePassword = $('.signupPasswordRepeat').val()
@@ -17,7 +17,7 @@ angular.module('signupUserFactory', [])
         })
         .then(function(newUser){
           console.log(newUser);
-          return newUser
+          callback();
         })
       } else {
         console.log('Your passwords dont match');

@@ -1,9 +1,9 @@
-angular.module('signupController', ['checkStatusFactory', 'signupUserFactory'])
+angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', 'startSessionFactory'])
 
   .controller('signupCtrl', signupCtrl)
 
-  signupCtrl.$inject = ['$http', 'checkstatus', 'signupUser'];
-  function signupCtrl($http, checkstatus, signupUser){
+  signupCtrl.$inject = ['$http', 'checkstatus', 'signupUser', 'startSession'];
+  function signupCtrl($http, checkstatus, signupUser, startSession){
     var self = this;
 
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
@@ -13,7 +13,8 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory'])
 
     /////event to sign up a new user
     $('.signupSubmit').on('click', function(){
-      signupUser.signup();
+
+      signupUser.signup(startSession.startSession());
       // var email = $('.signupEmail').val();
       // var password = $('.signupPassword').val();
       // $http({
