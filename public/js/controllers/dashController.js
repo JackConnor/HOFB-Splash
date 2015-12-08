@@ -8,45 +8,50 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ///////////////////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
-    function loadProjects(callback){
+    function loadProjects(callback, arg){
       allProjects.allprojects().then(function(allP){
         console.log(allP);
         self.allProjects = allP
         console.log(self.allProjects);
-        callback();
+        callback(arg);
       });
 
     }
 
     /////load all active projects into the dashboard view
-    function loadInitialList(){
+    function loadInitialList(arg){
       for (var i = 0; i < self.allProjects.length; i++) {
         $('.designerDashList').append(
-          "<div class='projectCell col-md-4 col-xs-12'>"+
-            "<div class='projectCellImageHolder'>"+
-              "<img src='/img/test.png'>"+
-            "<div>"+
-            "<div class='projectCellContent'>"+
-              "<p>"+self.allProjects[i].name+"</p>"+
+          "<div class='col-md-4 col-xs-12 projectCell'>"+
+            "<div class='projectCellInner'>"+
+              "<div class='projectCellImageHolder'>"+
+                "<img src='/img/test.png'>"+
+              "<div>"+
+              "<div class='projectCellContent'>"+
+                "<p>"+self.allProjects[i].name+"</p>"+
+              "<div>"+
             "<div>"+
           "<div>"
         )
         self.allProjects[i]
       }
+      arg();
     }
     ///////will set self.allProjects as all our projects
-    loadProjects(loadInitialList);
+    loadProjects(loadInitialList, addHoverToCell);
 
     ////function for appending active list
     function loadCuratedList(){
       for (var i = 0; i < self.allProjects.length; i++) {
         $('.designerDashList').append(
           "<div class='projectCell col-md-4 col-xs-12'>"+
-            "<div class='projectCellImageHolder'>"+
-              "<img src='/img/buyerstep.jpg'>"+
-            "<div>"+
-            "<div class='projectCellContent'>"+
-              "<p>"+self.allProjects[i].name+"--curated</p>"+
+            "<div class='projectCellInner'>"+
+              "<div class='projectCellImageHolder'>"+
+                "<img src='/img/buyerstep.jpg'>"+
+              "<div>"+
+              "<div class='projectCellContent'>"+
+                "<p>"+self.allProjects[i].name+"--curated</p>"+
+              "<div>"+
             "<div>"+
           "<div>"
         )
@@ -79,18 +84,48 @@ angular.module('dashController', ['allProjectsFactory'])
     $('.designerDashCurated').on('click', function(){
       console.log('to curated');
       toggleCurated();
+      addHoverToCell();
     })
 
     ////////toggle to active view
     $('.designerDashActive').on('click', function(){
       console.log('to active');
       toggleActive();
+      addHoverToCell();
     })
     //////////click functions for toggling designer dashboard
     /////////////////////////////////////////////////////////
 
     //////End Toggle Logic/////
     ///////////////////////////
+
+    /////////////////////////////
+    /////////Cell Hover effect///
+
+    function addHoverToCell(){
+      console.log('yoyoyoyoy');
+      $('.projectCellImageHolder').on('click', function(evt){
+        console.log(evt.target);
+        var $hoverTarget = $(evt.target);
+        console.log($hoverTarget);
+        $hoverTarget.css({
+          opacity: 0.5
+        })
+        ////we drill up in order to get the parent, so we can append the html buttons to it
+        var parentContainer = $hoverTarget.parent().parent()[0];
+        console.log(parentContainer);
+        $(parentContainer).prepend(
+          "<div class='projectCellHoverContainer'>"+
+            "<div class='projectCellTrash'>X</div>"+
+            '<div class="projectCellButton">Edit'+
+            "<div>"+
+          "<div>"
+        )
+      })
+    }
+
+    ////////End Cell Hover///////
+    /////////////////////////////
 
   /////end dash controller
   ////////////////////////
