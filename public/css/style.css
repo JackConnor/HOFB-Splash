@@ -78,12 +78,36 @@
   display: inline-block;
 }
 
+.designerDashActive {
+  display: inline-block;
+  height: 100%;
+  width: 225px;
+  outline: 2px solid pink;
+  text-align: center;
+  font-size: 27px;
+}
+
+.designerDashCurated {
+  display: inline-block;
+  height: 100%;
+  width: 225px;
+  outline: 2px solid pink;
+  text-align: center;
+  font-size: 27px;
+}
+
 .designerDashFilter {
   display: inline-block;
   outline: 2px solid yellow;
   height: 100%;
   width: 70%;
   vertical-align: top;
+}
+
+.designerDashListContainer {
+  display: block;
+  min-height: 300px;
+  outline: 4px solid gray;
 }
 
 .designerDashSearchFilterContainer {
@@ -105,6 +129,13 @@
   height: 70px;
   margin-top: 65px;
   font-size: 22px;
+}
+
+.designerDashToggleContainer {
+  height: 90px;
+  outline: 2px solid orange;
+  width: 100%;
+  display: block;
 }
 
 .howToCell {
