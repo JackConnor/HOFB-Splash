@@ -231,61 +231,22 @@ module.exports = function(app){
   } )
 
   //////session and token stuff
-
   ///////begin the session
   app.post('/api/startsession', function(req, res){
-    jwt.sign({iss: "hofb.com", name: req.body.email}, process.env.JWT_TOKEN_SECRET, {expiresIn: "12h", audience: "designer"}, function(token){
+    jwt.sign({iss: "hofb.com", name: req.body.email}, process.env.JWT_TOKEN_SECRET, {expiresIn: "4h", audience: "designer"}, function(token){
       res.json(token);
     });
   })
 
-  ///////check the users status from the jwt web token (as "subject")/////
+  ///////check the users status from the jwt web token (as "audience")/////
   app.post('/api/checkstatus', function(req, res){
-    jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(decodedToken){
+    jwt.verify(req.body.token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
       console.log(decodedToken);
-      res.json(decodedToken);
+      ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
+      res.json(decodedToken.aud);
     });
   })
 
-  // var decoded = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
-  // console.log(decoded);
-
-  // app.post('/api/signup', function(req, res){
-  //   console.log(req.body);
-  //   var email = req.body.email;
-  //   var password = req.body.password;
-  //   User.find({}, function(err, users){
-  //     if(err){
-  //       console.log(err);
-  //       res.json({message: err})
-  //     }
-  //     function checkUniqueEmail(email){
-  //       for (var i = 0; i < users.length; i++) {
-  //         if(email == users[i].email){
-  //           res.json({message: "already in the system, try a new email"})
-  //         } else {
-  //         }
-  //       }
-  //       User.create({email: email, passwordDigest: bcrypt.hashSync(password, function(err, user){
-  //         console.log(233);
-  //         if(err){console.log(err)}
-  //         res.json(user)
-  //       })
-  //     })
-  //   }
-  //
-  //     checkUniqueEmail(email);
-  //
-  //     // var passwordDigest = bcrypt.hashSync(password);
-  //
-  //     // if (email == null) {
-  //     //   console.log('duplicate');
-  //     //   res.json({message:"That email is already in our system"})
-  //     // } else {
-  //     //   res.json({passwordDigest: passwordDigest, email: email})
-  //     // }
-  //   })
-  // })
   ///////End Signup, Login, Authorization, and Sessions
   ///////////////////////////////////////////////////////
 
