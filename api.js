@@ -2,7 +2,7 @@ var express        = require('express');
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
-var jwt            = require('jsonwebtoken');
+// var jwt            = require('jsonwebtoken');
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client= new mandrill.Mandrill(process.env.MANDRILL_KEY);
@@ -232,23 +232,23 @@ module.exports = function(app){
 
   //////session and token stuff
   ///////begin the session
-  app.post('/api/startsession', function(req, res){
-    jwt.sign({iss: "hofb.com", name: req.body.email}, process.env.JWT_TOKEN_SECRET, {expiresIn: "4h", audience: "designer"}, function(token){
-      res.json(token);
-    });
-  })
+  // app.post('/api/startsession', function(req, res){
+  //   jwt.sign({iss: "hofb.com", name: req.body.email}, process.env.JWT_TOKEN_SECRET, {expiresIn: "4h", audience: "designer"}, function(token){
+  //     res.json(token);
+  //   });
+  // })
 
   ///////check the users status from the jwt web token (as "audience")/////
-  app.get('/api/checkstatus/:jwt', function(req, res){
-    var token = req.params.jwt;
-    console.log(req.params);
-    jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
-      if(err){console.log(err)}
-      console.log(decodedToken);
-      ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
-      res.json(decodedToken.aud);
-    });
-  })
+  // app.get('/api/checkstatus/:jwt', function(req, res){
+  //   var token = req.params.jwt;
+  //   console.log(req.params);
+  //   jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
+  //     if(err){console.log(err)}
+  //     console.log(decodedToken);
+  //     ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
+  //     res.json(decodedToken.aud);
+  //   });
+  // })
 
   ///////End Signup, Login, Authorization, and Sessions
   ///////////////////////////////////////////////////////
