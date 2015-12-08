@@ -8,16 +8,24 @@ var mandrill_client= new mandrill.Mandrill(process.env.MANDRILL_KEY);
 var route          = express.Router();
 var bCrypt         = require('bcrypt');
 
-var hash = bCrypt.hashSync('yoyoyo', 10);
+// var compareHash = 'yoyoyo';
+// console.log(compareHash);
+//
+// bCrypt.hash("bacon", null, null, function(err, hash) {
+// 	// Store hash in your password DB.
+//   console.log(hash);
+// });
 
-console.log(hash);
+// console.log(bCrypt.compare('compareHash', hash), function(err, hash){
+//   console.log(hash);
+// });
 //
 // console.log(bCrypt.hashSync('brown'), function(err, password){
 //   console.log(password);
 // });
 
 var seed           = require('./seed.js');
-console.log(seed);
+// console.log(seed);
 
 var User = seed.Users;
 // console.log(User[0]);
@@ -43,7 +51,7 @@ module.exports = function(app){
     console.log('creating')
     Project.find({}, function(err, projects){
       if(err) console.log(err)
-      console.log(projects)
+      // console.log(projects)
       res.json(projects)
     })
     res.json(projects)
@@ -113,6 +121,11 @@ module.exports = function(app){
 
   /////////////////////////////////
   ////////Begin Product API calls//
+
+  app.get('/defaultsite', function(req, res){
+    res.redirect('/#/')
+    // res.json({name: "blah"})
+  })
 
   ///////get all products
   app.get('/api/products', function(req, res){
