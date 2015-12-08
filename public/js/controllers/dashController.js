@@ -21,9 +21,10 @@ angular.module('dashController', ['allProjectsFactory'])
     function loadInitialList(){
       for (var i = 0; i < self.allProjects.length; i++) {
         $('.designerDashList').append(
-          // "<div class='projectCell col-md-4 col-xs-12'>"+
-          // "<div>"
-          "<h2>ksdjflksdjflksd</h2>"
+          "<div class='projectCell col-md-4 col-xs-12'>"+
+            self.allProjects[i].name +
+          "<div>"
+          // "<h2>ksdjflksdjflksd</h2>"
         )
         self.allProjects[i]
       }
