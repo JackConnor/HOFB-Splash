@@ -12,21 +12,9 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     // console.log(signupUser);
 
     /////event to sign up a new user
-    $('.signupSubmit').on('click', function(){
-
-      signupUser.signup(startSession.startSession());
-      // var email = $('.signupEmail').val();
-      // var password = $('.signupPassword').val();
-      // $http({
-      //   method: "POST"
-      //   ,url: "/api/signup"
-      //   ,data: {email: email, password: password}
-      // })
-      // .then(function(newUser){
-      //   console.log(newUser);
-      //   return newUser
-      // })
-    })
+    // $('.signupSubmit').on('click', function(){
+    //   signupUser.signup(startSession.startSession());
+    // })
 
     ///////////////////////////////////////////
     /////////logic for the navbar and toggle///
