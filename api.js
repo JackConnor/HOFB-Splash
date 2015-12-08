@@ -18,7 +18,7 @@ require('./passport.js')(passport);
 var seed           = require('./seed.js');
 // console.log(seed);
 
-var User = seed.Users;
+// var User = seed.Users;
 // console.log(User[0]);
 
 // var Project = seed.Products;
@@ -231,10 +231,24 @@ module.exports = function(app){
   } )
 
   //////session and token stuff
-  jwt.sign({iss: "hofb.com", name: "jack connor"}, 'shhhh', function(token){
-    console.log('yea yaaaaa');
-    console.log(token);
+
+  ///////begin the session
+  app.post('/api/startsession', function(req, res){
+    jwt.sign({iss: "hofb.com", name: req.body.email}, process.env.JWT_TOKEN_SECRET, {expiresIn: "12h", audience: "designer"}, function(token){
+      res.json(token);
+    });
   })
+
+  ///////check the users status from the jwt web token (as "subject")/////
+  app.post('/api/checkstatus', function(req, res){
+    jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(decodedToken){
+      console.log(decodedToken);
+      res.json(decodedToken);
+    });
+  })
+
+  // var decoded = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
+  // console.log(decoded);
 
   // app.post('/api/signup', function(req, res){
   //   console.log(req.body);
