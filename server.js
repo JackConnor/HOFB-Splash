@@ -8,7 +8,7 @@ var bodyParser     = require('body-parser');
 var http           = require('http');
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
-// var jwt            = require('jsonwebtoken');
+var jwt            = require('jsonwebtoken');
 var methodOverride = require('method-override');
 var passport       = require('passport');
 var passportlocal = require('passport-local');
@@ -70,4 +70,8 @@ app.get('*', function(req, res){
   res.sendFile( __dirname + '/public/index.html')
 })
 
+// mongoose.createConnection(process.env.DB_URL_HOFB);
+// // mongoose.createConnection('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash');
+// // mongoose.createConnection(mongoose.connect(ENV['DB_URL'])
+// // );
 module.exports = app;

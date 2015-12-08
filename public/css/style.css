@@ -78,6 +78,35 @@
   display: inline-block;
 }
 
+.designerDashFilter {
+  display: inline-block;
+  outline: 2px solid yellow;
+  height: 100%;
+  width: 70%;
+  vertical-align: top;
+}
+
+.designerDashSearchFilterContainer {
+  height: 200px;
+  display: block;
+  outline: 4px solid green;
+}
+
+.designerDashSearch {
+  display: inline-block;
+  outline: 2px solid blue;
+  height: 100%;
+  width: 29%;
+  vertical-align: top;
+}
+
+.designerDashSearchInput {
+  width: 100%;
+  height: 70px;
+  margin-top: 65px;
+  font-size: 22px;
+}
+
 .howToCell {
   min-height: 100%;
   width: 33%;
