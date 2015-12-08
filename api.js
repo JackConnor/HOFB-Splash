@@ -6,22 +6,19 @@ var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client= new mandrill.Mandrill(process.env.MANDRILL_KEY);
 var route          = express.Router();
-var bCrypt         = require('bcrypt');
+var bcrypt         = require('bcrypt-nodejs');
+var passport       = require('passport');
+var passportLocal  = require('passport-local');
 
-// var compareHash = 'yoyoyo';
-// console.log(compareHash);
-//
-// bCrypt.hash("bacon", null, null, function(err, hash) {
-// 	// Store hash in your password DB.
-//   console.log(hash);
-// });
+require('./passport.js')(passport);
 
-// console.log(bCrypt.compare('compareHash', hash), function(err, hash){
-//   console.log(hash);
-// });
+//===========================================================
+
+// var salts = bcrypt.genSaltSync(10);
 //
-// console.log(bCrypt.hashSync('brown'), function(err, password){
-//   console.log(password);
+// var varx = bcrypt.hash("bacon", salts, null, function(err, newHash){
+//   console.log(newHash);
+//   return newHash;
 // });
 
 var seed           = require('./seed.js');
@@ -124,7 +121,6 @@ module.exports = function(app){
 
   app.get('/defaultsite', function(req, res){
     res.redirect('/#/')
-    // res.json({name: "blah"})
   })
 
   ///////get all products
@@ -218,7 +214,69 @@ module.exports = function(app){
     res.json(cityData.zipcode)
   })
 
-  /////email stuff
+  //////////////////////////////////////
+  ///////Signup, Login, Authorization, and Sessions
+  app.post('/api/signup', function( req, res ) {
+  	User.findOne( { email: req.body.email }, function(err, user){
+  		if (err ) {
+  				res.json( err )
+  		} else if ( user ) {
+  			res.redirect( '/login')
+  		} else {
+  			var newUser = new User();
+  			newUser.email = req.body.email
+  			newUser.passwordDigest = newUser.generateHash( req.body.password )
+  			newUser.save( function( err, user ) {
+  				if ( err ) { console.log(err) }
+  				//AUTHENTICATE USER HERE
+  				res.json(user)
+  			})
+  		}
+  	})
+
+  } )
+
+  // app.post('/api/signup', function(req, res){
+  //   console.log(req.body);
+  //   var email = req.body.email;
+  //   var password = req.body.password;
+  //   User.find({}, function(err, users){
+  //     if(err){
+  //       console.log(err);
+  //       res.json({message: err})
+  //     }
+  //     function checkUniqueEmail(email){
+  //       for (var i = 0; i < users.length; i++) {
+  //         if(email == users[i].email){
+  //           res.json({message: "already in the system, try a new email"})
+  //         } else {
+  //         }
+  //       }
+  //       User.create({email: email, passwordDigest: bcrypt.hashSync(password, function(err, user){
+  //         console.log(233);
+  //         if(err){console.log(err)}
+  //         res.json(user)
+  //       })
+  //     })
+  //   }
+  //
+  //     checkUniqueEmail(email);
+  //
+  //     // var passwordDigest = bcrypt.hashSync(password);
+  //
+  //     // if (email == null) {
+  //     //   console.log('duplicate');
+  //     //   res.json({message:"That email is already in our system"})
+  //     // } else {
+  //     //   res.json({passwordDigest: passwordDigest, email: email})
+  //     // }
+  //   })
+  // })
+  ///////End Signup, Login, Authorization, and Sessions
+  ///////////////////////////////////////////////////////
+
+  //////////////////////////////////////////
+  /////begin email stuff////////////////////
   app.post('/api/sendemail', function(req, res){
     mandrill_client.messages.send({
       message: {
@@ -237,8 +295,8 @@ module.exports = function(app){
       res.json(data)
     })
   })
-  //////End Emailcapture calls//////
-  //////////////////////////////////
+  /////end email stuff////////////////////
+  ////////////////////////////////////////
 }
 
 //mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
