@@ -183,6 +183,11 @@
   background-color: white;
 }
 
+.projectCell {
+  height: 300px;
+  outline: 4px solid magenta;
+}
+
 .signupContainer {
   position: absolute;
   width: 60%;

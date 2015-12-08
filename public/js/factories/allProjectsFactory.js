@@ -12,7 +12,8 @@ angular.module('allProjectsFactory', [])
       })
       .then(function(allProjectsData){
         console.log(allProjectsData);
-        return allProjectsData;
+        self.allProjects = allProjectsData.data;
+        return allProjectsData.data;
       })
     }
 

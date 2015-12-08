@@ -6,18 +6,36 @@ angular.module('dashController', ['allProjectsFactory'])
   function dashCtrl($http, allProjects){
     var self = this;
 
+    ///////////////////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
-    function loadProjects(){
-      var projects = allProjects.allprojects();
-      console.log(projects);
-      self.allProjects = projects;
+    function loadProjects(callback){
+      allProjects.allprojects().then(function(allP){
+        console.log(allP);
+        self.allProjects = allP
+        console.log(self.allProjects);
+        callback();
+      });
+
     }
-    loadProjects();
+
+    function loadInitialList(){
+      for (var i = 0; i < self.allProjects.length; i++) {
+        $('.designerDashList').append(
+          // "<div class='projectCell col-md-4 col-xs-12'>"+
+          // "<div>"
+          "<h2>ksdjflksdjflksd</h2>"
+        )
+        self.allProjects[i]
+      }
+    }
+    ///////will set self.allProjects as all our projects
+    loadProjects(loadInitialList);
+
 
     ///////////////////////////
     //////Toggle Logic/////////
 
-    ////get all curated projects
+    ////see all curated projects
     function toggleCurated(){
       $('.designerDashListContainer').html();
       $('.designerDashListContainer').html(
@@ -25,6 +43,7 @@ angular.module('dashController', ['allProjectsFactory'])
       );
     }
 
+    ////see all active projects
     function toggleActive(){
       $('.designerDashListContainer').html();
       $('.designerDashListContainer').html(
