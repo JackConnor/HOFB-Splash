@@ -78,6 +78,63 @@
   display: inline-block;
 }
 
+.designerDashActive {
+  display: inline-block;
+  height: 100%;
+  width: 225px;
+  outline: 2px solid pink;
+  text-align: center;
+  font-size: 27px;
+}
+
+.designerDashCurated {
+  display: inline-block;
+  height: 100%;
+  width: 225px;
+  outline: 2px solid pink;
+  text-align: center;
+  font-size: 27px;
+}
+
+.designerDashFilter {
+  display: inline-block;
+  outline: 2px solid yellow;
+  height: 100%;
+  vertical-align: top;
+}
+
+.designerDashListContainer {
+  display: block;
+  outline: 4px solid gray;
+}
+
+.designerDashSearchFilterContainer {
+  height: 120px;
+  display: block;
+  outline: 4px solid green;
+}
+
+.designerDashSearch {
+  display: inline-block;
+  outline: 2px solid blue;
+  height: 100%;
+  vertical-align: top;
+}
+
+.designerDashSearchInput {
+  width: 100%;
+  height: 70px;
+  margin-top: 20px;
+  font-size: 22px;
+}
+
+.designerDashToggleContainer {
+  height: 90px;
+  outline: 2px solid orange;
+  width: 100%;
+  display: block;
+}
+
 .howToCell {
   min-height: 100%;
   width: 33%;
@@ -123,6 +180,28 @@
   margin-top: 75px;
   /*border: 3px solid white;*/
   background-color: white;
+}
+
+.projectCell {
+  height: 300px;
+  outline: 4px solid magenta;
+}
+
+.projectCell img{
+  width: 100%;
+  height: 100%;
+}
+
+.projectCellContent {
+  display: block;
+  height: 20%;
+  outline: 2px solid green;
+}
+
+.projectCellImageHolder {
+  width: 100%;
+  height: 80%;
+  display: block;
 }
 
 .signupContainer {
