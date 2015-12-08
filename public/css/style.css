@@ -100,7 +100,6 @@
   display: inline-block;
   outline: 2px solid yellow;
   height: 100%;
-  width: 70%;
   vertical-align: top;
 }
 
@@ -120,7 +119,6 @@
   display: inline-block;
   outline: 2px solid blue;
   height: 100%;
-  width: 29%;
   vertical-align: top;
 }
 
