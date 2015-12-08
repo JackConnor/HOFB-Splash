@@ -260,9 +260,13 @@ module.exports = function(app){
       message: {
         from_email: "thankyou@hofb.com"
         ,html:
-        "<divs style='background-color:#E0F8EC'>"+
-          "<h2>Be the first to gain access to HOFB, a FREE new platform allowing the design styles of independent and emerging fashion designers to be discovered by buyers and mass retailers globally."+
-          "HOFB ends the struggles faced by independent and emerging fashion designers who have to cold-call and send line sheets and style guides to countless retailers just hoping for a favorable response. Likewise, buyers and mass retailers no longer have to waste time searching through endless line sheets and products that do not fit the retailer’s merchandising plan. HOFB is a seamless platform for both fashion designers and buyers to capitalize on each other’s work, and it’s FREE!</h2>"+
+        "<divs>"+
+          "<img src='http://i.imgur.com/f5T6U5B.png' style='width:250px'>"+
+          "<h2 style='color:#737373'>Thank you for joining HOFB. We’re gearing up to introduce you to our exciting new platform, created solely for the purpose of making your work and life easier! In the coming days and weeks, you will receive a link via e-mail which will invite you to enter and start using the closed beta HOFB platform. "+
+          "<br>"+
+          "Please bear with us while we onboard users gradually.</h2>"+
+          "<h2 style='color:#293d3d'>HOFB</h2>"+
+          "<h3 style='color:#293d3d'>Los Angeles</h3>"+
         "</div>"
         ,subject: "HOFB Signup Confirmation"
         ,to:[{
