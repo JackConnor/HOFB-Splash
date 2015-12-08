@@ -56,7 +56,7 @@ angular.module('dashController', ['allProjectsFactory'])
       // $('.designerDashListContainer').html(
       //   "<p>listing projects</p>"
       // );
-      loadProjects(loadInitialList);
+      loadInitialList();
     }
 
     /////////////////////////////////////////////////////////
