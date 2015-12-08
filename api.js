@@ -2,6 +2,7 @@ var express        = require('express');
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var jwt            = require('jsonwebtoken');
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client= new mandrill.Mandrill(process.env.MANDRILL_KEY);
@@ -13,13 +14,6 @@ var passportLocal  = require('passport-local');
 require('./passport.js')(passport);
 
 //===========================================================
-
-// var salts = bcrypt.genSaltSync(10);
-//
-// var varx = bcrypt.hash("bacon", salts, null, function(err, newHash){
-//   console.log(newHash);
-//   return newHash;
-// });
 
 var seed           = require('./seed.js');
 // console.log(seed);
@@ -235,6 +229,12 @@ module.exports = function(app){
   	})
 
   } )
+
+  //////session and token stuff
+  jwt.sign({iss: "hofb.com", name: "jack connor"}, 'shhhh', function(token){
+    console.log('yea yaaaaa');
+    console.log(token);
+  })
 
   // app.post('/api/signup', function(req, res){
   //   console.log(req.body);

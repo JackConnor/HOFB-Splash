@@ -8,10 +8,10 @@ var bodyParser     = require('body-parser');
 var http           = require('http');
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
+var jwt            = require('jsonwebtoken');
 var methodOverride = require('method-override');
 var passport       = require('passport');
 var passportlocal = require('passport-local');
-console.log(passport);
 var app            = express();
 
 // view engine setup

@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt');
 var userSchema = new Schema({
   email: String
   ,passwordDigest: String
+  ,token: String
   ,location: String
   ,firstname: String
   ,lastname: String
