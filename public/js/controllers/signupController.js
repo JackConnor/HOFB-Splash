@@ -1,12 +1,15 @@
-angular.module('signupController', [])
+angular.module('signupController', ['checkStatusFactory'])
 
   .controller('signupCtrl', signupCtrl)
 
-  signupCtrl.$inject = ['$http'];
-  function signupCtrl($http){
+  signupCtrl.$inject = ['$http', 'checkstatus'];
+  function signupCtrl($http, checkstatus){
     var self = this;
 
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
+
+    console.log(checkstatus);
+
 
     ///////////////////////////////////////////
     /////////logic for the navbar and toggle///
