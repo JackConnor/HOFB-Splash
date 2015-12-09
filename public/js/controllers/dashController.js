@@ -10,9 +10,7 @@ angular.module('dashController', ['allProjectsFactory'])
     /////////onload event to add initial list of repeated projects
     function loadProjects(callback, arg){
       allProjects.allprojects().then(function(allP){
-        console.log(allP);
-        self.allProjects = allP
-        console.log(self.allProjects);
+        self.allProjects = allP;
         callback(arg);
       });
 
@@ -25,7 +23,7 @@ angular.module('dashController', ['allProjectsFactory'])
           "<div class='col-md-4 col-xs-12 projectCell'>"+
             "<div class='projectCellInner'>"+
               "<div class='projectCellImageHolder'>"+
-                "<img src='/img/test.png'>"+
+                "<img src='"+self.allProjects[i].images[0]+"'>"+
               "<div>"+
               "<div class='projectCellContent'>"+
                 "<p>"+self.allProjects[i].name+"</p>"+
@@ -47,7 +45,7 @@ angular.module('dashController', ['allProjectsFactory'])
           "<div class='projectCell col-md-4 col-xs-12'>"+
             "<div class='projectCellInner'>"+
               "<div class='projectCellImageHolder'>"+
-                "<img src='/img/buyerstep.jpg'>"+
+                "<img src='"+self.allProjects[i].images[1]+"'>"+
               "<div>"+
               "<div class='projectCellContent'>"+
                 "<p>"+self.allProjects[i].name+"--curated</p>"+
@@ -82,6 +80,12 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////////toggle to curated view
     $('.designerDashCurated').on('click', function(){
+      $('.designerDashCurated').css({
+        backgroundColor: "#E0F8F7"
+      })
+      $('.designerDashActive').css({
+        backgroundColor: "white"
+      })
       console.log('to curated');
       toggleCurated();
       addHoverToCell();
@@ -90,6 +94,12 @@ angular.module('dashController', ['allProjectsFactory'])
     ////////toggle to active view
     $('.designerDashActive').on('click', function(){
       console.log('to active');
+      $('.designerDashCurated').css({
+        backgroundColor: "white"
+      })
+      $('.designerDashActive').css({
+        backgroundColor: "#E0F8F7"
+      })
       toggleActive();
       addHoverToCell();
     })
