@@ -52,7 +52,7 @@ angular.module('dashController', ['allProjectsFactory'])
           "<div class='projectCell col-md-4 col-xs-12'>"+
             "<div class='projectCellInner'>"+
               "<div class='projectCellImageHolder'>"+
-                "<img src='"+self.curatedProjects[i].images[1]+"'>"+
+                "<img src='"+self.curatedProjects[i].images[0]+"'>"+
               "<div>"+
               "<div class='projectCellContent'>"+
                 "<p>"+self.curatedProjects[i].name+"--curated</p>"+
