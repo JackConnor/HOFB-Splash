@@ -7,7 +7,7 @@ db.products.insert({
   ,tags: ["fun", "tshirts", "camo"]
   ,vendor: false
   ,colors: ['green', 'black']
-  ,Fabrics: ["seersucker", "denim"]
+  ,fabrics: ["seersucker", "denim"]
   ,buttons: 'iron_cross'
   ,stitchPattern: "double_straight"
   ,season: "fall"
@@ -23,7 +23,7 @@ db.products.insert({
   ,tags: [""]
   ,vendor: false
   ,colors: ['blue', 'gold']
-  ,Fabrics: [ "denim"]
+  ,fabrics: [ "denim"]
   ,buttons: 'straight'
   ,stitchPattern: "double_straight"
   ,season: "fall"
@@ -39,7 +39,7 @@ db.products.insert({
   ,tags: ["headgear", "hats"]
   ,vendor: false
   ,colors: ['pink', 'magenta']
-  ,Fabrics: [ "cotton"]
+  ,fabrics: [ "cotton"]
   ,buttons: 'clasp'
   ,stitchPattern: "single"
   ,season: "summer"
@@ -55,7 +55,7 @@ db.products.insert({
   ,tags: ["fun", "tshirts", "camo"]
   ,vendor: false
   ,colors: ['green', 'black']
-  ,Fabrics: ["seersucker", "denim"]
+  ,fabrics: ["seersucker", "denim"]
   ,buttons: 'iron_cross'
   ,stitchPattern: "double_straight"
   ,season: "winter"
@@ -71,7 +71,7 @@ db.products.insert({
   ,tags: []
   ,vendor: false
   ,colors: ['blue', 'gold']
-  ,Fabrics: [ "denim"]
+  ,fabrics: [ "denim"]
   ,buttons: 'straight'
   ,stitchPattern: "double_straight"
   ,season: "spring"
@@ -87,7 +87,7 @@ db.products.insert({
   ,tags: ["headgear", "hats"]
   ,vendor: false
   ,colors: ['pink', 'magenta']
-  ,Fabrics: [ "cotton"]
+  ,fabrics: [ "cotton"]
   ,buttons: 'clasp'
   ,stitchPattern: "single"
   ,season: "winter"

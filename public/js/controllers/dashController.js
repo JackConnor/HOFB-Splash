@@ -67,8 +67,10 @@ angular.module('dashController', ['allProjectsFactory'])
     function loadFilteredList(filterType, filterValue){
       console.log(filterType);
       console.log(filterValue);
-      var productTypeData = self.allProjects[0];
+      var productTypeData = self.allProjects[1];
       var productType = productTypeData[filterType];
+      console.log(productType);
+      console.log(typeof(productType));
       var filteredArray = [];
         //////check for filters with one value versus many
       if(typeof(productType) == 'string'){
@@ -229,6 +231,24 @@ angular.module('dashController', ['allProjectsFactory'])
     $('.designerDashColor').change(function(){
       $('.designerDashList').html('');
       loadFilteredList("colors", $('.designerDashColor').val())
+    })
+
+    ////filter by fabric
+    $('.designerDashFabric').change(function(){
+      $('.designerDashList').html('');
+      loadFilteredList("fabrics", $('.designerDashFabric').val())
+    })
+
+    ////filter by button
+    $('.designerDashButton').change(function(){
+      $('.designerDashList').html('');
+      loadFilteredList("buttons", $('.designerDashButton').val())
+    })
+
+    ////filter by season
+    $('.designerDashSeason').change(function(){
+      $('.designerDashList').html('');
+      loadFilteredList("season", $('.designerDashSeason').val())
     })
 
     ////End Filtering///////////////
