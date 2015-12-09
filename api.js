@@ -134,7 +134,7 @@ module.exports = function(app){
   })
 
   ////post a single product
-  app.post('/api/products', function(req, res){
+  app.post('/api/projects', function(req, res){
     Product.create(req.body, function(err, product){
       if(err) throw err;
       res.json(product);
@@ -142,7 +142,7 @@ module.exports = function(app){
   })
 
   /////update a product
-  app.post('/api/product/update', function(req, res){
+  app.post('/api/project/update', function(req, res){
     Product.findOne(req.body.id, function(err, product){
       if(err){console.log(err)}
 

@@ -1,14 +1,17 @@
-var app = angular.module('createProjectController', [])
+var app = angular.module('createProjectController', ['postProjectFactory'])
 
   .controller('createProjectCtrl', createProjectCtrl)
 
-  createProjectCtrl.$inject = ['$http']
-  function createProjectCtrl($http){
+  createProjectCtrl.$inject = ['$http', 'postProject']
+  function createProjectCtrl($http, postProject){
     var self = this;
     //////global variables we'll be using for moving the carousel
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
     /////end global variables
+
+    console.log(postProject);
+    console.log(postProject.postProject({name: "The Wonder Mop"}));
 
     ///////////////////////////////////////////
     //////////begin logic for moving carousel//
