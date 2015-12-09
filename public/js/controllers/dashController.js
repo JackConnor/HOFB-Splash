@@ -31,13 +31,13 @@ angular.module('dashController', ['allProjectsFactory'])
           "<div class='col-md-4 col-xs-12 projectCell'>"+
             "<div class='projectCellInner'>"+
               "<div class='projectCellImageHolder'>"+
-                "<img src='"+self.allProjects[i].images[0]+"'>"+
-              "<div>"+
+                "<img class='projectCellImage' src='"+self.allProjects[i].images[0]+"'>"+
+              "</div>"+
               "<div class='projectCellContent'>"+
                 "<p>"+self.allProjects[i].name+"</p>"+
-              "<div>"+
-            "<div>"+
-          "<div>"
+              "</div>"+
+            "</div>"+
+          "</div>"
         )
       }
       arg();
@@ -53,12 +53,12 @@ angular.module('dashController', ['allProjectsFactory'])
             "<div class='projectCellInner'>"+
               "<div class='projectCellImageHolder'>"+
                 "<img src='"+self.curatedProjects[i].images[0]+"'>"+
-              "<div>"+
+              "</div>"+
               "<div class='projectCellContent'>"+
                 "<p>"+self.curatedProjects[i].name+"--curated</p>"+
-              "<div>"+
-            "<div>"+
-          "<div>"
+              "</div>"+
+            "</div>"+
+          "</div>"
         )
       }
     }
@@ -189,7 +189,7 @@ angular.module('dashController', ['allProjectsFactory'])
 
     function addHoverToCell(){
       /////create mouseenter event listener to cause frontend changes
-      $('.projectCellImageHolder').on('mouseenter', function(evt){
+      $('.projectCellImage').on('mouseenter', function(evt){
         var $hoverTarget = $(evt.target);
         $hoverTarget.css({
           opacity: 0.5
