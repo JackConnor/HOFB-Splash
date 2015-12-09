@@ -250,7 +250,6 @@ angular.module('dashController', ['allProjectsFactory'])
       $('.designerDashList').html('');
       loadFilteredList("season", $('.designerDashSeason').val())
     })
-
     ////End Filtering///////////////
     ////////////////////////////////
 

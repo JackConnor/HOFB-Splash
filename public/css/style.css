@@ -192,7 +192,8 @@
 
 .projectCell {
   height: 300px;
-  outline: 4px solid magenta;
+  /*outline: 4px solid magenta;*/
+  /*background-color: #D8D8D8;*/
 }
 
 .projectCell img{
@@ -203,7 +204,15 @@
 .projectCellContent {
   display: block;
   height: 20%;
-  outline: 2px solid green;
+  background-color: #0B3861;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  /*outline: 2px solid green;*/
+}
+
+.projectCellContent p{
+  margin-top: 20px;
 }
 
 .projectCellHoverContainer {
@@ -224,6 +233,7 @@
 }
 
 .projectCellInner {
+  outline: 5px solid gray;
   width: 80%;
   margin-left: 10%;
   margin-top: 5%;
