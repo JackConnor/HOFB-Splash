@@ -73,7 +73,7 @@ angular.module('dashController', ['allProjectsFactory'])
     ////see all active projects
     function toggleActive(){
       $('.designerDashList').html('');
-      loadInitialList();
+      loadInitialList(function(){console.log('boom')});
       $('.sectionTitle').text('listing all active projects')
     }
 
