@@ -103,17 +103,14 @@ angular.module('dashController', ['allProjectsFactory'])
     /////////Cell Hover effect///
 
     function addHoverToCell(){
-      console.log('yoyoyoyoy');
-      $('.projectCellImageHolder').on('click', function(evt){
-        console.log(evt.target);
+      /////create mouseenter event listener to cause frontend changes
+      $('.projectCellImageHolder').on('mouseenter', function(evt){
         var $hoverTarget = $(evt.target);
-        console.log($hoverTarget);
         $hoverTarget.css({
           opacity: 0.5
         })
         ////we drill up in order to get the parent, so we can append the html buttons to it
         var parentContainer = $hoverTarget.parent().parent()[0];
-        console.log(parentContainer);
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
             "<div class='projectCellTrash'>X</div>"+
@@ -121,7 +118,16 @@ angular.module('dashController', ['allProjectsFactory'])
             "<div>"+
           "<div>"
         )
+        $('.projectCellHoverContainer').on('mouseleave', function(evt){
+          $hoverTarget.css({
+            opacity: 1
+          })
+          ////we drill up in order to get the parent, so we can append the html buttons to it
+          // var parentContainer = $hoverTarget.parent().parent()[0];
+          $('.projectCellHoverContainer').remove();
+        })
       })
+      //////function to restore cell to order when mouse leaves cell
     }
 
     ////////End Cell Hover///////
