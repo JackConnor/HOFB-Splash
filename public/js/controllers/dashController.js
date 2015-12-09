@@ -67,20 +67,52 @@ angular.module('dashController', ['allProjectsFactory'])
     function loadFilteredList(filterType, filterValue){
       console.log(filterType);
       console.log(filterValue);
+      var productTypeData = self.allProjects[0];
+      var productType = productTypeData[filterType];
       var filteredArray = [];
-      for (var i = 0; i < self.allProjects.length; i++) {
-        var productTypeData = self.allProjects[i];
-        console.log(productTypeData);
-        var productType = productTypeData[filterType];
-        console.log(productType);
-        if(filterValue == productType){
-          console.log(filterValue +" should equal "+productType+" for this one to work");
-          filteredArray.push(self.allProjects[i]);
+        //////check for filters with one value versus many
+      if(typeof(productType) == 'string'){
+        for (var i = 0; i < self.allProjects.length; i++) {
+          var productTypeData = self.allProjects[i];
+          console.log(productTypeData);
+          var productType = productTypeData[filterType];
+          console.log(typeof(productType));
+          console.log(productType);
+          ///adding for loop here
+          if(filterValue == productType){
+            console.log(filterValue +" string should equal "+productType+" for this one to work");
+            filteredArray.push(self.allProjects[i]);
+          }
+          self.filteredProjects = filteredArray;
+          console.log(self.filteredArray);
+          ////ending for loop
+          }
         }
-        self.filteredProjects = filteredArray;
-        console.log(self.filteredArray);
-      }
+        ////filter for attributes that come in arrays
+        else if(typeof(productType) == 'object'){
+          for (var i = 0; i < self.allProjects.length; i++) {
+            var productTypeDataArray = self.allProjects[i];
+            var productTypeArray = productTypeDataArray[filterType];
+            console.log(productTypeArray);
+            console.log(productTypeArray.length);
+            console.log(filterValue);
+            for (var j = 0; j < productTypeArray.length; j++) {
+              console.log(productTypeArray[j]);
+              console.log(filterValue);
+              if(productTypeArray[j] == filterValue){
+                console.log(filterValue +" object should equal "+productTypeArray[j]+" for this one to work");
+                console.log(filteredArray);
+                filteredArray.push(self.allProjects[i]);
+                self.filteredProjects = filteredArray;
+                console.log(self.filteredProjects);
+              }else{
+                console.log('nope');
+              }
+            }
+          }
+        }
       console.log(self.filteredProjects);
+      /////end for loop
       for (var i = 0; i < self.filteredProjects.length; i++) {
         $('.designerDashList').append(
           "<div class='projectCell col-md-4 col-xs-12'>"+
@@ -186,10 +218,17 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////////////////////////////////
     //////Begin Filtering///////////
-    $('.designerDashProductType').change(function(){
-      console.log('ahhhhhh yeaaaaa');
+
+    ////filter by productType
+    $('.designerDashProductType').change(function(evt){
       $('.designerDashList').html('');
       loadFilteredList("productType", $('.designerDashProductType').val())
+    })
+
+    ////filter by color
+    $('.designerDashColor').change(function(){
+      $('.designerDashList').html('');
+      loadFilteredList("colors", $('.designerDashColor').val())
     })
 
     ////End Filtering///////////////
