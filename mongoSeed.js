@@ -10,6 +10,7 @@ db.products.insert({
   ,Fabrics: ["seersucker", "denim"]
   ,buttons: 'iron_cross'
   ,stitchPattern: "double_straight"
+  ,season: "fall"
   ,status: "unCurated"
   ,tier: ""
 })
@@ -18,13 +19,14 @@ db.products.insert({
   ,timestamp: new Date()
   ,images: ["http://news.fitnyc.edu/wp-content/uploads/2015/10/Symposium_2015_Susanne-Bartsch_Steven_Menendez-500-300x400.jpg", "http://cdn-media.toofab.com/2015/11/11/1111-gigi-hotphotos-300x400.jpg"]
   ,groups: ["pants", "jeans"]
-  ,productType: "shirt"
-  ,tags: ["fun", "tshirts", "camo"]
+  ,productType: "pants"
+  ,tags: [""]
   ,vendor: false
   ,colors: ['blue', 'gold']
   ,Fabrics: [ "denim"]
   ,buttons: 'straight'
   ,stitchPattern: "double_straight"
+  ,season: "fall"
   ,status: "unCurated"
   ,tier: ""
 })
@@ -40,6 +42,7 @@ db.products.insert({
   ,Fabrics: [ "cotton"]
   ,buttons: 'clasp'
   ,stitchPattern: "single"
+  ,season: "summer"
   ,status: "unCurated"
   ,tier: ""
 })
@@ -55,6 +58,7 @@ db.products.insert({
   ,Fabrics: ["seersucker", "denim"]
   ,buttons: 'iron_cross'
   ,stitchPattern: "double_straight"
+  ,season: "winter"
   ,status: "curated"
   ,tier: ""
 })
@@ -63,13 +67,14 @@ db.products.insert({
   ,timestamp: new Date()
   ,images: ["http://images2.fanpop.com/images/photos/3700000/jeans-designer-jeans-3707972-300-400.jpg", "https://s-media-cache-ak0.pinimg.com/736x/5d/da/db/5ddadb42606521dd0dc6797b432512b6.jpg"]
   ,groups: ["pants", "jeans"]
-  ,productType: "shirt"
-  ,tags: ["fun", "tshirts", "camo"]
+  ,productType: "pants"
+  ,tags: []
   ,vendor: false
   ,colors: ['blue', 'gold']
   ,Fabrics: [ "denim"]
   ,buttons: 'straight'
   ,stitchPattern: "double_straight"
+  ,season: "spring"
   ,status: "curated"
   ,tier: ""
 })
@@ -85,6 +90,7 @@ db.products.insert({
   ,Fabrics: [ "cotton"]
   ,buttons: 'clasp'
   ,stitchPattern: "single"
+  ,season: "winter"
   ,status: "curated"
   ,tier: ""
 })

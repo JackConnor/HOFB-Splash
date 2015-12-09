@@ -63,6 +63,41 @@ angular.module('dashController', ['allProjectsFactory'])
       }
     }
 
+    ////function for appending filtered lists from dropdown in realtime
+    function loadFilteredList(filterType, filterValue){
+      console.log(filterType);
+      console.log(filterValue);
+      var filteredArray = [];
+      for (var i = 0; i < self.allProjects.length; i++) {
+        var productTypeData = self.allProjects[i];
+        console.log(productTypeData);
+        var productType = productTypeData[filterType];
+        console.log(productType);
+        if(filterValue == productType){
+          console.log(filterValue +" should equal "+productType+" for this one to work");
+          filteredArray.push(self.allProjects[i]);
+        }
+        self.filteredProjects = filteredArray;
+        console.log(self.filteredArray);
+      }
+      console.log(self.filteredProjects);
+      for (var i = 0; i < self.filteredProjects.length; i++) {
+        $('.designerDashList').append(
+          "<div class='projectCell col-md-4 col-xs-12'>"+
+            "<div class='projectCellInner'>"+
+              "<div class='projectCellImageHolder'>"+
+                "<img src='"+self.filteredProjects[i].images[0]+"'>"+
+              "<div>"+
+              "<div class='projectCellContent'>"+
+                "<p>"+self.filteredProjects[i].name+"</p>"+
+              "<div>"+
+            "<div>"+
+          "<div>"
+        )
+      }
+      addHoverToCell();
+    }
+
 
     ///////////////////////////
     //////Toggle Logic/////////
@@ -148,6 +183,17 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////////End Cell Hover///////
     /////////////////////////////
+
+    ////////////////////////////////
+    //////Begin Filtering///////////
+    $('.designerDashProductType').change(function(){
+      console.log('ahhhhhh yeaaaaa');
+      $('.designerDashList').html('');
+      loadFilteredList("productType", $('.designerDashProductType').val())
+    })
+
+    ////End Filtering///////////////
+    ////////////////////////////////
 
   /////end dash controller
   ////////////////////////
