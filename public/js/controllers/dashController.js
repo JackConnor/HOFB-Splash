@@ -11,9 +11,17 @@ angular.module('dashController', ['allProjectsFactory'])
     function loadProjects(callback, arg){
       allProjects.allprojects().then(function(allP){
         self.allProjects = allP;
+        var curatedProjectsArray = [];
+        for (var i = 0; i < self.allProjects.length; i++) {
+          if(self.allProjects[i].status == "curated"){
+            console.log('theres one');
+            curatedProjectsArray.push(self.allProjects[i])
+          }
+          self.curatedProjects = curatedProjectsArray;//list of all user's curated projects
+        }
+        var curatedProjects =
         callback(arg);
       });
-
     }
 
     /////load all active projects into the dashboard view
@@ -31,7 +39,6 @@ angular.module('dashController', ['allProjectsFactory'])
             "<div>"+
           "<div>"
         )
-        self.allProjects[i]
       }
       arg();
     }
@@ -40,20 +47,19 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////function for appending active list
     function loadCuratedList(){
-      for (var i = 0; i < self.allProjects.length; i++) {
+      for (var i = 0; i < self.curatedProjects.length; i++) {
         $('.designerDashList').append(
           "<div class='projectCell col-md-4 col-xs-12'>"+
             "<div class='projectCellInner'>"+
               "<div class='projectCellImageHolder'>"+
-                "<img src='"+self.allProjects[i].images[1]+"'>"+
+                "<img src='"+self.curatedProjects[i].images[1]+"'>"+
               "<div>"+
               "<div class='projectCellContent'>"+
-                "<p>"+self.allProjects[i].name+"--curated</p>"+
+                "<p>"+self.curatedProjects[i].name+"--curated</p>"+
               "<div>"+
             "<div>"+
           "<div>"
         )
-        self.allProjects[i]
       }
     }
 
@@ -123,7 +129,7 @@ angular.module('dashController', ['allProjectsFactory'])
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
-            "<div class='projectCellTrash'>X</div>"+
+            "<div class='projectCellTrash'>X </div>"+
             '<div class="projectCellButton">Edit'+
             "<div>"+
           "<div>"

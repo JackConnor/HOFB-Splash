@@ -211,7 +211,7 @@
   width: 74%;
   height: 90%;
   z-index: 2;
-  font-size: 24px;
+  font-size: 28px;
   text-align: center;
   /*outline: 3px solid red;*/
 }
@@ -233,6 +233,8 @@
 .projectCellTrash {
   float: right;
   font-size: 30px;
+  color: white;
+  margin-right: 10px;
 }
 
 .signupContainer {
