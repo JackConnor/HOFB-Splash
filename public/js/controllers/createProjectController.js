@@ -220,13 +220,28 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         clickDistance(circlePosition);
         highlightCounter();
       })
+      $('.circle5').on('click', function(evt){
+        var circlePosition = $(evt.target)[0].className.split('')[13];
+        clickDistance(circlePosition);
+        highlightCounter();
+      })
+      $('.circle6').on('click', function(evt){
+        var circlePosition = $(evt.target)[0].className.split('')[13];
+        clickDistance(circlePosition);
+        highlightCounter();
+      })
+      $('.circle7').on('click', function(evt){
+        var circlePosition = $(evt.target)[0].className.split('')[13];
+        clickDistance(circlePosition);
+        highlightCounter();
+      })
     }
     circleClick();
 
     ////function for calculating distance
     function clickDistance(circlePosition){
       var spaces = circlePosition - carouselCounter;
-      var singleCellDistance = $('.carouselBacking').width()* (0.192) + 4;
+      var singleCellDistance = $('.carouselBacking').width()* (0.12) + 4;
       var moveDistance = carouselMargin + (singleCellDistance*spaces*-1);
       carouselMargin = moveDistance;
       carouselCounter = circlePosition;
