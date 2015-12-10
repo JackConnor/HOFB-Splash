@@ -79,6 +79,19 @@
   display: inline-block;
 }
 
+.createFabric {
+  height: 33.33%;
+  outline: 2px solid green;
+}
+
+.createFabricContainer {
+  outline: 2px solid gray;
+  height: 80%;
+  margin-top: 5%;
+  margin-left: 10%;
+  width: 80%;
+}
+
 .createGroups {
   height: 40px;
   margin-top: 30px;
