@@ -39,7 +39,8 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
             opacity: 0.5
             ,backgroundColor: "blue"
           })
-          $(evt.target).attr('id', 'picked');
+          $(evt.target).attr('id', 'picked_'+swatchType+"_"+evt.target.innerText.split(' ').join(''));
+          $(evt.target).addClass('picked');
         } else {
           $(evt.target).css({
             opacity: 1
@@ -71,6 +72,30 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         ,buttons: ""
         ,stitchPattern: ""
         ,season: ""
+      }
+      var pickedElems = $('.picked');
+      console.log(pickedElems);
+      for (var i = 0; i < pickedElems.length; i++) {
+        if(pickedElems[i].id.split('_')[1] == "Season"){
+          self.createNewProject.season = pickedElems[i].id.split('_')[2];
+          console.log(self.createNewProject.season);
+        }
+        else if(pickedElems[i].id.split('_')[1] == "Color"){
+          self.createNewProject.colors.push(pickedElems[i].id.split('_')[2])
+          console.log(self.createNewProject.colors);
+        }
+        else if(pickedElems[i].id.split('_')[1] == "Fabric"){
+          self.createNewProject.fabrics.push(pickedElems[i].id.split('_')[2])
+          console.log(self.createNewProject.fabricss);
+        }
+        else if(pickedElems[i].id.split('_')[1] == "Buttons"){
+          self.createNewProject.buttons = pickedElems[i].id.split('_')[2];
+          console.log(self.createNewProject.color);
+        }
+        else if(pickedElems[i].id.split('_')[1] == "Stitch"){
+          self.createNewProject.stitchPattern = pickedElems[i].id.split('_')[2];
+          console.log(self.createNewProject.stitchPattern);
+        }
       }
       $http({
         method: "POST"
