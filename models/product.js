@@ -10,9 +10,12 @@ var productSchema = new Schema({
   ,tags: Array
   ,vendor: String
   ,colors: Array
-  ,Fabrics: Array
-  ,buttons: Array
+  ,fabrics: Array
+  ,buttons: String
   ,stitchPattern: String
+  ,status: String
+  ,season: String
+  ,tier: String
 })
 
 module.exports = mongoose.model('product', productSchema)

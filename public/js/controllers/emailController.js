@@ -9,7 +9,7 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
     console.log('production');
 
     ///////get all users
-    console.log(allUsers());
+    console.log(    allUsers()   );
 
     //////use factory to search a single user
     var url = "5660e162312d9bf1f2d2dce6";

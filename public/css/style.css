@@ -43,7 +43,7 @@
 }
 
 .carouselBacking {
-  width: 520.833%;
+  width: 833.333%;
   height: 400px;
   outline: 4px solid green;
 }
@@ -63,11 +63,12 @@
 }
 
 .carouselFourth {
-  width: 19.2%;
+  width: 12%;
   /*border-right: 2px solid black;*/
-  background-color: blue;
+  background-color: #81BEF7;
   display: inline-block;
   height: 400px;
+  vertical-align: top;
 }
 
 .carouselLeft {
@@ -111,9 +112,184 @@
 }
 
 .circleContainer {
-  width: 14%;
+  width: 5%;
   margin-left: 5%;
   display: inline-block;
+}
+
+.createButton {
+  outline: 2px solid red;
+  height: 50%;
+}
+
+.createButtonContainer {
+  width: 80%;
+  height: 80%;
+  margin: 5% 0 0 10%;
+  outline: 3px solid gray;
+}
+
+.createColor {
+  height: 33.33%;
+  outline: 2px solid green;
+}
+
+.createColorContainer {
+  outline: 2px solid gray;
+  height: 80%;
+  margin-top: 5%;
+  margin-left: 10%;
+  width: 80%;
+}
+
+.createFabric {
+  height: 33.33%;
+  outline: 2px solid green;
+}
+
+.createFabricContainer {
+  outline: 2px solid gray;
+  height: 80%;
+  margin-top: 5%;
+  margin-left: 10%;
+  width: 80%;
+}
+
+.createGroups {
+  height: 40px;
+  margin-top: 30px;
+  font-size: 28px;
+  text-align: center;
+  display: inline-block;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.createProductType {
+  font-size: 28px;
+  height: 40px;
+  margin-top: 70px;
+  text-align: center;
+  display: inline-block;
+  width: 60%;
+  margin-left: 20%;
+}
+.createVendor {
+  font-size: 28px;
+  height: 40px;
+  margin-top: 30px;
+  text-align: center;
+  display: inline-block;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.createSeason {
+  outline: 2px solid red;
+  height: 50%;
+}
+
+.createSeasonContainer {
+  width: 80%;
+  height: 80%;
+  margin: 5% 0 0 10%;
+  outline: 3px solid gray;
+}
+
+.createStitch {
+  outline: 2px solid red;
+  height: 50%;
+}
+
+.createStitchContainer {
+  width: 80%;
+  height: 80%;
+  margin: 5% 0 0 10%;
+  outline: 3px solid gray;
+}
+
+.createSubmit {
+  width: 250px;
+  height: 40px;
+  font-size: 24px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: purple;
+  color: white;
+}
+
+.createTags {
+  height: 40px;
+  margin-top: 30px;
+  font-size: 28px;
+  text-align: center;
+  display: inline-block;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.dashFilter {
+  padding-top: 10px;
+  width: 150px;
+  font-size: 30px;
+}
+
+.designerDashActive {
+  display: inline-block;
+  height: 100%;
+  width: 225px;
+  outline: 2px solid pink;
+  text-align: center;
+  font-size: 27px;
+  background-color: #E0F8F7;
+}
+
+.designerDashCurated {
+  display: inline-block;
+  height: 100%;
+  width: 225px;
+  outline: 2px solid pink;
+  text-align: center;
+  font-size: 27px;
+}
+
+.designerDashFilter {
+  display: inline-block;
+  outline: 2px solid yellow;
+  height: 100%;
+  vertical-align: top;
+}
+
+.designerDashListContainer {
+  display: block;
+  outline: 4px solid gray;
+}
+
+.designerDashSearchFilterContainer {
+  height: 120px;
+  display: block;
+  outline: 4px solid green;
+}
+
+.designerDashSearch {
+  display: inline-block;
+  outline: 2px solid blue;
+  height: 100%;
+  vertical-align: top;
+}
+
+.designerDashSearchInput {
+  width: 100%;
+  height: 70px;
+  margin-top: 20px;
+  font-size: 22px;
+}
+
+.designerDashToggleContainer {
+  height: 90px;
+  outline: 2px solid orange;
+  width: 100%;
+  display: block;
 }
 
 .howToCell {
@@ -161,6 +337,70 @@
   margin-top: 75px;
   /*border: 3px solid white;*/
   background-color: white;
+}
+
+.projectCellButton {
+  width: 120px;
+  height: 40px;
+  background-color: white;
+  margin: 100px auto 0 auto;
+}
+
+.projectCell {
+  height: 300px;
+  /*outline: 4px solid magenta;*/
+  /*background-color: #D8D8D8;*/
+}
+
+.projectCell img{
+  width: 100%;
+  height: 100%;
+}
+
+.projectCellContent {
+  display: block;
+  height: 20%;
+  background-color: #0B3861;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  /*outline: 2px solid green;*/
+}
+
+.projectCellContent p{
+  /*margin-top: 20px;*/
+}
+
+.projectCellHoverContainer {
+  position: absolute;
+  width: 74%;
+  height: 90%;
+  z-index: 2;
+  font-size: 28px;
+  text-align: center;
+  /*outline: 3px solid red;*/
+}
+
+.projectCellImageHolder {
+  width: 100%;
+  height: 80%;
+  display: block;
+  background-color: black;
+}
+
+.projectCellInner {
+  outline: 5px solid gray;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 5%;
+  height: 90%;
+}
+
+.projectCellTrash {
+  float: right;
+  font-size: 30px;
+  color: white;
+  margin-right: 10px;
 }
 
 .signupContainer {

@@ -2,24 +2,34 @@ var express        = require('express');
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var jwt            = require('jsonwebtoken');
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
-var mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_KEY);
+var mandrill_client= new mandrill.Mandrill(process.env.MANDRILL_KEY);
 var route          = express.Router();
-var seed = require('./seed.js');
-console.log(seed);
+var bcrypt         = require('bcrypt-nodejs');
+var passport       = require('passport');
+var passportLocal  = require('passport-local');
 
-var User = seed.Users;
-console.log(User[0]);
+require('./passport.js')(passport);
 
-var Project = seed.Products;
+//===========================================================
+
+var seed           = require('./seed.js');
+// console.log(seed);
+
+// var User = seed.Users;
+// console.log(User[0]);
+
+// var Project = seed.Products;
 
 //////bring in models////////
 /////////////////////////////
-// var Emailcapture = require('./models/emailCapture.js');
-// var User         = require('./models/user.js');
-// var Product      = require('./models/product.js');
-// var Project      = require('./models/createProject.js');
+
+var Emailcapture = require('./models/emailCapture.js');
+var User         = require('./models/user.js');
+var Product      = require('./models/product.js');
+var Project      = require('./models/createProject.js');
 var viewProduct      = require('./models/viewProduct.js');
 ///////finish bringing models////
 /////////////////////////////////
@@ -34,13 +44,13 @@ module.exports = function(app){
 
   //get all createProjects
   app.get('/api/createprojects', function(req, res){
-    // console.log('creating')
-    // Project.find({}, function(err, projects){
-    //   if(err) console.log(err)
-    //   console.log(projects)
-    //   res.json(projects)
-    // })
-    res.json(Project)
+    console.log('creating')
+    Project.find({}, function(err, projects){
+      if(err) console.log(err)
+      // console.log(projects)
+      res.json(projects)
+    })
+    res.json(projects)
   })
 
 
@@ -65,7 +75,7 @@ module.exports = function(app){
     User.create(req.body, function(err, user){
       if(err){console.log(err)}
       ////json with info of new user we created
-      res.json(user)
+      res.json(user);
     })
   })
 
@@ -115,8 +125,12 @@ module.exports = function(app){
     })
   })
 
+  app.get('/defaultsite', function(req, res){
+    res.redirect('/#/')
+  })
+
   ///////get all products
-  app.get('/api/products', function(req, res){
+  app.get('/api/projects', function(req, res){
     Product.find({}, function(err, products){
       if(err) throw err;
       res.json(products)
@@ -124,7 +138,7 @@ module.exports = function(app){
   })
 
   ///get a single product
-  app.get('/api/products/:id', function(req, res){
+  app.get('/api/projects/:id', function(req, res){
     Product.findOne({"_id":req.params.id}, function(err, product){
       if(err) throw err;
       res.json(product);
@@ -132,7 +146,7 @@ module.exports = function(app){
   })
 
   ////post a single product
-  app.post('/api/products', function(req, res){
+  app.post('/api/projects', function(req, res){
     Product.create(req.body, function(err, product){
       if(err) throw err;
       res.json(product);
@@ -140,7 +154,7 @@ module.exports = function(app){
   })
 
   /////update a product
-  app.post('/api/product/update', function(req, res){
+  app.post('/api/project/update', function(req, res){
     Product.findOne(req.body.id, function(err, product){
       if(err){console.log(err)}
 
@@ -206,15 +220,65 @@ module.exports = function(app){
     res.json(cityData.zipcode)
   })
 
-  /////email stuff
+  //////////////////////////////////////
+  ///////Signup, Login, Authorization, and Sessions
+  app.post('/api/signup', function( req, res ) {
+  	User.findOne( { email: req.body.email }, function(err, user){
+  		if (err ) {
+  				res.json( err )
+  		} else if ( user ) {
+  			res.redirect( '/login')
+  		} else {
+  			var newUser = new User();
+  			newUser.email = req.body.email
+  			newUser.passwordDigest = newUser.generateHash( req.body.password )
+  			newUser.save( function( err, user ) {
+  				if ( err ) { console.log(err) }
+  				//AUTHENTICATE USER HERE
+  				res.json(user)
+  			})
+  		}
+  	})
+
+  } )
+
+  //////session and token stuff
+  ///////begin the session
+  app.post('/api/startsession', function(req, res){
+    jwt.sign({iss: "hofb.com", name: req.body.email}, process.env.JWT_TOKEN_SECRET, {expiresIn: "4h", audience: "designer"}, function(token){
+      res.json(token);
+    });
+  })
+
+  ///////check the users status from the jwt web token (as "audience")/////
+  app.get('/api/checkstatus/:jwt', function(req, res){
+    var token = req.params.jwt;
+    console.log(req.params);
+    jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
+      if(err){console.log(err)}
+      console.log(decodedToken);
+      ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
+      res.json(decodedToken.aud);
+    });
+  })
+
+  ///////End Signup, Login, Authorization, and Sessions
+  ///////////////////////////////////////////////////////
+
+  //////////////////////////////////////////
+  /////begin email stuff////////////////////
   app.post('/api/sendemail', function(req, res){
     mandrill_client.messages.send({
       message: {
         from_email: "thankyou@hofb.com"
         ,html:
-        "<divs style='background-color:#E0F8EC'>"+
-          "<h2>Be the first to gain access to HOFB, a FREE new platform allowing the design styles of independent and emerging fashion designers to be discovered by buyers and mass retailers globally."+
-          "HOFB ends the struggles faced by independent and emerging fashion designers who have to cold-call and send line sheets and style guides to countless retailers just hoping for a favorable response. Likewise, buyers and mass retailers no longer have to waste time searching through endless line sheets and products that do not fit the retailer’s merchandising plan. HOFB is a seamless platform for both fashion designers and buyers to capitalize on each other’s work, and it’s FREE!</h2>"+
+        "<divs>"+
+          "<img src='http://i.imgur.com/f5T6U5B.png' style='width:250px'>"+
+          "<h2 style='color:#737373'>Thank you for joining HOFB. We’re gearing up to introduce you to our exciting new platform, created solely for the purpose of making your work and life easier! In the coming days and weeks, you will receive a link via e-mail which will invite you to enter and start using the closed beta HOFB platform. "+
+          "<br>"+
+          "Please bear with us while we onboard users gradually.</h2>"+
+          "<h2 style='color:#293d3d'>HOFB</h2>"+
+          "<h3 style='color:#293d3d'>Los Angeles</h3>"+
         "</div>"
         ,subject: "HOFB Signup Confirmation"
         ,to:[{
@@ -225,14 +289,14 @@ module.exports = function(app){
       res.json(data)
     })
   })
-  //////End Emailcapture calls//////
-  //////////////////////////////////
+  /////end email stuff////////////////////
+  ////////////////////////////////////////
 }
 
 //mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
 //mongoose.connect('mongodb://localhost:27017/myproject');
 
-// var db = process.env.DB_URL_HOFB;
-// mongoose.connect(db)
+var db = process.env.DB_URL_HOFB;
+mongoose.connect(db)
 // mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
 // mongoose.connect(ENV['DB_URL'])

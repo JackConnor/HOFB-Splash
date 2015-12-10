@@ -6,6 +6,7 @@ var usersFactory = angular.module('allusersfactory', [])
   function allUsers($http){
 
     function allUsersCall(){
+
       return $http({
         method: "GET"
         ,url: "/api/users"

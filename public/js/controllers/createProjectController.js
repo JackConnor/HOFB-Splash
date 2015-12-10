@@ -1,20 +1,121 @@
-var app = angular.module('createProjectController', [])
+var app = angular.module('createProjectController', ['postProjectFactory'])
 
   .controller('createProjectCtrl', createProjectCtrl)
 
-  createProjectCtrl.$inject = ['$http']
-  function createProjectCtrl($http){
+  createProjectCtrl.$inject = ['$http', 'postProject']
+  function createProjectCtrl($http, postProject){
     var self = this;
     //////global variables we'll be using for moving the carousel
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
+    self.createNewProject = {
+      name: ""
+      ,timestamp: ""
+      ,images: []
+      ,groups: []
+      ,productType: ""
+      ,tags: []
+      ,vendor: ""
+      ,colors: []
+      ,fabrics: []
+      ,buttons: ""
+      ,stitchPattern: ""
+      ,season: ""
+    }
+    console.log(self.createNewProject);
     /////end global variables
+
+    // console.log(postProject);
+    // console.log(postProject.postProject({name: "The Wonder Mop"}));<---logic for post project factory call
+
+    ////////////////////////////////////////
+    /////////Effects for carousel//////////
+    ////click effect for seasonsplash
+    function swatchLogic(swatchType){
+      ///////note: swatchType needs to be added as a capital, i.e. "Season"
+      $('.create'+swatchType).on('click', function(evt){
+        if($(evt.target).css('opacity') == 1 ){
+          $(evt.target).css({
+            opacity: 0.5
+            ,backgroundColor: "blue"
+          })
+          $(evt.target).attr('id', 'picked_'+swatchType+"_"+evt.target.innerText.split(' ').join(''));
+          $(evt.target).addClass('picked');
+        } else {
+          $(evt.target).css({
+            opacity: 1
+            ,backgroundColor: ""
+          })
+        }
+      })
+    }
+    swatchLogic("Season");
+    swatchLogic("Fabric");
+    swatchLogic("Color");
+    swatchLogic("Button");
+    swatchLogic("Stitch");
+
+    ///////////////////////////////////////////////////
+    ///////////////build function to collect and submit
+    $('.createSubmit').on('click', function(){
+      console.log('lol');
+      self.createNewProject = {
+        name: $('.carouselNameEntry').val()
+        ,timestamp: ""
+        ,images: []
+        ,groups: []
+        ,productType: ""
+        ,tags: []
+        ,vendor: ""
+        ,colors: []
+        ,fabrics: []
+        ,buttons: ""
+        ,stitchPattern: ""
+        ,season: ""
+      }
+      var pickedElems = $('.picked');
+      console.log(pickedElems);
+      for (var i = 0; i < pickedElems.length; i++) {
+        if(pickedElems[i].id.split('_')[1] == "Season"){
+          self.createNewProject.season = pickedElems[i].id.split('_')[2];
+          console.log(self.createNewProject.season);
+        }
+        else if(pickedElems[i].id.split('_')[1] == "Color"){
+          self.createNewProject.colors.push(pickedElems[i].id.split('_')[2])
+          console.log(self.createNewProject.colors);
+        }
+        else if(pickedElems[i].id.split('_')[1] == "Fabric"){
+          self.createNewProject.fabrics.push(pickedElems[i].id.split('_')[2])
+          console.log(self.createNewProject.fabricss);
+        }
+        else if(pickedElems[i].id.split('_')[1] == "Buttons"){
+          self.createNewProject.buttons = pickedElems[i].id.split('_')[2];
+          console.log(self.createNewProject.color);
+        }
+        else if(pickedElems[i].id.split('_')[1] == "Stitch"){
+          self.createNewProject.stitchPattern = pickedElems[i].id.split('_')[2];
+          console.log(self.createNewProject.stitchPattern);
+        }
+      }
+      $http({
+        method: "POST"
+        ,url: "/api/projects"
+        ,data: self.createNewProject
+      })
+      .then(function(newProjectStuff){
+        console.log(newProjectStuff);
+      })
+    })
+
+    /////////Effects for carousel//////////
+    ////////////////////////////////////////
+
 
     ///////////////////////////////////////////
     //////////begin logic for moving carousel//
     ///function controlling carousel movement forward
     function moveNext(){
-      var singleCellDistance = $('.carouselBacking').width()* (0.192) + 4;
+      var singleCellDistance = $('.carouselBacking').width()* (0.12) + 4;
       var moveDistance = carouselMargin - singleCellDistance;
       carouselMargin = moveDistance;
       carouselCounter ++;
@@ -26,7 +127,7 @@ var app = angular.module('createProjectController', [])
 
     ///function controlling carousel movement forward
     function movePrevious(){
-      var singleCellDistance = $('.carouselBacking').width()* (0.192) + 4;
+      var singleCellDistance = $('.carouselBacking').width()* (0.12) + 4;
       var moveDistance = carouselMargin + singleCellDistance;
       carouselMargin = moveDistance;
       carouselCounter --;
@@ -37,7 +138,7 @@ var app = angular.module('createProjectController', [])
 
     ///on-click, move to next page
     $('.carouselRight').on('click', function(){
-      if(carouselCounter < 4){
+      if(carouselCounter < 7){
         moveNext();
       }
       highlightCounter();
@@ -60,7 +161,7 @@ var app = angular.module('createProjectController', [])
         $('.circle0').css({
           backgroundColor: 'blue'
         })
-        for (var i = 1; i < 5; i++) {
+        for (var i = 1; i < 8; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
           })
@@ -72,7 +173,7 @@ var app = angular.module('createProjectController', [])
         $('.circle0').css({
           backgroundColor: "white"
         })
-        for (var i = 2; i < 5; i++) {
+        for (var i = 2; i < 8; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
           })
@@ -81,9 +182,11 @@ var app = angular.module('createProjectController', [])
         $('.circle2').css({
           backgroundColor: 'blue'
         })
-        $('.circle3').css({
-          backgroundColor: "white"
-        })
+        for (var i = 3; i < 8; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
         for (var i = 0; i < 2; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
@@ -93,9 +196,11 @@ var app = angular.module('createProjectController', [])
         $('.circle3').css({
           backgroundColor: 'blue'
         })
-        $('.circle4').css({
-          backgroundColor: "white"
-        })
+        for (var i = 4; i < 8; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
         for (var i = 0; i < 3; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
@@ -110,6 +215,48 @@ var app = angular.module('createProjectController', [])
             backgroundColor: "white"
           })
         }
+        for (var i = 5; i < 8; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+      } else if(carouselCounter == 5){
+        $('.circle5').css({
+          backgroundColor: 'blue'
+        })
+        for (var i = 0; i < 5; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+        for (var i = 6; i < 8; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+      } else if(carouselCounter == 6){
+        $('.circle6').css({
+          backgroundColor: 'blue'
+        })
+        for (var i = 0; i < 6; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+        for (var i = 7; i < 8; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+      } else if(carouselCounter == 7){
+        for (var i = 0; i < 7; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+        $('.circle7').css({
+          backgroundColor: "blue"
+        })
       }
     }
     highlightCounter(); //run to set counter on load
@@ -145,13 +292,28 @@ var app = angular.module('createProjectController', [])
         clickDistance(circlePosition);
         highlightCounter();
       })
+      $('.circle5').on('click', function(evt){
+        var circlePosition = $(evt.target)[0].className.split('')[13];
+        clickDistance(circlePosition);
+        highlightCounter();
+      })
+      $('.circle6').on('click', function(evt){
+        var circlePosition = $(evt.target)[0].className.split('')[13];
+        clickDistance(circlePosition);
+        highlightCounter();
+      })
+      $('.circle7').on('click', function(evt){
+        var circlePosition = $(evt.target)[0].className.split('')[13];
+        clickDistance(circlePosition);
+        highlightCounter();
+      })
     }
     circleClick();
 
     ////function for calculating distance
     function clickDistance(circlePosition){
       var spaces = circlePosition - carouselCounter;
-      var singleCellDistance = $('.carouselBacking').width()* (0.192) + 4;
+      var singleCellDistance = $('.carouselBacking').width()* (0.12) + 4;
       var moveDistance = carouselMargin + (singleCellDistance*spaces*-1);
       carouselMargin = moveDistance;
       carouselCounter = circlePosition;
