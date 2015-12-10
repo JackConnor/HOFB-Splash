@@ -258,7 +258,7 @@ module.exports = function(app){
       if(err){console.log(err)}
       console.log(decodedToken);
       ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
-      res.json(decodedToken.aud);
+      res.json(decodedToken);
     });
   })
 

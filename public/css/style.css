@@ -37,7 +37,7 @@
   margin: 0px;
 }
 
-
+/*Segmentation for Jacks css*/
 .bodyview {
   height: 100%;
 }
@@ -314,9 +314,38 @@
   display: block;
 }
 
+.newProductLeftColumn {
+  display: inline-block;
+  outline: 2px solid green;
+  height: 100%;
+  vertical-align: top;
+}
+
+.newProductCenterColumn {
+  display: inline-block;
+  outline: 2px solid green;
+  height: 100%;
+  vertical-align: top;
+}
+
+.newProductRightColumn {
+  display: inline-block;
+  outline: 2px solid green;
+  height: 100%;
+  vertical-align: top;
+}
+
+.newProductHolder {
+  width: 100%;
+  height: 1000px;
+  position: relative;
+  background-color: gray;
+  outline: 2px solid green;
+}
+
 .newprojectcontainer {
   background-color: #E0FFFF;
-  height: 100%;
+  height: 100px;
   width: 100%;
   display: block;
   position: absolute;
