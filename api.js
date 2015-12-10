@@ -20,13 +20,17 @@ var Project = seed.Products;
 // var User         = require('./models/user.js');
 // var Product      = require('./models/product.js');
 // var Project      = require('./models/createProject.js');
+var viewProduct      = require('./models/viewProduct.js');
 ///////finish bringing models////
 /////////////////////////////////
 
 module.exports = function(app){
 
+
   /////////////////////////////////
   ////////begin user api requests////
+
+
 
   //get all createProjects
   app.get('/api/createprojects', function(req, res){
@@ -103,6 +107,13 @@ module.exports = function(app){
 
   /////////////////////////////////
   ////////Begin Product API calls//
+///get a single product by ID
+  app.get('/api/product/:id', function(req, res){
+    Product.findOne({"_id":req.params.id}, function(err, product){
+      if(err) throw err;
+      res.json(product);
+    })
+  })
 
   ///////get all products
   app.get('/api/products', function(req, res){

@@ -1,0 +1,57 @@
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+<script charset="utf-8" src="bootstrap/css/bootstrap-theme.css"></script>
+<script charset="utf-8" src="bootstrap/css/bootstrap-theme.css.maps"></script>
+<script charset="utf-8" src="bootstrap/css/bootstrap-theme.min.css"></script>
+<script charset="utf-8" src="bootstrap/css/boostrap.css"></script>
+<script charset="utf-8" src="bootstrap/css/boostrap.css.map"></script>
+<script charset="utf-8" src="bootstrap/css/boostrap.min.css"></script>
+<script charset="utf-8" src="bootstrap/fonts/glyphicons-halflings-regular.eot"></script>
+<script charset="utf-8" src="bootstrap/fonts/glyphicons-halflings-regular.svg"></script>
+<script charset="utf-8" src="bootstrap/fonts/glyphicons-halflings-regular.ttf"></script>
+<script charset="utf-8" src="bootstrap/fonts/glyphicons-halflings-regular.woff"></script>
+<script charset="utf-8" src="bootstrap/js/bootstrap.js"></script>
+<script charset="utf-8" src="bootstrap/js/bootstrap.min.js"></script>
+
+<br/><br/><br/>
+
+<!-- Product -->
+<section id="Products">
+    <div class="container">
+        <div class="row">
+            <!-- item -->
+            <div class="col-md-10 text-center">
+                <div class="panel panel-danger panel-product">
+                    <div class="panel-heading">
+                        <img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/assets/v3/editorial/1/86/18677864-3515-5180-bb03-4d24201548c7/5374d3335cec8.image.png">
+                    </div>
+                    <div class="panel-body text-center">
+                        <p><strong>Product Name</strong></p>
+                    </div>
+                    <ul class="list-group text-center">
+                        <li class="list-group-item"><i class="fa fa-check"></i> Product Price</li>
+                        <li class="list-group-item"><i class="fa fa-check"></i> Product Tier/Ticket Number?</li>
+                        <li class="list-group-item"><i class="fa fa-check"></i> Product Details</li>
+                    </ul>
+                    <div class="panel-footer">
+                        <a class="btn btn-lg btn-block btn-danger" type='submit'id='commentSubmit'>Comment</a>
+                    </div>
+                </div>
+                <form method='post'>
+                  <textarea maxlength="50 "rows='10' columns='50'name='comment' id='comment' class='comment'></textarea>
+                  <br />
+
+                  <input type='hidden' name='articleid' id='cmdCreateComment' value='<? echo $_GET["id"]; ?>' />
+
+                </form>
+            </div>
+            <!-- /item -->
+        </div>
+    </div>
+
+</section>
+<!-- /Product -->
+
+{{viewProduct.test}}

@@ -56,6 +56,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controller: 'signupCtrl'
       ,contollerAs: 'signup'
     })
+    //view a singl Product
+    .when('/view/product', {
+      templateUrl: 'templates/_viewProduct.html'
+      ,controller: 'viewProductCtrl'
+      ,controllerAs: 'viewProduct'
+    })
     /////////default to home
     .otherwise('/');
 
