@@ -10,14 +10,15 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
     /////end global variables
 
-    console.log(postProject);
-    console.log(postProject.postProject({name: "The Wonder Mop"}));
+    // console.log(postProject);
+    // console.log(postProject.postProject({name: "The Wonder Mop"}));<---logic for post project factory call
+
 
     ///////////////////////////////////////////
     //////////begin logic for moving carousel//
     ///function controlling carousel movement forward
     function moveNext(){
-      var singleCellDistance = $('.carouselBacking').width()* (0.192) + 4;
+      var singleCellDistance = $('.carouselBacking').width()* (0.12) + 4;
       var moveDistance = carouselMargin - singleCellDistance;
       carouselMargin = moveDistance;
       carouselCounter ++;
@@ -29,7 +30,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
 
     ///function controlling carousel movement forward
     function movePrevious(){
-      var singleCellDistance = $('.carouselBacking').width()* (0.192) + 4;
+      var singleCellDistance = $('.carouselBacking').width()* (0.12) + 4;
       var moveDistance = carouselMargin + singleCellDistance;
       carouselMargin = moveDistance;
       carouselCounter --;
@@ -40,7 +41,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
 
     ///on-click, move to next page
     $('.carouselRight').on('click', function(){
-      if(carouselCounter < 4){
+      if(carouselCounter < 7){
         moveNext();
       }
       highlightCounter();
@@ -63,7 +64,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         $('.circle0').css({
           backgroundColor: 'blue'
         })
-        for (var i = 1; i < 5; i++) {
+        for (var i = 1; i < 8; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
           })
@@ -75,7 +76,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         $('.circle0').css({
           backgroundColor: "white"
         })
-        for (var i = 2; i < 5; i++) {
+        for (var i = 2; i < 8; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
           })
@@ -84,9 +85,11 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         $('.circle2').css({
           backgroundColor: 'blue'
         })
-        $('.circle3').css({
-          backgroundColor: "white"
-        })
+        for (var i = 3; i < 8; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
         for (var i = 0; i < 2; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
@@ -96,9 +99,11 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         $('.circle3').css({
           backgroundColor: 'blue'
         })
-        $('.circle4').css({
-          backgroundColor: "white"
-        })
+        for (var i = 4; i < 8; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
         for (var i = 0; i < 3; i++) {
           $('.circle'+i).css({
             backgroundColor: "white"
@@ -113,6 +118,48 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
             backgroundColor: "white"
           })
         }
+        for (var i = 5; i < 8; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+      } else if(carouselCounter == 5){
+        $('.circle5').css({
+          backgroundColor: 'blue'
+        })
+        for (var i = 0; i < 5; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+        for (var i = 6; i < 8; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+      } else if(carouselCounter == 6){
+        $('.circle6').css({
+          backgroundColor: 'blue'
+        })
+        for (var i = 0; i < 6; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+        for (var i = 7; i < 8; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+      } else if(carouselCounter == 7){
+        for (var i = 0; i < 7; i++) {
+          $('.circle'+i).css({
+            backgroundColor: "white"
+          })
+        }
+        $('.circle7').css({
+          backgroundColor: "blue"
+        })
       }
     }
     highlightCounter(); //run to set counter on load
