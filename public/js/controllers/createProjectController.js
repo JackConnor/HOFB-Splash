@@ -13,6 +13,24 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     // console.log(postProject);
     // console.log(postProject.postProject({name: "The Wonder Mop"}));<---logic for post project factory call
 
+    ////click effect for seasonsplash
+    $('.createSeason').on('click', function(evt){
+      console.log(evt.target);
+      console.log($(evt.target).css('opacity'));
+      if($(evt.target).css('opacity') == 1 ){
+        $(evt.target).css({
+          opacity: 0.5
+          ,backgroundColor: "blue"
+        })
+      } else {
+        $(evt.target).css({
+          opacity: 1
+          ,backgroundColor: ""
+        })
+      }
+
+    })
+
 
     ///////////////////////////////////////////
     //////////begin logic for moving carousel//
