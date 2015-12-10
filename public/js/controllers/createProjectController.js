@@ -8,6 +8,21 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     //////global variables we'll be using for moving the carousel
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
+    self.createNewProject = {
+      name: ""
+      ,timestamp: ""
+      ,images: []
+      ,groups: []
+      ,productType: ""
+      ,tags: []
+      ,vendor: ""
+      ,colors: []
+      ,fabrics: []
+      ,buttons: ""
+      ,stitchPattern: ""
+      ,season: ""
+    }
+    console.log(self.createNewProject);
     /////end global variables
 
     // console.log(postProject);
@@ -24,6 +39,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
             opacity: 0.5
             ,backgroundColor: "blue"
           })
+          $(evt.target).attr('id', 'picked');
         } else {
           $(evt.target).css({
             opacity: 1
@@ -34,6 +50,37 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     }
     swatchLogic("Season");
     swatchLogic("Fabric");
+    swatchLogic("Color");
+    swatchLogic("Button");
+    swatchLogic("Stitch");
+
+    ///////////////////////////////////////////////////
+    ///////////////build function to collect and submit
+    $('.createSubmit').on('click', function(){
+      console.log('lol');
+      self.createNewProject = {
+        name: $('.carouselNameEntry').val()
+        ,timestamp: ""
+        ,images: []
+        ,groups: []
+        ,productType: ""
+        ,tags: []
+        ,vendor: ""
+        ,colors: []
+        ,fabrics: []
+        ,buttons: ""
+        ,stitchPattern: ""
+        ,season: ""
+      }
+      $http({
+        method: "POST"
+        ,url: "/api/projects"
+        ,data: self.createNewProject
+      })
+      .then(function(newProjectStuff){
+        console.log(newProjectStuff);
+      })
+    })
 
     /////////Effects for carousel//////////
     ////////////////////////////////////////
