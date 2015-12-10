@@ -39,6 +39,13 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'createProject'
     })
 
+    //create new project
+    .when('/create/projectOld', {
+      templateUrl: 'templates/_createProject.html'
+      ,controller: 'createProjectCtrl'
+      ,controllerAs: 'createProject'
+    })
+
     .when('/betasplash', {
       templateUrl: 'templates/_beta_splash.html'
       ,controller: 'signupCtrl'
@@ -56,7 +63,7 @@ angular.module('app.routes', ['ngRoute'])
       ,controller: 'signupCtrl'
       ,contollerAs: 'signup'
     })
-    //view a singl Product
+    //view a single Product
     .when('/view/product', {
       templateUrl: 'templates/_viewProduct.html'
       ,controller: 'viewProductCtrl'

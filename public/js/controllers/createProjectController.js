@@ -119,10 +119,10 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       var moveDistance = carouselMargin - singleCellDistance;
       carouselMargin = moveDistance;
       carouselCounter ++;
-      getName();
+      // getName();
       $('.carouselBacking').animate({
         marginLeft: moveDistance
-      }, 200)
+      })
     }
 
     ///function controlling carousel movement forward
@@ -268,42 +268,53 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     //////begin logic for click to switch page//
     function circleClick(){
       $('.circle0').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle1').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle2').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle3').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle4').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        console.log('this working?');
+        var circlePositionBeta = $(evt.target)[0];
+        console.log(circlePositionBeta);
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[6];
+        console.log(circlePosition);
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle5').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle6').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle7').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
@@ -317,10 +328,10 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       var moveDistance = carouselMargin + (singleCellDistance*spaces*-1);
       carouselMargin = moveDistance;
       carouselCounter = circlePosition;
-      getName();
-      $('.carouselBacking').animate({
+      // getName();
+      $('.carouselBacking').css({
         marginLeft: moveDistance
-      }, 300)
+      })
       // $('.carouselBacking').css({
       //   marginLeft: carouselMargin
     }
@@ -328,13 +339,13 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     //////end logic for click to switch page//
     ////////////////////////////////////////////
 
-    function getName(){
-      var name = $('.carouselNameEntry').val();
-      if(name.split('').length > 0){
-        console.log('there something there');
-        $('.productTitle').text(name);
-      }
-    }
+    // function getName(){
+    //   var name = $('.carouselNameEntry').val();
+    //   if(name.split('').length > 0){
+    //     console.log('there something there');
+    //     $('.productTitle').text(name);
+    //   }
+    // }
     // getName();
 
   /////end createProject controller

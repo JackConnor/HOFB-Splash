@@ -314,6 +314,13 @@
   display: block;
 }
 
+.newProductCenterColumn {
+  display: inline-block;
+  outline: 2px solid green;
+  height: 100%;
+  vertical-align: top;
+}
+
 .newProductLeftColumn {
   display: inline-block;
   outline: 2px solid green;
@@ -321,11 +328,12 @@
   vertical-align: top;
 }
 
-.newProductCenterColumn {
-  display: inline-block;
+.newProductHolder {
+  width: 100%;
+  height: 900px;
+  position: relative;
+  background-color: gray;
   outline: 2px solid green;
-  height: 100%;
-  vertical-align: top;
 }
 
 .newProductRightColumn {
@@ -335,12 +343,33 @@
   vertical-align: top;
 }
 
-.newProductHolder {
+.newProductSwatchHolder {
+  margin-top: 40px;
   width: 100%;
-  height: 1000px;
-  position: relative;
-  background-color: gray;
-  outline: 2px solid green;
+  height: 380px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.newProductSwatchTabs {
+  height: 60px;
+  width: 100%;
+  outline: 2px solid blue;
+}
+
+.newProductTab {
+  height: 45px;
+  margin-top: 15px;
+  outline: 3px solid red;
+}
+
+.newProductTitle {
+  height: 55px;
+  background-color: white;
+  font-size: 28px;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 40px;
 }
 
 .newprojectcontainer {
