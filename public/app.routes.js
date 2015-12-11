@@ -34,6 +34,13 @@ angular.module('app.routes', ['ngRoute'])
 
     //create new project
     .when('/create/project', {
+      templateUrl: 'templates/_newProject.html'
+      ,controller: 'createProjectCtrl'
+      ,controllerAs: 'createProject'
+    })
+
+    //create new project
+    .when('/create/projectOld', {
       templateUrl: 'templates/_createProject.html'
       ,controller: 'createProjectCtrl'
       ,controllerAs: 'createProject'
@@ -56,7 +63,7 @@ angular.module('app.routes', ['ngRoute'])
       ,controller: 'signupCtrl'
       ,contollerAs: 'signup'
     })
-    //view a singl Product
+    //view a single Product
     .when('/view/product', {
       templateUrl: 'templates/_viewProduct.html'
       ,controller: 'viewProductCtrl'

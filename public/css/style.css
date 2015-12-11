@@ -37,7 +37,7 @@
   margin: 0px;
 }
 
-
+/*Segmentation for Jacks css*/
 .bodyview {
   height: 100%;
 }
@@ -309,14 +309,84 @@
 }
 
 .navigationBar {
-  height: 110px;
+  height: 70px;
   background-color: blue;
   display: block;
 }
 
+.newProductCenterColumn {
+  display: inline-block;
+  outline: 2px solid green;
+  height: 100%;
+  vertical-align: top;
+}
+
+.newProductLeftColumn {
+  display: inline-block;
+  outline: 2px solid green;
+  height: 100%;
+  vertical-align: top;
+}
+
+.newProductHolder {
+  width: 100%;
+  height: 900px;
+  position: relative;
+  background-color: gray;
+  outline: 2px solid green;
+}
+
+.newProductImage {
+  width: 100%;
+  height: 100%;
+}
+
+.newProductImageHolder {
+  width: 80%;
+  margin-left: 10%;
+  height: 450px;
+  outline: 2px solid blue;
+}
+
+.newProductRightColumn {
+  display: inline-block;
+  outline: 2px solid green;
+  height: 100%;
+  vertical-align: top;
+}
+
+.newProductSwatchHolder {
+  margin-top: 40px;
+  width: 100%;
+  height: 380px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.newProductSwatchTabs {
+  height: 60px;
+  width: 100%;
+  outline: 2px solid blue;
+}
+
+.newProductTab {
+  height: 45px;
+  margin-top: 15px;
+  outline: 3px solid red;
+}
+
+.newProductTitle {
+  height: 55px;
+  background-color: white;
+  font-size: 28px;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 40px;
+}
+
 .newprojectcontainer {
   background-color: #E0FFFF;
-  height: 100%;
+  height: 100px;
   width: 100%;
   display: block;
   position: absolute;

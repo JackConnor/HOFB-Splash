@@ -10,6 +10,10 @@ var route          = express.Router();
 var bcrypt         = require('bcrypt-nodejs');
 var passport       = require('passport');
 var passportLocal  = require('passport-local');
+var multer         = require('multer');
+// app.use(bodyParser.json());
+
+//
 
 require('./passport.js')(passport);
 
@@ -258,12 +262,68 @@ module.exports = function(app){
       if(err){console.log(err)}
       console.log(decodedToken);
       ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
-      res.json(decodedToken.aud);
+      res.json(decodedToken);
     });
   })
 
   ///////End Signup, Login, Authorization, and Sessions
   ///////////////////////////////////////////////////////
+
+  ///////////////////////////////////////
+  /////Begin photo uploading logic///////
+  var uploading = multer({
+    dest: __dirname + '../public/uploads/',
+  })
+
+  app.post('/api/pictures/upload', multer({ dest: './uploads/'}).single('upl'), function(req,res){
+  	console.log(req.body); //form fields
+  	/* example output:
+  	{ title: 'abc' }
+  	 */
+  	console.log(req.file); //form files
+  	/* example output:
+              { fieldname: 'upl',
+                originalname: 'grumpy.png',
+                encoding: '7bit',
+                mimetype: 'image/png',
+                destination: './uploads/',
+                filename: '436ec561793aa4dc475a88e84776b1b9',
+                path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
+                size: 277056 }
+  	 */
+  	res.status(204).end();
+  });
+
+  var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, '672569cb4315e101604d7c6f9f2f8916')
+  }
+})
+
+var upload = multer({ storage: storage })
+console.log('yoyo');
+// console.log(upload);
+// console.log(upload.storage.getFilename('upl'));
+// console.log(
+//   multer.diskStorage({
+//     destination: function (req, file, cb) {
+//     cb(null, './public/uploads')
+//   },
+//   filename: function (req, file, cb) {
+//     // cb(null, '672569cb4315e101604d7c6f9f2f8916')
+//     console.log(file);
+//   }
+//   })
+// )
+console.log('yoyo');
+
+
+  /////End photo uploading logic/////////
+  ///////////////////////////////////////
+
 
   //////////////////////////////////////////
   /////begin email stuff////////////////////
