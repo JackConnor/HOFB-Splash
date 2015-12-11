@@ -41,9 +41,6 @@ var Photo      = require('./models/photo.js');
 
 module.exports = function(app){
 
-  // console.log(Photo);
-  var newPhoto = new Photo();
-  console.log(newPhoto);
 
 
   /////////////////////////////////
@@ -281,14 +278,27 @@ module.exports = function(app){
   })
 
   app.post('/api/pictures/upload', multer({ dest: './uploads/'}).single('upl'), function(req,res){
-  	console.log(req.body); //form fields
+  	// console.log(req.body); //form fields
   	/* example output:
   	{ title: 'abc' }
   	 */
+
    console.log('yoyo');
    console.log(req.file); //form files
    req.file.fieldname = req.file.originalname
+   req.body.fieldname = req.body.originalname
+  //  var thisPhoto = require("./uploads/"+req.body.originalname)
+  //  console.log(thisPhoto);
+  //  req.file.encoding = '64bit';
+  //  Photo.create({
+  //    photoData: thisPhoto
+  //    ,author: "jack connor"
+  //    ,title: "first test photo, baby"
+  //  }, function(err, newPhoto){
+  //    console.log(newPhoto);
+  //  })
    console.log(req.file);
+   console.log(req.body);
    console.log('yoyo');
   	/* example output:
               { fieldname: 'upl',
