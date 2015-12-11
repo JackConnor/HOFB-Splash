@@ -309,7 +309,7 @@
 }
 
 .navigationBar {
-  height: 110px;
+  height: 70px;
   background-color: blue;
   display: block;
 }
@@ -334,6 +334,18 @@
   position: relative;
   background-color: gray;
   outline: 2px solid green;
+}
+
+.newProductImage {
+  width: 100%;
+  height: 100%;
+}
+
+.newProductImageHolder {
+  width: 80%;
+  margin-left: 10%;
+  height: 450px;
+  outline: 2px solid blue;
 }
 
 .newProductRightColumn {
