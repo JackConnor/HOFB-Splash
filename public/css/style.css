@@ -442,20 +442,18 @@
 .newProductImageHolder {
   width: 80%;
   margin-left: 10%;
+  margin-top: 15px;
   height: 550px;
-  outline: 2px solid blue;
 }
 
 .newProductLeftColumn {
   display: inline-block;
-  outline: 2px solid green;
   height: 100%;
   vertical-align: top;
 }
 
 .newProductMiddleColumn {
   display: inline-block;
-  outline: 2px solid green;
   height: 100%;
   vertical-align: top;
 }
@@ -480,7 +478,6 @@
 
 .newProductRightColumn {
   display: inline-block;
-  outline: 2px solid green;
   height: 100%;
   vertical-align: top;
 }
@@ -509,7 +506,6 @@
   margin-top: 15px;
   color: white;
   background-color: black;
-  /*outline: 3px solid red;*/
   font-size: 16px;
   text-align: center;
   border-top-left-radius:8px;
