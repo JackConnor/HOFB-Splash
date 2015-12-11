@@ -12,6 +12,7 @@ var jwt            = require('jsonwebtoken');
 var methodOverride = require('method-override');
 var passport       = require('passport');
 var passportlocal = require('passport-local');
+var cloudinary     = require('cloudinary');
 var app            = express();
 
 // view engine setup
