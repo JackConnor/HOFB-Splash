@@ -275,7 +275,7 @@ module.exports = function(app){
     dest: __dirname + '../public/uploads/',
   })
 
-  app.post('/pictures/upload', multer({ dest: './uploads/'}).single('upl'), function(req,res){
+  app.post('/api/pictures/upload', multer({ dest: './uploads/'}).single('upl'), function(req,res){
   	console.log(req.body); //form fields
   	/* example output:
   	{ title: 'abc' }
@@ -293,6 +293,33 @@ module.exports = function(app){
   	 */
   	res.status(204).end();
   });
+
+  var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, '672569cb4315e101604d7c6f9f2f8916')
+  }
+})
+
+var upload = multer({ storage: storage })
+console.log('yoyo');
+// console.log(upload);
+// console.log(upload.storage.getFilename('upl'));
+// console.log(
+//   multer.diskStorage({
+//     destination: function (req, file, cb) {
+//     cb(null, './public/uploads')
+//   },
+//   filename: function (req, file, cb) {
+//     // cb(null, '672569cb4315e101604d7c6f9f2f8916')
+//     console.log(file);
+//   }
+//   })
+// )
+console.log('yoyo');
+
 
   /////End photo uploading logic/////////
   ///////////////////////////////////////
