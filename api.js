@@ -10,31 +10,34 @@ var route          = express.Router();
 var bcrypt         = require('bcrypt-nodejs');
 var passport       = require('passport');
 var passportLocal  = require('passport-local');
+var multer         = require('multer');
+var cloudinary     = require('cloudinary');
+console.log(cloudinary.api.ping());
 
-require('./passport.js')(passport);
+cloudinary.config({
+  cloud_name: 'hofb'
+  ,api_key: process.env.CLOUDINARY_API_KEY
+  ,api_secret: process.env.CLOUDINARY_SECRET
+})
+
+console.log(cloudinary.config());
+//
 
 //===========================================================
 
-var seed           = require('./seed.js');
-// console.log(seed);
-
-// var User = seed.Users;
-// console.log(User[0]);
-
-// var Project = seed.Products;
-
 //////bring in models////////
 /////////////////////////////
-
 var Emailcapture = require('./models/emailCapture.js');
 var User         = require('./models/user.js');
 var Product      = require('./models/product.js');
 var Project      = require('./models/createProject.js');
 var viewProduct      = require('./models/viewProduct.js');
+var Photo      = require('./models/photo.js');
 ///////finish bringing models////
 /////////////////////////////////
 
 module.exports = function(app){
+
 
 
   /////////////////////////////////
@@ -258,12 +261,63 @@ module.exports = function(app){
       if(err){console.log(err)}
       console.log(decodedToken);
       ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
-      res.json(decodedToken.aud);
+      res.json(decodedToken);
     });
   })
 
   ///////End Signup, Login, Authorization, and Sessions
   ///////////////////////////////////////////////////////
+
+  ///////////////////////////////////////
+  /////Begin photo uploading logic///////
+  var uploading = multer({
+    dest: __dirname + '../public/uploads/',
+  })
+
+  app.post('/api/pictures/upload', multer({ dest: './uploads/'}).single('upl'), function(req,res){
+  	// console.log(req.body); //form fields
+  	/* example output:
+  	{ title: 'abc' }
+  	 */
+
+   console.log('yoyo');
+   console.log(req.file); //form files
+   req.file.fieldname = req.file.originalname
+   req.body.fieldname = req.body.originalname
+   console.log(req);
+
+   cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
+     console.log(uploadResult);
+   })
+  //  var thisPhoto = require("./uploads/"+req.body.originalname)
+  //  console.log(thisPhoto);
+  //  req.file.encoding = '64bit';
+  //  Photo.create({
+  //    photoData: thisPhoto
+  //    ,author: "jack connor"
+  //    ,title: "first test photo, baby"
+  //  }, function(err, newPhoto){
+  //    console.log(newPhoto);
+  //  })
+
+  	/* example output:
+              { fieldname: 'upl',
+                originalname: 'grumpy.png',
+                encoding: '7bit',
+                mimetype: 'image/png',
+                destination: './uploads/',
+                filename: '436ec561793aa4dc475a88e84776b1b9',
+                path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
+                size: 277056 }
+
+  	 */
+  	res.status(204).end();
+  });
+
+
+  /////End photo uploading logic/////////
+  ///////////////////////////////////////
+
 
   //////////////////////////////////////////
   /////begin email stuff////////////////////

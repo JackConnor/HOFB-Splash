@@ -44,7 +44,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         } else {
           $(evt.target).css({
             opacity: 1
-            ,backgroundColor: ""
+            ,backgroundColor: "black"
           })
         }
       })
@@ -119,10 +119,10 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       var moveDistance = carouselMargin - singleCellDistance;
       carouselMargin = moveDistance;
       carouselCounter ++;
-      getName();
+      // getName();
       $('.carouselBacking').animate({
         marginLeft: moveDistance
-      }, 200)
+      })
     }
 
     ///function controlling carousel movement forward
@@ -159,103 +159,125 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     function highlightCounter(){
       if(carouselCounter == 0){
         $('.circle0').css({
-          backgroundColor: 'blue'
+          backgroundColor: 'white',
+          color: 'black'
         })
         for (var i = 1; i < 8; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
       } else if(carouselCounter == 1){
         $('.circle1').css({
-          backgroundColor: 'blue'
+          backgroundColor: 'white',
+          color: 'black'
         })
         $('.circle0').css({
-          backgroundColor: "white"
+          backgroundColor: "black",
+          color: 'white'
         })
         for (var i = 2; i < 8; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
       } else if(carouselCounter == 2){
         $('.circle2').css({
-          backgroundColor: 'blue'
+          backgroundColor: 'white',
+          color: 'black'
         })
         for (var i = 3; i < 8; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
         for (var i = 0; i < 2; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
       } else if(carouselCounter == 3){
         $('.circle3').css({
-          backgroundColor: 'blue'
+          backgroundColor: 'white',
+          color: 'black'
         })
         for (var i = 4; i < 8; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
         for (var i = 0; i < 3; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
       } else if(carouselCounter == 4){
         $('.circle4').css({
-          backgroundColor: 'blue'
+          backgroundColor: 'white',
+          color: 'black'
         })
         for (var i = 0; i < 4; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
         for (var i = 5; i < 8; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
       } else if(carouselCounter == 5){
         $('.circle5').css({
-          backgroundColor: 'blue'
+          backgroundColor: 'white',
+          color: 'black'
         })
         for (var i = 0; i < 5; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
         for (var i = 6; i < 8; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
       } else if(carouselCounter == 6){
         $('.circle6').css({
-          backgroundColor: 'blue'
+          backgroundColor: 'white',
+          color: 'black'
         })
         for (var i = 0; i < 6; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
         for (var i = 7; i < 8; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
       } else if(carouselCounter == 7){
         for (var i = 0; i < 7; i++) {
           $('.circle'+i).css({
-            backgroundColor: "white"
+            backgroundColor: "black",
+            color: 'white'
           })
         }
         $('.circle7').css({
-          backgroundColor: "blue"
+          backgroundColor: 'white',
+          color: 'black'
         })
       }
     }
@@ -268,42 +290,53 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     //////begin logic for click to switch page//
     function circleClick(){
       $('.circle0').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle1').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle2').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle3').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle4').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        console.log('this working?');
+        var circlePositionBeta = $(evt.target)[0];
+        console.log(circlePositionBeta);
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[6];
+        console.log(circlePosition);
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle5').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle6').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
       $('.circle7').on('click', function(evt){
-        var circlePosition = $(evt.target)[0].className.split('')[13];
+        var circlePositionBeta = $(evt.target)[0];
+        var circlePosition = $(circlePositionBeta)[0].id.split('')[7];
         clickDistance(circlePosition);
         highlightCounter();
       })
@@ -317,10 +350,10 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       var moveDistance = carouselMargin + (singleCellDistance*spaces*-1);
       carouselMargin = moveDistance;
       carouselCounter = circlePosition;
-      getName();
-      $('.carouselBacking').animate({
+      // getName();
+      $('.carouselBacking').css({
         marginLeft: moveDistance
-      }, 300)
+      })
       // $('.carouselBacking').css({
       //   marginLeft: carouselMargin
     }
@@ -328,13 +361,13 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     //////end logic for click to switch page//
     ////////////////////////////////////////////
 
-    function getName(){
-      var name = $('.carouselNameEntry').val();
-      if(name.split('').length > 0){
-        console.log('there something there');
-        $('.productTitle').text(name);
-      }
-    }
+    // function getName(){
+    //   var name = $('.carouselNameEntry').val();
+    //   if(name.split('').length > 0){
+    //     console.log('there something there');
+    //     $('.productTitle').text(name);
+    //   }
+    // }
     // getName();
 
   /////end createProject controller
