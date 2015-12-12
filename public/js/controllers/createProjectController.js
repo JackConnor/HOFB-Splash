@@ -27,22 +27,11 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       ,season: ""
     }
 
-    $('.uploadFileButton').on('click', function(){
-      console.log($('.uploadFile')[0].files[0]);
 
-      var newImage = $('.uploadFile')[0].files[0];
-      console.log(newImage);
-      // $(".testClass").attr('src', newImage)
-      //
-      // $http({
-      //   method: "POST"
-      //   ,url: "/api/photo"
-      //   ,data: newImage
-      // })
-      // file.upload.then(function (response){
-      //   console.log(response);
-      // })
+    $('.photoForm').submit(function(info){
+      console.log(info);
     })
+
     /////end global variables
 
     // console.log(postProject);
