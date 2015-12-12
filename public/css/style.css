@@ -748,3 +748,83 @@
 .splashNavLinks button {
   margin-left: 20px;
 }
+
+.panel-product {
+  -moz-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  -webkit-transition: all .3s ease;
+}
+.panel-product:hover {
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+}
+.panel-product .panel-heading {
+  padding: 20px 10px;
+}
+.panel-product .panel-heading .fa {
+  margin-top: 10px;
+  font-size: 58px;
+}
+.panel-product.list-group-item {
+  color: #777777;
+  border-bottom: 1px solid rgba(250, 250, 250, 0.5);
+}
+.panel-product .list-group-item:last-child {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.panel-product .list-group-item:first-child {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+.panel-product .panel-body {
+  background-color: #f0f0f0;
+  font-size: 40px;
+  color: #777777;
+  padding: 20px;
+  margin: 0px;
+}
+.productContainer{
+margin-top: 20px;
+margin-bottom: 10px;
+}
+
+textarea#styled {
+	width: 500px;
+	height: 120px;
+	border: 3px solid #cccccc;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
+	background-image: url(bg.gif);
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+
+.commentSubmitBtn .editProductSubmitBtn{
+width:500px;
+}
+
+.productContainer{
+  outline:2px solid yellow;
+}
+.productTitle{
+  outline:2px solid black;
+}
+.productStatus{
+  margin-top:-9px;
+  outline:2px solid green;
+}
+.productThumbnailImage{
+  float:left;
+  outline:2px solid black;
+  padding:10px 5px 10px 5px;
+}
+
+.productDescriptionTextBox{
+  outline:2px solid black;
+  padding:10px 5px 200px 5px;
+}
+
+.productAccessoryBox{
+  outline:2px solid blue;
+  padding:10px 5px 100px 5px;
+}

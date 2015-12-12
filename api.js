@@ -20,7 +20,7 @@ cloudinary.config({
   ,api_secret: process.env.CLOUDINARY_SECRET
 })
 
-console.log(cloudinary.config());
+// console.log(cloudinary.config());
 //
 
 //===========================================================
@@ -274,17 +274,25 @@ module.exports = function(app){
     dest: __dirname + '../public/uploads/',
   })
 
-  app.post('/api/photo', function(req, res){
-    console.log(req.file);
-    console.log(req.body);
-    // cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
-    //   //  console.log(uploadResult);
-    //    res.json(uploadResult.secure_url)
-    //  })
-  })
+  // app.post('/api/photo', function(req, res){
+  //   console.log(req.file);
+  //   console.log(req.body);
+  //   // cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
+  //   //   //  console.log(uploadResult);
+  //   //    res.json(uploadResult.secure_url)
+  //   //  })
+  // })
 
   app.post('/api/pictures', multer({ dest: './uploads/'}).single('upl'), function(req,res){
   	console.log(req.file);
+    cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
+      console.log(uploadResult);
+      Photo.create({photoUrl: uploadResult.secure_url, author: 'jack'}, function(err, uploadedImage){
+        console.log(uploadedImage);
+      })
+
+   //    res.json(uploadResult);
+    })
   	/* example output:
   	{ title: 'abc' }
   	 */
@@ -295,15 +303,17 @@ module.exports = function(app){
   //  req.body.fieldname = req.body.originalname
   //  console.log(req);
    //
-   cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
-     console.log(uploadResult);
-     res.json(uploadResult);
-   })
+  //
 
   	res.status(204).end();
   });
 
-
+  app.get('/api/photos', function(req, res){
+    Photo.find({}, function(err, photos){
+      if(err){console.log(err)}
+      res.json(photos)
+    })
+  })
   /////End photo uploading logic/////////
   ///////////////////////////////////////
 
@@ -340,6 +350,6 @@ module.exports = function(app){
 //mongoose.connect('mongodb://localhost:27017/myproject');
 
 var db = process.env.DB_URL_HOFB;
-mongoose.connect(db)
-// mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
-// mongoose.connect(ENV['DB_URL'])
+//mongoose.connect(db)
+mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
+//mongoose.connect(ENV['DB_URL'])

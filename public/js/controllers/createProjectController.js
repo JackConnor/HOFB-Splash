@@ -30,6 +30,21 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
 
     $('.photoForm').submit(function(info){
       console.log(info);
+      setTimeout(function(){
+        $http({
+          method: "GET"
+          ,url: "/api/photos"
+        })
+        .then(function(photos){
+          var photoArray = photos.data;
+          console.log(photoArray.length);
+          var photoLast = photoArray[photoArray.length];
+          console.log(photoArray);
+          console.log(photoLast);
+          var url = photoLast.photoUrl;
+          $('.testImage').attr('src', photoLast.photoUrl);
+        })
+      }, 200)
     })
 
     /////end global variables
