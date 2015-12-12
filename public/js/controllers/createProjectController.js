@@ -5,6 +5,10 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
   createProjectCtrl.$inject = ['$http', 'postProject']
   function createProjectCtrl($http, postProject){
     var self = this;
+    /////////fuckinga round with some dropzone shit
+    // $.cloudinary.config({ cloud_name: 'sample', api_key: '874837483274837'})
+    ////ending dropzone shit
+
     //////global variables we'll be using for moving the carousel
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
@@ -22,7 +26,23 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       ,stitchPattern: ""
       ,season: ""
     }
-    console.log(self.createNewProject);
+
+    $('.uploadFileButton').on('click', function(){
+      console.log($('.uploadFile')[0].files[0]);
+
+      var newImage = $('.uploadFile')[0].files[0];
+      console.log(newImage);
+      // $(".testClass").attr('src', newImage)
+      //
+      // $http({
+      //   method: "POST"
+      //   ,url: "/api/photo"
+      //   ,data: newImage
+      // })
+      // file.upload.then(function (response){
+      //   console.log(response);
+      // })
+    })
     /////end global variables
 
     // console.log(postProject);

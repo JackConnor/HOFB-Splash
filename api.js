@@ -274,45 +274,54 @@ module.exports = function(app){
     dest: __dirname + '../public/uploads/',
   })
 
-  app.post('/api/pictures/upload', multer({ dest: './uploads/'}).single('upl'), function(req,res){
-  	// console.log(req.body); //form fields
-  	/* example output:
-  	{ title: 'abc' }
-  	 */
+  app.post('/api/photo', function(req, res){
+    // console.log(req.file);
+    console.log(req.body);
+    // cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
+    //   //  console.log(uploadResult);
+    //    res.json(uploadResult.secure_url)
+    //  })
+  })
 
-   console.log('yoyo');
-   console.log(req.file); //form files
-   req.file.fieldname = req.file.originalname
-   req.body.fieldname = req.body.originalname
-   console.log(req);
-
-   cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
-     console.log(uploadResult);
-   })
-  //  var thisPhoto = require("./uploads/"+req.body.originalname)
-  //  console.log(thisPhoto);
-  //  req.file.encoding = '64bit';
-  //  Photo.create({
-  //    photoData: thisPhoto
-  //    ,author: "jack connor"
-  //    ,title: "first test photo, baby"
-  //  }, function(err, newPhoto){
-  //    console.log(newPhoto);
+  // app.post('/api/pictures/upload', multer({ dest: './uploads/'}).single('upl'), function(req,res){
+  // 	// console.log(req.body); //form fields
+  // 	/* example output:
+  // 	{ title: 'abc' }
+  // 	 */
+  //
+  //  console.log('yoyo');
+  //  console.log(req.file); //form files
+  //  req.file.fieldname = req.file.originalname
+  //  req.body.fieldname = req.body.originalname
+  //  console.log(req);
+  //
+  //  cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
+  //    console.log(uploadResult);
   //  })
-
-  	/* example output:
-              { fieldname: 'upl',
-                originalname: 'grumpy.png',
-                encoding: '7bit',
-                mimetype: 'image/png',
-                destination: './uploads/',
-                filename: '436ec561793aa4dc475a88e84776b1b9',
-                path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
-                size: 277056 }
-
-  	 */
-  	res.status(204).end();
-  });
+  // //  var thisPhoto = require("./uploads/"+req.body.originalname)
+  // //  console.log(thisPhoto);
+  // //  req.file.encoding = '64bit';
+  // //  Photo.create({
+  // //    photoData: thisPhoto
+  // //    ,author: "jack connor"
+  // //    ,title: "first test photo, baby"
+  // //  }, function(err, newPhoto){
+  // //    console.log(newPhoto);
+  // //  })
+  //
+  // 	/* example output:
+  //             { fieldname: 'upl',
+  //               originalname: 'grumpy.png',
+  //               encoding: '7bit',
+  //               mimetype: 'image/png',
+  //               destination: './uploads/',
+  //               filename: '436ec561793aa4dc475a88e84776b1b9',
+  //               path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
+  //               size: 277056 }
+  //
+  // 	 */
+  // 	res.status(204).end();
+  // });
 
 
   /////End photo uploading logic/////////

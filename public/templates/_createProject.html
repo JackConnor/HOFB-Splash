@@ -1,3 +1,7 @@
+<script type="text/javascript">
+   $.cloudinary.config({"api_key":"855436727633456","cloud_name":"hofb"});
+</script>
+
 <h4>//build your new project</h4>
 <div class="navigationBar">
 
@@ -6,184 +10,19 @@
 <div class="newprojectcontainer">
   <div class="carouselControl">
     <h1 class='productTitle'>Create Your Product</h1>
-    <div class="carouselControls">
-      <div class="carouselLeft">
-        Prev
-      </div>
-      <div class="carouselCount">
-        <div class="circleContainer">
-          <div class="circle circle0"></div>
-        </div>
-        <div class="circleContainer">
-          <div class="circle circle1"></div>
-        </div>
-        <div class="circleContainer">
-          <div class="circle circle2"></div>
-        </div>
-        <div class="circleContainer">
-          <div class="circle circle3"></div>
-        </div>
-        <div class="circleContainer">
-          <div class="circle circle4"></div>
-        </div>
-        <div class="circleContainer">
-          <div class="circle circle5"></div>
-        </div>
-        <div class="circleContainer">
-          <div class="circle circle6"></div>
-        </div>
-        <div class="circleContainer">
-          <div class="circle circle7"></div>
-        </div>
-      </div>
-      <div class="carouselRight">
-        Next
-      </div>
-    </div>
-  </div>
-  <div class="newProjectView">
-    <div class="carouselBacking">
-      <div class="carouselFourth carouselOne">
-        <div class="productName">
-          <input class='carouselNameEntry' type="text" placeholder="product name">
-        </div>
-      </div>
-      <div class="carouselFourth carouselTwo">
+    <div class="dropzoneTest">
 
-      </div>
-      <div class="carouselFourth carouselThree">
-        <select class="createProductType" name="">
-          <option value="shirt" select>Shirt</option>
-          <option value="hat">Hat</option>
-          <option value="pants">Pants</option>
-          <option value="accessories">Accessories</option>
-        </select>
-        <select class="createVendor" name="">
-          <option value="yes" select>Yes</option>
-          <option value="no">No</option>
-        </select>
-        <input type="text" class="createGroups" placeholder='enter groups'>
-        <input type="text" class="createTags" placeholder='enter tags'>
-      </div>
-      <div class="carouselFourth carouselFour">
-        <div class="createSeasonContainer">
-          <div class="createSeason createSummer col-xs-6">
-            Summer
-          </div>
-          <div class="createSeason createFall col-xs-6">
-            Fall
-          </div>
-          <div class="createSeason createSpring col-xs-6">
-            Spring
-          </div>
-          <div class="createSeason createWinter col-xs-6">
-            Winter
-          </div>
-        </div>
-      </div>
-      <div class="carouselFourth carouselFive">
-        <div class="createFabricContainer">
-          <div class="createFabric createSeersucker col-xs-4">
-            Seersucker
-          </div>
-          <div class="createFabric createDenim col-xs-4">
-            Denim
-          </div>
-          <div class="createFabric createCotton col-xs-4">
-            Cotton
-          </div>
-          <div class="createFabric createNylon col-xs-4">
-            Nylon
-          </div>
-          <div class="createFabric createVeneer col-xs-4">
-            Veneer
-          </div>
-          <div class="createFabric createCamo col-xs-4">
-            Camo
-          </div>
-          <div class="createFabric createDockers col-xs-4">
-            Dockers
-          </div>
-          <div class="createFabric createPleather col-xs-4">
-            Pleather
-          </div>
-          <div class="createFabric createLeather col-xs-4">
-            Leather
-          </div>
-        </div>
-      </div>
-      <div class="carouselFourth carouselSix">
-        <div class="createColorContainer">
-          <div class="createColor createRed col-xs-4">
-            Red
-          </div>
-          <div class="createColor createBlue col-xs-4">
-            Blue
-          </div>
-          <div class="createColor createGreen col-xs-4">
-            Green
-          </div>
-          <div class="createColor createAqua col-xs-4">
-            Aqua
-          </div>
-          <div class="createColor createMagenta col-xs-4">
-            Magenta
-          </div>
-          <div class="createColor createYellow col-xs-4">
-            Yellow
-          </div>
-          <div class="createColor createOrange col-xs-4">
-            Orange
-          </div>
-          <div class="createColor createBlack col-xs-4">
-            Black
-          </div>
-          <div class="createColor createWhite col-xs-4">
-            White
-          </div>
-        </div>
-      </div>
-      <div class="carouselFourth carouselSeven">
-        <div class="createButtonContainer">
-          <div class="createButton createCrossButton col-xs-6">
-            Cross Button
-          </div>
-          <div class="createButton createStraightButton col-xs-6">
-            Straight Button
-          </div>
-          <div class="createButton createGildedButton col-xs-6">
-            Gilded Button
-          </div>
-          <div class="createButton createFlatButton col-xs-6">
-            Flat Button
-          </div>
-        </div>
-      </div>
-      <div class="carouselFourth carouselEight">
-        <div class="createStitchContainer">
-          <div class="createStitch createStraightStitch col-xs-6">
-            Straight
-          </div>
-          <div class="createStitch createDoubleStitch col-xs-6">
-            Double Stitch
-          </div>
-          <div class="createStitch createLeftStitch col-xs-6">
-            Left Stitch
-          </div>
-          <div class="createStitch createRightStitch col-xs-6">
-            Right Stitch
-          </div>
-        </div>
-        <div class="createSubmit">
-          Submit This Project
-        </div>
-        <form action="/api/pictures/upload" method="POST" enctype="multipart/form-data">
+    </div>
+
+        <!--  -->
+        <!-- <form action="/api/photo" method="POST" enctype="multipart/form-data">
           Select an image to upload:
-          <input type="file" name="upl">
-          <input type="submit" value="Upload Image">
+          <input type="file" name="upl" class='uploadFile'>
+          <input class="uploadFileButton" type="submit" value="Upload Image">
         </form>
-        <img src="/uploads/672569cb4315e101604d7c6f9f2f8916.jpg" alt="" />
+        <img class='testClass' src="" alt="" /> -->
       </div>
     </div>
   </div>
 </div>
+<input name="file" type="file" class="cloudinary-fileupload" data-cloudinary-field="image_upload" data-form-data=" ... html-escaped JSON data ... " ></input>
