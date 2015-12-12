@@ -351,6 +351,6 @@ module.exports = function(app){
 //mongoose.connect('mongodb://localhost:27017/myproject');
 
 var db = process.env.DB_URL_HOFB;
-mongoose.connect(db)
-// mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
-// mongoose.connect(ENV['DB_URL'])
+//mongoose.connect(db)
+mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
+//mongoose.connect(ENV['DB_URL'])
