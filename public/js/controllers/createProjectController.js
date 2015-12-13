@@ -354,15 +354,25 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     ////////Begin Logic for uploading photos///
     /////listens for change to file upload, creating an event every time there is a change
     $('#i_file').change( function(event) {
-        var tmppath = URL.createObjectURL(event.target.files[0]);//new temp url
-        $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
-        self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
-        console.log(self.tempPhotoCache);
-        $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-        self.miniPhotoCounter++;
-
+      if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 4){
+        frontendPhotoDisplay();
+      }
+      else{
+        alert('better delete some photos if you want to add more')
+      }
     });
 
+    function frontendPhotoDisplay(){
+      var tmppath = URL.createObjectURL(event.target.files[0]);//new temp url
+      $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
+      self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
+      console.log(self.tempPhotoCache);
+      $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
+      $('#newProductMiniImage'+self.miniPhotoCounter).css({
+        outline: "3px solid orange"
+      })
+      self.miniPhotoCounter++;
+    }
 
     ////////Begin Logic for uploading photos///
     ///////////////////////////////////////////
