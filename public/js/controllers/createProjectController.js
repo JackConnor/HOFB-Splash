@@ -345,6 +345,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     $('#i_file').change( function(event) {
       if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 4){
         frontendPhotoDisplay();
+        self.miniPhotoCounter = self.tempPhotoCache.length;
       }
       else{
         alert('better delete some photos if you want to add more')
@@ -363,37 +364,16 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     }
     //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
-      console.log(evt);
-      console.log(evt.target);
-      console.log(evt.currentTarget.previousElementSibling);
-      //
       var targetImage = $(evt.currentTarget.previousElementSibling);
       var placeInLine = targetImage[0].id.split('').pop();
-      console.log(placeInLine);
-      console.log(self.tempPhotoCache);
       self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
-      console.log(self.tempPhotoCache);
       $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[0]));
       self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
       ///////now we need to reorder all of the remaining mini photos so that there are no spaces
       var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
-      console.log(allMiniPhotosLength);
-      // var allMiniPhoto = function(){
-      //   var photoArray = [];
-      //   for (var i = 0; i < allMiniPhotosLength; i++) {
-      //     photoArray.push($('#newProductMiniImage'+i)[0])
-      //   }
-      //   return photoArray;
-      // }
-      // console.log(allMiniPhoto());
-      console.log(self.tempPhotoCache.length);
       for(var i = 0; i < allMiniPhotosLength; i++) {
         $('#newProductMiniImage'+i).attr('src', '');
-        console.log(i);
         if(i < self.tempPhotoCache.length){
-          console.log('abot to change');
-          console.log($('#newProductMiniImage'+i));
-          console.log($('#newProductMiniImage'+i)[0]);
           var imageShift = $('#newProductMiniImage'+i)[0];
           $(imageShift).attr('src', URL.createObjectURL(self.tempPhotoCache[i]))
           // $('#newProductMiniImage'+i).src( URL.createObjectURL(self.tempPhotoCache[i]))
@@ -406,10 +386,15 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
           })
         }
       }
-      //  $(evt.currentTarget.previousElementSibling).attr('src', '')
     }
-    $('.newProductDeleteMini').on('click', deleteMiniPhoto)
+    $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
+    function changeMiniPhoto(event){
+      var photoNumber = $(event.target)[0].id.split('').pop();
+      console.log(photoNumber);
+      self.miniPhotoCounter = photoNumber;
+    }
+    $('.newProductMiniImageImage').on('click', changeMiniPhoto)
 
 
     ////////Begin Logic for uploading photos///
