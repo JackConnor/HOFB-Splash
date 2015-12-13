@@ -373,25 +373,37 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       console.log(self.tempPhotoCache);
       self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
       console.log(self.tempPhotoCache);
+      ///////now we need to reorder all of the remaining mini photos so that there are no spaces
       var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
-      var allMiniPhoto = function(){
-        var photoArray = [];
-        for (var i = 0; i < allMiniPhotosLength; i++) {
-          photoArray.push($('#newProductMiniImage'+i)[0])
-        }
-        return photoArray;
-      }
+      console.log(allMiniPhotosLength);
+      // var allMiniPhoto = function(){
+      //   var photoArray = [];
+      //   for (var i = 0; i < allMiniPhotosLength; i++) {
+      //     photoArray.push($('#newProductMiniImage'+i)[0])
+      //   }
+      //   return photoArray;
+      // }
       // console.log(allMiniPhoto());
-      for (var i = 0; i < allMiniPhoto.length; i++) {
-        if(self.tempPhotoCache[i]){
+      console.log(self.tempPhotoCache.length);
+      for(var i = 0; i < allMiniPhotosLength; i++) {
+        $('#newProductMiniImage'+i).attr('src', '');
+        console.log(i);
+        if(i < self.tempPhotoCache.length){
           console.log('abot to change');
-          $('#newProductMiniImage'+i).attr('src', URL.createObjectURL(self.tempPhotoCache[i]))
+          console.log($('#newProductMiniImage'+i));
+          console.log($('#newProductMiniImage'+i)[0]);
+          var imageShift = $('#newProductMiniImage'+i)[0];
+          $(imageShift).attr('src', URL.createObjectURL(self.tempPhotoCache[i]))
+          // $('#newProductMiniImage'+i).src( URL.createObjectURL(self.tempPhotoCache[i]))
         }
-        else{
-          allMiniPhoto[i].attr('src', '');
+        else if(i >= self.tempPhotoCache.length){
+          var imageShift = $('#newProductMiniImage'+i)[0];
+          $(imageShift).attr('src', '');
+          $(imageShift).css({
+            outline: '1px dashed gray'
+          })
         }
       }
-      targetImage.attr('src', '')
       //  $(evt.currentTarget.previousElementSibling).attr('src', '')
     }
     $('.newProductDeleteMini').on('click', deleteMiniPhoto)
