@@ -397,6 +397,8 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     $('.newProductMiniImageImage').on('click', changeMiniPhoto)
 
 
+
+
     ////////Begin Logic for uploading photos///
     ///////////////////////////////////////////
 
