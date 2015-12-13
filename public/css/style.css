@@ -331,6 +331,10 @@
   width: 100%;
 }
 
+#i_file {
+  position: fixed;
+}
+
 .logoImage {
   height: 173px;
 }
