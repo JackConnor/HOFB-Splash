@@ -361,12 +361,41 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       })
       self.miniPhotoCounter++;
     }
+    //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
       console.log(evt);
       console.log(evt.target);
-      $(evt.target).attr('src', '')
+      console.log(evt.currentTarget.previousElementSibling);
+      //
+      var targetImage = $(evt.currentTarget.previousElementSibling);
+      var placeInLine = targetImage[0].id.split('').pop();
+      console.log(placeInLine);
+      console.log(self.tempPhotoCache);
+      self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
+      console.log(self.tempPhotoCache);
+      var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
+      var allMiniPhoto = function(){
+        var photoArray = [];
+        for (var i = 0; i < allMiniPhotosLength; i++) {
+          photoArray.push($('#newProductMiniImage'+i)[0])
+        }
+        return photoArray;
+      }
+      // console.log(allMiniPhoto());
+      for (var i = 0; i < allMiniPhoto.length; i++) {
+        if(self.tempPhotoCache[i]){
+          console.log('abot to change');
+          $('#newProductMiniImage'+i).attr('src', URL.createObjectURL(self.tempPhotoCache[i]))
+        }
+        else{
+          allMiniPhoto[i].attr('src', '');
+        }
+      }
+      targetImage.attr('src', '')
+      //  $(evt.currentTarget.previousElementSibling).attr('src', '')
     }
-    $('#newProductMiniImage2').on('click', deleteMiniPhoto)
+    $('.newProductDeleteMini').on('click', deleteMiniPhoto)
+
 
 
     ////////Begin Logic for uploading photos///
