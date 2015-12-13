@@ -373,6 +373,8 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       console.log(self.tempPhotoCache);
       self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
       console.log(self.tempPhotoCache);
+      $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[0]));
+      self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
       ///////now we need to reorder all of the remaining mini photos so that there are no spaces
       var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
       console.log(allMiniPhotosLength);
