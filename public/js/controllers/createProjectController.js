@@ -2,6 +2,14 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
 
   .controller('createProjectCtrl', createProjectCtrl)
 
+  ///////////////////////////////////////////////////////
+  ///////about to do experimental service/directive stuff
+
+
+
+  ///////about to do experimental service/directive stuff
+  ///////////////////////////////////////////////////////
+
   createProjectCtrl.$inject = ['$http', 'postProject']
   function createProjectCtrl($http, postProject){
     var self = this;
@@ -26,26 +34,66 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       ,stitchPattern: ""
       ,season: ""
     }
+    // $.ajax({
+    //   method:"GET"
+    //   ,url: "/api/users"
+    //   success: function(users){
+    //     console.log(users);
+    //   }
+    // })
 
+    // $('.photoForm').submit(function(info){
+    //   setTimeout(function(){
+    //     $http({
+    //       method: "GET"
+    //       ,url: "/api/photos"
+    //     })
+    //     .then(function(photos){
+    //       var photoArray = photos.data;
+    //       photoArray.unshift('');
+    //       console.log(photoArray);
+    //       var length = photoArray.length-1;
+    //       console.log(length);
+    //       var spot = photoArray[length];
+    //       var url = spot.photoUrl;
+    //       console.log(url);
+    //       // $('.testImage').attr('src', url);
+    //       $('.testDiv').append(
+    //         "<img src='"+url+"' >"
+    //       )
+    //     })
+    //   }, 1000)
+    // })
+    ////////new attempt at a post request where we trnasform the file and the headers and stuff
+    // function getSendFile(){
+    //   var myFile = $('.uploadFile')[0].files[0];
+    //   console.log(myFile);
+    //   //////create the form////
+    //   var formData = new FormData();
+    //   console.log(formData);
+    //   formData.append('file', myFile);
+    //   console.log(formData);
+    //   $http({
+    //     method: "POST"
+    //     ,url: '/api/photos'
+    //     ,transformRequest: angular.identity
+    //     ,headers: {'Content-Type': undefined}
+    //     ,file: myFile
+    //   })
+    //   .then(function (data) {
+    //     console.log("in the callback");
+    //     console.log(data);
+    //   });
+    // }
+    // $('.photoForm').on('click', getSendFile);
 
-    $('.photoForm').submit(function(info){
-      console.log(info);
-      setTimeout(function(){
-        $http({
-          method: "GET"
-          ,url: "/api/photos"
-        })
-        .then(function(photos){
-          var photoArray = photos.data;
-          console.log(photoArray.length);
-          var photoLast = photoArray[photoArray.length];
-          console.log(photoArray);
-          console.log(photoLast);
-          var url = photoLast.photoUrl;
-          $('.testImage').attr('src', photoLast.photoUrl);
-        })
-      }, 200)
-    })
+    $('#i_file').change( function(event) {
+        var tmppath = URL.createObjectURL(event.target.files[0]);
+        $("img").fadeIn("fast").attr('src',URL.createObjectURL(event.target.files[0]));
+
+        $("#disp_tmp_path").html("Temporary Path(Copy it and try pasting it in browser address bar) --> <strong>["+tmppath+"]</strong>");
+    });
+
 
     /////end global variables
 

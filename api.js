@@ -274,14 +274,15 @@ module.exports = function(app){
     dest: __dirname + '../public/uploads/',
   })
 
-  // app.post('/api/photo', function(req, res){
-  //   console.log(req.file);
-  //   console.log(req.body);
-  //   // cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
-  //   //   //  console.log(uploadResult);
-  //   //    res.json(uploadResult.secure_url)
-  //   //  })
-  // })
+  app.post('/api/photo', function(req, res, err){
+    console.log(req.body);
+    console.log(req.body.file);
+    res.json({message:'at least we got some back-and-forth'})
+    cloudinary.uploader.upload(req.file, function(uploadResult){
+       console.log(uploadResult);
+       res.json(uploadResult.secure_url)
+     })
+  })
 
   app.post('/api/pictures', multer({ dest: './uploads/'}).single('upl'), function(req,res){
   	console.log(req.file);
@@ -290,9 +291,12 @@ module.exports = function(app){
       Photo.create({photoUrl: uploadResult.secure_url, author: 'jack'}, function(err, uploadedImage){
         console.log(uploadedImage);
       })
-
-   //    res.json(uploadResult);
-    })
+    },
+    { width: 400, height: 300
+      ,x: 200
+      ,y: 200,
+      crop: "crop"
+      ,format: "png" })
   	/* example output:
   	{ title: 'abc' }
   	 */
