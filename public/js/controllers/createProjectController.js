@@ -50,7 +50,6 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     ///////////////////////////////////////////////////
     ///////////////build function to collect and submit
     $('.createSubmit').on('click', function(){
-      console.log('lol');
       self.createNewProject = {
         name: $('.carouselNameEntry').val()
         ,timestamp: ""
@@ -66,27 +65,21 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         ,season: ""
       }
       var pickedElems = $('.picked');
-      console.log(pickedElems);
       for (var i = 0; i < pickedElems.length; i++) {
         if(pickedElems[i].id.split('_')[1] == "Season"){
           self.createNewProject.season = pickedElems[i].id.split('_')[2];
-          console.log(self.createNewProject.season);
         }
         else if(pickedElems[i].id.split('_')[1] == "Color"){
           self.createNewProject.colors.push(pickedElems[i].id.split('_')[2])
-          console.log(self.createNewProject.colors);
         }
         else if(pickedElems[i].id.split('_')[1] == "Fabric"){
           self.createNewProject.fabrics.push(pickedElems[i].id.split('_')[2])
-          console.log(self.createNewProject.fabricss);
         }
         else if(pickedElems[i].id.split('_')[1] == "Buttons"){
           self.createNewProject.buttons = pickedElems[i].id.split('_')[2];
-          console.log(self.createNewProject.color);
         }
         else if(pickedElems[i].id.split('_')[1] == "Stitch"){
           self.createNewProject.stitchPattern = pickedElems[i].id.split('_')[2];
-          console.log(self.createNewProject.stitchPattern);
         }
       }
       $http({
@@ -95,7 +88,6 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         ,data: self.createNewProject
       })
       .then(function(newProjectStuff){
-        console.log(newProjectStuff);
       })
     })
 
@@ -306,11 +298,8 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         highlightCounter();
       })
       $('.circle4').on('click', function(evt){
-        console.log('this working?');
         var circlePositionBeta = $(evt.target)[0];
-        console.log(circlePositionBeta);
         var circlePosition = $(circlePositionBeta)[0].id.split('')[6];
-        console.log(circlePosition);
         clickDistance(circlePosition);
         highlightCounter();
       })
@@ -366,13 +355,19 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       var tmppath = URL.createObjectURL(event.target.files[0]);//new temp url
       $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
       self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
-      console.log(self.tempPhotoCache);
       $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
       $('#newProductMiniImage'+self.miniPhotoCounter).css({
         outline: "3px solid orange"
       })
       self.miniPhotoCounter++;
     }
+    function deleteMiniPhoto(evt){
+      console.log(evt);
+      console.log(evt.target);
+      $(evt.target).attr('src', '')
+    }
+    $('#newProductMiniImage2').on('click', deleteMiniPhoto)
+
 
     ////////Begin Logic for uploading photos///
     ///////////////////////////////////////////
