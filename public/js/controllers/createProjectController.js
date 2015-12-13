@@ -390,6 +390,10 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
     function changeMiniPhoto(event){
+      console.log($(event.target));
+      var source = $(event.target)[0].src;
+      $(".newProductCurrentImage").attr('src', source);
+      console.log(source);
       var photoNumber = $(event.target)[0].id.split('').pop();
       console.log(photoNumber);
       self.miniPhotoCounter = photoNumber;
