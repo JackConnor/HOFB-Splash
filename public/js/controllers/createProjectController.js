@@ -361,6 +361,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         outline: "3px solid orange"
       })
       self.miniPhotoCounter++;
+      highlightMini();
     }
     //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
@@ -369,6 +370,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
       $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[0]));
       self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
+      highlightMini();
       ///////now we need to reorder all of the remaining mini photos so that there are no spaces
       var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
       for(var i = 0; i < allMiniPhotosLength; i++) {
@@ -397,8 +399,30 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       var photoNumber = $(event.target)[0].id.split('').pop();
       console.log(photoNumber);
       self.miniPhotoCounter = photoNumber;
+      highlightMini();
     }
     $('.newProductMiniImageImage').on('click', changeMiniPhoto)
+
+    ///create function to highlight mini image that's about to be updated
+    function highlightMini(){
+      var arrLength = $('.newProductMiniImage').length;
+      $('#newProductMiniImage0').css({
+        borderBottom: "1px solid white"
+      })
+      $('#newProductMiniImage1').css({
+        borderBottom: "1px solid white"
+      })
+      $('#newProductMiniImage2').css({
+        borderBottom: "1px solid white"
+      })
+      $('#newProductMiniImage3').css({
+        borderBottom: "1px solid white"
+      })
+      $('#newProductMiniImage'+self.miniPhotoCounter).css({
+        borderBottom: "5px solid blue"
+      })
+    }
+    highlightMini();
 
 
 
