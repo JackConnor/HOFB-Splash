@@ -384,12 +384,9 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
     function changeMiniPhoto(event){
-      console.log($(event.target));
       var source = $(event.target)[0].src;
       $(".newProductCurrentImage").attr('src', source);
-      console.log(source);
       var photoNumber = $(event.target)[0].id.split('').pop();
-      console.log(photoNumber);
       self.miniPhotoCounter = photoNumber;
       highlightMini();
     }
@@ -420,7 +417,6 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
 
     ///////////////function to send full create http request
     function sendNewProject(evt){
-      console.log('hey hey');
       var name = "jack";
       var timestamp =  new Date();
       var images = self.tempPhotoCache;
@@ -435,7 +431,6 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
           if(allPicked[i].id.split('_')[1] == 'Color')
           colorsArray.push(allPicked[i].id.split('_')[2])
         }
-        console.log(colorsArray);
         return colorsArray;
       }
       var colors = colorsFunc();
@@ -446,7 +441,6 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
           if(allPicked[i].id.split('_')[1] == 'Fabric')
           fabricsArray.push(allPicked[i].id.split('_')[2])
         }
-        console.log(fabricsArray);
         return fabricsArray;
       }
       var fabrics = fabricsFunc();
@@ -457,7 +451,6 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
           if(allPicked[i].id.split('_')[1] == 'Season')
           seasonsArray.push(allPicked[i].id.split('_')[2])
         }
-        console.log(seasonsArray);
         return seasonsArray;
       }
       var seasons = seasonsFunc();
@@ -468,7 +461,6 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
           if(allPicked[i].id.split('_')[1] == 'Stitch')
           stitchesArray.push(allPicked[i].id.split('_')[2])
         }
-        console.log(stitchesArray);
         return stitchesArray;
       }
       var stitches = stitchesFunc();
@@ -479,18 +471,15 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
           if(allPicked[i].id.split('_')[1] == 'Button')
           stitchesArray.push(allPicked[i].id.split('_')[2])
         }
-        console.log(stitchesArray);
         return stitchesArray;
       }
       var buttons = buttonsFunc();
-      console.log($(evt.target)[0].className.split('_')[2]);
       var statusVar = $(evt.target)[0].className.split('_')[2];
       if(statusVar == 'send'){
         var status = 'submitted to curator'
       } else if(statusVar == 'save'){
         var status = 'saved'
       }
-
       /////putting together whole object to send
       var newProjectObject = {
         name: name
@@ -507,28 +496,53 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         ,buttons: buttons
         ,status: status
       }
-      console.log(newProjectObject);
-
-      // name: String
-      // ,timestamp: Date
-      // ,images: Array
-      // ,groups: Array
-      // ,productType: String
-      // ,tags: Array
-      // ,vendor: String
-      // ,colors: Array
-      // ,fabrics: Array
-      // ,buttons: String
-      // ,stitchPattern: String
-      // ,status: String
-      // ,season: String
-      // ,tier: String
-      postProject.postProject(newProjectObject)
+      postProject.postProject(newProjectObject)///post the object
+      //////////logic to send stuff through to cloudinary
+      var newForm = new FormData();
+      console.log(newForm);
+      newForm.append('file', self.tempPhotoCache[0])
+      ////action="/pictures/upload" method="POST" enctype="multipart/form-data"
+      newForm.action = '/api/pictures';
+      console.log(newForm);
+      newForm.method = "POST";
+      newForm.enctype="multipart/form-data";
+      console.log($(newForm));
+      // $(newForm).submit();
+      // newForm.submit();
+      // $http({
+      //   method: "POST"
+      //   ,data: newForm
+      // })
+      // .then(function(data){
+      //   console.log(data);
+      // })
     }
     $('.new_product_send').on('click', sendNewProject);
     $('.new_product_save').on('click', sendNewProject);
 
+    // setInterval(function(){
+    //   console.log($('#i_file'));
+    // }, 1000)
 
+    function newForm(){
+      var formNew = new FormData();
+      console.log($('#i_file'));
+      formNew.append('file', $('#i_file')[0].files[0]);
+      console.log(formNew);
+      formNew.action = "/api/pictures";
+      formNew.method = "POST";
+      // var request = new XMLHttpRequest();
+      // request.open("POST", "/api/pictures");
+      // request.send(formNew);
+      $('.appendDiv').append(
+        "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
+        "</form>"
+      )
+      $('.tempForm').append($('#i_file')[0])
+      $('.tempForm').submit();
+      // $(formNew).submit();
+    }
+    $("#i_submit").on('click', newForm)
   /////end createProject controller
   ////////////////////////
   ////////////////////////

@@ -19,13 +19,16 @@
         <!-- <img class='testImage' src="" alt="" /> -->
         <!-- <img class='testClass' src="" alt="" /> -->
         <div class="testDiv">
-          <input type="file" id="i_file" value="">
-          <input type="button" id="i_submit" value="Submit">
+          <input type="file" id="i_file" name='file'><br><br>
+          <input type="button" id="i_submit" value="submit">
           <br>
           <img src="" width="200" style="display:none;" />
           <br>
-        <div id="disp_tmp_path"></div>
-
+        <div class="appendDiv"></div>
+          <form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>
+            <input type="file" name="file" accept="application/x-zip-compressed,image/*">
+            <input type="submit" value="Upload selected file to server">
+          </form>
         </div>
       </div>
 
