@@ -525,12 +525,6 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     // }, 1000)
 
     function newForm(){
-      var formNew = new FormData();
-      console.log($('#i_file'));
-      formNew.append('file', $('#i_file')[0].files[0]);
-      console.log(formNew);
-      formNew.action = "/api/pictures";
-      formNew.method = "POST";
       // var request = new XMLHttpRequest();
       // request.open("POST", "/api/pictures");
       // request.send(formNew);
@@ -538,7 +532,11 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
         "</form>"
       )
-      $('.tempForm').append($('#i_file')[0])
+      $('.tempForm').append($('#i_file0')[0]);
+      $('.tempForm').append($('#i_file1')[0]);
+      $('.tempForm').append($('#i_file2')[0]);
+      $('.tempForm').append($('#i_file3')[0]);
+      $('.tempForm').append($('#i_name')[0]);
       $('.tempForm').submit();
       // $(formNew).submit();
     }

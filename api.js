@@ -11,6 +11,7 @@ var bcrypt         = require('bcrypt-nodejs');
 var passport       = require('passport');
 var passportLocal  = require('passport-local');
 var multer         = require('multer');
+var upload         = multer({ dest: './uploads/'});
 var cloudinary     = require('cloudinary');
 console.log(cloudinary.api.ping());
 
@@ -284,15 +285,27 @@ module.exports = function(app){
      })
   })
 
-  app.post('/api/pictures', multer({ dest: './uploads/'}).single('file'), function(req,res){
+  app.post('/api/pictures', upload.array('files', 4), function(req,res){
   	console.log(req.body);
-  	console.log(req.file);
+  	console.log(req.files);
+  	console.log(req.files.length);
+    for (var i = 0; i < req.files.length; i++) {
+      var fileName = req.files[i].filename;
+      console.log(fileName);
+      cloudinary.uploader.upload('./uploads/'+fileName, function(uploadResult){
+        console.log(uploadResult);
+        Photo.create({photoUrl: uploadResult.secure_url, author: 'jack'}, function(err, uploadedImage){
+          console.log(uploadedImage);
+        })
+      })
+    }
     cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
       console.log(uploadResult);
       Photo.create({photoUrl: uploadResult.secure_url, author: 'jack'}, function(err, uploadedImage){
         console.log(uploadedImage);
       })
     })
+    res.json('hi there')
   	/* example output:
   	{ title: 'abc' }
   	 */
