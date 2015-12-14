@@ -150,7 +150,7 @@ module.exports = function(app){
   })
 
   ////post a single product
-  app.post('/api/projects', function(req, res){
+  app.post('/api/products', function(req, res){
     Product.create(req.body, function(err, product){
       if(err) throw err;
       res.json(product);
@@ -286,26 +286,28 @@ module.exports = function(app){
   })
 
   app.post('/api/pictures', upload.array('files', 4), function(req,res){
-  	console.log(req.body);
-  	console.log(req.files);
-  	console.log(req.files.length);
     for (var i = 0; i < req.files.length; i++) {
       var fileName = req.files[i].filename;
-      console.log(fileName);
       cloudinary.uploader.upload('./uploads/'+fileName, function(uploadResult){
-        console.log(uploadResult);
-        Photo.create({photoUrl: uploadResult.secure_url, author: 'jack'}, function(err, uploadedImage){
-          console.log(uploadedImage);
+        Product.findOne(req.body.productName, function(err, user){
+          console.log(user);
+          console.log(uploadResult);
+          console.log(uploadResult.secure_url);
+          console.log(user.images[i]);
+          // console.log(uploadResult);
+          user.images.push(uploadResult.secure_url);
+          console.log(user);
+          user.save();
         })
       })
     }
-    cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
-      console.log(uploadResult);
-      Photo.create({photoUrl: uploadResult.secure_url, author: 'jack'}, function(err, uploadedImage){
-        console.log(uploadedImage);
-      })
-    })
-    res.json('hi there')
+    // cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
+    //   console.log(uploadResult);
+    //   Photo.create({photoUrl: uploadResult.secure_url, author: 'jack'}, function(err, uploadedImage){
+    //     console.log(uploadedImage);
+    //   })
+    // })
+    // res.json('hi there')
   	/* example output:
   	{ title: 'abc' }
   	 */

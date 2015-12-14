@@ -5,15 +5,16 @@ angular.module('postProjectFactory', [])
   postProject.$inject = ['$http'];
   function postProject($http){
 
-    function postProjectToDb(projectArray){
+    function postProjectToDb(projectArray, callback){
       return $http({
         method: "POST"
-        ,url: "/api/projects"
+        ,url: "/api/products"
         ,data: projectArray
       })
       .then(function(newProjectInfo){
         console.log('posted project');
         console.log(newProjectInfo);
+        callback();
         return newProjectInfo;
       })
     }

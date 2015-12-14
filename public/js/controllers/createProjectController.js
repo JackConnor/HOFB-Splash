@@ -10,6 +10,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
     self.miniPhotoCounter = 0;
     self.tempPhotoCache = [];
+    self.tempPhotoHTMLCache = [];
     /////end global variables
 
     ////////////////////////////////////////
@@ -76,7 +77,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       }
       $http({
         method: "POST"
-        ,url: "/api/projects"
+        ,url: "/api/products"
         ,data: self.createNewProject
       })
       .then(function(newProjectStuff){
@@ -334,20 +335,30 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     ///////////////////////////////////////////
     ////////Begin Logic for uploading photos///
     /////listens for change to file upload, creating an event every time there is a change
-    $('#i_file').change( function(event) {
-      if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 4){
-        frontendPhotoDisplay();
-        self.miniPhotoCounter = self.tempPhotoCache.length;
-      }
-      else{
-        alert('better delete some photos if you want to add more')
-      }
-    });
+    function changeEffect(){
+      $('#i_file').change( function(event) {
+        if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 4){
+          frontendPhotoDisplay();
+          $('#i_file').remove();
+          $('.inputFileHolder').append(
+            '<input type="file" id="i_file" name="files">'
+          )
+          changeEffect()
+          self.miniPhotoCounter = self.tempPhotoCache.length;
+        }
+        else{
+          alert('better delete some photos if you want to add more')
+        }
+      });
+    }
+    changeEffect();
 
     function frontendPhotoDisplay(){
       var tmppath = URL.createObjectURL(event.target.files[0]);//new temp url
       $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
       self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
+      self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
+      console.log(self.tempPhotoHTMLCache);
       $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
       $('#newProductMiniImage'+self.miniPhotoCounter).css({
         outline: "3px solid orange"
@@ -360,6 +371,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       var targetImage = $(evt.currentTarget.previousElementSibling);
       var placeInLine = targetImage[0].id.split('').pop();
       self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
+      self.tempPhotoHTMLCache.splice(placeInLine, 1);///our master photo array should be adjusted
       $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[0]));
       self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
       highlightMini();
@@ -419,7 +431,8 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     function sendNewProject(evt){
       var name = "jack";
       var timestamp =  new Date();
-      var images = self.tempPhotoCache;
+      // var images = self.tempPhotoCache;
+      var imagesHTML = self.tempPhotoHTMLCache;
       var groups = $('.newProductCollectionsInput').val().split(' ');
       var productType = $('.newProductTypeDropdown').val();
       var tags = $('.newProductTagsInput').val().split(' ');
@@ -484,7 +497,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       var newProjectObject = {
         name: name
         ,timestamp: timestamp
-        ,images: images
+        ,images: []
         ,groups: groups
         ,productType: productType
         ,tags: tags
@@ -496,26 +509,16 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         ,buttons: buttons
         ,status: status
       }
-      postProject.postProject(newProjectObject)///post the object
+      postProject.postProject(newProjectObject, submitPhotos)///post the object
       //////////logic to send stuff through to cloudinary
-      var newForm = new FormData();
-      console.log(newForm);
-      newForm.append('file', self.tempPhotoCache[0])
-      ////action="/pictures/upload" method="POST" enctype="multipart/form-data"
-      newForm.action = '/api/pictures';
-      console.log(newForm);
-      newForm.method = "POST";
-      newForm.enctype="multipart/form-data";
-      console.log($(newForm));
-      // $(newForm).submit();
-      // newForm.submit();
-      // $http({
-      //   method: "POST"
-      //   ,data: newForm
-      // })
-      // .then(function(data){
-      //   console.log(data);
-      // })
+      submitPhotos();
+      // self.tempPhotoHTMLCache.pop();
+      // submitPhotos();
+      // self.tempPhotoHTMLCache.pop();
+      // submitPhotos();
+      // self.tempPhotoHTMLCache.pop();
+      // submitPhotos();
+      // self.tempPhotoHTMLCache.pop();
     }
     $('.new_product_send').on('click', sendNewProject);
     $('.new_product_save').on('click', sendNewProject);
@@ -523,6 +526,27 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     // setInterval(function(){
     //   console.log($('#i_file'));
     // }, 1000)
+    function submitPhotos(){
+      console.log(self.tempPhotoHTMLCache.length);
+      $(".bodyview").append(
+        "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
+        "</form>"
+      )
+      //
+      console.log($(self.tempPhotoHTMLCache[0]));
+      console.log($(self.tempPhotoHTMLCache[1]));
+      console.log($(self.tempPhotoHTMLCache[2]));
+      console.log($(self.tempPhotoHTMLCache[3]));
+      $('.tempForm').append(self.tempPhotoHTMLCache[0]);
+      $('.tempForm').append(self.tempPhotoHTMLCache[1]);
+      $('.tempForm').append(self.tempPhotoHTMLCache[2]);
+      $('.tempForm').append(self.tempPhotoHTMLCache[3]);
+      $('.tempForm').append(
+        "<input name='productName' type='text' value='56679ee3e363a4a04399a064'>"
+      );
+      console.log(self.tempPhotoHTMLCache);
+      $('.tempForm').submit();
+    }
 
     function newForm(){
       // var request = new XMLHttpRequest();
