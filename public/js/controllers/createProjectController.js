@@ -2,14 +2,6 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
 
   .controller('createProjectCtrl', createProjectCtrl)
 
-  ///////////////////////////////////////////////////////
-  ///////about to do experimental service/directive stuff
-
-
-
-  ///////about to do experimental service/directive stuff
-  ///////////////////////////////////////////////////////
-
   createProjectCtrl.$inject = ['$http', 'postProject']
   function createProjectCtrl($http, postProject){
     var self = this;
@@ -423,12 +415,118 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       })
     }
     highlightMini();
-
-
-
-
-    ////////Begin Logic for uploading photos///
+    ////////End Logic for uploading photos/////
     ///////////////////////////////////////////
+
+    ///////////////function to send full create http request
+    function sendNewProject(evt){
+      console.log('hey hey');
+      var name = "jack";
+      var timestamp =  new Date();
+      var images = self.tempPhotoCache;
+      var groups = $('.newProductCollectionsInput').val().split(' ');
+      var productType = $('.newProductTypeDropdown').val();
+      var tags = $('.newProductTagsInput').val().split(' ');
+      var vendor = $('.newProductTypeDropdown').val();
+      var colorsFunc = function(){
+        var allPicked = $(".picked");
+        var colorsArray = [];
+        for (var i = 0; i < allPicked.length; i++) {
+          if(allPicked[i].id.split('_')[1] == 'Color')
+          colorsArray.push(allPicked[i].id.split('_')[2])
+        }
+        console.log(colorsArray);
+        return colorsArray;
+      }
+      var colors = colorsFunc();
+      var fabricsFunc = function(){
+        var allPicked = $(".picked");
+        var fabricsArray = [];
+        for (var i = 0; i < allPicked.length; i++) {
+          if(allPicked[i].id.split('_')[1] == 'Fabric')
+          fabricsArray.push(allPicked[i].id.split('_')[2])
+        }
+        console.log(fabricsArray);
+        return fabricsArray;
+      }
+      var fabrics = fabricsFunc();
+      var seasonsFunc = function(){
+        var allPicked = $(".picked");
+        var seasonsArray = [];
+        for (var i = 0; i < allPicked.length; i++) {
+          if(allPicked[i].id.split('_')[1] == 'Season')
+          seasonsArray.push(allPicked[i].id.split('_')[2])
+        }
+        console.log(seasonsArray);
+        return seasonsArray;
+      }
+      var seasons = seasonsFunc();
+      var stitchesFunc = function(){
+        var allPicked = $(".picked");
+        var stitchesArray = [];
+        for (var i = 0; i < allPicked.length; i++) {
+          if(allPicked[i].id.split('_')[1] == 'Stitch')
+          stitchesArray.push(allPicked[i].id.split('_')[2])
+        }
+        console.log(stitchesArray);
+        return stitchesArray;
+      }
+      var stitches = stitchesFunc();
+      var buttonsFunc = function(){
+        var allPicked = $(".picked");
+        var stitchesArray = [];
+        for (var i = 0; i < allPicked.length; i++) {
+          if(allPicked[i].id.split('_')[1] == 'Button')
+          stitchesArray.push(allPicked[i].id.split('_')[2])
+        }
+        console.log(stitchesArray);
+        return stitchesArray;
+      }
+      var buttons = buttonsFunc();
+      console.log($(evt.target)[0].className.split('_')[2]);
+      var statusVar = $(evt.target)[0].className.split('_')[2];
+      if(statusVar == 'send'){
+        var status = 'submitted to curator'
+      } else if(statusVar == 'save'){
+        var status = 'saved'
+      }
+
+      /////putting together whole object to send
+      var newProjectObject = {
+        name: name
+        ,timestamp: timestamp
+        ,images: images
+        ,groups: groups
+        ,productType: productType
+        ,tags: tags
+        ,vendor: vendor
+        ,colors: colors
+        ,fabrics: fabrics
+        ,seasons: seasons
+        ,stitchPatterns: stitches
+        ,buttons: buttons
+        ,status: status
+      }
+      console.log(newProjectObject);
+
+      // name: String
+      // ,timestamp: Date
+      // ,images: Array
+      // ,groups: Array
+      // ,productType: String
+      // ,tags: Array
+      // ,vendor: String
+      // ,colors: Array
+      // ,fabrics: Array
+      // ,buttons: String
+      // ,stitchPattern: String
+      // ,status: String
+      // ,season: String
+      // ,tier: String
+      postProject.postProject(newProjectObject)
+    }
+    $('.new_product_send').on('click', sendNewProject);
+    $('.new_product_save').on('click', sendNewProject);
 
 
   /////end createProject controller

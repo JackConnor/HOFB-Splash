@@ -11,8 +11,8 @@ var productSchema = new Schema({
   ,vendor: String
   ,colors: Array
   ,fabrics: Array
-  ,buttons: String
-  ,stitchPattern: String
+  ,buttons: Array
+  ,stitchPatterns: Array
   ,status: String
   ,season: String
   ,tier: String

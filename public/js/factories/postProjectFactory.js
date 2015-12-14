@@ -13,6 +13,7 @@ angular.module('postProjectFactory', [])
       })
       .then(function(newProjectInfo){
         console.log('posted project');
+        console.log(newProjectInfo);
         return newProjectInfo;
       })
     }
