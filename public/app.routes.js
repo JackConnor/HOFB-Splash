@@ -14,6 +14,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'email'
     })
 
+    .when('/signin', {
+      templateUrl: 'templates/_signin.html'
+      ,controller: 'signupCtrl'
+      ,controllerAs: 'signin'
+    })
+
     .when('/admin/dashboard', {
       templateUrl: 'templates/_adminDashboard.html'
       ,controller: 'dashCtrl'

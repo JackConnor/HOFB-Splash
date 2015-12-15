@@ -8,10 +8,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     //
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
 
-    // console.log(checkstatus);
-    // console.log(signupUser);
-
-    /////event to sign up a new user
+    /////event to sign up a new user from signup page
     $('.signupSubmit').on('click', function(){
       console.log('lolll');
       var password = $('.signupPassword').val();
@@ -21,9 +18,24 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       } else {
         alert('your passwords dont match');
       }
-
     })
 
+    ///////function to signin a new user from signin page
+    function signinUser(email, pw){
+      startSession.startSession(email, pw);
+    }
+
+    // event to trigger starting a session from signin page
+    $('.signinSubmit').on('click', function(){
+      var email = $('.signinEmail').val();
+      var password = $('.signinPassword').val();
+      var rePassword = $('.signinPasswordRepeat').val();
+      if(password == rePassword){
+        signinUser(email, password);
+      } else {
+        console.log('not matching dude');
+      }
+    })
     ///////////////////////////////////////////
     /////////logic for the navbar and toggle///
 

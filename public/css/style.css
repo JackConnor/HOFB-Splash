@@ -718,6 +718,47 @@
   font-size: 25px;
 }
 
+.signinContainer {
+  position: absolute;
+  width: 60%;
+  height: 525px;
+  background-color: gray;
+  margin-left: 20%;
+  margin-top: 100px;
+}
+
+.signinContent {
+  display: block;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 35px;
+  font-size: 30px;
+  text-align: center;
+  position: relative;
+  font-style: bolder;
+}
+
+.signinControls {
+  display: block;
+}
+
+.signinInput {
+  height: 55px;
+  font-size: 28px;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 35px;
+  text-align: center;
+}
+
+.signinSubmit {
+  width: 25%;
+  margin-left: 37.50%;
+  height: 60px;
+  margin-top: 25px;
+  font-size: 25px;
+}
+
 .splashBackgroundImageContainer {
   width: 100%;
   min-height: 100%;
