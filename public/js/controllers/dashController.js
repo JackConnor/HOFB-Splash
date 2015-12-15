@@ -26,7 +26,9 @@ angular.module('dashController', ['allProjectsFactory'])
 
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
+      console.log(self.allProjects[i]);
       for (var i = 0; i < self.allProjects.length; i++) {
+        console.log(self.allProjects[i]);
         $('.designerDashList').append(
           "<div class='col-md-4 col-xs-12 projectCell'>"+
             "<div class='projectCellInner'>"+

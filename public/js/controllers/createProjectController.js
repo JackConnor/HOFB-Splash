@@ -511,7 +511,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       }
       postProject.postProject(newProjectObject, submitPhotos)///post the object
       //////////logic to send stuff through to cloudinary
-      submitPhotos();
+      // submitPhotos();
       // self.tempPhotoHTMLCache.pop();
       // submitPhotos();
       // self.tempPhotoHTMLCache.pop();

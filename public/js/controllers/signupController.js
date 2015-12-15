@@ -15,6 +15,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       var rePassword = $('.signupPasswordRepeat').val();
       if(password == rePassword){
         signupUser.signup(startSession.startSession, password);
+        window.location.hash = "#/designer/dashboard"
       } else {
         alert('your passwords dont match');
       }
@@ -32,6 +33,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       var rePassword = $('.signinPasswordRepeat').val();
       if(password == rePassword){
         signinUser(email, password);
+        window.location.hash = "#/designer/dashboard"
       } else {
         console.log('not matching dude');
       }

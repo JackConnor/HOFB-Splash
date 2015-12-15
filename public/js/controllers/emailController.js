@@ -16,13 +16,12 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
     console.log(singleUser(url));
 
     /////post a new user
-    var newUserData = {firstname: "trinity", password: "password"}
-    console.log(newUser(newUserData));
 
     /////collect all of our emails on splash page
     $('.collectEmail').on('click', function(){
       var emailAddress = $('.emailInput').val();
-      newEmail(emailAddress)
+      var date = new Date();
+      newEmail({email: emailAddress, date: date});
     })
 
   ////////end email controller//////

@@ -45,9 +45,8 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'createProject'
     })
 
-    //create new project
-    .when('/create/projectOld', {
-      templateUrl: 'templates/_createProject.html'
+    .when('/edit/project/:id', {
+      templateUrl: 'templates/_editProject.html'
       ,controller: 'createProjectCtrl'
       ,controllerAs: 'createProject'
     })
