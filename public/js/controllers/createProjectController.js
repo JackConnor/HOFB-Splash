@@ -420,7 +420,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         borderBottom: "1px solid white"
       })
       $('#newProductMiniImage'+self.miniPhotoCounter).css({
-        borderBottom: "5px solid blue"
+        borderBottom: "12px solid #9F81F7"
       })
     }
     highlightMini();

@@ -592,10 +592,20 @@
   width: 120px;
   height: 40px;
   background-color: white;
-  margin: 100px auto 0 auto;
+  margin: 20px auto 0 auto;
+}
+
+.projectCellButtonShow {
+  margin-top: 80px;
 }
 
 .projectCell {
+  height: 300px;
+  /*outline: 4px solid magenta;*/
+  /*background-color: #D8D8D8;*/
+}
+
+.projectNewCell {
   height: 300px;
   /*outline: 4px solid magenta;*/
   /*background-color: #D8D8D8;*/
@@ -643,6 +653,21 @@
   margin-left: 10%;
   margin-top: 5%;
   height: 90%;
+}
+
+.projectCellNewInner {
+  width: 80%;
+  height: 90%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  opacity: .85;
+}
+
+.projectCellNewInner h2 {
+  width: 60%;
+  padding-top: 30%;
+  margin-left: 20%;
 }
 
 .projectCellTrash {

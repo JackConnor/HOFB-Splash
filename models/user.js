@@ -24,8 +24,8 @@ userSchema.methods.generateHash = function(password) {
 userSchema.methods.validPassword = function(password) {
   console.log(password);
   console.log(this.password);
-	console.log(bcrypt.compareSync(password, this.password));
-  return bcrypt.compareSync(password, this.password)
+	console.log(bcrypt.compareSync(password, this.passwordDigest));
+  return bcrypt.compareSync(password, this.passwordDigest)
 }
 
 module.exports = mongoose.model('User', userSchema)
