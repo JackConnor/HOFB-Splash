@@ -433,10 +433,10 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       var timestamp = new Date();
       // var images = self.tempPhotoCache;
       var imagesHTML = self.tempPhotoHTMLCache;
-      var groups = $('.newProductCollectionsInput').val().split(' ');
+      var collections = $('.newProductCollectionsInput').val().split(' ');
       var productType = $('.newProductTypeDropdown').val();
       var tags = $('.newProductTagsInput').val().split(' ');
-      var vendor = $('.newProductTypeDropdown').val();
+      var vendor = $('.newProductVendor').val();
       var description = $('.newProductDescription').val();
       var colorsFunc = function(){
         var allPicked = $(".picked");
@@ -500,9 +500,9 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         ,timestamp: timestamp
         ,images: []
         ,description: description
-        ,groups: groups
         ,productType: productType
         ,tags: tags
+        ,collections: collections
         ,vendor: vendor
         ,colors: colors
         ,fabrics: fabrics

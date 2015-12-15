@@ -5,7 +5,7 @@ var productSchema = new Schema({
   name: String
   ,timestamp: Date
   ,images: Array
-  ,groups: Array
+  ,collections: Array
   ,description: String
   ,productType: String
   ,tags: Array

@@ -328,7 +328,7 @@ module.exports = function(app){
         })
       })
     }
-    // res.redirect('/#/designer/dashboard');
+    res.redirect('/#/designer/dashboard');
   });
 
   app.get('/api/photos', function(req, res){
