@@ -5,16 +5,13 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   editProjectCtrl.$inject = ['$http', 'postProject', 'getProduct']
   function editProjectCtrl($http, postProject){
     var self = this;
-    console.log('yoo');
     // getProduct();
     var productId = window.location.hash.split('/')[3];
-    console.log(productId);
     $http({
       method: "GET"
       ,url: "/api/product/"+productId
     })
     .then(function(product){
-      console.log(product);
       self.currentProduct = product.data;
       loadData(self.currentProduct);
     })
@@ -36,6 +33,27 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         }
       }
       addImgsFunc();
+      //////functions for addding swatches
+      function addSeasons(){
+        var seasonHtmlArray = $('.createSeason');
+        console.log(seasonHtmlArray);
+        var currentValues = productObject.seasons;
+        console.log(currentValues);
+        for (var i = 0; i < seasonHtmlArray.length; i++) {
+          var elType = seasonHtmlArray[i].classList[1].slice(6, 20);
+          console.log(elType);
+          for (var j = 0; j < currentValues.length; j++) {
+            if( elType == currentValues[i]){
+              console.log(seasonHtmlArray[i]);
+              $(seasonHtmlArray[i]).css({
+                backgroundColor: "blue"
+              })
+            }
+          }
+
+        }
+      }
+      addSeasons();
 
     }
   ////////////////////////////
