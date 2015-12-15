@@ -28,6 +28,14 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       $('.newProductCollectionsInput').val(productObject.collections.join(', '))
       $('.newProductType').val(productObject.productType);
       $('.newProductVendor').val(productObject.vendor);
+      /////add photos
+      var addImgsFunc = function(){
+        $('.newProductCurrentImage').attr('src', productObject.images[0])
+        for (var i = 0; i < productObject.images.length; i++) {
+          $('#newProductMiniImage'+i).attr('src' , productObject.images[i]);
+        }
+      }
+      addImgsFunc();
 
     }
   ////////////////////////////
