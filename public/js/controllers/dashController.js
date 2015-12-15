@@ -6,7 +6,7 @@ angular.module('dashController', ['allProjectsFactory'])
   function dashCtrl($http, allProjects){
     var self = this;
 
-    ///////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
     function loadProjects(callback, arg){
       allProjects.allprojects().then(function(allP){
@@ -26,12 +26,15 @@ angular.module('dashController', ['allProjectsFactory'])
 
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
+      console.log(self.allProjects[i]);
       for (var i = 0; i < self.allProjects.length; i++) {
+        console.log(self.allProjects[i]);
         $('.designerDashList').append(
           "<div class='col-md-4 col-xs-12 projectCell'>"+
             "<div class='projectCellInner'>"+
               "<div class='projectCellImageHolder'>"+
-                "<img class='projectCellImage' src='"+self.allProjects[i].images[0]+"'>"+
+                "<img class='projectCellImage' id='"+self.allProjects[i]._id+"'"+
+              "src='"+self.allProjects[i].images[0]+"'>"+
               "</div>"+
               "<div class='projectCellContent'>"+
                 "<p>"+self.allProjects[i].name+"</p>"+
@@ -39,7 +42,33 @@ angular.module('dashController', ['allProjectsFactory'])
             "</div>"+
           "</div>"
         )
+        $('.projectCellImageHolder').on('click', function(){
+          // window.location.hash = "#/view/product/"
+          console.log('yoyoyoyoyoyo');
+        })
       }
+      $('.designerDashList').append(
+        "<div class='col-md-4 col-xs-12 projectNewCell'>"+
+          "<div class='projectCellNewInner'>"+
+            "<h2>Build a New product</h2>"+
+          "</div>"+
+        "</div>"
+      )
+      //////add hover events to 'addNew' box
+      $('.projectCellNewInner').on('mouseenter', function(){
+        $('.projectCellNewInner').animate({
+          opacity: .6
+        }, 100)
+      })
+      $('.projectCellNewInner').on('mouseleave', function(){
+        $('.projectCellNewInner').animate({
+          outline: 'none'
+          ,opacity: 1
+        }, 100)
+      })
+      $('.projectCellNewInner').on('click', function(){
+        window.location.hash = "#/create/project"
+      })
       arg();
     }
     ///////will set self.allProjects as all our projects
@@ -199,10 +228,19 @@ angular.module('dashController', ['allProjectsFactory'])
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
             "<div class='projectCellTrash'>X </div>"+
+            '<div class="projectCellButton projectCellButtonShow">See'+
+            "<div>"+
             '<div class="projectCellButton">Edit'+
             "<div>"+
           "<div>"
         )
+        $('.projectCellButtonShow').on('click', function(){
+          var product = $(parentContainer);
+          var productId = $($(product[0].children[1])[0].children[0])[0].id
+          console.log(productId);
+          // console.log($($(productId[0].children[1])[0].children[0])[0].id);
+          window.location.hash = "#/view/product/"+productId;
+        })
         $('.projectCellHoverContainer').on('mouseleave', function(evt){
           $hoverTarget.css({
             opacity: 1

@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var emailCaptureSchema = new Schema({
   email: String
+  ,date: Date
   ,location: String
 })
 

@@ -420,7 +420,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         borderBottom: "1px solid white"
       })
       $('#newProductMiniImage'+self.miniPhotoCounter).css({
-        borderBottom: "5px solid blue"
+        borderBottom: "12px solid #9F81F7"
       })
     }
     highlightMini();
@@ -511,7 +511,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       }
       postProject.postProject(newProjectObject, submitPhotos)///post the object
       //////////logic to send stuff through to cloudinary
-      submitPhotos();
+      // submitPhotos();
       // self.tempPhotoHTMLCache.pop();
       // submitPhotos();
       // self.tempPhotoHTMLCache.pop();

@@ -231,8 +231,9 @@ module.exports = function(app){
   		if (err ) {
   				res.json( err )
   		} else if ( user ) {
-  			res.redirect( '/login')
+  			res.redirect( '/')
   		} else {
+        //////situation where no user is found (aka email is unique)
   			var newUser = new User();
   			newUser.email = req.body.email
   			newUser.passwordDigest = newUser.generateHash( req.body.password )
@@ -249,9 +250,20 @@ module.exports = function(app){
   //////session and token stuff
   ///////begin the session
   app.post('/api/startsession', function(req, res){
-    jwt.sign({iss: "hofb.com", name: req.body.email}, process.env.JWT_TOKEN_SECRET, {expiresIn: "4h", audience: "designer"}, function(token){
-      res.json(token);
-    });
+    console.log(req.body);
+    var password = req.body.password;
+    console.log('checking password');
+    console.log(password);
+    User.findOne({'email': req.body.email}, function(err, user){
+      console.log(user);
+      console.log('found some kind of db thing');
+      if(err){console.log(err)}
+      console.log(user.validPassword(password));
+      console.log('just checked for valid user pw');
+      jwt.sign({iss: "hofb.com", name: req.body.email}, process.env.JWT_TOKEN_SECRET, {expiresIn: "4h", audience: "designer"}, function(token){
+        res.json(token);
+      });
+    })
   })
 
   ///////check the users status from the jwt web token (as "audience")/////
@@ -288,6 +300,7 @@ module.exports = function(app){
   app.post('/api/pictures', upload.array('files', 4), function(req,res){
     for (var i = 0; i < req.files.length; i++) {
       var fileName = req.files[i].filename;
+      console.log(fileName);
       cloudinary.uploader.upload('./uploads/'+fileName, function(uploadResult){
         Product.findOne(req.body.productName, function(err, user){
           console.log(user);
@@ -357,6 +370,46 @@ module.exports = function(app){
       res.json(data)
     })
   })
+
+  /////get all emails from splash collection to email back to us
+  app.get('/api/emails', function(req, res){
+    console.log('in emails');
+    Emailcapture.find({}, function(err, emails){
+      console.log(emails);
+      var uniqueArray = [];
+      for (var i = 0; i < emails.length; i++) {
+        for (var j = 0; j < uniqueArray.length; j++) {
+          if(emails[i].email == uniqueArray[j]){
+          }
+          else{
+          }
+        }
+        uniqueArray.push(emails[i].email);
+      }
+      console.log(uniqueArray);
+      var emailStringFunc = function(){
+        var eString = "";
+        for (var i = 0; i < uniqueArray.length; i++) {
+          eString = eString+" "+uniqueArray[i]+",";
+        }
+        return eString;
+      }
+      var emailString = emailStringFunc();
+      console.log(emailString);
+      //
+      mandrill_client.messages.send({
+        message: {
+          from_email: "jack@jack.com"
+          ,html: "<h2>"+emailString+"</h2>"
+          ,subject: "Email Signups"
+          ,to:[{
+            email: "jackc@hofb.com"
+          }]
+        }
+      })
+      //
+    });
+  });
   /////end email stuff////////////////////
   ////////////////////////////////////////
 }

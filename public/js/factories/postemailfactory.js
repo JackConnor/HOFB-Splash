@@ -5,11 +5,11 @@ angular.module('newemailfactory', [])
   newEmail.$inject = ['$http'];
   function newEmail($http){
 
-    return function postEmail(userEmail){
+    return function postEmail(userEmailInfo){
       $http({
         method: "POST"
         ,url: "/api/emailcaptures"
-        ,data: {email: userEmail}
+        ,data: {email: userEmail.email, date: date.date}
       })
       .then(function(email){
         $http({

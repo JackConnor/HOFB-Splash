@@ -592,10 +592,20 @@
   width: 120px;
   height: 40px;
   background-color: white;
-  margin: 100px auto 0 auto;
+  margin: 20px auto 0 auto;
+}
+
+.projectCellButtonShow {
+  margin-top: 80px;
 }
 
 .projectCell {
+  height: 300px;
+  /*outline: 4px solid magenta;*/
+  /*background-color: #D8D8D8;*/
+}
+
+.projectNewCell {
   height: 300px;
   /*outline: 4px solid magenta;*/
   /*background-color: #D8D8D8;*/
@@ -645,6 +655,21 @@
   height: 90%;
 }
 
+.projectCellNewInner {
+  width: 80%;
+  height: 90%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  opacity: .85;
+}
+
+.projectCellNewInner h2 {
+  width: 60%;
+  padding-top: 30%;
+  margin-left: 20%;
+}
+
 .projectCellTrash {
   float: right;
   font-size: 30px;
@@ -686,6 +711,47 @@
 }
 
 .signupSubmit {
+  width: 25%;
+  margin-left: 37.50%;
+  height: 60px;
+  margin-top: 25px;
+  font-size: 25px;
+}
+
+.signinContainer {
+  position: absolute;
+  width: 60%;
+  height: 525px;
+  background-color: gray;
+  margin-left: 20%;
+  margin-top: 100px;
+}
+
+.signinContent {
+  display: block;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 35px;
+  font-size: 30px;
+  text-align: center;
+  position: relative;
+  font-style: bolder;
+}
+
+.signinControls {
+  display: block;
+}
+
+.signinInput {
+  height: 55px;
+  font-size: 28px;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 35px;
+  text-align: center;
+}
+
+.signinSubmit {
   width: 25%;
   margin-left: 37.50%;
   height: 60px;

@@ -11,7 +11,7 @@ angular.module('allProjectsFactory', [])
         ,url: "/api/projects"
       })
       .then(function(allProjectsData){
-        console.log(allProjectsData);
+        console.log(allProjectsData.data);
         self.allProjects = allProjectsData.data;
         return allProjectsData.data;
       })

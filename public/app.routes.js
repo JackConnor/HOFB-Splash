@@ -14,6 +14,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'email'
     })
 
+    .when('/signin', {
+      templateUrl: 'templates/_signin.html'
+      ,controller: 'signupCtrl'
+      ,controllerAs: 'signin'
+    })
+
     .when('/admin/dashboard', {
       templateUrl: 'templates/_adminDashboard.html'
       ,controller: 'dashCtrl'
@@ -39,9 +45,8 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'createProject'
     })
 
-    //create new project
-    .when('/create/projectOld', {
-      templateUrl: 'templates/_createProject.html'
+    .when('/edit/project/:id', {
+      templateUrl: 'templates/_editProject.html'
       ,controller: 'createProjectCtrl'
       ,controllerAs: 'createProject'
     })
@@ -64,7 +69,7 @@ angular.module('app.routes', ['ngRoute'])
       ,contollerAs: 'signup'
     })
     //view a single Product
-    .when('/view/product', {
+    .when('/view/product/:id', {
       templateUrl: 'templates/_viewProduct.html'
       ,controller: 'viewProductCtrl'
       ,controllerAs: 'viewProduct'
