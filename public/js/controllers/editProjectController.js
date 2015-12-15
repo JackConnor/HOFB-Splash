@@ -617,7 +617,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       id: window.location.hash.split('/')[3]
       ,name: name
       ,timestamp: timestamp
-      ,images: []
       ,description: description
       ,productType: productType
       ,tags: tags

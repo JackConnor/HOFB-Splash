@@ -174,7 +174,6 @@ module.exports = function(app){
         product.colors = req.body.colors;
         product.fabrics = req.body.fabrics;
         product.seasons = req.body.seasons;
-        product.images = req.body.images;
         product.buttons = req.body.button;
         product.save(function(err, product){
         res.json(product)
