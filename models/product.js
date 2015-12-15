@@ -6,6 +6,7 @@ var productSchema = new Schema({
   ,timestamp: Date
   ,images: Array
   ,groups: Array
+  ,description: String
   ,productType: String
   ,tags: Array
   ,vendor: String

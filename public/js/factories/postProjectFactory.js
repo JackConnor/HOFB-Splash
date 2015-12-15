@@ -6,6 +6,7 @@ angular.module('postProjectFactory', [])
   function postProject($http){
 
     function postProjectToDb(projectArray, callback){
+      console.log('in factory');
       return $http({
         method: "POST"
         ,url: "/api/products"
@@ -14,8 +15,9 @@ angular.module('postProjectFactory', [])
       .then(function(newProjectInfo){
         console.log('posted project');
         console.log(newProjectInfo);
-        callback();
-        return newProjectInfo;
+        console.log('that was just the Id to compare against');
+        callback(newProjectInfo.data._id);
+        // return newProjectInfo;
       })
     }
 

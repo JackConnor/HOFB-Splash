@@ -1,22 +1,21 @@
-var usersFactory = angular.module('getProductFactory', [])
+var getProductFactory = angular.module('getProductFactory', [])
 
-  .factory('getProduct', allUsers);
+  .factory('getProduct', getProduct);
 
   getProduct.$inject = ['$http'];
   function getProduct($http){
 
-    function getProductCall(){
-      return $http({
+    return function getProductCall(productId){
+      $http({
         method: "GET"
-        ,url: "/api/getProduct"
+        ,url: "/api/product/"+productId
       })
       .then(function(data){
         self.data = data;
+        console.log(self.data);
         return data;
       })
     }
-
-    return getProductCall;
     //
   }
 

@@ -151,8 +151,10 @@ module.exports = function(app){
 
   ////post a single product
   app.post('/api/products', function(req, res){
+    console.log(req.body);
     Product.create(req.body, function(err, product){
       if(err) throw err;
+      console.log(product);
       res.json(product);
     })
   })
@@ -298,42 +300,35 @@ module.exports = function(app){
   })
 
   app.post('/api/pictures', upload.array('files', 4), function(req,res){
+    console.log(req.body);
+    console.log(req.files);
+    console.log(req.files.length);
     for (var i = 0; i < req.files.length; i++) {
       var fileName = req.files[i].filename;
-      console.log(fileName);
-      cloudinary.uploader.upload('./uploads/'+fileName, function(uploadResult){
-        Product.findOne(req.body.productName, function(err, user){
-          console.log(user);
-          console.log(uploadResult);
-          console.log(uploadResult.secure_url);
-          console.log(user.images[i]);
+      var destination = req.files[i].destination
+      // console.log(fileName);
+      cloudinary.uploader.upload(destination+fileName, function(uploadResult){
+        console.log(req.body.productId);
+        console.log(uploadResult);
+        var id = req.body.productId;
+        console.log(id);
+        Product.findOne({"_id": id}, function(err, product){
+          console.log(product);
+          if(err){console.log(err)}
+          console.log('in product callback');
+          console.log(product);
           // console.log(uploadResult);
-          user.images.push(uploadResult.secure_url);
-          console.log(user);
-          user.save();
+          console.log(uploadResult.secure_url);
+          // console.log(user.images[i]);
+          // console.log(uploadResult);
+          product.images.push(uploadResult.secure_url);
+          // console.log(product);
+          product.save({}, function(){
+          });
         })
       })
     }
-    // cloudinary.uploader.upload('./uploads/'+req.file.filename, function(uploadResult){
-    //   console.log(uploadResult);
-    //   Photo.create({photoUrl: uploadResult.secure_url, author: 'jack'}, function(err, uploadedImage){
-    //     console.log(uploadedImage);
-    //   })
-    // })
-    // res.json('hi there')
-  	/* example output:
-  	{ title: 'abc' }
-  	 */
-   //
-  //  console.log('yoyo');
-  //  console.log(req.file); //form files
-  //  req.file.fieldname = req.file.originalname
-  //  req.body.fieldname = req.body.originalname
-  //  console.log(req);
-   //
-  //
-
-  	res.status(204).end();
+    // res.redirect('/#/designer/dashboard');
   });
 
   app.get('/api/photos', function(req, res){
