@@ -160,27 +160,23 @@ module.exports = function(app){
   })
 
   /////update a product
-  app.post('/api/project/update', function(req, res){
+  app.post('/api/product/update', function(req, res){
+    console.log(req.body);
     Product.findOne(req.body.id, function(err, product){
       if(err){console.log(err)}
-
-      if(req.body.name){
-        product.name = req.body.name
-      }
-      if(req.body.timestamp){
-        product.email = req.body.timestamp
-      }
-      if(req.body.productType){
-        product.email = req.body.productType
-      }
-      if(req.body.vendor){
-        product.email = req.body.vendor
-      }
-      if(req.body.stitchPattern){
-        product.email = req.body.stitchPattern
-      }
-
-      product.save(function(err, product){
+        product.name = req.body.name;
+        product.productType = req.body.productType;
+        product.vendor = req.body.vendor;
+        product.stitchPattern = req.body.stitchPattern;
+        product.description = req.body.description;
+        product.collections = req.body.collections;
+        product.tags = req.body.tags;
+        product.colors = req.body.colors;
+        product.fabrics = req.body.fabrics;
+        product.seasons = req.body.seasons;
+        product.images = req.body.images;
+        product.buttons = req.body.button;
+        product.save(function(err, product){
         res.json(product)
       });
     })

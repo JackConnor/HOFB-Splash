@@ -1,8 +1,8 @@
-var app = angular.module('editProjectController', ['postProjectFactory', 'getProductFactory'])
+var app = angular.module('editProjectController', ['postProjectFactory', 'getProductFactory', 'editProjectFactory'])
 
   .controller('editProjectCtrl', editProjectCtrl)
 
-  editProjectCtrl.$inject = ['$http', 'postProject', 'getProduct']
+  editProjectCtrl.$inject = ['$http', 'postProject', 'getProduct', 'editProject']
   function editProjectCtrl($http, postProject){
     var self = this;
     // getProduct();
@@ -546,6 +546,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
   ///////////////function to send full create http request
   function sendNewProject(evt){
+    console.log('something');
     var name = $('.newProductTitle').val();
     var timestamp = new Date();
     // var images = self.tempPhotoCache;
@@ -613,7 +614,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     }
     /////putting together whole object to send
     var newProjectObject = {
-      name: name
+      id: window.location.hash.split('/')[3]
+      ,name: name
       ,timestamp: timestamp
       ,images: []
       ,description: description
@@ -628,12 +630,29 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       ,buttons: buttons
       ,status: status
     }
-    console.log(newProjectObject);
-    postProject.postProject(newProjectObject, submitPhotos)///post the object
+    editProjectToDb(newProjectObject, submitPhotos)
+    // editProject().editProject(newProjectObject, submitPhotos)///post the object
   }
   $('.new_product_send').on('click', sendNewProject);
   $('.new_product_save').on('click', sendNewProject);
 
+  /////function to update a project (will go in a factory)
+  function editProjectToDb(projectArray, callback){
+    console.log('in factory');
+    console.log(projectArray);
+    return $http({
+      method: "POST"
+      ,url: "/api/product/update"
+      ,data: projectArray
+    })
+    .then(function(newProjectInfo){
+      console.log('posted project');
+      console.log(newProjectInfo);
+      console.log('that was just the Id to compare against');
+      callback(newProjectInfo.data._id);
+      // return newProjectInfo;
+    })
+  }
   // setInterval(function(){
   //   console.log($('#i_file'));
   // }, 1000)
