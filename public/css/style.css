@@ -259,16 +259,21 @@
   padding-top: 10px;
   width: 150px;
   font-size: 30px;
+  margin-top: 20px;
 }
 
 .designerDashActive {
   display: inline-block;
-  height: 100%;
+  height: 45px;
   width: 225px;
-  outline: 2px solid pink;
   text-align: center;
   font-size: 27px;
-  background-color: #E0F8F7;
+  background-color: #F9F7F5;
+  vertical-align: bottom;
+  margin-left: 10%;
+  margin-top: 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .designerDashCollections {
@@ -290,22 +295,29 @@
 
 .designerDashCurated {
   display: inline-block;
-  height: 100%;
+  height: 45px;
   width: 225px;
-  outline: 2px solid pink;
+  background-color: #EBEBE9;
   text-align: center;
   font-size: 27px;
+  margin-left: 10px;
+  margin-top: 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .designerDashDashTitle {
   font-size: 25px;
+  background-color: #F6FDFA;
 }
 
 .designerDashFilter {
   display: inline-block;
-  outline: 2px solid yellow;
-  height: 100%;
+  height: 60px;
+  width: 88%;
+  margin-left: 8%;
   vertical-align: top;
+  background-color: #F9F7F5;
 }
 
 .designerDashListContainer {
@@ -316,12 +328,10 @@
 .designerDashSearchFilterContainer {
   height: 120px;
   display: block;
-  outline: 4px solid green;
 }
 
 .designerDashSearch {
   display: inline-block;
-  outline: 2px solid blue;
   height: 100%;
   vertical-align: top;
 }
@@ -334,8 +344,7 @@
 }
 
 .designerDashToggleContainer {
-  height: 90px;
-  outline: 2px solid orange;
+  height: 65px;
   width: 100%;
   display: block;
 }
