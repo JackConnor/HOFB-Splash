@@ -23,41 +23,42 @@ angular.module('dashController', ['allProjectsFactory'])
           ,url: '/api/'+decodedToken.data.name+'/products'
         })
         .then(function(products){
-          console.log(products);
           self.allProjects = products.data;
           var curatedProjectsArray = [];
+          var collectionName = [];
           for (var i = 0; i < self.allProjects.length; i++) {
+            for (var j = 0; j < self.allProjects[i].collections.length; j++) {
+              collectionName.push(self.allProjects[i].collections[j]);
+            }
             if(self.allProjects[i].status == "curated"){
-              console.log('theres one');
               curatedProjectsArray.push(self.allProjects[i])
             }
             self.curatedProjects = curatedProjectsArray;//list of all user's curated projects
-            callback(arg)
           }
+          self.allCollectionsRaw = collectionName;
+          //////must make sure there are no duplicates
+          self.allCollections = [];
+          for (var i = 0; i < self.allCollectionsRaw.length; i++) {
+            var passBool = true;
+            for (var j = 0; j < self.allCollections.length; j++) {
+              if(self.allCollectionsRaw[i] == self.allCollections[j]){
+                console.log('double');
+                passBool = false;
+              }
+            }
+            if(passBool){
+              self.allCollections.push(self.allCollectionsRaw[i])
+            }
+          }
+          console.log(self.allCollections);
+          callback(arg)
         })
       })
-
-      // allProjects.allprojects().then(function(allP){
-      //   self.allProjects = allP;
-      //   var curatedProjectsArray = [];
-      //   for (var i = 0; i < self.allProjects.length; i++) {
-      //     if(self.allProjects[i].status == "curated"){
-      //       console.log('theres one');
-      //       curatedProjectsArray.push(self.allProjects[i])
-      //     }
-      //     self.curatedProjects = curatedProjectsArray;//list of all user's curated projects
-      //   }
-      //   var curatedProjects =
-      //   callback(arg);
-      // });
     }
 
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
-      console.log('yoyoyo');
-      console.log(self.allProjects[i]);
       for (var i = 0; i < self.allProjects.length; i++) {
-        console.log(self.allProjects[i]);
         $('.designerDashList').append(
           "<div class='col-md-4 col-xs-12 projectCell'>"+
             "<div class='projectCellInner'>"+
