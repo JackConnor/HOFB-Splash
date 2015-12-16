@@ -16,7 +16,11 @@ angular.module('viewProductController', [])
     });
 
 
-
+    ///logout button functionality
+    $('.logoutButton').on('click', function(){
+      window.localStorage.hofbToken = "";
+      window.location.hash = "#/signin"
+    })
   /////end viewProduct controller
   ////////////////////////
   ////////////////////////

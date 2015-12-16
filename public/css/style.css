@@ -336,6 +336,11 @@
   background-color: #F9F7F5;
 }
 
+.designerDashList {
+  outline: 2px solid blue;
+  width: 120%;
+}
+
 .designerDashListContainer {
   display: block;
   outline: 4px solid gray;
@@ -661,7 +666,7 @@
 
 .projectCell {
   height: 300px;
-  /*outline: 4px solid magenta;*/
+  outline: 4px solid magenta;
   /*background-color: #D8D8D8;*/
 }
 
@@ -709,10 +714,8 @@
 
 .projectCellInner {
   outline: 5px solid gray;
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 5%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
 }
 
 .projectCellNewInner {

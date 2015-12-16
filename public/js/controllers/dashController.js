@@ -60,19 +60,27 @@ angular.module('dashController', ['allProjectsFactory'])
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
       for (var i = 0; i < self.allProjects.length; i++) {
-        $('.designerDashList').append(
-          "<div class='col-md-4 col-xs-12 projectCell'>"+
-            "<div class='projectCellInner'>"+
-              "<div class='projectCellImageHolder'>"+
-                "<img class='projectCellImage' id='"+self.allProjects[i]._id+"'"+
-              "src='"+self.allProjects[i].images[0]+"'>"+
+        if((i%5) != 0){
+          $('.designerDashList').append(
+            "<div class='col-md-2 col-xs-12 projectCell'>"+
+              "<div class='projectCellInner'>"+
+                "<div class='projectCellImageHolder'>"+
+                  "<img class='projectCellImage' id='"+self.allProjects[i]._id+"'"+
+                "src='"+self.allProjects[i].images[0]+"'>"+
+                "</div>"+
+                "<div class='projectCellContent'>"+
+                  "<p>"+self.allProjects[i].name+"</p>"+
+                "</div>"+
               "</div>"+
-              "<div class='projectCellContent'>"+
-                "<p>"+self.allProjects[i].name+"</p>"+
-              "</div>"+
-            "</div>"+
-          "</div>"
-        )
+            "</div>"
+          )
+        }
+        else if ((i%5) == 5){
+          $('.designerDashList').append(
+            "<div class='blankDiv col-md-2 col-xs-0'>"+
+            "</div>"
+          )
+        }
       }
       $('.designerDashList').append(
         "<div class='col-md-4 col-xs-12 projectNewCell'>"+
