@@ -322,6 +322,11 @@ angular.module('dashController', ['allProjectsFactory'])
     ////End Filtering///////////////
     ////////////////////////////////
 
+    ///logout button functionality
+    $('.logoutButton').on('click', function(){
+      window.localStorage.hofbToken = "";
+      window.location.hash = "#/signin"
+    })
   /////end dash controller
   ////////////////////////
   ////////////////////////

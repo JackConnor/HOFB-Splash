@@ -14,7 +14,6 @@ var passport       = require('passport');
 var passportlocal = require('passport-local');
 var cloudinary     = require('cloudinary');
 var app            = express();
-console.log(1);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,15 +26,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-console.log(2);
 
 /////signup stuff
 app.use(passport.initialize());
 app.use(passport.session());
 require('./passport.js')(passport);
-console.log(2.4);
+
 require('./api.js')(app);
-console.log(2.5);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -43,7 +41,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 // error handlers
-console.log(3);
 
 // development error handler
 // will print stacktrace
@@ -66,11 +63,11 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-console.log(4);
+
 app.listen(process.env.PORT || '5555');
 
 app.get('*', function(req, res){
-  console.log(5);
+
   res.sendFile( __dirname + '/public/index.html')
 })
 
@@ -81,6 +78,5 @@ app.get('*', function(req, res){
 
 
 
-console.log(6);
 
 module.exports = app;
