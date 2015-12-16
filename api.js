@@ -4,6 +4,7 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var jwt            = require('jsonwebtoken');
 var cities         = require('cities');
+console.log(1);
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client= new mandrill.Mandrill(process.env.MANDRILL_KEY);
 var route          = express.Router();
@@ -13,13 +14,13 @@ var passportLocal  = require('passport-local');
 var multer         = require('multer');
 var upload         = multer({ dest: './uploads/'});
 var cloudinary     = require('cloudinary');
-console.log(cloudinary.api.ping());
-
+console.log(2);
 cloudinary.config({
   cloud_name: 'hofb'
   ,api_key: process.env.CLOUDINARY_API_KEY
   ,api_secret: process.env.CLOUDINARY_SECRET
 })
+console.log(3);
 
 // console.log(cloudinary.config());
 //
@@ -36,7 +37,7 @@ var viewProduct      = require('./models/viewProduct.js');
 var Photo      = require('./models/photo.js');
 ///////finish bringing models////
 /////////////////////////////////
-
+console.log(4);
 module.exports = function(app){
 
 
@@ -56,7 +57,7 @@ module.exports = function(app){
     })
     res.json(projects)
   })
-
+console.log(5);
 
   //get all users
   app.get('/api/users', function(req, res){
@@ -82,7 +83,7 @@ module.exports = function(app){
       res.json(user);
     })
   })
-
+console.log(6);
   /////update a user
   app.post('/api/users/update', function(req, res){
     User.findOne(req.body.id, function(err, user){
@@ -229,7 +230,7 @@ module.exports = function(app){
     var cityData = cities.gps_lookup(req.body.long, req.body.lat);
     res.json(cityData.zipcode)
   })
-
+console.log(7);
   //////////////////////////////////////
   ///////Signup, Login, Authorization, and Sessions
   app.post('/api/signup', function( req, res ) {
@@ -334,7 +335,7 @@ module.exports = function(app){
     }
     res.redirect('/#/designer/dashboard');
   });
-
+console.log(8);
   app.get('/api/photos', function(req, res){
     Photo.find({}, function(err, photos){
       if(err){console.log(err)}
@@ -412,11 +413,11 @@ module.exports = function(app){
   /////end email stuff////////////////////
   ////////////////////////////////////////
 }
-
+console.log(9);
 //mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
 //mongoose.connect('mongodb://localhost:27017/myproject');
 
 var db = process.env.DB_URL_HOFB;
-//mongoose.connect(db)
-mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
+mongoose.connect(db)
+// mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
 //mongoose.connect(ENV['DB_URL'])
