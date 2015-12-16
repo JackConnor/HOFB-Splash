@@ -24,6 +24,7 @@ angular.module('dashController', ['allProjectsFactory'])
         })
         .then(function(products){
           self.allProjects = products.data;
+          console.log(self.allProjects);
           var curatedProjectsArray = [];
           var collectionName = [];
           for (var i = 0; i < self.allProjects.length; i++) {
