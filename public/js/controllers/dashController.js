@@ -8,24 +8,53 @@ angular.module('dashController', ['allProjectsFactory'])
 
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
+
     function loadProjects(callback, arg){
-      allProjects.allprojects().then(function(allP){
-        self.allProjects = allP;
-        var curatedProjectsArray = [];
-        for (var i = 0; i < self.allProjects.length; i++) {
-          if(self.allProjects[i].status == "curated"){
-            console.log('theres one');
-            curatedProjectsArray.push(self.allProjects[i])
+      ///////decode user to pull data
+      console.log(window.localStorage.hofbToken);
+      $http({
+        method: "GET"
+        ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
+      })
+      .then(function(decodedToken){
+        console.log(decodedToken);
+        $http({
+          method: "GET"
+          ,url: '/api/'+decodedToken.data.name+'/products'
+        })
+        .then(function(products){
+          console.log(products);
+          self.allProjects = products.data;
+          var curatedProjectsArray = [];
+          for (var i = 0; i < self.allProjects.length; i++) {
+            if(self.allProjects[i].status == "curated"){
+              console.log('theres one');
+              curatedProjectsArray.push(self.allProjects[i])
+            }
+            self.curatedProjects = curatedProjectsArray;//list of all user's curated projects
+            callback(arg)
           }
-          self.curatedProjects = curatedProjectsArray;//list of all user's curated projects
-        }
-        var curatedProjects =
-        callback(arg);
-      });
+        })
+      })
+
+      // allProjects.allprojects().then(function(allP){
+      //   self.allProjects = allP;
+      //   var curatedProjectsArray = [];
+      //   for (var i = 0; i < self.allProjects.length; i++) {
+      //     if(self.allProjects[i].status == "curated"){
+      //       console.log('theres one');
+      //       curatedProjectsArray.push(self.allProjects[i])
+      //     }
+      //     self.curatedProjects = curatedProjectsArray;//list of all user's curated projects
+      //   }
+      //   var curatedProjects =
+      //   callback(arg);
+      // });
     }
 
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
+      console.log('yoyoyo');
       console.log(self.allProjects[i]);
       for (var i = 0; i < self.allProjects.length; i++) {
         console.log(self.allProjects[i]);
@@ -42,10 +71,6 @@ angular.module('dashController', ['allProjectsFactory'])
             "</div>"+
           "</div>"
         )
-        $('.projectCellImageHolder').on('click', function(){
-          // window.location.hash = "#/view/product/"
-          console.log('yoyoyoyoyoyo');
-        })
       }
       $('.designerDashList').append(
         "<div class='col-md-4 col-xs-12 projectNewCell'>"+
@@ -67,7 +92,8 @@ angular.module('dashController', ['allProjectsFactory'])
         }, 100)
       })
       $('.projectCellNewInner').on('click', function(){
-        window.location.hash = "#/create/project"
+        window.location.hash = "#/create/project";
+        window.location.reload();
       })
       arg();
     }
@@ -228,18 +254,21 @@ angular.module('dashController', ['allProjectsFactory'])
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
             "<div class='projectCellTrash'>X </div>"+
-            '<div class="projectCellButton projectCellButtonShow">See'+
-            "<div>"+
-            '<div class="projectCellButton">Edit'+
-            "<div>"+
-          "<div>"
+            '<div class="projectCellButton projectCellButtonShow">See</div>'+
+            '<div class="projectCellButton" id="projectCellButtonEdit">Edit</div>"'+
+          "</div>"
         )
         $('.projectCellButtonShow').on('click', function(){
           var product = $(parentContainer);
           var productId = $($(product[0].children[1])[0].children[0])[0].id
-          console.log(productId);
-          // console.log($($(productId[0].children[1])[0].children[0])[0].id);
           window.location.hash = "#/view/product/"+productId;
+          window.location.reload();
+        });
+        $('#projectCellButtonEdit').on('click', function(){
+          var product = $(parentContainer);
+          var productId = $($(product[0].children[1])[0].children[0])[0].id
+          window.location.hash = "#/edit/project/"+productId;
+          window.location.reload();
         })
         $('.projectCellHoverContainer').on('mouseleave', function(evt){
           $hoverTarget.css({

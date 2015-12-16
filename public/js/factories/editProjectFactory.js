@@ -1,15 +1,16 @@
-angular.module('postProjectFactory', [])
+angular.module('editProjectFactory', [])
 
-  .factory('postProject', postProject);
+  .factory('editProject', editProject);
 
-  postProject.$inject = ['$http'];
-  function postProject($http){
+  editProject.$inject = ['$http'];
+  function editProject($http){
 
-    function postProjectToDb(projectArray, callback){
+    function editProjectToDb(projectArray, callback){
       console.log('in factory');
+      console.log(projectArray);
       return $http({
         method: "POST"
-        ,url: "/api/products"
+        ,url: "/api/products/update"
         ,data: projectArray
       })
       .then(function(newProjectInfo){
@@ -22,7 +23,7 @@ angular.module('postProjectFactory', [])
     }
 
     return {
-      postProject: postProjectToDb
+      editProject: editProjectToDb
     }
 
 

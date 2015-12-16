@@ -6,6 +6,15 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
   function createProjectCtrl($http, postProject){
     var self = this;
     //////global variables we'll be using for moving the carousel
+    ///////get the users token
+    $http({
+      method: "GET"
+      ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
+    })
+    .then(function(decodedToken){
+      console.log(decodedToken);
+      self.userId = decodedToken.data.name;
+    })
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
     self.miniPhotoCounter = 0;
@@ -429,14 +438,16 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
 
     ///////////////function to send full create http request
     function sendNewProject(evt){
-      var name = "jack";
-      var timestamp =  new Date();
+      var name = $('.newProductTitle').val();
+      var timestamp = new Date();
       // var images = self.tempPhotoCache;
       var imagesHTML = self.tempPhotoHTMLCache;
-      var groups = $('.newProductCollectionsInput').val().split(' ');
+      var userId = self.userId;
+      var collections = $('.newProductCollectionsInput').val().split(' ');
       var productType = $('.newProductTypeDropdown').val();
       var tags = $('.newProductTagsInput').val().split(' ');
-      var vendor = $('.newProductTypeDropdown').val();
+      var vendor = $('.newProductVendor').val();
+      var description = $('.newProductDescription').val();
       var colorsFunc = function(){
         var allPicked = $(".picked");
         var colorsArray = [];
@@ -496,11 +507,13 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       /////putting together whole object to send
       var newProjectObject = {
         name: name
+        ,userId: userId
         ,timestamp: timestamp
         ,images: []
-        ,groups: groups
+        ,description: description
         ,productType: productType
         ,tags: tags
+        ,collections: collections
         ,vendor: vendor
         ,colors: colors
         ,fabrics: fabrics
@@ -509,16 +522,8 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
         ,buttons: buttons
         ,status: status
       }
+      console.log(newProjectObject);
       postProject.postProject(newProjectObject, submitPhotos)///post the object
-      //////////logic to send stuff through to cloudinary
-      // submitPhotos();
-      // self.tempPhotoHTMLCache.pop();
-      // submitPhotos();
-      // self.tempPhotoHTMLCache.pop();
-      // submitPhotos();
-      // self.tempPhotoHTMLCache.pop();
-      // submitPhotos();
-      // self.tempPhotoHTMLCache.pop();
     }
     $('.new_product_send').on('click', sendNewProject);
     $('.new_product_save').on('click', sendNewProject);
@@ -526,7 +531,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     // setInterval(function(){
     //   console.log($('#i_file'));
     // }, 1000)
-    function submitPhotos(){
+    function submitPhotos(productIdToUpdate){
       console.log(self.tempPhotoHTMLCache.length);
       $(".bodyview").append(
         "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
@@ -537,12 +542,20 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       console.log($(self.tempPhotoHTMLCache[1]));
       console.log($(self.tempPhotoHTMLCache[2]));
       console.log($(self.tempPhotoHTMLCache[3]));
-      $('.tempForm').append(self.tempPhotoHTMLCache[0]);
-      $('.tempForm').append(self.tempPhotoHTMLCache[1]);
-      $('.tempForm').append(self.tempPhotoHTMLCache[2]);
-      $('.tempForm').append(self.tempPhotoHTMLCache[3]);
+      if(self.tempPhotoHTMLCache[0]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[0]);
+      }
+      if(self.tempPhotoHTMLCache[1]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[1]);
+      }
+      if(self.tempPhotoHTMLCache[2]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[2]);
+      }
+      if(self.tempPhotoHTMLCache[3]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[3]);
+      }
       $('.tempForm').append(
-        "<input name='productName' type='text' value='56679ee3e363a4a04399a064'>"
+        "<input name='productId' type='text' value='"+productIdToUpdate+"'>"
       );
       console.log(self.tempPhotoHTMLCache);
       $('.tempForm').submit();

@@ -47,8 +47,8 @@ angular.module('app.routes', ['ngRoute'])
 
     .when('/edit/project/:id', {
       templateUrl: 'templates/_editProject.html'
-      ,controller: 'createProjectCtrl'
-      ,controllerAs: 'createProject'
+      ,controller: 'editProjectCtrl'
+      ,controllerAs: 'editProject'
     })
 
     .when('/betasplash', {

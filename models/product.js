@@ -3,9 +3,11 @@ var Schema = mongoose.Schema;
 
 var productSchema = new Schema({
   name: String
+  ,userId: String
   ,timestamp: Date
   ,images: Array
-  ,groups: Array
+  ,collections: Array
+  ,description: String
   ,productType: String
   ,tags: Array
   ,vendor: String
@@ -14,7 +16,7 @@ var productSchema = new Schema({
   ,buttons: Array
   ,stitchPatterns: Array
   ,status: String
-  ,season: String
+  ,seasons: Array
   ,tier: String
 })
 
