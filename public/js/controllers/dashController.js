@@ -8,24 +8,53 @@ angular.module('dashController', ['allProjectsFactory'])
 
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
+
     function loadProjects(callback, arg){
-      allProjects.allprojects().then(function(allP){
-        self.allProjects = allP;
-        var curatedProjectsArray = [];
-        for (var i = 0; i < self.allProjects.length; i++) {
-          if(self.allProjects[i].status == "curated"){
-            console.log('theres one');
-            curatedProjectsArray.push(self.allProjects[i])
+      ///////decode user to pull data
+      console.log(window.localStorage.hofbToken);
+      $http({
+        method: "GET"
+        ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
+      })
+      .then(function(decodedToken){
+        console.log(decodedToken);
+        $http({
+          method: "GET"
+          ,url: '/api/'+decodedToken.data.name+'/products'
+        })
+        .then(function(products){
+          console.log(products);
+          self.allProjects = products.data;
+          var curatedProjectsArray = [];
+          for (var i = 0; i < self.allProjects.length; i++) {
+            if(self.allProjects[i].status == "curated"){
+              console.log('theres one');
+              curatedProjectsArray.push(self.allProjects[i])
+            }
+            self.curatedProjects = curatedProjectsArray;//list of all user's curated projects
+            callback(arg)
           }
-          self.curatedProjects = curatedProjectsArray;//list of all user's curated projects
-        }
-        var curatedProjects =
-        callback(arg);
-      });
+        })
+      })
+
+      // allProjects.allprojects().then(function(allP){
+      //   self.allProjects = allP;
+      //   var curatedProjectsArray = [];
+      //   for (var i = 0; i < self.allProjects.length; i++) {
+      //     if(self.allProjects[i].status == "curated"){
+      //       console.log('theres one');
+      //       curatedProjectsArray.push(self.allProjects[i])
+      //     }
+      //     self.curatedProjects = curatedProjectsArray;//list of all user's curated projects
+      //   }
+      //   var curatedProjects =
+      //   callback(arg);
+      // });
     }
 
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
+      console.log('yoyoyo');
       console.log(self.allProjects[i]);
       for (var i = 0; i < self.allProjects.length; i++) {
         console.log(self.allProjects[i]);

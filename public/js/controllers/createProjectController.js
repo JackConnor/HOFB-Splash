@@ -6,6 +6,15 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
   function createProjectCtrl($http, postProject){
     var self = this;
     //////global variables we'll be using for moving the carousel
+    ///////get the users token
+    $http({
+      method: "GET"
+      ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
+    })
+    .then(function(decodedToken){
+      console.log(decodedToken);
+      self.userId = decodedToken.data.name;
+    })
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
     self.miniPhotoCounter = 0;
@@ -433,6 +442,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       var timestamp = new Date();
       // var images = self.tempPhotoCache;
       var imagesHTML = self.tempPhotoHTMLCache;
+      var userId = self.userId;
       var collections = $('.newProductCollectionsInput').val().split(' ');
       var productType = $('.newProductTypeDropdown').val();
       var tags = $('.newProductTagsInput').val().split(' ');
@@ -497,6 +507,7 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       /////putting together whole object to send
       var newProjectObject = {
         name: name
+        ,userId: userId
         ,timestamp: timestamp
         ,images: []
         ,description: description

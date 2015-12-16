@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var productSchema = new Schema({
   name: String
+  ,userId: String
   ,timestamp: Date
   ,images: Array
   ,collections: Array

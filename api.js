@@ -181,6 +181,15 @@ module.exports = function(app){
     })
   })
 
+  app.get('/api/:user/products', function(req, res){
+    var userId = req.params.user;
+    console.log(userId);
+    Product.find({'userId':userId}, function(err, products){
+      console.log(products);
+      res.json(products);
+    })
+  })
+
   ////////End Product API calls////
   /////////////////////////////////
 
@@ -257,7 +266,7 @@ module.exports = function(app){
       if(err){console.log(err)}
       console.log(user.validPassword(password));
       console.log('just checked for valid user pw');
-      jwt.sign({iss: "hofb.com", name: req.body.email}, process.env.JWT_TOKEN_SECRET, {expiresIn: "4h", audience: "designer"}, function(token){
+      jwt.sign({iss: "hofb.com", name: user._id}, process.env.JWT_TOKEN_SECRET, {expiresIn: "4h", audience: "designer"}, function(token){
         res.json(token);
       });
     })
