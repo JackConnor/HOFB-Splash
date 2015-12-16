@@ -287,18 +287,25 @@
 
 .designerDashCollections {
   height: 40px;
-  outline: 3px solid green;
+  border-bottom: 2px solid #BFBBB7;
   width: 100%;
 }
 
 .designerDashCollectionsContainer {
-  outline: 2px solid gray;
+  background-color: #F9F7F5;
   height: 600px;
+  text-align:justify;
+}
+
+.designerDashCollectionsContainer p{
+  margin-top: 8px;
+  font-size: 18px;
+  font-style: bolder;
 }
 
 .designerDashContests {
   height: 40px;
-  outline: 3px solid green;
+  border-bottom: 2px solid #BFBBB7;
   width: 100%;
 }
 
