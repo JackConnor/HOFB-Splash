@@ -30,12 +30,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 console.log(2);
 
 /////signup stuff
-app.use(passport.initialize());
-app.use(passport.session());
-require('./passport.js')(passport);
-
+// app.use(passport.initialize());
+// app.use(passport.session());
+// require('./passport.js')(passport);
+console.log(2.4);
 require('./api.js')(app);
-
+console.log(2.5);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
