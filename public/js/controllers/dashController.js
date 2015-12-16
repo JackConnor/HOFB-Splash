@@ -86,7 +86,7 @@ angular.module('dashController', ['allProjectsFactory'])
         }
       }
       $('.designerDashList').append(
-        "<div class='col-md-2 col-xs-12 projectCell'>"+
+        "<div class='col-md-2 col-xs-12 projectCell projectCellNew'>"+
           "<div class='projectCellNewInner'>"+
             "<p>Build a New product</p>"+
           "</div>"+
