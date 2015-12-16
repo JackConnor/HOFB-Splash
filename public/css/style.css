@@ -256,10 +256,19 @@
 }
 
 .dashFilter {
-  padding-top: 10px;
-  width: 150px;
-  font-size: 30px;
+  -webkit-appearance: none;  /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
+  -moz-appearance: none;  /*REMOVES DEFAULT FIREFOX STYLE*/
+  border: 0 !important;  /*REMOVES BORDER*/
+  color: #fff;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 5px;
+  width: 90px;;
+  cursor: pointer;
   margin-top: 20px;
+  margin-left: 5px;
+  background-color: #CAE9F7;
 }
 
 .designerDashActive {
@@ -313,9 +322,9 @@
 
 .designerDashFilter {
   display: inline-block;
-  height: 60px;
-  width: 88%;
-  margin-left: 8%;
+  height: 80px;
+  width: 94%;
+  margin-left: 2%;
   vertical-align: top;
   background-color: #F9F7F5;
 }
