@@ -649,6 +649,17 @@
   background-color: white;
 }
 
+.projectCell {
+  height: 300px;
+  outline: 4px solid magenta;
+  /*background-color: #D8D8D8;*/
+}
+
+.projectCell img{
+  width: 100%;
+  height: 100%;
+}
+
 .projectCellButton {
   width: 120px;
   height: 40px;
@@ -662,23 +673,6 @@
 
 .projectCellButtonShow {
   margin-top: 80px;
-}
-
-.projectCell {
-  height: 300px;
-  outline: 4px solid magenta;
-  /*background-color: #D8D8D8;*/
-}
-
-.projectNewCell {
-  height: 300px;
-  /*outline: 4px solid magenta;*/
-  /*background-color: #D8D8D8;*/
-}
-
-.projectCell img{
-  width: 100%;
-  height: 100%;
 }
 
 .projectCellContent {
@@ -718,19 +712,25 @@
   height: 100%;
 }
 
+.projectNewCell {
+  height: 300px;
+  vertical-align: top;
+  /*outline: 4px solid magenta;*/
+  /*background-color: #D8D8D8;*/
+}
+
 .projectCellNewInner {
-  width: 80%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   background-color: black;
   color: white;
   text-align: center;
   opacity: .85;
 }
 
-.projectCellNewInner h2 {
-  width: 60%;
-  padding-top: 30%;
-  margin-left: 20%;
+.projectCellNewInner p {
+  font-size: 26px;
+  padding-top: 40%;
 }
 
 .projectCellTrash {

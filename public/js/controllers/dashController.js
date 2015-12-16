@@ -60,7 +60,9 @@ angular.module('dashController', ['allProjectsFactory'])
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
       for (var i = 0; i < self.allProjects.length; i++) {
-        if((i%5) != 0){
+        console.log(i);
+        if((i%5) != 0 || i == 0){
+          console.log('passed');
           $('.designerDashList').append(
             "<div class='col-md-2 col-xs-12 projectCell'>"+
               "<div class='projectCellInner'>"+
@@ -75,17 +77,18 @@ angular.module('dashController', ['allProjectsFactory'])
             "</div>"
           )
         }
-        else if ((i%5) == 5){
+        else if ((i%5) == 0 && i != 0){
+          console.log('failed');
           $('.designerDashList').append(
-            "<div class='blankDiv col-md-2 col-xs-0'>"+
+            "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
             "</div>"
           )
         }
       }
       $('.designerDashList').append(
-        "<div class='col-md-4 col-xs-12 projectNewCell'>"+
+        "<div class='col-md-2 col-xs-12 projectCell'>"+
           "<div class='projectCellNewInner'>"+
-            "<h2>Build a New product</h2>"+
+            "<p>Build a New product</p>"+
           "</div>"+
         "</div>"
       )
@@ -114,7 +117,7 @@ angular.module('dashController', ['allProjectsFactory'])
     function loadCuratedList(){
       for (var i = 0; i < self.curatedProjects.length; i++) {
         $('.designerDashList').append(
-          "<div class='projectCell col-md-4 col-xs-12'>"+
+          "<div class='projectCell col-md-2 col-xs-12'>"+
             "<div class='projectCellInner'>"+
               "<div class='projectCellImageHolder'>"+
                 "<img src='"+self.curatedProjects[i].images[0]+"'>"+
@@ -182,7 +185,7 @@ angular.module('dashController', ['allProjectsFactory'])
       /////end for loop
       for (var i = 0; i < self.filteredProjects.length; i++) {
         $('.designerDashList').append(
-          "<div class='projectCell col-md-4 col-xs-12'>"+
+          "<div class='projectCell col-md-2 col-xs-12'>"+
             "<div class='projectCellInner'>"+
               "<div class='projectCellImageHolder'>"+
                 "<img src='"+self.filteredProjects[i].images[0]+"'>"+
