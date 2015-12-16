@@ -337,13 +337,12 @@
 }
 
 .designerDashList {
-  outline: 2px solid blue;
-  width: 120%;
+  width: 115%;
+  margin-left: 5px;
 }
 
 .designerDashListContainer {
   display: block;
-  outline: 4px solid gray;
 }
 
 .designerDashSearchFilterContainer {
@@ -661,14 +660,14 @@
 }
 
 .projectCellButton {
-  width: 120px;
+  width: 100px;
   height: 40px;
   background-color: white;
-  margin: 20px auto 0 auto;
+  margin: 100px auto 0 auto;
 }
 
 #projectCellButtonEdit {
-  /*margin-top: 50px;*/
+
 }
 
 .projectCellButtonShow {
@@ -691,8 +690,8 @@
 
 .projectCellHoverContainer {
   position: absolute;
-  width: 74%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   z-index: 2;
   font-size: 28px;
   text-align: center;
@@ -707,7 +706,6 @@
 }
 
 .projectCellInner {
-  /*outline: 5px solid gray;*/
   width: 98%;
   margin-left: 1%;
   margin-top: 1%;

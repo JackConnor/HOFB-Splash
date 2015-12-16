@@ -26,7 +26,7 @@ angular.module('dashController', ['allProjectsFactory'])
           self.allProjects = products.data;
           console.log(self.allProjects);
           var curatedProjectsArray = [];
-          var collectionName = [];
+          var collectionName = ["All"];
           for (var i = 0; i < self.allProjects.length; i++) {
             for (var j = 0; j < self.allProjects[i].collections.length; j++) {
               collectionName.push(self.allProjects[i].collections[j]);
@@ -267,7 +267,6 @@ angular.module('dashController', ['allProjectsFactory'])
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
             "<div class='projectCellTrash'>X </div>"+
-            '<div class="projectCellButton projectCellButtonShow">See</div>'+
             '<div class="projectCellButton" id="projectCellButtonEdit">Edit</div>"'+
           "</div>"
         )

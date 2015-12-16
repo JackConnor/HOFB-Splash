@@ -545,7 +545,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   ///////////////////////////////////////////
 
   ///////////////function to send full create http request
-  function sendNewProject(evt){
+  function editProject(evt){
     console.log('something');
     var name = $('.newProductTitle').val();
     var timestamp = new Date();
@@ -614,7 +614,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     }
     /////putting together whole object to send
     var newProjectObject = {
-      id: window.location.hash.split('/')[3]
+      projectId: window.location.hash.split('/')[3]
       ,name: name
       ,timestamp: timestamp
       ,description: description
@@ -629,11 +629,12 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       ,buttons: buttons
       ,status: status
     }
+    console.log(newProjectObject);
     editProjectToDb(newProjectObject, submitPhotos)
     // editProject().editProject(newProjectObject, submitPhotos)///post the object
   }
-  $('.new_product_send').on('click', sendNewProject);
-  $('.new_product_save').on('click', sendNewProject);
+  $('.new_product_send').on('click', editProject);
+  $('.new_product_save').on('click', editProject);
 
   /////function to update a project (will go in a factory)
   function editProjectToDb(projectArray, callback){

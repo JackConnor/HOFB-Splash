@@ -81,7 +81,7 @@ module.exports = function(app){
 
   /////update a user
   app.post('/api/users/update', function(req, res){
-    User.findOne(req.body.id, function(err, user){
+    User.findOne({"_id":req.body.id}, function(err, user){
       if(err){console.log(err)}
       if(req.body.email){
         user.email = req.body.email
@@ -158,7 +158,8 @@ module.exports = function(app){
   /////update a product
   app.post('/api/product/update', function(req, res){
     console.log(req.body);
-    Product.findOne(req.body.id, function(err, product){
+    console.log(req.body.projectId);
+    Product.findOne({"_id":req.body.projectId}, function(err, product){
       if(err){console.log(err)}
         product.name = req.body.name;
         product.productType = req.body.productType;
@@ -179,9 +180,7 @@ module.exports = function(app){
 
   app.get('/api/:user/products', function(req, res){
     var userId = req.params.user;
-    console.log(userId);
     Product.find({'userId':userId}, function(err, products){
-      console.log(products);
       res.json(products);
     })
   })
@@ -252,20 +251,10 @@ module.exports = function(app){
   //////session and token stuff
   ///////begin the session
   app.post('/api/startsession', function(req, res){
-    console.log(req.body);
     var password = req.body.password;
-    console.log('checking password');
-    console.log(password);
     User.findOne({'email': req.body.email}, function(err, user){
-      console.log(user);
-      console.log('found some kind of db thing');
       if(err){console.log(err)}
-
-      console.log(user.validPassword(password));
-
-      console.log('just checked for valid user pw');
       if (user.validPassword(password)) {
-
         //////user password verified
         jwt.sign({iss: "hofb.com", name: user._id}, process.env.JWT_TOKEN_SECRET, {
           expiresIn: "1h"
@@ -273,18 +262,15 @@ module.exports = function(app){
           ,function(token){
             res.json(token);
           });
-
-      }
+        }
     })
   })
 
   ///////check the users status from the jwt web token (as "audience")/////
   app.get('/api/checkstatus/:jwt', function(req, res){
     var token = req.params.jwt;
-    console.log(req.params);
     jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
       if(err){console.log(err)}
-      console.log(decodedToken);
       ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
       res.json(decodedToken);
     });
@@ -299,40 +285,27 @@ module.exports = function(app){
     dest: __dirname + '../public/uploads/',
   })
 
-  app.post('/api/photo', function(req, res, err){
-    console.log(req.body);
-    console.log(req.body.file);
-    res.json({message:'at least we got some back-and-forth'})
-    cloudinary.uploader.upload(req.file, function(uploadResult){
-       console.log(uploadResult);
-       res.json(uploadResult.secure_url)
-     })
-  })
+  // app.post('/api/photo', function(req, res, err){
+  //   console.log(req.body);
+  //   console.log(req.body.file);
+  //   res.json({message:'at least we got some back-and-forth'})
+  //   cloudinary.uploader.upload(req.file, function(uploadResult){
+  //      console.log(uploadResult);
+  //      res.json(uploadResult.secure_url)
+  //    })
+  // })
 
   app.post('/api/pictures', upload.array('files', 4), function(req,res){
-    console.log(req.body);
-    console.log(req.files);
-    console.log(req.files.length);
+    // console.log(req.body);
+    // console.log(req.files);
     for (var i = 0; i < req.files.length; i++) {
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination
-      // console.log(fileName);
       cloudinary.uploader.upload(destination+fileName, function(uploadResult){
-        console.log(req.body.productId);
-        console.log(uploadResult);
         var id = req.body.productId;
-        console.log(id);
         Product.findOne({"_id": id}, function(err, product){
-          console.log(product);
           if(err){console.log(err)}
-          console.log('in product callback');
-          console.log(product);
-          // console.log(uploadResult);
-          console.log(uploadResult.secure_url);
-          // console.log(user.images[i]);
-          // console.log(uploadResult);
           product.images.push(uploadResult.secure_url);
-          // console.log(product);
           product.save({}, function(){
           });
         })
