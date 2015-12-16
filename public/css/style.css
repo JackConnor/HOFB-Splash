@@ -271,6 +271,23 @@
   background-color: #E0F8F7;
 }
 
+.designerDashCollections {
+  height: 40px;
+  outline: 3px solid green;
+  width: 100%;
+}
+
+.designerDashCollectionsContainer {
+  outline: 2px solid gray;
+  height: 600px;
+}
+
+.designerDashContests {
+  height: 40px;
+  outline: 3px solid green;
+  width: 100%;
+}
+
 .designerDashCurated {
   display: inline-block;
   height: 100%;
@@ -278,6 +295,10 @@
   outline: 2px solid pink;
   text-align: center;
   font-size: 27px;
+}
+
+.designerDashDashTitle {
+  font-size: 25px;
 }
 
 .designerDashFilter {

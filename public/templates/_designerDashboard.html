@@ -1,7 +1,18 @@
-<h1>Dashboard for Designers designerDash</h1>
+<div class="navigationBar">
+HOFB
+</div>
+<div class='designerDashDashTitle'>Dashboard</div>
 <div class="designerDashContainer">
+  <div class="designerDashToggleContainer">
+    <div class="designerDashActive">
+      Active
+    </div>
+    <div class="designerDashCurated">
+      Curated
+    </div>
+  </div>
   <div class="designerDashSearchFilterContainer">
-    <div class="designerDashFilter col-xs-9">
+    <div class="designerDashFilter col-xs-12">
       <h4>Filters</h4>
       <select class="designerDashProductType dashFilter" placeholder='select color'>
         <option value="">select a product type</option>
@@ -37,22 +48,24 @@
         <option value="spring">Spring</option>
       </select>
     </div>
-    <div class="designerDashSearch col-xs-3">
-      <input type="text" class="designerDashSearchInput" placeholder="Search">
+  </div>
+  <div class="designerDashBottomContainer row">
+    <div class="designerDashCollectionsContainer col-xs-2">
+      <div class="designerDashContests">
+        Contests
+      </div>
+      <div class="designerDashCollections">
+        Collections
+      </div>
+      <div class="designerDashCollectionDropdown" ng-repeat='collection in dash.allCollections'>
+        <p>
+        {{collection}}
+        </p>
+      </div>
+    </div>
+    <div class="designerDashListContainer col-xs-10">
+      <div class="designerDashList"></div>
     </div>
   </div>
-  <div class="designerDashToggleContainer">
-    <div class="designerDashActive">
-      Active
-    </div>
-    <div class="designerDashCurated">
-      Curated
-    </div>
-  </div>
-  <div class="designerDashListContainer">
-    <p class="sectionTitle">listing all projects</p>
-    <div class="designerDashList">
 
-    </div>
-  </div>
 </div>
