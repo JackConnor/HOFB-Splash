@@ -147,87 +147,200 @@ angular.module('dashController', ['allProjectsFactory'])
     ////function for appending active list
     function loadCuratedList(){
       for (var i = 0; i < self.curatedProjects.length; i++) {
-        $('.designerDashList').append(
-          "<div class='projectCell col-md-2 col-xs-12'>"+
-            "<div class='projectCellInner'>"+
-              "<div class='projectCellImageHolder'>"+
-                "<img src='"+self.curatedProjects[i].images[0]+"'>"+
-              "</div>"+
-              "<div class='projectCellContent'>"+
-                "<p>"+self.curatedProjects[i].name+"--curated</p>"+
-              "</div>"+
-            "</div>"+
-          "</div>"
-        )
+        function timeSince(){
+          var nowDate = new Date();
+          var timeProj = self.curatedProjects[i].timestamp;
+          console.log(timeProj);
+          var projYear = timeProj.split('-')[0];
+          var projMonth = timeProj.split('-')[1];
+          var projDay = timeProj.split('-')[2];
+          var yearsSince = nowDate.getFullYear() - projYear;
+          var monthsSince = nowDate.getMonth() - projMonth;
+          var daysSince = nowDate.getDate() - projDay;
+          if(yearsSince > 0){
+            return yearsSince+" years";
+          }
+          else if(monthsSince > 0){
+            return monthsSince+" months";
+          }
+          else if(daysSince > 0 ){
+            return daysSince+" days"
+          } else {
+            return "Less Than 1 day";
+          }
+        }
+        self.curatedProjects[i].TimeSinceCreation = timeSince();
       }
+      for (var i = 0; i < self.curatedProjects.length; i++) {
+        if((i%5) != 0 || i == 0){
+          $('.designerDashList').append(
+            "<div class='projectCell col-md-2 col-xs-12'>"+
+              "<div class='projectCellInner'>"+
+                "<div class='projectCellImageHolder'>"+
+                  "<img src='"+self.curatedProjects[i].images[0]+"'>"+
+                "</div>"+
+                "<div class='projectCellContent'>"+
+                  "<p>"+self.allProjects[i].TimeSinceCreation+"</p>"+
+                  "<p>"+self.curatedProjects[i].name+"--curated</p>"+
+                "</div>"+
+              "</div>"+
+            "</div>"
+          )
+        }
+        else if ((i%5) == 0 && i != 0){
+          $('.designerDashList').append(
+            "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
+            "</div>"
+          )
+        }
+      }
+      $('.designerDashList').append(
+        "<div class='col-md-2 col-xs-12 projectCell projectCellNew'>"+
+          "<div class='projectCellNewInner'>"+
+            "<p>Build a New product</p>"+
+          "</div>"+
+        "</div>"
+      )
+      $('.projectCellNewInner').on('mouseenter', function(){
+        $('.projectCellNewInner').animate({
+          opacity: .6
+        }, 100)
+      })
+      $('.projectCellNewInner').on('mouseleave', function(){
+        $('.projectCellNewInner').animate({
+          outline: 'none'
+          ,opacity: 1
+        }, 100)
+      })
+      $('.projectCellNewInner').on('click', function(){
+        window.location.hash = "#/create/project";
+        window.location.reload();
+      })
     }
 
     ////function for appending filtered lists from dropdown in realtime
     function loadFilteredList(filterType, filterValue){
       console.log(filterType);
       console.log(filterValue);
-      var productTypeData = self.allProjects[1];
-      var productType = productTypeData[filterType];
-      console.log(productType);
-      console.log(typeof(productType));
+      var productData = self.allProjects[0];
+      var productElemType = productData[filterType];///return string or array
+      console.log(typeof(productElemType));
       var filteredArray = [];
         //////check for filters with one value versus many
-      if(typeof(productType) == 'string'){
+      if(typeof(productElemType) == 'string'){
         for (var i = 0; i < self.allProjects.length; i++) {
           var productTypeData = self.allProjects[i];
           console.log(productTypeData);
           var productType = productTypeData[filterType];
-          console.log(typeof(productType));
           console.log(productType);
+          console.log(productTypeData);
           ///adding for loop here
           if(filterValue == productType){
-            console.log(filterValue +" string should equal "+productType+" for this one to work");
+            console.log(filterValue +"  should equal "+productType+" for this one to work");
             filteredArray.push(self.allProjects[i]);
           }
-          self.filteredProjects = filteredArray;
-          console.log(self.filteredArray);
           ////ending for loop
-          }
         }
-        ////filter for attributes that come in arrays
-        else if(typeof(productType) == 'object'){
-          for (var i = 0; i < self.allProjects.length; i++) {
-            var productTypeDataArray = self.allProjects[i];
-            var productTypeArray = productTypeDataArray[filterType];
-            console.log(productTypeArray);
-            console.log(productTypeArray.length);
+        self.filteredProjects = filteredArray;
+        console.log(self.filteredArray);
+      }
+      ////filter for attributes that come in arrays
+      else if(typeof(productType) == 'object'){
+        for (var i = 0; i < self.allProjects.length; i++) {
+          var productTypeDataArray = self.allProjects[i];
+          var productTypeArray = productTypeDataArray[filterType];
+          console.log(productTypeArray);
+          console.log(productTypeArray.length);
+          console.log(filterValue);
+          for (var j = 0; j < productTypeArray.length; j++) {
+            console.log(productTypeArray[j]);
             console.log(filterValue);
-            for (var j = 0; j < productTypeArray.length; j++) {
-              console.log(productTypeArray[j]);
-              console.log(filterValue);
-              if(productTypeArray[j] == filterValue){
-                console.log(filterValue +" object should equal "+productTypeArray[j]+" for this one to work");
-                console.log(filteredArray);
-                filteredArray.push(self.allProjects[i]);
-                self.filteredProjects = filteredArray;
-                console.log(self.filteredProjects);
-              }else{
-                console.log('nope');
-              }
+            if(productTypeArray[j] == filterValue){
+              console.log(filterValue +" object should equal "+productTypeArray[j]+" for this one to work");
+              console.log(filteredArray);
+              filteredArray.push(self.allProjects[i]);
+              self.filteredProjects = filteredArray;
+              console.log(self.filteredProjects);
+            }else{
+              console.log('nope');
             }
           }
         }
-      console.log(self.filteredProjects);
-      /////end for loop
-      for (var i = 0; i < self.filteredProjects.length; i++) {
-        $('.designerDashList').append(
-          "<div class='projectCell col-md-2 col-xs-12'>"+
-            "<div class='projectCellInner'>"+
-              "<div class='projectCellImageHolder'>"+
-                "<img src='"+self.filteredProjects[i].images[0]+"'>"+
-              "<div>"+
-              "<div class='projectCellContent'>"+
-                "<p>"+self.filteredProjects[i].name+"</p>"+
-              "<div>"+
-            "<div>"+
-          "<div>"
-        )
       }
+      console.log(self.filteredProjects);
+
+      for (var i = 0; i < self.filteredProjects.length; i++) {
+        function timeSince(){
+          var nowDate = new Date();
+          var timeProj = self.filteredProjects[i].timestamp;
+          console.log(timeProj);
+          var projYear = timeProj.split('-')[0];
+          var projMonth = timeProj.split('-')[1];
+          var projDay = timeProj.split('-')[2];
+          var yearsSince = nowDate.getFullYear() - projYear;
+          var monthsSince = nowDate.getMonth() - projMonth;
+          var daysSince = nowDate.getDate() - projDay;
+          if(yearsSince > 0){
+            return yearsSince+" years";
+          }
+          else if(monthsSince > 0){
+            return monthsSince+" months";
+          }
+          else if(daysSince > 0 ){
+            return daysSince+" days"
+          } else {
+            return "Less Than 1 day";
+          }
+        }
+        self.filteredProjects[i].TimeSinceCreation = timeSince();
+      }
+
+      for (var i = 0; i < self.filteredProjects.length; i++) {
+        if((i%5) != 0 || i == 0){
+          $('.designerDashList').append(
+            "<div class='projectCell col-md-2 col-xs-12'>"+
+              "<div class='projectCellInner'>"+
+                "<div class='projectCellImageHolder'>"+
+                  "<img src='"+self.filteredProjects[i].images[0]+"'>"+
+                "</div>"+
+                "<div class='projectCellContent'>"+
+                  "<p>"+self.filteredProjects[i].TimeSinceCreation+"</p>"+
+                  "<p>"+self.filteredProjects[i].name+"</p>"+
+                "</div>"+
+              "</div>"+
+            "</div>"
+          )
+        }
+        else if ((i%5) == 0 && i != 0){
+          $('.designerDashList').append(
+            "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
+            "</div>"
+          )
+        }
+      }
+      $('.designerDashList').append(
+        "<div class='col-md-2 col-xs-12 projectCell projectCellNew'>"+
+          "<div class='projectCellNewInner'>"+
+            "<p>Build a New product</p>"+
+          "</div>"+
+        "</div>"
+      )
+      //////add hover events to 'addNew' box
+      $('.projectCellNewInner').on('mouseenter', function(){
+        $('.projectCellNewInner').animate({
+          opacity: .6
+        }, 100)
+      })
+      $('.projectCellNewInner').on('mouseleave', function(){
+        $('.projectCellNewInner').animate({
+          outline: 'none'
+          ,opacity: 1
+        }, 100)
+      })
+      $('.projectCellNewInner').on('click', function(){
+        window.location.hash = "#/create/project";
+        window.location.reload();
+      })
       addHoverToCell();
     }
 
