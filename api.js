@@ -30,6 +30,7 @@ var Product      = require('./models/product.js');
 var Project      = require('./models/createProject.js');
 var viewProduct      = require('./models/viewProduct.js');
 var Photo      = require('./models/photo.js');
+var productComment      = require('./models/productComment.js');
 ///////finish bringing models////
 /////////////////////////////////
 
@@ -177,6 +178,23 @@ module.exports = function(app){
       });
     })
   })
+  ///get all product comments
+  app.get('/api/view/product', function(req, res){
+    console.log('productComment')
+    productComment.find({}, function(err, productComment){
+      if(err) console.log(err)
+      console.log(productComment); //this is a console log that will pop up through the terminal shell
+      res.json(productComment)
+    })
+  })
+
+  ///get a single product comments
+  // app.get('/api/view/product/:id', function(req, res){
+  //   Product.findOne({"_id":req.params.id}, function(err, productComments){
+  //     if(err) throw err;
+  //     res.json(productComments);
+  //   })
+  // })
 
   //////delete a product
   app.delete('/api/product/:product_id', function(req, res){
@@ -399,6 +417,7 @@ module.exports = function(app){
   });
   /////end email stuff////////////////////
   ////////////////////////////////////////
+  
 }
 
 //mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
