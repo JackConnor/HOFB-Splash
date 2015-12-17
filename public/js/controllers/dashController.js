@@ -96,7 +96,7 @@ angular.module('dashController', ['allProjectsFactory'])
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
       for (var i = 0; i < self.allProjects.length; i++) {
-        if((i%5) != 0 || i == 0){
+        if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
             "<div class='col-md-2 col-xs-12 projectCell'>"+
               "<div class='projectCellInner'>"+
@@ -112,7 +112,7 @@ angular.module('dashController', ['allProjectsFactory'])
             "</div>"
           )
         }
-        else if ((i%5) == 0 && i != 0){
+        else if (((i+1)%6) == 0 && i != 0){
           $('.designerDashList').append(
             "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
             "</div>"
@@ -149,6 +149,7 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////function for appending active list
     function loadCuratedList(){
+      console.log(self.curatedProjects);
       for (var i = 0; i < self.curatedProjects.length; i++) {
         function timeSince(){
           var nowDate = new Date();
@@ -173,9 +174,10 @@ angular.module('dashController', ['allProjectsFactory'])
           }
         }
         self.curatedProjects[i].TimeSinceCreation = timeSince();
+        console.log(self.curatedProjects);
       }
       for (var i = 0; i < self.curatedProjects.length; i++) {
-        if((i%5) != 0 || i == 0){
+        if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
             "<div class='projectCell col-md-2 col-xs-12'>"+
               "<div class='projectCellInner'>"+
@@ -183,14 +185,14 @@ angular.module('dashController', ['allProjectsFactory'])
                   "<img src='"+self.curatedProjects[i].images[0]+"'>"+
                 "</div>"+
                 "<div class='projectCellContent'>"+
-                  "<p>"+self.allProjects[i].TimeSinceCreation+"</p>"+
+                  "<p>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
                   "<p>"+self.curatedProjects[i].name+"--curated</p>"+
                 "</div>"+
               "</div>"+
             "</div>"
           )
         }
-        else if ((i%5) == 0 && i != 0){
+        else if (((i+1)%6) == 0 && i != 0){
           $('.designerDashList').append(
             "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
             "</div>"
@@ -225,6 +227,7 @@ angular.module('dashController', ['allProjectsFactory'])
     function loadFilteredList(filterType, filterValue, listToFilter){
       console.log(filterType);
       console.log(filterValue);
+      console.log(listToFilter);
       var productData = listToFilter[0];
       var productElemType = productData[filterType];///return string or array
       console.log(typeof(productElemType));
@@ -248,9 +251,10 @@ angular.module('dashController', ['allProjectsFactory'])
         console.log(self.filteredArray);
       }
       ////filter for attributes that come in arrays
-      else if(typeof(productType) == 'object'){
+      else if(typeof(productElemType) == 'object'){
+        console.log('its an object');
         for (var i = 0; i < listToFilter.length; i++) {
-          var productTypeDataArray = listToFilter;
+          var productTypeDataArray = listToFilter[i];
           var productTypeArray = productTypeDataArray[filterType];
           console.log(productTypeArray);
           console.log(productTypeArray.length);
@@ -299,7 +303,7 @@ angular.module('dashController', ['allProjectsFactory'])
       }
 
       for (var i = 0; i < self.filteredProjects.length; i++) {
-        if((i%5) != 0 || i == 0){
+        if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
             "<div class='projectCell col-md-2 col-xs-12'>"+
               "<div class='projectCellInner'>"+
@@ -314,7 +318,7 @@ angular.module('dashController', ['allProjectsFactory'])
             "</div>"
           )
         }
-        else if ((i%5) == 0 && i != 0){
+        else if (((i+1)%6) == 0 && i != 0){
           $('.designerDashList').append(
             "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
             "</div>"
@@ -484,7 +488,12 @@ angular.module('dashController', ['allProjectsFactory'])
     ////filter by color
     $('.designerDashColor').change(function(){
       $('.designerDashList').html('');
-      loadFilteredList("colors", $('.designerDashColor').val())
+      if(self.curatedToggleCounter == 'active'){
+        loadFilteredList("colors", $('.designerDashColor').val(), self.allProjects);
+      }
+      else if(self.curatedToggleCounter == 'curated'){
+        loadFilteredList("colors", $('.designerDashColor').val(), self.curatedProjects);
+      }
     })
 
     ////filter by fabric
