@@ -295,17 +295,38 @@ angular.module('dashController', ['allProjectsFactory'])
             '<div class="projectCellButton" id="projectCellButtonEdit">Edit</div>"'+
           "</div>"
         )
-        $('.projectCellButtonShow').on('click', function(){
-          var product = $(parentContainer);
-          var productId = $($(product[0].children[1])[0].children[0])[0].id
-          window.location.hash = "#/view/product/"+productId;
-          window.location.reload();
-        });
         $('#projectCellButtonEdit').on('click', function(){
           var product = $(parentContainer);
           var productId = $($(product[0].children[1])[0].children[0])[0].id
           window.location.hash = "#/edit/project/"+productId;
           window.location.reload();
+        })
+        $('.projectCellTrash').on('click', function(){
+          var product = $(parentContainer);
+          var productId = $($(product[0].children[1])[0].children[0])[0].id
+          $('.bodyview').prepend(
+            '<div class="designerDashDeleteProduct col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">'+
+              "<p>Are you sure you want to delete this product?</p>"+
+              "<button class='deleteButton'>No</button>"+
+              "<button id='"+productId+"' class='deleteButton'>Yes</button>"+
+            "</div>"
+          )
+          $('.deleteButton').on('click', function(evt){
+            console.log($(evt.target)[0].id);
+            var idToDelete = $(evt.target)[0].id;
+            $http({
+              method: "DELETE"
+              ,url: "/api/product/"+idToDelete
+            })
+            .then(function(deletedObject){
+              console.log(deletedObject);
+              console.log('just deleted '+deletedObject.data.name);
+              /////reload cells
+              $('.designerDashList').html('');
+              loadProjects(loadInitialList, addHoverToCell)
+              $('.designerDashDeleteProduct').remove();
+            })
+          })
         })
         $('.projectCellHoverContainer').on('mouseleave', function(evt){
           $hoverTarget.css({

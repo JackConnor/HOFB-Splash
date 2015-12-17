@@ -39,7 +39,9 @@
 
 /*Segmentation for Jacks css*/
 .bodyview {
-  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
 .carouselBacking {
@@ -259,7 +261,7 @@
   -webkit-appearance: none;  /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
   -moz-appearance: none;  /*REMOVES DEFAULT FIREFOX STYLE*/
   border: 0 !important;  /*REMOVES BORDER*/
-  color: #fff;
+  /*color: #fff;*/
   -webkit-border-radius: 5px;
   border-radius: 5px;
   font-size: 18px;
@@ -269,6 +271,13 @@
   margin-top: 20px;
   margin-left: 10px;
   background-color: #CAE9F7;
+}
+
+.deleteButton {
+  margin-left: 10%;
+  width: 35%;
+  margin-top: 10px;
+  color: purple;
 }
 
 .designerDashActive {
@@ -293,7 +302,7 @@
 
 .designerDashCollectionsContainer {
   background-color: #F9F7F5;
-  height: 600px;
+  height: 100%;
   text-align:justify;
 }
 
@@ -325,6 +334,18 @@
 .designerDashDashTitle {
   font-size: 25px;
   background-color: #F6FDFA;
+}
+
+.designerDashDeleteProduct {
+  position: fixed;
+  height: 200px;
+  width: 300px;
+  font-size: 25px;
+  color: white;
+  margin-top: 300px;
+  background-color: gray;
+  outline: 4px solid aqua;
+  z-index: 3
 }
 
 .designerDashFilter {

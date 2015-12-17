@@ -178,6 +178,15 @@ module.exports = function(app){
     })
   })
 
+  //////delete a product
+  app.delete('/api/product/:product_id', function(req, res){
+    Product.remove({"_id": req.params.product_id}, function(err, removedProduct){
+      if(err){console.log(err)}
+      res.json(removedProduct);
+    })
+  })
+
+  /////get all products from one user
   app.get('/api/:user/products', function(req, res){
     var userId = req.params.user;
     Product.find({'userId':userId}, function(err, products){
