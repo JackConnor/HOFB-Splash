@@ -23,7 +23,22 @@ angular.module('dashController', ['allProjectsFactory'])
           ,url: '/api/'+decodedToken.data.name+'/products'
         })
         .then(function(products){
-          self.allProjects = products.data;
+          var allProjects = products.data;
+          console.log(allProjects);
+          var allProjectsSaved = [];
+          var curatedProjectsArray = [];
+          for (var i = 0; i < allProjects.length; i++) {
+            if(allProjects[i].status == "saved"){
+              console.log('got on ');
+              console.log(allProjects[i]);
+              allProjectsSaved.push(allProjects[i]);
+            }
+            else if(allProjects[i].status == "submitted to curator"){
+              curatedProjectsArray.push(allProjects[i]);
+            }
+            self.allProjects = allProjectsSaved;
+            self.curatedProjects = curatedProjectsArray;
+          }
           console.log(self.allProjects);
           //////add time-since-creation field
           for (var i = 0; i < self.allProjects.length; i++) {
@@ -52,17 +67,8 @@ angular.module('dashController', ['allProjectsFactory'])
             self.allProjects[i].TimeSinceCreation = timeSince();
           }
           console.log(self.allProjects);
-          var curatedProjectsArray = [];
+
           var collectionName = ["All"];
-          for (var i = 0; i < self.allProjects.length; i++) {
-            for (var j = 0; j < self.allProjects[i].collections.length; j++) {
-              collectionName.push(self.allProjects[i].collections[j]);
-            }
-            if(self.allProjects[i].status == "curated"){
-              curatedProjectsArray.push(self.allProjects[i])
-            }
-            self.curatedProjects = curatedProjectsArray;//list of all user's curated projects
-          }
           self.allCollectionsRaw = collectionName;
           //////must make sure there are no duplicates
           self.allCollections = [];
