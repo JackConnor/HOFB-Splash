@@ -375,10 +375,10 @@ angular.module('dashController', ['allProjectsFactory'])
     ////////toggle to curated view
     $('.designerDashCurated').on('click', function(){
       $('.designerDashCurated').css({
-        backgroundColor: "#E0F8F7"
+        backgroundColor: "#F9F7F5"
       })
       $('.designerDashActive').css({
-        backgroundColor: "white"
+        backgroundColor: "#EBEBE9"
       })
       console.log('to curated');
       self.curatedToggleCounter = 'curated';
@@ -390,10 +390,10 @@ angular.module('dashController', ['allProjectsFactory'])
     $('.designerDashActive').on('click', function(){
       console.log('to active');
       $('.designerDashCurated').css({
-        backgroundColor: "white"
+        backgroundColor: "#EBEBE9"
       })
       $('.designerDashActive').css({
-        backgroundColor: "#E0F8F7"
+        backgroundColor: "#F9F7F5"
       })
       self.curatedToggleCounter = 'active';
       toggleActive();
@@ -499,19 +499,29 @@ angular.module('dashController', ['allProjectsFactory'])
     ////filter by fabric
     $('.designerDashFabric').change(function(){
       $('.designerDashList').html('');
-      loadFilteredList("fabrics", $('.designerDashFabric').val())
+      if(self.curatedToggleCounter == 'active'){
+        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.allProjects);
+      }
+      else if(self.curatedToggleCounter == 'curated'){
+        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.curatedProjects);
+      }
     })
 
     ////filter by button
-    $('.designerDashButton').change(function(){
-      $('.designerDashList').html('');
-      loadFilteredList("buttons", $('.designerDashButton').val())
-    })
+    // $('.designerDashButton').change(function(){
+    //   $('.designerDashList').html('');
+    //   loadFilteredList("buttons", $('.designerDashButton').val())
+    // })
 
     ////filter by season
     $('.designerDashSeason').change(function(){
       $('.designerDashList').html('');
-      loadFilteredList("season", $('.designerDashSeason').val())
+      if(self.curatedToggleCounter == 'active'){
+        loadFilteredList("seasons", $('.designerDashSeason').val(), self.allProjects);
+      }
+      else if(self.curatedToggleCounter == 'curated'){
+        loadFilteredList("seasons", $('.designerDashSeason').val(), self.curatedProjects);
+      }
     })
     ////End Filtering///////////////
     ////////////////////////////////
