@@ -2,8 +2,7 @@
 
 @import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css");
 
-<<<<<<< HEAD
-=======
+
 .panel-product {
   -moz-transition: all .3s ease;
   -o-transition: all .3s ease;
@@ -830,4 +829,15 @@ width:500px;
 .productAccessoryBox{
   outline:2px solid blue;
   padding:10px 5px 100px 5px;
+}
+
+#commentTextBox {
+  /*position: absolute;*/
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: scroll;
+  height:350px;
+  outline:2px solid red;
+  /*width: 25%;*/
 }

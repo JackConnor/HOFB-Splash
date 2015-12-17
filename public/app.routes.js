@@ -64,7 +64,7 @@ angular.module('app.routes', ['ngRoute'])
       ,contollerAs: 'signup'
     })
     //view a single Product
-    .when('/view/product', {
+    .when('/view/product/:id', {
       templateUrl: 'templates/_viewProduct.html'
       ,controller: 'viewProductCtrl'
       ,controllerAs: 'viewProduct'

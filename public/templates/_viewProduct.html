@@ -26,7 +26,7 @@
             <!-- item -->
             <div class="col-md-4 text-center">
               <div >
-              <h1 class='productTitle'>Title</h1>
+              <h1 class='productTitle'>Name</h1>
               <h1 class='productStatus'>Status</h1>
             </div>
             <!-- Modal -->
@@ -50,7 +50,7 @@
               </div>
             </div>
             <!-- /Modal -->
-</br></br>
+          </br></br>
             <div class='productAccessoryBox text-center'>
             <h1>Accessory Box</h1>
             <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Color</Button>
@@ -106,15 +106,35 @@
               </div>
             </br></br>
               <form method='post'>
-                <!-- <textarea maxlength="50 "rows='10' columns='50'name='comment' id='comment' class='comment'></textarea> -->
-                <textarea name="styled-textarea" id="styled" onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')">Enter your comment here...</textarea>
-                <br />
-
-                <input type='hidden' name='articleid' id='cmdCreateComment' value='<? echo $_GET["id"]; ?>' />
-
+                <div class="comment-form">
+                  <form role="form" id="comment-form">
+                    <div class="form-group has-feedback">
+                      <label for="sender">Name</label>
+                      <input type="text" class="form-control name" id="sender" placeholder="Sender Name" name="sender">
+                      <i class="fa fa-user form-control-feedback"></i>
+                    </div>
+                    <div class="form-group has-feedback">
+                      <label for="message">Message</label>
+                      <textarea class="form-control message" rows="8" id="message" placeholder="Enter your comment here...." name="message"></textarea>
+                      <i class="fa fa-envelope-o form-control-feedback"></i>
+                    </div>
+                    <!-- <input type='hidden' name='articleid' id='cmdCreateComment' > -->
+                    <input type="button" value="Comment" class="btn btn-lg btn-block btn-danger commentSubmitBtn" id="cmdSubmitComment" data-formid="#comment-form">
+                </form>
+                </div>
               </form>
-              <a class="btn btn-lg btn-block btn-danger commentSubmitBtn" type='submit'id='commentSubmit'>Comment</a>
+            </br>
+              <div id="commentTextBox">
+                <!-- comment in angular is referring each individual data within an array -->
+                <div ng-repeat="comment in viewProduct.allComments" class='text-left' >
+                  <h1>{{comment.sender}}</h1>
+                  <h2>{{comment.date}}</h2>
+                  <h3>{{comment.commentText}}</h3>
+                </div>
+              </div>
+
             </div>
+
             <!-- /item -->
 
         </div>
