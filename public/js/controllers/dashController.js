@@ -25,6 +25,33 @@ angular.module('dashController', ['allProjectsFactory'])
         .then(function(products){
           self.allProjects = products.data;
           console.log(self.allProjects);
+          //////add time-since-creation field
+          for (var i = 0; i < self.allProjects.length; i++) {
+            function timeSince(){
+              var nowDate = new Date();
+              var timeProj = self.allProjects[i].timestamp;
+              console.log(timeProj);
+              var projYear = timeProj.split('-')[0];
+              var projMonth = timeProj.split('-')[1];
+              var projDay = timeProj.split('-')[2];
+              var yearsSince = nowDate.getFullYear() - projYear;
+              var monthsSince = nowDate.getMonth() - projMonth;
+              var daysSince = nowDate.getDate() - projDay;
+              if(yearsSince > 0){
+                return yearsSince+" years";
+              }
+              else if(monthsSince > 0){
+                return monthsSince+" months";
+              }
+              else if(daysSince > 0 ){
+                return daysSince+" days"
+              } else {
+                return "Less Than 1 day";
+              }
+            }
+            self.allProjects[i].TimeSinceCreation = timeSince();
+          }
+          console.log(self.allProjects);
           var curatedProjectsArray = [];
           var collectionName = ["All"];
           for (var i = 0; i < self.allProjects.length; i++) {
@@ -60,9 +87,7 @@ angular.module('dashController', ['allProjectsFactory'])
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
       for (var i = 0; i < self.allProjects.length; i++) {
-        console.log(i);
         if((i%5) != 0 || i == 0){
-          console.log('passed');
           $('.designerDashList').append(
             "<div class='col-md-2 col-xs-12 projectCell'>"+
               "<div class='projectCellInner'>"+
@@ -71,6 +96,7 @@ angular.module('dashController', ['allProjectsFactory'])
                 "src='"+self.allProjects[i].images[0]+"'>"+
                 "</div>"+
                 "<div class='projectCellContent'>"+
+                  "<p>"+self.allProjects[i].TimeSinceCreation+"</p>"+
                   "<p>"+self.allProjects[i].name+"</p>"+
                 "</div>"+
               "</div>"+
@@ -78,7 +104,6 @@ angular.module('dashController', ['allProjectsFactory'])
           )
         }
         else if ((i%5) == 0 && i != 0){
-          console.log('failed');
           $('.designerDashList').append(
             "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
             "</div>"

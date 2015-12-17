@@ -440,7 +440,6 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     function sendNewProject(evt){
       var name = $('.newProductTitle').val();
       var timestamp = new Date();
-      // var images = self.tempPhotoCache;
       var imagesHTML = self.tempPhotoHTMLCache;
       var userId = self.userId;
       var collections = $('.newProductCollectionsInput').val().split(' ');
