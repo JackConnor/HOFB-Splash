@@ -14,26 +14,21 @@ angular.module('dashController', ['allProjectsFactory'])
 
     function loadProjects(callback, arg){
       ///////decode user to pull data
-      console.log(window.localStorage.hofbToken);
       $http({
         method: "GET"
         ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
       })
       .then(function(decodedToken){
-        console.log(decodedToken);
         $http({
           method: "GET"
           ,url: '/api/'+decodedToken.data.name+'/products'
         })
         .then(function(products){
           var allProjects = products.data;
-          console.log(allProjects);
           var allProjectsSaved = [];
           var curatedProjectsArray = [];
           for (var i = 0; i < allProjects.length; i++) {
             if(allProjects[i].status == "saved"){
-              console.log('got on ');
-              console.log(allProjects[i]);
               allProjectsSaved.push(allProjects[i]);
             }
             else if(allProjects[i].status == "submitted to curator"){
@@ -42,13 +37,11 @@ angular.module('dashController', ['allProjectsFactory'])
             self.allProjects = allProjectsSaved;
             self.curatedProjects = curatedProjectsArray;
           }
-          console.log(self.allProjects);
           //////add time-since-creation field
           for (var i = 0; i < self.allProjects.length; i++) {
             function timeSince(){
               var nowDate = new Date();
               var timeProj = self.allProjects[i].timestamp;
-              console.log(timeProj);
               var projYear = timeProj.split('-')[0];
               var projMonth = timeProj.split('-')[1];
               var projDay = timeProj.split('-')[2];
@@ -69,8 +62,6 @@ angular.module('dashController', ['allProjectsFactory'])
             }
             self.allProjects[i].TimeSinceCreation = timeSince();
           }
-          console.log(self.allProjects);
-
           var collectionName = ["All"];
           self.allCollectionsRaw = collectionName;
           //////must make sure there are no duplicates
@@ -79,7 +70,6 @@ angular.module('dashController', ['allProjectsFactory'])
             var passBool = true;
             for (var j = 0; j < self.allCollections.length; j++) {
               if(self.allCollectionsRaw[i] == self.allCollections[j]){
-                console.log('double');
                 passBool = false;
               }
             }
@@ -87,7 +77,6 @@ angular.module('dashController', ['allProjectsFactory'])
               self.allCollections.push(self.allCollectionsRaw[i])
             }
           }
-          console.log(self.allCollections);
           callback(arg)
         })
       })
@@ -149,12 +138,10 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////function for appending active list
     function loadCuratedList(){
-      console.log(self.curatedProjects);
       for (var i = 0; i < self.curatedProjects.length; i++) {
         function timeSince(){
           var nowDate = new Date();
           var timeProj = self.curatedProjects[i].timestamp;
-          console.log(timeProj);
           var projYear = timeProj.split('-')[0];
           var projMonth = timeProj.split('-')[1];
           var projDay = timeProj.split('-')[2];
@@ -174,7 +161,6 @@ angular.module('dashController', ['allProjectsFactory'])
           }
         }
         self.curatedProjects[i].TimeSinceCreation = timeSince();
-        console.log(self.curatedProjects);
       }
       for (var i = 0; i < self.curatedProjects.length; i++) {
         if(((i+1)%6) != 0 || i == 0){
@@ -225,105 +211,92 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////function for appending filtered lists from dropdown in realtime
     function loadFilteredList(filterType, filterValue, listToFilter){
-      console.log(filterType);
-      console.log(filterValue);
-      console.log(listToFilter);
+      for (var i = 0; i < $('.projectCell').length; i++) {
+        $('.projectCell')[i].remove();
+      };
       var productData = listToFilter[0];
       var productElemType = productData[filterType];///return string or array
-      console.log(typeof(productElemType));
       var filteredArray = [];
         //////check for filters with one value versus many
       if(typeof(productElemType) == 'string'){
         for (var i = 0; i < listToFilter.length; i++) {
           var productTypeData = listToFilter[i];
-          console.log(productTypeData);
           var productType = productTypeData[filterType];
-          console.log(productType);
-          console.log(productTypeData);
           ///adding for loop here
           if(filterValue == productType){
-            console.log(filterValue +"  should equal "+productType+" for this one to work");
             filteredArray.push(listToFilter[i]);
           }
           ////ending for loop
         }
         self.filteredProjects = filteredArray;
-        console.log(self.filteredArray);
       }
       ////filter for attributes that come in arrays
       else if(typeof(productElemType) == 'object'){
-        console.log('its an object');
         for (var i = 0; i < listToFilter.length; i++) {
-          var productTypeDataArray = listToFilter[i];
-          var productTypeArray = productTypeDataArray[filterType];
-          console.log(productTypeArray);
-          console.log(productTypeArray.length);
-          console.log(filterValue);
+          var productDataArray = listToFilter[i];
+          var productTypeArray = productDataArray[filterType];
           for (var j = 0; j < productTypeArray.length; j++) {
-            console.log(productTypeArray[j]);
-            console.log(filterValue);
             if(productTypeArray[j] == filterValue){
-              console.log(filterValue +" object should equal "+productTypeArray[j]+" for this one to work");
-              console.log(filteredArray);
               filteredArray.push(listToFilter[i]);
               self.filteredProjects = filteredArray;
-              console.log(self.filteredProjects);
             }else{
-              console.log('nope');
             }
           }
         }
       }
-      console.log(self.filteredProjects);
-
-      for (var i = 0; i < self.filteredProjects.length; i++) {
-        function timeSince(){
-          var nowDate = new Date();
-          var timeProj = self.filteredProjects[i].timestamp;
-          console.log(timeProj);
-          var projYear = timeProj.split('-')[0];
-          var projMonth = timeProj.split('-')[1];
-          var projDay = timeProj.split('-')[2];
-          var yearsSince = nowDate.getFullYear() - projYear;
-          var monthsSince = nowDate.getMonth() - projMonth;
-          var daysSince = nowDate.getDate() - projDay;
-          if(yearsSince > 0){
-            return yearsSince+" years";
-          }
-          else if(monthsSince > 0){
-            return monthsSince+" months";
-          }
-          else if(daysSince > 0 ){
-            return daysSince+" days"
-          } else {
-            return "Less Than 1 day";
-          }
-        }
-        self.filteredProjects[i].TimeSinceCreation = timeSince();
+      //////begin if statement for self.filtered
+      if(!self.filteredProjects || self.filteredProjects.length == 0){
+        console.log('no hits for that filter');
       }
-
-      for (var i = 0; i < self.filteredProjects.length; i++) {
-        if(((i+1)%6) != 0 || i == 0){
-          $('.designerDashList').append(
-            "<div class='projectCell col-md-2 col-xs-12'>"+
-              "<div class='projectCellInner'>"+
-                "<div class='projectCellImageHolder'>"+
-                  "<img src='"+self.filteredProjects[i].images[0]+"'>"+
-                "</div>"+
-                "<div class='projectCellContent'>"+
-                  "<p>"+self.filteredProjects[i].TimeSinceCreation+"</p>"+
-                  "<p>"+self.filteredProjects[i].name+"</p>"+
-                "</div>"+
-              "</div>"+
-            "</div>"
-          )
+      else {
+        for (var i = 0; i < self.filteredProjects.length; i++) {
+          function timeSince(){
+            var nowDate = new Date();
+            var timeProj = self.filteredProjects[i].timestamp;
+            var projYear = timeProj.split('-')[0];
+            var projMonth = timeProj.split('-')[1];
+            var projDay = timeProj.split('-')[2];
+            var yearsSince = nowDate.getFullYear() - projYear;
+            var monthsSince = nowDate.getMonth() - projMonth;
+            var daysSince = nowDate.getDate() - projDay;
+            if(yearsSince > 0){
+              return yearsSince+" years";
+            }
+            else if(monthsSince > 0){
+              return monthsSince+" months";
+            }
+            else if(daysSince > 0 ){
+              return daysSince+" days"
+            } else {
+              return "Less Than 1 day";
+            }
+          }
+          self.filteredProjects[i].TimeSinceCreation = timeSince();
         }
-        else if (((i+1)%6) == 0 && i != 0){
-          $('.designerDashList').append(
-            "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
-            "</div>"
-          )
+        for (var i = 0; i < self.filteredProjects.length; i++) {
+          if(((i+1)%6) != 0 || i == 0){
+            $('.designerDashList').append(
+              "<div class='projectCell col-md-2 col-xs-12'>"+
+                "<div class='projectCellInner'>"+
+                  "<div class='projectCellImageHolder'>"+
+                    "<img src='"+self.filteredProjects[i].images[0]+"'>"+
+                  "</div>"+
+                  "<div class='projectCellContent'>"+
+                    "<p>"+self.filteredProjects[i].TimeSinceCreation+"</p>"+
+                    "<p>"+self.filteredProjects[i].name+"</p>"+
+                  "</div>"+
+                "</div>"+
+              "</div>"
+            )
+          }
+          else if (((i+1)%6) == 0 && i != 0){
+            $('.designerDashList').append(
+              "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
+              "</div>"
+            )
+          }
         }
+      //////end if statement for self.filtered
       }
       $('.designerDashList').append(
         "<div class='col-md-2 col-xs-12 projectCell projectCellNew'>"+
@@ -380,7 +353,6 @@ angular.module('dashController', ['allProjectsFactory'])
       $('.designerDashActive').css({
         backgroundColor: "#EBEBE9"
       })
-      console.log('to curated');
       self.curatedToggleCounter = 'curated';
       toggleCurated();
       addHoverToCell();
@@ -388,7 +360,6 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////////toggle to active view
     $('.designerDashActive').on('click', function(){
-      console.log('to active');
       $('.designerDashCurated').css({
         backgroundColor: "#EBEBE9"
       })
@@ -440,15 +411,12 @@ angular.module('dashController', ['allProjectsFactory'])
             "</div>"
           )
           $('.deleteButton').on('click', function(evt){
-            console.log($(evt.target)[0].id);
             var idToDelete = $(evt.target)[0].id;
             $http({
               method: "DELETE"
               ,url: "/api/product/"+idToDelete
             })
             .then(function(deletedObject){
-              console.log(deletedObject);
-              console.log('just deleted '+deletedObject.data.name);
               /////reload cells
               $('.designerDashList').html('');
               loadProjects(loadInitialList, addHoverToCell)
@@ -498,6 +466,7 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////filter by fabric
     $('.designerDashFabric').change(function(){
+      console.log('looooo testing');
       $('.designerDashList').html('');
       if(self.curatedToggleCounter == 'active'){
         loadFilteredList("fabrics", $('.designerDashFabric').val(), self.allProjects);
