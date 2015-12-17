@@ -6,6 +6,9 @@ angular.module('dashController', ['allProjectsFactory'])
   function dashCtrl($http, allProjects){
     var self = this;
 
+    //////counter to keep track of active or curated list being shown
+    self.curatedToggleCounter = 'active'
+
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
 
@@ -219,17 +222,17 @@ angular.module('dashController', ['allProjectsFactory'])
     }
 
     ////function for appending filtered lists from dropdown in realtime
-    function loadFilteredList(filterType, filterValue){
+    function loadFilteredList(filterType, filterValue, listToFilter){
       console.log(filterType);
       console.log(filterValue);
-      var productData = self.allProjects[0];
+      var productData = listToFilter[0];
       var productElemType = productData[filterType];///return string or array
       console.log(typeof(productElemType));
       var filteredArray = [];
         //////check for filters with one value versus many
       if(typeof(productElemType) == 'string'){
-        for (var i = 0; i < self.allProjects.length; i++) {
-          var productTypeData = self.allProjects[i];
+        for (var i = 0; i < listToFilter.length; i++) {
+          var productTypeData = listToFilter[i];
           console.log(productTypeData);
           var productType = productTypeData[filterType];
           console.log(productType);
@@ -237,7 +240,7 @@ angular.module('dashController', ['allProjectsFactory'])
           ///adding for loop here
           if(filterValue == productType){
             console.log(filterValue +"  should equal "+productType+" for this one to work");
-            filteredArray.push(self.allProjects[i]);
+            filteredArray.push(listToFilter[i]);
           }
           ////ending for loop
         }
@@ -246,8 +249,8 @@ angular.module('dashController', ['allProjectsFactory'])
       }
       ////filter for attributes that come in arrays
       else if(typeof(productType) == 'object'){
-        for (var i = 0; i < self.allProjects.length; i++) {
-          var productTypeDataArray = self.allProjects[i];
+        for (var i = 0; i < listToFilter.length; i++) {
+          var productTypeDataArray = listToFilter;
           var productTypeArray = productTypeDataArray[filterType];
           console.log(productTypeArray);
           console.log(productTypeArray.length);
@@ -258,7 +261,7 @@ angular.module('dashController', ['allProjectsFactory'])
             if(productTypeArray[j] == filterValue){
               console.log(filterValue +" object should equal "+productTypeArray[j]+" for this one to work");
               console.log(filteredArray);
-              filteredArray.push(self.allProjects[i]);
+              filteredArray.push(listToFilter[i]);
               self.filteredProjects = filteredArray;
               console.log(self.filteredProjects);
             }else{
@@ -374,6 +377,7 @@ angular.module('dashController', ['allProjectsFactory'])
         backgroundColor: "white"
       })
       console.log('to curated');
+      self.curatedToggleCounter = 'curated';
       toggleCurated();
       addHoverToCell();
     })
@@ -387,6 +391,7 @@ angular.module('dashController', ['allProjectsFactory'])
       $('.designerDashActive').css({
         backgroundColor: "#E0F8F7"
       })
+      self.curatedToggleCounter = 'active';
       toggleActive();
       addHoverToCell();
     })
@@ -468,7 +473,12 @@ angular.module('dashController', ['allProjectsFactory'])
     ////filter by productType
     $('.designerDashProductType').change(function(evt){
       $('.designerDashList').html('');
-      loadFilteredList("productType", $('.designerDashProductType').val())
+      if(self.curatedToggleCounter == 'active'){
+        loadFilteredList("productType", $('.designerDashProductType').val(), self.allProjects);
+      }
+      else if(self.curatedToggleCounter == 'curated'){
+        loadFilteredList("productType", $('.designerDashProductType').val(), self.curatedProjects);
+      }
     })
 
     ////filter by color
