@@ -81,6 +81,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controller: 'messageCtrl'
       ,controllerAs: 'message'
     })
+
+    .when('/message/:messageId', {
+      templateUrl: 'templates/_singleMessage.html'
+      ,controller: 'messageCtrl'
+      ,controllerAs: 'message'
+    })
     /////////default to home
     .otherwise('/');
 

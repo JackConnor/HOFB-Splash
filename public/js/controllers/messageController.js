@@ -13,6 +13,7 @@ angular.module('messageController', ['allMessagesFactory'])
         ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
       })
       .then(function(decodedToken){
+        self.decodedToken = decodedToken;
         console.log(decodedToken);
         $http({
           method: "GET"
@@ -31,7 +32,7 @@ angular.module('messageController', ['allMessagesFactory'])
         $('.messageContainer').append(
           '<div class="messagesCell">'+
             "<div class='messageNameHolder'>from: "+list[i].sender+"</div>"+
-            "<div class='messageContentHolder'>text: "+ list[i].commentText+
+            "<div id='"+list[i]._id+"' class='messageContentHolder'>text: "+ list[i].commentText+
           "</div>"
         )
       }
@@ -50,15 +51,31 @@ angular.module('messageController', ['allMessagesFactory'])
           backgroundColor: "white"
         })
       })
+      $('.messageContentHolder').on('click', function(evt){
+        console.log($(evt.target)[0].id);
+        window.location.hash = "#/message/"+$(evt.target)[0].id;
+      })
     }
+    allMessagesFunc(addEmailHtml);/////call the function to load all messages
 
-    allMessagesFunc(addEmailHtml);
+    if(window.location.hash.split('/')[1] == 'message'){
+      var messageId = window.location.hash.split('/')[2];
+      $http({
+        method: "GET"
+        ,url: "/api/comment/"+window.location.hash.split("/")[2]
+        // +window.location.hash.split('/')[2]
+      })
+      .then(function(comment){
+        console.log(comment);
+        self.sender = comment.data.sender;
+        self.commentText = comment.data.commentText;
+      })
+    }
 
 
     ///logout button functionality
     $('.logoutButton').on('click', function(){
       window.localStorage.hofbToken = "";
-      window.location.hash = "#/signin"
     })
   /////////end of the messages controller
   ///////////////////////////////////////

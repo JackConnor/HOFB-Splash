@@ -429,10 +429,20 @@ module.exports = function(app){
 
   /////get all comments sent to a specific user
   app.get('/api/view/comments/:receiverId', function(req, res){
-    console.log(req.params);
     productComment.find({"receiver": "56719a11ee024833030efede"}, function(err, comments){
-      console.log(comments);
       res.json(comments)
+    })
+  })
+
+  /////get a single comment
+  app.get('/api/comment/:messageId', function(req, res){
+    var messageId = req.params.messageId;
+    console.log('id next');
+    console.log(messageId);
+    productComment.findOne({"_id":messageId},function(err, message){
+      if(err){console.log(err)}
+      console.log(message);
+      res.json(message);
     })
   })
 
