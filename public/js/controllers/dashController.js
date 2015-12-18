@@ -77,6 +77,7 @@ angular.module('dashController', ['allProjectsFactory'])
               self.allCollections.push(self.allCollectionsRaw[i])
             }
           }
+          // console.log(self.all);
           callback(arg)
         })
       })
@@ -168,7 +169,7 @@ angular.module('dashController', ['allProjectsFactory'])
             "<div class='projectCell col-md-2 col-xs-12'>"+
               "<div class='projectCellInner'>"+
                 "<div class='projectCellImageHolder'>"+
-                  "<img src='"+self.curatedProjects[i].images[0]+"'>"+
+                  "<img class='projectCellImage' src='"+self.curatedProjects[i].images[0]+"'>"+
                 "</div>"+
                 "<div class='projectCellContent'>"+
                   "<p>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
@@ -279,7 +280,7 @@ angular.module('dashController', ['allProjectsFactory'])
               "<div class='projectCell col-md-2 col-xs-12'>"+
                 "<div class='projectCellInner'>"+
                   "<div class='projectCellImageHolder'>"+
-                    "<img src='"+self.filteredProjects[i].images[0]+"'>"+
+                    "<img class='projectCellImage' src='"+self.filteredProjects[i].images[0]+"'>"+
                   "</div>"+
                   "<div class='projectCellContent'>"+
                     "<p>"+self.filteredProjects[i].TimeSinceCreation+"</p>"+
