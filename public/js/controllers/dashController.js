@@ -547,6 +547,7 @@ angular.module('dashController', ['allProjectsFactory'])
         if( color != 'rgb(28, 28, 28)'){
           $($(evt.target)[0]).css({
             backgroundColor: 'white'
+            ,color: "black"
           })
         }
       })
@@ -556,12 +557,14 @@ angular.module('dashController', ['allProjectsFactory'])
         for (var i = 0; i < collections.length; i++) {
           $(collections[i]).css({
             backgroundColor: 'white'
+            ,color: "black"
           })
         }
         var collectionValue = $($(evt.target)[0])[0].id;
         console.log(collectionValue);
         $($(evt.target)[0]).css({
           backgroundColor: "#1C1C1C"
+          ,color: 'white'
         })
         if(self.curatedToggleCounter == 'active'){
           if(collectionValue == 'All'){

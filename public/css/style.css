@@ -296,7 +296,7 @@
 
 .designerDashCollectionCell {
   height: 40px;
-  outline: 2px solid red;
+  font-size: 26px;
 }
 
 .designerDashCollections {
