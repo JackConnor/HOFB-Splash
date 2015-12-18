@@ -75,7 +75,6 @@ self.allComments=(data.data);
 
   //self.seedComments = [{_id:'10', sender:'chris', date:'10/21/2015', commentText:'hello first comment'}, {_id:'10',sender:'John', date:'10/2/2015', commentText:'hello second comment'},{_id:'10',sender:'matt', date:'10/22/2015', commentText:'hello third comment'},{_id:'10', sender:'Gabe', date:'10/25/2015', commentText:'hello last comment'}]
   //self.test=('self test'); // quick way to testing displaying data
->>>>>>> viewProduct
   /////end viewProduct controller
   ////////////////////////
   ////////////////////////

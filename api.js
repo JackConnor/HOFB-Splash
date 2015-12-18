@@ -36,8 +36,6 @@ var productComment      = require('./models/productComment.js');
 
 module.exports = function(app){
 
-
-
   /////////////////////////////////
   ////////begin user api requests////
 
@@ -417,7 +415,7 @@ module.exports = function(app){
   });
   /////end email stuff////////////////////
   ////////////////////////////////////////
-  
+
 }
 
 //mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')

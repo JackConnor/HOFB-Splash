@@ -211,9 +211,6 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////function for appending filtered lists from dropdown in realtime
     function loadFilteredList(filterType, filterValue, listToFilter){
-      for (var i = 0; i < $('.projectCell').length; i++) {
-        $('.projectCell')[i].remove();
-      };
       var productData = listToFilter[0];
       var productElemType = productData[filterType];///return string or array
       var filteredArray = [];
@@ -247,8 +244,11 @@ angular.module('dashController', ['allProjectsFactory'])
       //////begin if statement for self.filtered
       if(!self.filteredProjects || self.filteredProjects.length == 0){
         console.log('no hits for that filter');
+        $('.designerDashList').html('');
       }
       else {
+        console.log(self.filteredProjects);
+        console.log('trying to do something');
         for (var i = 0; i < self.filteredProjects.length; i++) {
           function timeSince(){
             var nowDate = new Date();
@@ -322,6 +322,7 @@ angular.module('dashController', ['allProjectsFactory'])
         window.location.reload();
       })
       addHoverToCell();
+      self.filteredProjects = [];
     }
 
 
