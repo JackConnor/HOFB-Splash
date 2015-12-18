@@ -424,7 +424,21 @@
 .messagesCell {
   height: 100px;
   outline: 2px solid gray;
-  
+}
+
+.messageContainer {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.messageContentHolder {
+  height: 75%;
+}
+
+.messageNameHolder {
+  height: 25px;
+  outline: 2px solid blue;
+  width: 100%;
 }
 
 .navigationBar {

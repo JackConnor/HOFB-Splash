@@ -35,10 +35,21 @@ angular.module('messageController', ['allMessagesFactory'])
           "</div>"
         )
       }
+      addInteractionToMessages();
     }
 
     function addInteractionToMessages(){
-
+      $('.messageContentHolder').on('mouseenter', function(evt){
+        $($(evt.target)[0].parentElement).css({
+          backgroundColor: "#e6e6e6"
+        })
+      })
+      $('.messageContentHolder').on('mouseleave', function(evt){
+        console.log($($(evt.target)[0].parentElement));
+        $($(evt.target)[0].parentElement).css({
+          backgroundColor: "white"
+        })
+      })
     }
 
     allMessagesFunc(addEmailHtml);
