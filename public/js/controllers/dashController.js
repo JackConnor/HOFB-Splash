@@ -38,6 +38,7 @@ angular.module('dashController', ['allProjectsFactory'])
             self.curatedProjects = curatedProjectsArray;
           }
           //////add time-since-creation field
+          var collectionName = ["All"];
           for (var i = 0; i < self.allProjects.length; i++) {
             function timeSince(){
               var nowDate = new Date();
@@ -61,9 +62,13 @@ angular.module('dashController', ['allProjectsFactory'])
               }
             }
             self.allProjects[i].TimeSinceCreation = timeSince();
+            /////get all collections
+            for (var j = 0; j < self.allProjects[i].collections.length; j++) {
+              console.log(self.allProjects[i].collections[j]);
+              collectionName.push(self.allProjects[i].collections[j])
+            }
+            self.allCollectionsRaw = collectionName;
           }
-          var collectionName = ["All"];
-          self.allCollectionsRaw = collectionName;
           //////must make sure there are no duplicates
           self.allCollections = [];
           for (var i = 0; i < self.allCollectionsRaw.length; i++) {
@@ -77,6 +82,8 @@ angular.module('dashController', ['allProjectsFactory'])
               self.allCollections.push(self.allCollectionsRaw[i])
             }
           }
+          self.allCollections
+          console.log(self.allCollections);
           callback(arg)
         })
       })
@@ -168,7 +175,7 @@ angular.module('dashController', ['allProjectsFactory'])
             "<div class='projectCell col-md-2 col-xs-12'>"+
               "<div class='projectCellInner'>"+
                 "<div class='projectCellImageHolder'>"+
-                  "<img src='"+self.curatedProjects[i].images[0]+"'>"+
+                  "<img class='projectCellImage' src='"+self.curatedProjects[i].images[0]+"'>"+
                 "</div>"+
                 "<div class='projectCellContent'>"+
                   "<p>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
@@ -211,9 +218,6 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////function for appending filtered lists from dropdown in realtime
     function loadFilteredList(filterType, filterValue, listToFilter){
-      for (var i = 0; i < $('.projectCell').length; i++) {
-        $('.projectCell')[i].remove();
-      };
       var productData = listToFilter[0];
       var productElemType = productData[filterType];///return string or array
       var filteredArray = [];
@@ -247,8 +251,11 @@ angular.module('dashController', ['allProjectsFactory'])
       //////begin if statement for self.filtered
       if(!self.filteredProjects || self.filteredProjects.length == 0){
         console.log('no hits for that filter');
+        $('.designerDashList').html('');
       }
       else {
+        console.log(self.filteredProjects);
+        console.log('trying to do something');
         for (var i = 0; i < self.filteredProjects.length; i++) {
           function timeSince(){
             var nowDate = new Date();
@@ -279,7 +286,7 @@ angular.module('dashController', ['allProjectsFactory'])
               "<div class='projectCell col-md-2 col-xs-12'>"+
                 "<div class='projectCellInner'>"+
                   "<div class='projectCellImageHolder'>"+
-                    "<img src='"+self.filteredProjects[i].images[0]+"'>"+
+                    "<img class='projectCellImage' src='"+self.filteredProjects[i].images[0]+"'>"+
                   "</div>"+
                   "<div class='projectCellContent'>"+
                     "<p>"+self.filteredProjects[i].TimeSinceCreation+"</p>"+
@@ -322,6 +329,7 @@ angular.module('dashController', ['allProjectsFactory'])
         window.location.reload();
       })
       addHoverToCell();
+      self.filteredProjects = [];
     }
 
 
