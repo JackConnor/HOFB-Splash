@@ -14,6 +14,7 @@ angular.module('startSessionFactory', [])
       .then(function(sessionToken){
         console.log(sessionToken.data);
         window.localStorage.hofbToken = sessionToken.data;
+        //window.sessionStorage.hofbToken = sessionToken.data;
       })
     }
     return {

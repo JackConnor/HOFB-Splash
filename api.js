@@ -178,23 +178,7 @@ module.exports = function(app){
       });
     })
   })
-  ///get all product comments
-  app.get('/api/view/product', function(req, res){
-    console.log('productComment')
-    productComment.find({}, function(err, productComment){
-      if(err) console.log(err)
-      console.log(productComment); //this is a console log that will pop up through the terminal shell
-      res.json(productComment)
-    })
-  })
 
-  ///get a single product comments
-  // app.get('/api/view/product/:id', function(req, res){
-  //   Product.findOne({"_id":req.params.id}, function(err, productComments){
-  //     if(err) throw err;
-  //     res.json(productComments);
-  //   })
-  // })
 
   //////delete a product
   app.delete('/api/product/:product_id', function(req, res){
@@ -417,8 +401,35 @@ module.exports = function(app){
   });
   /////end email stuff////////////////////
   ////////////////////////////////////////
-  
+
+  ////Start of commenting system///////
+  ////////////////////////////////////
+
+  ///get all product comments
+  app.get('/api/view/product', function(req, res){
+    console.log('productComment')
+    productComment.find({}, function(err, productComment){
+      if(err) console.log(err)
+      console.log(productComment); //this is a console log that will pop up through the terminal shell
+      res.json(productComment)
+    })
+  })
+
+
+  ///Posting a single comment
+  app.post("/api/product/comment", function(req, res){
+    console.log(req.body);
+    productComment.create(req.body, function(err, productComment){
+      if(err) throw err;
+      res.json(productComment);
+    })
+  })
+
 }
+
+/////End of commenting system ////////
+/////////////////////////////////////
+/////////////////////////////////////
 
 //mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
 //mongoose.connect('mongodb://localhost:27017/myproject');
