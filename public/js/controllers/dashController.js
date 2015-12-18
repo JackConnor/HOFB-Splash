@@ -38,6 +38,7 @@ angular.module('dashController', ['allProjectsFactory'])
             self.curatedProjects = curatedProjectsArray;
           }
           //////add time-since-creation field
+          var collectionName = ["All"];
           for (var i = 0; i < self.allProjects.length; i++) {
             function timeSince(){
               var nowDate = new Date();
@@ -61,9 +62,13 @@ angular.module('dashController', ['allProjectsFactory'])
               }
             }
             self.allProjects[i].TimeSinceCreation = timeSince();
+            /////get all collections
+            for (var j = 0; j < self.allProjects[i].collections.length; j++) {
+              console.log(self.allProjects[i].collections[j]);
+              collectionName.push(self.allProjects[i].collections[j])
+            }
+            self.allCollectionsRaw = collectionName;
           }
-          var collectionName = ["All"];
-          self.allCollectionsRaw = collectionName;
           //////must make sure there are no duplicates
           self.allCollections = [];
           for (var i = 0; i < self.allCollectionsRaw.length; i++) {
@@ -77,7 +82,8 @@ angular.module('dashController', ['allProjectsFactory'])
               self.allCollections.push(self.allCollectionsRaw[i])
             }
           }
-          // console.log(self.all);
+          self.allCollections
+          console.log(self.allCollections);
           callback(arg)
         })
       })
