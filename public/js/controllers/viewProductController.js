@@ -8,31 +8,40 @@ angular.module('viewProductController', [])
     console.log('viewProductController is working');
     self.test=('self test');
 
+//Product Id
+    var productId = window.location.hash.split('/')[3];
+    console.log(productId);
 
 
 // Submit comment button wiring
   $(".commentSubmitBtn").on('click', function(){
     console.log('Submit comment button is working');
-          addProductComment
+          addProductComment();
     });
 
 //function to collect and post comment
 function addProductComment() {
-                var targetFormId = $(this).attr('data-formId');
-                var targetForm = $(targetFormId, productComment);
-                var newCommentName = $('.name', targetForm).val();
-                var newCommentMessage = $('.message', targetForm).val();
+                // var targetFormId = $(this).attr('data-formId');
+                // var targetForm = $(targetFormId);
+                var newCommentId = $(productId)
+                var newCommentSender = $('.sender').val();
+                var newCommentMessage = $('.message').val();
 
                 var myData = {
-                    sender: newCommentName,
+                    sender: newCommentSender,
                     message: newCommentMessage,
                 };
+                console.log(myData);
                 self.test=(myData);
                 $http({
                   method: "POST"
                   ,url: "/api/product/comment"
                   ,data: myData
                 })
+                .then(function(data){
+                  console.log(data);
+                })
+
             }
 
 
@@ -47,12 +56,6 @@ console.log(productId);
       window.localStorage.hofbToken = "";
       window.location.hash = "#/signin"
     })
-
-console.log(window.location.hash);
-console.log(window.location.hash.split(''));
-console.log(window.location.hash.split('/'));
-console.log(window.location.hash.split('/')[3]);
-
 
 
 // $http({
