@@ -421,6 +421,12 @@
   margin-left: 80%;
 }
 
+.messagesCell {
+  height: 100px;
+  outline: 2px solid gray;
+  
+}
+
 .navigationBar {
   height: 40px;
   font-size: 30px;

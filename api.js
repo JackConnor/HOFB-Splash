@@ -363,17 +363,31 @@ module.exports = function(app){
     console.log('in emails');
     Emailcapture.find({}, function(err, emails){
       console.log(emails);
-      var uniqueArray = [];
-      for (var i = 0; i < emails.length; i++) {
-        for (var j = 0; j < uniqueArray.length; j++) {
-          if(emails[i].email == uniqueArray[j]){
-          }
-          else{
+      var allEmails = [];
+      for (var i = 0; i < 35; i++) {
+        var passBool = true;
+        for (var j = 0; j < allEmails.length; j++) {
+          if(emails[i] == allEmails[j]){
+            console.log('a double');
+            passBool = false;
           }
         }
-        uniqueArray.push(emails[i].email);
+        if(passBool){
+          allEmails.push(emails[i].email)
+        }
       }
-      console.log(uniqueArray);
+      var uniqueArray = allEmails;
+      // var uniqueArray = [];
+      // for (var i = 0; i < emails.length; i++) {
+      //   for (var j = 0; j < uniqueArray.length; j++) {
+      //     if(emails[i].email == uniqueArray[j]){
+      //     }
+      //     else{
+      //     }
+      //   }
+      //   uniqueArray.push(emails[i].email);
+      // }
+      // console.log(uniqueArray);
       var emailStringFunc = function(){
         var eString = "";
         for (var i = 0; i < uniqueArray.length; i++) {
@@ -406,10 +420,19 @@ module.exports = function(app){
   ///get all product comments
   app.get('/api/view/product', function(req, res){
     console.log('productComment')
-    productComment.find({}, function(err, productComment){
+    productComment.find({}, function(err, productComments){
       if(err) console.log(err)
-      console.log(productComment); //this is a console log that will pop up through the terminal shell
-      res.json(productComment)
+      console.log(productComments); //this is a console log that will pop up through the terminal shell
+      res.json(productComments)
+    })
+  })
+
+  /////get all comments sent to a specific user
+  app.get('/api/view/comments/:receiverId', function(req, res){
+    console.log(req.params);
+    productComment.find({"receiver": "56719a11ee024833030efede"}, function(err, comments){
+      console.log(comments);
+      res.json(comments)
     })
   })
 
@@ -436,5 +459,5 @@ module.exports = function(app){
 
 var db = process.env.DB_URL_HOFB;
 //mongoose.connect(db)
-mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
+mongoose.connect(db)
 //mongoose.connect(ENV['DB_URL'])

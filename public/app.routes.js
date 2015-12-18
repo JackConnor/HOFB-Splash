@@ -74,6 +74,13 @@ angular.module('app.routes', ['ngRoute'])
       ,controller: 'viewProductCtrl'
       ,controllerAs: 'viewProduct'
     })
+
+    //////go to all messages
+    .when('/messages', {
+      templateUrl: 'templates/_allMessages.html'
+      ,controller: 'messageCtrl'
+      ,controllerAs: 'message'
+    })
     /////////default to home
     .otherwise('/');
 

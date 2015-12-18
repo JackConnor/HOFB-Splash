@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var productSchema = new Schema({
   name: String
   ,userId: String
+  ,curatorId: String
   ,timestamp: Date
   ,images: Array
   ,collections: Array
