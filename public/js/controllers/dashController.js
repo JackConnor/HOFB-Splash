@@ -8,6 +8,7 @@ angular.module('dashController', ['allProjectsFactory'])
 
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
+    self.collectionCounter = true;///so we only load collections once
 
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
@@ -78,11 +79,14 @@ angular.module('dashController', ['allProjectsFactory'])
                 passBool = false;
               }
             }
-            if(passBool){
+            if(passBool && self.allCollectionsRaw[i] != ""){
               self.allCollections.push(self.allCollectionsRaw[i])
             }
           }
-          self.allCollections
+          self.allCollections;
+          if(self.collectionCounter){
+            loadCollection(self.allCollections);
+          }
           console.log(self.allCollections);
           callback(arg)
         })
@@ -508,6 +512,87 @@ angular.module('dashController', ['allProjectsFactory'])
       window.localStorage.hofbToken = "";
       window.location.hash = "#/signin"
     })
+
+    ///////////////////////
+    //////load collections/
+    function loadCollection(collections){
+      self.collectionCounter = false;///so that we only load collections once
+      for (var i = 0; i < collections.length; i++) {
+
+        $('.designerDashCollectionDropdown').append(
+          '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
+            // "<p>"+
+            collections[i]+
+            // "</p>"+
+          "</div>"
+        )
+      }
+      $('.designerDashCollectionCell').on('mouseenter', function(evt){
+        // console.log(evt.target);
+        // console.log($($(evt.target)[0]));
+        var color = $(evt.target).css('backgroundColor');
+        console.log(color);
+        if( color != 'rgb(28, 28, 28)'){
+          $($(evt.target)[0]).css({
+              backgroundColor: '#BDBDBD'
+          })
+        }
+      })
+      $('.designerDashCollectionCell').on('mouseleave', function(evt){
+        // console.log(evt.target);
+        // console.log($($(evt.target)[0]));
+        var color = $(evt.target).css('backgroundColor');
+        console.log(color);
+        console.log();
+        if( color != 'rgb(28, 28, 28)'){
+          $($(evt.target)[0]).css({
+            backgroundColor: 'white'
+          })
+        }
+      })
+      $('.designerDashCollectionCell').on('click', function(evt){
+        var collections = $('.designerDashCollectionCell');
+        console.log(collections);
+        for (var i = 0; i < collections.length; i++) {
+          $(collections[i]).css({
+            backgroundColor: 'white'
+          })
+        }
+        var collectionValue = $($(evt.target)[0])[0].id;
+        console.log(collectionValue);
+        $($(evt.target)[0]).css({
+          backgroundColor: "#1C1C1C"
+        })
+        if(self.curatedToggleCounter == 'active'){
+          if(collectionValue == 'All'){
+            $('.designerDashList').html("");
+            loadProjects(loadInitialList, addHoverToCell);
+          }
+          else {
+            $('.designerDashList').html("");
+            loadFilteredList('collections', collectionValue, self.allProjects);
+          }
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          if(collectionValue == 'All'){
+            $('.designerDashList').html("");
+            loadCuratedList();
+          }
+          else {
+            $('.designerDashList').html("");
+            loadFilteredList('collections', collectionValue, self.curatedProjects);
+          }
+        }
+
+      })
+    }
+    //end load collections/
+    ///////////////////////
+
+
+    /////collection column logic
+
+
   /////end dash controller
   ////////////////////////
   ////////////////////////

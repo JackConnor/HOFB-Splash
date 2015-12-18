@@ -294,6 +294,11 @@
   border-top-right-radius: 5px;
 }
 
+.designerDashCollectionCell {
+  height: 40px;
+  outline: 2px solid red;
+}
+
 .designerDashCollections {
   height: 40px;
   border-bottom: 2px solid #BFBBB7;
