@@ -422,8 +422,8 @@
 }
 
 .messagesCell {
-  height: 130px;
-  outline: 2px solid gray;
+  height: 180px;
+  background-color: #e0ebeb;
 }
 
 .messageContainer {
@@ -432,14 +432,18 @@
 }
 
 .messageContentHolder {
-  height: 70%;
+  height: 100px;
   font-size: 22px;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 15px;
+  background-color: white
 }
 
 .messageNameHolder {
-  height: 30%;
+  height: 50px;
   font-size: 26px;
-  outline: 2px solid blue;
+  background-color: #e5ccff;
   width: 100%;
 }
 

@@ -42,13 +42,13 @@ angular.module('messageController', ['allMessagesFactory'])
     function addInteractionToMessages(){
       $('.messageContentHolder').on('mouseenter', function(evt){
         $($(evt.target)[0].parentElement).css({
-          backgroundColor: "#e6e6e6"
+          backgroundColor: "#669999"
         })
       })
       $('.messageContentHolder').on('mouseleave', function(evt){
         console.log($($(evt.target)[0].parentElement));
         $($(evt.target)[0].parentElement).css({
-          backgroundColor: "white"
+          backgroundColor: "#e0ebeb"
         })
       })
       $('.messageContentHolder').on('click', function(evt){
