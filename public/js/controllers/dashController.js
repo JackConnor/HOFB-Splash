@@ -32,7 +32,7 @@ angular.module('dashController', ['allProjectsFactory'])
             if(allProjects[i].status == "saved"){
               allProjectsSaved.push(allProjects[i]);
             }
-            else if(allProjects[i].status == "submitted to curator"){
+            else if(allProjects[i].status == "submitted to curator" || "curated"){
               curatedProjectsArray.push(allProjects[i]);
             }
             self.allProjects = allProjectsSaved;
@@ -65,7 +65,6 @@ angular.module('dashController', ['allProjectsFactory'])
             self.allProjects[i].TimeSinceCreation = timeSince();
             /////get all collections
             for (var j = 0; j < self.allProjects[i].collections.length; j++) {
-              console.log(self.allProjects[i].collections[j]);
               collectionName.push(self.allProjects[i].collections[j])
             }
             self.allCollectionsRaw = collectionName;
@@ -87,7 +86,6 @@ angular.module('dashController', ['allProjectsFactory'])
           if(self.collectionCounter){
             loadCollection(self.allCollections);
           }
-          console.log(self.allCollections);
           callback(arg)
         })
       })
@@ -254,12 +252,9 @@ angular.module('dashController', ['allProjectsFactory'])
       }
       //////begin if statement for self.filtered
       if(!self.filteredProjects || self.filteredProjects.length == 0){
-        console.log('no hits for that filter');
         $('.designerDashList').html('');
       }
       else {
-        console.log(self.filteredProjects);
-        console.log('trying to do something');
         for (var i = 0; i < self.filteredProjects.length; i++) {
           function timeSince(){
             var nowDate = new Date();
@@ -478,7 +473,6 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////filter by fabric
     $('.designerDashFabric').change(function(){
-      console.log('looooo testing');
       $('.designerDashList').html('');
       if(self.curatedToggleCounter == 'active'){
         loadFilteredList("fabrics", $('.designerDashFabric').val(), self.allProjects);
@@ -528,10 +522,7 @@ angular.module('dashController', ['allProjectsFactory'])
         )
       }
       $('.designerDashCollectionCell').on('mouseenter', function(evt){
-        // console.log(evt.target);
-        // console.log($($(evt.target)[0]));
         var color = $(evt.target).css('backgroundColor');
-        console.log(color);
         if( color != 'rgb(28, 28, 28)'){
           $($(evt.target)[0]).css({
               backgroundColor: '#BDBDBD'
@@ -539,11 +530,7 @@ angular.module('dashController', ['allProjectsFactory'])
         }
       })
       $('.designerDashCollectionCell').on('mouseleave', function(evt){
-        // console.log(evt.target);
-        // console.log($($(evt.target)[0]));
         var color = $(evt.target).css('backgroundColor');
-        console.log(color);
-        console.log();
         if( color != 'rgb(28, 28, 28)'){
           $($(evt.target)[0]).css({
             backgroundColor: 'white'
@@ -553,7 +540,6 @@ angular.module('dashController', ['allProjectsFactory'])
       })
       $('.designerDashCollectionCell').on('click', function(evt){
         var collections = $('.designerDashCollectionCell');
-        console.log(collections);
         for (var i = 0; i < collections.length; i++) {
           $(collections[i]).css({
             backgroundColor: 'white'
@@ -561,7 +547,6 @@ angular.module('dashController', ['allProjectsFactory'])
           })
         }
         var collectionValue = $($(evt.target)[0])[0].id;
-        console.log(collectionValue);
         $($(evt.target)[0]).css({
           backgroundColor: "#1C1C1C"
           ,color: 'white'
