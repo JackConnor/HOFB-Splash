@@ -177,6 +177,17 @@ module.exports = function(app){
     })
   })
 
+  ///update just the status
+  app.post('/api/update/status', function(req, res){
+    console.log(req.body);
+    Product.findOne({"_id":req.body.prodId}, function(err, productToUpdate){
+      console.log(productToUpdate);
+      productToUpdate.status = req.body.status;
+      productToUpdate.save();
+      res.json(productToUpdate);
+    })
+  })
+
 
   //////delete a product
   app.delete('/api/product/:product_id', function(req, res){

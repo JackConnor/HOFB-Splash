@@ -36,8 +36,8 @@ angular.module('adminController', ['allProjectsFactory'])
             else if(allProjects[i].status == "submitted to curator"){
               curatedProjectsArray.push(allProjects[i]);
             }
-            self.alreadyCurated = allProjectsAlreadyCurated;
-            self.curatedProjects = curatedProjectsArray;
+            self.alreadyCurated = curatedProjectsArray;
+            self.curatedProjects = allProjectsAlreadyCurated;
             console.log(self.alreadyCurated);
             console.log(self.curatedProjects);
           }
@@ -377,19 +377,38 @@ angular.module('adminController', ['allProjectsFactory'])
         $hoverTarget.css({
           opacity: 0.5
         })
+        console.log($(evt.target)[0].id);
         ////we drill up in order to get the parent, so we can append the html buttons to it
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
-          "<div class='projectCellHoverContainer'>"+
+          "<div class='projectCellHoverContainer' id='"+$(evt.target)[0].id+"'>"+
             "<div class='projectCellTrash'>X </div>"+
             '<div class="projectCellButton" id="projectCellButtonEdit">Edit</div>"'+
           "</div>"
         )
-        $('#projectCellButtonEdit').on('click', function(){
-          var product = $(parentContainer);
-          var productId = $($(product[0].children[1])[0].children[0])[0].id
-          window.location.hash = "#/edit/project/"+productId;
-          window.location.reload();
+        $('#projectCellButtonEdit').on('click', function(evt){
+          var prodIdToUpdate = $($(evt.target)[0].parentNode)[0].id;
+          console.log($($(evt.target)[0].parentNode)[0].id);
+          $('.bodyview').prepend(
+            '<div class="curatePopup">'+
+              "<p>Curate?</p>"+
+              '<button>no</button>'+
+              '<button class="addToCurated" id="'+prodIdToUpdate+'">yes</button>'+
+            '</div>'
+          )
+          $('.addToCurated').on('click', function(evt){
+            var prodId = $(evt.target)[0].id;
+            console.log(prodId);
+            $http({
+              method: "POST"
+              ,url: "/api/update/status"
+              ,data: {status: "curated", prodId: prodId}
+            })
+            .then(function(updatedProduct){
+              console.log(updatedProduct);
+
+            })
+          })
         })
         $('.projectCellTrash').on('click', function(){
           var product = $(parentContainer);
