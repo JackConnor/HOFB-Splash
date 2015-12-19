@@ -257,6 +257,15 @@
   margin-left: 20%;
 }
 
+.curatePopup {
+  height: 200px;
+  width: 300px;
+  margin: 240px 40%;
+  outline: 4px solid gray;
+  position: fixed;
+  z-index: 3;
+}
+
 .dashFilter {
   -webkit-appearance: none;  /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
   -moz-appearance: none;  /*REMOVES DEFAULT FIREFOX STYLE*/
