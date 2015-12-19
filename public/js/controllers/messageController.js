@@ -72,10 +72,10 @@ angular.module('messageController', ['allMessagesFactory'])
       })
     }
 
-
     ///logout button functionality
     $('.logoutButton').on('click', function(){
       window.localStorage.hofbToken = "";
+      window.location.hash = "#/signin";
     })
   /////////end of the messages controller
   ///////////////////////////////////////

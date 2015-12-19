@@ -22,8 +22,8 @@ angular.module('app.routes', ['ngRoute'])
 
     .when('/admin/dashboard', {
       templateUrl: 'templates/_adminDashboard.html'
-      ,controller: 'dashCtrl'
-      ,controllerAs: 'dash'
+      ,controller: 'adminCtrl'
+      ,controllerAs: 'admin'
     })
 
     .when('/designer/dashboard', {
