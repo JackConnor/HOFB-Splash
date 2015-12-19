@@ -431,17 +431,21 @@
 }
 
 .messagesCell {
-  height: 180px;
+  height: 140px;
   background-color: #e0ebeb;
 }
 
 .messageContainer {
-  width: 80%;
-  margin-left: 10%;
+  display: inline-block;
+}
+
+.messageContent {
+  min-height: 300px;
+  outline: 4px solid gray;
 }
 
 .messageContentHolder {
-  height: 100px;
+  height: 60px;
   font-size: 22px;
   width: 80%;
   margin-left: 10%;
@@ -454,6 +458,22 @@
   font-size: 26px;
   background-color: #e5ccff;
   width: 100%;
+}
+
+.messageSender {
+  height: 25%;
+  background-color: red;
+  font-size: 29px;
+}
+
+.messagesSingleContainer {
+  height: 100%;
+  outline: 2px solid red;
+}
+
+.messageText {
+  height: 75%;
+  font-size: 22px;
 }
 
 .navigationBar {

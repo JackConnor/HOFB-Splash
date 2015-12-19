@@ -43,10 +43,8 @@ module.exports = function(app){
 
   //get all createProjects
   app.get('/api/createprojects', function(req, res){
-    console.log('creating')
     Project.find({}, function(err, projects){
       if(err) console.log(err)
-      // console.log(projects)
       res.json(projects)
     })
     res.json(projects)
@@ -146,18 +144,14 @@ module.exports = function(app){
 
   ////post a single product
   app.post('/api/products', function(req, res){
-    console.log(req.body);
     Product.create(req.body, function(err, product){
       if(err) throw err;
-      console.log(product);
       res.json(product);
     })
   })
 
   /////update a product
   app.post('/api/product/update', function(req, res){
-    console.log(req.body);
-    console.log(req.body.projectId);
     Product.findOne({"_id":req.body.projectId}, function(err, product){
       if(err){console.log(err)}
         product.name = req.body.name;
@@ -179,9 +173,7 @@ module.exports = function(app){
 
   ///update just the status
   app.post('/api/update/status', function(req, res){
-    console.log(req.body);
     Product.findOne({"_id":req.body.prodId}, function(err, productToUpdate){
-      console.log(productToUpdate);
       productToUpdate.status = req.body.status;
       productToUpdate.save();
       res.json(productToUpdate);
@@ -305,19 +297,7 @@ module.exports = function(app){
     dest: __dirname + '../public/uploads/',
   })
 
-  // app.post('/api/photo', function(req, res, err){
-  //   console.log(req.body);
-  //   console.log(req.body.file);
-  //   res.json({message:'at least we got some back-and-forth'})
-  //   cloudinary.uploader.upload(req.file, function(uploadResult){
-  //      console.log(uploadResult);
-  //      res.json(uploadResult.secure_url)
-  //    })
-  // })
-
   app.post('/api/pictures', upload.array('files', 4), function(req,res){
-    // console.log(req.body);
-    // console.log(req.files);
     for (var i = 0; i < req.files.length; i++) {
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination
@@ -371,15 +351,12 @@ module.exports = function(app){
 
   /////get all emails from splash collection to email back to us
   app.get('/api/emails', function(req, res){
-    console.log('in emails');
     Emailcapture.find({}, function(err, emails){
-      console.log(emails);
       var allEmails = [];
       for (var i = 0; i < 35; i++) {
         var passBool = true;
         for (var j = 0; j < allEmails.length; j++) {
           if(emails[i] == allEmails[j]){
-            console.log('a double');
             passBool = false;
           }
         }
@@ -388,17 +365,6 @@ module.exports = function(app){
         }
       }
       var uniqueArray = allEmails;
-      // var uniqueArray = [];
-      // for (var i = 0; i < emails.length; i++) {
-      //   for (var j = 0; j < uniqueArray.length; j++) {
-      //     if(emails[i].email == uniqueArray[j]){
-      //     }
-      //     else{
-      //     }
-      //   }
-      //   uniqueArray.push(emails[i].email);
-      // }
-      // console.log(uniqueArray);
       var emailStringFunc = function(){
         var eString = "";
         for (var i = 0; i < uniqueArray.length; i++) {
@@ -407,7 +373,6 @@ module.exports = function(app){
         return eString;
       }
       var emailString = emailStringFunc();
-      console.log(emailString);
       //
       mandrill_client.messages.send({
         message: {
@@ -430,10 +395,8 @@ module.exports = function(app){
 
   ///get all product comments
   app.get('/api/view/product', function(req, res){
-    console.log('productComment')
     productComment.find({}, function(err, productComments){
       if(err) console.log(err)
-      console.log(productComments); //this is a console log that will pop up through the terminal shell
       res.json(productComments)
     })
   })
@@ -448,11 +411,8 @@ module.exports = function(app){
   /////get a single comment
   app.get('/api/comment/:messageId', function(req, res){
     var messageId = req.params.messageId;
-    console.log('id next');
-    console.log(messageId);
     productComment.findOne({"_id":messageId},function(err, message){
       if(err){console.log(err)}
-      console.log(message);
       res.json(message);
     })
   })
@@ -460,7 +420,6 @@ module.exports = function(app){
 
   ///Posting a single comment
   app.post("/api/product/comment", function(req, res){
-    console.log(req.body);
     productComment.create(req.body, function(err, productComment){
       if(err) throw err;
       res.json(productComment);

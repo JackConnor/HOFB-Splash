@@ -5,8 +5,6 @@ angular.module('messageController', ['allMessagesFactory'])
   messageCtrl.$inject = ['$http', 'allMessages'];
   function messageCtrl($http, allMessages){
     var self = this;
-    console.log('in the messages Controller');
-
     function allMessagesFunc(setHtmlCallback){
       $http({
         method: "GET"
@@ -14,13 +12,11 @@ angular.module('messageController', ['allMessagesFactory'])
       })
       .then(function(decodedToken){
         self.decodedToken = decodedToken;
-        console.log(decodedToken);
         $http({
           method: "GET"
           ,url: "/api/view/comments/"+decodedToken.data.name
         })
         .then(function(allComments){
-          console.log(allComments);
           self.allComments = allComments.data;
           setHtmlCallback(self.allComments);
         })
@@ -46,14 +42,26 @@ angular.module('messageController', ['allMessagesFactory'])
         })
       })
       $('.messageContentHolder').on('mouseleave', function(evt){
-        console.log($($(evt.target)[0].parentElement));
         $($(evt.target)[0].parentElement).css({
           backgroundColor: "#e0ebeb"
         })
       })
       $('.messageContentHolder').on('click', function(evt){
-        console.log($(evt.target)[0].id);
-        window.location.hash = "#/message/"+$(evt.target)[0].id;
+        var messageId = $(evt.target)[0].id;
+        $http({
+          method: "GET"
+          ,url: "/api/comment/"+messageId
+          // +window.location.hash.split('/')[2]
+        })
+        .then(function(comment){
+          $('.messagesSingleContainer').html('')
+          $('.messagesSingleContainer').append(
+            '<div class="messageContent">'+
+              "<p class='messageSender'>"+comment.data.sender+"</p>"+
+              "<p class='messageText'>"+comment.data.commentText+"</p>"+
+            "</div>"
+          )
+        })
       })
     }
     allMessagesFunc(addEmailHtml);/////call the function to load all messages
@@ -66,7 +74,6 @@ angular.module('messageController', ['allMessagesFactory'])
         // +window.location.hash.split('/')[2]
       })
       .then(function(comment){
-        console.log(comment);
         self.sender = comment.data.sender;
         self.commentText = comment.data.commentText;
       })
