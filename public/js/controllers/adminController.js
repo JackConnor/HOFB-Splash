@@ -26,7 +26,7 @@ angular.module('adminController', ['allProjectsFactory'])
         }
         $http({
           method: "GET"
-          ,url: '/api/'+decodedToken.data.name+'/products'
+          ,url: '/api/submitted/products'
         })
         .then(function(products){
           var allProjects = products.data;

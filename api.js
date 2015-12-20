@@ -90,19 +90,22 @@ module.exports = function(app){
         user.email = req.body.location
       }
       if(req.body.firstname){
-        user.email = req.body.firstname
+        user.email = req.body.firstname;
       }
       if(req.body.lastname){
-        user.email = req.body.lastname
+        user.email = req.body.lastname;
       }
       if(req.body.address){
-        user.email = req.body.address
+        user.email = req.body.address;
       }
       if(req.body.city){
-        user.email = req.body.city
+        user.email = req.body.city;
       }
       if(req.body.profession){
-        user.email = req.body.profession
+        user.email = req.body.profession;
+      }
+      if(req.body.status){
+        user.status = req.body.status;
       }
       user.save(function(err, user){
         res.json(user)
@@ -134,6 +137,13 @@ module.exports = function(app){
     })
   })
 
+  ///get all products currently being submitted for curation
+  app.get('/api/submitted/products', function(req, res){
+    Product.find({"status": "submitted to curator"}, function(err, productsToCurate){
+      res.json(productsToCurate);
+    })
+  })
+
   ///get a single product
   app.get('/api/projects/:id', function(req, res){
     Product.findOne({"_id":req.params.id}, function(err, product){
@@ -154,19 +164,38 @@ module.exports = function(app){
   app.post('/api/product/update', function(req, res){
     Product.findOne({"_id":req.body.projectId}, function(err, product){
       if(err){console.log(err)}
+      if (req.body.name) {
         product.name = req.body.name;
+      }
+      if (req.body.productType) {
         product.productType = req.body.productType;
+      }
+      if (req.body.vendor) {
         product.vendor = req.body.vendor;
+      }
+      if (req.body.stitchPattern) {
         product.stitchPattern = req.body.stitchPattern;
+      }
+      if (req.body.description) {
         product.description = req.body.description;
+      }
+      if (req.body.collections) {
         product.collections = req.body.collections;
-        product.tags = req.body.tags;
+      }
+      if (req.body.colors) {
         product.colors = req.body.colors;
+      }
+      if (req.body.fabrics) {
         product.fabrics = req.body.fabrics;
+      }
+      if (req.body.seasons) {
         product.seasons = req.body.seasons;
+      }
+      if (req.body.button) {
         product.buttons = req.body.button;
-        product.save(function(err, product){
-        res.json(product)
+      }
+      product.save(function(err, product){
+      res.json(product)
       });
     })
   })
