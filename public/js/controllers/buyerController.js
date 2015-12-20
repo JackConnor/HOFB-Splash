@@ -22,12 +22,14 @@ angular.module('buyerController', ['allProjectsFactory'])
       })
       .then(function(decodedToken){
         console.log(decodedToken);
+        var tier = decodedToken.data.aud.split("-")[1];
+        console.log(tier);
         if(decodedToken.data.aud.split('-')[0] != "buyer"){
           window.location.hash = '#/signin'
         }
         $http({
           method: "GET"
-          ,url: '/api/'+decodedToken.data.name+'/products'
+          ,url: '/api/buyer/products/'+tier
         })
         .then(function(products){
           console.log(products);

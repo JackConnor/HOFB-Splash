@@ -407,7 +407,7 @@ angular.module('adminController', ['allProjectsFactory'])
           $('.addToCurated').on('click', function(evt){
             var prodId = $(evt.target)[0].id;
             var tier = $('.tierValue').val();
-            console.log(tiern);
+            console.log(tier);
             console.log(prodId);
             $http({
               method: "POST"
@@ -416,7 +416,7 @@ angular.module('adminController', ['allProjectsFactory'])
             })
             .then(function(updatedProduct){
               console.log(updatedProduct);
-
+              window.location.reload();
             })
           })
         })

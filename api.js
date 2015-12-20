@@ -10,9 +10,8 @@ var route          = express.Router();
 var bcrypt         = require('bcrypt-nodejs');
 var passport       = require('passport');
 var passportLocal  = require('passport-local');
-// var multer         = require('multer');
-// var upload         = multer({ dest: './uploads/'});
-// var upload         = multer({ dest: './uploads/'});
+var multer         = require('multer');
+var upload         = multer({ dest: './uploads/'});
 var cloudinary     = require('cloudinary');
 
 cloudinary.config({
@@ -145,6 +144,15 @@ module.exports = function(app){
     })
   })
 
+  ////get all buyer's tier products
+  app.get("/api/buyer/products/:tier", function(req, res){
+    console.log(req.params);
+    Product.find({"tier":req.params.tier}, function(err, products){
+      console.log(products);
+      res.json(products);
+    })
+  })
+
   ///get a single product
   app.get('/api/projects/:id', function(req, res){
     Product.findOne({"_id":req.params.id}, function(err, product){
@@ -197,6 +205,7 @@ module.exports = function(app){
         product.buttons = req.body.button;
       }
       if (req.body.tier) {
+        console.log('changing the tier');
         product.tier = req.body.tier;
       }
       if (req.body.status) {
@@ -332,9 +341,9 @@ module.exports = function(app){
 
   ///////////////////////////////////////
   /////Begin photo uploading logic///////
-  // var uploading = multer({
-  //   dest: __dirname + '../public/uploads/',
-  // })
+  var uploading = multer({
+    dest: __dirname + '../public/uploads/',
+  })
 
   app.post('/api/pictures', upload.array('files', 4), function(req,res){
     for (var i = 0; i < req.files.length; i++) {
