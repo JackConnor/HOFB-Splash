@@ -395,17 +395,24 @@ angular.module('adminController', ['allProjectsFactory'])
           $('.bodyview').prepend(
             '<div class="curatePopup">'+
               "<p>Curate?</p>"+
+              "<select class='tierValue'>"+
+                "<option value='1'>One</optiion>"+
+                "<option value='2'>Two</optiion>"+
+                "<option value='3'>Three</optiion>"+
+              "</select>"+
               '<button>no</button>'+
               '<button class="addToCurated" id="'+prodIdToUpdate+'">yes</button>'+
             '</div>'
           )
           $('.addToCurated').on('click', function(evt){
             var prodId = $(evt.target)[0].id;
+            var tier = $('.tierValue').val();
+            console.log(tier);
             console.log(prodId);
             $http({
               method: "POST"
-              ,url: "/api/update/status"
-              ,data: {status: "curated", prodId: prodId}
+              ,url: "/api/product/update"
+              ,data: {status: "curated", projectId: prodId, tier: tier}
             })
             .then(function(updatedProduct){
               console.log(updatedProduct);

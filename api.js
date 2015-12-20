@@ -162,6 +162,7 @@ module.exports = function(app){
 
   /////update a product
   app.post('/api/product/update', function(req, res){
+    console.log(req.body);
     Product.findOne({"_id":req.body.projectId}, function(err, product){
       if(err){console.log(err)}
       if (req.body.name) {
@@ -193,6 +194,12 @@ module.exports = function(app){
       }
       if (req.body.button) {
         product.buttons = req.body.button;
+      }
+      if (req.body.tier) {
+        product.tier = req.body.tier;
+      }
+      if (req.body.status) {
+        product.status = req.body.status;
       }
       product.save(function(err, product){
       res.json(product)
