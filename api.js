@@ -10,8 +10,9 @@ var route          = express.Router();
 var bcrypt         = require('bcrypt-nodejs');
 var passport       = require('passport');
 var passportLocal  = require('passport-local');
-var multer         = require('multer');
-var upload         = multer({ dest: './uploads/'});
+// var multer         = require('multer');
+// var upload         = multer({ dest: './uploads/'});
+// var upload         = multer({ dest: './uploads/'});
 var cloudinary     = require('cloudinary');
 
 cloudinary.config({
@@ -331,9 +332,9 @@ module.exports = function(app){
 
   ///////////////////////////////////////
   /////Begin photo uploading logic///////
-  var uploading = multer({
-    dest: __dirname + '../public/uploads/',
-  })
+  // var uploading = multer({
+  //   dest: __dirname + '../public/uploads/',
+  // })
 
   app.post('/api/pictures', upload.array('files', 4), function(req,res){
     for (var i = 0; i < req.files.length; i++) {
