@@ -35,16 +35,12 @@ angular.module('buyerController', ['allProjectsFactory'])
           console.log(products);
           var allProjects = products.data;
           var allProjectsAlreadyCurated = [];
-          var curatedProjectsArray = [];
           for (var i = 0; i < allProjects.length; i++) {
             if(allProjects[i].status == "curated"){
               allProjectsAlreadyCurated.push(allProjects[i]);
             }
-            else if(allProjects[i].status == "submitted to curator"){
-              curatedProjectsArray.push(allProjects[i]);
-            }
             self.alreadyCurated = allProjectsAlreadyCurated;
-            self.curatedProjects = curatedProjectsArray;
+            self.curatedProjects = [];
             console.log(self.alreadyCurated);
             console.log(self.curatedProjects);
           }
