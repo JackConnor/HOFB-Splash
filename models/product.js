@@ -18,7 +18,7 @@ var productSchema = new Schema({
   ,stitchPatterns: Array
   ,status: String
   ,seasons: Array
-  ,tier: String
+  ,tier: Number
 })
 
 module.exports = mongoose.model('product', productSchema)

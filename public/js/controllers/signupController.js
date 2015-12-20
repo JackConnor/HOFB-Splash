@@ -13,9 +13,11 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       console.log('lolll');
       var password = $('.signupPassword').val();
       var rePassword = $('.signupPasswordRepeat').val();
+      var status = window.location.hash.split('/')[1];
+      console.log(status);
       if(password == rePassword){
-        signupUser.signup(startSession.startSession, password);
-        window.location.hash = "#/designer/dashboard"
+        signupUser.signup(startSession.startSession, password, status);
+        window.location.hash = "#/"+status+"/dashboard";
       } else {
         alert('your passwords dont match');
       }
@@ -33,7 +35,19 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       var rePassword = $('.signinPasswordRepeat').val();
       if(password == rePassword){
         signinUser(email, password);
-        window.location.hash = "#/designer/dashboard"
+        // window.location.hash = "#/designer/dashboard"
+        console.log(window.location.hash);
+        setTimeout(function(){
+          $http({
+            method:"GET"
+            ,url: '/api/checkstatus/'+window.localStorage.hofbToken
+          })
+          .then(function(decToken){
+            console.log(decToken);
+            var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
+            window.location.hash = newUrl;
+          })
+        }, 750)
       } else {
         console.log('not matching dude');
       }

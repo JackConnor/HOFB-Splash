@@ -261,7 +261,7 @@
   height: 200px;
   width: 300px;
   margin: 240px 40%;
-  outline: 4px solid gray;
+  background-color:gray;
   position: fixed;
   z-index: 3;
 }

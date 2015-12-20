@@ -5,16 +5,15 @@ angular.module('signupUserFactory', [])
   signupUser.$inject = ['$http'];
   function signupUser($http){
 
-    function signUp(callback, pw){
+    function signUp(callback, pw, status){
       var email = $('.signupEmail').val();
-      console.log(email);
       var password = pw
-      console.log(password);
       var rePassword = pw
+      var status = status;
       $http({
         method: "POST"
         ,url: "/api/signup"
-        ,data: {email: email, password: password}
+        ,data: {email: email, password: password, status: status}
       })
       .then(function(newUser){
         console.log(newUser);
