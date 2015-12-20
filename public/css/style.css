@@ -260,7 +260,7 @@
 .curatePopup {
   height: 200px;
   width: 300px;
-  margin: 240px 40%;
+  margin: 150px 40%;
   background-color:gray;
   position: fixed;
   z-index: 3;

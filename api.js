@@ -172,6 +172,7 @@ module.exports = function(app){
   /////update a product
   app.post('/api/product/update', function(req, res){
     console.log(req.body);
+    console.log('that was the body');
     Product.findOne({"_id":req.body.projectId}, function(err, product){
       if(err){console.log(err)}
       if (req.body.name) {
@@ -211,7 +212,11 @@ module.exports = function(app){
       if (req.body.status) {
         product.status = req.body.status;
       }
+      if (req.body.purchaserInformation) {
+        product.purchaserInformation = req.body.purchaserInformation;
+      }
       product.save(function(err, product){
+        console.log(product);
       res.json(product)
       });
     })
@@ -240,6 +245,15 @@ module.exports = function(app){
     var userId = req.params.user;
     Product.find({'userId':userId}, function(err, products){
       res.json(products);
+    })
+  })
+
+  ////get all products purchased by a single buyer
+  app.get('/api/bought/products/:buyerId', function(req, res){
+    var buyerId = req.params.buyerId;
+    console.log(buyerId);
+    Product.find({"purchaserInformation.purchaserId": buyerId}, function(err, boughtProducts){
+      res.json(boughtProducts);
     })
   })
 

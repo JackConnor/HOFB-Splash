@@ -24,6 +24,8 @@ angular.module('buyerController', ['allProjectsFactory'])
         console.log(decodedToken);
         var tier = decodedToken.data.aud.split("-")[1];
         console.log(tier);
+        self.buyerId = decodedToken.data.name;
+        getBoughtList();/////run on load in order for list to be set on toggle
         if(decodedToken.data.aud.split('-')[0] != "buyer"){
           window.location.hash = '#/signin'
         }
@@ -40,9 +42,7 @@ angular.module('buyerController', ['allProjectsFactory'])
               allProjectsAlreadyCurated.push(allProjects[i]);
             }
             self.alreadyCurated = allProjectsAlreadyCurated;
-            self.curatedProjects = [];
             console.log(self.alreadyCurated);
-            console.log(self.curatedProjects);
           }
           //////add time-since-creation field
           var collectionName = ["All"];
@@ -130,11 +130,14 @@ angular.module('buyerController', ['allProjectsFactory'])
     loadProjects(loadInitialList, addHoverToCell);
 
     ////function for appending active list
-    function loadCuratedList(){
-      for (var i = 0; i < self.curatedProjects.length; i++) {
+    function loadBoughtList(){
+      console.log('going for it');
+      var buyerId = self.buyerId;
+      console.log(self.boughtProducts);
+      for (var i = 0; i < self.boughtProducts.length; i++) {
         function timeSince(){
           var nowDate = new Date();
-          var timeProj = self.curatedProjects[i].timestamp;
+          var timeProj = self.boughtProducts[i].timestamp;
           var projYear = timeProj.split('-')[0];
           var projMonth = timeProj.split('-')[1];
           var projDay = timeProj.split('-')[2];
@@ -153,19 +156,19 @@ angular.module('buyerController', ['allProjectsFactory'])
             return "Less Than 1 day";
           }
         }
-        self.curatedProjects[i].TimeSinceCreation = timeSince();
+        self.boughtProducts[i].TimeSinceCreation = timeSince();
       }
-      for (var i = 0; i < self.curatedProjects.length; i++) {
+      for (var i = 0; i < self.boughtProducts.length; i++) {
         if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
             "<div class='projectCell col-md-2 col-xs-12'>"+
               "<div class='projectCellInner'>"+
                 "<div class='projectCellImageHolder'>"+
-                  "<img class='projectCellImage' src='"+self.curatedProjects[i].images[0]+"'>"+
+                  "<img class='projectCellImage' src='"+self.boughtProducts[i].images[0]+"'>"+
                 "</div>"+
                 "<div class='projectCellContent'>"+
-                  "<p>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
-                  "<p>"+self.curatedProjects[i].name+"--curated</p>"+
+                  "<p>"+self.boughtProducts[i].TimeSinceCreation+"</p>"+
+                  "<p>"+self.boughtProducts[i].name+"--bought</p>"+
                 "</div>"+
               "</div>"+
             "</div>"
@@ -199,6 +202,17 @@ angular.module('buyerController', ['allProjectsFactory'])
       $('.projectCellNewInner').on('click', function(){
         window.location.hash = "#/create/project";
         window.location.reload();
+      })
+    }
+    function getBoughtList(){
+      console.log(self.buyerId);
+      $http({
+        method: "GET"
+        ,url: "/api/bought/products/"+ self.buyerId
+      })
+      .then(function(boughtProducts){
+        console.log(boughtProducts);
+        self.boughtProducts = boughtProducts.data;
       })
     }
 
@@ -325,8 +339,8 @@ angular.module('buyerController', ['allProjectsFactory'])
     ////see all curated projects
     function toggleCurated(){
       $('.designerDashList').html('');
-      loadCuratedList();
-      $('.sectionTitle').text('listing all curated projects')
+      loadBoughtList();
+      $('.sectionTitle').text('listing all bought projects')
     }
 
     ////see all active projects
@@ -394,22 +408,29 @@ angular.module('buyerController', ['allProjectsFactory'])
           console.log($($(evt.target)[0].parentNode)[0].id);
           $('.bodyview').prepend(
             '<div class="curatePopup">'+
-              "<p>Curate?</p>"+
-              '<button>no</button>'+
-              '<button class="addToCurated" id="'+prodIdToUpdate+'">yes</button>'+
+              "<h2>Purchase or request a sample?</h2>"+
+              "<br>"+
+              '<button>no thanks</button>'+
+              '<button class="addToPurchased bought" id="'+prodIdToUpdate+'">Purchase an order</button>'+
+              '<button class="addToPurchased sample" id="'+prodIdToUpdate+'">Request a Sample</button>'+
             '</div>'
           )
-          $('.addToCurated').on('click', function(evt){
+          $('.addToPurchased').on('click', function(evt){
             var prodId = $(evt.target)[0].id;
-            console.log(prodId);
+            console.log($(evt.target)[0].classList[1]);
+            var purchaseType = $(evt.target)[0].classList[1];
+            var purchaserInformation = [{"purchaserId": self.buyerId, "companyName":"Dummy Company"}]
             $http({
               method: "POST"
-              ,url: "/api/update/status"
-              ,data: {status: "curated", prodId: prodId}
+              ,url: "/api/product/update"
+              ,data: {status: purchaseType, projectId: prodId, purchaserInformation: purchaserInformation}
             })
-            .then(function(updatedProduct){
-              console.log(updatedProduct);
-
+            .then(function(err, updatedProduct){
+              if(err){console.log(err)}
+              if (updatedProduct) {
+                // window.location.reload();
+                console.log(updatedProduct);
+              }
             })
           })
         })
@@ -462,7 +483,7 @@ angular.module('buyerController', ['allProjectsFactory'])
         loadFilteredList("productType", $('.designerDashProductType').val(), self.alreadyCurated);
       }
       else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("productType", $('.designerDashProductType').val(), self.curatedProjects);
+        loadFilteredList("productType", $('.designerDashProductType').val(), self.boughtProjects);
       }
     })
 
@@ -473,7 +494,7 @@ angular.module('buyerController', ['allProjectsFactory'])
         loadFilteredList("colors", $('.designerDashColor').val(), self.alreadyCurated);
       }
       else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("colors", $('.designerDashColor').val(), self.curatedProjects);
+        loadFilteredList("colors", $('.designerDashColor').val(), self.boughtProjects);
       }
     })
 
@@ -485,7 +506,7 @@ angular.module('buyerController', ['allProjectsFactory'])
         loadFilteredList("fabrics", $('.designerDashFabric').val(), self.alreadyCurated);
       }
       else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.curatedProjects);
+        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.boughtProjects);
       }
     })
 
@@ -502,7 +523,7 @@ angular.module('buyerController', ['allProjectsFactory'])
         loadFilteredList("seasons", $('.designerDashSeason').val(), self.alreadyCurated);
       }
       else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("seasons", $('.designerDashSeason').val(), self.curatedProjects);
+        loadFilteredList("seasons", $('.designerDashSeason').val(), self.boughtProjects);
       }
     })
     ////End Filtering///////////////
@@ -580,11 +601,11 @@ angular.module('buyerController', ['allProjectsFactory'])
         else if(self.curatedToggleCounter == 'curated'){
           if(collectionValue == 'All'){
             $('.designerDashList').html("");
-            loadCuratedList();
+            loadboughtList();
           }
           else {
             $('.designerDashList').html("");
-            loadFilteredList('collections', collectionValue, self.curatedProjects);
+            loadFilteredList('collections', collectionValue, self.boughtProjects);
           }
         }
 
