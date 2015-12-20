@@ -22,7 +22,7 @@ angular.module('buyerController', ['allProjectsFactory'])
       })
       .then(function(decodedToken){
         console.log(decodedToken);
-        if(decodedToken.data.aud != "buyer"){
+        if(decodedToken.data.aud.split('/')[0] != "buyer"){
           window.location.hash = '#/signin'
         }
         $http({

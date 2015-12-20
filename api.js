@@ -240,6 +240,7 @@ module.exports = function(app){
   //////////////////////////////////////
   ///////Signup, Login, Authorization, and Sessions
   app.post('/api/signup', function( req, res ) {
+    console.log(req.body);
   	User.findOne( { email: req.body.email }, function(err, user){
   		if (err ) {
   				res.json( err )
@@ -250,6 +251,7 @@ module.exports = function(app){
   			var newUser = new User();
   			newUser.email = req.body.email
   			newUser.passwordDigest = newUser.generateHash( req.body.password )
+        newUser.status = req.body.status;
   			newUser.save( function( err, user ) {
   				if ( err ) { console.log(err) }
   				//AUTHENTICATE USER HERE
@@ -270,7 +272,7 @@ module.exports = function(app){
         //////user password verified
         jwt.sign({iss: "hofb.com", name: user._id}, process.env.JWT_TOKEN_SECRET, {
           expiresIn: "24h"
-          ,audience: "designer"}
+          ,audience: user.status}
           ,function(token){
             res.json(token);
           });
