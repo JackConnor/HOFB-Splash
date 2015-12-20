@@ -32,10 +32,10 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'dash'
     })
 
-    .when('/curator/dashboard', {
-      templateUrl: 'templates/_curatorDashboard.html'
-      ,controller: 'dashCtrl'
-      ,controllerAs: 'dash'
+    .when('/buyer/dashboard', {
+      templateUrl: 'templates/_buyerDashboard.html'
+      ,controller: 'buyerCtrl'
+      ,controllerAs: 'buyer'
     })
 
     //create new project

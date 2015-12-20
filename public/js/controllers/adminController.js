@@ -21,6 +21,9 @@ angular.module('adminController', ['allProjectsFactory'])
         ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
       })
       .then(function(decodedToken){
+        if(decodedToken.data.aud != "admin"){
+          window.location.hash = '#/signin'
+        }
         $http({
           method: "GET"
           ,url: '/api/'+decodedToken.data.name+'/products'
