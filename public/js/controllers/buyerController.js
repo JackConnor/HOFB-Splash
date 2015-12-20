@@ -1,10 +1,11 @@
-angular.module('dashController', ['allProjectsFactory'])
+angular.module('buyerController', ['allProjectsFactory'])
 
-  .controller('dashCtrl', dashCtrl)
+  .controller('buyerCtrl', buyerCtrl)
 
-  dashCtrl.$inject = ['$http', 'allProjects'];
-  function dashCtrl($http, allProjects){
+  buyerCtrl.$inject = ['$http', 'allProjects'];
+  function buyerCtrl($http, allProjects){
     var self = this;
+    console.log('Buyer controller');
 
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
@@ -20,7 +21,8 @@ angular.module('dashController', ['allProjectsFactory'])
         ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
       })
       .then(function(decodedToken){
-        if(decodedToken.data.aud != "designer"){
+        console.log(decodedToken);
+        if(decodedToken.data.aud != "buyer"){
           window.location.hash = '#/signin'
         }
         $http({
@@ -28,25 +30,28 @@ angular.module('dashController', ['allProjectsFactory'])
           ,url: '/api/'+decodedToken.data.name+'/products'
         })
         .then(function(products){
+          console.log(products);
           var allProjects = products.data;
-          var allProjectsSaved = [];
+          var allProjectsAlreadyCurated = [];
           var curatedProjectsArray = [];
           for (var i = 0; i < allProjects.length; i++) {
-            if(allProjects[i].status == "saved"){
-              allProjectsSaved.push(allProjects[i]);
+            if(allProjects[i].status == "curated"){
+              allProjectsAlreadyCurated.push(allProjects[i]);
             }
-            else if(allProjects[i].status == "submitted to curator" || "curated"){
+            else if(allProjects[i].status == "submitted to curator"){
               curatedProjectsArray.push(allProjects[i]);
             }
-            self.allProjects = allProjectsSaved;
+            self.alreadyCurated = allProjectsAlreadyCurated;
             self.curatedProjects = curatedProjectsArray;
+            console.log(self.alreadyCurated);
+            console.log(self.curatedProjects);
           }
           //////add time-since-creation field
           var collectionName = ["All"];
-          for (var i = 0; i < self.allProjects.length; i++) {
+          for (var i = 0; i < self.alreadyCurated.length; i++) {
             function timeSince(){
               var nowDate = new Date();
-              var timeProj = self.allProjects[i].timestamp;
+              var timeProj = self.alreadyCurated[i].timestamp;
               var projYear = timeProj.split('-')[0];
               var projMonth = timeProj.split('-')[1];
               var projDay = timeProj.split('-')[2];
@@ -65,29 +70,7 @@ angular.module('dashController', ['allProjectsFactory'])
                 return "Less Than 1 day";
               }
             }
-            self.allProjects[i].TimeSinceCreation = timeSince();
-            /////get all collections
-            for (var j = 0; j < self.allProjects[i].collections.length; j++) {
-              collectionName.push(self.allProjects[i].collections[j])
-            }
-            self.allCollectionsRaw = collectionName;
-          }
-          //////must make sure there are no duplicates
-          self.allCollections = [];
-          for (var i = 0; i < self.allCollectionsRaw.length; i++) {
-            var passBool = true;
-            for (var j = 0; j < self.allCollections.length; j++) {
-              if(self.allCollectionsRaw[i] == self.allCollections[j]){
-                passBool = false;
-              }
-            }
-            if(passBool && self.allCollectionsRaw[i] != ""){
-              self.allCollections.push(self.allCollectionsRaw[i])
-            }
-          }
-          self.allCollections;
-          if(self.collectionCounter){
-            loadCollection(self.allCollections);
+            self.alreadyCurated[i].TimeSinceCreation = timeSince();
           }
           callback(arg)
         })
@@ -96,18 +79,18 @@ angular.module('dashController', ['allProjectsFactory'])
 
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
-      for (var i = 0; i < self.allProjects.length; i++) {
+      for (var i = 0; i < self.alreadyCurated.length; i++) {
         if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
             "<div class='col-md-2 col-xs-12 projectCell'>"+
               "<div class='projectCellInner'>"+
                 "<div class='projectCellImageHolder'>"+
-                  "<img class='projectCellImage' id='"+self.allProjects[i]._id+"'"+
-                "src='"+self.allProjects[i].images[0]+"'>"+
+                  "<img class='projectCellImage' id='"+self.alreadyCurated[i]._id+"'"+
+                "src='"+self.alreadyCurated[i].images[0]+"'>"+
                 "</div>"+
                 "<div class='projectCellContent'>"+
-                  "<p>"+self.allProjects[i].TimeSinceCreation+"</p>"+
-                  "<p>"+self.allProjects[i].name+"</p>"+
+                  "<p>"+self.alreadyCurated[i].TimeSinceCreation+"</p>"+
+                  "<p>"+self.alreadyCurated[i].name+"</p>"+
                 "</div>"+
               "</div>"+
             "</div>"
@@ -255,9 +238,12 @@ angular.module('dashController', ['allProjectsFactory'])
       }
       //////begin if statement for self.filtered
       if(!self.filteredProjects || self.filteredProjects.length == 0){
+        console.log('no hits for that filter');
         $('.designerDashList').html('');
       }
       else {
+        console.log(self.filteredProjects);
+        console.log('trying to do something');
         for (var i = 0; i < self.filteredProjects.length; i++) {
           function timeSince(){
             var nowDate = new Date();
@@ -396,19 +382,38 @@ angular.module('dashController', ['allProjectsFactory'])
         $hoverTarget.css({
           opacity: 0.5
         })
+        console.log($(evt.target)[0].id);
         ////we drill up in order to get the parent, so we can append the html buttons to it
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
-          "<div class='projectCellHoverContainer'>"+
+          "<div class='projectCellHoverContainer' id='"+$(evt.target)[0].id+"'>"+
             "<div class='projectCellTrash'>X </div>"+
             '<div class="projectCellButton" id="projectCellButtonEdit">Edit</div>"'+
           "</div>"
         )
-        $('#projectCellButtonEdit').on('click', function(){
-          var product = $(parentContainer);
-          var productId = $($(product[0].children[1])[0].children[0])[0].id
-          window.location.hash = "#/edit/project/"+productId;
-          window.location.reload();
+        $('#projectCellButtonEdit').on('click', function(evt){
+          var prodIdToUpdate = $($(evt.target)[0].parentNode)[0].id;
+          console.log($($(evt.target)[0].parentNode)[0].id);
+          $('.bodyview').prepend(
+            '<div class="curatePopup">'+
+              "<p>Curate?</p>"+
+              '<button>no</button>'+
+              '<button class="addToCurated" id="'+prodIdToUpdate+'">yes</button>'+
+            '</div>'
+          )
+          $('.addToCurated').on('click', function(evt){
+            var prodId = $(evt.target)[0].id;
+            console.log(prodId);
+            $http({
+              method: "POST"
+              ,url: "/api/update/status"
+              ,data: {status: "curated", prodId: prodId}
+            })
+            .then(function(updatedProduct){
+              console.log(updatedProduct);
+
+            })
+          })
         })
         $('.projectCellTrash').on('click', function(){
           var product = $(parentContainer);
@@ -456,7 +461,7 @@ angular.module('dashController', ['allProjectsFactory'])
     $('.designerDashProductType').change(function(evt){
       $('.designerDashList').html('');
       if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("productType", $('.designerDashProductType').val(), self.allProjects);
+        loadFilteredList("productType", $('.designerDashProductType').val(), self.alreadyCurated);
       }
       else if(self.curatedToggleCounter == 'curated'){
         loadFilteredList("productType", $('.designerDashProductType').val(), self.curatedProjects);
@@ -467,7 +472,7 @@ angular.module('dashController', ['allProjectsFactory'])
     $('.designerDashColor').change(function(){
       $('.designerDashList').html('');
       if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("colors", $('.designerDashColor').val(), self.allProjects);
+        loadFilteredList("colors", $('.designerDashColor').val(), self.alreadyCurated);
       }
       else if(self.curatedToggleCounter == 'curated'){
         loadFilteredList("colors", $('.designerDashColor').val(), self.curatedProjects);
@@ -476,9 +481,10 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////filter by fabric
     $('.designerDashFabric').change(function(){
+      console.log('looooo testing');
       $('.designerDashList').html('');
       if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.allProjects);
+        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.alreadyCurated);
       }
       else if(self.curatedToggleCounter == 'curated'){
         loadFilteredList("fabrics", $('.designerDashFabric').val(), self.curatedProjects);
@@ -495,7 +501,7 @@ angular.module('dashController', ['allProjectsFactory'])
     $('.designerDashSeason').change(function(){
       $('.designerDashList').html('');
       if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("seasons", $('.designerDashSeason').val(), self.allProjects);
+        loadFilteredList("seasons", $('.designerDashSeason').val(), self.alreadyCurated);
       }
       else if(self.curatedToggleCounter == 'curated'){
         loadFilteredList("seasons", $('.designerDashSeason').val(), self.curatedProjects);
@@ -525,7 +531,10 @@ angular.module('dashController', ['allProjectsFactory'])
         )
       }
       $('.designerDashCollectionCell').on('mouseenter', function(evt){
+        // console.log(evt.target);
+        // console.log($($(evt.target)[0]));
         var color = $(evt.target).css('backgroundColor');
+        console.log(color);
         if( color != 'rgb(28, 28, 28)'){
           $($(evt.target)[0]).css({
               backgroundColor: '#BDBDBD'
@@ -533,7 +542,11 @@ angular.module('dashController', ['allProjectsFactory'])
         }
       })
       $('.designerDashCollectionCell').on('mouseleave', function(evt){
+        // console.log(evt.target);
+        // console.log($($(evt.target)[0]));
         var color = $(evt.target).css('backgroundColor');
+        console.log(color);
+        console.log();
         if( color != 'rgb(28, 28, 28)'){
           $($(evt.target)[0]).css({
             backgroundColor: 'white'
@@ -543,6 +556,7 @@ angular.module('dashController', ['allProjectsFactory'])
       })
       $('.designerDashCollectionCell').on('click', function(evt){
         var collections = $('.designerDashCollectionCell');
+        console.log(collections);
         for (var i = 0; i < collections.length; i++) {
           $(collections[i]).css({
             backgroundColor: 'white'
@@ -550,6 +564,7 @@ angular.module('dashController', ['allProjectsFactory'])
           })
         }
         var collectionValue = $($(evt.target)[0])[0].id;
+        console.log(collectionValue);
         $($(evt.target)[0]).css({
           backgroundColor: "#1C1C1C"
           ,color: 'white'
@@ -561,7 +576,7 @@ angular.module('dashController', ['allProjectsFactory'])
           }
           else {
             $('.designerDashList').html("");
-            loadFilteredList('collections', collectionValue, self.allProjects);
+            loadFilteredList('collections', collectionValue, self.alreadyCurated);
           }
         }
         else if(self.curatedToggleCounter == 'curated'){
@@ -584,7 +599,7 @@ angular.module('dashController', ['allProjectsFactory'])
     /////collection column logic
 
 
-  /////end dash controller
+  /////end admin controller
   ////////////////////////
   ////////////////////////
   }
