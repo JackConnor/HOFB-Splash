@@ -577,6 +577,29 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       // $(formNew).submit();
     }
     $("#i_submit").on('click', newForm)
+
+    ///////////////////////////////////////////////
+    //////Begin logic for photo popup modal////////
+    $('.newProductCurrentImage').on('click', function(){
+      console.log($('.bodyview'));
+      $('.bodyview').prepend(
+        '<div class="photoModal">'+
+          "<div class='modalFiller'>"+
+          "</div>"+
+          "<div class='modalPhotoHolder'>"+
+            "<img class='modalImage' src='"+$('.newProductCurrentImage').attr('src')+"'>"+
+          '</div>'+
+          "<div class='modalFiller'>"+
+          "</div>"+
+        '</div>'
+      )
+      $('.modalFiller').on('click', function(){
+        $('.photoModal').remove();
+      })/////function to view a full page modal on click
+    });
+    //////End logic for photo popup modal//////////
+    ///////////////////////////////////////////////
+
   /////end createProject controller
   ////////////////////////
   ////////////////////////

@@ -545,6 +545,29 @@
   font-size: 22px;
 }
 
+.modalFiller {
+  height: 100%;
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.modalImage {
+  width: 100%;
+  height: 100%;
+}
+
+.modalPhotoHolder {
+  width: 50%;
+  /*margin-left: 25%;*/
+  vertical-align: top;
+  outline: 2px solid gray;
+  height: 80%;
+  margin-top: 5%;
+  z-index: 6;
+  display: inline-block;
+}
+
 .navigationBar {
   height: 40px;
   font-size: 30px;
@@ -787,6 +810,14 @@
   margin-left: 20%;
   outline: 4px solid gray;
   height: 400px;
+}
+
+.photoModal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: black;
+  z-index: 5;
 }
 
 .productName {
