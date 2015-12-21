@@ -461,19 +461,19 @@ angular.module('dashController', ['allProjectsFactory'])
           "</div>"+
           "<div id='filterBlue' class='colorFilterCell col-xs-4'>"+
           "</div>"+
-          "<div class='colorFilterCell col-xs-4'>"+
+          "<div id='filterWhite' class='colorFilterCell col-xs-4'>"+
           "</div>"+
-          "<div class='colorFilterCell col-xs-4'>"+
+          "<div id='filterBlack' class='colorFilterCell col-xs-4'>"+
           "</div>"+
-          "<div class='colorFilterCell col-xs-4'>"+
+          "<div id='filterOrange' class='colorFilterCell col-xs-4'>"+
           "</div>"+
-          "<div class='colorFilterCell col-xs-4'>"+
+          "<div id='filterYellow' class='colorFilterCell col-xs-4'>"+
           "</div>"+
-          "<div class='colorFilterCell col-xs-4'>"+
+          "<div id='filterMagenta' class='colorFilterCell col-xs-4'>"+
           "</div>"+
-          "<div class='colorFilterCell col-xs-4'>"+
+          "<div id='filterAqua' class='colorFilterCell col-xs-4'>"+
           "</div>"+
-          "<div class='colorFilterCell col-xs-4'>"+
+          "<div id='filterGreen' class='colorFilterCell col-xs-4'>"+
           "</div>"+
         "</div>"
       )
