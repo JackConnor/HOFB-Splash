@@ -247,6 +247,8 @@ angular.module('dashController', ['allProjectsFactory'])
           var productDataArray = listToFilter[i];
           var productTypeArray = productDataArray[filterType];
           for (var j = 0; j < productTypeArray.length; j++) {
+            console.log(productTypeArray[j]);
+            console.log(filterValue);
             if(productTypeArray[j] == filterValue){
               filteredArray.push(listToFilter[i]);
               self.filteredProjects = filteredArray;
@@ -604,7 +606,6 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////////filter dropdown frontend html logic
     $('.designerDashSeason').on('click', function(evt){
-      console.log('season');
       $(evt.target).append(
         "<div class='seasonFilter'>"+
           "<div  id='filterSpring' class='seasonFilterCell col-xs-6'>"+
@@ -627,63 +628,19 @@ angular.module('dashController', ['allProjectsFactory'])
 
       $('.seasonFilterCell').on('click', function(evt){
         var season = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
-        console.log(season);
         $('.designerDashList').html('');
         $('.seasonFilter').remove();
-        console.log('yo');
         if(self.curatedToggleCounter == 'active'){
           loadFilteredList("seasons", season, self.allProjects);
         }
         else if(self.curatedToggleCounter == 'curated'){
+          console.log(' curated list');
+          console.log(self.curatedProjects);
           loadFilteredList("seasons", season, self.curatedProjects);
         }
       })
     })
 
-
-    ////filter by productType
-    // $('.designerDashProductType').change(function(evt){
-    //   $('.designerDashList').html('');
-    //   if(self.curatedToggleCounter == 'active'){
-    //     loadFilteredList("productType", $('.designerDashProductType').val(), self.allProjects);
-    //   }
-    //   else if(self.curatedToggleCounter == 'curated'){
-    //     loadFilteredList("productType", $('.designerDashProductType').val(), self.curatedProjects);
-    //   }
-    // })
-
-    ////filter by color
-    // $('.designerDashColor').change(function(){
-    //   $('.designerDashList').html('');
-    //   if(self.curatedToggleCounter == 'active'){
-    //     loadFilteredList("colors", $('.designerDashColor').val(), self.allProjects);
-    //   }
-    //   else if(self.curatedToggleCounter == 'curated'){
-    //     loadFilteredList("colors", $('.designerDashColor').val(), self.curatedProjects);
-    //   }
-    // })
-
-    ////filter by fabric
-    // $('.designerDashFabric').change(function(){
-    //   $('.designerDashList').html('');
-    //   if(self.curatedToggleCounter == 'active'){
-    //     loadFilteredList("fabrics", $('.designerDashFabric').val(), self.allProjects);
-    //   }
-    //   else if(self.curatedToggleCounter == 'curated'){
-    //     loadFilteredList("fabrics", $('.designerDashFabric').val(), self.curatedProjects);
-    //   }
-    // })
-
-    ////filter by season
-    $('.designerDashSeason').change(function(){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("seasons", $('.designerDashSeason').val(), self.allProjects);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("seasons", $('.designerDashSeason').val(), self.curatedProjects);
-      }
-    })
     ////End Filtering///////////////
     ////////////////////////////////
 

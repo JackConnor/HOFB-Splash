@@ -41,6 +41,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           var elType = seasonHtmlArray[i].classList[1].slice(6, 20);
           for (var j = 0; j < currentValues.length; j++) {
             if( elType == currentValues[j]){
+              $(seasonHtmlArray[i]).addClass('picked');
+              $(seasonHtmlArray[i]).attr('id', "picked_Season_"+currentValues[j]);
               $(seasonHtmlArray[i]).css({
                   backgroundColor: "blue"
               })
@@ -56,6 +58,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           var elType = fabricHtmlArray[i].classList[1].slice(6, 20);
           for (var j = 0; j < currentValues.length; j++) {
             if( elType == currentValues[j]){
+              $(fabricHtmlArray[i]).addClass('picked');
+              $(fabricHtmlArray[i]).attr('id', "picked_Fabric_"+currentValues[j]);
               $(fabricHtmlArray[i]).css({
                 backgroundColor: "blue"
               })
@@ -76,6 +80,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
             console.log(currentValues[j]);
             console.log(elType);
             if( elType == currentValues[j]){
+              $(stitchHtmlArray[i]).addClass('picked');
+              $(stitchHtmlArray[i]).attr('id', "picked_Stitch_"+currentValues[j]);
               $(stitchHtmlArray[i]).css({
                 backgroundColor: "blue"
               })
@@ -90,8 +96,11 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         var currentValues = productObject.colors;
         for (var i = 0; i < colorsHtmlArray.length; i++) {
           var elType = colorsHtmlArray[i].classList[1].slice(6, 20);
+          console.log(elType);
           for (var j = 0; j < currentValues.length; j++) {
             if( elType == currentValues[j]){
+              $(colorsHtmlArray[i]).addClass('picked');
+              $(colorsHtmlArray[i]).attr('id', "picked_Color_"+currentValues[j]);
               $(colorsHtmlArray[i]).css({
                 backgroundColor: "blue"
               })
@@ -108,6 +117,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           var elType = buttonHtmlArray[i].classList[1].slice(6, 20);
           for (var j = 0; j < currentValues.length; j++) {
             if( elType == currentValues[j]){
+              $(buttonHtmlArray[i]).addClass('picked');
+              $(buttonHtmlArray[i]).attr('id', "picked_Button_"+currentValues[j]);
               $(buttonHtmlArray[i]).css({
                 backgroundColor: "blue"
               })
@@ -116,7 +127,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         }
       }
       addButtons();
-
     }
   ////////////////////////////
   ////////////////////////////
@@ -194,7 +204,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     }
     $http({
       method: "POST"
-      ,url: "/api/products"
+      ,url: "/api/products/update"
       ,data: self.createNewProject
     })
     .then(function(newProjectStuff){
@@ -629,6 +639,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       ,buttons: buttons
       ,status: status
     }
+    console.log(newProjectObject);
     console.log(newProjectObject);
     editProjectToDb(newProjectObject, submitPhotos)
     // editProject().editProject(newProjectObject, submitPhotos)///post the object
