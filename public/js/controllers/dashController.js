@@ -608,16 +608,16 @@ angular.module('dashController', ['allProjectsFactory'])
       $(evt.target).append(
         "<div class='seasonFilter'>"+
           "<div  id='filterSpring' class='seasonFilterCell col-xs-6'>"+
-            "<img src='http://secretenergy.com/wp-content/uploads/2014/07/SOUL-WARS-shirt-21.jpg'>" +
+            "<img src='http://organically.server276.com/blog/wp-content/uploads/2014/03/18_spring-300x300.jpg'>" +
           "</div>"+
           "<div  id='filterSummer' class='seasonFilterCell col-xs-6'>"+
-            "<img src='https://bonobos-prod-s3.imgix.net/products/10163/original/PNT_Golf_Maide_HighlandPant_Blackwatch_category.jpg?1423867714&w=300&q=74&h=300&fit=crop'>" +
+            "<img src='http://r2rdesigns.com/wp-content/uploads/2014/06/summer-beach-hd-desktop-wallpaper-300x300.jpg'>" +
           "</div>"+
           "<div  id='filterFall' class='seasonFilterCell col-xs-6'>"+
-            "<img src='http://www.kirnazabete.com/media/catalog/product/cache/1/image/300x/5e06319eda06f020e43594a9c230972d/1/1/11218940_5802764_1000/KirnaZabete-Dolce-and-Gabbana-Rose-Print-Dress-31.jpg'>" +
+            "<img src='http://img.thrfun.com/img/083/036/autumn_trees_s1.jpg'>" +
           "</div>"+
           "<div  id='filterWinter' class='seasonFilterCell col-xs-6'>"+
-            "<img src='http://images.motorcycle-superstore.com/productimages/300/2016-dainese-womens-michelle-leather-jacket-mcss.jpg'>" +
+            "<img src='http://pixelshok.com/wp-content/uploads/2011/01/Winter-300x300.png'>" +
           "</div>"+
         "</div>"
       )
