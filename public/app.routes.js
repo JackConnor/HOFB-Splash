@@ -39,7 +39,7 @@ angular.module('app.routes', ['ngRoute'])
     })
 
     //create new project
-    .when('/create/project', {
+    .when('/create/project/:project_name', {
       templateUrl: 'templates/_newProject.html'
       ,controller: 'createProjectCtrl'
       ,controllerAs: 'createProject'

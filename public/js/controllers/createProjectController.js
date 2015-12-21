@@ -600,6 +600,18 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
     //////End logic for photo popup modal//////////
     ///////////////////////////////////////////////
 
+    ///////////////////////////////////////////////
+    /////////Logic to load intial params name//////
+    function loadName(){
+      var name = window.location.hash.split('/')[3].split('_').join(' ');
+      console.log(name);
+      $('.newProductTitle').val(name);
+    }
+    loadName();
+
+    /////End Logic to load intial params name//////
+    ///////////////////////////////////////////////
+
   /////end createProject controller
   ////////////////////////
   ////////////////////////

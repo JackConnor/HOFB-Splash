@@ -140,13 +140,38 @@ angular.module('dashController', ['allProjectsFactory'])
         }, 100)
       })
       $('.projectCellNewInner').on('click', function(){
-        window.location.hash = "#/create/project";
-        window.location.reload();
+        // window.location.hash = "#/create/project";
+        newProductPop();
+        // window.location.reload();
       })
       arg();
     }
     ///////will set self.allProjects as all our projects
     loadProjects(loadInitialList, addHoverToCell);
+
+    function newProductPop(){
+      $('.bodyview').prepend(
+        '<div class="newProductModal">'+
+          "<div class='modalFiller'>"+
+          "</div>"+
+          "<div class='newProductModalHolder'>"+
+            "<div class='newProductModalDelete'>X</div>"+
+            "<h3>Welcome to your New Product</h3>"+
+            "<h4>Here we will be building your new Product. It's important to give us as much detail as possible, so that our buyers can evaluate what they are getting</h4>"+
+            "<br>"+
+            "<h3>The first step is giving your product a name</h3>"+
+            "<input class='newProductName' placeholder='New Product Name'>"+
+            "<input class='newProductBegin' value='Start' type='button'>"+
+          '</div>'+
+          "<div class='modalFiller'>"+
+          "</div>"+
+        '</div>'
+      )
+      $('.newProductBegin').on('click', function(){
+        var name = $('.newProductName').val().split(' ').join('_');
+        window.location.hash = "#/create/project/"+name;
+      })
+    }
 
     ////function for appending active list
     function loadCuratedList(){
@@ -715,12 +740,6 @@ angular.module('dashController', ['allProjectsFactory'])
     }
     //end load collections/
     ///////////////////////
-
-    ///////////////////////////////////////////////
-    //////Begin logic for photo popup modal////////
-    // $('.')
-    //////End logic for photo popup modal//////////
-    ///////////////////////////////////////////////
 
   /////end dash controller
   ////////////////////////
