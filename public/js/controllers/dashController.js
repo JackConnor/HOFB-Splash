@@ -96,6 +96,8 @@ angular.module('dashController', ['allProjectsFactory'])
 
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
+      var dataType = $('.dashDataType');
+      dataType.text('Active Products, which have not been sent to curation');
       for (var i = 0; i < self.allProjects.length; i++) {
         if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
@@ -150,6 +152,8 @@ angular.module('dashController', ['allProjectsFactory'])
 
     ////function for appending active list
     function loadCuratedList(){
+      var dataType = $('.dashDataType');
+      dataType.text('Sent-for-Curation Products');
       for (var i = 0; i < self.curatedProjects.length; i++) {
         function timeSince(){
           var nowDate = new Date();

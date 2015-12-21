@@ -77,6 +77,8 @@ angular.module('buyerController', ['allProjectsFactory'])
 
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
+      var dataType = $('.dashDataType');
+      dataType.text('Curated, fed to your Tier');
       for (var i = 0; i < self.alreadyCurated.length; i++) {
         if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
@@ -131,6 +133,8 @@ angular.module('buyerController', ['allProjectsFactory'])
 
     ////function for appending active list
     function loadBoughtList(){
+      var dataType = $('.dashDataType');
+      dataType.text('Products which you have purchased');
       console.log('going for it');
       var buyerId = self.buyerId;
       console.log(self.boughtProducts);
@@ -218,6 +222,8 @@ angular.module('buyerController', ['allProjectsFactory'])
 
     ////function for appending filtered lists from dropdown in realtime
     function loadFilteredList(filterType, filterValue, listToFilter){
+      var dataType = $('.dashDataType');
+      dataType.text('Filtered');
       var productData = listToFilter[0];
       var productElemType = productData[filterType];///return string or array
       var filteredArray = [];

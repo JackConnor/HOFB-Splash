@@ -41,8 +41,6 @@ angular.module('adminController', ['allProjectsFactory'])
             }
             self.alreadyCurated = curatedProjectsArray;
             self.curatedProjects = allProjectsAlreadyCurated;
-            console.log(self.alreadyCurated);
-            console.log(self.curatedProjects);
           }
           //////add time-since-creation field
           var collectionName = ["All"];
@@ -77,6 +75,8 @@ angular.module('adminController', ['allProjectsFactory'])
 
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
+      var dataType = $('.dashDataType');
+      dataType.text('Newly submitted for curation');
       for (var i = 0; i < self.alreadyCurated.length; i++) {
         if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
@@ -131,6 +131,8 @@ angular.module('adminController', ['allProjectsFactory'])
 
     ////function for appending active list
     function loadCuratedList(){
+      var dataType = $('.dashDataType');
+      dataType.text('Already been Curated');
       for (var i = 0; i < self.curatedProjects.length; i++) {
         function timeSince(){
           var nowDate = new Date();
@@ -204,6 +206,8 @@ angular.module('adminController', ['allProjectsFactory'])
 
     ////function for appending filtered lists from dropdown in realtime
     function loadFilteredList(filterType, filterValue, listToFilter){
+      var dataType = $('.dashDataType');
+      dataType.text('Filtering');
       var productData = listToFilter[0];
       var productElemType = productData[filterType];///return string or array
       var filteredArray = [];

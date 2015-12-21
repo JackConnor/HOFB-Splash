@@ -822,6 +822,16 @@
   margin-right: 10px;
 }
 
+.selectCell {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: none;
+  appearance: none;
+  width: 100px;
+  height: 100px;
+  outline: 2px solid blue;
+}
+
 .signupContainer {
   position: absolute;
   width: 60%;
