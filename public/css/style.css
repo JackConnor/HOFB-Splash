@@ -118,6 +118,20 @@
   display: inline-block;
 }
 
+.colorFilter {
+  height: 210px;
+  width: 210px;
+  margin: 30px 0 0 -43px;
+  outline: 2px solid gray;
+  position: absolute;
+  display: inline-block;
+}
+
+.colorFilterCell {
+  height: 70px;
+  outline: 2px solid red;
+}
+
 .createButtonCellHolder {
   height: 50%;
 }
@@ -280,6 +294,7 @@
   margin-top: 20px;
   margin-left: 10px;
   background-color: #CAE9F7;
+  display: inline-block;
 }
 
 .deleteButton {
@@ -402,6 +417,14 @@
   height: 65px;
   width: 100%;
   display: block;
+}
+
+#filterRed {
+  background-color: red;
+}
+
+#filterBlue {
+  background-color: blue;
 }
 
 .howToCell {

@@ -5,14 +5,12 @@ angular.module('dashController', ['allProjectsFactory'])
   dashCtrl.$inject = ['$http', 'allProjects'];
   function dashCtrl($http, allProjects){
     var self = this;
-
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
     self.collectionCounter = true;///so we only load collections once
 
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
-
     function loadProjects(callback, arg){
       ///////decode user to pull data
       $http({
@@ -449,12 +447,55 @@ angular.module('dashController', ['allProjectsFactory'])
       })
       //////function to restore cell to order when mouse leaves cell
     }
-
     ////////End Cell Hover///////
     /////////////////////////////
 
     ////////////////////////////////
     //////Begin Filtering///////////
+
+    ////////filter dropdown frontend html logic
+    $('.designerDashType').on('click', function(evt){
+      $(evt.target).append(
+        "<div class='colorFilter'>"+
+          "<div  id='filterRed' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div id='filterBlue' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+        "</div>"
+      )
+      $('.colorFilter').on('mouseleave', function(){
+        $('.colorFilter').remove();
+      })
+
+      $('.colorFilterCell').on('click', function(evt){
+        var color = $(evt.target)[0].id.slice(6, 25);
+        $('.designerDashList').html('');
+        $('.colorFilter').remove();
+        console.log('yo');
+        console.log(color);
+        if(self.curatedToggleCounter == 'active'){
+          loadFilteredList("colors", color, self.allProjects);
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          loadFilteredList("colors", color, self.curatedProjects);
+        }
+      })
+    })
+
 
     ////filter by productType
     $('.designerDashProductType').change(function(evt){
@@ -489,12 +530,6 @@ angular.module('dashController', ['allProjectsFactory'])
       }
     })
 
-    ////filter by button
-    // $('.designerDashButton').change(function(){
-    //   $('.designerDashList').html('');
-    //   loadFilteredList("buttons", $('.designerDashButton').val())
-    // })
-
     ////filter by season
     $('.designerDashSeason').change(function(){
       $('.designerDashList').html('');
@@ -519,12 +554,9 @@ angular.module('dashController', ['allProjectsFactory'])
     function loadCollection(collections){
       self.collectionCounter = false;///so that we only load collections once
       for (var i = 0; i < collections.length; i++) {
-
         $('.designerDashCollectionDropdown').append(
           '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
-            // "<p>"+
             collections[i]+
-            // "</p>"+
           "</div>"
         )
       }
@@ -578,14 +610,10 @@ angular.module('dashController', ['allProjectsFactory'])
             loadFilteredList('collections', collectionValue, self.curatedProjects);
           }
         }
-
       })
     }
     //end load collections/
     ///////////////////////
-
-
-    /////collection column logic
 
 
   /////end dash controller

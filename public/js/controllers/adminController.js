@@ -5,8 +5,6 @@ angular.module('adminController', ['allProjectsFactory'])
   adminCtrl.$inject = ['$http', 'allProjects'];
   function adminCtrl($http, allProjects){
     var self = this;
-    console.log('admin controller');
-
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
     self.collectionCounter = true;///so we only load collections once
@@ -101,29 +99,6 @@ angular.module('adminController', ['allProjectsFactory'])
           )
         }
       }
-      $('.designerDashList').append(
-        "<div class='col-md-2 col-xs-12 projectCell projectCellNew'>"+
-          "<div class='projectCellNewInner'>"+
-            "<p>Build a New product</p>"+
-          "</div>"+
-        "</div>"
-      )
-      //////add hover events to 'addNew' box
-      $('.projectCellNewInner').on('mouseenter', function(){
-        $('.projectCellNewInner').animate({
-          opacity: .6
-        }, 100)
-      })
-      $('.projectCellNewInner').on('mouseleave', function(){
-        $('.projectCellNewInner').animate({
-          outline: 'none'
-          ,opacity: 1
-        }, 100)
-      })
-      $('.projectCellNewInner').on('click', function(){
-        window.location.hash = "#/create/project";
-        window.location.reload();
-      })
       arg();
     }
     ///////will set self.allProjects as all our projects
@@ -180,28 +155,6 @@ angular.module('adminController', ['allProjectsFactory'])
           )
         }
       }
-      $('.designerDashList').append(
-        "<div class='col-md-2 col-xs-12 projectCell projectCellNew'>"+
-          "<div class='projectCellNewInner'>"+
-            "<p>Build a New product</p>"+
-          "</div>"+
-        "</div>"
-      )
-      $('.projectCellNewInner').on('mouseenter', function(){
-        $('.projectCellNewInner').animate({
-          opacity: .6
-        }, 100)
-      })
-      $('.projectCellNewInner').on('mouseleave', function(){
-        $('.projectCellNewInner').animate({
-          outline: 'none'
-          ,opacity: 1
-        }, 100)
-      })
-      $('.projectCellNewInner').on('click', function(){
-        window.location.hash = "#/create/project";
-        window.location.reload();
-      })
     }
 
     ////function for appending filtered lists from dropdown in realtime
@@ -240,12 +193,9 @@ angular.module('adminController', ['allProjectsFactory'])
       }
       //////begin if statement for self.filtered
       if(!self.filteredProjects || self.filteredProjects.length == 0){
-        console.log('no hits for that filter');
         $('.designerDashList').html('');
       }
       else {
-        console.log(self.filteredProjects);
-        console.log('trying to do something');
         for (var i = 0; i < self.filteredProjects.length; i++) {
           function timeSince(){
             var nowDate = new Date();
@@ -295,29 +245,6 @@ angular.module('adminController', ['allProjectsFactory'])
         }
       //////end if statement for self.filtered
       }
-      $('.designerDashList').append(
-        "<div class='col-md-2 col-xs-12 projectCell projectCellNew'>"+
-          "<div class='projectCellNewInner'>"+
-            "<p>Build a New product</p>"+
-          "</div>"+
-        "</div>"
-      )
-      //////add hover events to 'addNew' box
-      $('.projectCellNewInner').on('mouseenter', function(){
-        $('.projectCellNewInner').animate({
-          opacity: .6
-        }, 100)
-      })
-      $('.projectCellNewInner').on('mouseleave', function(){
-        $('.projectCellNewInner').animate({
-          outline: 'none'
-          ,opacity: 1
-        }, 100)
-      })
-      $('.projectCellNewInner').on('click', function(){
-        window.location.hash = "#/create/project";
-        window.location.reload();
-      })
       addHoverToCell();
       self.filteredProjects = [];
     }
@@ -384,18 +311,15 @@ angular.module('adminController', ['allProjectsFactory'])
         $hoverTarget.css({
           opacity: 0.5
         })
-        console.log($(evt.target)[0].id);
         ////we drill up in order to get the parent, so we can append the html buttons to it
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer' id='"+$(evt.target)[0].id+"'>"+
-            "<div class='projectCellTrash'>X </div>"+
-            '<div class="projectCellButton" id="projectCellButtonEdit">Edit</div>"'+
+            '<div class="projectCellButton" id="projectCellButtonEdit">Curate Product</div>"'+
           "</div>"
         )
         $('#projectCellButtonEdit').on('click', function(evt){
           var prodIdToUpdate = $($(evt.target)[0].parentNode)[0].id;
-          console.log($($(evt.target)[0].parentNode)[0].id);
           $('.bodyview').prepend(
             '<div class="curatePopup">'+
               "<p>Curate?</p>"+
@@ -411,40 +335,13 @@ angular.module('adminController', ['allProjectsFactory'])
           $('.addToCurated').on('click', function(evt){
             var prodId = $(evt.target)[0].id;
             var tier = $('.tierValue').val();
-            console.log(tier);
-            console.log(prodId);
             $http({
               method: "POST"
               ,url: "/api/product/update"
               ,data: {status: "curated", projectId: prodId, tier: tier}
             })
             .then(function(updatedProduct){
-              console.log(updatedProduct);
               window.location.reload();
-            })
-          })
-        })
-        $('.projectCellTrash').on('click', function(){
-          var product = $(parentContainer);
-          var productId = $($(product[0].children[1])[0].children[0])[0].id
-          $('.bodyview').prepend(
-            '<div class="designerDashDeleteProduct col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">'+
-              "<p>Are you sure you want to delete this product?</p>"+
-              "<button class='deleteButton'>No</button>"+
-              "<button id='"+productId+"' class='deleteButton'>Yes</button>"+
-            "</div>"
-          )
-          $('.deleteButton').on('click', function(evt){
-            var idToDelete = $(evt.target)[0].id;
-            $http({
-              method: "DELETE"
-              ,url: "/api/product/"+idToDelete
-            })
-            .then(function(deletedObject){
-              /////reload cells
-              $('.designerDashList').html('');
-              loadProjects(loadInitialList, addHoverToCell)
-              $('.designerDashDeleteProduct').remove();
             })
           })
         })
@@ -490,7 +387,6 @@ angular.module('adminController', ['allProjectsFactory'])
 
     ////filter by fabric
     $('.designerDashFabric').change(function(){
-      console.log('looooo testing');
       $('.designerDashList').html('');
       if(self.curatedToggleCounter == 'active'){
         loadFilteredList("fabrics", $('.designerDashFabric').val(), self.alreadyCurated);
@@ -499,13 +395,6 @@ angular.module('adminController', ['allProjectsFactory'])
         loadFilteredList("fabrics", $('.designerDashFabric').val(), self.curatedProjects);
       }
     })
-
-    ////filter by button
-    // $('.designerDashButton').change(function(){
-    //   $('.designerDashList').html('');
-    //   loadFilteredList("buttons", $('.designerDashButton').val())
-    // })
-
     ////filter by season
     $('.designerDashSeason').change(function(){
       $('.designerDashList').html('');
@@ -533,17 +422,12 @@ angular.module('adminController', ['allProjectsFactory'])
 
         $('.designerDashCollectionDropdown').append(
           '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
-            // "<p>"+
             collections[i]+
-            // "</p>"+
           "</div>"
         )
       }
       $('.designerDashCollectionCell').on('mouseenter', function(evt){
-        // console.log(evt.target);
-        // console.log($($(evt.target)[0]));
         var color = $(evt.target).css('backgroundColor');
-        console.log(color);
         if( color != 'rgb(28, 28, 28)'){
           $($(evt.target)[0]).css({
               backgroundColor: '#BDBDBD'
@@ -551,11 +435,7 @@ angular.module('adminController', ['allProjectsFactory'])
         }
       })
       $('.designerDashCollectionCell').on('mouseleave', function(evt){
-        // console.log(evt.target);
-        // console.log($($(evt.target)[0]));
         var color = $(evt.target).css('backgroundColor');
-        console.log(color);
-        console.log();
         if( color != 'rgb(28, 28, 28)'){
           $($(evt.target)[0]).css({
             backgroundColor: 'white'
@@ -565,7 +445,6 @@ angular.module('adminController', ['allProjectsFactory'])
       })
       $('.designerDashCollectionCell').on('click', function(evt){
         var collections = $('.designerDashCollectionCell');
-        console.log(collections);
         for (var i = 0; i < collections.length; i++) {
           $(collections[i]).css({
             backgroundColor: 'white'
@@ -573,7 +452,6 @@ angular.module('adminController', ['allProjectsFactory'])
           })
         }
         var collectionValue = $($(evt.target)[0])[0].id;
-        console.log(collectionValue);
         $($(evt.target)[0]).css({
           backgroundColor: "#1C1C1C"
           ,color: 'white'
