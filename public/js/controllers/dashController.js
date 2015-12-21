@@ -602,6 +602,44 @@ angular.module('dashController', ['allProjectsFactory'])
       })
     })
 
+    ////////filter dropdown frontend html logic
+    $('.designerDashSeason').on('click', function(evt){
+      console.log('season');
+      $(evt.target).append(
+        "<div class='seasonFilter'>"+
+          "<div  id='filterSpring' class='seasonFilterCell col-xs-6'>"+
+            "<img src='http://secretenergy.com/wp-content/uploads/2014/07/SOUL-WARS-shirt-21.jpg'>" +
+          "</div>"+
+          "<div  id='filterSummer' class='seasonFilterCell col-xs-6'>"+
+            "<img src='https://bonobos-prod-s3.imgix.net/products/10163/original/PNT_Golf_Maide_HighlandPant_Blackwatch_category.jpg?1423867714&w=300&q=74&h=300&fit=crop'>" +
+          "</div>"+
+          "<div  id='filterFall' class='seasonFilterCell col-xs-6'>"+
+            "<img src='http://www.kirnazabete.com/media/catalog/product/cache/1/image/300x/5e06319eda06f020e43594a9c230972d/1/1/11218940_5802764_1000/KirnaZabete-Dolce-and-Gabbana-Rose-Print-Dress-31.jpg'>" +
+          "</div>"+
+          "<div  id='filterWinter' class='seasonFilterCell col-xs-6'>"+
+            "<img src='http://images.motorcycle-superstore.com/productimages/300/2016-dainese-womens-michelle-leather-jacket-mcss.jpg'>" +
+          "</div>"+
+        "</div>"
+      )
+      $('.seasonFilter').on('mouseleave', function(){
+        $('.seasonFilter').remove();
+      })
+
+      $('.seasonFilterCell').on('click', function(evt){
+        var season = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
+        console.log(season);
+        $('.designerDashList').html('');
+        $('.seasonFilter').remove();
+        console.log('yo');
+        if(self.curatedToggleCounter == 'active'){
+          loadFilteredList("seasons", season, self.allProjects);
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          loadFilteredList("seasons", season, self.curatedProjects);
+        }
+      })
+    })
+
 
     ////filter by productType
     // $('.designerDashProductType').change(function(evt){

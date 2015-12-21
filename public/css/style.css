@@ -418,8 +418,6 @@
   display: block;
 }
 
-
-
 .fabricFilter {
   height: 210px;
   width: 210px;
@@ -892,6 +890,26 @@
   color: white;
   margin-right: 10px;
 }
+
+.seasonFilter {
+  height: 210px;
+  width: 210px;
+  margin: 30px 0 0 -43px;
+  position: absolute;
+  display: inline-block;
+  z-index: 3;
+}
+
+.seasonFilterCell {
+  height: 105px;
+}
+
+.seasonFilterCell img{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
 
 .selectCell {
   -webkit-appearance: none;
