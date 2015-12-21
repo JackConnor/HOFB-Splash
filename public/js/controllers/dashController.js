@@ -156,12 +156,14 @@ angular.module('dashController', ['allProjectsFactory'])
           "</div>"+
           "<div class='newProductModalHolder'>"+
             "<div class='newProductModalDelete'>X</div>"+
-            "<h3>Welcome to your New Product</h3>"+
-            "<h4>Here we will be building your new Product. It's important to give us as much detail as possible, so that our buyers can evaluate what they are getting</h4>"+
-            "<br>"+
-            "<h3>The first step is giving your product a name</h3>"+
-            "<input class='newProductName' placeholder='New Product Name'>"+
-            "<input class='newProductBegin' value='Start' type='button'>"+
+            "<div class='newProductModalContent'>"+
+              "<h3>Welcome to your New Product</h3>"+
+              "<h4>Here we will be building your new Product. It's important to give us as much detail as possible, so that our buyers can evaluate what they are getting</h4>"+
+              "<br>"+
+              "<h4>The first step is giving your product a name</h4>"+
+              "<input class='newProductName' placeholder='New Product Name'>"+
+              "<input class='newProductBegin' value='Ok, lets start' type='button'>"+
+            '</div>'+
           '</div>'+
           "<div class='modalFiller'>"+
           "</div>"+
@@ -170,6 +172,12 @@ angular.module('dashController', ['allProjectsFactory'])
       $('.newProductBegin').on('click', function(){
         var name = $('.newProductName').val().split(' ').join('_');
         window.location.hash = "#/create/project/"+name;
+      });////function to begin product build
+      $('.modalFiller').on('click', function(){
+        $('.newProductModal').remove();
+      });/////function to go back to dashboard
+      $('.newProductModalDelete').on('click', function(){
+        $('.newProductModal').remove();
       })
     }
 
