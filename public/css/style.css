@@ -418,6 +418,27 @@
   display: block;
 }
 
+
+
+.fabricFilter {
+  height: 210px;
+  width: 210px;
+  margin: 30px 0 0 -43px;
+  position: absolute;
+  display: inline-block;
+  z-index: 3;
+}
+
+.fabricFilterCell {
+  height: 70px;
+}
+
+.fabricFilterCell img{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
 #filterRed {
   background-color: red;
 }
@@ -1130,6 +1151,26 @@ width:500px;
 .productAccessoryBox{
   outline:2px solid blue;
   padding:10px 5px 100px 5px;
+}
+
+
+.typeFilter {
+  height: 210px;
+  width: 210px;
+  margin: 30px 0 0 -43px;
+  position: absolute;
+  display: inline-block;
+  z-index: 3;
+}
+
+.typeFilterCell {
+  height: 70px;
+}
+
+.typeFilterCell img{
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
 #commentTextBox {

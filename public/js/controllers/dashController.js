@@ -454,7 +454,7 @@ angular.module('dashController', ['allProjectsFactory'])
     //////Begin Filtering///////////
 
     ////////filter dropdown frontend html logic
-    $('.designerDashType').on('click', function(evt){
+    $('.designerDashColor').on('click', function(evt){
       $(evt.target).append(
         "<div class='colorFilter'>"+
           "<div  id='filterRed' class='colorFilterCell col-xs-4'>"+
@@ -496,39 +496,145 @@ angular.module('dashController', ['allProjectsFactory'])
       })
     })
 
+    ////////filter dropdown frontend html logic
+    $('.designerDashType').on('click', function(evt){
+      console.log('yoyoyo');
+      $(evt.target).append(
+        "<div class='typeFilter'>"+
+          "<div  id='filterShirt' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://secretenergy.com/wp-content/uploads/2014/07/SOUL-WARS-shirt-21.jpg'>" +
+          "</div>"+
+          "<div  id='filterPants' class='typeFilterCell col-xs-4'>"+
+            "<img src='https://bonobos-prod-s3.imgix.net/products/10163/original/PNT_Golf_Maide_HighlandPant_Blackwatch_category.jpg?1423867714&w=300&q=74&h=300&fit=crop'>" +
+          "</div>"+
+          "<div  id='filterDress' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://www.kirnazabete.com/media/catalog/product/cache/1/image/300x/5e06319eda06f020e43594a9c230972d/1/1/11218940_5802764_1000/KirnaZabete-Dolce-and-Gabbana-Rose-Print-Dress-31.jpg'>" +
+          "</div>"+
+          "<div  id='filterJacket' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://images.motorcycle-superstore.com/productimages/300/2016-dainese-womens-michelle-leather-jacket-mcss.jpg'>" +
+          "</div>"+
+          "<div  id='filterTee' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=140393304'>" +
+          "</div>"+
+          "<div  id='filterSkirt' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://stylishcurves.com/wp-content/uploads/2014/01/burnt-orange-godet-skirt-300x300.jpg'>" +
+          "</div>"+
+          "<div  id='filterShorts' class='typeFilterCell col-xs-4'>"+
+            "<img src='https://images.bigcartel.com/bigcartel/product_images/163340455/-/shorts-0175.jpg'>" +
+          "</div>"+
+          "<div  id='filterScarf' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://onwardpullzone.onwardreserve.netdna-cdn.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/o/r/or-camel-check-reversible-cashmere-scarf.jpg'>" +
+          "</div>"+
+          "<div  id='filterHat' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://ep.yimg.com/ay/oaklandraiders/oakland-raiders-girls-tailsweep-hat-3.jpg'>" +
+          "</div>"+
+        "</div>"
+      )
+      $('.typeFilter').on('mouseleave', function(){
+        $('.typeFilter').remove();
+      })
+
+      $('.typeFilterCell').on('click', function(evt){
+        var type = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
+        console.log(type);
+        $('.designerDashList').html('');
+        $('.typeFilter').remove();
+        console.log('yo');
+        if(self.curatedToggleCounter == 'active'){
+          loadFilteredList("productType", type, self.allProjects);
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          loadFilteredList("productType", type, self.curatedProjects);
+        }
+      })
+    })
+
+    ////////filter Fabric
+    $('.designerDashFabric').on('click', function(evt){
+      console.log('yoyoyo');
+      $(evt.target).append(
+        "<div class='fabricFilter'>"+
+          "<div  id='filterSeersucker' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://cdn.shopify.com/s/files/1/0400/5101/products/FFseernavy_grande.jpg?v=1437514918'>" +
+          "</div>"+
+          "<div  id='filterPleather' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://i.ebayimg.com/images/g/EB8AAOSwk5FUvXtS/s-l300.jpg'>" +
+          "</div>"+
+          "<div  id='filterDockers' class='fabricFilterCell col-xs-4'>"+
+            "<img src='https://dtpmhvbsmffsz.cloudfront.net/posts/2015/05/08/554d8bdbbcd4a73a1d00565b/s_554d8bdbbcd4a73a1d00565c.jpg'>" +
+          "</div>"+
+          "<div  id='filterCamo' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://wiganhydroprinting.co.uk/wp-content/uploads/2014/04/clear-camo-300x3001.jpg'>" +
+          "</div>"+
+          "<div  id='filterVeneer' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://www.arrow.gb.net/images/pages/finish-colours/material-finishes/veneer/walnut-r.jpg'>" +
+          "</div>"+
+          "<div  id='filterNylon' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://static1.squarespace.com/static/52965deee4b0f580c1fe0b7d/52c88375e4b03b30610b4a0a/52c8845be4b0268360ddfb8c/1388874157418/LightRoyalNylon.jpg?format=300w'>" +
+          "</div>"+
+          "<div  id='filterLeather' class='fabricFilterCell col-xs-4'>"+
+            "<img src='https://s-media-cache-ak0.pinimg.com/736x/8b/c3/bf/8bc3bf43297bc2bc9983996ee8ed4cdb.jpg'>" +
+          "</div>"+
+          "<div  id='filterCotton' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://d6lw7to1547c3.cloudfront.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/308744.jpg'>" +
+          "</div>"+
+          "<div  id='filterDenim' class='fabricFilterCell col-xs-4'>"+
+            "<img src='https://www.shoponeonline.com/wp-content/uploads/denim-swatch.png'>" +
+          "</div>"+
+        "</div>"
+      )
+      $('.fabricFilter').on('mouseleave', function(){
+        $('.fabricFilter').remove();
+      })
+
+      $('.fabricFilterCell').on('click', function(evt){
+        var fabric = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
+        console.log(fabric);
+        $('.designerDashList').html('');
+        $('.fabricFilter').remove();
+        console.log('yo');
+        if(self.curatedToggleCounter == 'active'){
+          loadFilteredList("fabrics", fabric, self.allProjects);
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          loadFilteredList("fabrics", fabric, self.curatedProjects);
+        }
+      })
+    })
+
 
     ////filter by productType
-    $('.designerDashProductType').change(function(evt){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("productType", $('.designerDashProductType').val(), self.allProjects);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("productType", $('.designerDashProductType').val(), self.curatedProjects);
-      }
-    })
+    // $('.designerDashProductType').change(function(evt){
+    //   $('.designerDashList').html('');
+    //   if(self.curatedToggleCounter == 'active'){
+    //     loadFilteredList("productType", $('.designerDashProductType').val(), self.allProjects);
+    //   }
+    //   else if(self.curatedToggleCounter == 'curated'){
+    //     loadFilteredList("productType", $('.designerDashProductType').val(), self.curatedProjects);
+    //   }
+    // })
 
     ////filter by color
-    $('.designerDashColor').change(function(){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("colors", $('.designerDashColor').val(), self.allProjects);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("colors", $('.designerDashColor').val(), self.curatedProjects);
-      }
-    })
+    // $('.designerDashColor').change(function(){
+    //   $('.designerDashList').html('');
+    //   if(self.curatedToggleCounter == 'active'){
+    //     loadFilteredList("colors", $('.designerDashColor').val(), self.allProjects);
+    //   }
+    //   else if(self.curatedToggleCounter == 'curated'){
+    //     loadFilteredList("colors", $('.designerDashColor').val(), self.curatedProjects);
+    //   }
+    // })
 
     ////filter by fabric
-    $('.designerDashFabric').change(function(){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.allProjects);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.curatedProjects);
-      }
-    })
+    // $('.designerDashFabric').change(function(){
+    //   $('.designerDashList').html('');
+    //   if(self.curatedToggleCounter == 'active'){
+    //     loadFilteredList("fabrics", $('.designerDashFabric').val(), self.allProjects);
+    //   }
+    //   else if(self.curatedToggleCounter == 'curated'){
+    //     loadFilteredList("fabrics", $('.designerDashFabric').val(), self.curatedProjects);
+    //   }
+    // })
 
     ////filter by season
     $('.designerDashSeason').change(function(){
