@@ -47,6 +47,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       var password = $('.signinPassword').val();
       var rePassword = $('.signinPasswordRepeat').val();
       if(password == rePassword){
+        console.log('tryig to sign in');
         signinUser(email, password);
         // window.location.hash = "#/designer/dashboard"
 

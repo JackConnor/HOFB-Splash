@@ -337,15 +337,21 @@ module.exports = function(app){
   //////session and token stuff
   ///////begin the session
   app.post('/api/startsession', function(req, res){
+    console.log(req.body);
+    console.log('that was the body');
     var password = req.body.password;
     User.findOne({'email': req.body.email}, function(err, user){
       if(err){console.log(err)}
+      console.log(user);
+      console.log('found the user');
       if (user.validPassword(password)) {
+        console.log('and the user has a valid pw');
         //////user password verified
         jwt.sign({iss: "hofb.com", name: user._id}, process.env.JWT_TOKEN_SECRET, {
           expiresIn: "24h"
           ,audience: user.status}
           ,function(token){
+            console.log('and we made a token');
             console.log('made it to the token part, which is: '+token.data);
             res.json({data:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJob…tMSJ9.aWd6vwT0kai7uYN6Uhnv9yN7IL3qjzN0tJ_flc5az6s"});
           });
