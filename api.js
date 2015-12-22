@@ -362,14 +362,17 @@ module.exports = function(app){
         var secret = process.env.JWT_TOKEN_SECRET;
         console.log('and the user has a valid pw');
         //////user password verified
-        jwt.sign({iss: "hofb.com", name: user._id}, secret, {
-          expiresIn: "24h"
-          ,audience: user.status}
-          ,function(token){
-            console.log('and we made a token');
-            console.log('made it to the token part, which is: '+token.data);
-            res.json(token);
-          });
+        var token = jwt.sign({iss: "hofb.com", name: user._id}, secret, {expiresIn: "24h", audience: user.status})
+        console.log(token);
+        res.json(token);
+        // jwt.sign({iss: "hofb.com", name: user._id}, secret, {
+        //   expiresIn: "24h"
+        //   ,audience: user.status}
+        //   ,function(token){
+        //     console.log('and we made a token');
+        //     console.log('made it to the token part, which is: '+token.data);
+        //     res.json(token);
+        //   });
         }
     })
   })
