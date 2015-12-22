@@ -10,7 +10,7 @@ console.log(tttt);
 console.log('token');
 // var decoded = jwt.decode(token);
 // console.log(decoded);
-var decoded2 = jwt.verify(tttt, 'shhhhh');
+var decoded2 = jwt.verify();
 console.log('inbetweener');
 console.log(decoded2);
 // console.log('decoded');
