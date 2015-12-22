@@ -1,14 +1,14 @@
-angular.module('buyerController', ['allProjectsFactory'])
+angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory'])
 
   .controller('buyerCtrl', buyerCtrl)
 
-  buyerCtrl.$inject = ['$http', 'allProjects'];
-  function buyerCtrl($http, allProjects){
+  buyerCtrl.$inject = ['$http', 'allProjects', 'checkPw'];
+  function buyerCtrl($http, allProjects, checkPw){
     var self = this;
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
     self.collectionCounter = true;///so we only load collections once
-
+    checkPw.checkPassword();
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
 

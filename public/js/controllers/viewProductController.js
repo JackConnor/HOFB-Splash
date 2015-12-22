@@ -1,13 +1,13 @@
-angular.module('viewProductController', [])
+angular.module('viewProductController', ['checkPwFactory'])
 
   .controller('viewProductCtrl', viewProductCtrl)
 
-  viewProductCtrl.$inject = ['$http'];
-  function viewProductCtrl($http){
+  viewProductCtrl.$inject = ['$http', 'checkPw'];
+  function viewProductCtrl($http, checkPw){
     var self = this;
     console.log('viewProductController is working');
     self.test=('self test');
-
+    checkPw.checkPassword();
 //Product Id
     var productId = window.location.hash.split('/')[3];
     console.log(productId);

@@ -1,14 +1,14 @@
-angular.module('dashController', ['allProjectsFactory'])
+angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
 
   .controller('dashCtrl', dashCtrl)
 
-  dashCtrl.$inject = ['$http', 'allProjects'];
-  function dashCtrl($http, allProjects){
+  dashCtrl.$inject = ['$http', 'allProjects', 'checkPw'];
+  function dashCtrl($http, allProjects, checkPw){
     var self = this;
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
     self.collectionCounter = true;///so we only load collections once
-
+    checkPw.checkPassword();
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
     function loadProjects(callback, arg){

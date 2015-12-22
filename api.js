@@ -372,7 +372,7 @@ module.exports = function(app){
         //     console.log('and we made a token');
         //     console.log('made it to the token part, which is: '+token.data);
         //     res.json(token);
-        //   });
+        //   }); OLD VERSION THAT WAS SCREWING UP DIGITAL OCEAN
         }
     })
   })
@@ -528,19 +528,20 @@ module.exports = function(app){
       res.json(productComment);
     })
   })
+  /////End of commenting system ////////
+  /////////////////////////////////////
+  /////////////////////////////////////
 
-
+  app.post('/api/checkpassword/production', function(req, res){
+    console.log(req.body);
+    if(req.body.password == "SledFiveScrewy"){
+      res.json(true);
+    }
+  })
 
 }
 
-/////End of commenting system ////////
-/////////////////////////////////////
-/////////////////////////////////////
 
-//mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
-//mongoose.connect('mongodb://localhost:27017/myproject');
 
 var db = process.env.DB_URL_HOFB;
-//mongoose.connect(db)
 mongoose.connect(db)
-//mongoose.connect(ENV['DB_URL'])

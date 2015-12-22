@@ -1,11 +1,11 @@
-var app = angular.module('editProjectController', ['postProjectFactory', 'getProductFactory', 'editProjectFactory'])
+var app = angular.module('editProjectController', ['postProjectFactory', 'getProductFactory', 'editProjectFactory', 'checkPwFactory'])
 
   .controller('editProjectCtrl', editProjectCtrl)
 
-  editProjectCtrl.$inject = ['$http', 'postProject', 'getProduct', 'editProject']
-  function editProjectCtrl($http, postProject){
+  editProjectCtrl.$inject = ['$http', 'postProject', 'getProduct', 'editProject', 'checkPw']
+  function editProjectCtrl($http, postProject, checkPw){
     var self = this;
-    // getProduct();
+    checkPw.checkPassword();
     var productId = window.location.hash.split('/')[3];
     $http({
       method: "GET"

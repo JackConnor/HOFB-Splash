@@ -1,14 +1,14 @@
-angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', 'startSessionFactory'])
+angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', 'startSessionFactory', 'checkPwFactory'])
 
   .controller('signupCtrl', signupCtrl)
 
-  signupCtrl.$inject = ['$http', 'checkstatus', 'signupUser', 'startSession'];
-  function signupCtrl($http, checkstatus, signupUser, startSession){
+  signupCtrl.$inject = ['$http', 'checkstatus', 'signupUser', 'startSession', 'checkPw'];
+  function signupCtrl($http, checkstatus, signupUser, startSession, checkPw){
     window.localStorage.testing = "blahhhh";
     var self = this;
     //
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
-
+    checkPw.checkPassword();
     /////event to sign up a new user from signup page
     $('.signupSubmit').on('click', function(){
       console.log('lolll');

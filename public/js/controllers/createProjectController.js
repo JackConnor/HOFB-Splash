@@ -1,12 +1,13 @@
-var app = angular.module('createProjectController', ['postProjectFactory'])
+var app = angular.module('createProjectController', ['postProjectFactory', 'checkPwFactory'])
 
   .controller('createProjectCtrl', createProjectCtrl)
 
-  createProjectCtrl.$inject = ['$http', 'postProject']
-  function createProjectCtrl($http, postProject){
+  createProjectCtrl.$inject = ['$http', 'postProject', 'checkPw']
+  function createProjectCtrl($http, postProject, checkPw){
     var self = this;
     //////global variables we'll be using for moving the carousel
     ///////get the users token
+    checkPw.checkPassword();
     $http({
       method: "GET"
       ,url: '/api/checkstatus/'+ window.localStorage.hofbToken

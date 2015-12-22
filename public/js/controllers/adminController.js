@@ -1,13 +1,14 @@
-angular.module('adminController', ['allProjectsFactory'])
+angular.module('adminController', ['allProjectsFactory', 'checkPwFactory'])
 
   .controller('adminCtrl', adminCtrl)
 
-  adminCtrl.$inject = ['$http', 'allProjects'];
-  function adminCtrl($http, allProjects){
+  adminCtrl.$inject = ['$http', 'allProjects', 'checkPw'];
+  function adminCtrl($http, allProjects, checkPw){
     var self = this;
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
     self.collectionCounter = true;///so we only load collections once
+    checkPw.checkPassword();
 
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
@@ -33,7 +34,6 @@ angular.module('adminController', ['allProjectsFactory'])
           console.log(allProjects);
           for (var i = 0; i < allProjects.length; i++) {
             if(allProjects[i].status == "curated" || allProjects[i].status == "bought"){
-              console.log('theres one previously curated');
               allProjectsAlreadyCurated.push(allProjects[i]);
             }
             else if(allProjects[i].status == "submitted to curator"){
@@ -41,7 +41,6 @@ angular.module('adminController', ['allProjectsFactory'])
             }
             self.alreadyCurated = curatedProjectsArray;
             self.curatedProjects = allProjectsAlreadyCurated;
-            console.log(self.alreadyCurated);
           }
           //////add time-since-creation field
           var collectionName = ["All"];
