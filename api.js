@@ -6,7 +6,7 @@ var jwt            = require('jsonwebtoken');
 /////fixing tokens
 console.log(jwt);
 var tttt = jwt.sign("Qhi", 'shhhhh');
-console.log(token);
+console.log(tttt);
 console.log('token');
 // var decoded = jwt.decode(token);
 // console.log(decoded);
