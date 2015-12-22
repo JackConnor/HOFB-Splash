@@ -30,8 +30,10 @@ angular.module('adminController', ['allProjectsFactory'])
           var allProjects = products.data;
           var allProjectsAlreadyCurated = [];
           var curatedProjectsArray = [];
+          console.log(allProjects);
           for (var i = 0; i < allProjects.length; i++) {
-            if(allProjects[i].status == "curated"){
+            if(allProjects[i].status == "curated" || allProjects[i].status == "bought"){
+              console.log('theres one previously curated');
               allProjectsAlreadyCurated.push(allProjects[i]);
             }
             else if(allProjects[i].status == "submitted to curator"){
@@ -39,6 +41,7 @@ angular.module('adminController', ['allProjectsFactory'])
             }
             self.alreadyCurated = curatedProjectsArray;
             self.curatedProjects = allProjectsAlreadyCurated;
+            console.log(self.alreadyCurated);
           }
           //////add time-since-creation field
           var collectionName = ["All"];
@@ -69,6 +72,26 @@ angular.module('adminController', ['allProjectsFactory'])
           callback(arg)
         })
       })
+    }
+
+
+    function checkDuplicate(){
+      //////must make sure there are no duplicates
+      self.allCollections = [];
+      for (var i = 0; i < self.allCollectionsRaw.length; i++) {
+        var passBool = true;
+        for (var j = 0; j < self.allCollections.length; j++) {
+          if(self.allCollectionsRaw[i] == self.allCollections[j]){
+            passBool = false;
+          }
+        }
+        if(passBool && self.allCollectionsRaw[i] != ""){
+          self.allCollections.push(self.allCollectionsRaw[i])
+        }
+      }
+      if(self.collectionCounter){
+        loadCollection(self.allCollections);
+      }
     }
 
     /////load all active projects into the dashboard view
@@ -108,6 +131,7 @@ angular.module('adminController', ['allProjectsFactory'])
     function loadCuratedList(){
       var dataType = $('.dashDataType');
       dataType.text('Already been Curated');
+      console.log(self.curatedProjects);
       for (var i = 0; i < self.curatedProjects.length; i++) {
         function timeSince(){
           var nowDate = new Date();

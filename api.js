@@ -140,7 +140,19 @@ module.exports = function(app){
   ///get all products currently being submitted for curation
   app.get('/api/submitted/products', function(req, res){
     Product.find({"status": "submitted to curator"}, function(err, productsToCurate){
-      res.json(productsToCurate);
+      var allProds = [];
+      var submittedProds = productsToCurate;
+      for (var i = 0; i < submittedProds.length; i++) {
+        allProds.push(submittedProds[i]);
+      }
+      Product.find({"status":"curated"}, function(err, curatedProducts){
+        var curatedProds = curatedProducts;
+        for (var i = 0; i < curatedProds.length; i++) {
+          allProds.push(curatedProds[i]);
+        }
+        console.log(allProds);
+        res.json(allProds);
+      })
     })
   })
 

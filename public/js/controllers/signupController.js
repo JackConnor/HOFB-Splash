@@ -47,7 +47,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
             var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
             window.location.hash = newUrl;
           })
-        }, 750)
+        }, 3000)
       } else {
         console.log('not matching dude');
       }
