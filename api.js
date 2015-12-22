@@ -5,12 +5,12 @@ var methodOverride = require('method-override');
 var jwt            = require('jsonwebtoken');
 /////fixing tokens
 console.log(jwt);
-var token = jwt.sign("Qhi", 'shhhhh');
+var tttt = jwt.sign("Qhi", 'shhhhh');
 console.log(token);
 console.log('token');
 // var decoded = jwt.decode(token);
 // console.log(decoded);
-var decoded2 = jwt.verify(token, 'shhhhh');
+var decoded2 = jwt.verify(tttt, 'shhhhh');
 console.log('inbetweener');
 console.log(decoded2);
 // console.log('decoded');
