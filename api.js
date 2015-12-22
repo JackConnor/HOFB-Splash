@@ -7,7 +7,7 @@ var jwt            = require('jsonwebtoken');
 console.log(jwt);
 var token = jwt.sign("hi", 'shhhhh');
 console.log(token);
-// console.log('token');
+console.log('token');
 // var decoded = jwt.verify(token, 'shhhhh');
 // console.log(decoded);
 // console.log('decoded');
@@ -359,14 +359,14 @@ module.exports = function(app){
         var secret = process.env.JWT_TOKEN_SECRET;
         console.log('and the user has a valid pw');
         //////user password verified
-        // jwt.sign({iss: "hofb.com", name: user._id}, secret, {
-        //   expiresIn: "24h"
-        //   ,audience: user.status}
-        //   ,function(token){
-        //     console.log('and we made a token');
-        //     console.log('made it to the token part, which is: '+token.data);
-            res.json("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJob…tMSJ9.aWd6vwT0kai7uYN6Uhnv9yN7IL3qjzN0tJ_flc5az6s");
-          // });
+        jwt.sign({iss: "hofb.com", name: user._id}, secret, {
+          expiresIn: "24h"
+          ,audience: user.status}
+          ,function(token){
+            console.log('and we made a token');
+            console.log('made it to the token part, which is: '+token.data);
+            res.json(token);
+          });
         }
     })
   })
@@ -376,7 +376,7 @@ module.exports = function(app){
     var token = req.params.jwt;
     console.log(token);
     console.log('secret: '+process.env.JWT_TOKEN_SECRET);
-    jwt.verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJob…tMSJ9.aWd6vwT0kai7uYN6Uhnv9yN7IL3qjzN0tJ_flc5az6s", "boomforreal", function(err, decodedToken){
+    jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
       if(err){console.log(err)}
       console.log(decodedToken);
       ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
