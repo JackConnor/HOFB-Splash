@@ -12,6 +12,7 @@ angular.module('startSessionFactory', [])
         ,data: {email: email, password: password}
       })
       .then(function(sessionToken){
+        console.log(sessionToken);
         console.log(sessionToken.data);
         window.localStorage.hofbToken = sessionToken.data;
         callback(sessionToken.data);
