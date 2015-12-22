@@ -343,8 +343,9 @@ module.exports = function(app){
       if (user.validPassword(password)) {
         //////user password verified
         jwt.sign({iss: "hofb.com", name: user._id}, process.env.JWT_TOKEN_SECRET, {
-          expiresIn: "24h"
-          ,audience: user.status}
+          // expiresIn: "24h"
+          // ,
+          audience: user.status}
           ,function(token){
             res.json(token);
           });
