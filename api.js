@@ -345,9 +345,12 @@ module.exports = function(app){
       console.log(user);
       console.log('found the user');
       if (user.validPassword(password)) {
+        var userId = user._id;
+        var status = user.status;
+        var secret = process.env.JWT_TOKEN_SECRET;
         console.log('and the user has a valid pw');
         //////user password verified
-        jwt.sign({iss: "hofb.com", name: user._id}, process.env.JWT_TOKEN_SECRET, {
+        jwt.sign({iss: "hofb.com", name: user._id}, secret, {
           expiresIn: "24h"
           ,audience: user.status}
           ,function(token){
