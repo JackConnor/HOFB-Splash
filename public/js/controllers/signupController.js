@@ -25,10 +25,10 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
 
     ///////function to signin a new user from signin page
     function signinUser(email, pw){
-      startSession.startSession(email, pw, function(){
+      startSession.startSession(email, pw, function(token){
         $http({
           method:"GET"
-          ,url: '/api/checkstatus/'+window.localStorage.hofbToken
+          ,url: '/api/checkstatus/'+token
         })
         .then(function(decToken){
           console.log(decToken);

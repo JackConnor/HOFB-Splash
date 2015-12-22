@@ -355,7 +355,7 @@ module.exports = function(app){
   ///////check the users status from the jwt web token (as "audience")/////
   app.get('/api/checkstatus/:jwt', function(req, res){
     var token = req.params.jwt;
-    jwt.verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJob…W4ifQ.txgqoFo8CkT0L9PxwCXiVSfU-h-qpA-pS-nMf7qm--0", process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
+    jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
       if(err){console.log(err)}
       console.log(decodedToken);
       ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
