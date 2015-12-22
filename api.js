@@ -5,10 +5,12 @@ var methodOverride = require('method-override');
 var jwt            = require('jsonwebtoken');
 /////fixing tokens
 console.log(jwt);
-var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+var token = jwt.sign("hi", 'shhhhh');
 console.log(token);
-var decoded = jwt.verify(token, 'shhhhh');
-console.log(decoded);
+// console.log('token');
+// var decoded = jwt.verify(token, 'shhhhh');
+// console.log(decoded);
+// console.log('decoded');
 /////fixing tokens
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
