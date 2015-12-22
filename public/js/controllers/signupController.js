@@ -32,8 +32,10 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
           ,url: '/api/checkstatus/'+token
         })
         .then(function(decToken){
+          console.log('in here');
           console.log(decToken);
           var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
+          console.log(newUrl);
           window.location.hash = newUrl;
         })
       });
@@ -47,7 +49,6 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       if(password == rePassword){
         signinUser(email, password);
         // window.location.hash = "#/designer/dashboard"
-        console.log(window.location.hash);
 
       } else {
         console.log('not matching dude');
