@@ -7,12 +7,12 @@ var jwt            = require('jsonwebtoken');
 console.log(jwt);
 var tttt = jwt.sign("Qhi", 'shhhhh');
 console.log(tttt);
-console.log('token');
-// var decoded = jwt.decode(token);
-// console.log(decoded);
-var decoded2 = jwt.verify();
-console.log('inbetweener');
-console.log(decoded2);
+// console.log('token');
+// // var decoded = jwt.decode(token);
+// // console.log(decoded);
+// var decoded2 = jwt.verify(tttt, 'shhhhh');
+// console.log('inbetweener');
+// console.log(decoded2);
 // console.log('decoded');
 /////fixing tokens
 var cities         = require('cities');
@@ -380,6 +380,7 @@ module.exports = function(app){
     console.log(token);
     console.log('secret: '+process.env.JWT_TOKEN_SECRET);
     jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
+      console.log('getting decode');
       if(err){console.log(err)}
       console.log(decodedToken);
       ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
