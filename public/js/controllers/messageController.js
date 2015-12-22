@@ -15,11 +15,12 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
         self.decodedToken = decodedToken;
         $http({
           method: "GET"
-          ,url: "/api/view/comments/"+decodedToken.data.name
+          ,url: "/api/conversations/"+decodedToken.data.name
         })
-        .then(function(allComments){
-          self.allComments = allComments.data;
-          setHtmlCallback(self.allComments);
+        .then(function(allConversations){
+          self.allConversations = allConversations.data;
+          console.log(self.allConversations);
+          setHtmlCallback(self.allConversations);
         })
       })
     }

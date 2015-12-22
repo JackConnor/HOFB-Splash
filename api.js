@@ -31,6 +31,7 @@ var Project      = require('./models/createProject.js');
 var viewProduct      = require('./models/viewProduct.js');
 var Photo      = require('./models/photo.js');
 var productComment      = require('./models/productComment.js');
+var Conversation      = require('./models/conversation.js');
 ///////finish bringing models////
 /////////////////////////////////
 
@@ -38,8 +39,6 @@ module.exports = function(app){
 
   /////////////////////////////////
   ////////begin user api requests////
-
-
 
   //get all createProjects
   app.get('/api/createprojects', function(req, res){
@@ -492,6 +491,23 @@ module.exports = function(app){
       res.json(productComment);
     })
   })
+
+  //////logic for getting all conversations of a specific user
+  app.get('/api/conversations/:user_id', function(req, res){
+    Conversation.find({'ownerId': req.params.user_id}, function(err, conversations){
+      console.log(conversations);
+      res.json(conversations);
+    })
+  })
+
+  /////post a new conversation
+  app.post('/api/new/conversation', function(req, res){
+    Conversation.create(req.body, function(err, newConvo){
+      if(err){console.log(err)}
+      res.json(newConvo)
+    })
+  })
+
   /////End of commenting system ////////
   /////////////////////////////////////
   /////////////////////////////////////
