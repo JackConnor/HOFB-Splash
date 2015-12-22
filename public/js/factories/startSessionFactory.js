@@ -14,6 +14,9 @@ angular.module('startSessionFactory', [])
       .then(function(sessionToken){
         console.log(sessionToken);
         console.log(sessionToken.data);
+        if(sessionToken.data.data == "sorry no token"){
+          alert('name or password were incorrect');
+        }
         window.localStorage.hofbToken = sessionToken.data;
         callback(sessionToken.data);
       })

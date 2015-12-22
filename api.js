@@ -356,7 +356,7 @@ module.exports = function(app){
       if(err){console.log(err)}
       console.log(user);
       console.log('found the user');
-      if (user.validPassword(password)) {
+      if (user && user.validPassword(password)) {
         var userId = user._id;
         var status = user.status;
         var secret = process.env.JWT_TOKEN_SECRET;
@@ -365,15 +365,10 @@ module.exports = function(app){
         var token = jwt.sign({iss: "hofb.com", name: user._id}, secret, {expiresIn: "24h", audience: user.status})
         console.log(token);
         res.json(token);
-        // jwt.sign({iss: "hofb.com", name: user._id}, secret, {
-        //   expiresIn: "24h"
-        //   ,audience: user.status}
-        //   ,function(token){
-        //     console.log('and we made a token');
-        //     console.log('made it to the token part, which is: '+token.data);
-        //     res.json(token);
-        //   }); OLD VERSION THAT WAS SCREWING UP DIGITAL OCEAN
-        }
+      }
+      else {
+        res.json({data: 'sorry no token'})
+      }
     })
   })
 
