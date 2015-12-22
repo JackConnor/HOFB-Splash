@@ -69,27 +69,30 @@ angular.module('dashController', ['allProjectsFactory'])
               collectionName.push(self.allProjects[i].collections[j])
             }
             self.allCollectionsRaw = collectionName;
-          }
-          //////must make sure there are no duplicates
-          self.allCollections = [];
-          for (var i = 0; i < self.allCollectionsRaw.length; i++) {
-            var passBool = true;
-            for (var j = 0; j < self.allCollections.length; j++) {
-              if(self.allCollectionsRaw[i] == self.allCollections[j]){
-                passBool = false;
-              }
-            }
-            if(passBool && self.allCollectionsRaw[i] != ""){
-              self.allCollections.push(self.allCollectionsRaw[i])
-            }
-          }
-          self.allCollections;
-          if(self.collectionCounter){
-            loadCollection(self.allCollections);
+            checkDuplicate();
           }
           callback(arg)
         })
       })
+    }
+
+    function checkDuplicate(){
+      //////must make sure there are no duplicates
+      self.allCollections = [];
+      for (var i = 0; i < self.allCollectionsRaw.length; i++) {
+        var passBool = true;
+        for (var j = 0; j < self.allCollections.length; j++) {
+          if(self.allCollectionsRaw[i] == self.allCollections[j]){
+            passBool = false;
+          }
+        }
+        if(passBool && self.allCollectionsRaw[i] != ""){
+          self.allCollections.push(self.allCollectionsRaw[i])
+        }
+      }
+      if(self.collectionCounter){
+        loadCollection(self.allCollections);
+      }
     }
 
     /////load all active projects into the dashboard view
@@ -140,15 +143,12 @@ angular.module('dashController', ['allProjectsFactory'])
         }, 100)
       })
       $('.projectCellNewInner').on('click', function(){
-        // window.location.hash = "#/create/project";
         newProductPop();
-        // window.location.reload();
       })
       arg();
     }
     ///////will set self.allProjects as all our projects
-    loadProjects(loadInitialList, addHoverToCell);
-
+    setTimeout(loadProjects(loadInitialList, addHoverToCell), 700)
     function newProductPop(){
       $('.bodyview').prepend(
         '<div class="newProductModal">'+
@@ -251,8 +251,7 @@ angular.module('dashController', ['allProjectsFactory'])
         }, 100)
       })
       $('.projectCellNewInner').on('click', function(){
-        window.location.hash = "#/create/project";
-        window.location.reload();
+        newProductPop();
       })
     }
 

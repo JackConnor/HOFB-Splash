@@ -367,13 +367,6 @@ angular.module('buyerController', ['allProjectsFactory'])
     ////////////////////////////////
     //////Begin Filtering///////////
 
-    ///////////begin new filtering system///
-    ////////////////////////////////////////
-    ////////////////////////////////////////
-
-    ////////////////////////////////
-    //////Begin Filtering///////////
-
     ////////filter dropdown frontend html logic
     $('.designerDashColor').on('click', function(evt){
       $(evt.target).append(
@@ -560,56 +553,6 @@ angular.module('buyerController', ['allProjectsFactory'])
       })
     })
 
-    ////End Filtering///////////////
-    ////////////////////////////////
-
-
-    ///////////////////////////////////////
-    ///////////////////////////////////////
-    ///////////////////////////////////////
-
-    ////filter by productType
-    $('.designerDashProductType').change(function(evt){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("productType", $('.designerDashProductType').val(), self.alreadyCurated);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("productType", $('.designerDashProductType').val(), self.boughtProjects);
-      }
-    })
-
-    ////filter by color
-    $('.designerDashColor').change(function(){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("colors", $('.designerDashColor').val(), self.alreadyCurated);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("colors", $('.designerDashColor').val(), self.boughtProjects);
-      }
-    })
-
-    ////filter by fabric
-    $('.designerDashFabric').change(function(){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.alreadyCurated);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.boughtProjects);
-      }
-    })
-    ////filter by season
-    $('.designerDashSeason').change(function(){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("seasons", $('.designerDashSeason').val(), self.alreadyCurated);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("seasons", $('.designerDashSeason').val(), self.boughtProjects);
-      }
-    })
     ////End Filtering///////////////
     ////////////////////////////////
 
