@@ -356,7 +356,7 @@ module.exports = function(app){
         //   ,function(token){
         //     console.log('and we made a token');
         //     console.log('made it to the token part, which is: '+token.data);
-            res.json({data:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJob…tMSJ9.aWd6vwT0kai7uYN6Uhnv9yN7IL3qjzN0tJ_flc5az6s"});
+            res.json("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJob…tMSJ9.aWd6vwT0kai7uYN6Uhnv9yN7IL3qjzN0tJ_flc5az6s");
           // });
         }
     })
