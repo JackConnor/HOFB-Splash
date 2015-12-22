@@ -21,7 +21,7 @@ angular.module('newemailfactory', [])
         })
         .then(function(email){
           console.log(email);
-          // window.location.reload()
+          window.location.reload()
         })
       })
     }
