@@ -4,6 +4,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
 
   signupCtrl.$inject = ['$http', 'checkstatus', 'signupUser', 'startSession'];
   function signupCtrl($http, checkstatus, signupUser, startSession){
+    window.localStorage.testing = "blahhhh";
     var self = this;
     //
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
