@@ -346,6 +346,7 @@ module.exports = function(app){
           expiresIn: "24h"
           ,audience: user.status}
           ,function(token){
+            console.log('made it to the token part, which is: '+token.data);
             res.json({data:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJob…tMSJ9.aWd6vwT0kai7uYN6Uhnv9yN7IL3qjzN0tJ_flc5az6s"});
           });
         }
