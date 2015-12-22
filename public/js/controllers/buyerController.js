@@ -8,7 +8,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory'])
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
     self.collectionCounter = true;///so we only load collections once
-    checkPw.checkPassword();
+    // checkPw.checkPassword();
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
 
@@ -369,6 +369,10 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory'])
 
     ////////filter dropdown frontend html logic
     $('.designerDashColor').on('click', function(evt){
+      $('.colorFilter').remove();
+      $('.typeFilter').remove();
+      $('.fabricFilter').remove();
+      $('.seasonFilter').remove();
       $(evt.target).append(
         "<div class='colorFilter'>"+
           "<div  id='filterRed' class='colorFilterCell col-xs-4'>"+
@@ -412,6 +416,10 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory'])
 
     ////////filter dropdown frontend html logic
     $('.designerDashType').on('click', function(evt){
+      $('.colorFilter').remove();
+      $('.typeFilter').remove();
+      $('.fabricFilter').remove();
+      $('.seasonFilter').remove();
       console.log('yoyoyo');
       $(evt.target).append(
         "<div class='typeFilter'>"+
@@ -465,6 +473,10 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory'])
 
     ////////filter Fabric
     $('.designerDashFabric').on('click', function(evt){
+      $('.colorFilter').remove();
+      $('.typeFilter').remove();
+      $('.fabricFilter').remove();
+      $('.seasonFilter').remove();
       console.log('yoyoyo');
       $(evt.target).append(
         "<div class='fabricFilter'>"+
@@ -518,6 +530,10 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory'])
 
     ////////filter dropdown frontend html logic
     $('.designerDashSeason').on('click', function(evt){
+      $('.colorFilter').remove();
+      $('.typeFilter').remove();
+      $('.fabricFilter').remove();
+      $('.seasonFilter').remove();
       $(evt.target).append(
         "<div class='seasonFilter'>"+
           "<div  id='filterSpring' class='seasonFilterCell col-xs-6'>"+

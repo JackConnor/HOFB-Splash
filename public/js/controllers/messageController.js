@@ -5,7 +5,7 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
   messageCtrl.$inject = ['$http', 'allMessages', 'checkPw'];
   function messageCtrl($http, allMessages, checkPw){
     var self = this;
-    checkPw.checkPassword();
+    // checkPw.checkPassword();
     function allMessagesFunc(setHtmlCallback){
       $http({
         method: "GET"

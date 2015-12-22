@@ -7,7 +7,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     var self = this;
     //////global variables we'll be using for moving the carousel
     ///////get the users token
-    checkPw.checkPassword();
+    // checkPw.checkPassword();
     $http({
       method: "GET"
       ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
