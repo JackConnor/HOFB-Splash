@@ -357,6 +357,7 @@ module.exports = function(app){
     var token = req.params.jwt;
     jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
       if(err){console.log(err)}
+      console.log(decodedToken);
       ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
       res.json(decodedToken);
     });
