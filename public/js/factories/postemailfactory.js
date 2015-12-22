@@ -6,21 +6,18 @@ angular.module('newemailfactory', [])
   function newEmail($http){
 
     return function postEmail(userEmailInfo){
-      console.log(userEmailInfo);
       $http({
         method: "POST"
         ,url: "/api/emailcaptures"
         ,data: {email: userEmailInfo.email, date: userEmailInfo.date}
       })
       .then(function(email){
-        console.log(email.data.email);
         $http({
           method: "POST"
           ,url: "/api/sendemail"
           ,data: {email: email.data.email}
         })
         .then(function(email){
-          console.log(email);
           window.location.reload()
         })
       })

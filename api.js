@@ -3,18 +3,6 @@ var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var jwt            = require('jsonwebtoken');
-/////fixing tokens
-console.log(jwt);
-var tttt = jwt.sign("Qhi", 'shhhhh');
-console.log(tttt);
-// console.log('token');
-// // var decoded = jwt.decode(token);
-// // console.log(decoded);
-// var decoded2 = jwt.verify(tttt, 'shhhhh');
-// console.log('inbetweener');
-// console.log(decoded2);
-// console.log('decoded');
-/////fixing tokens
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client= new mandrill.Mandrill(process.env.MANDRILL_KEY);
@@ -162,7 +150,6 @@ module.exports = function(app){
         for (var i = 0; i < curatedProds.length; i++) {
           allProds.push(curatedProds[i]);
         }
-        console.log(allProds);
         res.json(allProds);
       })
     })
@@ -170,9 +157,7 @@ module.exports = function(app){
 
   ////get all buyer's tier products
   app.get("/api/buyer/products/:tier", function(req, res){
-    console.log(req.params);
     Product.find({"tier":req.params.tier}, function(err, products){
-      console.log(products);
       res.json(products);
     })
   })
@@ -195,8 +180,6 @@ module.exports = function(app){
 
   /////update a product
   app.post('/api/product/update', function(req, res){
-    console.log(req.body);
-    console.log('that was the body');
     Product.findOne({"_id":req.body.projectId}, function(err, product){
       if(err){console.log(err)}
       if (req.body.name) {
@@ -230,7 +213,6 @@ module.exports = function(app){
         product.buttons = req.body.button;
       }
       if (req.body.tier) {
-        console.log('changing the tier');
         product.tier = req.body.tier;
       }
       if (req.body.status) {
@@ -240,7 +222,6 @@ module.exports = function(app){
         product.purchaserInformation = req.body.purchaserInformation;
       }
       product.save(function(err, product){
-        console.log(product);
       res.json(product)
       });
     })
@@ -275,7 +256,6 @@ module.exports = function(app){
   ////get all products purchased by a single buyer
   app.get('/api/bought/products/:buyerId', function(req, res){
     var buyerId = req.params.buyerId;
-    console.log(buyerId);
     Product.find({"purchaserInformation.purchaserId": buyerId}, function(err, boughtProducts){
       res.json(boughtProducts);
     })
@@ -324,7 +304,6 @@ module.exports = function(app){
   //////////////////////////////////////
   ///////Signup, Login, Authorization, and Sessions
   app.post('/api/signup', function( req, res ) {
-    console.log(req.body);
   	User.findOne( { email: req.body.email }, function(err, user){
   		if (err ) {
   				res.json( err )
@@ -349,21 +328,15 @@ module.exports = function(app){
   //////session and token stuff
   ///////begin the session
   app.post('/api/startsession', function(req, res){
-    console.log(req.body);
-    console.log('that was the body');
     var password = req.body.password;
     User.findOne({'email': req.body.email}, function(err, user){
       if(err){console.log(err)}
-      console.log(user);
-      console.log('found the user');
       if (user && user.validPassword(password)) {
         var userId = user._id;
         var status = user.status;
         var secret = process.env.JWT_TOKEN_SECRET;
-        console.log('and the user has a valid pw');
         //////user password verified
         var token = jwt.sign({iss: "hofb.com", name: user._id}, secret, {expiresIn: "24h", audience: user.status})
-        console.log(token);
         res.json(token);
       }
       else {
@@ -375,12 +348,8 @@ module.exports = function(app){
   ///////check the users status from the jwt web token (as "audience")/////
   app.get('/api/checkstatus/:jwt', function(req, res){
     var token = req.params.jwt;
-    console.log(token);
-    console.log('secret: '+process.env.JWT_TOKEN_SECRET);
     jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
-      console.log('getting decode');
       if(err){console.log(err)}
-      console.log(decodedToken);
       ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
       res.json(decodedToken);
     });
@@ -425,7 +394,6 @@ module.exports = function(app){
   //////////////////////////////////////////
   /////begin email stuff////////////////////
   app.post('/api/sendemail', function(req, res){
-    console.log(req.body);
     mandrill_client.messages.send({
       message: {
         from_email: "thankyou@hofb.com"
@@ -529,7 +497,6 @@ module.exports = function(app){
   /////////////////////////////////////
 
   app.post('/api/checkpassword/production', function(req, res){
-    console.log(req.body);
     if(req.body.password == "SledFiveScrewy"){
       res.json(true);
     }
