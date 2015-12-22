@@ -425,6 +425,7 @@ module.exports = function(app){
   //////////////////////////////////////////
   /////begin email stuff////////////////////
   app.post('/api/sendemail', function(req, res){
+    console.log(req.body);
     mandrill_client.messages.send({
       message: {
         from_email: "thankyou@hofb.com"
