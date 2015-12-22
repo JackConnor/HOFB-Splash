@@ -8,7 +8,7 @@ console.log(jwt);
 var token = jwt.sign("hi", 'shhhhh');
 console.log(token);
 console.log('token');
-// var decoded = jwt.verify(token, 'shhhhh');
+var decoded = jwt.verify(token, 'shhhhh');
 // console.log(decoded);
 // console.log('decoded');
 /////fixing tokens
