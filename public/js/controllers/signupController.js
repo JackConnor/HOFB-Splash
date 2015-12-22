@@ -25,7 +25,17 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
 
     ///////function to signin a new user from signin page
     function signinUser(email, pw){
-      startSession.startSession(email, pw);
+      startSession.startSession(email, pw, function(){
+        $http({
+          method:"GET"
+          ,url: '/api/checkstatus/'+window.localStorage.hofbToken
+        })
+        .then(function(decToken){
+          console.log(decToken);
+          var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
+          window.location.hash = newUrl;
+        })
+      });
     }
 
     // event to trigger starting a session from signin page
@@ -37,17 +47,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
         signinUser(email, password);
         // window.location.hash = "#/designer/dashboard"
         console.log(window.location.hash);
-        setTimeout(function(){
-          $http({
-            method:"GET"
-            ,url: '/api/checkstatus/'+window.localStorage.hofbToken
-          })
-          .then(function(decToken){
-            console.log(decToken);
-            var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
-            window.location.hash = newUrl;
-          })
-        }, 3000)
+
       } else {
         console.log('not matching dude');
       }

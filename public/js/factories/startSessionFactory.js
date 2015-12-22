@@ -5,7 +5,7 @@ angular.module('startSessionFactory', [])
   startSession.$inject = ['$http'];
   function startSession($http){
 
-    function start(email, password){
+    function start(email, password, callback){
       $http({
         method: "POST"
         ,url: "/api/startsession"
@@ -14,6 +14,7 @@ angular.module('startSessionFactory', [])
       .then(function(sessionToken){
         console.log(sessionToken.data);
         window.localStorage.hofbToken = sessionToken.data;
+        callback();
       })
     }
     return {
