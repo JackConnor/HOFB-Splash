@@ -8,9 +8,10 @@ console.log(jwt);
 var token = jwt.sign("Qhi", 'shhhhh');
 console.log(token);
 console.log('token');
-var decoded = jwt.decode(token);
-console.log(decoded);
+// var decoded = jwt.decode(token);
+// console.log(decoded);
 var decoded2 = jwt.verify(token, 'shhhhh');
+console.log('inbetweener');
 console.log(decoded2);
 // console.log('decoded');
 /////fixing tokens
