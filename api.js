@@ -355,6 +355,8 @@ module.exports = function(app){
   ///////check the users status from the jwt web token (as "audience")/////
   app.get('/api/checkstatus/:jwt', function(req, res){
     var token = req.params.jwt;
+    console.log(token);
+    console.log('secret: '+process.env.JWT_TOKEN_SECRET);
     jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
       if(err){console.log(err)}
       console.log(decodedToken);
