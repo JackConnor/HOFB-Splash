@@ -3,7 +3,13 @@ var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var jwt            = require('jsonwebtoken');
+/////fixing tokens
 console.log(jwt);
+var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+console.log(token);
+var decoded = jwt.verify(token, 'shhhhh');
+console.log(decoded);
+/////fixing tokens
 var cities         = require('cities');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client= new mandrill.Mandrill(process.env.MANDRILL_KEY);
