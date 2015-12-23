@@ -437,42 +437,6 @@
   position: absolute;
 }
 
-#filterRed {
-  background-color: red;
-}
-
-#filterBlue {
-  background-color: blue;
-}
-
-#filterGreen {
-  background-color: green;
-}
-
-#filterAqua {
-  background-color: aqua;
-}
-
-#filterMagenta {
-  background-color: magenta;
-}
-
-#filterYellow {
-  background-color: yellow;
-}
-
-#filterOrange {
-  background-color: orange;
-}
-
-#filterBlack {
-  background-color: black;
-}
-
-#filterWhite {
-  background-color: white;
-}
-
 .howToCell {
   min-height: 100%;
   width: 33%;

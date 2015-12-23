@@ -55,11 +55,17 @@
       <div class='productAccessoryBox'>
       </br>
       <h3 class='productAccessoryBoxCatagories'>Colors</h3>
-      <div class="viewProductColorBox" style="background-color:#B9B1AF;">
+      <div class="viewColorHolder" ng-repeat='color in viewProduct.colors'>
+        <div class="viewProductColorBox" style="background-color:{{color}}">
+          {{color}}
+          <!-- <img class='viewProductImageMain' src="http://1.bp.blogspot.com/-vc-Q5d9gpBY/VOeWbTnOGfI/AAAAAAAACl8/s7QeWq48bJM/s1600/Sexywalk02.gif"> -->
+        </div>
+      </div>
+      <!-- <div class="viewProductColorBox" style="background-color:#B9B1AF;">
         <img class='viewProductImageMain' src="http://1.bp.blogspot.com/-vc-Q5d9gpBY/VOeWbTnOGfI/AAAAAAAACl8/s7QeWq48bJM/s1600/Sexywalk02.gif">
       </div>
       <div class="viewProductColorBox" style="background-color:#A7A39F;"></div>
-      <div class="viewProductColorBox" style="background-color:#ECE9EF;"></div>
+      <div class="viewProductColorBox" style="background-color:#ECE9EF;"></div> -->
     </br>
       <h3 class='productAccessoryBoxCatagories'>Fabric</h3>
       <div class="viewProductFabricBox" style="background-color:#B9B1AF;"></div>

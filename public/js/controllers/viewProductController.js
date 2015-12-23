@@ -1,9 +1,9 @@
-angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 'checkStatusFactory', 'singleuserfactory'])
+angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 'checkStatusFactory', 'singleuserfactory', 'getSwatchesFactory'])
 
   .controller('viewProductCtrl', viewProductCtrl)
 
-  viewProductCtrl.$inject = ['$http', 'checkPw', 'getProduct', 'checkstatus', 'singleUser'];
-  function viewProductCtrl($http, checkPw, getProduct, checkstatus, singleUser){
+  viewProductCtrl.$inject = ['$http', 'checkPw', 'getProduct', 'checkstatus', 'singleUser', 'allSwatches'];
+  function viewProductCtrl($http, checkPw, getProduct, checkstatus, singleUser, allSwatches){
     var self = this;
     console.log('viewProductController is working');
     self.test=('self test');
@@ -83,17 +83,22 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
               console.log(user);
               self.currentUser = user.data;
               popContent();
+              popSwatches();
             })
         })
-      console.log(checkstatus());
-      console.log(self.productData);
-    }
+      }
 
     function popContent(){
       $('.viewProductTypeData').text(self.productData.productType);
       $('.viewProductDescription').text(self.productData.description);
       $('.viewProductCreator').text(self.currentUser.email)
       $('.viewProductName').text(self.productData.name)
+    }
+
+    function popSwatches(){
+      self.colors = self.productData.colors;
+      console.log(self.colors);
+      console.log(allSwatches);
     }
 
     //////////logic to populate page on load//

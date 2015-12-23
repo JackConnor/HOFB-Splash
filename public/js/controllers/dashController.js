@@ -1,9 +1,9 @@
-angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
+angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSwatchesFactory'])
 
   .controller('dashCtrl', dashCtrl)
 
-  dashCtrl.$inject = ['$http', 'allProjects', 'checkPw'];
-  function dashCtrl($http, allProjects, checkPw){
+  dashCtrl.$inject = ['$http', 'allProjects', 'checkPw', 'allSwatches'];
+  function dashCtrl($http, allProjects, checkPw, allSwatches){
     var self = this;
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
@@ -11,6 +11,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
     // checkPw.checkPassword();
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
+
+    var allSwatches = allSwatches;
+    console.log(allSwatches);
     function loadProjects(callback, arg){
       ///////decode user to pull data
       $http({
@@ -553,23 +556,23 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
       $('.seasonFilter').remove();
       $(evt.target).append(
         "<div class='colorFilter'>"+
-          "<div  id='filterRed' class='colorFilterCell col-xs-4'>"+
+          "<div  id='filterRed' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.red+">"+
           "</div>"+
-          "<div id='filterBlue' class='colorFilterCell col-xs-4'>"+
+          "<div id='filterBlue' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.blue+">"+
           "</div>"+
-          "<div id='filterWhite' class='colorFilterCell col-xs-4'>"+
+          "<div id='filterWhite' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.white+">"+
           "</div>"+
-          "<div id='filterBlack' class='colorFilterCell col-xs-4'>"+
+          "<div id='filterBlack' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.black+">"+
           "</div>"+
-          "<div id='filterOrange' class='colorFilterCell col-xs-4'>"+
+          "<div id='filterOrange' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.orange+">"+
           "</div>"+
-          "<div id='filterYellow' class='colorFilterCell col-xs-4'>"+
+          "<div id='filterYellow' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.yellow+">"+
           "</div>"+
-          "<div id='filterMagenta' class='colorFilterCell col-xs-4'>"+
+          "<div id='filterMagenta' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.magenta+">"+
           "</div>"+
-          "<div id='filterAqua' class='colorFilterCell col-xs-4'>"+
+          "<div id='filterAqua' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.aqua+">"+
           "</div>"+
-          "<div id='filterGreen' class='colorFilterCell col-xs-4'>"+
+          "<div id='filterGreen' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.green+">"+
           "</div>"+
         "</div>"
       )
@@ -602,31 +605,31 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
       $(evt.target).append(
         "<div class='typeFilter'>"+
           "<div  id='filterShirt' class='typeFilterCell col-xs-4'>"+
-            "<img src='http://secretenergy.com/wp-content/uploads/2014/07/SOUL-WARS-shirt-21.jpg'>" +
+            "<img src='"+allSwatches.types.shirt+"'>" +
           "</div>"+
           "<div  id='filterPants' class='typeFilterCell col-xs-4'>"+
-            "<img src='https://bonobos-prod-s3.imgix.net/products/10163/original/PNT_Golf_Maide_HighlandPant_Blackwatch_category.jpg?1423867714&w=300&q=74&h=300&fit=crop'>" +
+            "<img src='"+allSwatches.types.pants+"'>" +
           "</div>"+
           "<div  id='filterDress' class='typeFilterCell col-xs-4'>"+
-            "<img src='http://www.kirnazabete.com/media/catalog/product/cache/1/image/300x/5e06319eda06f020e43594a9c230972d/1/1/11218940_5802764_1000/KirnaZabete-Dolce-and-Gabbana-Rose-Print-Dress-31.jpg'>" +
+            "<img src='"+allSwatches.types.dress+"'>" +
           "</div>"+
           "<div  id='filterJacket' class='typeFilterCell col-xs-4'>"+
-            "<img src='http://images.motorcycle-superstore.com/productimages/300/2016-dainese-womens-michelle-leather-jacket-mcss.jpg'>" +
+            "<img src='"+allSwatches.types.jacket+"'>" +
           "</div>"+
           "<div  id='filterTee' class='typeFilterCell col-xs-4'>"+
-            "<img src='http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=140393304'>" +
+            "<img src='"+allSwatches.types.tee+"'>" +
           "</div>"+
           "<div  id='filterSkirt' class='typeFilterCell col-xs-4'>"+
-            "<img src='http://stylishcurves.com/wp-content/uploads/2014/01/burnt-orange-godet-skirt-300x300.jpg'>" +
+            "<img src='"+allSwatches.types.skirt+"'>" +
           "</div>"+
           "<div  id='filterShorts' class='typeFilterCell col-xs-4'>"+
-            "<img src='https://images.bigcartel.com/bigcartel/product_images/163340455/-/shorts-0175.jpg'>" +
+            "<img src='"+allSwatches.types.shorts+"'>" +
           "</div>"+
           "<div  id='filterScarf' class='typeFilterCell col-xs-4'>"+
-            "<img src='http://onwardpullzone.onwardreserve.netdna-cdn.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/o/r/or-camel-check-reversible-cashmere-scarf.jpg'>" +
+            "<img src='"+allSwatches.types.scarf+"'>" +
           "</div>"+
           "<div  id='filterHat' class='typeFilterCell col-xs-4'>"+
-            "<img src='http://ep.yimg.com/ay/oaklandraiders/oakland-raiders-girls-tailsweep-hat-3.jpg'>" +
+            "<img src='"+allSwatches.types.hat+"'>" +
           "</div>"+
         "</div>"
       )
@@ -658,31 +661,31 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
       $(evt.target).append(
         "<div class='fabricFilter'>"+
           "<div  id='filterSeersucker' class='fabricFilterCell col-xs-4'>"+
-            "<img src='http://cdn.shopify.com/s/files/1/0400/5101/products/FFseernavy_grande.jpg?v=1437514918'>" +
+            "<img src='"+allSwatches.fabrics.seersucker+"'>" +
           "</div>"+
           "<div  id='filterPleather' class='fabricFilterCell col-xs-4'>"+
-            "<img src='http://i.ebayimg.com/images/g/EB8AAOSwk5FUvXtS/s-l300.jpg'>" +
+            "<img src='"+allSwatches.fabrics.pleather+"'>" +
           "</div>"+
           "<div  id='filterDockers' class='fabricFilterCell col-xs-4'>"+
-            "<img src='https://dtpmhvbsmffsz.cloudfront.net/posts/2015/05/08/554d8bdbbcd4a73a1d00565b/s_554d8bdbbcd4a73a1d00565c.jpg'>" +
+            "<img src='"+allSwatches.fabrics.dockers+"'>" +
           "</div>"+
           "<div  id='filterCamo' class='fabricFilterCell col-xs-4'>"+
-            "<img src='http://wiganhydroprinting.co.uk/wp-content/uploads/2014/04/clear-camo-300x3001.jpg'>" +
+            "<img src='"+allSwatches.fabrics.camo+"'>" +
           "</div>"+
           "<div  id='filterVeneer' class='fabricFilterCell col-xs-4'>"+
-            "<img src='http://www.arrow.gb.net/images/pages/finish-colours/material-finishes/veneer/walnut-r.jpg'>" +
+            "<img src='"+allSwatches.fabrics.veneer+"'>" +
           "</div>"+
           "<div  id='filterNylon' class='fabricFilterCell col-xs-4'>"+
-            "<img src='http://static1.squarespace.com/static/52965deee4b0f580c1fe0b7d/52c88375e4b03b30610b4a0a/52c8845be4b0268360ddfb8c/1388874157418/LightRoyalNylon.jpg?format=300w'>" +
+            "<img src='"+allSwatches.fabrics.nylon+"'>" +
           "</div>"+
           "<div  id='filterLeather' class='fabricFilterCell col-xs-4'>"+
-            "<img src='https://s-media-cache-ak0.pinimg.com/736x/8b/c3/bf/8bc3bf43297bc2bc9983996ee8ed4cdb.jpg'>" +
+            "<img src='"+allSwatches.fabrics.leather+"'>" +
           "</div>"+
           "<div  id='filterCotton' class='fabricFilterCell col-xs-4'>"+
-            "<img src='http://d6lw7to1547c3.cloudfront.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/308744.jpg'>" +
+            "<img src='"+allSwatches.fabrics.cotton+"'>" +
           "</div>"+
           "<div  id='filterDenim' class='fabricFilterCell col-xs-4'>"+
-            "<img src='https://www.shoponeonline.com/wp-content/uploads/denim-swatch.png'>" +
+            "<img src='"+allSwatches.fabrics.denim+"'>" +
           "</div>"+
         "</div>"
       )
@@ -714,16 +717,16 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
       $(evt.target).append(
         "<div class='seasonFilter'>"+
           "<div  id='filterSpring' class='seasonFilterCell col-xs-6'>"+
-            "<img src='http://organically.server276.com/blog/wp-content/uploads/2014/03/18_spring-300x300.jpg'>" +
+            "<img src='"+allSwatches.seasons.spring+"'>" +
           "</div>"+
           "<div  id='filterSummer' class='seasonFilterCell col-xs-6'>"+
-            "<img src='http://r2rdesigns.com/wp-content/uploads/2014/06/summer-beach-hd-desktop-wallpaper-300x300.jpg'>" +
+            "<img src='"+allSwatches.seasons.summer+"'>" +
           "</div>"+
           "<div  id='filterFall' class='seasonFilterCell col-xs-6'>"+
-            "<img src='http://img.thrfun.com/img/083/036/autumn_trees_s1.jpg'>" +
+            "<img src='"+allSwatches.seasons.fall+"'>" +
           "</div>"+
           "<div  id='filterWinter' class='seasonFilterCell col-xs-6'>"+
-            "<img src='http://pixelshok.com/wp-content/uploads/2011/01/Winter-300x300.png'>" +
+            "<img src='"+allSwatches.seasons.winter+"'>" +
           "</div>"+
         "</div>"
       )
