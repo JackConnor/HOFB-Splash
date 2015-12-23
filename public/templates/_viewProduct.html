@@ -2,12 +2,9 @@
 <!-- Modal -->
 <!-- code for lutton that pops up modal on page -->
 <!-- <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Color</Button> -->
-<div class='viewProductPageContainer'>
+<!-- <div class='viewProductPageContainer'>
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
-
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -22,128 +19,131 @@
     </div>
 
   </div>
-</div>
+</div> -->
 <!-- /Modal -->
 
-
-<br/><br/><br/>
-
+<!-- Navigation Bar -->
+<div class="navigationBar">
+ <div class="navTitle">
+   HOFB
+ </div>
+ <div class="logoutButton">
+   Logout
+ </div>
+</div>
+<!-- end nav bar -->
 <!-- Product -->
-    <div class="productContainer">
-        <div class="row">
-            <!-- item -->
-            <div class='productContainerLeft'>
-            <div class="col-md-4">
-              <div class='viewProductDetailsContainer' >
-              <h1 class='viewProductTitle'>Details</h1>
-              <h1 class='viewProductTitleUnderline'></h1>
-              <h3 class='viewProductType'>Product Type:</h3>
+<div class="viewProductBar">
+  <span class='viewProductCreator'></span>/
+  <span class='viewProductName'></span>
+</div>
+<div class="productContainer">
+  <div class="row">
+      <!-- item -->
+    <div class='productContainerLeft'>
+      <div class="col-md-4">
+        <div class='viewProductDetailsContainer' >
+        <h1 class='viewProductTitle'>Details</h1>
+        <h1 class='viewProductTitleUnderline'></h1>
+        <h3 class='viewProductType'>Product Type:  <span class='viewProductTypeData'></span></h3>
+      </div>
+      <div class='productDescriptionBox'>
+        <h2>Description</h2>
+        <p class='wordwrap viewProductDescription'></p>
+      </div>
 
-            </div>
+      <div class='productAccessoryBox'>
+      </br>
+      <h3 class='productAccessoryBoxCatagories'>Colors</h3>
+      <div class="viewProductColorBox" style="background-color:#B9B1AF;">
+        <img class='viewProductImageMain' src="http://1.bp.blogspot.com/-vc-Q5d9gpBY/VOeWbTnOGfI/AAAAAAAACl8/s7QeWq48bJM/s1600/Sexywalk02.gif">
+      </div>
+      <div class="viewProductColorBox" style="background-color:#A7A39F;"></div>
+      <div class="viewProductColorBox" style="background-color:#ECE9EF;"></div>
+    </br>
+      <h3 class='productAccessoryBoxCatagories'>Fabric</h3>
+      <div class="viewProductFabricBox" style="background-color:#B9B1AF;"></div>
+      <div class="viewProductFabricBox" style="background-color:#A7A39F;"></div>
+      <div class="viewProductFabricBox" style="background-color:#ECE9EF;"></div>
+    </br>
+      <h3 class='productAccessoryBoxCatagories'>Stitch</h3>
+      <div class="viewProductStitchBox" style="background-color:#B9B1AF;"></div>
+      <div class="viewProductStitchBox" style="background-color:#A7A39F;"></div>
+      <div class="viewProductStitchBox" style="background-color:#ECE9EF;"></div>
+    </br>
+      <h3 class='productAccessoryBoxCatagories'>Accessories</h3>
+      <div class="viewProductAccessoryBox" style="background-color:#B9B1AF;"></div>
+      <div class="viewProductAccessoryBox" style="background-color:#A7A39F;"></div>
+      <div class="viewProductAccessoryBox" style="background-color:#ECE9EF;"></div>
+    </br>
+    </div>
+      </div>
+      <!-- /item -->
 
-            <div class='productDescriptionBox'>
-            <h2>Description</h2>
-            <p class='wordwrap'>Sample text that will display a description of a product here</p>
+      <!-- item -->
+      <div class="col-md-4 text-center">
+          <div class="panel panel-danger panel-product viewProductImageContainer">
+            <i class="glyphicon glyphicon-resize-full viewPictureImageIcon"></i>
+              <div class="viewProductImage">
 
-          </div>
-
-            <div class='productAccessoryBox'>
-            </br>
-            <h3 class='productAccessoryBoxCatagories'>Colors</h3>
-            <div class="viewProductColorBox" style="background-color:#B9B1AF;">
-              <img class='viewProductImageMain' src="http://1.bp.blogspot.com/-vc-Q5d9gpBY/VOeWbTnOGfI/AAAAAAAACl8/s7QeWq48bJM/s1600/Sexywalk02.gif">
-            </div>
-            <div class="viewProductColorBox" style="background-color:#A7A39F;"></div>
-            <div class="viewProductColorBox" style="background-color:#ECE9EF;"></div>
-          </br>
-            <h3 class='productAccessoryBoxCatagories'>Fabric</h3>
-            <div class="viewProductFabricBox" style="background-color:#B9B1AF;"></div>
-            <div class="viewProductFabricBox" style="background-color:#A7A39F;"></div>
-            <div class="viewProductFabricBox" style="background-color:#ECE9EF;"></div>
-          </br>
-            <h3 class='productAccessoryBoxCatagories'>Stitch</h3>
-            <div class="viewProductStitchBox" style="background-color:#B9B1AF;"></div>
-            <div class="viewProductStitchBox" style="background-color:#A7A39F;"></div>
-            <div class="viewProductStitchBox" style="background-color:#ECE9EF;"></div>
-          </br>
-            <h3 class='productAccessoryBoxCatagories'>Accessories</h3>
-            <div class="viewProductAccessoryBox" style="background-color:#B9B1AF;"></div>
-            <div class="viewProductAccessoryBox" style="background-color:#A7A39F;"></div>
-            <div class="viewProductAccessoryBox" style="background-color:#ECE9EF;"></div>
-          </br>
-          </div>
-            </div>
-            <!-- /item -->
-
-            <!-- item -->
-            <div class="col-md-4 text-center">
-                <div class="panel panel-danger panel-product viewProductImageContainer">
-                  <i class="glyphicon glyphicon-resize-full viewPictureImageIcon"></i>
-                    <div class="viewProductImage">
-
-                        <img class='viewProductImageMain' src="http://www.stylebop.com/media/img/article/230/1200/230027.jpg">
-                        <div class="newProductMiniImagesHolder">
-                          <div class="newProductMiniImage col-xs-3">
-                            <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage0'/>
-                            <div class="newProductDeleteMini">X</div>
-                          </div>
-                          <div class="newProductMiniImage col-xs-3">
-                            <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage1'/>
-                            <div class="newProductDeleteMini">X</div>
-                          </div>
-                          <div class="newProductMiniImage col-xs-3">
-                            <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage2'/>
-                            <div class="newProductDeleteMini">X</div>
-                          </div>
-                          <div class="newProductMiniImage col-xs-3">
-                            <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage3'/>
-                            <div class="newProductDeleteMini">X</div>
-                          </div>
-                        </div>
+                  <img class='viewProductImageMain' src="http://www.stylebop.com/media/img/article/230/1200/230027.jpg">
+                  <div class="newProductMiniImagesHolder">
+                    <div class="newProductMiniImage col-xs-3">
+                      <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage0'/>
+                      <div class="newProductDeleteMini">X</div>
                     </div>
-                </div>
-            </div>
-            <!-- /item -->
+                    <div class="newProductMiniImage col-xs-3">
+                      <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage1'/>
+                      <div class="newProductDeleteMini">X</div>
+                    </div>
+                    <div class="newProductMiniImage col-xs-3">
+                      <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage2'/>
+                      <div class="newProductDeleteMini">X</div>
+                    </div>
+                    <div class="newProductMiniImage col-xs-3">
+                      <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage3'/>
+                      <div class="newProductDeleteMini">X</div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- /item -->
 
-            <!-- item -->
-            <div class="col-md-4 text-center commentBoxContainer">
-            <div class="detailBox">
+      <!-- item -->
+      <div class="col-md-4 text-center commentBoxContainer">
+      <div class="detailBox">
 
 <!-- start of comment box -->
-                <div class="actionBox">
-                  <div id="commentTextBox">
-        <!-- comment in angular is referring each individual data within an array -->
-                <div ng-repeat="comment in viewProduct.allComments" repeat-complete='lastCommentBoxColor()'class='text-left commentFile' >
-                  <div ng-class-odd="'commentBoxTextBackgroundColorOdd'" ng-class-even="'commentBoxTextBackgroundColorEven'" >
-                  <a class="btn btn-default btn-circle-default-user-icon"><i class="fa fa-user"></i></a>
-                  <h1 class='commentBoxName'>{{comment.sender}}</h1>
-                  <h2 class='commentBoxDate'>{{comment.date}}</h2>
-                  <h2 class='commentBoxText'>{{comment.commentText}}</h2>
-                </div>
-                </div>
-              </div>
-                <form class="form-inline" role="form">
-              <div class="form-group">
-                <input class="form-control sender" type="text" placeholder="Name" />
-                <input class="form-control message" type="text" placeholder="Leave a reply" />
-              </div>
-                </form>
-                <div class='col-md-4 text-center viewProductReplyButtonBox'>
-                  <input type="button" value="Reply" class="btn btn-default commentSubmitBtn" id="cmdSubmitComment">
-                </div>
-              </div>
-
-            </div>
-
-
+          <div class="actionBox">
+            <div id="commentTextBox">
+  <!-- comment in angular is referring each individual data within an array -->
+          <div ng-repeat="comment in viewProduct.allComments" repeat-complete='lastCommentBoxColor()'class='text-left commentFile' >
+            <div ng-class-odd="'commentBoxTextBackgroundColorOdd'" ng-class-even="'commentBoxTextBackgroundColorEven'" >
+            <a class="btn btn-default btn-circle-default-user-icon"><i class="fa fa-user"></i></a>
+            <h1 class='commentBoxName'>{{comment.sender}}</h1>
+            <h2 class='commentBoxDate'>{{comment.date}}</h2>
+            <h2 class='commentBoxText'>{{comment.commentText}}</h2>
           </div>
-
-            <!-- /item -->
-
           </div>
         </div>
-    <!-- End of comment box -->
+          <form class="form-inline" role="form">
+        <div class="form-group">
+          <input class="form-control sender" type="text" placeholder="Name" />
+          <input class="form-control message" type="text" placeholder="Leave a reply" />
+        </div>
+          </form>
+          <div class='col-md-4 text-center viewProductReplyButtonBox'>
+            <input type="button" value="Reply" class="btn btn-default commentSubmitBtn" id="cmdSubmitComment">
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- /item -->
+    </div>
   </div>
+<!-- End of comment box -->
+</div>
 
 <!-- /Product -->
 </div>

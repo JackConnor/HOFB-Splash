@@ -9,10 +9,10 @@ angular.module('singleuserfactory', [])
         method: "GET"
         ,url: "/api/users/"+userId
       })
-      .then(function(data){
-        self.data = data;
-        return data;
-      })
+      // .then(function(data){
+      //   self.data = data;
+      //   return data;
+      // })
     }
 
     return singleUserCall;

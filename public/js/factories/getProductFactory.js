@@ -5,20 +5,17 @@ var getProductFactory = angular.module('getProductFactory', [])
   getProduct.$inject = ['$http'];
   function getProduct($http){
 
-    return function getProductCall(productId){
-      $http({
+    function getProductCall(productId){
+      return $http({
         method: "GET"
         ,url: "/api/product/"+productId
       })
-      .then(function(data){
-        self.data = data;
-        console.log(self.data);
-        return data;
-      })
+      // .then(function(data){
+      //   self.data = data;
+      //   console.log(self.data);
+      //   return data;
+      // })
     }
-    //
-  }
 
-  //
-  //<script type="text/javascript" src="/plugins/jquery.js"></script>
-  //<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    return getProductCall;
+  }
