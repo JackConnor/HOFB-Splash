@@ -212,7 +212,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
       for (var i = 0; i < self.curatedProjects.length; i++) {
         if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
-            "<div class='projectCell col-md-2 col-xs-12'>"+
+            "<div class='projectCell col-md-2 col-xs-12' id='"+self.curatedProjects[i]._id+"'>"+
               "<div class='projectCellInner'>"+
                 "<div class='projectCellImageHolder'>"+
                   "<img class='projectCellImage' src='"+self.curatedProjects[i].images[0]+"'>"+
@@ -401,7 +401,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
       })
       self.curatedToggleCounter = 'curated';
       toggleCurated();
-      addHoverToCell();
+      addHoverToCuratedCell()
     })
 
     ////////toggle to active view
@@ -444,6 +444,64 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
           var product = $(parentContainer);
           var productId = $($(product[0].children[1])[0].children[0])[0].id
           window.location.hash = "#/edit/project/"+productId;
+          window.location.reload();
+        })
+        $('.projectCellTrash').on('click', function(){
+          var product = $(parentContainer);
+          var productId = $($(product[0].children[1])[0].children[0])[0].id
+          $('.bodyview').prepend(
+            '<div class="designerDashDeleteProduct col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">'+
+              "<p>Are you sure you want to delete this product?</p>"+
+              "<button class='deleteButton'>No</button>"+
+              "<button id='"+productId+"' class='deleteButton'>Yes</button>"+
+            "</div>"
+          )
+          $('.deleteButton').on('click', function(evt){
+            var idToDelete = $(evt.target)[0].id;
+            $http({
+              method: "DELETE"
+              ,url: "/api/product/"+idToDelete
+            })
+            .then(function(deletedObject){
+              /////reload cells
+              $('.designerDashList').html('');
+              loadProjects(loadInitialList, addHoverToCell)
+              $('.designerDashDeleteProduct').remove();
+            })
+          })
+        })
+        $('.projectCellHoverContainer').on('mouseleave', function(evt){
+          $hoverTarget.css({
+            opacity: 1
+          })
+          ////we drill up in order to get the parent, so we can append the html buttons to it
+          // var parentContainer = $hoverTarget.parent().parent()[0];
+          $('.projectCellHoverContainer').remove();
+        })
+      })
+      //////function to restore cell to order when mouse leaves cell
+    }
+    function addHoverToCuratedCell(){
+      /////create mouseenter event listener to cause frontend changes
+      $('.projectCellImage').on('mouseenter', function(evt){
+        var $hoverTarget = $(evt.target);
+        $hoverTarget.css({
+          opacity: 0.5
+        })
+        ////we drill up in order to get the parent, so we can append the html buttons to it
+        var parentContainer = $hoverTarget.parent().parent()[0];
+        $(parentContainer).prepend(
+          "<div class='projectCellHoverContainer'>"+
+            "<div class='projectCellTrash'>X </div>"+
+            '<div class="projectCellButton projectCellButtonView" >View</div>'+
+          "</div>"
+        )
+        $('.projectCellButtonView').on('click', function(evt){
+          // var product = $(evt.target);
+          console.log($($(parentContainer)[0].parentNode)[0].id);
+          var productId = $($(parentContainer)[0].parentNode)[0].id;
+
+          window.location.hash = "#/view/product/"+productId;
           window.location.reload();
         })
         $('.projectCellTrash').on('click', function(){

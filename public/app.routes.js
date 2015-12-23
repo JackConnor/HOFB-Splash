@@ -88,7 +88,7 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'message'
     })
     /////////default to home
-    .otherwise('/');
+    // .otherwise('/');
 
   ////////and of api routes///////
   ////////////////////////////////
