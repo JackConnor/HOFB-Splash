@@ -1,21 +1,24 @@
-angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', 'startSessionFactory'])
+angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', 'startSessionFactory', 'checkPwFactory'])
 
   .controller('signupCtrl', signupCtrl)
 
-  signupCtrl.$inject = ['$http', 'checkstatus', 'signupUser', 'startSession'];
-  function signupCtrl($http, checkstatus, signupUser, startSession){
+  signupCtrl.$inject = ['$http', 'checkstatus', 'signupUser', 'startSession', 'checkPw'];
+  function signupCtrl($http, checkstatus, signupUser, startSession, checkPw){
+    window.localStorage.testing = "blahhhh";
     var self = this;
     //
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
-
+    // checkPw.checkPassword();
     /////event to sign up a new user from signup page
     $('.signupSubmit').on('click', function(){
       console.log('lolll');
       var password = $('.signupPassword').val();
       var rePassword = $('.signupPasswordRepeat').val();
+      var status = window.location.hash.split('/')[1];
+      console.log(status);
       if(password == rePassword){
-        signupUser.signup(startSession.startSession, password);
-        window.location.hash = "#/designer/dashboard"
+        signupUser.signup(startSession.startSession, password, status);
+        window.location.hash = "#/"+status+"/dashboard";
       } else {
         alert('your passwords dont match');
       }
@@ -23,7 +26,20 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
 
     ///////function to signin a new user from signin page
     function signinUser(email, pw){
-      startSession.startSession(email, pw);
+      startSession.startSession(email, pw, function(token){
+        console.log(token);
+        $http({
+          method:"GET"
+          ,url: '/api/checkstatus/'+token
+        })
+        .then(function(decToken){
+          console.log('in here');
+          console.log(decToken);
+          var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
+          console.log(newUrl);
+          window.location.hash = newUrl;
+        })
+      });
     }
 
     // event to trigger starting a session from signin page
@@ -32,8 +48,10 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       var password = $('.signinPassword').val();
       var rePassword = $('.signinPasswordRepeat').val();
       if(password == rePassword){
+        console.log('tryig to sign in');
         signinUser(email, password);
-        window.location.hash = "#/designer/dashboard"
+        // window.location.hash = "#/designer/dashboard"
+
       } else {
         console.log('not matching dude');
       }

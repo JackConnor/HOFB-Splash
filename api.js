@@ -43,10 +43,8 @@ module.exports = function(app){
 
   //get all createProjects
   app.get('/api/createprojects', function(req, res){
-    console.log('creating')
     Project.find({}, function(err, projects){
       if(err) console.log(err)
-      // console.log(projects)
       res.json(projects)
     })
     res.json(projects)
@@ -92,19 +90,22 @@ module.exports = function(app){
         user.email = req.body.location
       }
       if(req.body.firstname){
-        user.email = req.body.firstname
+        user.email = req.body.firstname;
       }
       if(req.body.lastname){
-        user.email = req.body.lastname
+        user.email = req.body.lastname;
       }
       if(req.body.address){
-        user.email = req.body.address
+        user.email = req.body.address;
       }
       if(req.body.city){
-        user.email = req.body.city
+        user.email = req.body.city;
       }
       if(req.body.profession){
-        user.email = req.body.profession
+        user.email = req.body.profession;
+      }
+      if(req.body.status){
+        user.status = req.body.status;
       }
       user.save(function(err, user){
         res.json(user)
@@ -136,6 +137,31 @@ module.exports = function(app){
     })
   })
 
+  ///get all products currently being submitted for curation
+  app.get('/api/submitted/products', function(req, res){
+    Product.find({"status": "submitted to curator"}, function(err, productsToCurate){
+      var allProds = [];
+      var submittedProds = productsToCurate;
+      for (var i = 0; i < submittedProds.length; i++) {
+        allProds.push(submittedProds[i]);
+      }
+      Product.find({"status":"curated"}, function(err, curatedProducts){
+        var curatedProds = curatedProducts;
+        for (var i = 0; i < curatedProds.length; i++) {
+          allProds.push(curatedProds[i]);
+        }
+        res.json(allProds);
+      })
+    })
+  })
+
+  ////get all buyer's tier products
+  app.get("/api/buyer/products/:tier", function(req, res){
+    Product.find({"tier":req.params.tier}, function(err, products){
+      res.json(products);
+    })
+  })
+
   ///get a single product
   app.get('/api/projects/:id', function(req, res){
     Product.findOne({"_id":req.params.id}, function(err, product){
@@ -146,34 +172,67 @@ module.exports = function(app){
 
   ////post a single product
   app.post('/api/products', function(req, res){
-    console.log(req.body);
     Product.create(req.body, function(err, product){
       if(err) throw err;
-      console.log(product);
       res.json(product);
     })
   })
 
   /////update a product
   app.post('/api/product/update', function(req, res){
-    console.log(req.body);
-    console.log(req.body.projectId);
     Product.findOne({"_id":req.body.projectId}, function(err, product){
       if(err){console.log(err)}
+      if (req.body.name) {
         product.name = req.body.name;
+      }
+      if (req.body.productType) {
         product.productType = req.body.productType;
+      }
+      if (req.body.vendor) {
         product.vendor = req.body.vendor;
+      }
+      if (req.body.stitchPattern) {
         product.stitchPattern = req.body.stitchPattern;
+      }
+      if (req.body.description) {
         product.description = req.body.description;
+      }
+      if (req.body.collections) {
         product.collections = req.body.collections;
-        product.tags = req.body.tags;
+      }
+      if (req.body.colors) {
         product.colors = req.body.colors;
+      }
+      if (req.body.fabrics) {
         product.fabrics = req.body.fabrics;
+      }
+      if (req.body.seasons) {
         product.seasons = req.body.seasons;
+      }
+      if (req.body.button) {
         product.buttons = req.body.button;
-        product.save(function(err, product){
-        res.json(product)
+      }
+      if (req.body.tier) {
+        product.tier = req.body.tier;
+      }
+      if (req.body.status) {
+        product.status = req.body.status;
+      }
+      if (req.body.purchaserInformation) {
+        product.purchaserInformation = req.body.purchaserInformation;
+      }
+      product.save(function(err, product){
+      res.json(product)
       });
+    })
+  })
+
+  ///update just the status
+  app.post('/api/update/status', function(req, res){
+    Product.findOne({"_id":req.body.prodId}, function(err, productToUpdate){
+      productToUpdate.status = req.body.status;
+      productToUpdate.save();
+      res.json(productToUpdate);
     })
   })
 
@@ -191,6 +250,14 @@ module.exports = function(app){
     var userId = req.params.user;
     Product.find({'userId':userId}, function(err, products){
       res.json(products);
+    })
+  })
+
+  ////get all products purchased by a single buyer
+  app.get('/api/bought/products/:buyerId', function(req, res){
+    var buyerId = req.params.buyerId;
+    Product.find({"purchaserInformation.purchaserId": buyerId}, function(err, boughtProducts){
+      res.json(boughtProducts);
     })
   })
 
@@ -247,6 +314,7 @@ module.exports = function(app){
   			var newUser = new User();
   			newUser.email = req.body.email
   			newUser.passwordDigest = newUser.generateHash( req.body.password )
+        newUser.status = req.body.status;
   			newUser.save( function( err, user ) {
   				if ( err ) { console.log(err) }
   				//AUTHENTICATE USER HERE
@@ -263,15 +331,17 @@ module.exports = function(app){
     var password = req.body.password;
     User.findOne({'email': req.body.email}, function(err, user){
       if(err){console.log(err)}
-      if (user.validPassword(password)) {
+      if (user && user.validPassword(password)) {
+        var userId = user._id;
+        var status = user.status;
+        var secret = process.env.JWT_TOKEN_SECRET;
         //////user password verified
-        jwt.sign({iss: "hofb.com", name: user._id}, process.env.JWT_TOKEN_SECRET, {
-          expiresIn: "24h"
-          ,audience: "designer"}
-          ,function(token){
-            res.json(token);
-          });
-        }
+        var token = jwt.sign({iss: "hofb.com", name: user._id}, secret, {expiresIn: "24h", audience: user.status})
+        res.json(token);
+      }
+      else {
+        res.json({data: 'sorry no token'})
+      }
     })
   })
 
@@ -294,19 +364,7 @@ module.exports = function(app){
     dest: __dirname + '../public/uploads/',
   })
 
-  // app.post('/api/photo', function(req, res, err){
-  //   console.log(req.body);
-  //   console.log(req.body.file);
-  //   res.json({message:'at least we got some back-and-forth'})
-  //   cloudinary.uploader.upload(req.file, function(uploadResult){
-  //      console.log(uploadResult);
-  //      res.json(uploadResult.secure_url)
-  //    })
-  // })
-
   app.post('/api/pictures', upload.array('files', 4), function(req,res){
-    // console.log(req.body);
-    // console.log(req.files);
     for (var i = 0; i < req.files.length; i++) {
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination
@@ -360,20 +418,20 @@ module.exports = function(app){
 
   /////get all emails from splash collection to email back to us
   app.get('/api/emails', function(req, res){
-    console.log('in emails');
     Emailcapture.find({}, function(err, emails){
-      console.log(emails);
-      var uniqueArray = [];
-      for (var i = 0; i < emails.length; i++) {
-        for (var j = 0; j < uniqueArray.length; j++) {
-          if(emails[i].email == uniqueArray[j]){
-          }
-          else{
+      var allEmails = [];
+      for (var i = 0; i < 35; i++) {
+        var passBool = true;
+        for (var j = 0; j < allEmails.length; j++) {
+          if(emails[i] == allEmails[j]){
+            passBool = false;
           }
         }
-        uniqueArray.push(emails[i].email);
+        if(passBool){
+          allEmails.push(emails[i].email)
+        }
       }
-      console.log(uniqueArray);
+      var uniqueArray = allEmails;
       var emailStringFunc = function(){
         var eString = "";
         for (var i = 0; i < uniqueArray.length; i++) {
@@ -382,7 +440,6 @@ module.exports = function(app){
         return eString;
       }
       var emailString = emailStringFunc();
-      console.log(emailString);
       //
       mandrill_client.messages.send({
         message: {
@@ -405,36 +462,49 @@ module.exports = function(app){
 
   ///get all product comments
   app.get('/api/view/product', function(req, res){
-    console.log('productComment')
-    productComment.find({}, function(err, productComment){
+    productComment.find({}, function(err, productComments){
       if(err) console.log(err)
-      console.log(productComment); //this is a console log that will pop up through the terminal shell
-      res.json(productComment)
+      res.json(productComments)
+    })
+  })
+
+  /////get all comments sent to a specific user
+  app.get('/api/view/comments/:receiverId', function(req, res){
+    productComment.find({"receiver": "56719a11ee024833030efede"}, function(err, comments){
+      res.json(comments)
+    })
+  })
+
+  /////get a single comment
+  app.get('/api/comment/:messageId', function(req, res){
+    var messageId = req.params.messageId;
+    productComment.findOne({"_id":messageId},function(err, message){
+      if(err){console.log(err)}
+      res.json(message);
     })
   })
 
 
   ///Posting a single comment
   app.post("/api/product/comment", function(req, res){
-    console.log(req.body);
     productComment.create(req.body, function(err, productComment){
       if(err) throw err;
       res.json(productComment);
     })
   })
+  /////End of commenting system ////////
+  /////////////////////////////////////
+  /////////////////////////////////////
 
-
+  app.post('/api/checkpassword/production', function(req, res){
+    if(req.body.password == "SledFiveScrewy"){
+      res.json(true);
+    }
+  })
 
 }
 
-/////End of commenting system ////////
-/////////////////////////////////////
-/////////////////////////////////////
 
-//mongoose.connect('mongodb://chris:password@ds063134.mongolab.com:63134/hofbsplash')
-//mongoose.connect('mongodb://localhost:27017/myproject');
 
 var db = process.env.DB_URL_HOFB;
-//mongoose.connect(db)
-mongoose.connect('mongodb://jackconnor:Skateboard1@ds063134.mongolab.com:63134/hofbsplash')
-//mongoose.connect(ENV['DB_URL'])
+mongoose.connect(db)

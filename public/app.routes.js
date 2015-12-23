@@ -22,8 +22,8 @@ angular.module('app.routes', ['ngRoute'])
 
     .when('/admin/dashboard', {
       templateUrl: 'templates/_adminDashboard.html'
-      ,controller: 'dashCtrl'
-      ,controllerAs: 'dash'
+      ,controller: 'adminCtrl'
+      ,controllerAs: 'admin'
     })
 
     .when('/designer/dashboard', {
@@ -32,14 +32,14 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'dash'
     })
 
-    .when('/curator/dashboard', {
-      templateUrl: 'templates/_curatorDashboard.html'
-      ,controller: 'dashCtrl'
-      ,controllerAs: 'dash'
+    .when('/buyer/dashboard', {
+      templateUrl: 'templates/_buyerDashboard.html'
+      ,controller: 'buyerCtrl'
+      ,controllerAs: 'buyer'
     })
 
     //create new project
-    .when('/create/project', {
+    .when('/create/project/:project_name', {
       templateUrl: 'templates/_newProject.html'
       ,controller: 'createProjectCtrl'
       ,controllerAs: 'createProject'
@@ -73,6 +73,19 @@ angular.module('app.routes', ['ngRoute'])
       templateUrl: 'templates/_viewProduct.html'
       ,controller: 'viewProductCtrl'
       ,controllerAs: 'viewProduct'
+    })
+
+    //////go to all messages
+    .when('/messages', {
+      templateUrl: 'templates/_allMessages.html'
+      ,controller: 'messageCtrl'
+      ,controllerAs: 'message'
+    })
+
+    .when('/message/:messageId', {
+      templateUrl: 'templates/_singleMessage.html'
+      ,controller: 'messageCtrl'
+      ,controllerAs: 'message'
     })
     /////////default to home
     .otherwise('/');

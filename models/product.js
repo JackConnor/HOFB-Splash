@@ -4,6 +4,8 @@ var Schema = mongoose.Schema;
 var productSchema = new Schema({
   name: String
   ,userId: String
+  ,curatorId: String
+  ,purchaserInformation: Array
   ,timestamp: Date
   ,images: Array
   ,collections: Array
@@ -17,7 +19,7 @@ var productSchema = new Schema({
   ,stitchPatterns: Array
   ,status: String
   ,seasons: Array
-  ,tier: String
+  ,tier: Number
 })
 
 module.exports = mongoose.model('product', productSchema)

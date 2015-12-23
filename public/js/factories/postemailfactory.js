@@ -9,16 +9,15 @@ angular.module('newemailfactory', [])
       $http({
         method: "POST"
         ,url: "/api/emailcaptures"
-        ,data: {email: userEmail.email, date: date.date}
+        ,data: {email: userEmailInfo.email, date: userEmailInfo.date}
       })
       .then(function(email){
         $http({
           method: "POST"
           ,url: "/api/sendemail"
-          ,data: {email: userEmail}
+          ,data: {email: email.data.email}
         })
         .then(function(email){
-          console.log(email);
           window.location.reload()
         })
       })

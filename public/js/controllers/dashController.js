@@ -1,18 +1,16 @@
-angular.module('dashController', ['allProjectsFactory'])
+angular.module('dashController', ['allProjectsFactory', 'checkPwFactory'])
 
   .controller('dashCtrl', dashCtrl)
 
-  dashCtrl.$inject = ['$http', 'allProjects'];
-  function dashCtrl($http, allProjects){
+  dashCtrl.$inject = ['$http', 'allProjects', 'checkPw'];
+  function dashCtrl($http, allProjects, checkPw){
     var self = this;
-
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
     self.collectionCounter = true;///so we only load collections once
-
+    // checkPw.checkPassword();
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
-
     function loadProjects(callback, arg){
       ///////decode user to pull data
       $http({
@@ -20,6 +18,9 @@ angular.module('dashController', ['allProjectsFactory'])
         ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
       })
       .then(function(decodedToken){
+        if(decodedToken.data.aud != "designer"){
+          window.location.hash = '#/signin'
+        }
         $http({
           method: "GET"
           ,url: '/api/'+decodedToken.data.name+'/products'
@@ -32,7 +33,7 @@ angular.module('dashController', ['allProjectsFactory'])
             if(allProjects[i].status == "saved"){
               allProjectsSaved.push(allProjects[i]);
             }
-            else if(allProjects[i].status == "submitted to curator"){
+            else if(allProjects[i].status == "submitted to curator" || "curated"){
               curatedProjectsArray.push(allProjects[i]);
             }
             self.allProjects = allProjectsSaved;
@@ -65,36 +66,39 @@ angular.module('dashController', ['allProjectsFactory'])
             self.allProjects[i].TimeSinceCreation = timeSince();
             /////get all collections
             for (var j = 0; j < self.allProjects[i].collections.length; j++) {
-              console.log(self.allProjects[i].collections[j]);
               collectionName.push(self.allProjects[i].collections[j])
             }
             self.allCollectionsRaw = collectionName;
+            checkDuplicate();
           }
-          //////must make sure there are no duplicates
-          self.allCollections = [];
-          for (var i = 0; i < self.allCollectionsRaw.length; i++) {
-            var passBool = true;
-            for (var j = 0; j < self.allCollections.length; j++) {
-              if(self.allCollectionsRaw[i] == self.allCollections[j]){
-                passBool = false;
-              }
-            }
-            if(passBool && self.allCollectionsRaw[i] != ""){
-              self.allCollections.push(self.allCollectionsRaw[i])
-            }
-          }
-          self.allCollections;
-          if(self.collectionCounter){
-            loadCollection(self.allCollections);
-          }
-          console.log(self.allCollections);
           callback(arg)
         })
       })
     }
 
+    function checkDuplicate(){
+      //////must make sure there are no duplicates
+      self.allCollections = [];
+      for (var i = 0; i < self.allCollectionsRaw.length; i++) {
+        var passBool = true;
+        for (var j = 0; j < self.allCollections.length; j++) {
+          if(self.allCollectionsRaw[i] == self.allCollections[j]){
+            passBool = false;
+          }
+        }
+        if(passBool && self.allCollectionsRaw[i] != ""){
+          self.allCollections.push(self.allCollectionsRaw[i])
+        }
+      }
+      if(self.collectionCounter){
+        loadCollection(self.allCollections);
+      }
+    }
+
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
+      var dataType = $('.dashDataType');
+      dataType.text('Active Products, which have not been sent to curation');
       for (var i = 0; i < self.allProjects.length; i++) {
         if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
@@ -139,16 +143,48 @@ angular.module('dashController', ['allProjectsFactory'])
         }, 100)
       })
       $('.projectCellNewInner').on('click', function(){
-        window.location.hash = "#/create/project";
-        window.location.reload();
+        newProductPop();
       })
       arg();
     }
     ///////will set self.allProjects as all our projects
-    loadProjects(loadInitialList, addHoverToCell);
+    setTimeout(loadProjects(loadInitialList, addHoverToCell), 700)
+    function newProductPop(){
+      $('.bodyview').prepend(
+        '<div class="newProductModal">'+
+          "<div class='modalFiller'>"+
+          "</div>"+
+          "<div class='newProductModalHolder'>"+
+            "<div class='newProductModalDelete'>X</div>"+
+            "<div class='newProductModalContent'>"+
+              "<h3>Welcome to your New Product</h3>"+
+              "<h4>Here we will be building your new Product. It's important to give us as much detail as possible, so that our buyers can evaluate what they are getting</h4>"+
+              "<br>"+
+              "<h4>The first step is giving your product a name</h4>"+
+              "<input class='newProductName' placeholder='New Product Name'>"+
+              "<input class='newProductBegin' value='Ok, lets start' type='button'>"+
+            '</div>'+
+          '</div>'+
+          "<div class='modalFiller'>"+
+          "</div>"+
+        '</div>'
+      )
+      $('.newProductBegin').on('click', function(){
+        var name = $('.newProductName').val().split(' ').join('_');
+        window.location.hash = "#/create/project/"+name;
+      });////function to begin product build
+      $('.modalFiller').on('click', function(){
+        $('.newProductModal').remove();
+      });/////function to go back to dashboard
+      $('.newProductModalDelete').on('click', function(){
+        $('.newProductModal').remove();
+      })
+    }
 
     ////function for appending active list
     function loadCuratedList(){
+      var dataType = $('.dashDataType');
+      dataType.text('Sent-for-Curation Products');
       for (var i = 0; i < self.curatedProjects.length; i++) {
         function timeSince(){
           var nowDate = new Date();
@@ -215,8 +251,7 @@ angular.module('dashController', ['allProjectsFactory'])
         }, 100)
       })
       $('.projectCellNewInner').on('click', function(){
-        window.location.hash = "#/create/project";
-        window.location.reload();
+        newProductPop();
       })
     }
 
@@ -244,6 +279,8 @@ angular.module('dashController', ['allProjectsFactory'])
           var productDataArray = listToFilter[i];
           var productTypeArray = productDataArray[filterType];
           for (var j = 0; j < productTypeArray.length; j++) {
+            console.log(productTypeArray[j]);
+            console.log(filterValue);
             if(productTypeArray[j] == filterValue){
               filteredArray.push(listToFilter[i]);
               self.filteredProjects = filteredArray;
@@ -254,12 +291,9 @@ angular.module('dashController', ['allProjectsFactory'])
       }
       //////begin if statement for self.filtered
       if(!self.filteredProjects || self.filteredProjects.length == 0){
-        console.log('no hits for that filter');
         $('.designerDashList').html('');
       }
       else {
-        console.log(self.filteredProjects);
-        console.log('trying to do something');
         for (var i = 0; i < self.filteredProjects.length; i++) {
           function timeSince(){
             var nowDate = new Date();
@@ -447,63 +481,213 @@ angular.module('dashController', ['allProjectsFactory'])
       })
       //////function to restore cell to order when mouse leaves cell
     }
-
     ////////End Cell Hover///////
     /////////////////////////////
 
     ////////////////////////////////
     //////Begin Filtering///////////
 
-    ////filter by productType
-    $('.designerDashProductType').change(function(evt){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("productType", $('.designerDashProductType').val(), self.allProjects);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("productType", $('.designerDashProductType').val(), self.curatedProjects);
-      }
+    ////////filter dropdown frontend html logic
+    $('.designerDashColor').on('click', function(evt){
+      $('.colorFilter').remove();
+      $('.typeFilter').remove();
+      $('.fabricFilter').remove();
+      $('.seasonFilter').remove();
+      $(evt.target).append(
+        "<div class='colorFilter'>"+
+          "<div  id='filterRed' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div id='filterBlue' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div id='filterWhite' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div id='filterBlack' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div id='filterOrange' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div id='filterYellow' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div id='filterMagenta' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div id='filterAqua' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+          "<div id='filterGreen' class='colorFilterCell col-xs-4'>"+
+          "</div>"+
+        "</div>"
+      )
+      $('.colorFilter').on('mouseleave', function(){
+        $('.colorFilter').remove();
+      })
+
+      $('.colorFilterCell').on('click', function(evt){
+        var color = $(evt.target)[0].id.slice(6, 25);
+        $('.designerDashList').html('');
+        $('.colorFilter').remove();
+        console.log('yo');
+        console.log(color);
+        if(self.curatedToggleCounter == 'active'){
+          loadFilteredList("colors", color, self.allProjects);
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          loadFilteredList("colors", color, self.curatedProjects);
+        }
+      })
     })
 
-    ////filter by color
-    $('.designerDashColor').change(function(){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("colors", $('.designerDashColor').val(), self.allProjects);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("colors", $('.designerDashColor').val(), self.curatedProjects);
-      }
+    ////////filter dropdown frontend html logic
+    $('.designerDashType').on('click', function(evt){
+      console.log('yoyoyo');
+      $('.colorFilter').remove();
+      $('.typeFilter').remove();
+      $('.fabricFilter').remove();
+      $('.seasonFilter').remove();
+      $(evt.target).append(
+        "<div class='typeFilter'>"+
+          "<div  id='filterShirt' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://secretenergy.com/wp-content/uploads/2014/07/SOUL-WARS-shirt-21.jpg'>" +
+          "</div>"+
+          "<div  id='filterPants' class='typeFilterCell col-xs-4'>"+
+            "<img src='https://bonobos-prod-s3.imgix.net/products/10163/original/PNT_Golf_Maide_HighlandPant_Blackwatch_category.jpg?1423867714&w=300&q=74&h=300&fit=crop'>" +
+          "</div>"+
+          "<div  id='filterDress' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://www.kirnazabete.com/media/catalog/product/cache/1/image/300x/5e06319eda06f020e43594a9c230972d/1/1/11218940_5802764_1000/KirnaZabete-Dolce-and-Gabbana-Rose-Print-Dress-31.jpg'>" +
+          "</div>"+
+          "<div  id='filterJacket' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://images.motorcycle-superstore.com/productimages/300/2016-dainese-womens-michelle-leather-jacket-mcss.jpg'>" +
+          "</div>"+
+          "<div  id='filterTee' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=140393304'>" +
+          "</div>"+
+          "<div  id='filterSkirt' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://stylishcurves.com/wp-content/uploads/2014/01/burnt-orange-godet-skirt-300x300.jpg'>" +
+          "</div>"+
+          "<div  id='filterShorts' class='typeFilterCell col-xs-4'>"+
+            "<img src='https://images.bigcartel.com/bigcartel/product_images/163340455/-/shorts-0175.jpg'>" +
+          "</div>"+
+          "<div  id='filterScarf' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://onwardpullzone.onwardreserve.netdna-cdn.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/o/r/or-camel-check-reversible-cashmere-scarf.jpg'>" +
+          "</div>"+
+          "<div  id='filterHat' class='typeFilterCell col-xs-4'>"+
+            "<img src='http://ep.yimg.com/ay/oaklandraiders/oakland-raiders-girls-tailsweep-hat-3.jpg'>" +
+          "</div>"+
+        "</div>"
+      )
+      $('.typeFilter').on('mouseleave', function(){
+        $('.typeFilter').remove();
+      })
+
+      $('.typeFilterCell').on('click', function(evt){
+        var type = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
+        console.log(type);
+        $('.designerDashList').html('');
+        $('.typeFilter').remove();
+        console.log('yo');
+        if(self.curatedToggleCounter == 'active'){
+          loadFilteredList("productType", type, self.allProjects);
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          loadFilteredList("productType", type, self.curatedProjects);
+        }
+      })
     })
 
-    ////filter by fabric
-    $('.designerDashFabric').change(function(){
-      console.log('looooo testing');
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.allProjects);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("fabrics", $('.designerDashFabric').val(), self.curatedProjects);
-      }
+    ////////filter Fabric
+    $('.designerDashFabric').on('click', function(evt){
+      $('.colorFilter').remove();
+      $('.typeFilter').remove();
+      $('.fabricFilter').remove();
+      $('.seasonFilter').remove();
+      $(evt.target).append(
+        "<div class='fabricFilter'>"+
+          "<div  id='filterSeersucker' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://cdn.shopify.com/s/files/1/0400/5101/products/FFseernavy_grande.jpg?v=1437514918'>" +
+          "</div>"+
+          "<div  id='filterPleather' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://i.ebayimg.com/images/g/EB8AAOSwk5FUvXtS/s-l300.jpg'>" +
+          "</div>"+
+          "<div  id='filterDockers' class='fabricFilterCell col-xs-4'>"+
+            "<img src='https://dtpmhvbsmffsz.cloudfront.net/posts/2015/05/08/554d8bdbbcd4a73a1d00565b/s_554d8bdbbcd4a73a1d00565c.jpg'>" +
+          "</div>"+
+          "<div  id='filterCamo' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://wiganhydroprinting.co.uk/wp-content/uploads/2014/04/clear-camo-300x3001.jpg'>" +
+          "</div>"+
+          "<div  id='filterVeneer' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://www.arrow.gb.net/images/pages/finish-colours/material-finishes/veneer/walnut-r.jpg'>" +
+          "</div>"+
+          "<div  id='filterNylon' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://static1.squarespace.com/static/52965deee4b0f580c1fe0b7d/52c88375e4b03b30610b4a0a/52c8845be4b0268360ddfb8c/1388874157418/LightRoyalNylon.jpg?format=300w'>" +
+          "</div>"+
+          "<div  id='filterLeather' class='fabricFilterCell col-xs-4'>"+
+            "<img src='https://s-media-cache-ak0.pinimg.com/736x/8b/c3/bf/8bc3bf43297bc2bc9983996ee8ed4cdb.jpg'>" +
+          "</div>"+
+          "<div  id='filterCotton' class='fabricFilterCell col-xs-4'>"+
+            "<img src='http://d6lw7to1547c3.cloudfront.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/308744.jpg'>" +
+          "</div>"+
+          "<div  id='filterDenim' class='fabricFilterCell col-xs-4'>"+
+            "<img src='https://www.shoponeonline.com/wp-content/uploads/denim-swatch.png'>" +
+          "</div>"+
+        "</div>"
+      )
+      $('.fabricFilter').on('mouseleave', function(){
+        $('.fabricFilter').remove();
+      })
+
+      $('.fabricFilterCell').on('click', function(evt){
+        var fabric = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
+        console.log(fabric);
+        $('.designerDashList').html('');
+        $('.fabricFilter').remove();
+        console.log('yo');
+        if(self.curatedToggleCounter == 'active'){
+          loadFilteredList("fabrics", fabric, self.allProjects);
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          loadFilteredList("fabrics", fabric, self.curatedProjects);
+        }
+      })
     })
 
-    ////filter by button
-    // $('.designerDashButton').change(function(){
-    //   $('.designerDashList').html('');
-    //   loadFilteredList("buttons", $('.designerDashButton').val())
-    // })
+    ////////filter dropdown frontend html logic
+    $('.designerDashSeason').on('click', function(evt){
+      $('.colorFilter').remove();
+      $('.typeFilter').remove();
+      $('.fabricFilter').remove();
+      $('.seasonFilter').remove();
+      $(evt.target).append(
+        "<div class='seasonFilter'>"+
+          "<div  id='filterSpring' class='seasonFilterCell col-xs-6'>"+
+            "<img src='http://organically.server276.com/blog/wp-content/uploads/2014/03/18_spring-300x300.jpg'>" +
+          "</div>"+
+          "<div  id='filterSummer' class='seasonFilterCell col-xs-6'>"+
+            "<img src='http://r2rdesigns.com/wp-content/uploads/2014/06/summer-beach-hd-desktop-wallpaper-300x300.jpg'>" +
+          "</div>"+
+          "<div  id='filterFall' class='seasonFilterCell col-xs-6'>"+
+            "<img src='http://img.thrfun.com/img/083/036/autumn_trees_s1.jpg'>" +
+          "</div>"+
+          "<div  id='filterWinter' class='seasonFilterCell col-xs-6'>"+
+            "<img src='http://pixelshok.com/wp-content/uploads/2011/01/Winter-300x300.png'>" +
+          "</div>"+
+        "</div>"
+      )
+      $('.seasonFilter').on('mouseleave', function(){
+        $('.seasonFilter').remove();
+      })
 
-    ////filter by season
-    $('.designerDashSeason').change(function(){
-      $('.designerDashList').html('');
-      if(self.curatedToggleCounter == 'active'){
-        loadFilteredList("seasons", $('.designerDashSeason').val(), self.allProjects);
-      }
-      else if(self.curatedToggleCounter == 'curated'){
-        loadFilteredList("seasons", $('.designerDashSeason').val(), self.curatedProjects);
-      }
+      $('.seasonFilterCell').on('click', function(evt){
+        var season = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
+        $('.designerDashList').html('');
+        $('.seasonFilter').remove();
+        if(self.curatedToggleCounter == 'active'){
+          loadFilteredList("seasons", season, self.allProjects);
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          console.log(' curated list');
+          console.log(self.curatedProjects);
+          loadFilteredList("seasons", season, self.curatedProjects);
+        }
+      })
     })
+
     ////End Filtering///////////////
     ////////////////////////////////
 
@@ -518,20 +702,14 @@ angular.module('dashController', ['allProjectsFactory'])
     function loadCollection(collections){
       self.collectionCounter = false;///so that we only load collections once
       for (var i = 0; i < collections.length; i++) {
-
         $('.designerDashCollectionDropdown').append(
           '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
-            // "<p>"+
             collections[i]+
-            // "</p>"+
           "</div>"
         )
       }
       $('.designerDashCollectionCell').on('mouseenter', function(evt){
-        // console.log(evt.target);
-        // console.log($($(evt.target)[0]));
         var color = $(evt.target).css('backgroundColor');
-        console.log(color);
         if( color != 'rgb(28, 28, 28)'){
           $($(evt.target)[0]).css({
               backgroundColor: '#BDBDBD'
@@ -539,11 +717,7 @@ angular.module('dashController', ['allProjectsFactory'])
         }
       })
       $('.designerDashCollectionCell').on('mouseleave', function(evt){
-        // console.log(evt.target);
-        // console.log($($(evt.target)[0]));
         var color = $(evt.target).css('backgroundColor');
-        console.log(color);
-        console.log();
         if( color != 'rgb(28, 28, 28)'){
           $($(evt.target)[0]).css({
             backgroundColor: 'white'
@@ -553,7 +727,6 @@ angular.module('dashController', ['allProjectsFactory'])
       })
       $('.designerDashCollectionCell').on('click', function(evt){
         var collections = $('.designerDashCollectionCell');
-        console.log(collections);
         for (var i = 0; i < collections.length; i++) {
           $(collections[i]).css({
             backgroundColor: 'white'
@@ -561,7 +734,6 @@ angular.module('dashController', ['allProjectsFactory'])
           })
         }
         var collectionValue = $($(evt.target)[0])[0].id;
-        console.log(collectionValue);
         $($(evt.target)[0]).css({
           backgroundColor: "#1C1C1C"
           ,color: 'white'
@@ -586,15 +758,10 @@ angular.module('dashController', ['allProjectsFactory'])
             loadFilteredList('collections', collectionValue, self.curatedProjects);
           }
         }
-
       })
     }
     //end load collections/
     ///////////////////////
-
-
-    /////collection column logic
-
 
   /////end dash controller
   ////////////////////////

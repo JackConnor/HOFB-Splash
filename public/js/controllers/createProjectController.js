@@ -1,12 +1,13 @@
-var app = angular.module('createProjectController', ['postProjectFactory'])
+var app = angular.module('createProjectController', ['postProjectFactory', 'checkPwFactory'])
 
   .controller('createProjectCtrl', createProjectCtrl)
 
-  createProjectCtrl.$inject = ['$http', 'postProject']
-  function createProjectCtrl($http, postProject){
+  createProjectCtrl.$inject = ['$http', 'postProject', 'checkPw']
+  function createProjectCtrl($http, postProject, checkPw){
     var self = this;
     //////global variables we'll be using for moving the carousel
     ///////get the users token
+    // checkPw.checkPassword();
     $http({
       method: "GET"
       ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
@@ -577,6 +578,41 @@ var app = angular.module('createProjectController', ['postProjectFactory'])
       // $(formNew).submit();
     }
     $("#i_submit").on('click', newForm)
+
+    ///////////////////////////////////////////////
+    //////Begin logic for photo popup modal////////
+    $('.newProductCurrentImage').on('click', function(){
+      console.log($('.bodyview'));
+      $('.bodyview').prepend(
+        '<div class="photoModal">'+
+          "<div class='modalFiller'>"+
+          "</div>"+
+          "<div class='modalPhotoHolder'>"+
+            "<img class='modalImage' src='"+$('.newProductCurrentImage').attr('src')+"'>"+
+          '</div>'+
+          "<div class='modalFiller'>"+
+          "</div>"+
+        '</div>'
+      )
+      $('.modalFiller').on('click', function(){
+        $('.photoModal').remove();
+      })/////function to view a full page modal on click
+    });
+    //////End logic for photo popup modal//////////
+    ///////////////////////////////////////////////
+
+    ///////////////////////////////////////////////
+    /////////Logic to load intial params name//////
+    function loadName(){
+      var name = window.location.hash.split('/')[3].split('_').join(' ');
+      console.log(name);
+      $('.newProductTitle').val(name);
+    }
+    loadName();
+
+    /////End Logic to load intial params name//////
+    ///////////////////////////////////////////////
+
   /////end createProject controller
   ////////////////////////
   ////////////////////////
