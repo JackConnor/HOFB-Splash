@@ -1,6 +1,6 @@
 # Empty CSS file for your own CSS
 
-@import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css");
+/*@import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css");*/
 
 .panel-product {
   -moz-transition: all .3s ease;
@@ -947,10 +947,6 @@
   padding: 20px;
   margin: 0px;
 }
-.productContainer{
-margin-top: 20px;
-margin-bottom: 10px;
-}
 
 textarea#styled {
 	width: 500px;
@@ -963,19 +959,20 @@ textarea#styled {
 	background-repeat: no-repeat;
 }
 
-.commentSubmitBtn .editProductSubmitBtn{
-width:500px;
-}
-
 .productContainer{
-  outline:2px solid yellow;
+  border-top:2px solid yellow;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: 'Oxygen', sans-serif;
 }
-.productTitle{
-  outline:2px solid black;
+.viewProductTitle{
+  /*outline:2px solid black;*/
 }
-.productStatus{
+.viewProductType{
   margin-top:-9px;
-  outline:2px solid green;
+  margin-left: 2px;
+  font-size:17px;
+  /*outline:2px solid green;*/
 }
 .productThumbnailImage{
   float:left;
@@ -983,14 +980,16 @@ width:500px;
   padding:10px 5px 10px 5px;
 }
 
-.productDescriptionTextBox{
-  outline:2px solid black;
+.productAccessoryBox{
+  /*outline:2px solid black;*/
   padding:10px 5px 200px 5px;
+  margin-left:-4px;
 }
 
-.productAccessoryBox{
-  outline:2px solid blue;
+.productDescriptionBox{
+  /*outline:2px solid blue;*/
   padding:10px 5px 100px 5px;
+  margin-left:-4px;
 }
 
 #commentTextBox {
@@ -999,7 +998,218 @@ width:500px;
   bottom: 0;
   right: 0;
   overflow-y: scroll;
-  height:350px;
-  outline:2px solid red;
+  height:600px;
+  /*outline:2px solid red;*/
   /*width: 25%;*/
+}
+
+/*Start of Product comment box V2, using bootstrap*/
+/*@import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);*/
+
+.detailBox {
+    width:320px;
+    border:1px solid #bbb;
+    margin:15px 50px 50px 50px;
+    border-radius: 3px;
+}
+.titleBox {
+    background-color:#fdfdfd;
+    padding:10px;
+}
+.titleBox label{
+  color:#444;
+  margin:0;
+  display:inline-block;
+}
+
+.commentBox {
+    padding:10px;
+    border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+.actionBox .form-group * {
+  width: 130%;
+  margin-left: -36px;
+
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:200px;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    border-top:1px #bbb;
+    padding:10px;
+}
+
+.commentSubmitBtn{
+  float: right;
+  margin-right: 100px;
+  margin-top: -30px;
+  background-color: #169AA9;
+  color: white;
+  padding: 10px 30px 10px 30px;
+  border-color:#007236;
+}
+
+.commentBoxDate{
+    font-size: 12px;
+    float: right;
+    margin-top: -25px;
+
+}
+
+/*End of Product comment box, using bootstrap*/
+
+/*Beginning of product image*/
+
+.viewProductImage{
+  background-image:url('smiley.gif');
+background-repeat:no-repeat;
+background-size:100% 100%;
+}
+
+/* resize images */
+.viewProductImageMain {
+    width: 100%;
+    height: auto;
+}
+
+.viewProductImageContainer {
+  margin-top: 15px;
+}
+/*End of product image*/
+/*Underlines the product title*/
+.viewProductTitleUnderline{
+  width: 40px;
+  position: relative;
+  border-bottom: 2px solid #169AA9;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+/*Sets the correct margin spacing for the left column of view product page*/
+.productContainerLeft{
+  margin-right:-40px;
+  margin-left: 80px;
+}
+/*Comment box text css in view product page*/
+.commentBoxDate {
+  color:#C6C3C0;
+}
+
+.commentBoxText{
+  color:#636363;
+  font-size: 14px;
+}
+
+.commentBoxName{
+  color:#232730;
+  font-size:18px;
+  white-space: nowrap;
+  padding-left: 45px;
+  margin-top: -30px;
+}
+/*end of Comment box text css in view product page*/
+
+/* Source: http://snipplr.com/view/10979/css-cross-browser-word-wrap */
+.wordwrap {
+   white-space: pre-wrap;      /* CSS3 */
+   white-space: -moz-pre-wrap; /* Firefox */
+   white-space: -pre-wrap;     /* Opera <7 */
+   white-space: -o-pre-wrap;   /* Opera 7 */
+   word-wrap: break-word;      /* IE */
+}
+/*CSS for accessory boxes on the viewProduct page*/
+.viewProductColorBox, .viewProductAccessoryBox, .viewProductFabricBox, .viewProductStitchBox {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    /*border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0,0,0,.2);*/
+}
+/*CSS for accessory titles on viewProduct page*/
+.productAccessoryBoxCatagories{
+  margin-top:30px;
+  font-size:17px;
+}
+/*Applies background color in viewProduct page*/
+.viewProductPageContainer{
+  background-color:#F6FDFA;
+}
+/*btn used as a circle icon for comment section on viewProduct page*/
+.btn-circle-default-user-icon {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 30px;
+  background-color: black;
+}
+/*box around the reply box for comment system*/
+.viewProductReplyButtonBox{
+  padding: 100px;
+  width: 320px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  margin-left: -11px;
+  margin-top: 0px;
+  border-top-color: #F1ECED;
+  background-color: #F1ECED;
+  padding-bottom: 45px;
+  padding-top: 45px;
+}
+
+.commentBoxTextBackgroundColorOdd {
+  background-color: #FEFDFA;
+}
+.commentBoxTextBackgroundColorEven {
+  background-color: #F7F6F4;
+}
+
+.commentFile:last-of-type {
+    background-color: blue;
+}
+.viewPictureImageIcon {
+  font-size: 20px;
+  color: #858585;
+  float: left;
+  margin: 20px;
 }

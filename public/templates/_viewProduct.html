@@ -1,174 +1,149 @@
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-
-<script charset="utf-8" src="bootstrap/css/bootstrap-theme.css"></script>
-<script charset="utf-8" src="bootstrap/css/bootstrap-theme.css.maps"></script>
-<script charset="utf-8" src="bootstrap/css/bootstrap-theme.min.css"></script>
-<script charset="utf-8" src="bootstrap/css/boostrap.css"></script>
-<script charset="utf-8" src="bootstrap/css/boostrap.css.map"></script>
-<script charset="utf-8" src="bootstrap/css/boostrap.min.css"></script>
-<script charset="utf-8" src="bootstrap/fonts/glyphicons-halflings-regular.eot"></script>
-<script charset="utf-8" src="bootstrap/fonts/glyphicons-halflings-regular.svg"></script>
-<script charset="utf-8" src="bootstrap/fonts/glyphicons-halflings-regular.ttf"></script>
-<script charset="utf-8" src="bootstrap/fonts/glyphicons-halflings-regular.woff"></script>
-<script charset="utf-8" src="bootstrap/js/bootstrap.js"></script>
-<script charset="utf-8" src="bootstrap/js/bootstrap.min.js"></script>
 <script charset="utf-8" src="css/viewProduct.css"></script>
+<!-- Modal -->
+<!-- code for lutton that pops up modal on page -->
+<!-- <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Color</Button> -->
+<div class='viewProductPageContainer'>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-<!-- ospry.io photoupload API -->
-<script src="https://code.ospry.io/v1/ospry.js"></script>
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- /Modal -->
+
+
 <br/><br/><br/>
 
 <!-- Product -->
     <div class="productContainer">
-        <div class="row ">
+        <div class="row">
             <!-- item -->
-            <div class="col-md-4 text-center">
-              <div >
-              <h1 class='productTitle'>Name</h1>
-              <h1 class='productStatus'>Status</h1>
-            </div>
-            <!-- Modal -->
-            <div id="myModal" class="modal fade" role="dialog">
-              <div class="modal-dialog">
+            <div class='productContainerLeft'>
+            <div class="col-md-4">
+              <div class='viewProductDetailsContainer' >
+              <h1 class='viewProductTitle'>Details</h1>
+              <h1 class='viewProductTitleUnderline'></h1>
+              <h3 class='viewProductType'>Product Type:</h3>
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                  </div>
-                  <div class="modal-body">
-                    <p>Some text in the modal.</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-
-              </div>
             </div>
-            <!-- /Modal -->
-          </br></br>
-            <div class='productAccessoryBox text-center'>
-            <h1>Accessory Box</h1>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Color</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Fabric</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Stitching</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Buttons</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Belt</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Zippers</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Sash</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Custom</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Custom</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Custom</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Custom</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Custom</Button>
-            <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Custom</Button>
+
+            <div class='productDescriptionBox'>
+            <h2>Description</h2>
+            <p class='wordwrap'>Sample text that will display a description of a product here</p>
+
           </div>
 
-            <div class='productDescriptionTextBox text-center'>
-            <h1>Product Description</h1>
-          </div>
-            </div>
-            <!-- /item -->
-
-            <!-- item -->
-            <div class="col-md-4 text-center">
-                <div class="panel panel-danger panel-product">
-                    <div class="panel-heading">
-                        <img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/assets/v3/editorial/1/86/18677864-3515-5180-bb03-4d24201548c7/5374d3335cec8.image.png">
-                    </div>
-                    <div class="panel-body text-center">
-                      <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-                      <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-                      <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-                      <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-                      <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-                      <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-                    </div>
-                    <ul class="list-group text-center">
-                        <li class="list-group-item"><i class="fa fa-check"></i> Product Price</li>
-                        <li class="list-group-item"><i class="fa fa-check"></i> Product Tier/Ticket Number?</li>
-                    </ul>
-                    <!-- <div class="panel-footer">
-
-                    </div> -->
-                </div>
-            </div>
-            <!-- /item -->
-
-            <!-- item -->
-            <div class="col-md-4 text-center">
-              <div>
-                <a class="btn btn-lg btn-block btn-danger editProductSubmitBtn" type='submit'id='editProjectSubmit'>Revise/Edit Product</a>
-              </div>
-            </br></br>
-              <form method='post'>
-                <div class="comment-form">
-                  <form role="form" id="comment-form">
-                    <div class="form-group has-feedback">
-                      <label for="sender">Name</label>
-                      <input type="text" class="form-control sender" id="sender" placeholder="Sender Name" name="sender">
-                      <i class="fa fa-user form-control-feedback"></i>
-                    </div>
-                    <div class="form-group has-feedback">
-                      <label for="message">Message</label>
-                      <textarea class="form-control message" rows="8" id="message" placeholder="Enter your comment here...." name="message"></textarea>
-                      <i class="fa fa-envelope-o form-control-feedback"></i>
-                    </div>
-                    <!-- <input type='hidden' name='articleid' id='cmdCreateComment' > -->
-                    <input type="button" value="Comment" class="btn btn-lg btn-block btn-danger commentSubmitBtn" id="cmdSubmitComment" data-formid="#comment-form">
-                </form>
-                </div>
-              </form>
+            <div class='productAccessoryBox'>
             </br>
-              <div id="commentTextBox">
-                <!-- comment in angular is referring each individual data within an array -->
-                <div ng-repeat="comment in viewProduct.allComments" class='text-left' >
-                  <h1>{{comment.sender}}</h1>
-                  <h2>{{comment.date}}</h2>
-                  <h3>{{comment.commentText}}</h3>
+            <h3 class='productAccessoryBoxCatagories'>Colors</h3>
+            <div class="viewProductColorBox" style="background-color:#B9B1AF;">
+              <img class='viewProductImageMain' src="http://1.bp.blogspot.com/-vc-Q5d9gpBY/VOeWbTnOGfI/AAAAAAAACl8/s7QeWq48bJM/s1600/Sexywalk02.gif">
+            </div>
+            <div class="viewProductColorBox" style="background-color:#A7A39F;"></div>
+            <div class="viewProductColorBox" style="background-color:#ECE9EF;"></div>
+          </br>
+            <h3 class='productAccessoryBoxCatagories'>Fabric</h3>
+            <div class="viewProductFabricBox" style="background-color:#B9B1AF;"></div>
+            <div class="viewProductFabricBox" style="background-color:#A7A39F;"></div>
+            <div class="viewProductFabricBox" style="background-color:#ECE9EF;"></div>
+          </br>
+            <h3 class='productAccessoryBoxCatagories'>Stitch</h3>
+            <div class="viewProductStitchBox" style="background-color:#B9B1AF;"></div>
+            <div class="viewProductStitchBox" style="background-color:#A7A39F;"></div>
+            <div class="viewProductStitchBox" style="background-color:#ECE9EF;"></div>
+          </br>
+            <h3 class='productAccessoryBoxCatagories'>Accessories</h3>
+            <div class="viewProductAccessoryBox" style="background-color:#B9B1AF;"></div>
+            <div class="viewProductAccessoryBox" style="background-color:#A7A39F;"></div>
+            <div class="viewProductAccessoryBox" style="background-color:#ECE9EF;"></div>
+          </br>
+          </div>
+            </div>
+            <!-- /item -->
+
+            <!-- item -->
+            <div class="col-md-4 text-center">
+                <div class="panel panel-danger panel-product viewProductImageContainer">
+                  <i class="glyphicon glyphicon-resize-full viewPictureImageIcon"></i>
+                    <div class="viewProductImage">
+
+                        <img class='viewProductImageMain' src="http://www.stylebop.com/media/img/article/230/1200/230027.jpg">
+                        <div class="newProductMiniImagesHolder">
+                          <div class="newProductMiniImage col-xs-3">
+                            <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage0'/>
+                            <div class="newProductDeleteMini">X</div>
+                          </div>
+                          <div class="newProductMiniImage col-xs-3">
+                            <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage1'/>
+                            <div class="newProductDeleteMini">X</div>
+                          </div>
+                          <div class="newProductMiniImage col-xs-3">
+                            <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage2'/>
+                            <div class="newProductDeleteMini">X</div>
+                          </div>
+                          <div class="newProductMiniImage col-xs-3">
+                            <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage3'/>
+                            <div class="newProductDeleteMini">X</div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /item -->
+
+            <!-- item -->
+            <div class="col-md-4 text-center commentBoxContainer">
+            <div class="detailBox">
+
+<!-- start of comment box -->
+                <div class="actionBox">
+                  <div id="commentTextBox">
+        <!-- comment in angular is referring each individual data within an array -->
+                <div ng-repeat="comment in viewProduct.allComments" repeat-complete='lastCommentBoxColor()'class='text-left commentFile' >
+                  <div ng-class-odd="'commentBoxTextBackgroundColorOdd'" ng-class-even="'commentBoxTextBackgroundColorEven'" >
+                  <a class="btn btn-default btn-circle-default-user-icon"><i class="fa fa-user"></i></a>
+                  <h1 class='commentBoxName'>{{comment.sender}}</h1>
+                  <h2 class='commentBoxDate'>{{comment.date}}</h2>
+                  <h2 class='commentBoxText'>{{comment.commentText}}</h2>
+                </div>
+                </div>
+              </div>
+                <form class="form-inline" role="form">
+              <div class="form-group">
+                <input class="form-control sender" type="text" placeholder="Name" />
+                <input class="form-control message" type="text" placeholder="Leave a reply" />
+              </div>
+                </form>
+                <div class='col-md-4 text-center viewProductReplyButtonBox'>
+                  <input type="button" value="Reply" class="btn btn-default commentSubmitBtn" id="cmdSubmitComment">
                 </div>
               </div>
 
             </div>
 
+
+          </div>
+
             <!-- /item -->
 
+          </div>
         </div>
-    </div>
-    <!-- Thumbnail carousel view at bottom of page -->
-  <div class="col-md-12">
-    <div>
-                  <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
-    <button type="button" class="btn btn-info btn-lg productThumbnailImage" data-toggle="modal" data-target="#myModal">Image</Button>
+    <!-- End of comment box -->
   </div>
-</div>
-<!-- /Thumbnail carousel view at bottom of page -->
+
 <!-- /Product -->
+</div>

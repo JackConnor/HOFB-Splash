@@ -29,7 +29,7 @@ function addProductComment() {
 
                 var myData = {
                     sender: newCommentSender,
-                    message: newCommentMessage,
+                    commentText: newCommentMessage,
                 };
                 console.log(myData);
                 self.test=(myData);
@@ -57,7 +57,7 @@ console.log(productId);
       window.location.hash = "#/signin"
     })
 
-
+//Get request for single product comments
 // $http({
 //  method:'GET'
 //  ,url:'/api/product/'+ productId
@@ -67,6 +67,7 @@ console.log(productId);
 // self.data=(data.data);
 // })
 
+//Get request for ALL product comments
 $http({
  method:'GET'
  ,url:'/api/view/product'
@@ -76,6 +77,39 @@ console.log(data);
 self.allComments=(data.data);
 })
 
+///Mini photo change ui
+
+function changeEffect(){
+  $('#i_file').change( function(event) {
+    if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 4){
+      frontendPhotoDisplay();
+      $('#i_file').remove();
+      $('.inputFileHolder').append(
+        '<input type="file" id="i_file" name="files">'
+      )
+      changeEffect()
+      self.miniPhotoCounter = self.tempPhotoCache.length;
+    }
+    else{
+      alert('better delete some photos if you want to add more')
+    }
+  });
+}
+changeEffect();
+
+$('.newProductMiniImageImage').on('click', changeMiniPhoto)
+
+function changeMiniPhoto(event){
+  var source = $(event.target)[0].src;
+  $(".newProductCurrentImage").attr('src', source);
+  var photoNumber = $(event.target)[0].id.split('').pop();
+  self.miniPhotoCounter = photoNumber;
+  highlightMini();
+}
+
+lastCommentBoxColor = function(){
+  console.log('commentbox color test is working');
+}
   //self.seedComments = [{_id:'10', sender:'chris', date:'10/21/2015', commentText:'hello first comment'}, {_id:'10',sender:'John', date:'10/2/2015', commentText:'hello second comment'},{_id:'10',sender:'matt', date:'10/22/2015', commentText:'hello third comment'},{_id:'10', sender:'Gabe', date:'10/25/2015', commentText:'hello last comment'}]
   //self.test=('self test'); // quick way to testing displaying data
   /////end viewProduct controller
