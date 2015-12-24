@@ -96,9 +96,45 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     }
 
     function popSwatches(){
-      self.colors = self.productData.colors;
-      console.log(self.colors);
-      console.log(allSwatches);
+      ////get all colors
+      var colorArrayFunc = function(){
+        var prodcolors = self.productData.colors;
+        console.log(prodcolors);
+        var colorArr = [];
+        for (var i = 0; i < prodcolors.length; i++) {
+          var prod = prodcolors[i].toLowerCase();
+          // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
+          colorArr.push(allSwatches.colors[prod]);
+          console.log(colorArr);
+        }
+        return colorArr;
+      }
+      self.allColors = colorArrayFunc();
+      //////get all fabrics
+      var fabricArrayFunc = function(){
+        var fabricArr = [];
+        for (var i = 0; i < self.productData.fabrics.length; i++) {
+          var fabric = self.productData.fabrics[i].toLowerCase();
+          console.log(fabric);
+          // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
+          fabricArr.push(allSwatches.fabrics[fabric]);
+          console.log(fabricArr);
+        }
+        return fabricArr;
+      }
+      self.allFabrics = fabricArrayFunc();
+      //////get seasons
+      var seasonArrayFunc = function(){
+        var seasonArr = [];
+        for (var i = 0; i < self.productData.seasons.length; i++) {
+          var season = self.productData.seasons[i].toLowerCase();
+          console.log(season);
+          seasonArr.push(allSwatches.seasons[season]);
+          console.log(seasonArr);
+        }
+        return seasonArr;
+      }
+      self.allSeasons = seasonArrayFunc();
     }
 
     //////////logic to populate page on load//
