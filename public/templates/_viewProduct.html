@@ -68,10 +68,6 @@
         <div class="viewProductHolder" ng-repeat='season in viewProduct.allSeasons'>
           <img class="viewProductFabricBox" src='{{season}}'></img>
         </div>
-        <!-- <h3 class='productAccessoryBoxCatagories'>Stitch</h3>
-        <div class="viewProductStitchBox" style="background-color:#B9B1AF;"></div>
-        <div class="viewProductStitchBox" style="background-color:#A7A39F;"></div>
-        <div class="viewProductStitchBox" style="background-color:#ECE9EF;"></div> -->
       </br>
         <h3 class='productAccessoryBoxCatagories'>Accessories</h3>
         <div class="viewProductAccessoryBox" style="background-color:#B9B1AF;"></div>
@@ -87,14 +83,14 @@
           <div class="panel panel-danger panel-product viewProductImageContainer">
             <i class="glyphicon glyphicon-resize-full viewPictureImageIcon"></i>
               <div class="viewProductImage">
-
-                  <img class='viewProductImageMain' src="http://www.stylebop.com/media/img/article/230/1200/230027.jpg">
-                  <div class="newProductMiniImagesHolder">
+                  <img class='viewProductImageMain' src="{{viewProduct.allImages[0]}}">
+                  <div class="newProductMiniImagesHolder" ng-repeat='image in viewProduct.allImages'>
                     <div class="newProductMiniImage col-xs-3">
-                      <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage0'/>
+                      <img src="{{image}}" class='newProductMiniImageImage' alt="" id='newProductMiniImage0'/>
                       <div class="newProductDeleteMini">X</div>
                     </div>
-                    <div class="newProductMiniImage col-xs-3">
+                  </div>
+                    <!-- <div class="newProductMiniImage col-xs-3">
                       <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage1'/>
                       <div class="newProductDeleteMini">X</div>
                     </div>
@@ -105,8 +101,7 @@
                     <div class="newProductMiniImage col-xs-3">
                       <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage3'/>
                       <div class="newProductDeleteMini">X</div>
-                    </div>
-                  </div>
+                    </div> -->
               </div>
           </div>
       </div>

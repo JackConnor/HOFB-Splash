@@ -84,6 +84,7 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
               self.currentUser = user.data;
               popContent();
               popSwatches();
+              popImages();
             })
         })
       }
@@ -137,6 +138,9 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
       self.allSeasons = seasonArrayFunc();
     }
 
+    function popImages(){
+      self.allImages = self.productData.images;
+    }
     //////////logic to populate page on load//
     //////////////////////////////////////////
 
