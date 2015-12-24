@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/css/removePaddingBootstrap.css" media="screen" title="no title" charset="utf-8">
 <script charset="utf-8" src="css/viewProduct.css"></script>
 <!-- Modal -->
 <!-- code for lutton that pops up modal on page -->
@@ -34,8 +35,8 @@
 <!-- end nav bar -->
 <!-- Product -->
 <div class="viewProductBar">
-  <span class='viewProductCreator'></span>/
-  <span class='viewProductName'></span>
+  <span class='viewProductCreator'>{{viewProduct.currentUser.email}}</span>/
+  <span class='viewProductName'>{{viewProduct.productData.name}}</span>
 </div>
 <div class="productContainer">
   <div class="row">
@@ -45,11 +46,11 @@
         <div class='viewProductDetailsContainer' >
         <h1 class='viewProductTitle'>Details</h1>
         <h1 class='viewProductTitleUnderline'></h1>
-        <h3 class='viewProductType'>Product Type:  <span class='viewProductTypeData'></span></h3>
+        <h3 class='viewProductType'>Product Type:  <span class='viewProductTypeData'>{{viewProduct.productData.productType}}</span></h3>
       </div>
       <div class='productDescriptionBox'>
         <h2>Description</h2>
-        <p class='wordwrap viewProductDescription'></p>
+        <p class='wordwrap viewProductDescription'>{{viewProduct.productData.description}}</p>
       </div>
 
       <div class='productAccessoryBox'>

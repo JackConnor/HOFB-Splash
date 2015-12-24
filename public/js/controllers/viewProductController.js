@@ -90,8 +90,8 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
       }
 
     function popContent(){
-      $('.viewProductTypeData').text(self.productData.productType);
-      $('.viewProductDescription').text(self.productData.description);
+      // $('.viewProductTypeData').text(self.productData.productType);
+      // $('.viewProductDescription').text(self.productData.description);
       $('.viewProductCreator').text(self.currentUser.email)
       $('.viewProductName').text(self.productData.name)
     }
