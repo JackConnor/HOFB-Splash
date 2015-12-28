@@ -477,8 +477,8 @@
 }
 
 .designerDashList {
-  width: 115%;
-  margin-left: 5px;
+  width: 94%;
+  margin-left: 2%;
 }
 
 .designerDashListContainer {
@@ -1081,10 +1081,7 @@
 }
 
 .projectCellNew {
-  margin-left: 1px;
 
-  /*outline: 4px solid magenta;*/
-  /*background-color: #D8D8D8;*/
 }
 
 .projectCellNewInner {

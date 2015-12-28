@@ -29,15 +29,15 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
       for (var i = 0; i < list.length; i++) {
         $('.messageContainer').append(
           '<div class="messagesCell">'+
-            "<div class='messageNameHolder'>from: "+list[i].sender+"</div>"+
-            "<div id='"+list[i]._id+"' class='messageContentHolder'>text: "+ list[i].commentText+
+            "<div class='messageNameHolder'>from: "+list[i].comments[0].sender+"</div>"+
+            "<div id='"+list[i]._id+"' class='messageContentHolder'>text: "+ list[i].comments[0].messageText+
           "</div>"
         )
       }
-      addInteractionToMessages();
+      addInteractionToMessages(list);
     }
 
-    function addInteractionToMessages(){
+    function addInteractionToMessages(convoList){
       $('.messageContentHolder').on('mouseenter', function(evt){
         $($(evt.target)[0].parentElement).css({
           backgroundColor: "#669999"
@@ -49,37 +49,50 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
         })
       })
       $('.messageContentHolder').on('click', function(evt){
-        var messageId = $(evt.target)[0].id;
-        $http({
-          method: "GET"
-          ,url: "/api/comment/"+messageId
-          // +window.location.hash.split('/')[2]
-        })
-        .then(function(comment){
-          $('.messagesSingleContainer').html('')
-          $('.messagesSingleContainer').append(
-            '<div class="messageContent">'+
-              "<p class='messageSender'>"+comment.data.sender+"</p>"+
-              "<p class='messageText'>"+comment.data.commentText+"</p>"+
-            "</div>"
-          )
-        })
+        console.log(evt.target.id);
+        for (var i = 0; i < convoList.length; i++) {
+          if(convoList[i]._id == evt.target.id){
+            $('.messagesSingleContainer').html('')
+            $('.messagesSingleContainer').append(
+              // '<div class="messageContent">'+
+              //   "<p class='messageSender'>"+comment.data.sender+"</p>"+
+              //   "<p class='messageText'>"+comment.data.commentText+"</p>"+
+              // "</div>"
+            )
+          }
+        }
+        // var messageId = $(evt.target)[0].id;
+        // $http({
+        //   method: "GET"
+        //   ,url: "/api/comment/"+messageId
+        //   // +window.location.hash.split('/')[2]
+        // })
+        // .then(function(comment){
+        //   $('.messagesSingleContainer').html('')
+        //   $('.messagesSingleContainer').append(
+        //     '<div class="messageContent">'+
+        //       "<p class='messageSender'>"+comment.data.sender+"</p>"+
+        //       "<p class='messageText'>"+comment.data.commentText+"</p>"+
+        //     "</div>"
+        //   )
+        // })
       })
     }
     allMessagesFunc(addEmailHtml);/////call the function to load all messages
 
-    if(window.location.hash.split('/')[1] == 'message'){
-      var messageId = window.location.hash.split('/')[2];
-      $http({
-        method: "GET"
-        ,url: "/api/comment/"+window.location.hash.split("/")[2]
-        // +window.location.hash.split('/')[2]
-      })
-      .then(function(comment){
-        self.sender = comment.data.sender;
-        self.commentText = comment.data.commentText;
-      })
-    }
+    ///////only for single message page, which is no longer in our final design
+    // if(window.location.hash.split('/')[1] == 'message'){
+    //   var messageId = window.location.hash.split('/')[2];
+    //   $http({
+    //     method: "GET"
+    //     ,url: "/api/comment/"+window.location.hash.split("/")[2]
+    //     // +window.location.hash.split('/')[2]
+    //   })
+    //   .then(function(comment){
+    //     self.sender = comment.data.sender;
+    //     self.commentText = comment.data.commentText;
+    //   })
+    // }
 
     ///logout button functionality
     $('.logoutButton').on('click', function(){
