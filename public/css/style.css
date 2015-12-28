@@ -394,6 +394,11 @@
   border-top-right-radius: 5px;
 }
 
+.designerDashboardPage{
+  font-family: 'Oxygen', sans-serif;
+  color: #454444;
+}
+
 .designerDashCollectionCell {
   height: 40px;
   font-size: 26px;
@@ -401,15 +406,16 @@
 
 .designerDashCollections {
   height: 40px;
-  border-bottom: 2px solid #BFBBB7;
+  border-bottom: 1px solid #EFEEEC;
   width: 100%;
 }
 
 .designerDashCollectionsContainer {
   background-color: #F9F7F5;
-  height: 100%;
+  height: 700px;
   text-align:justify;
   margin-top: 20px;
+  outline: 1px solid #EFEEEC;
 }
 
 .designerDashCollectionsContainer p{
@@ -417,9 +423,13 @@
   font-style: bolder;
 }
 
+.designerDashContainer{
+    margin-top: 30px;
+}
+
 .designerDashContests {
   height: 40px;
-  border-bottom: 2px solid #BFBBB7;
+  border-bottom: 1px solid #EFEEEC;
   width: 100%;
 }
 
