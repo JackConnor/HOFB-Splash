@@ -6,9 +6,9 @@ var conversationSchema = new Schema({
   ,adminOrBuyer: Boolean
   ,dateCreated: Date
   ,lastUpdated: Date
-  ,comments: Array
+  ,comments: Array///will all comments in chronological order
   ,ownerId: String////product owner's id
-  ,partnerId: String////Id of th person a user is talking to
+  ,adminOrBuyerId: String////Id of th person a user is talking to
 })
 
 module.exports = mongoose.model("Conversation", conversationSchema);
