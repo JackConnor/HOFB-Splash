@@ -409,10 +409,10 @@
   background-color: #F9F7F5;
   height: 100%;
   text-align:justify;
+  margin-top: 20px;
 }
 
 .designerDashCollectionsContainer p{
-  margin-top: 8px;
   font-size: 18px;
   font-style: bolder;
 }
@@ -439,6 +439,10 @@
 .designerDashDashTitle {
   font-size: 25px;
   background-color: #F6FDFA;
+  box-shadow: 1px 4px 4px #D5D3D1;
+  z-index: 1;
+  position: absolute;
+  width: 100%;
 }
 
 .designerDashDeleteProduct {
