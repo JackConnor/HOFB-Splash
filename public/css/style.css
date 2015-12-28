@@ -467,8 +467,8 @@
 }
 
 .designerDashList {
-  width: 115%;
-  margin-left: 5px;
+  width: 94%;
+  margin-left: 2%;
 }
 
 .designerDashListContainer {
@@ -552,6 +552,17 @@
   margin-right: 20px;
 }
 
+.messageBar {
+  height: 50px;
+  background-color: #F7FDFB;
+}
+
+.messageBar p {
+  margin-left: 33px;
+  font-size: 25px;
+  margin-top: 5px;
+}
+
 .messagesCell {
   height: 140px;
   background-color: #e0ebeb;
@@ -567,19 +578,12 @@
 }
 
 .messageContentHolder {
-  height: 60px;
+  height: 72px;
   font-size: 22px;
   width: 80%;
   margin-left: 10%;
-  margin-top: 15px;
+  margin-top: 2px;
   background-color: white
-}
-
-.messageNameHolder {
-  height: 50px;
-  font-size: 26px;
-  background-color: #e5ccff;
-  width: 100%;
 }
 
 .messageSender {
@@ -1068,13 +1072,6 @@
   margin-left: 1%;
   margin-top: 1%;
   height: 98%;
-}
-
-.projectCellNew {
-  margin-left: 1px;
-
-  /*outline: 4px solid magenta;*/
-  /*background-color: #D8D8D8;*/
 }
 
 .projectCellNewInner {
