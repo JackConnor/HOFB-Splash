@@ -1,47 +1,31 @@
 # Empty CSS file for your own CSS
 
-/*@import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css");*/
-
-.panel-product {
-  -moz-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  -webkit-transition: all .3s ease;
-}
-.panel-product:hover {
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
-}
-.panel-product .panel-heading {
-  padding: 20px 10px;
-}
-.panel-product .panel-heading .fa {
-  margin-top: 10px;
-  font-size: 58px;
-}
-.panel-product.list-group-item {
-  color: #777777;
-  border-bottom: 1px solid rgba(250, 250, 250, 0.5);
-}
-.panel-product .list-group-item:last-child {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-}
-.panel-product .list-group-item:first-child {
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-}
-.panel-product .panel-body {
-  background-color: #f0f0f0;
-  font-size: 40px;
-  color: #777777;
-  padding: 20px;
-  margin: 0px;
-}
-
 /*Segmentation for Jacks css*/
+.actionBox {
+    border-top:1px #bbb;
+    padding:10px;
+}
+
+.actionBox .form-group * {
+  width: 130%;
+  margin-left: -36px;
+}
+
 .bodyview {
   min-height: 100%;
   width: 100%;
   position: absolute;
+}
+
+.btn-circle-default-user-icon {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 30px;
+  background-color: black;
 }
 
 .carouselBacking {
@@ -129,6 +113,99 @@
 
 .colorFilterCell {
   height: 70px;
+}
+
+.commentBox {
+    padding:10px;
+    border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+
+.commentBoxDate{
+    font-size: 12px;
+    float: right;
+    margin-top: -25px;
+    color:#C6C3C0;
+}
+
+.commentBoxName{
+  color:#232730;
+  font-size:18px;
+  white-space: nowrap;
+  padding-left: 45px;
+  margin-top: -30px;
+}
+
+.commentBoxText{
+  color:#636363;
+  font-size: 14px;
+}
+
+
+.commentBoxTextBackgroundColorOdd {
+  background-color: #FEFDFA;
+}
+.commentBoxTextBackgroundColorEven {
+  background-color: #F7F6F4;
+}
+
+.commentFile:last-of-type {
+    background-color: blue;
+}
+
+.commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:200px;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+
+.commentSubmitBtn{
+  float: right;
+  margin-right: 100px;
+  margin-top: -30px;
+  background-color: #169AA9;
+  color: white;
+  padding: 10px 30px 10px 30px;
+  border-color:#007236;
+}
+
+.commentText p {
+    margin:0;
+}
+
+#commentTextBox {
+  /*position: absolute;*/
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: scroll;
+  height:600px;
+  /*outline:2px solid red;*/
+  /*width: 25%;*/
 }
 
 .createButtonCellHolder {
@@ -416,6 +493,13 @@
   height: 65px;
   width: 100%;
   display: block;
+}
+
+.detailBox {
+    width:320px;
+    border:1px solid #bbb;
+    margin:15px 50px 50px 50px;
+    border-radius: 3px;
 }
 
 .fabricFilter {
@@ -832,6 +916,48 @@
   height: 400px;
 }
 
+.panel-product {
+  -moz-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  -webkit-transition: all .3s ease;
+}
+
+.panel-product:hover {
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+}
+
+.panel-product .panel-heading {
+  padding: 20px 10px;
+}
+
+.panel-product .panel-heading .fa {
+  margin-top: 10px;
+  font-size: 58px;
+}
+
+.panel-product.list-group-item {
+  color: #777777;
+  border-bottom: 1px solid rgba(250, 250, 250, 0.5);
+}
+
+.panel-product .list-group-item:last-child {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.panel-product .list-group-item:first-child {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.panel-product .panel-body {
+  background-color: #f0f0f0;
+  font-size: 40px;
+  color: #777777;
+  padding: 20px;
+  margin: 0px;
+}
+
 .photoModal {
   width: 100%;
   height: 100%;
@@ -840,8 +966,25 @@
   z-index: 5;
 }
 
-.productAccessoryBoxCatagories {
+.productAccessoryBox{
+  padding:10px 5px 200px 5px;
+  margin-left:-4px;
+}
+
+.productAccessoryBoxCatagories{
+  margin-top:30px;
+  font-size:17px;
   display: block;
+}
+
+.productContainerLeft{
+  margin-right:-40px;
+  margin-left: 80px;
+}
+
+.productDescriptionBox{
+  padding:10px 5px 10px 5px;
+  margin-left:-4px;
 }
 
 .productName {
@@ -851,6 +994,12 @@
   margin-top: 75px;
   /*border: 3px solid white;*/
   background-color: white;
+}
+
+.productThumbnailImage{
+  float:left;
+  outline:2px solid black;
+  padding:10px 5px 10px 5px;
 }
 
 .projectCell {
@@ -1162,86 +1311,6 @@
   margin-left: 20px;
 }
 
-.panel-product {
-  -moz-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  -webkit-transition: all .3s ease;
-}
-.panel-product:hover {
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
-}
-.panel-product .panel-heading {
-  padding: 20px 10px;
-}
-.panel-product .panel-heading .fa {
-  margin-top: 10px;
-  font-size: 58px;
-}
-.panel-product.list-group-item {
-  color: #777777;
-  border-bottom: 1px solid rgba(250, 250, 250, 0.5);
-}
-.panel-product .list-group-item:last-child {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-}
-.panel-product .list-group-item:first-child {
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-}
-.panel-product .panel-body {
-  background-color: #f0f0f0;
-  font-size: 40px;
-  color: #777777;
-  padding: 20px;
-  margin: 0px;
-}
-
-textarea#styled {
-	width: 500px;
-	height: 120px;
-	border: 3px solid #cccccc;
-	padding: 5px;
-	font-family: Tahoma, sans-serif;
-	background-image: url(bg.gif);
-	background-position: bottom right;
-	background-repeat: no-repeat;
-}
-
-.productContainer{
-  border-top:2px solid yellow;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-family: 'Oxygen', sans-serif;
-}
-.viewProductTitle{
-  /*outline:2px solid black;*/
-}
-.viewProductType{
-  margin-top:-9px;
-  margin-left: 2px;
-  font-size:17px;
-  /*outline:2px solid green;*/
-}
-.productThumbnailImage{
-  float:left;
-  outline:2px solid black;
-  padding:10px 5px 10px 5px;
-}
-
-.productAccessoryBox{
-  /*outline:2px solid black;*/
-  padding:10px 5px 200px 5px;
-  margin-left:-4px;
-}
-
-.productDescriptionBox{
-  /*outline:2px solid blue;*/
-  padding:10px 5px 10px 5px;
-  margin-left:-4px;
-}
-
-
 .typeFilter {
   height: 210px;
   width: 210px;
@@ -1261,26 +1330,35 @@ textarea#styled {
   position: absolute;
 }
 
-#commentTextBox {
-  /*position: absolute;*/
-  top: 0;
-  bottom: 0;
-  right: 0;
-  overflow-y: scroll;
-  height:600px;
-  /*outline:2px solid red;*/
-  /*width: 25%;*/
+
+.productContainer{
+  border-top:2px solid yellow;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: 'Oxygen', sans-serif;
 }
 
-/*Start of Product comment box V2, using bootstrap*/
-/*@import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);*/
-
-.detailBox {
-    width:320px;
-    border:1px solid #bbb;
-    margin:15px 50px 50px 50px;
-    border-radius: 3px;
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
 }
+
+.taskDescription {
+    margin-top:10px 0;
+}
+
+textarea#styled {
+	width: 500px;
+	height: 120px;
+	border: 3px solid #cccccc;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
+	background-image: url(bg.gif);
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
+
 .titleBox {
     background-color:#fdfdfd;
     padding:10px;
@@ -1291,138 +1369,17 @@ textarea#styled {
   display:inline-block;
 }
 
-.commentBox {
-    padding:10px;
-    border-top:1px dotted #bbb;
-}
-.commentBox .form-group:first-child, .actionBox .form-group:first-child {
-    width:80%;
-}
-.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
-    width:18%;
-}
-.actionBox .form-group * {
-  width: 130%;
-  margin-left: -36px;
-
-}
-.taskDescription {
-    margin-top:10px 0;
-}
-.commentList {
-    padding:0;
-    list-style:none;
-    max-height:200px;
-    overflow:auto;
-}
-.commentList li {
-    margin:0;
-    margin-top:10px;
-}
-.commentList li > div {
-    display:table-cell;
-}
-.commenterImage {
-    width:30px;
-    margin-right:5px;
-    height:100%;
-    float:left;
-}
-.commenterImage img {
-    width:100%;
-    border-radius:50%;
-}
-.commentText p {
-    margin:0;
-}
-.sub-text {
-    color:#aaa;
-    font-family:verdana;
-    font-size:11px;
-}
-.actionBox {
-    border-top:1px #bbb;
-    padding:10px;
+.viewPictureImageIcon {
+  font-size: 20px;
+  color: #858585;
+  float: left;
+  margin: 20px;
 }
 
-.commentSubmitBtn{
-  float: right;
-  margin-right: 100px;
-  margin-top: -30px;
-  background-color: #169AA9;
-  color: white;
-  padding: 10px 30px 10px 30px;
-  border-color:#007236;
+.viewProductBar {
+  font-size: 25px;
 }
 
-.commentBoxDate{
-    font-size: 12px;
-    float: right;
-    margin-top: -25px;
-
-}
-
-/*End of Product comment box, using bootstrap*/
-
-/*Beginning of product image*/
-
-.viewProductImage{
-  background-image:url('smiley.gif');
-background-repeat:no-repeat;
-background-size:100% 100%;
-}
-
-/* resize images */
-.viewProductImageMain {
-    width: 100%;
-    height: auto;
-}
-
-.viewProductImageContainer {
-  margin-top: 15px;
-}
-/*End of product image*/
-/*Underlines the product title*/
-.viewProductTitleUnderline{
-  width: 40px;
-  position: relative;
-  border-bottom: 2px solid #169AA9;
-  margin-top: -10px;
-  margin-bottom: 20px;
-}
-/*Sets the correct margin spacing for the left column of view product page*/
-.productContainerLeft{
-  margin-right:-40px;
-  margin-left: 80px;
-}
-/*Comment box text css in view product page*/
-.commentBoxDate {
-  color:#C6C3C0;
-}
-
-.commentBoxText{
-  color:#636363;
-  font-size: 14px;
-}
-
-.commentBoxName{
-  color:#232730;
-  font-size:18px;
-  white-space: nowrap;
-  padding-left: 45px;
-  margin-top: -30px;
-}
-/*end of Comment box text css in view product page*/
-
-/* Source: http://snipplr.com/view/10979/css-cross-browser-word-wrap */
-.wordwrap {
-   white-space: pre-wrap;      /* CSS3 */
-   white-space: -moz-pre-wrap; /* Firefox */
-   white-space: -pre-wrap;     /* Opera <7 */
-   white-space: -o-pre-wrap;   /* Opera 7 */
-   word-wrap: break-word;      /* IE */
-}
-/*CSS for accessory boxes on the viewProduct page*/
 .viewProductColorBox, .viewProductAccessoryBox, .viewProductFabricBox, .viewProductStitchBox {
     float: left;
     width: 40px;
@@ -1432,27 +1389,30 @@ background-size:100% 100%;
     border-style: solid;
     border-color: rgba(0,0,0,.2);*/
 }
-/*CSS for accessory titles on viewProduct page*/
-.productAccessoryBoxCatagories{
-  margin-top:30px;
-  font-size:17px;
+
+.viewProductHolder {
+  display: block;
 }
-/*Applies background color in viewProduct page*/
+
+.viewProductImage{
+  background-image:url('smiley.gif');
+background-repeat:no-repeat;
+background-size:100% 100%;
+}
+
+.viewProductImageContainer {
+  margin-top: 15px;
+}
+
+.viewProductImageMain {
+    width: 100%;
+    height: auto;
+}
+
 .viewProductPageContainer{
   background-color:#F6FDFA;
 }
-/*btn used as a circle icon for comment section on viewProduct page*/
-.btn-circle-default-user-icon {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.42;
-  border-radius: 30px;
-  background-color: black;
-}
-/*box around the reply box for comment system*/
+
 .viewProductReplyButtonBox{
   padding: 100px;
   width: 320px;
@@ -1466,27 +1426,29 @@ background-size:100% 100%;
   padding-top: 45px;
 }
 
-.commentBoxTextBackgroundColorOdd {
-  background-color: #FEFDFA;
-}
-.commentBoxTextBackgroundColorEven {
-  background-color: #F7F6F4;
+.viewProductTitle{
+  /*outline:2px solid black;*/
 }
 
-.commentFile:last-of-type {
-    background-color: blue;
-}
-.viewPictureImageIcon {
-  font-size: 20px;
-  color: #858585;
-  float: left;
-  margin: 20px;
+.viewProductTitleUnderline{
+  width: 40px;
+  position: relative;
+  border-bottom: 2px solid #169AA9;
+  margin-top: -10px;
+  margin-bottom: 20px;
 }
 
-.viewProductBar {
-  font-size: 25px;
+.viewProductType{
+  margin-top:-9px;
+  margin-left: 2px;
+  font-size:17px;
+  /*outline:2px solid green;*/
 }
 
-.viewProductHolder {
-  display: block;
+.wordwrap {
+   white-space: pre-wrap;      /* CSS3 */
+   white-space: -moz-pre-wrap; /* Firefox */
+   white-space: -pre-wrap;     /* Opera <7 */
+   white-space: -o-pre-wrap;   /* Opera 7 */
+   word-wrap: break-word;      /* IE */
 }
