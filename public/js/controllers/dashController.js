@@ -103,28 +103,20 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       var dataType = $('.dashDataType');
       dataType.text('Active Products, which have not been sent to curation');
       for (var i = 0; i < self.allProjects.length; i++) {
-        // if(((i+1)%6) != 0 || i == 0){
-          $('.designerDashList').append(
-            "<div class='col-md-4 col-xs-12 projectCell'>"+
-              "<div class='projectCellInner'>"+
-                "<div class='projectCellImageHolder'>"+
-                  "<img class='projectCellImage' id='"+self.allProjects[i]._id+"'"+
-                "src='"+self.allProjects[i].images[0]+"'>"+
-                "</div>"+
-                "<div class='projectCellContent'>"+
-                  "<p>"+self.allProjects[i].TimeSinceCreation+"</p>"+
-                  "<p>"+self.allProjects[i].name+"</p>"+
-                "</div>"+
+        $('.designerDashList').append(
+          "<div class='col-md-4 col-xs-12 projectCell'>"+
+            "<div class='projectCellInner'>"+
+              "<div class='projectCellImageHolder'>"+
+                "<img class='projectCellImage' id='"+self.allProjects[i]._id+"'"+
+              "src='"+self.allProjects[i].images[0]+"'>"+
               "</div>"+
-            "</div>"
-          )
-        // }
-        // else if (((i+1)%6) == 0 && i != 0){
-        //   $('.designerDashList').append(
-        //     "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
-        //     "</div>"
-        //   )
-        // }
+              "<div class='projectCellContent'>"+
+                "<p>"+self.allProjects[i].TimeSinceCreation+"</p>"+
+                "<p>"+self.allProjects[i].name+"</p>"+
+              "</div>"+
+            "</div>"+
+          "</div>"
+        )
       }
       $('.designerDashList').append(
         "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
@@ -213,7 +205,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         self.curatedProjects[i].TimeSinceCreation = timeSince();
       }
       for (var i = 0; i < self.curatedProjects.length; i++) {
-        // if(((i+1)%6) != 0 || i == 0){
           $('.designerDashList').append(
             "<div class='projectCell col-md-4 col-xs-12' id='"+self.curatedProjects[i]._id+"'>"+
               "<div class='projectCellInner'>"+
@@ -227,13 +218,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "</div>"+
             "</div>"
           )
-        // }
-        // else if (((i+1)%6) == 0 && i != 0){
-        //   $('.designerDashList').append(
-        //     "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
-        //     "</div>"
-        //   )
-        // }
       }
       $('.designerDashList').append(
         "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
@@ -322,32 +306,24 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           self.filteredProjects[i].TimeSinceCreation = timeSince();
         }
         for (var i = 0; i < self.filteredProjects.length; i++) {
-          if(((i+1)%6) != 0 || i == 0){
-            $('.designerDashList').append(
-              "<div class='projectCell col-md-2 col-xs-12'>"+
-                "<div class='projectCellInner'>"+
-                  "<div class='projectCellImageHolder'>"+
-                    "<img class='projectCellImage' src='"+self.filteredProjects[i].images[0]+"'>"+
-                  "</div>"+
-                  "<div class='projectCellContent'>"+
-                    "<p>"+self.filteredProjects[i].TimeSinceCreation+"</p>"+
-                    "<p>"+self.filteredProjects[i].name+"</p>"+
-                  "</div>"+
+          $('.designerDashList').append(
+            "<div class='projectCell col-md-4 col-xs-12'>"+
+              "<div class='projectCellInner'>"+
+                "<div class='projectCellImageHolder'>"+
+                  "<img class='projectCellImage' src='"+self.filteredProjects[i].images[0]+"'>"+
                 "</div>"+
-              "</div>"
-            )
-          }
-          else if (((i+1)%6) == 0 && i != 0){
-            $('.designerDashList').append(
-              "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
-              "</div>"
-            )
-          }
+                "<div class='projectCellContent'>"+
+                  "<p>"+self.filteredProjects[i].TimeSinceCreation+"</p>"+
+                  "<p>"+self.filteredProjects[i].name+"</p>"+
+                "</div>"+
+              "</div>"+
+            "</div>"
+          )
         }
       //////end if statement for self.filtered
       }
       $('.designerDashList').append(
-        "<div class='col-md-2 col-xs-12 projectCell projectCellNew'>"+
+        "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
           "<div class='projectCellNewInner'>"+
             "<p>Build a New product</p>"+
           "</div>"+
