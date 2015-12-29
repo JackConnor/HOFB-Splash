@@ -359,18 +359,20 @@
 .dashFilter {
   -webkit-appearance: none;  /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
   -moz-appearance: none;  /*REMOVES DEFAULT FIREFOX STYLE*/
-  border: 0 !important;  /*REMOVES BORDER*/
-  /*color: #fff;*/
+  border: 1px solid #CCCCCC;
+  color: #336666;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 12px;
   padding: 3px;
-  width: 100px;
+  width: auto;
   cursor: pointer;
   margin-top: 20px;
   margin-left: 10px;
-  background-color: #CAE9F7;
+  background-color: #fff;
   display: inline-block;
+  padding-right: 5px;
+
 }
 
 .deleteButton {
@@ -382,13 +384,13 @@
 
 .designerDashActive {
   display: inline-block;
-  height: 45px;
+  height: 40px;
   width: 225px;
   text-align: center;
-  font-size: 27px;
+  font-size: 20px;
   background-color: #F9F7F5;
   vertical-align: bottom;
-  margin-left: 10%;
+  margin-left: 37px;
   margin-top: 20px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -399,23 +401,31 @@
   color: #454444;
 }
 
+.designerDashboardGlyphiconUp {
+    padding-left: 10px;
+    font-size: 10px;
+}
+
 .designerDashCollectionCell {
   height: 40px;
   font-size: 26px;
+  padding-left: 40px;
 }
 
 .designerDashCollections {
   height: 40px;
   border-bottom: 1px solid #EFEEEC;
   width: 100%;
+  padding-left: 40px;
 }
 
 .designerDashCollectionsContainer {
   background-color: #F9F7F5;
   height: 700px;
   text-align:justify;
-  margin-top: 20px;
+  margin-top: 10px;
   outline: 1px solid #EFEEEC;
+  padding-top: 80px;
 }
 
 .designerDashCollectionsContainer p{
@@ -430,16 +440,18 @@
 .designerDashContests {
   height: 40px;
   border-bottom: 1px solid #EFEEEC;
+  border-top: 1px solid #EFEEEC;
   width: 100%;
+  padding-left: 40px;
 }
 
 .designerDashCurated {
   display: inline-block;
-  height: 45px;
+  height: 40px;
   width: 225px;
   background-color: #EBEBE9;
   text-align: center;
-  font-size: 27px;
+  font-size: 20px;
   margin-left: 10px;
   margin-top: 20px;
   border-top-left-radius: 5px;
@@ -447,12 +459,15 @@
 }
 
 .designerDashDashTitle {
-  font-size: 25px;
+  font-size: 20px;
   background-color: #F6FDFA;
   box-shadow: 1px 4px 4px #D5D3D1;
   z-index: 1;
   position: absolute;
   width: 100%;
+  padding-left: 40px;
+  padding-top:  15px;
+  padding-bottom: 15px
 }
 
 .designerDashDeleteProduct {
@@ -469,11 +484,25 @@
 
 .designerDashFilter {
   display: inline-block;
-  height: 80px;
+  height: 55px;
   width: 94%;
   margin-left: 2%;
+  margin-top: -5px;
   vertical-align: top;
-  background-color: #F9F7F5;
+  background-color: #FEFDFA;
+  /*outline: 1px solid #EFEEEC;*/
+  border: 1px solid #EFEEEC;
+  position: relative;
+}
+
+.designerDashFilter:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 463px;
+    top: -1px;
+    left: 10px;
+    border: 1px solid #FEFDFA;
 }
 
 .designerDashList {
@@ -507,6 +536,7 @@
   height: 65px;
   width: 100%;
   display: block;
+  margin-top: 15px;
 }
 
 .detailBox {
@@ -1017,8 +1047,10 @@
 }
 
 .projectCell {
-  height: 300px;
-  /*outline: 4px solid magenta;*/
+  height: 600px;
+  width: 400px;
+  outline: 1px solid #E7E6E3;
+  margin-right:10px;
   /*background-color: #D8D8D8;*/
 }
 
