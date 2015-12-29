@@ -73,21 +73,6 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
             }
           }
         }
-        // var messageId = $(evt.target)[0].id;
-        // $http({
-        //   method: "GET"
-        //   ,url: "/api/comment/"+messageId
-        //   // +window.location.hash.split('/')[2]
-        // })
-        // .then(function(comment){
-        //   $('.messagesSingleContainer').html('')
-        //   $('.messagesSingleContainer').append(
-        //     '<div class="messageContent">'+
-        //       "<p class='messageSender'>"+comment.data.sender+"</p>"+
-        //       "<p class='messageText'>"+comment.data.commentText+"</p>"+
-        //     "</div>"
-        //   )
-        // })
       })
     }
     allMessagesFunc(addEmailHtml);/////call the function to load all messages
