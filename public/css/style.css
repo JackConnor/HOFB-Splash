@@ -1115,17 +1115,15 @@
 }
 
 .projectCell {
-  height: 600px;
+  height: 750px;
   width: 400px;
   outline: 1px solid #E7E6E3;
   margin-right:10px;
-  /*background-color: #D8D8D8;*/
 }
-
+/*
 .projectCell img{
-  width: 100%;
-  height: 100%;
-}
+
+}*/
 
 .projectCellButton {
   width: 100px;
@@ -1166,6 +1164,16 @@
   /*outline: 3px solid red;*/
 }
 
+.projectCellHoverContent p {
+  color: white;
+  text-align: center;
+}
+
+.projectCellImage {
+  width: 100%;
+  height: 100%;
+}
+
 .projectCellImageHolder {
   width: 100%;
   height: 80%;
@@ -1178,6 +1186,19 @@
   margin-left: 1%;
   margin-top: 1%;
   height: 98%;
+}
+
+.projectCellMiniImage {
+  outline: 2px solid blue;
+  height: 80px;
+  display: inline-block;
+}
+
+.projectCellMinis {
+  height: 80px;
+  outline: 2px solid grey;
+  width: 100%;
+
 }
 
 .projectCellNewInner {
