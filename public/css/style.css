@@ -585,22 +585,36 @@
 .messageContentHolder {
   display: inline-block;
   vertical-align: top;
+  width: 75%;
+  height: 83px;
+  position: absolute;
+}
+
+.messageListContentTitle {
+  margin: 20px 0 0 20px;
+  font-size: 26px;
+  position: absolute;
 }
 
 .messageListSquareContainer {
   display: inline-block;
-  width: 83px;
+  width: 22%;
   height: 100%;
-  border-right: 1px solid white;
   vertical-align: top;
+}
+
+@media only screen and (max-width: 1000px) {
+  .messageListSquareContainer {
+    width: 35%;
+  }
 }
 
 .messageListSquareContainerSquare {
   display: inline-block;
-  width: 70%;
-  height: 70%;
+  width: 59px;
+  height: 59px;
   background-color: green;
-  margin: 15% 0 0 15%;
+  margin: 12px 12px;
 }
 
 .messageSender {

@@ -33,7 +33,11 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
               "<img class='messageListSquareContainerSquare' src='"+list[i].imageUrl+"' id='"+list[i].productId+"'>"+
               "</img>"+
             "</div>"+
-            "<div id='"+list[i]._id+"' class='messageContentHolder'>"+ list[i].productName+
+            "<div id='"+list[i]._id+"' class='messageContentHolder'>"+
+              "<div class='messageListContentTitle'>"+
+                list[i].productName +
+              "</div>"+
+            "</div>"+
           "</div>"
         )
       }
@@ -41,21 +45,61 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
     }
 
     function addInteractionToMessages(convoList){
-      $('.messageContentHolder').on('mouseenter', function(evt){
-        $($(evt.target)[0].parentElement).css({
-          backgroundColor: "#669999"
-        })
+      $('.messageListContentTitle').on('mouseenter', function(evt){
+        // var elemen = $(evt.target)[0].parentNode
+        // console.log(elemen);
+        // elemen.css({
+        //   backgroundColor: "#B2B2B4"
+        //   ,color: 'black'
+        // })
+      })
+      $('.messageListContentTitle').on('mouseleave', function(evt){
+        // var elemen = $($($(evt.target)[0].parentNode)[0].parentNode);
+        // console.log($(elemen));
+        // console.log(elemen.attr('id'));
       })
       $('.messageContentHolder').on('mouseleave', function(evt){
-        $($(evt.target)[0].parentElement).css({
-          backgroundColor: "#e0ebeb"
+        for (var i = 0; i < $('.messagesCell').length; i++) {
+          $($('.messagesCell')[i]).css({
+            'backgroundColor': "#B2B2B4"
+            ,color: "black"
+          })
+        }
+        for (var i = 0; i < $('.messageListContentTitle').length; i++) {
+          console.log($($('.messagesListContentTitle')[i]).css('background-color'));
+          $($('.messageListContentTitle')[i]).css({
+            'backgroundColor': "#B2B2B4"
+            ,color: "black"
+          })
+        }
+        for (var i = 0; i < $('.messageContentHolder').length; i++) {
+          $($('.messageContentHolder')[i]).css({
+            'backgroundColor': "#B2B2B4"
+            ,color: "black"
+          })
+        }
+      })
+      $('.messageContentHolder').on('mouseenter', function(evt){
+        console.log($(evt.target));
+        var elemen = $($(evt.target)[0].parentNode);
+        elemen.css({
+          backgroundColor: "black"
+          ,color: 'white'
         })
+        $(evt.target).css({
+          backgroundColor: "black"
+          ,color: 'white'
+        })
+        $($(evt.target)[0].children[0]).css({
+          backgroundColor: "black"
+          ,color: 'white'
+        })
+        elemen.attr('id', 'lit');
       })
       $('.messageListSquareContainerSquare').on('click', function(evt){
         console.log(evt.target);
         var productId = evt.target.id;
         window.location.hash = "#/view/product/"+productId;
-
       })
       $('.messageContentHolder').on('click', function(evt){
         console.log(evt.target.id);
