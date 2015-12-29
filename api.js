@@ -494,6 +494,7 @@ module.exports = function(app){
 
   //////logic for getting all conversations of a specific user
   app.get('/api/conversations/:user_id', function(req, res){
+    console.log(req.params.user_id);
     Conversation.find({'ownerId': req.params.user_id}, function(err, conversations){
       console.log(conversations);
       res.json(conversations);

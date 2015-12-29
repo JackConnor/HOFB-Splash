@@ -29,8 +29,11 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
       for (var i = 0; i < list.length; i++) {
         $('.messageContainer').append(
           '<div class="messagesCell">'+
-            "<div class='messageNameHolder'>from: "+list[i].comments[0].sender+"</div>"+
-            "<div id='"+list[i]._id+"' class='messageContentHolder'>text: "+ list[i].comments[0].messageText+
+            "<div class='messageListSquareContainer'>"+
+              "<img class='messageListSquareContainerSquare' src='"+list[i].imageUrl+"' id='"+list[i].productId+"'>"+
+              "</img>"+
+            "</div>"+
+            "<div id='"+list[i]._id+"' class='messageContentHolder'>"+ list[i].productName+
           "</div>"
         )
       }
@@ -48,34 +51,28 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
           backgroundColor: "#e0ebeb"
         })
       })
+      $('.messageListSquareContainerSquare').on('click', function(evt){
+        console.log(evt.target);
+        var productId = evt.target.id;
+        window.location.hash = "#/view/product/"+productId;
+
+      })
       $('.messageContentHolder').on('click', function(evt){
         console.log(evt.target.id);
         for (var i = 0; i < convoList.length; i++) {
           if(convoList[i]._id == evt.target.id){
-            $('.messagesSingleContainer').html('')
-            $('.messagesSingleContainer').append(
-              // '<div class="messageContent">'+
-              //   "<p class='messageSender'>"+comment.data.sender+"</p>"+
-              //   "<p class='messageText'>"+comment.data.commentText+"</p>"+
-              // "</div>"
-            )
+            for (var j = 0; j < convoList[i].comments.length; j++) {
+              console.log(convoList[i].comments[j].messageText);
+              $('.messagesSingleContainer').html('')
+              $('.messagesSingleContainer').append(
+                '<div class="messageContent">'+
+                  "<p class='messageSender'>"+convoList[i].comments[j].sender+"</p>"+
+                  "<p class='messageText'>"+convoList[i].comments[j].messageText+"</p>"+
+                "</div>"
+              );
+            }
           }
         }
-        // var messageId = $(evt.target)[0].id;
-        // $http({
-        //   method: "GET"
-        //   ,url: "/api/comment/"+messageId
-        //   // +window.location.hash.split('/')[2]
-        // })
-        // .then(function(comment){
-        //   $('.messagesSingleContainer').html('')
-        //   $('.messagesSingleContainer').append(
-        //     '<div class="messageContent">'+
-        //       "<p class='messageSender'>"+comment.data.sender+"</p>"+
-        //       "<p class='messageText'>"+comment.data.commentText+"</p>"+
-        //     "</div>"
-        //   )
-        // })
       })
     }
     allMessagesFunc(addEmailHtml);/////call the function to load all messages
