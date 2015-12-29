@@ -7,7 +7,7 @@ var conversationSchema = new Schema({
   ,photoUrl: String
   ,adminOrBuyer: Boolean
   ,dateCreated: Date
-  ,lastUpdated: Date
+  ,lastUpdated: Date  
   ,comments: Array///will all comments in chronological order
   ,ownerId: String////product owner's id
   ,adminOrBuyerId: String////Id of th person a user is talking to
