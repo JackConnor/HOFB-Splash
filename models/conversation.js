@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var conversationSchema = new Schema({
   productName: String
-  ,adminOrBuyer: Boolean
+  ,adminOrBuyer: Boolean 
   ,dateCreated: Date
   ,lastUpdated: Date
   ,comments: Array
