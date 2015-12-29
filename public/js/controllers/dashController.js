@@ -799,7 +799,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     }
     //end load collections/
     ///////////////////////
-
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
   /////end dash controller
   ////////////////////////
   ////////////////////////
