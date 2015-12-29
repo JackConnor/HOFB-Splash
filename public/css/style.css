@@ -599,18 +599,28 @@
 }
 
 .messageBar p {
-  margin-left: 33px;
+  margin-left: 2.5%;
   font-size: 25px;
   margin-top: 5px;
+}
+
+.messageBottom {
+  width: 95%;
+  margin-left: 2.5%;
+  margin-top: 15px;
 }
 
 .messagesCell {
   height: 83px;
   font-size: 22px;
-  width: 98%;
-  margin-left: 2%;
+  width: 100%;
   margin-top: 2px;
   background-color: #B2B2B4;
+}
+
+.messageChatBar {
+  height: 55px;
+  background-color: black;
 }
 
 .messageContainer {
@@ -618,8 +628,14 @@
 }
 
 .messageContent {
-  min-height: 300px;
-  outline: 4px solid gray;
+  min-height: 100%;
+}
+
+.messageContentOdd {
+  min-height: 100%;
+  background-color: #F8F8FA;
+  width: 90%;
+  margin-left: 50px;
 }
 
 .messageContentHolder {
@@ -659,18 +675,35 @@
 
 .messageSender {
   height: 25%;
-  background-color: red;
-  font-size: 29px;
+  font-size: 22px;
+  margin: 15px 0 0 50px;
+}
+
+.messageSenderOdd {
+  height: 25%;
+  font-size: 22px;
+  margin-left: 100px;
 }
 
 .messagesSingleContainer {
   height: 100%;
-  outline: 2px solid red;
+  margin-top: 2px;
 }
 
 .messageText {
   height: 75%;
-  font-size: 22px;
+  font-size: 19px;
+  margin-left: 50px;
+  padding: 10px 0;
+  margin-top: 0px;
+}
+
+.messageTextOdd {
+  height: 75%;
+  font-size: 19px;
+  margin-left: 20px;
+  margin-top: 0px;
+  padding: 15px 0;
 }
 
 .modalFiller {
