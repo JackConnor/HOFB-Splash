@@ -1,5 +1,6 @@
 # Empty CSS file for your own CSS
 
+
 /*Segmentation for Jacks css*/
 .actionBox {
     border-top:1px #bbb;
@@ -564,8 +565,12 @@
 }
 
 .messagesCell {
-  height: 140px;
-  background-color: #e0ebeb;
+  height: 83px;
+  font-size: 22px;
+  width: 98%;
+  margin-left: 2%;
+  margin-top: 2px;
+  background-color: #B2B2B4;
 }
 
 .messageContainer {
@@ -578,12 +583,24 @@
 }
 
 .messageContentHolder {
-  height: 72px;
-  font-size: 22px;
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 2px;
-  background-color: white
+  display: inline-block;
+  vertical-align: top;
+}
+
+.messageListSquareContainer {
+  display: inline-block;
+  width: 83px;
+  height: 100%;
+  border-right: 1px solid white;
+  vertical-align: top;
+}
+
+.messageListSquareContainerSquare {
+  display: inline-block;
+  width: 70%;
+  height: 70%;
+  background-color: green;
+  margin: 15% 0 0 15%;
 }
 
 .messageSender {

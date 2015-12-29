@@ -3,6 +3,8 @@ var Schema = mongoose.Schema;
 
 var conversationSchema = new Schema({
   productName: String
+  ,productId: String
+  ,photoUrl: String
   ,adminOrBuyer: Boolean
   ,dateCreated: Date
   ,lastUpdated: Date

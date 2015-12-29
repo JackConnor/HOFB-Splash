@@ -28,7 +28,11 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
     function addEmailHtml(list){
       for (var i = 0; i < list.length; i++) {
         $('.messageContainer').append(
-          '<div class="messagesCell">'+ 
+          '<div class="messagesCell">'+
+            "<div class='messageListSquareContainer'>"+
+              "<img class='messageListSquareContainerSquare' src='"+list[i].imageUrl+"' id='"+list[i].productId+"'>"+
+              "</img>"+
+            "</div>"+
             "<div id='"+list[i]._id+"' class='messageContentHolder'>"+ list[i].productName+
           "</div>"
         )
@@ -46,6 +50,12 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
         $($(evt.target)[0].parentElement).css({
           backgroundColor: "#e0ebeb"
         })
+      })
+      $('.messageListSquareContainerSquare').on('click', function(evt){
+        console.log(evt.target);
+        var productId = evt.target.id;
+        window.location.hash = "#/view/product/"+productId;
+
       })
       $('.messageContentHolder').on('click', function(evt){
         console.log(evt.target.id);
