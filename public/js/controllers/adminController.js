@@ -10,7 +10,7 @@ angular.module('adminController', ['allProjectsFactory', 'checkPwFactory', 'getS
     self.collectionCounter = true;///so we only load collections once
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects;
-    // checkPw.checkPassword();
+    checkPw.checkPassword();
 
     function loadProjects(callback, arg){
       ///////decode user to pull data

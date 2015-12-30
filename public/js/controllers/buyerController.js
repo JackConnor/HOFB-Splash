@@ -8,7 +8,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
     self.collectionCounter = true;///so we only load collections once
-    // checkPw.checkPassword();
+    checkPw.checkPassword();
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
     function loadProjects(callback, arg){

@@ -7,7 +7,7 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     var self = this;
     console.log('viewProductController is working');
     self.test=('self test');
-    // checkPw.checkPassword();
+    checkPw.checkPassword();
     //Product Id
     var productId = window.location.hash.split('/')[3];
 
