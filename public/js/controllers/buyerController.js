@@ -319,8 +319,9 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer' id='"+$(evt.target)[0].id+"'>"+
-            '<div class="projectCellButtonSample">Request A Sample</div>"'+
-            '<div class="projectCellButtonOrder">Place an Order</div>"'+
+            '<div class="projectCellButtonSample">Request A Sample'+
+            '</div>'+
+            '<div class="projectCellButtonOrder">Place an Order</div>'+
           "</div>"
         )
         $('#projectCellButtonEdit').on('click', function(evt){
@@ -356,7 +357,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           })
           ////we drill up in order to get the parent, so we can append the html buttons to it
           // var parentContainer = $hoverTarget.parent().parent()[0];
-          // $('.projectCellHoverContainer').remove();
+          $('.projectCellHoverContainer').remove();
         })
       })
       //////function to restore cell to order when mouse leaves cell
