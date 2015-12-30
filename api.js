@@ -517,7 +517,7 @@ module.exports = function(app){
   /////////////////////////////////////
 
   app.post('/api/checkpassword/production', function(req, res){
-    if(req.body.password == "SledFiveScrewy"){
+    if(req.body.password == "SledFive"){
       res.json(true);
     }
   })
