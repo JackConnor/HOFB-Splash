@@ -516,7 +516,7 @@
 }
 
 .designerDashSearchFilterContainer {
-  height: 120px;
+  height: 60px;
   display: block;
 }
 
@@ -1115,10 +1115,9 @@
 }
 
 .projectCell {
-  height: 750px;
-  width: 400px;
-  outline: 1px solid #E7E6E3;
-  margin-right:10px;
+  height: 525px;
+  /*width: 470px;*/
+  /*margin-right:10px;*/
 }
 /*
 .projectCell img{
@@ -1126,14 +1125,39 @@
 }*/
 
 .projectCellButton {
-  width: 100px;
-  height: 40px;
-  background-color: white;
-  margin: 100px auto 0 auto;
+  width: 167px;
+  height: 50px;
+  background-color: #368D64;
+  margin: 150px auto 0 auto;
+  color: white;
+  border-radius: 3px;
+  padding-top: 10px;
 }
 
 #projectCellButtonEdit {
 
+}
+
+.projectCellButtonSample {
+  font-size: 18px;
+  width: 167px;
+  height: 50px;
+  background-color: #368D64;
+  margin: 150px auto 0 auto;
+  color: white;
+  border-radius: 3px;
+  padding-top: 10px;
+}
+
+.projectCellButtonOrder {
+  width: 167px;
+  height: 50px;
+  background-color: #368D64;
+  margin: 20px auto 0 auto;
+  color: white;
+  border-radius: 3px;
+  font-size: 18px;
+  padding-top: 10px;
 }
 
 .projectCellButtonShow {
@@ -1142,16 +1166,34 @@
 
 .projectCellContent {
   display: block;
-  height: 20%;
-  background-color: #0B3861;
+  height: 58px;
+  background-color: #EFE9EB;
   color: white;
   font-size: 18px;
   text-align: center;
   /*outline: 2px solid green;*/
 }
 
-.projectCellContent p{
-  /*margin-top: 20px;*/
+.projectCellContentName {
+  color: black;
+  padding-top: 15px;
+  font-size: 22px;
+  display: inline-block;
+}
+
+.projectCellContentTime {
+  color: black;
+  font-size: 14px;
+  margin-top: -13px;
+}
+
+.projectCellHeart {
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 40px;
+  float: left;
+  color: #CCCCCC;
 }
 
 .projectCellHoverContainer {
@@ -1176,27 +1218,28 @@
 
 .projectCellImageHolder {
   width: 100%;
-  height: 80%;
+  height: 408px;
   display: block;
-  background-color: black;
+  background-color: #292D36;
 }
 
 .projectCellInner {
-  width: 98%;
-  margin-left: 1%;
+  width: 96%;
+  margin-left: 2%;
   margin-top: 1%;
   height: 98%;
+  outline: 2px solid #E7E6E3;
 }
 
 .projectCellMiniImage {
-  outline: 2px solid blue;
-  height: 80px;
+  height: 100%;
+  margin: 2px;
   display: inline-block;
+  width: 12.5%;
 }
 
 .projectCellMinis {
-  height: 80px;
-  outline: 2px solid grey;
+  height: 50px;
   width: 100%;
 
 }
@@ -1220,7 +1263,7 @@
   float: right;
   font-size: 30px;
   color: white;
-  margin-right: 10px;
+  margin-right: 30px;
 }
 
 .pwCheck {

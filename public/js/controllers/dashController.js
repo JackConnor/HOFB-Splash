@@ -111,11 +111,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "src='"+self.allProjects[i].images[0]+"'>"+
               "</div>"+
               "<div class='projectCellMinis' id='mini"+i+"'>"+
-
               "</div>"+
               "<div class='projectCellContent'>"+
-                "<p>"+self.allProjects[i].TimeSinceCreation+"</p>"+
-                "<p>"+self.allProjects[i].name+"</p>"+
+                "<span class='glyphicon glyphicon-heart projectCellHeart'></span>"+
+                "<p class='projectCellContentName'>"+self.allProjects[i].name+"</p>"+
+                "<p class='projectCellContentTime'>"+self.allProjects[i].TimeSinceCreation+"</p>"+
               "</div>"+
             "</div>"+
           "</div>"
@@ -124,7 +124,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         console.log(allImages);
         for (var j = 0; j < allImages.length; j++) {
           $('#mini'+i).append(
-            "<img src='"+allImages[j]+"' class='col-xs-3 projectCellMiniImage'/>"
+            "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
           )
         }
 
@@ -419,7 +419,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.projectCellImage').on('mouseenter', function(evt){
         var $hoverTarget = $(evt.target);
         $hoverTarget.css({
-          opacity: 0.5
+          opacity: 0.08
         })
         ////we drill up in order to get the parent, so we can append the html buttons to it
         console.log($hoverTarget);

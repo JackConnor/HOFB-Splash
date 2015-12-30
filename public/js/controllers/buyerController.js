@@ -74,28 +74,29 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       var dataType = $('.dashDataType');
       dataType.text('Curated, fed to your Tier');
       for (var i = 0; i < self.alreadyCurated.length; i++) {
-        if(((i+1)%6) != 0 || i == 0){
-          $('.designerDashList').append(
-            "<div class='col-md-2 col-xs-12 projectCell'>"+
-              "<div class='projectCellInner'>"+
-                "<div class='projectCellImageHolder'>"+
-                  "<img class='projectCellImage' id='"+self.alreadyCurated[i]._id+"'"+
-                "src='"+self.alreadyCurated[i].images[0]+"'>"+
-                "</div>"+
-                "<div class='projectCellContent'>"+
-                  "<p>"+self.alreadyCurated[i].TimeSinceCreation+"</p>"+
-                  "<p>"+self.alreadyCurated[i].name+"</p>"+
-                "</div>"+
+        $('.designerDashList').append(
+          "<div class='col-md-4 col-xs-12 projectCell'>"+
+            "<div class='projectCellInner'>"+
+              "<div class='projectCellImageHolder'>"+
+                "<img class='projectCellImage' id='"+self.alreadyCurated[i]._id+"'"+
+              "src='"+self.alreadyCurated[i].images[0]+"'>"+
+              "</div>"+
+              "<div class='projectCellMinis' id='mini"+i+"'>"+
+              "</div>"+
+              "<div class='projectCellContent'>"+
+                "<span class='glyphicon glyphicon-heart projectCellHeart'></span>"+
+                "<p class='projectCellContentName'>"+self.alreadyCurated[i].name+"</p>"+
+                "<p class='projectCellContentTime'>"+self.alreadyCurated[i].TimeSinceCreation+"</p>"+
               "</div>"+
             "</div>"
           )
-        }
-        else if (((i+1)%6) == 0 && i != 0){
-          $('.designerDashList').append(
-            "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
-            "</div>"
-          )
-        }
+          var allImages = self.alreadyCurated[i].images;
+          console.log(allImages);
+          for (var j = 0; j < allImages.length; j++) {
+            $('#mini'+i).append(
+              "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
+            )
+          }
       }
       arg();
     }
@@ -318,7 +319,8 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer' id='"+$(evt.target)[0].id+"'>"+
-            '<div class="projectCellButton" id="projectCellButtonEdit">Edit</div>"'+
+            '<div class="projectCellButtonSample">Request A Sample</div>"'+
+            '<div class="projectCellButtonOrder">Place an Order</div>"'+
           "</div>"
         )
         $('#projectCellButtonEdit').on('click', function(evt){
@@ -354,7 +356,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           })
           ////we drill up in order to get the parent, so we can append the html buttons to it
           // var parentContainer = $hoverTarget.parent().parent()[0];
-          $('.projectCellHoverContainer').remove();
+          // $('.projectCellHoverContainer').remove();
         })
       })
       //////function to restore cell to order when mouse leaves cell

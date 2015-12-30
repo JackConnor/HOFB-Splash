@@ -247,9 +247,12 @@ module.exports = function(app){
   /////get all products from one user
   app.get('/api/:user/products', function(req, res){
     var userId = req.params.user;
-    Product.find({'userId':userId}, function(err, products){
+
+    /////now we get the data
+    Product.find({'userId':req.params.user}, function(err, products){
       res.json(products);
     })
+
   })
 
   ////get all products purchased by a single buyer
