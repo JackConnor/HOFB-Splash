@@ -9,7 +9,7 @@ angular.module('checkPwFactory', [])
       console.log('were doing it');
       console.log(window.localStorage.checkPw);
       console.log(window.localStorage);
-      if(!window.localStorage.checkPw){
+      if(window.localStorage.checkPw || window.localStorage.checkPw == false){
         $('.bodyview').prepend(
           '<div class="photoModal">'+
             "<input class='pwCheck' placeholder='Password'>"+

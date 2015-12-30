@@ -8,6 +8,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     var self = this;
     //
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
+    window.localStorage.checkPw = false;
     checkPw.checkPassword();
     /////event to sign up a new user from signup page
     $('.signupSubmit').on('click', function(){
