@@ -290,11 +290,13 @@ module.exports = function(app){
   });
 
   app.post('/api/emailcaptures', function(req, res){
+    console.log(req.body);
     Emailcapture.create(req.body, function(err, emailCapture){
       if(err){console.log(err)}
-      else(
+      else{
+        console.log(emailCapture);
         res.json(emailCapture)
-      )
+      }
     })
   })
 

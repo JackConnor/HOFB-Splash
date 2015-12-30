@@ -6,6 +6,7 @@ angular.module('newemailfactory', [])
   function newEmail($http){
 
     return function postEmail(userEmailInfo){
+      console.log(userEmailInfo);
       $http({
         method: "POST"
         ,url: "/api/emailcaptures"
@@ -18,7 +19,7 @@ angular.module('newemailfactory', [])
           ,data: {email: email.data.email}
         })
         .then(function(email){
-          window.location.reload()
+          window.location.reload();
         })
       })
     }

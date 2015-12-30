@@ -20,7 +20,9 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
     /////collect all of our emails on splash page
     $('.collectEmail').on('click', function(){
       var emailAddress = $('.emailInput').val();
+      console.log(emailAddress);
       var date = new Date();
+      console.log(date);
       newEmail({email: emailAddress, date: date});
     })
 
