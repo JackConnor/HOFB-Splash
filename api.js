@@ -247,9 +247,12 @@ module.exports = function(app){
   /////get all products from one user
   app.get('/api/:user/products', function(req, res){
     var userId = req.params.user;
-    Product.find({'userId':userId}, function(err, products){
+
+    /////now we get the data
+    Product.find({'userId':req.params.user}, function(err, products){
       res.json(products);
     })
+
   })
 
   ////get all products purchased by a single buyer
@@ -287,11 +290,13 @@ module.exports = function(app){
   });
 
   app.post('/api/emailcaptures', function(req, res){
+    console.log(req.body);
     Emailcapture.create(req.body, function(err, emailCapture){
       if(err){console.log(err)}
-      else(
+      else{
+        console.log(emailCapture);
         res.json(emailCapture)
-      )
+      }
     })
   })
 
@@ -514,7 +519,7 @@ module.exports = function(app){
   /////////////////////////////////////
 
   app.post('/api/checkpassword/production', function(req, res){
-    if(req.body.password == "SledFiveScrewy"){
+    if(req.body.password == "SledFive"){
       res.json(true);
     }
   })

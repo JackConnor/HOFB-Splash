@@ -8,6 +8,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
     self.collectionCounter = true;///so we only load collections once
+    // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
@@ -110,13 +111,24 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 "<img class='projectCellImage' id='"+self.allProjects[i]._id+"'"+
               "src='"+self.allProjects[i].images[0]+"'>"+
               "</div>"+
+              "<div class='projectCellMinis' id='mini"+i+"'>"+
+              "</div>"+
               "<div class='projectCellContent'>"+
-                "<p>"+self.allProjects[i].TimeSinceCreation+"</p>"+
-                "<p>"+self.allProjects[i].name+"</p>"+
+                "<span class='glyphicon glyphicon-heart projectCellHeart'></span>"+
+                "<p class='projectCellContentName'>"+self.allProjects[i].name+"</p>"+
+                "<p class='projectCellContentTime'>"+self.allProjects[i].TimeSinceCreation+"</p>"+
               "</div>"+
             "</div>"+
           "</div>"
         )
+        var allImages = self.allProjects[i].images;
+        console.log(allImages);
+        for (var j = 0; j < allImages.length; j++) {
+          $('#mini'+i).append(
+            "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
+          )
+        }
+
       }
       $('.designerDashList').append(
         "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
@@ -403,22 +415,25 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
     /////////////////////////////
     /////////Cell Hover effect///
-
     function addHoverToCell(){
       /////create mouseenter event listener to cause frontend changes
       $('.projectCellImage').on('mouseenter', function(evt){
         var $hoverTarget = $(evt.target);
         $hoverTarget.css({
-          opacity: 0.5
+          opacity: 0.08
         })
         ////we drill up in order to get the parent, so we can append the html buttons to it
+        console.log($hoverTarget);
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
             "<div class='projectCellTrash'>X </div>"+
+            "<div class='projectCellHoverContent'>"+
+            "</div>" +
             '<div class="projectCellButton" id="projectCellButtonEdit">Edit</div>"'+
           "</div>"
         )
+        //////begin to call hover actions
         $('#projectCellButtonEdit').on('click', function(){
           var product = $(parentContainer);
           var productId = $($(product[0].children[1])[0].children[0])[0].id

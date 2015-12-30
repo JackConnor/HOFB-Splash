@@ -5,6 +5,7 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
   messageCtrl.$inject = ['$http', 'allMessages', 'checkPw'];
   function messageCtrl($http, allMessages, checkPw){
     var self = this;
+    // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
     function allMessagesFunc(setHtmlCallback){
       $http({
@@ -33,7 +34,11 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
               "<img class='messageListSquareContainerSquare' src='"+list[i].imageUrl+"' id='"+list[i].productId+"'>"+
               "</img>"+
             "</div>"+
-            "<div id='"+list[i]._id+"' class='messageContentHolder'>"+ list[i].productName+
+            "<div id='"+list[i]._id+"' class='messageContentHolder'>"+
+              "<div class='messageListContentTitle'>"+
+                list[i].productName +
+              "</div>"+
+            "</div>"+
           "</div>"
         )
       }
@@ -41,55 +46,74 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
     }
 
     function addInteractionToMessages(convoList){
-      $('.messageContentHolder').on('mouseenter', function(evt){
-        $($(evt.target)[0].parentElement).css({
-          backgroundColor: "#669999"
-        })
-      })
       $('.messageContentHolder').on('mouseleave', function(evt){
-        $($(evt.target)[0].parentElement).css({
-          backgroundColor: "#e0ebeb"
+        for (var i = 0; i < $('.messagesCell').length; i++) {
+          $($('.messagesCell')[i]).css({
+            'backgroundColor': "#B2B2B4"
+            ,color: "black"
+          })
+        }
+        for (var i = 0; i < $('.messageListContentTitle').length; i++) {
+          $($('.messageListContentTitle')[i]).css({
+            'backgroundColor': "#B2B2B4"
+            ,color: "black"
+          })
+        }
+        for (var i = 0; i < $('.messageContentHolder').length; i++) {
+          $($('.messageContentHolder')[i]).css({
+            'backgroundColor': "#B2B2B4"
+            ,color: "black"
+          })
+        }
+      })
+      $('.messageContentHolder').on('mouseenter', function(evt){
+        var elemen = $($(evt.target)[0].parentNode);
+        elemen.css({
+          backgroundColor: "black"
+          ,color: 'white'
         })
+        $(evt.target).css({
+          backgroundColor: "black"
+          ,color: 'white'
+        })
+        $($(evt.target)[0].children[0]).css({
+          backgroundColor: "black"
+          ,color: 'white'
+        })
+        elemen.attr('id', 'lit');
       })
       $('.messageListSquareContainerSquare').on('click', function(evt){
         console.log(evt.target);
         var productId = evt.target.id;
         window.location.hash = "#/view/product/"+productId;
-
       })
       $('.messageContentHolder').on('click', function(evt){
-        console.log(evt.target.id);
+        $('.messageChatWindowList').html('');
         for (var i = 0; i < convoList.length; i++) {
           if(convoList[i]._id == evt.target.id){
+            console.log(convoList[i].comments.length);
             for (var j = 0; j < convoList[i].comments.length; j++) {
-              console.log(convoList[i].comments[j].messageText);
-              $('.messagesSingleContainer').html('')
-              $('.messagesSingleContainer').append(
-                '<div class="messageContent">'+
-                  "<p class='messageSender'>"+convoList[i].comments[j].sender+"</p>"+
-                  "<p class='messageText'>"+convoList[i].comments[j].messageText+"</p>"+
-                "</div>"
-              );
+              if(j%2 == 0){
+                $('.messageChatWindowList').append(
+                  '<div class="messageContent">'+
+                    "<p class='messageSender'>"+convoList[i].comments[j].sender+"</p>"+
+                    "<p class='messageText'>"+convoList[i].comments[j].messageText+"</p>"+
+                  "</div>"
+                )
+              }
+              else {
+                $('.messageChatWindowList').append(
+                  '<div class="messageContentOdd">'+
+                    "<p class='messageTextOdd'>"+convoList[i].comments[j].messageText+"</p>"+
+                  "</div>"
+                )
+              }
             }
           }
         }
       })
     }
     allMessagesFunc(addEmailHtml);/////call the function to load all messages
-
-    ///////only for single message page, which is no longer in our final design
-    // if(window.location.hash.split('/')[1] == 'message'){
-    //   var messageId = window.location.hash.split('/')[2];
-    //   $http({
-    //     method: "GET"
-    //     ,url: "/api/comment/"+window.location.hash.split("/")[2]
-    //     // +window.location.hash.split('/')[2]
-    //   })
-    //   .then(function(comment){
-    //     self.sender = comment.data.sender;
-    //     self.commentText = comment.data.commentText;
-    //   })
-    // }
 
     ///logout button functionality
     $('.logoutButton').on('click', function(){

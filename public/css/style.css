@@ -516,7 +516,7 @@
 }
 
 .designerDashSearchFilterContainer {
-  height: 120px;
+  height: 60px;
   display: block;
 }
 
@@ -599,18 +599,28 @@
 }
 
 .messageBar p {
-  margin-left: 33px;
+  margin-left: 2.5%;
   font-size: 25px;
   margin-top: 5px;
+}
+
+.messageBottom {
+  width: 95%;
+  margin-left: 2.5%;
+  margin-top: 15px;
 }
 
 .messagesCell {
   height: 83px;
   font-size: 22px;
-  width: 98%;
-  margin-left: 2%;
+  width: 100%;
   margin-top: 2px;
   background-color: #B2B2B4;
+}
+
+.messageChatBar {
+  height: 55px;
+  background-color: black;
 }
 
 .messageContainer {
@@ -618,45 +628,82 @@
 }
 
 .messageContent {
-  min-height: 300px;
-  outline: 4px solid gray;
+  min-height: 100%;
+}
+
+.messageContentOdd {
+  min-height: 100%;
+  background-color: #F8F8FA;
+  width: 90%;
+  margin-left: 50px;
 }
 
 .messageContentHolder {
   display: inline-block;
   vertical-align: top;
+  width: 75%;
+  height: 83px;
+  position: absolute;
+}
+
+.messageListContentTitle {
+  margin: 20px 0 0 20px;
+  font-size: 26px;
+  position: absolute;
 }
 
 .messageListSquareContainer {
   display: inline-block;
-  width: 83px;
+  width: 22%;
   height: 100%;
-  border-right: 1px solid white;
   vertical-align: top;
+}
+
+@media only screen and (max-width: 1000px) {
+  .messageListSquareContainer {
+    width: 35%;
+  }
 }
 
 .messageListSquareContainerSquare {
   display: inline-block;
-  width: 70%;
-  height: 70%;
+  width: 59px;
+  height: 59px;
   background-color: green;
-  margin: 15% 0 0 15%;
+  margin: 12px 12px;
 }
 
 .messageSender {
   height: 25%;
-  background-color: red;
-  font-size: 29px;
+  font-size: 22px;
+  margin: 15px 0 0 50px;
+}
+
+.messageSenderOdd {
+  height: 25%;
+  font-size: 22px;
+  margin-left: 100px;
 }
 
 .messagesSingleContainer {
   height: 100%;
-  outline: 2px solid red;
+  margin-top: 2px;
 }
 
 .messageText {
   height: 75%;
-  font-size: 22px;
+  font-size: 19px;
+  margin-left: 50px;
+  padding: 10px 0;
+  margin-top: 0px;
+}
+
+.messageTextOdd {
+  height: 75%;
+  font-size: 19px;
+  margin-left: 20px;
+  margin-top: 0px;
+  padding: 15px 0;
 }
 
 .modalFiller {
@@ -1068,27 +1115,49 @@
 }
 
 .projectCell {
-  height: 600px;
-  width: 400px;
-  outline: 1px solid #E7E6E3;
-  margin-right:10px;
-  /*background-color: #D8D8D8;*/
+  height: 525px;
+  /*width: 470px;*/
+  /*margin-right:10px;*/
 }
-
+/*
 .projectCell img{
-  width: 100%;
-  height: 100%;
-}
+
+}*/
 
 .projectCellButton {
-  width: 100px;
-  height: 40px;
-  background-color: white;
-  margin: 100px auto 0 auto;
+  width: 167px;
+  height: 50px;
+  background-color: #368D64;
+  margin: 150px auto 0 auto;
+  color: white;
+  border-radius: 3px;
+  padding-top: 10px;
 }
 
 #projectCellButtonEdit {
 
+}
+
+.projectCellButtonSample {
+  font-size: 18px;
+  width: 167px;
+  height: 50px;
+  background-color: #368D64;
+  margin: 150px auto 0 auto;
+  color: white;
+  border-radius: 3px;
+  padding-top: 10px;
+}
+
+.projectCellButtonOrder {
+  width: 167px;
+  height: 50px;
+  background-color: #368D64;
+  margin: 10px auto 0 auto;
+  color: white;
+  border-radius: 3px;
+  font-size: 18px;
+  padding-top: 10px;
 }
 
 .projectCellButtonShow {
@@ -1097,16 +1166,34 @@
 
 .projectCellContent {
   display: block;
-  height: 20%;
-  background-color: #0B3861;
+  height: 58px;
+  background-color: #EFE9EB;
   color: white;
   font-size: 18px;
   text-align: center;
   /*outline: 2px solid green;*/
 }
 
-.projectCellContent p{
-  /*margin-top: 20px;*/
+.projectCellContentName {
+  color: black;
+  padding-top: 15px;
+  font-size: 22px;
+  display: inline-block;
+}
+
+.projectCellContentTime {
+  color: black;
+  font-size: 14px;
+  margin-top: -13px;
+}
+
+.projectCellHeart {
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 40px;
+  float: left;
+  color: #CCCCCC;
 }
 
 .projectCellHoverContainer {
@@ -1119,18 +1206,42 @@
   /*outline: 3px solid red;*/
 }
 
+.projectCellHoverContent p {
+  color: white;
+  text-align: center;
+}
+
+.projectCellImage {
+  width: 100%;
+  height: 100%;
+}
+
 .projectCellImageHolder {
   width: 100%;
-  height: 80%;
+  height: 408px;
   display: block;
-  background-color: black;
+  background-color: #292D36;
 }
 
 .projectCellInner {
-  width: 98%;
-  margin-left: 1%;
+  width: 96%;
+  margin-left: 2%;
   margin-top: 1%;
   height: 98%;
+  outline: 2px solid #E7E6E3;
+}
+
+.projectCellMiniImage {
+  height: 100%;
+  margin: 2px;
+  display: inline-block;
+  width: 12.5%;
+}
+
+.projectCellMinis {
+  height: 50px;
+  width: 100%;
+
 }
 
 .projectCellNewInner {
@@ -1152,7 +1263,7 @@
   float: right;
   font-size: 30px;
   color: white;
-  margin-right: 10px;
+  margin-right: 30px;
 }
 
 .pwCheck {

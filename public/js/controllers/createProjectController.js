@@ -7,6 +7,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     var self = this;
     //////global variables we'll be using for moving the carousel
     ///////get the users token
+    // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
     $http({
       method: "GET"
