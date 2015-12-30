@@ -82,6 +82,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'message'
     })
 
+    .when('/profile/:user_id', {
+      templateUrl: 'templates/_userProfile.html'
+      ,controller: 'userCtrl'
+      ,controllerAs: 'user'
+    })
+
     .when('/message/:messageId', {
       templateUrl: 'templates/_singleMessage.html'
       ,controller: 'messageCtrl'

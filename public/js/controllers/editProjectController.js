@@ -5,8 +5,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   editProjectCtrl.$inject = ['$http', 'postProject', 'getProduct', 'editProject', 'checkPw']
   function editProjectCtrl($http, postProject, checkPw){
     var self = this;
-    window.localStorage.checkPw = false;
-    checkPw.checkPassword();
+    // window.localStorage.checkPw = false;
+    // checkPw.checkPassword();
     var productId = window.location.hash.split('/')[3];
     $http({
       method: "GET"
