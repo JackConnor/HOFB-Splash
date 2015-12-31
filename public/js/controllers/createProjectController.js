@@ -33,9 +33,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           allFabrics.push(fabric);
           $('.createFabricContainer').append(
             '<div class="createFabricCellHolder col-xs-4">'+
-              '<div class="createFabric create'+fabric+'">'+
-                fabric+
-              "</div>"+
+              '<img src='+allSwatches.fabrics[fabric]+' class="createFabric create'+fabric+'">'+
             "</div>"
           )
         }
@@ -54,11 +52,32 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
               "</div>"+
             "</div>"
           )
+          console.log(allSwatches.colors[color]);
+          $('.create'+color).css({
+            backgroundColor: allSwatches.colors[color]
+            ,outline: "1px solid #E0E0E0"
+          })
         }
         console.log(allcolors);
         return allcolors;
       }
       colorsfunc();
+      var stitchesfunc = function(){
+        var allstitches = [];
+        for(stitch in allSwatches.stitch){
+          allstitches.push(stitch);
+          $('.createStitchContainer').append(
+            '<div class="createStitchCellHolder col-xs-12">'+
+              '<div class="createStitch create'+stitch+'">'+
+                stitch+
+              "</div>"+
+            "</div>"
+          )
+        }
+        console.log(allstitches);
+        return allstitches;
+      }
+      stitchesfunc();
     }
     setSwatches();
 
@@ -72,14 +91,14 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         if($(evt.target).css('opacity') == 1 ){
           $(evt.target).css({
             opacity: 0.5
-            ,backgroundColor: "blue"
+            ,outline: "2px solid gray"
           })
           $(evt.target).attr('id', 'picked_'+swatchType+"_"+evt.target.innerText.split(' ').join(''));
           $(evt.target).addClass('picked');
         } else {
           $(evt.target).css({
             opacity: 1
-            ,backgroundColor: "black"
+            ,outline: "none"
           })
         }
       })

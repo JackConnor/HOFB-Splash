@@ -59,6 +59,16 @@ angular.module('getSwatchesFactory', [])
           ,yello3w: "#F2F5A9"
           ,aqu3a: "#58FAF4"
         }
+        ,stitch: {
+          straight: ''
+          ,right: ''
+          ,double: ''
+          ,hooklsine: ''
+          ,righst: ''
+          ,dousble: ''
+          ,hooklsinekline: ''
+          ,hooskline: ''
+        }
       }
       return swatches;
     }
