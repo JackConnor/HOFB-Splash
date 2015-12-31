@@ -94,9 +94,10 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
 
       $('.purchaseSizeSlider').slider({
         max: self.order.totalItems
+        ,step: 10
       })
 
-      $('.purchaseSizeSlider').on('slidechange', function(evt){
+      $('.purchaseSizeSlider').on('slide', function(evt){
         var totalSizeItems = $(evt.target).slider('value');
         var itemColor = self.colorToggle;
         console.log(itemColor);
