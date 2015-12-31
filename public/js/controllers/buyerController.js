@@ -276,27 +276,19 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           self.boughtProducts[i].TimeSinceCreation = timeSince();
         }
         for (var i = 0; i < self.boughtProducts.length; i++) {
-          if(((i+1)%6) != 0 || i == 0){
-            $('.designerDashList').append(
-              "<div class='projectCell col-md-2 col-xs-12'>"+
-                "<div class='projectCellInner'>"+
-                  "<div class='projectCellImageHolder'>"+
-                    "<img class='projectCellImage' src='"+self.boughtProducts[i].images[0]+"'>"+
-                  "</div>"+
-                  "<div class='projectCellContent'>"+
-                    "<p>"+self.boughtProducts[i].TimeSinceCreation+"</p>"+
-                    "<p>"+self.boughtProducts[i].name+"--bought</p>"+
-                  "</div>"+
+          $('.designerDashList').append(
+            "<div class='projectCell col-md-4 col-xs-12'>"+
+              "<div class='projectCellInner'>"+
+                "<div class='projectCellImageHolder'>"+
+                  "<img class='projectCellImage' src='"+self.boughtProducts[i].images[0]+"'>"+
                 "</div>"+
-              "</div>"
-            )
-          }
-          else if (((i+1)%6) == 0 && i != 0){
-            $('.designerDashList').append(
-              "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
-              "</div>"
-            )
-          }
+                "<div class='projectCellContent'>"+
+                  "<p>"+self.boughtProducts[i].TimeSinceCreation+"</p>"+
+                  "<p>"+self.boughtProducts[i].name+"--bought</p>"+
+                "</div>"+
+              "</div>"+
+            "</div>"
+          )
         }
       }
       function getBoughtList(){
@@ -425,10 +417,17 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       ////////toggle to curated view
       $('.designerDashCurated').on('click', function(){
         $('.designerDashCurated').css({
-          backgroundColor: "#F9F7F5"
+          backgroundColor: "#FEFDFA"
+          ,borderTop: "1px solid #EFEEEC"
+          ,borderLeft: '1px solid #EFEEEC'
+          ,borderRight: '1px solid #EFEEEC'
+
         })
         $('.designerDashActive').css({
           backgroundColor: "#EBEBE9"
+          ,borderTop: "0px solid #EFEEEC"
+          ,borderLeft: '0px solid #EFEEEC'
+          ,borderRight: '0px solid #EFEEEC'
         })
         self.curatedToggleCounter = 'curated';
         toggleCurated();
@@ -439,9 +438,17 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       $('.designerDashActive').on('click', function(){
         $('.designerDashCurated').css({
           backgroundColor: "#EBEBE9"
+          ,borderTop: "0px solid #EFEEEC"
+          ,borderLeft: '0px solid #EFEEEC'
+          ,borderRight: '0px solid #EFEEEC'
+
         })
         $('.designerDashActive').css({
-          backgroundColor: "#F9F7F5"
+          backgroundColor: "#FEFDFA"
+          ,borderTop: "1px solid #EFEEEC"
+          ,borderLeft: '1px solid #EFEEEC'
+          ,borderRight: '1px solid #EFEEEC'
+
         })
         self.curatedToggleCounter = 'active';
         toggleActive();
@@ -467,6 +474,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
               '<div class="projectCellButtonOrder">Place an Order</div>'+
             "</div>"
           )
+          clickPurchaseModal();
           $('#projectCellButtonEdit').on('click', function(evt){
             var prodIdToUpdate = $($(evt.target)[0].parentNode)[0].id;
             $('.bodyview').prepend(
@@ -794,6 +802,17 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       }
       //end load collections/
       ///////////////////////
+    }
+
+
+    //////function to load modal which allows buyer to make a purchase
+    function clickPurchaseModal(){
+      $('.projectCellButtonOrder').on('click', function(){
+        $('.bodyview').append(
+          "<div class='purchaseModal'>"+
+          "</div>"
+        )
+      })
     }
   /////end admin controller
   ////////////////////////
