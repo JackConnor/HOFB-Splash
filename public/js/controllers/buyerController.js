@@ -51,6 +51,13 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
               })
               ///update toggle to register sizes properly
               self.colorToggle = $(evt.target)[0].id;
+              for (var i = 0; i < $('.purchaseSizeSlider').length; i++) {
+                var size = $('.purchaseSizeSlider')[i].classList[0].slice(0,2);
+                console.log(size);
+                var sliderVal = self.order.totalItemsDivided[self.colorToggle][size];
+                console.log(sliderVal);
+                $($('.purchaseSizeSlider')[i]).slider('value', sliderVal);
+              }
             })
           })
       }
@@ -111,9 +118,21 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         }
         var remainingItems = getAllSliderFunc();
         $('.purchaseTotalRemaining').text(remainingItems);
+        if(parseInt($('.purchaseTotalRemaining').text()) < 0){
+          $('.purchaseTotalRemaining').css({
+            color: "tomato"
+            ,fontSize: '25px'
+          })
+        }
+        else {
+          $('.purchaseTotalRemaining').css({
+            color: "black"
+            ,fontSize: '21px'
+          })
+        }
         /////reset all sliders to new max
         for (var i = 0; i < $('.purchaseSizeSlider').length; i++) {
-          $($('.purchaseSizeSlider')[i]).slider('option', 'max', remainingItems);
+          // $($('.purchaseSizeSlider')[i]).slider('option', 'max', remainingItems);
         }
       }
       /////////activate all sliders/////////////
