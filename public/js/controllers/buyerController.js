@@ -72,9 +72,21 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       $('#slider').on('slidechange', function(evt){
         var totalItems = $(evt.target).slider('value');
         $('.purchaseStatTotal').text(totalItems);
+        console.log(self.order);
+        //////////resetting the main slider should reset all values;
+        for(key in self.order.totalItemsDivided){
+          console.log(self.order.totalItemsDivided);
+          console.log(key);
+          for(size in key){
+            console.log(size);
+            size = 0;
+          }
+        }
         self.order.totalItems = totalItems;
         console.log(self.order);
         $('.purchaseSizeSlider').slider('option', 'max', self.order.totalItems);
+        $('.purchaseSizeSlider').slider('value', 0);
+
         returnRemaining();
       })
 
