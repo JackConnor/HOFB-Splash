@@ -808,11 +808,14 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
 
     //////function to load modal which allows buyer to make a purchase
     function clickPurchaseModal(){
-      $('.projectCellButtonOrder').on('click', function(){
-        $('.bodyview').append(
-          "<div class='purchaseModal'>"+
-          "</div>"
-        )
+      $('.projectCellButtonOrder').on('click', function(evt){
+        // $('.bodyview').append(
+        //   "<div class='purchaseModal'>"+
+        //   "</div>"
+        // )
+
+        console.log($($(evt.target)[0].parentNode)[0].id);
+        window.location.hash = "#/purchase/"+$($(evt.target)[0].parentNode)[0].id;
       })
     }
   /////end admin controller
