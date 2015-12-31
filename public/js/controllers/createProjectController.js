@@ -1,9 +1,9 @@
-var app = angular.module('createProjectController', ['postProjectFactory', 'checkPwFactory'])
+var app = angular.module('createProjectController', ['postProjectFactory', 'checkPwFactory', 'getSwatchesFactory'])
 
   .controller('createProjectCtrl', createProjectCtrl)
 
-  createProjectCtrl.$inject = ['$http', 'postProject', 'checkPw']
-  function createProjectCtrl($http, postProject, checkPw){
+  createProjectCtrl.$inject = ['$http', 'postProject', 'checkPw', 'allSwatches']
+  function createProjectCtrl($http, postProject, checkPw, allSwatches){
     var self = this;
     //////global variables we'll be using for moving the carousel
     ///////get the users token
@@ -22,7 +22,46 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     self.miniPhotoCounter = 0;
     self.tempPhotoCache = [];
     self.tempPhotoHTMLCache = [];
+    self.allSwatches = allSwatches;
     /////end global variables
+
+    ////////set our global variables for our our html to create the swatches from
+    function setSwatches(){
+      var fabricsfunc = function(){
+        var allFabrics = [];
+        for(fabric in allSwatches.fabrics){
+          allFabrics.push(fabric);
+          $('.createFabricContainer').append(
+            '<div class="createFabricCellHolder col-xs-4">'+
+              '<div class="createFabric create'+fabric+'">'+
+                fabric+
+              "</div>"+
+            "</div>"
+          )
+        }
+        console.log(allFabrics);
+        return allFabrics;
+      }
+      fabricsfunc();
+      var colorsfunc = function(){
+        var allcolors = [];
+        for(color in allSwatches.colors){
+          allcolors.push(color);
+          $('.createColorContainer').append(
+            '<div class="createColorCellHolder col-xs-2">'+
+              '<div class="createColor create'+color+'">'+
+                color+
+              "</div>"+
+            "</div>"
+          )
+        }
+        console.log(allcolors);
+        return allcolors;
+      }
+      colorsfunc();
+    }
+    setSwatches();
+
 
     ////////////////////////////////////////
     /////////Effects for carousel//////////
