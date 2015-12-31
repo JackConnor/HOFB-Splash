@@ -82,6 +82,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'message'
     })
 
+    .when('/purchase/:product_id', {
+      templateUrl: 'templates/_purchaseOrder.html'
+      ,controller: 'buyerCtrl'
+      ,controllerAs: 'order'
+    })
+
     .when('/profile/:user_id', {
       templateUrl: 'templates/_userProfile.html'
       ,controller: 'userCtrl'

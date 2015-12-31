@@ -1266,6 +1266,75 @@
   margin-right: 30px;
 }
 
+.purchaseCloseModal {
+  height: 25px;
+  width: 100%;
+  float: right;
+  position: relative;
+}
+
+.purchaseColor {
+  width: 60px;
+  height: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  outline: 1px solid gold;
+  display: inline-block;
+}
+
+.purchaseColorRow {
+  height: 80px;
+  outline: 1px solid green;
+}
+
+.purchaseContainer {
+  background-color: gray;
+  height: 100%;
+  position: relative;
+}
+
+.purchaseHolder {
+  width: 70%;
+  height: 700px;
+  margin-left: 15%;
+  margin-top: 100px;
+  background-color: white;
+  position: absolute;
+}
+
+.purchaseSizeSliderHolder {
+  margin-top: 20px;
+}
+
+.purchaseStat {
+  height: 60px;
+  outline: 2px solid blue;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+
+.purchaseStatistics {
+  height: 60px;
+  margin-top: 25px;
+  background-color: #C5C5C5;
+}
+
+.purchaseTotalSlider{
+  position: relative;
+  display: block;
+}
+
+.purchaseTotalSliderContainer{
+  width: 90%;
+  margin-left: 5%;
+}
+
+.purchaseTotalSliderText {
+  display: inline-block;
+}
+
 .pwCheck {
   width: 40%;
   margin-left: 30%;
