@@ -231,7 +231,8 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
                   "<p class='projectCellContentName'>"+self.alreadyCurated[i].name+"</p>"+
                   "<p class='projectCellContentTime'>"+self.alreadyCurated[i].TimeSinceCreation+"</p>"+
                 "</div>"+
-              "</div>"
+              "</div>"+
+            "</div>"
             )
             var allImages = self.alreadyCurated[i].images;
             console.log(allImages);
@@ -277,14 +278,18 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         }
         for (var i = 0; i < self.boughtProducts.length; i++) {
           $('.designerDashList').append(
-            "<div class='projectCell col-md-4 col-xs-12'>"+
+            "<div class='col-md-4 col-xs-12 projectCell'>"+
               "<div class='projectCellInner'>"+
                 "<div class='projectCellImageHolder'>"+
-                  "<img class='projectCellImage' src='"+self.boughtProducts[i].images[0]+"'>"+
+                  "<img class='projectCellImage' id='"+self.boughtProducts[i]._id+"'"+
+                "src='"+self.boughtProducts[i].images[0]+"'>"+
+                "</div>"+
+                "<div class='projectCellMinis' id='mini"+i+"'>"+
                 "</div>"+
                 "<div class='projectCellContent'>"+
-                  "<p>"+self.boughtProducts[i].TimeSinceCreation+"</p>"+
-                  "<p>"+self.boughtProducts[i].name+"--bought</p>"+
+                  "<span class='glyphicon glyphicon-heart projectCellHeart'></span>"+
+                  "<p class='projectCellContentName'>"+self.boughtProducts[i].name+"</p>"+
+                  "<p class='projectCellContentTime'>"+self.boughtProducts[i].TimeSinceCreation+"</p>"+
                 "</div>"+
               "</div>"+
             "</div>"
@@ -365,27 +370,23 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
             self.filteredProjects[i].TimeSinceCreation = timeSince();
           }
           for (var i = 0; i < self.filteredProjects.length; i++) {
-            if(((i+1)%6) != 0 || i == 0){
-              $('.designerDashList').append(
-                "<div class='projectCell col-md-2 col-xs-12'>"+
-                  "<div class='projectCellInner'>"+
-                    "<div class='projectCellImageHolder'>"+
-                      "<img class='projectCellImage' src='"+self.filteredProjects[i].images[0]+"'>"+
-                    "</div>"+
-                    "<div class='projectCellContent'>"+
-                      "<p>"+self.filteredProjects[i].TimeSinceCreation+"</p>"+
-                      "<p>"+self.filteredProjects[i].name+"</p>"+
-                    "</div>"+
+            $('.designerDashList').append(
+              "<div class='col-md-4 col-xs-12 projectCell'>"+
+                "<div class='projectCellInner'>"+
+                  "<div class='projectCellImageHolder'>"+
+                    "<img class='projectCellImage' id='"+self.filteredProjects[i]._id+"'"+
+                  "src='"+self.filteredProjects[i].images[0]+"'>"+
                   "</div>"+
-                "</div>"
-              )
-            }
-            else if (((i+1)%6) == 0 && i != 0){
-              $('.designerDashList').append(
-                "<div class='blankDiv projectCell col-md-2 col-xs-0'>"+
-                "</div>"
-              )
-            }
+                  "<div class='projectCellMinis' id='mini"+i+"'>"+
+                  "</div>"+
+                  "<div class='projectCellContent'>"+
+                    "<span class='glyphicon glyphicon-heart projectCellHeart'></span>"+
+                    "<p class='projectCellContentName'>"+self.filteredProjects[i].name+"</p>"+
+                    "<p class='projectCellContentTime'>"+self.filteredProjects[i].TimeSinceCreation+"</p>"+
+                  "</div>"+
+                "</div>"+
+              "</div>"
+            )
           }
         //////end if statement for self.filtered
         }
