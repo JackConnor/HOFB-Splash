@@ -22,6 +22,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         totalItems: 0
         ,totalItemsDivided: {}
       }
+      self.colorToggle = '';
       function addColorsToOrder(){
         var prodToBuy = window.location.hash.split('/')[2];
         getProduct(prodToBuy)
@@ -35,7 +36,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
               )
               //////add color to the master array
               console.log(self.order);
-              self.order.totalItemsDivided[allColors[i]] = 0;
+              self.order.totalItemsDivided[allColors[i]] = {xs: 0, sm: 0, md: 0, lg: 0, xl: 0};
             }
             console.log(self.order.totalItemsDivided);
             console.log(self.order);
@@ -48,6 +49,8 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
               $(evt.target).css({
                 outline: '4px solid green'
               })
+              ///update toggle to register sizes properly
+              self.colorToggle = $(evt.target)[0].id;
             })
           })
       }
@@ -74,8 +77,13 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
 
       $('.purchaseSizeSlider').on('slidechange', function(evt){
         var totalSizeItems = $(evt.target).slider('value');
+        var itemColor = self.colorToggle;
+        console.log(itemColor);
+        var itemSize = $(evt.target)[0].classList[0].slice(0, 2);
+        console.log(itemSize);
         console.log(totalSizeItems);
-        // self.order.totalItemsDivided['']
+        self.order.totalItemsDivided[itemColor][itemSize] = totalSizeItems;
+        console.log(self.order);
         $(evt.target)[0].nextElementSibling.innerText = totalSizeItems;
         returnRemaining();
       })
