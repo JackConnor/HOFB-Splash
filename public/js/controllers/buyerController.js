@@ -67,7 +67,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         $('.purchaseStatTotal').text(totalItems);
         self.order.totalItems = totalItems;
         console.log(self.order);
-        $('.purchaseSizeSlider').slider('option', 'max', self.order.totalItems)
+        $('.purchaseSizeSlider').slider('option', 'max', self.order.totalItems);
         returnRemaining();
       })
 
@@ -78,12 +78,13 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       $('.purchaseSizeSlider').on('slidechange', function(evt){
         var totalSizeItems = $(evt.target).slider('value');
         var itemColor = self.colorToggle;
-        console.log(itemColor);
+        // console.log(itemColor);
         var itemSize = $(evt.target)[0].classList[0].slice(0, 2);
-        console.log(itemSize);
-        console.log(totalSizeItems);
+        // console.log(itemSize);
+        // console.log(totalSizeItems);
         self.order.totalItemsDivided[itemColor][itemSize] = totalSizeItems;
-        console.log(self.order);
+        // self.order.totalItems += totalSizeItems;
+        // console.log(self.order);
         $(evt.target)[0].nextElementSibling.innerText = totalSizeItems;
         returnRemaining();
       })
@@ -92,18 +93,28 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       function returnRemaining(){
         var getAllSliderFunc = function(){
           var totalFromSizes = 0;
-          for (var i = 0; i < self.order.totalItemsDivided.length; i++) {
+          for (var key in self.order.totalItemsDivided){
+            console.log(key);
             ///////now we have to get each size from each color, so we do another iteration
-            for (var j = 0; j < self.order.totalItemsDivided[i].sizes.length; j++) {
-              totalFromSizes += self.order.totalItemsDivided[i].sizes[j];
-            }
+            console.log(self.order.totalItemsDivided[key]);
+            totalFromSizes += self.order.totalItemsDivided[key].xs;
+            totalFromSizes += self.order.totalItemsDivided[key].sm;
+            totalFromSizes += self.order.totalItemsDivided[key].md;
+            totalFromSizes += self.order.totalItemsDivided[key].lg;
+            totalFromSizes += self.order.totalItemsDivided[key].xl;
           }
           console.log(totalFromSizes);
-          return totalFromSizes;
+          console.log(self.order.totalItems);
+          var totalRemaining = self.order.totalItems - totalFromSizes;
+          console.log(totalRemaining);
+          return totalRemaining;
         }
-        var sizeItems = getAllSliderFunc();
-        console.log();
-        $('.purchaseTotalRemaining').text(self.order.totalItems - sizeItems);
+        var remainingItems = getAllSliderFunc();
+        $('.purchaseTotalRemaining').text(remainingItems);
+        /////reset all sliders to new max
+        for (var i = 0; i < $('.purchaseSizeSlider').length; i++) {
+          $($('.purchaseSizeSlider')[i]).slider('option', 'max', remainingItems);
+        }
       }
       /////////activate all sliders/////////////
       //////////////////////////////////////////
