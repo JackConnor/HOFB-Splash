@@ -97,13 +97,14 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       $('.purchaseSizeSlider').on('slidechange', function(evt){
         var totalSizeItems = $(evt.target).slider('value');
         var itemColor = self.colorToggle;
-        // console.log(itemColor);
+        console.log(itemColor);
         var itemSize = $(evt.target)[0].classList[0].slice(0, 2);
-        // console.log(itemSize);
+        console.log($(evt.target));
+        console.log(itemSize);
         // console.log(totalSizeItems);
         self.order.totalItemsDivided[itemColor][itemSize] = totalSizeItems;
         // self.order.totalItems += totalSizeItems;
-        // console.log(self.order);
+        console.log(self.order);
         $(evt.target)[0].nextElementSibling.innerText = totalSizeItems;
         returnRemaining();
       })
@@ -113,19 +114,16 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         var getAllSliderFunc = function(){
           var totalFromSizes = 0;
           for (var key in self.order.totalItemsDivided){
-            console.log(key);
+            // console.log(key);
             ///////now we have to get each size from each color, so we do another iteration
-            console.log(self.order.totalItemsDivided[key]);
+            // console.log(self.order.totalItemsDivided[key]);
             totalFromSizes += self.order.totalItemsDivided[key].xs;
             totalFromSizes += self.order.totalItemsDivided[key].sm;
             totalFromSizes += self.order.totalItemsDivided[key].md;
             totalFromSizes += self.order.totalItemsDivided[key].lg;
             totalFromSizes += self.order.totalItemsDivided[key].xl;
           }
-          console.log(totalFromSizes);
-          console.log(self.order.totalItems);
           var totalRemaining = self.order.totalItems - totalFromSizes;
-          console.log(totalRemaining);
           return totalRemaining;
         }
         var remainingItems = getAllSliderFunc();
