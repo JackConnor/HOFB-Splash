@@ -389,7 +389,7 @@ module.exports = function(app){
     dest: __dirname + '../public/uploads/',
   })
 
-  app.post('/api/pictures', upload.array('files', 4), function(req,res){
+  app.post('/api/pictures', upload.array('files', 8), function(req,res){
     for (var i = 0; i < req.files.length; i++) {
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination

@@ -535,18 +535,11 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   ///create function to highlight mini image that's about to be updated
   function highlightMini(){
     var arrLength = $('.newProductMiniImage').length;
-    $('#newProductMiniImage0').css({
-      borderBottom: "1px solid white"
-    })
-    $('#newProductMiniImage1').css({
-      borderBottom: "1px solid white"
-    })
-    $('#newProductMiniImage2').css({
-      borderBottom: "1px solid white"
-    })
-    $('#newProductMiniImage3').css({
-      borderBottom: "1px solid white"
-    })
+    for (var i = 0; i < 8; i++) {
+      $('#newProductMiniImage'+i).css({
+        borderBottom: "1px solid white"
+      })
+    }
     $('#newProductMiniImage'+self.miniPhotoCounter).css({
       borderBottom: "12px solid #9F81F7"
     })

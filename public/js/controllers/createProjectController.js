@@ -348,7 +348,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////listens for change to file upload, creating an event every time there is a change
     function changeEffect(){
       $('#i_file').change( function(event) {
-        if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 4){
+        if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 8){
           frontendPhotoDisplay();
           $('#i_file').remove();
           $('.inputFileHolder').append(
@@ -418,18 +418,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     ///create function to highlight mini image that's about to be updated
     function highlightMini(){
       var arrLength = $('.newProductMiniImage').length;
-      $('#newProductMiniImage0').css({
-        borderBottom: "1px solid white"
-      })
-      $('#newProductMiniImage1').css({
-        borderBottom: "1px solid white"
-      })
-      $('#newProductMiniImage2').css({
-        borderBottom: "1px solid white"
-      })
-      $('#newProductMiniImage3').css({
-        borderBottom: "1px solid white"
-      })
+      for (var i = 0; i < 8; i++) {
+        $('#newProductMiniImage'+i).css({
+          borderBottom: "1px solid white"
+        })
+      }
       $('#newProductMiniImage'+self.miniPhotoCounter).css({
         borderBottom: "12px solid #9F81F7"
       })
@@ -554,6 +547,18 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
       if(self.tempPhotoHTMLCache[3]){
         $('.tempForm').append(self.tempPhotoHTMLCache[3]);
+      }
+      if(self.tempPhotoHTMLCache[4]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[4]);
+      }
+      if(self.tempPhotoHTMLCache[5]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[5]);
+      }
+      if(self.tempPhotoHTMLCache[6]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[6]);
+      }
+      if(self.tempPhotoHTMLCache[7]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[7]);
       }
       $('.tempForm').append(
         "<input name='productId' type='text' value='"+productIdToUpdate+"'>"
