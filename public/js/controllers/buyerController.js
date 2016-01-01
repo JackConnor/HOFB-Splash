@@ -927,7 +927,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
                   '</div>'+
                 '</div>'+
               '</div>'+
-              '<button type="button" class="purchaseOrderButton">Order</button>'+
+              '<div class="purchaseOrderButton">Order</div>'+
             '</div>'+
           "</div>"
         )
@@ -939,7 +939,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           $('.purchaseModal').remove();
         })
         /////////function to collect and submit purchase
-        
+
       })
     }
   /////end admin controller
