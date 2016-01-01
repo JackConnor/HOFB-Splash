@@ -5,116 +5,123 @@
     </div>
     <div class="purchaseStatistics">
       <div class="col-xs-3 purchaseStat">
-        <p>
+        <p class='purchaseStatTop'>
           Total
         </p>
-        <p class='purchaseStatTotal'>
+        <p class='purchaseStatTotal purchaseStatBottom'>
           xxxxxxxxx
         </p>
       </div>
       <div class="col-xs-3 purchaseStat">
-        <p>
+        <p class='purchaseStatTop'>
           Order Total
         </p>
-        <p>
+        <p class='purchaseStatBottom'>
           $30,000
         </p>
       </div>
       <div class="col-xs-3 purchaseStat">
-        <p>
+        <p class='purchaseStatTop'>
           Price per Item
         </p>
-        <p>
+        <p class='purchaseStatBottom'>
           $40/item
         </p>
       </div>
       <div class="col-xs-3 purchaseStat">
-        <p>
+        <p class='purchaseStatTop'>
           Turnaround
         </p>
-        <p>
+        <p class='purchaseStatBottom'>
           20 days
         </p>
       </div>
     </div>
-    <p>
-      1) Pick your Total:
-      (slide slider below)
-    </p>
-    <div class="purchaseTotalSliderContainer">
-      <span class='purchaseTotalSliderText col-xs-1'>Total: </span>
-      <div class='purchaseTotalSlider col-xs-11' id="slider"></div>
-      for larger orders, click here
-    </div>
-    <div class="purchaseColorsContainer">
-      <p>
-        2) Choose Yoru Color Options
+    <div class="purchaseSelectionHolder">
+      <p class='purchaseOne'>
+        1) How Many?
       </p>
-      <p>
-        Sizing charts are available for download
+      <p class='purchaseOneContent'>
+        minimum order is 250 with price break at quantities
       </p>
-      <div class="purchaseColorRow"></div>
-    </div>
-    <div class="purchaseSizesContainer">
-      <div class="row">
-        <div class="col-xs-8">
-          <p>
-            3) Choose Your Sizing for Each Color
-          </p>
-          <p>
-            sizing charts are available for download here
-          </p>
-        </div>
-        <div class="col-xs-4">
-          <span class='purchaseTotalRemaining'></span>
-          <span>Items Remaining</span>
-        </div>
+      <div class="purchaseTotalSliderContainer">
+        <span class='purchaseTotalSliderText col-xs-2'>Total: </span>
+        <div class='purchaseTotalSlider col-xs-9' id="slider"></div>
+        <span class='col-xs-1'>5000</span>
+        <p class='purchaseOther'>
+          Larger Quantities are Available Here
+        </p>
       </div>
-      <div class="purchaseSizeSliders">
-        <div class="purchaseSizeSliderHolder row">
-          <div class="purchaseSizeName col-xs-2">
-            <p>
-              Extra Small:
+      <div class="purchaseColorsContainer">
+        <p class='purchaseOne'>
+          2) Choose Your Color Options
+        </p>
+        <p class='purchaseOneContent'>
+          Sizing charts are available for download: Sizing Charts
+        </p>
+        <div class="purchaseColorRow"></div>
+      </div>
+      <div class="purchaseSizesContainer">
+        <div class="row">
+          <div class="col-xs-8">
+            <p class='purchaseOne'>
+              3) Choose Your Sizing for Each Color
+            </p>
+            <p class='purchaseOneContent'>
+              sizing charts are available for download: Sizing Charts
             </p>
           </div>
-          <div class="xsSlider purchaseSizeSlider col-xs-9"></div>
-          <div class="col-xs-1">0</div>
+          <div class="col-xs-4">
+            <span class='purchaseTotalRemaining'></span>
+            <span>Items Remaining</span>
+          </div>
         </div>
-        <div class="purchaseSizeSliderHolder row">
-          <div class="purchaseSizeName col-xs-2">
-            <p>
-              Small:
-            </p>
+        <div class="purchaseSizeSliders">
+          <div class="purchaseSizeSliderHolder row">
+            <div class="purchaseSizeName col-xs-2">
+              <p>
+                Extra Small:
+              </p>
+            </div>
+            <div class="xsSlider purchaseSizeSlider col-xs-9"></div>
+            <div class="col-xs-1">0</div>
           </div>
-          <div class="smSlider purchaseSizeSlider col-xs-9"></div>
-          <div class="col-xs-1">0</div>
-        </div>
-        <div class="purchaseSizeSliderHolder row">
-          <div class="purchaseSizeName col-xs-2">
-            <p>
-              Medium:
-            </p>
+          <div class="purchaseSizeSliderHolder row">
+            <div class="purchaseSizeName col-xs-2">
+              <p>
+                Small:
+              </p>
+            </div>
+            <div class="smSlider purchaseSizeSlider col-xs-9"></div>
+            <div class="col-xs-1">0</div>
           </div>
-          <div class="mdSlider purchaseSizeSlider col-xs-9"></div>
-          <div class="col-md-1">0</div>
-        </div>
-        <div class="purchaseSizeSliderHolder row">
-          <div class="purchaseSizeName col-xs-2">
-            <p>
-              Large:
-            </p>
+          <div class="purchaseSizeSliderHolder row">
+            <div class="purchaseSizeName col-xs-2">
+              <p>
+                Medium:
+              </p>
+            </div>
+            <div class="mdSlider purchaseSizeSlider col-xs-9"></div>
+            <div class="col-md-1">0</div>
           </div>
-          <div class="lgSlider purchaseSizeSlider col-xs-9"></div>
-          <div class="col-lg-1">0</div>
-        </div>
-        <div class="purchaseSizeSliderHolder row">
-          <div class="purchaseSizeName col-xs-2">
-            <p>
-              Extra Large:
-            </p>
+          <div class="purchaseSizeSliderHolder row">
+            <div class="purchaseSizeName col-xs-2">
+              <p>
+                Large:
+              </p>
+            </div>
+            <div class="lgSlider purchaseSizeSlider col-xs-9"></div>
+            <div class="col-lg-1">0</div>
           </div>
-          <div class="xlSlider purchaseSizeSlider col-xs-9"></div>
-          <div class="col-xl-1">0</div>
+          <div class="purchaseSizeSliderHolder row">
+            <div class="purchaseSizeName col-xs-2">
+              <p>
+                Extra Large:
+              </p>
+            </div>
+            <div class="xlSlider purchaseSizeSlider col-xs-9"></div>
+            <div class="col-xl-1">0</div>
+          </div>
         </div>
       </div>
     </div>

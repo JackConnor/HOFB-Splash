@@ -31,11 +31,24 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
             for (var i = 0; i < allColors.length; i++) {
               $('.purchaseColorRow').append(
                 "<div class='purchaseColor' id='"+allColors[i]+"'>"+
-                  allColors[i]+
+                  // allColors[i]+
                 "</div>"
               )
               //////add color to the master array
               console.log(self.order);
+
+              for(color in allSwatches.colors){
+                console.log(color);
+                console.log(allColors[i].toLowerCase());
+                if(color == allColors[i].toLowerCase()){
+                  console.log('match');
+                  console.log(allSwatches.colors[color]);
+                  $('#'+allColors[i]).css({
+                    backgroundColor: allSwatches.colors[color]
+                  })
+                }
+              }
+
               self.order.totalItemsDivided[allColors[i]] = {xs: 0, sm: 0, md: 0, lg: 0, xl: 0};
             }
             console.log(self.order.totalItemsDivided);
@@ -79,8 +92,8 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           }
         }
         self.order.totalItems = totalItems;
-        // $('.purchaseSizeSlider').slider('option', 'max', self.order.totalItems);
-        // $('.purchaseSizeSlider').slider('value', 0);
+        returnRemaining();
+
       })
 
       $('#slider').on('slidechange', function(evt){
@@ -100,14 +113,16 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       $('.purchaseSizeSlider').on('slide', function(evt){
         var totalSizeItems = $(evt.target).slider('value');
         var itemColor = self.colorToggle;
-        console.log(itemColor);
         var itemSize = $(evt.target)[0].classList[0].slice(0, 2);
-        console.log($(evt.target));
-        console.log(itemSize);
-        // console.log(totalSizeItems);
         self.order.totalItemsDivided[itemColor][itemSize] = totalSizeItems;
-        // self.order.totalItems += totalSizeItems;
-        console.log(self.order);
+        $(evt.target)[0].nextElementSibling.innerText = totalSizeItems;
+        returnRemaining();
+      })
+      $('.purchaseSizeSlider').on('slidechange', function(evt){
+        var totalSizeItems = $(evt.target).slider('value');
+        var itemColor = self.colorToggle;
+        var itemSize = $(evt.target)[0].classList[0].slice(0, 2);
+        self.order.totalItemsDivided[itemColor][itemSize] = totalSizeItems;
         $(evt.target)[0].nextElementSibling.innerText = totalSizeItems;
         returnRemaining();
       })
