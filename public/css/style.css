@@ -1303,9 +1303,9 @@
 
 .purchaseHolder {
   width: 58%;
-  height: 620px;
+  height: 670px;
   margin-left: 21%;
-  margin-top: 100px;
+  margin-top: 50px;
   background-color: white;
   position: absolute;
   border-radius: 5px;
@@ -1328,6 +1328,14 @@
   margin-left: 10px;
 }
 
+.purchaseOrderButton {
+  width: 150px;
+  height: 40px;
+  float: right;
+  margin-right: 80px;
+  background-color: #3CB878;
+}
+
 .purchaseOther {
   margin-left: 15px;
 }
@@ -1338,12 +1346,8 @@
   margin-top: 10px;
 }
 
-.purchaseTotalSlider {
-  /*color: blue;
-  background-color: yellow;*/
-}
-
 .purchaseSizeName {
+  margin-right: 15px;
 }
 
 .purchaseSizeSliderContainer {
@@ -1354,6 +1358,7 @@
 
 .purchaseSizeSlider {
   display: inline-block;
+  margin-right: 10px;
 }
 
 .purchaseSizeSliders p{
