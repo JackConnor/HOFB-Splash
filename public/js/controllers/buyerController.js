@@ -35,14 +35,9 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
                 "</div>"
               )
               //////add color to the master array
-              console.log(self.order);
 
               for(color in allSwatches.colors){
-                console.log(color);
-                console.log(allColors[i].toLowerCase());
                 if(color == allColors[i].toLowerCase()){
-                  console.log('match');
-                  console.log(allSwatches.colors[color]);
                   $('#'+allColors[i]).css({
                     backgroundColor: allSwatches.colors[color]
                   })
@@ -51,8 +46,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
 
               self.order.totalItemsDivided[allColors[i]] = {xs: 0, sm: 0, md: 0, lg: 0, xl: 0};
             }
-            console.log(self.order.totalItemsDivided);
-            console.log(self.order);
             $('.purchaseColor').on('click', function(evt){
               for (var i = 0; i < $('.purchaseColor').length; i++) {
                 $($('.purchaseColor')[i]).css({
@@ -66,9 +59,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
               self.colorToggle = $(evt.target)[0].id;
               for (var i = 0; i < $('.purchaseSizeSlider').length; i++) {
                 var size = $('.purchaseSizeSlider')[i].classList[0].slice(0,2);
-                console.log(size);
                 var sliderVal = self.order.totalItemsDivided[self.colorToggle][size];
-                console.log(sliderVal);
                 $($('.purchaseSizeSlider')[i]).slider('value', sliderVal);
               }
             })
@@ -86,6 +77,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       $('#slider').on('slide', function(evt){
         var totalItems = $(evt.target).slider('value');
         $('.purchaseStatTotal').text(totalItems);
+        $('.purchaseStatCost').text("$"+totalItems*25)
         for(key in self.order.totalItemsDivided){
           for(size in key){
             size = 0;
@@ -132,9 +124,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         var getAllSliderFunc = function(){
           var totalFromSizes = 0;
           for (var key in self.order.totalItemsDivided){
-            // console.log(key);
             ///////now we have to get each size from each color, so we do another iteration
-            // console.log(self.order.totalItemsDivided[key]);
             totalFromSizes += self.order.totalItemsDivided[key].xs;
             totalFromSizes += self.order.totalItemsDivided[key].sm;
             totalFromSizes += self.order.totalItemsDivided[key].md;
@@ -231,7 +221,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
 
       /////load all active projects into the dashboard view
       function loadInitialList(arg){
-        console.log(self.alreadyCurated);
         var dataType = $('.dashDataType');
         dataType.text('Curated, fed to your Tier');
         for (var i = 0; i < self.alreadyCurated.length; i++) {
@@ -253,7 +242,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
             "</div>"
             )
             var allImages = self.alreadyCurated[i].images;
-            console.log(allImages);
             for (var j = 0; j < allImages.length; j++) {
               $('#mini'+i).append(
                 "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
@@ -575,8 +563,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           var color = $(evt.target)[0].id.slice(6, 25);
           $('.designerDashList').html('');
           $('.colorFilter').remove();
-          console.log('yo');
-          console.log(color);
           if(self.curatedToggleCounter == 'active'){
             loadFilteredList("colors", color, self.alreadyCurated);
           }
@@ -592,7 +578,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         $('.typeFilter').remove();
         $('.fabricFilter').remove();
         $('.seasonFilter').remove();
-        console.log('yoyoyo');
         $(evt.target).append(
           "<div class='typeFilter'>"+
             "<div  id='filterShirt' class='typeFilterCell col-xs-4'>"+
@@ -630,10 +615,8 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
 
         $('.typeFilterCell').on('click', function(evt){
           var type = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
-          console.log(type);
           $('.designerDashList').html('');
           $('.typeFilter').remove();
-          console.log('yo');
           if(self.curatedToggleCounter == 'active'){
             loadFilteredList("productType", type, self.alreadyCurated);
           }
@@ -649,7 +632,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         $('.typeFilter').remove();
         $('.fabricFilter').remove();
         $('.seasonFilter').remove();
-        console.log('yoyoyo');
         $(evt.target).append(
           "<div class='fabricFilter'>"+
             "<div  id='filterSeersucker' class='fabricFilterCell col-xs-4'>"+
@@ -687,10 +669,8 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
 
         $('.fabricFilterCell').on('click', function(evt){
           var fabric = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
-          console.log(fabric);
           $('.designerDashList').html('');
           $('.fabricFilter').remove();
-          console.log('yo');
           if(self.curatedToggleCounter == 'active'){
             loadFilteredList("fabrics", fabric, self.alreadyCurated);
           }
@@ -734,8 +714,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
             loadFilteredList("seasons", season, self.alreadyCurated);
           }
           else if(self.curatedToggleCounter == 'curated'){
-            console.log(' curated list');
-            console.log(self.curatedProjects);
             loadFilteredList("seasons", season, self.boughtProducts);
           }
         })
@@ -773,8 +751,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           }
         })
         $('.designerDashCollectionCell').on('mouseleave', function(evt){
-          // console.log(evt.target);
-          // console.log($($(evt.target)[0]));
           var color = $(evt.target).css('backgroundColor');
           if( color != 'rgb(28, 28, 28)'){
             $($(evt.target)[0]).css({
@@ -832,7 +808,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         //   "</div>"
         // )
 
-        console.log($($(evt.target)[0].parentNode)[0].id);
         window.location.hash = "#/purchase/"+$($(evt.target)[0].parentNode)[0].id;
       })
     }
