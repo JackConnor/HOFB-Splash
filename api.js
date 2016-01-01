@@ -24,14 +24,18 @@ cloudinary.config({
 
 //////bring in models////////
 /////////////////////////////
-var Emailcapture = require('./models/emailCapture.js');
-var User         = require('./models/user.js');
-var Product      = require('./models/product.js');
-var Project      = require('./models/createProject.js');
-var viewProduct      = require('./models/viewProduct.js');
-var Photo      = require('./models/photo.js');
-var productComment      = require('./models/productComment.js');
-var Conversation      = require('./models/conversation.js');
+var Emailcapture       = require('./models/emailCapture.js');
+var User               = require('./models/user.js');
+var Product            = require('./models/product.js');
+var Project            = require('./models/createProject.js');
+var viewProduct        = require('./models/viewProduct.js');
+var Photo              = require('./models/photo.js');
+var productComment     = require('./models/productComment.js');
+var Conversation       = require('./models/conversation.js');
+var Purchase           = require('./models/purchase.js')
+console.log("david");
+// console.log(Purchase);
+console.log('bowie');
 ///////finish bringing models////
 /////////////////////////////////
 
@@ -119,8 +123,10 @@ module.exports = function(app){
 ///get a single product by ID
   app.get('/api/product/:id', function(req, res){
     Product.findOne({"_id":req.params.id}, function(err, product){
-      if(err) throw err;
-      res.json(product);
+      if(err) console.log(err);
+      else{
+        res.json(product);
+      }
     })
   })
 
@@ -223,6 +229,23 @@ module.exports = function(app){
       product.save(function(err, product){
       res.json(product)
       });
+    })
+  })
+
+  //////get all purchases
+  app.get('/api/purchases', function(req, res){
+    Purchase.find({}, function(err, purchases){
+      console.log(purchases);
+      res.json(purchases);
+    })
+  })
+
+  /////post a new Purchase to the db
+  app.post('/api/new/purchase', function(req, res){
+    // console.log(req.body);
+    Purchase.create(req.body, function(err, newPurchase){
+      console.log(newPurchase);
+      res.json(newPurchase)
     })
   })
 
@@ -368,7 +391,7 @@ module.exports = function(app){
     dest: __dirname + '../public/uploads/',
   })
 
-  app.post('/api/pictures', upload.array('files', 4), function(req,res){
+  app.post('/api/pictures', upload.array('files', 8), function(req,res){
     for (var i = 0; i < req.files.length; i++) {
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination

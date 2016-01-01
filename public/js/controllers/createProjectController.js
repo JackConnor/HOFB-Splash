@@ -1,9 +1,9 @@
-var app = angular.module('createProjectController', ['postProjectFactory', 'checkPwFactory'])
+var app = angular.module('createProjectController', ['postProjectFactory', 'checkPwFactory', 'getSwatchesFactory'])
 
   .controller('createProjectCtrl', createProjectCtrl)
 
-  createProjectCtrl.$inject = ['$http', 'postProject', 'checkPw']
-  function createProjectCtrl($http, postProject, checkPw){
+  createProjectCtrl.$inject = ['$http', 'postProject', 'checkPw', 'allSwatches']
+  function createProjectCtrl($http, postProject, checkPw, allSwatches){
     var self = this;
     //////global variables we'll be using for moving the carousel
     ///////get the users token
@@ -22,7 +22,65 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     self.miniPhotoCounter = 0;
     self.tempPhotoCache = [];
     self.tempPhotoHTMLCache = [];
+    self.allSwatches = allSwatches;
     /////end global variables
+
+    ////////set our global variables for our our html to create the swatches from
+    function setSwatches(){
+      var fabricsfunc = function(){
+        var allFabrics = [];
+        for(fabric in allSwatches.fabrics){
+          allFabrics.push(fabric);
+          $('.createFabricContainer').append(
+            '<div class="createFabricCellHolder col-xs-4">'+
+              '<img src='+allSwatches.fabrics[fabric]+' class="createFabric create'+fabric+'">'+
+            "</div>"
+          )
+        }
+        console.log(allFabrics);
+        return allFabrics;
+      }
+      fabricsfunc();
+      var colorsfunc = function(){
+        var allcolors = [];
+        for(color in allSwatches.colors){
+          allcolors.push(color);
+          $('.createColorContainer').append(
+            '<div class="createColorCellHolder col-xs-2">'+
+              '<div class="createColor create'+color+'">'+
+                color+
+              "</div>"+
+            "</div>"
+          )
+          console.log(allSwatches.colors[color]);
+          $('.create'+color).css({
+            backgroundColor: allSwatches.colors[color]
+            ,outline: "1px solid #E0E0E0"
+          })
+        }
+        console.log(allcolors);
+        return allcolors;
+      }
+      colorsfunc();
+      var stitchesfunc = function(){
+        var allstitches = [];
+        for(stitch in allSwatches.stitch){
+          allstitches.push(stitch);
+          $('.createStitchContainer').append(
+            '<div class="createStitchCellHolder col-xs-12">'+
+              '<div class="createStitch create'+stitch+'">'+
+                stitch+
+              "</div>"+
+            "</div>"
+          )
+        }
+        console.log(allstitches);
+        return allstitches;
+      }
+      stitchesfunc();
+    }
+    setSwatches();
+
 
     ////////////////////////////////////////
     /////////Effects for carousel//////////
@@ -33,14 +91,14 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         if($(evt.target).css('opacity') == 1 ){
           $(evt.target).css({
             opacity: 0.5
-            ,backgroundColor: "blue"
+            ,outline: "2px solid gray"
           })
           $(evt.target).attr('id', 'picked_'+swatchType+"_"+evt.target.innerText.split(' ').join(''));
           $(evt.target).addClass('picked');
         } else {
           $(evt.target).css({
             opacity: 1
-            ,backgroundColor: "black"
+            ,outline: "none"
           })
         }
       })
@@ -348,7 +406,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////listens for change to file upload, creating an event every time there is a change
     function changeEffect(){
       $('#i_file').change( function(event) {
-        if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 4){
+        if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 8){
           frontendPhotoDisplay();
           $('#i_file').remove();
           $('.inputFileHolder').append(
@@ -418,18 +476,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     ///create function to highlight mini image that's about to be updated
     function highlightMini(){
       var arrLength = $('.newProductMiniImage').length;
-      $('#newProductMiniImage0').css({
-        borderBottom: "1px solid white"
-      })
-      $('#newProductMiniImage1').css({
-        borderBottom: "1px solid white"
-      })
-      $('#newProductMiniImage2').css({
-        borderBottom: "1px solid white"
-      })
-      $('#newProductMiniImage3').css({
-        borderBottom: "1px solid white"
-      })
+      for (var i = 0; i < 8; i++) {
+        $('#newProductMiniImage'+i).css({
+          borderBottom: "1px solid white"
+        })
+      }
       $('#newProductMiniImage'+self.miniPhotoCounter).css({
         borderBottom: "12px solid #9F81F7"
       })
@@ -554,6 +605,18 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
       if(self.tempPhotoHTMLCache[3]){
         $('.tempForm').append(self.tempPhotoHTMLCache[3]);
+      }
+      if(self.tempPhotoHTMLCache[4]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[4]);
+      }
+      if(self.tempPhotoHTMLCache[5]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[5]);
+      }
+      if(self.tempPhotoHTMLCache[6]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[6]);
+      }
+      if(self.tempPhotoHTMLCache[7]){
+        $('.tempForm').append(self.tempPhotoHTMLCache[7]);
       }
       $('.tempForm').append(
         "<input name='productId' type='text' value='"+productIdToUpdate+"'>"

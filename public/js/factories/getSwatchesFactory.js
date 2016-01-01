@@ -43,6 +43,31 @@ angular.module('getSwatchesFactory', [])
           ,yellow: "#F2F5A9"
           ,aqua: "#58FAF4"
           ,green: "#04B404"
+          ,blue1: "#58ACFA"
+          ,white1: "#FFFFFF"
+          ,black1: "#000000"
+          ,magenta1: "#F781F3"
+          ,orange1: "#FA8258"
+          ,yellow1: "#F2F5A9"
+          ,aqua2: "#58FAF4"
+          ,green2: "#04B404"
+          ,blue2: "#58ACFA"
+          ,white2: "#FFFFFF"
+          ,blac2k: "#000000"
+          ,magent3a: "#F781F3"
+          ,orang3e: "#FA8258"
+          ,yello3w: "#F2F5A9"
+          ,aqu3a: "#58FAF4"
+        }
+        ,stitch: {
+          straight: ''
+          ,right: ''
+          ,double: ''
+          ,hooklsine: ''
+          ,righst: ''
+          ,dousble: ''
+          ,hooklsinekline: ''
+          ,hooskline: ''
         }
       }
       return swatches;
