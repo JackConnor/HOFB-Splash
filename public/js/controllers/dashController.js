@@ -114,7 +114,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<div class='projectCellMinis' id='mini"+i+"'>"+
               "</div>"+
               "<div class='projectCellContent'>"+
-                "<span class='glyphicon glyphicon-heart projectCellHeart'></span>"+
+                "<span class='fa fa-heart faa-pulse animated projectCellHeart'></span>"+
                 "<p class='projectCellContentName'>"+self.allProjects[i].name+"</p>"+
                 "<p class='projectCellContentTime'>"+self.allProjects[i].TimeSinceCreation+"</p>"+
               "</div>"+
@@ -430,7 +430,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "<div class='projectCellTrash'>X </div>"+
             "<div class='projectCellHoverContent'>"+
             "</div>" +
-            '<div class="projectCellButton" id="projectCellButtonEdit">Edit</div>"'+
+            '<div class="projectCellButton" id="projectCellButtonEdit">EDIT</div>"'+
           "</div>"
         )
         //////begin to call hover actions
@@ -487,7 +487,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
             "<div class='projectCellTrash'>X </div>"+
-            '<div class="projectCellButton projectCellButtonView" >View</div>'+
+            '<div class="projectCellButton projectCellButtonView" >VIEW</div>'+
           "</div>"
         )
         $('.projectCellButtonView').on('click', function(evt){
