@@ -1316,7 +1316,8 @@
   background-color: black;
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 1000%;
+  padding-top: 30px;
 }
 
 .purchaseOne {

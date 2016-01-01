@@ -123,8 +123,10 @@ module.exports = function(app){
 ///get a single product by ID
   app.get('/api/product/:id', function(req, res){
     Product.findOne({"_id":req.params.id}, function(err, product){
-      if(err) throw err;
-      res.json(product);
+      if(err) console.log(err);
+      else{
+        res.json(product);
+      }
     })
   })
 
