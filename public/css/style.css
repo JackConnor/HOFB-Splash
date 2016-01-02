@@ -12,6 +12,10 @@
   margin-left: -36px;
 }
 
+#activeTabIconSquare{
+  color: #6BB7C2;
+}
+
 .bodyview {
   min-height: 100%;
   width: 100%;
@@ -361,6 +365,10 @@
   z-index: 3;
 }
 
+#curatedTabIconSquare{
+    color: #BB516C;
+}
+
 .dashFilter {
   -webkit-appearance: none;  /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
   -moz-appearance: none;  /*REMOVES DEFAULT FIREFOX STYLE*/
@@ -402,6 +410,17 @@
   margin-top: 20px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  border-top: 1px solid #EFEEEC;
+  border-left: 1px solid #EFEEEC;
+  border-right: 1px solid #EFEEEC;
+  cursor:pointer;
+  /*opacity: 1;*/
+}
+
+.designerDashActive:hover {
+  /*box-shadow: inset 0 0 0 5px #F9F7F5;*/
+  /*opacity: 0.75;*/
+  box-shadow: 0 0 30px black;
 }
 
 .designerDashboardPage{
@@ -418,6 +437,7 @@
   height: 40px;
   font-size: 26px;
   padding-left: 40px;
+  cursor:pointer;
 }
 
 .designerDashCollections {
@@ -464,6 +484,14 @@
   margin-top: 20px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  border-top: 1px solid #EFEEEC;
+  border-left: 1px solid #EFEEEC;
+  border-right: 1px solid #EFEEEC;
+  cursor:pointer;
+}
+
+.designerDashCurated:hover{
+  box-shadow: 0 0 30px black;
 }
 
 .designerDashDashTitle {
@@ -598,6 +626,7 @@
   display: inline-block;
   float: right;
   margin-right: 20px;
+  cursor:pointer;
 }
 
 .messageBar {
@@ -1122,8 +1151,9 @@
 }
 
 .projectCell {
-  height: 525px;
-  /*width: 470px;*/
+  height: auto;
+  width: 375px;
+  margin-bottom: 3px;
   /*margin-right:10px;*/
 }
 /*
@@ -1138,7 +1168,14 @@
   margin: 150px auto 0 auto;
   color: white;
   border-radius: 3px;
-  padding-top: 10px;
+  padding-top: 5px;
+  font-family: 'Oxygen', sans-serif;
+  cursor:pointer;
+  font-size: 25px;
+}
+
+.projectCellButton:hover{
+  box-shadow: inset 0 0 0 5px #368D40;
 }
 
 #projectCellButtonEdit {
@@ -1178,6 +1215,7 @@
   color: white;
   font-size: 18px;
   text-align: center;
+  padding-bottom: 70px;
   /*outline: 2px solid green;*/
 }
 
@@ -1198,9 +1236,17 @@
   display: inline-block;
   margin-top: 20px;
   margin-left: 20px;
-  font-size: 40px;
+  margin-right: -50px;
+  font-size: 30px;
   float: left;
   color: #CCCCCC;
+}
+
+.projectCellHeart:hover{
+      box-shadow: 0 0 80px black;
+      background-color:#CBC9CE;
+      color:black;
+      cursor: pointer;
 }
 
 .projectCellHoverContainer {
@@ -1248,13 +1294,14 @@
 .projectCellMinis {
   height: 50px;
   width: 100%;
-
+  margin-bottom: 4px;
 }
 
 .projectCellNewInner {
   width: 98%;
   height: 100%;
-  margin-left: 1;
+  margin-left: 5px;
+  margin-top: 3px;
   background-color: black;
   color: white;
   text-align: center;
