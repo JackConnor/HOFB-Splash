@@ -437,13 +437,27 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     }
     //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
-      var targetImage = $(evt.currentTarget.previousElementSibling);
+      var targetImageFunc = function(){
+        var bigImageSrc = $('.newProductCurrentImage').attr('src');
+        for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+          var smallImageSrc = $($('.newProductMiniImageImage')[i]).attr('src');
+          console.log(smallImageSrc);
+          console.log(smallImageSrc);
+          if(bigImageSrc == smallImageSrc){
+            console.log('yea yooooo');
+            return $('.newProductMiniImageImage')[i];
+          }
+        }
+      }
+      targetImageFunc();
+      var targetImage = $(targetImageFunc());
+      console.log(targetImage);
+
       var placeInLine = targetImage[0].id.split('').pop();
       self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
       self.tempPhotoHTMLCache.splice(placeInLine, 1);///our master photo array should be adjusted
-      $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[0]));
+      $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[self.tempPhotoCache.length-1]));
       self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
-      highlightMini();
       ///////now we need to reorder all of the remaining mini photos so that there are no spaces
       var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
       for(var i = 0; i < allMiniPhotosLength; i++) {
@@ -461,6 +475,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           })
         }
       }
+      highlightMini();
     }
     $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
@@ -469,7 +484,14 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       $(".newProductCurrentImage").attr('src', source);
       var photoNumber = $(event.target)[0].id.split('').pop();
       self.miniPhotoCounter = photoNumber;
-      highlightMini();
+      for (var i = 0; i < 8; i++) {
+        $('#newProductMiniImage'+i).css({
+          border: "1px solid white"
+        })
+      }
+      $('#newProductMiniImage'+self.miniPhotoCounter).css({
+        border: "5px solid #858585"
+      })
     }
     $('.newProductMiniImageImage').on('click', changeMiniPhoto)
 
@@ -478,12 +500,17 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var arrLength = $('.newProductMiniImage').length;
       for (var i = 0; i < 8; i++) {
         $('#newProductMiniImage'+i).css({
-          borderBottom: "1px solid white"
+          border: "1px solid white"
         })
+        console.log($($('.newProductMiniImageImage')[i]).attr('src'));
+        if($($('.newProductMiniImageImage')[i]).attr('src') == ''){
+          self.miniPhotoCounter = i;
+          $('#newProductMiniImage'+self.miniPhotoCounter).css({
+            border: "5px solid #858585"
+          })
+          return;
+        }
       }
-      $('#newProductMiniImage'+self.miniPhotoCounter).css({
-        borderBottom: "12px solid #9F81F7"
-      })
     }
     highlightMini();
     ////////End Logic for uploading photos/////
