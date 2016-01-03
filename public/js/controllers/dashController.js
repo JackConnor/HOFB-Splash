@@ -14,14 +14,16 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     /////////onload event to add initial list of repeated projects
 
     var allSwatches = allSwatches;
-    console.log(allSwatches);
     function loadProjects(callback, arg){
+      console.log(callback);
       ///////decode user to pull data
       $http({
         method: "GET"
         ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
       })
       .then(function(decodedToken){
+        console.log(decodedToken);
+        self.decodedToken = decodedToken;
         if(decodedToken.data.aud != "designer"){
           window.location.hash = '#/signin'
         }
@@ -31,7 +33,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         })
         .then(function(products){
           var allProjects = products.data;
-          console.log(allProjects);
           var allProjectsSaved = [];
           var curatedProjectsArray = [];
           for (var i = 0; i < allProjects.length; i++) {
@@ -123,13 +124,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           "</div>"
         )
         var allImages = self.allProjects[i].images;
-        console.log(allImages);
         for (var j = 0; j < allImages.length; j++) {
           $('#mini'+i).append(
             "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
           )
         }
-
       }
       $('.designerDashList').append(
         "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
@@ -153,6 +152,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.projectCellNewInner').on('click', function(){
         newProductPop();
       })
+      console.log(self.decodedToken.data);
+      if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
+        self.tourCounter = 0;///keeps track of where we are in the dashboard tour
+          dashboardTour();
+      }
       arg();
     }
     ///////will set self.allProjects as all our projects
@@ -279,8 +283,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           var productDataArray = listToFilter[i];
           var productTypeArray = productDataArray[filterType];
           for (var j = 0; j < productTypeArray.length; j++) {
-            console.log(productTypeArray[j]);
-            console.log(filterValue);
             if(productTypeArray[j] == filterValue){
               filteredArray.push(listToFilter[i]);
               self.filteredProjects = filteredArray;
@@ -424,7 +426,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           opacity: 0.08
         })
         ////we drill up in order to get the parent, so we can append the html buttons to it
-        console.log($hoverTarget);
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
@@ -496,7 +497,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         )
         $('.projectCellButtonView').on('click', function(evt){
           // var product = $(evt.target);
-          console.log($($(parentContainer)[0].parentNode)[0].id);
           var productId = $($(parentContainer)[0].parentNode)[0].id;
 
           window.location.hash = "#/view/product/"+productId;
@@ -526,7 +526,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             })
           })
           $('.deleteButtonNo').on('click', function(){
-            console.log('yoyoyoyoyo');
             $('.designerDashDeleteProduct').remove();
           })
         })
@@ -583,8 +582,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var color = $(evt.target)[0].id.slice(6, 25);
         $('.designerDashList').html('');
         $('.colorFilter').remove();
-        console.log('yo');
-        console.log(color);
         if(self.curatedToggleCounter == 'active'){
           loadFilteredList("colors", color, self.allProjects);
         }
@@ -596,7 +593,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
     ////////filter dropdown frontend html logic
     $('.designerDashType').on('click', function(evt){
-      console.log('yoyoyo');
       $('.colorFilter').remove();
       $('.typeFilter').remove();
       $('.fabricFilter').remove();
@@ -638,10 +634,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
       $('.typeFilterCell').on('click', function(evt){
         var type = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
-        console.log(type);
         $('.designerDashList').html('');
         $('.typeFilter').remove();
-        console.log('yo');
         if(self.curatedToggleCounter == 'active'){
           loadFilteredList("productType", type, self.allProjects);
         }
@@ -694,10 +688,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
       $('.fabricFilterCell').on('click', function(evt){
         var fabric = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
-        console.log(fabric);
         $('.designerDashList').html('');
         $('.fabricFilter').remove();
-        console.log('yo');
         if(self.curatedToggleCounter == 'active'){
           loadFilteredList("fabrics", fabric, self.allProjects);
         }
@@ -741,8 +733,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           loadFilteredList("seasons", season, self.allProjects);
         }
         else if(self.curatedToggleCounter == 'curated'){
-          console.log(' curated list');
-          console.log(self.curatedProjects);
           loadFilteredList("seasons", season, self.curatedProjects);
         }
       })
@@ -829,10 +819,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
     ///////////////////////////////////////////////////
     ///////Begin Logic for Dashboard Tour//////////////
-    self.tourCounter = 0;///keeps track of where we are in the dashboard tour
-    $(document).ready(function(){
-      dashboardTour();
-    })
+    self.tourCounter = 0;
     function dashboardTour(){
       if(self.tourCounter == 0){
         $('.bodyview').prepend(
@@ -848,7 +835,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           '</div>'
         );
         $('.dashYesTour').on('click', function(){
-          console.log('yesss');
           self.tourCounter++;
           dashboardTour();
         });
@@ -899,17 +885,14 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         );
         var topOff = $('.designerDashCurated').offset().top;
         var topLeft = $('.designerDashCurated').offset().left;
-        console.log(topLeft);
         var width = $('.designerDashCurated').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
-        console.log(width);
         $('.dashTour1').css('margin-top', topOff);
         $('.dashTour1').css('margin-left', topLeft+parseInt(width)+15+'px');
       }
     }
-    self.danceTimer =  1;
+    // self.danceTimer =  1;
     //////code to make the guide holder move around
     // setInterval(function(){
-    //   console.log('yesss');
     //   var marginL = ($('.tourElem').css('margin-left').split('').slice(0, $('.tourElem').css('margin-left').split('').length-2).join(''));
     //   console.log(marginL);
     //   var marginLDown = marginL - 10;

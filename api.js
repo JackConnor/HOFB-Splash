@@ -77,9 +77,6 @@ module.exports = function(app){
       ////json with info of new user we created
       console.log(user);
       res.json(user)
-      // Product.create({name: 'Demo Product', userId: user._id}, function(err, product){
-      //   res.json(user);
-      // })
     })
   })
 
@@ -367,12 +364,23 @@ module.exports = function(app){
     User.findOne({'email': req.body.email}, function(err, user){
       if(err){console.log(err)}
       if (user && user.validPassword(password)) {
-        var userId = user._id;
-        var status = user.status;
-        var secret = process.env.JWT_TOKEN_SECRET;
-        //////user password verified
-        var token = jwt.sign({iss: "hofb.com", name: user._id}, secret, {expiresIn: "24h", audience: user.status})
-        res.json(token);
+        if(!user.signins){
+          user.signins = 0;
+        }
+        console.log('before');
+        console.log(user);
+        user.signins = user.signins+1;
+        console.log('after');
+        console.log(user);
+        user.save(function(err, user){
+          var userId = user._id;
+          var status = user.status;
+          var secret = process.env.JWT_TOKEN_SECRET;
+          //////user password verified
+          ///////iss == issuer (us), name = the user's id, and sub = the number of times they've logged in
+          var token = jwt.sign({iss: "hofb.com", name: user._id, sub: user.signins}, secret, {expiresIn: "24h", audience: user.status})
+          res.json(token);
+        })
       }
       else {
         res.json({data: 'sorry no token'})
