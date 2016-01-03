@@ -446,11 +446,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           $('.bodyview').prepend(
             '<div class="designerDashDeleteProduct col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">'+
               "<p>Are you sure you want to delete this product?</p>"+
-              "<button class='deleteButton'>No</button>"+
-              "<button id='"+productId+"' class='deleteButton'>Yes</button>"+
+              "<button class='deleteButton deleteButtonNo'>No</button>"+
+              "<button id='"+productId+"' class='deleteButton deleteButtonYes'>Yes</button>"+
             "</div>"
           )
-          $('.deleteButton').on('click', function(evt){
+          $('.deleteButtonYes').on('click', function(evt){
             var idToDelete = $(evt.target)[0].id;
             $http({
               method: "DELETE"
@@ -462,6 +462,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               loadProjects(loadInitialList, addHoverToCell)
               $('.designerDashDeleteProduct').remove();
             })
+          })
+          $('.deleteButtonNo').on('click', function(){
+            $('.designerDashDeleteProduct').remove();
           })
         })
         $('.projectCellHoverContainer').on('mouseleave', function(evt){
@@ -504,11 +507,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           $('.bodyview').prepend(
             '<div class="designerDashDeleteProduct col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">'+
               "<p>Are you sure you want to delete this product?</p>"+
-              "<button class='deleteButton'>No</button>"+
-              "<button id='"+productId+"' class='deleteButton'>Yes</button>"+
+              "<button class='deleteButtonNo deleteButton'>No</button>"+
+              "<button id='"+productId+"' class='deleteButtonYes deleteButton'>Yes</button>"+
             "</div>"
           )
-          $('.deleteButton').on('click', function(evt){
+          $('.deleteButtonYes').on('click', function(evt){
             var idToDelete = $(evt.target)[0].id;
             $http({
               method: "DELETE"
@@ -520,6 +523,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               loadProjects(loadInitialList, addHoverToCell)
               $('.designerDashDeleteProduct').remove();
             })
+          })
+          $('.deleteButtonNo').on('click', function(){
+            console.log('yoyoyoyoyo');
+            $('.designerDashDeleteProduct').remove();
           })
         })
         $('.projectCellHoverContainer').on('mouseleave', function(evt){

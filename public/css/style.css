@@ -512,7 +512,7 @@
   width: 300px;
   font-size: 25px;
   color: white;
-  margin-top: 300px;
+  margin-top: 100px;
   background-color: gray;
   outline: 4px solid aqua;
   z-index: 3
@@ -1152,9 +1152,7 @@
 
 .projectCell {
   height: auto;
-  width: 375px;
   margin-bottom: 3px;
-  /*margin-right:10px;*/
 }
 /*
 .projectCell img{

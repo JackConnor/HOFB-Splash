@@ -476,6 +476,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
             '<div class="projectCellButtonSample">Request A Sample'+
             '</div>'+
             '<div class="projectCellButtonOrder">Place an Order</div>'+
+            '<div class="projectCellMore">Learn More</div>'+
           "</div>"
         )
         clickPurchaseModal();
