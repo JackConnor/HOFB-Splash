@@ -136,7 +136,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   //////global variables we'll be using for moving the carousel
   var carouselMargin = 0; ///keeps track of carousel's margin
   var carouselCounter = 0;///keeps track of carousel's postion in the queue
-  self.miniPhotoCounter = 0;
+  self.miniPhotoCounter;
   self.tempPhotoCache = [];
   self.tempPhotoHTMLCache = [];
   /////end global variables
@@ -468,7 +468,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 8){
         frontendPhotoDisplay();
         $('#i_file').remove();
-        $('.inputFileHolder').append(
+        $('.inputFileHolder').prepend(
           '<input type="file" id="i_file" name="files">'
         )
         changeEffect()
@@ -488,9 +488,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
     console.log(self.tempPhotoHTMLCache);
     $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-    $('#newProductMiniImage'+self.miniPhotoCounter).css({
-      outline: "3px solid orange"
-    })
     var sourceArray = [];
     var sourceNum = [];
     for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
@@ -582,7 +579,18 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       border: "5px solid #858585"
     })
   }
-  highlightMini();
+  var miniPhotoCounterFunc = function(){
+    var sourceNum = [];
+    for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+      if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+        sourceNum.push(i);
+      }
+    }
+    self.miniPhotoCounter = sourceNum[0];
+    highlightMini();
+  };
+  setTimeout(miniPhotoCounterFunc, 1000);
+
   ////////End Logic for uploading photos/////
   ///////////////////////////////////////////
 

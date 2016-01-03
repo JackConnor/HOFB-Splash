@@ -428,9 +428,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
       self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
       $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-      $('#newProductMiniImage'+self.miniPhotoCounter).css({
-        outline: "3px solid orange"
-      })
       self.miniPhotoCounter++;
       highlightMini();
     }

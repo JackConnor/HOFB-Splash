@@ -615,11 +615,14 @@
 
 #i_file {
   position: absolute;
+  width: 20%;
+  display: inline-block;
 }
 
 .inputFileHolder {
   position: absolute;
   width: 80%;
+  vertical-align: top;
 }
 
 .logoImage {
@@ -806,6 +809,7 @@
   width: 100px;
   height: 45px;
   margin-top: 5px;
+  vertical-align: top;
 }
 
 .newProductCenterColumn {
