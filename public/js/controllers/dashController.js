@@ -852,6 +852,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           self.tourCounter++;
           dashboardTour();
         });
+        $('.dashNoTour').on('click', function(){
+          $('.tourElem').remove();
+          self.tourCounter = 7;
+        })
       }
       else if(self.tourCounter == 1){
         $('.tourElem').remove();
