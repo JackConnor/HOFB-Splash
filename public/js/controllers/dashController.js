@@ -829,55 +829,80 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
     ///////////////////////////////////////////////////
     ///////Begin Logic for Dashboard Tour//////////////
-    // self.tourCounter = 0;///keeps track of where we are in the dashboard tour
-    // $(document).ready(function(){
-    //   dashboardTour();
-    // })
-    // function dashboardTour(){
-    //   if(self.tourCounter == 0){
-    //     $('.bodyview').prepend(
-    //       '<div class="dashTour0 tourElem">'+
-    //         "<div class='dashTourController'>"+
-    //           '<div class="dashYesTour">'+
-    //             "I'd like a tour"+
-    //           "</div>"+
-    //           '<div class="dashNoTour">'+
-    //             "No Thanks"+
-    //           "</div>"+
-    //         "</div>"+
-    //       '</div>'
-    //     );
-    //     $('.dashYesTour').on('click', function(){
-    //       console.log('yesss');
-    //       self.tourCounter++;
-    //       dashboardTour();
-    //     });
-    //   }
-    //   else if(self.tourCounter == 1){
-    //     $('.tourElem').remove();
-    //     $('.bodyview').prepend(
-    //       '<div class="dashTour1 tourElem">'+
-    //         "<div class='dashTourBack'>"+
-    //           "Back"+
-    //         "</div>"+
-    //         "<div class='dashTourNext'>"+
-    //           "Next"+
-    //         "</div>"+
-    //       "<h4>Build a new Product to submit to our Curators, start by clicking here</h4>"+
-    //       "------------->>> ------------->>> ------------->>> ------------->>>"+
-    //       '</div>'
-    //     );
-    //     var topOff = $('.projectCellNew').offset().top;
-    //     var topLeft = $('.projectCellNew').offset().left;
-    //     var width = $('.projectCellNew').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
-    //     $('.dashTour1').css('margin-top', topOff + 30);
-    //     $('.dashTour1').css('margin-left', topLeft - width);
-    //   }
-    //   else if (self.tourCounter == 2){
-    //
-    //   }
-    // }
-    // self.danceTimer =  1;
+    self.tourCounter = 0;///keeps track of where we are in the dashboard tour
+    $(document).ready(function(){
+      dashboardTour();
+    })
+    function dashboardTour(){
+      if(self.tourCounter == 0){
+        $('.bodyview').prepend(
+          '<div class="dashTour0 tourElem">'+
+            "<div class='dashTourController'>"+
+              '<div class="dashYesTour">'+
+                "I'd like a tour"+
+              "</div>"+
+              '<div class="dashNoTour">'+
+                "No Thanks"+
+              "</div>"+
+            "</div>"+
+          '</div>'
+        );
+        $('.dashYesTour').on('click', function(){
+          console.log('yesss');
+          self.tourCounter++;
+          dashboardTour();
+        });
+      }
+      else if(self.tourCounter == 1){
+        $('.tourElem').remove();
+        $('.bodyview').prepend(
+          '<div class="dashTour1 tourElem">'+
+            "<div class='dashTourBack'>"+
+              "Back"+
+            "</div>"+
+            "<div class='dashTourNext'>"+
+              "Next"+
+            "</div>"+
+          "<h4>Build a new Product to submit to our Curators, start by clicking here</h4>"+
+          "------------->>> ------------->>> ------------->>> ------------->>>"+
+          '</div>'
+        );
+        var topOff = $('.projectCellNew').offset().top;
+        var topLeft = $('.projectCellNew').offset().left;
+        var width = $('.projectCellNew').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        $('.dashTour1').css('margin-top', topOff + 30);
+        $('.dashTour1').css('margin-left', topLeft - width);
+        $('.dashTourNext').on('click', function(){
+          self.tourCounter++;
+          dashboardTour();
+        })
+      }
+      else if (self.tourCounter == 2){
+        $('.tourElem').remove();
+        $('.bodyview').prepend(
+          '<div class="dashTour1 tourElem">'+
+            "<div class='dashTourBack'>"+
+              "Back"+
+            "</div>"+
+            "<div class='dashTourNext'>"+
+              "Next"+
+            "</div>"+
+            "<div>"+
+              "<<<----------- <<<<---------- <<<<-------------"+
+            "</div>"+
+          "<h4>Look at Products you've already submitted for Curation by toggling your listview, here</h4>"+
+          '</div>'
+        );
+        var topOff = $('.designerDashCurated').offset().top;
+        var topLeft = $('.designerDashCurated').offset().left;
+        console.log(topLeft);
+        var width = $('.designerDashCurated').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        console.log(width);
+        $('.dashTour1').css('margin-top', topOff);
+        $('.dashTour1').css('margin-left', topLeft+parseInt(width)+15+'px');
+      }
+    }
+    self.danceTimer =  1;
     //////code to make the guide holder move around
     // setInterval(function(){
     //   console.log('yesss');
