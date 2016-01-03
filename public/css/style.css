@@ -1839,8 +1839,10 @@ textarea#styled {
 }
 
 .tourElem {
-  outline: 3px solid #169AA9;
-  background-color: #e5fffa;
+  border: 6px solid #169AA9;
+  background-color: #e6e6e6;
+  border-radius: 10px;
+;
 
 }
 
