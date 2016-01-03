@@ -427,7 +427,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
       self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
       self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-      console.log(self.tempPhotoHTMLCache);
       $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
       $('#newProductMiniImage'+self.miniPhotoCounter).css({
         outline: "3px solid orange"
@@ -439,17 +438,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     function deleteMiniPhoto(evt){
       self.miniPhotoCounter = self.tempPhotoCache.length-1;
       var targetImage = $('#newProductMiniImage'+self.miniPhotoCounter)
-      console.log(targetImage);
-
       var placeInLine = targetImage[0].id.split('').pop();
-      console.log(placeInLine);
       self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
       self.tempPhotoHTMLCache.splice(placeInLine, 1);///our master photo array should be adjusted
-      console.log($('.newProductCurrentImage').attr('src'));
       $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[self.tempPhotoCache.length-1]));
       self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
-      console.log($('.newProductCurrentImage').attr('src'));
-
       ///////now we need to reorder all of the remaining mini photos so that there are no spaces
       var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
       for(var i = 0; i < allMiniPhotosLength; i++) {
@@ -497,7 +490,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         $('#newProductMiniImage'+i).css({
           border: "1px solid white"
         })
-        console.log($($('.newProductMiniImageImage')[i]).attr('src'));
         if($($('.newProductMiniImageImage')[i]).attr('src') == '' && i!=0){
           $('#newProductMiniImage'+self.miniPhotoCounter-1).css({
             border: "5px solid #858585"
