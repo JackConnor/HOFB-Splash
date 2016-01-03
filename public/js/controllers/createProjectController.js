@@ -409,7 +409,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 8){
           frontendPhotoDisplay();
           $('#i_file').remove();
-          $('.inputFileHolder').append(
+          $('.inputFileHolder').prepend(
             '<input type="file" id="i_file" name="files">'
           )
           changeEffect()
@@ -433,7 +433,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     }
     //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
-      self.miniPhotoCounter = self.tempPhotoCache.length-1;
+      var potSource = $('#newProductMiniImage'+self.miniPhotoCounter).attr('src');
+      console.log(potSource);
+      if(!potSource){
+        self.miniPhotoCounter = self.tempPhotoCache.length-1;
+      }
       var targetImage = $('#newProductMiniImage'+self.miniPhotoCounter)
       var placeInLine = targetImage[0].id.split('').pop();
       self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
@@ -465,18 +469,26 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
     function changeMiniPhoto(event){
-      var source = $(event.target)[0].src;
-      $(".newProductCurrentImage").attr('src', source);
-      var photoNumber = $(event.target)[0].id.split('').pop();
-      self.miniPhotoCounter = photoNumber;
-      for (var i = 0; i < 8; i++) {
-        $('#newProductMiniImage'+i).css({
-          border: "1px solid white"
-        })
+      console.log($($(event.target)[0]).attr('src'));
+      if($($(event.target)[0]).attr('src') != ""){
+        var source = $(event.target)[0].src;
+        var elId = $(event.target).attr('id');
+        self.miniPhotoCounter = elId.split('').pop();
+      } else {
+        var sourceArray = [];
+        var sourceNum = [];
+        for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+          if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+            sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
+            sourceNum.push(i);
+            console.log('yuuuup');
+          }
+        }
+        var source = sourceArray[0];
+        self.miniPhotoCounter = sourceNum[0];
       }
-      $('#newProductMiniImage'+self.miniPhotoCounter).css({
-        border: "5px solid #858585"
-      })
+      $(".newProductCurrentImage").attr('src', source);
+      highlightMini();
     }
     $('.newProductMiniImageImage').on('click', changeMiniPhoto)
 
@@ -487,8 +499,16 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         $('#newProductMiniImage'+i).css({
           border: "1px solid white"
         })
-        if($($('.newProductMiniImageImage')[i]).attr('src') == '' && i!=0){
-          $('#newProductMiniImage'+self.miniPhotoCounter-1).css({
+      }
+      for (var i = 0; i < 8; i++) {
+        if($($('.newProductMiniImageImage')[i]).attr('src') == '' && i != 0){
+          $('#newProductMiniImage'+self.miniPhotoCounter).css({
+            border: "5px solid #858585"
+          })
+          return;
+        }
+        else if($($('.newProductMiniImageImage')[i]).attr('src') == '' && i == 0){
+          $('#newProductMiniImage0').css({
             border: "5px solid #858585"
           })
           return;

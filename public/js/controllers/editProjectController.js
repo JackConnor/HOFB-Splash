@@ -503,7 +503,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   }
   //////function to delete the photo inside of a mini photo on click
   function deleteMiniPhoto(evt){
-    var targetImage = $('#newProductMiniImage'+self.miniPhotoCounter)
+    var targetImage = $('#newProductMiniImage'+self.miniPhotoCounter);
     console.log(targetImage);
     var placeInLine = targetImage[0].id.split('').pop();
     self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
