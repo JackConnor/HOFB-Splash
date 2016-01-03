@@ -75,7 +75,11 @@ module.exports = function(app){
     User.create(req.body, function(err, user){
       if(err){console.log(err)}
       ////json with info of new user we created
-      res.json(user);
+      console.log(user);
+      res.json(user)
+      // Product.create({name: 'Demo Product', userId: user._id}, function(err, product){
+      //   res.json(user);
+      // })
     })
   })
 
@@ -345,7 +349,11 @@ module.exports = function(app){
   			newUser.save( function( err, user ) {
   				if ( err ) { console.log(err) }
   				//AUTHENTICATE USER HERE
-  				res.json(user)
+          console.log(user);
+          Product.create({'name':"Demo Product", userId: user._id, status: 'saved', timestamp: new Date(), images:['https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg']}, function(err, product){
+            console.log(product);
+            res.json(user)
+          })
   			})
   		}
   	})

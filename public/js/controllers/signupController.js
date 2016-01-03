@@ -6,41 +6,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
   function signupCtrl($http, checkstatus, signupUser, startSession, checkPw){
     window.localStorage.testing = "blahhhh";
     var self = this;
-    /////some bullshit, erase after
-    // $http({
-    //   method: "GET"
-    //   ,url: "/api/emailcaptures"
-    // })
-    // .then(function(allEmails){
-    //   console.log(allEmails);
-    //   var justEmails = [];
-    //   for (var i = 0; i < allEmails.data.length; i++) {
-    //     justEmails.push(allEmails.data[i].email);
-    //   }
-    //   console.log(justEmails);
-    //   var cleanEmails = function unique(justEmails){
-    //       return justEmails.filter(function(el, index, arr) {
-    //           return index === arr.indexOf(el);
-    //       });
-    //   }
-    //   console.log(cleanEmails(justEmails));
-    //   self.cleanList = cleanEmails(justEmails);
-    //   for (var i = 0; i < cleanList.length; i++) {
-    //     console.log(cleanList[i]);
-    //   }
-    //   // for (var j = 0; j < justEmails.length; j++) {
-    //   //   for (var k = j; k < justEmails.length; k++) {
-    //   //     if(justEmails[j] == justEmails[k] && k !== j){
-    //   //       console.log('duplicate');
-    //   //       console.log(justEmails[j]);
-    //   //       console.log(justEmails[k]);
-    //   //       justEmails.slice(k, 1);
-    //   //     }
-    //   //   }
-    //   // }
-    //
-    // })
-    //////
+
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
     // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
@@ -53,7 +19,9 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       console.log(status);
       if(password == rePassword){
         signupUser.signup(startSession.startSession, password, status);
-        window.location.hash = "#/"+status+"/dashboard";
+        setTimeout(function(){
+          window.location.hash = "#/"+status+"/dashboard"
+        }, 1000)
       } else {
         alert('your passwords dont match');
       }

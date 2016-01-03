@@ -696,6 +696,37 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     ///////////////////////////////////////////////
 
     ///////////////////////////////////////////////
+    //////hover states for the save/submit buttons
+    $('.new_product_save').on('mouseenter', function(){
+      $('.new_product_save').css({
+        backgroundColor: '#169AA9'
+        ,color: 'white'
+      })
+    })
+
+    $('.new_product_save').on('mouseleave', function(){
+      $('.new_product_save').css({
+        backgroundColor: ''
+        ,color: '#169AA9'
+      })
+    })
+    $('.new_product_send').on('mouseenter', function(){
+      $('.new_product_send').css({
+        backgroundColor: '#169AA9'
+        ,color: 'white'
+      })
+    })
+
+    $('.new_product_send').on('mouseleave', function(){
+      $('.new_product_send').css({
+        backgroundColor: ''
+        ,color: '#169AA9'
+      })
+    })
+    ////////end hover states
+    ///////////////////////////
+
+    ///////////////////////////////////////////////
     /////////Logic to load intial params name//////
     function loadName(){
       var name = window.location.hash.split('/')[3].split('_').join(' ');
