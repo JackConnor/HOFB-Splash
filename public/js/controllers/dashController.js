@@ -15,7 +15,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
     var allSwatches = allSwatches;
     function loadProjects(callback, arg){
-      console.log(callback);
       ///////decode user to pull data
       $http({
         method: "GET"
@@ -47,29 +46,65 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           }
           //////add time-since-creation field
           var collectionName = ["All"];
+          // sel
           for (var i = 0; i < self.allProjects.length; i++) {
             function timeSince(){
               var nowDate = new Date();
               var timeProj = self.allProjects[i].timestamp;
+              console.log(timeProj);
+              //////project creation variables
               var projYear = timeProj.split('-')[0];
               var projMonth = timeProj.split('-')[1];
-              var projDay = timeProj.split('-')[2];
-              var yearsSince = nowDate.getFullYear() - projYear;
-              var monthsSince = nowDate.getMonth() - projMonth;
-              var daysSince = nowDate.getDate() - projDay;
-              if(yearsSince > 0){
-                return yearsSince+" years";
+              var projDay = timeProj.split('-')[2].slice(0,2);
+              var projDate = projMonth+"-"+projDay+"-"+projYear;
+
+              ///////current time variables
+              var nowMonth = nowDate.getMonth() + 1;
+              var nowYear  = nowDate.getFullYear();
+              var nowDay = nowDate.getDate();
+              var rigthNow = nowMonth+"-"+nowDay+"-"+nowYear;
+              // console.log(nowYear);
+              // console.log(projYear);
+              if(nowYear > projYear){
+                if(nowMonth > projMonth){
+                  console.log('greater than one year, less than 2');
+                   var months_since = (nowYear - projYear) + (nowMonth - projMonth);
+                   console.log(months_since);
+                   return months_since+ " months old"
+                }
+                else if ((nowYear - projYear == 1) && projMonth >= nowMonth ){
+                  if(projMonth == nowMonth){
+                    return "11 months old"
+                  }
+                  else {
+                    var mSince = ((12+nowMonth) - projMonth);
+                    if(mSince == 1){
+                      return  "less than "+(mSince+" month old");
+                    }
+                    else {
+                      return (mSince+" months old");
+                    }
+                  }
+
+                }
               }
-              else if(monthsSince > 0){
-                return monthsSince+" months";
-              }
-              else if(daysSince > 0 ){
-                return daysSince+" days"
-              } else {
-                return "Less Than 1 day";
+              else if(projYear == nowYear){
+                console.log(nowMonth);
+                console.log(projMonth);
+                console.log('happened this year');
+                if(nowMonth > projMonth+1){
+                  return (nowMonth - projMonth)+" months old";
+                }
+                else if(nowMonth-1 == projMonth){
+                  return "less than "+(nowMonth - projMonth)+" month old";
+                }
+                else if(nowMonth == projMonth){
+                  return nowDay - projDay+ " days old";
+                }
               }
             }
             self.allProjects[i].TimeSinceCreation = timeSince();
+            console.log(self.allProjects[i].TimeSinceCreation);
             /////get all collections
             for (var j = 0; j < self.allProjects[i].collections.length; j++) {
               collectionName.push(self.allProjects[i].collections[j])
