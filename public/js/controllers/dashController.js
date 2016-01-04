@@ -913,7 +913,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var topOff = $('.projectCellNew').offset().top;
         var topLeft = $('.projectCellNew').offset().left;
         var width = $('.projectCellNew').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
-        var height = $('.projectCellNew').css('height').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        var height = $('.projectCellNew').css('height').split('').slice(0, $('.projectCellNew').css('height').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
 
         /////
         $('.tourProjectCellNewInner').css('top', topOff);
@@ -948,9 +948,27 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           "<h4>Look at Products you've already submitted for Curation by toggling your listview, here</h4>"+
           '</div>'
         );
+        $('.bodyview').prepend(
+          "<div class='tourDesignerDashCurated'>"+
+            '<i class="fa fa-square" id="curatedTabIconSquare"></i>'+
+                "CURATED"+
+          "</div>"
+        );
+        $('.designerDashboardPage').css({
+          opacity: 0.3
+        });
+        $('.designerDashCurated').css({
+          opacity: 0
+        })
         var topOff = $('.designerDashCurated').offset().top;
+        console.log($('.designerDashCurated').offset());
         var topLeft = $('.designerDashCurated').offset().left;
-        var width = $('.designerDashCurated').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        var width = $('.designerDashCurated').css('width').split('').slice(0, $('.designerDashCurated').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        ////add new temporary element to show tutees
+        $('.tourDesignerDashCurated').css('top', topOff);
+        $('.tourDesignerDashCurated').css('left', topLeft);
+        $('.tourDesignerDashCurated').css('width', width);
+
         $('.dashTour1').css('margin-top', topOff);
         $('.dashTour1').css('margin-left', topLeft+parseInt(width)+15+'px');
       }
