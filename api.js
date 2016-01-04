@@ -26,6 +26,7 @@ cloudinary.config({
 /////////////////////////////
 var Emailcapture       = require('./models/emailCapture.js');
 var User               = require('./models/user.js');
+var userProfile        = require('./models/userProfile.js');
 var Product            = require('./models/product.js');
 var Project            = require('./models/createProject.js');
 var viewProduct        = require('./models/viewProduct.js');
@@ -67,6 +68,15 @@ module.exports = function(app){
     User.findOne({"_id":req.params.id}, function(err, user){
       if(err) throw err;
       res.json(user);
+    })
+  })
+
+  //get a single user profile
+  app.get("/api/user/profile/:id", function(req, res){
+    userProfile.findOne({"_id":req.params.id}, function(err, userProfile){
+      if(err) throw err;
+      res.json(userProfile);
+      console.log('userProfile - returns successful response 200 with correct ObjectID from DB, but no data - fails to return any response with a fake ObjectID');
     })
   })
 
