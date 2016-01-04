@@ -76,8 +76,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                   if(projMonth == nowMonth){
                     return "11 months old"
                   }
-                  else { 
+                  else {
                     var mSince = ((12+nowMonth) - projMonth);
+                    
                     if(mSince == 1){
                       return  "less than "+(mSince+" month old");
                     }
