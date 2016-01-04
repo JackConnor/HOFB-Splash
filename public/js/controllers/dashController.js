@@ -969,7 +969,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.tourDesignerDashCurated').css('left', topLeft);
         $('.tourDesignerDashCurated').css('width', width);
 
-        $('.dashTour1').css('margin-top', topOff);
+        $('.dashTour1').css('margin-top', topOff - 30);
         $('.dashTour1').css('margin-left', topLeft+parseInt(width)+15+'px');
       }
     }
