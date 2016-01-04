@@ -870,12 +870,18 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "</div>"+
           '</div>'
         );
+        $('.designerDashboardPage').css({
+          opacity: 0.3
+        });
         $('.dashYesTour').on('click', function(){
           self.tourCounter++;
           dashboardTour();
         });
         $('.dashNoTour').on('click', function(){
           $('.tourElem').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
           self.tourCounter = 7;
         })
       }
