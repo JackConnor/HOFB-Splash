@@ -899,12 +899,35 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           "------------->>> ------------->>> ------------->>> ------------->>>"+
           '</div>'
         );
+        $('.bodyview').prepend(
+          "<div class='tourProjectCellNewInner'>"+
+            "<p>Build a New Product</p>"+
+          "</div>"
+        );
+        $('.designerDashboardPage').css({
+          opacity: 0.3
+        });
+        $('.projectCellNewInner').css({
+          opacity: 0
+        })
         var topOff = $('.projectCellNew').offset().top;
         var topLeft = $('.projectCellNew').offset().left;
         var width = $('.projectCellNew').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        var height = $('.projectCellNew').css('height').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+
+        /////
+        $('.tourProjectCellNewInner').css('top', topOff);
+        $('.tourProjectCellNewInner').css('left', topLeft);
+        $('.tourProjectCellNewInner').css('width', width);
+        $('.tourProjectCellNewInner').css('height', height);
+
         $('.dashTour1').css('margin-top', topOff + 30);
         $('.dashTour1').css('margin-left', topLeft - width);
         $('.dashTourNext').on('click', function(){
+          $('.projectCellNewInner').css({
+            opacity: 1
+          })
+          $('.tourProjectCellNewInner').remove();
           self.tourCounter++;
           dashboardTour();
         })

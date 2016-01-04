@@ -496,6 +496,7 @@
 .designerDashboardPage{
   font-family: 'Oxygen', sans-serif;
   color: #454444;
+  background-color: #FEFDFA;
 }
 
 .designerDashboardGlyphiconUp {
@@ -1842,9 +1843,19 @@ textarea#styled {
   border: 6px solid #169AA9;
   background-color: #e6e6e6;
   border-radius: 10px;
-;
-
 }
+
+.tourProjectCellNewInner {
+  position: absolute;
+  background-color: black;
+}
+
+.tourProjectCellNewInner p{
+   font-size: 26px;
+   padding-top: 40%;
+   color: white;
+   text-align: center;
+ }
 
 .viewPictureImageIcon {
   font-size: 20px;
