@@ -424,7 +424,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     ////////toggle to curated view
     $('.designerDashCurated').on('click', function(){
       $('.designerDashCurated').css({
-        backgroundColor: "#F9F7F5"
+        backgroundColor: "#FEFDFA"
       })
       $('.designerDashActive').css({
         backgroundColor: "#EBEBE9"
@@ -440,7 +440,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         backgroundColor: "#EBEBE9"
       })
       $('.designerDashActive').css({
-        backgroundColor: "#F9F7F5"
+        backgroundColor: "#FEFDFA"
       })
       self.curatedToggleCounter = 'active';
       toggleActive();
