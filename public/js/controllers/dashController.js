@@ -191,7 +191,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       console.log(self.decodedToken.data);
       if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
         self.tourCounter = 0;///keeps track of where we are in the dashboard tour
-          dashboardTour();
+        dashboardTour();
       }
       arg();
     }
@@ -870,12 +870,18 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "</div>"+
           '</div>'
         );
+        $('.designerDashboardPage').css({
+          opacity: 0.3
+        });
         $('.dashYesTour').on('click', function(){
           self.tourCounter++;
           dashboardTour();
         });
         $('.dashNoTour').on('click', function(){
           $('.tourElem').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
           self.tourCounter = 7;
         })
       }
@@ -893,13 +899,63 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           "------------->>> ------------->>> ------------->>> ------------->>>"+
           '</div>'
         );
+        $('.bodyview').prepend(
+          "<div class='tourProjectCellNewInner'>"+
+            "<p>Build a New Product</p>"+
+          "</div>"
+        );
+        $('.projectCellNewInner').css({
+          opacity: 0.0
+        });
+        $('.designerDashboardPage').css({
+          opacity: 0.3
+        });
+        $('.projectCellNewInner').css({
+          opacity: 0
+        })
         var topOff = $('.projectCellNew').offset().top;
         var topLeft = $('.projectCellNew').offset().left;
         var width = $('.projectCellNew').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        var height = $('.projectCellNew').css('height').split('').slice(0, $('.projectCellNew').css('height').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+
+        /////
+        $('.tourProjectCellNewInner').css('top', topOff);
+        $('.tourProjectCellNewInner').css('left', topLeft);
+        $('.tourProjectCellNewInner').css('width', width);
+        $('.tourProjectCellNewInner').css('height', height);
+
         $('.dashTour1').css('margin-top', topOff + 30);
         $('.dashTour1').css('margin-left', topLeft - width);
+
+        /////add events to new elements
+        $('.tourProjectCellNewInner').on('mouseenter', function(evt){
+          $('.tourProjectCellNewInner').css({
+            opacity: 0.7
+          })
+        });
+        $('.tourProjectCellNewInner').on('mouseleave', function(evt){
+          $('.tourProjectCellNewInner').css({
+            opacity: 1
+          })
+        });
+        ////////allows users to actually make a new product then and there
+        $('.tourProjectCellNewInner').on('click', function(){
+          newProductPop();
+        })
         $('.dashTourNext').on('click', function(){
+          $('.tourProjectCellNewInner').remove();
+          $('.projectCellNewInner').css({
+            opacity: 1
+          });
           self.tourCounter++;
+          dashboardTour();
+        })
+        $('.dashTourBack').on('click', function(){
+          $('.tourProjectCellNewInner').remove();
+          $('.projectCellNewInner').css({
+            opacity: 1
+          });
+          self.tourCounter--;
           dashboardTour();
         })
       }
@@ -919,40 +975,31 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           "<h4>Look at Products you've already submitted for Curation by toggling your listview, here</h4>"+
           '</div>'
         );
+        $('.bodyview').prepend(
+          "<div class='tourDesignerDashCurated'>"+
+            '<i class="fa fa-square" id="curatedTabIconSquare"></i>'+
+                "CURATED"+
+          "</div>"
+        );
+        $('.designerDashboardPage').css({
+          opacity: 0.3
+        });
+        $('.designerDashCurated').css({
+          opacity: 0
+        })
         var topOff = $('.designerDashCurated').offset().top;
+        console.log($('.designerDashCurated').offset());
         var topLeft = $('.designerDashCurated').offset().left;
-        var width = $('.designerDashCurated').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
-        $('.dashTour1').css('margin-top', topOff);
+        var width = $('.designerDashCurated').css('width').split('').slice(0, $('.designerDashCurated').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        ////add new temporary element to show tutees
+        $('.tourDesignerDashCurated').css('top', topOff);
+        $('.tourDesignerDashCurated').css('left', topLeft);
+        $('.tourDesignerDashCurated').css('width', width);
+
+        $('.dashTour1').css('margin-top', topOff - 30);
         $('.dashTour1').css('margin-left', topLeft+parseInt(width)+15+'px');
       }
     }
-    // self.danceTimer =  1;
-    //////code to make the guide holder move around
-    // setInterval(function(){
-    //   var marginL = ($('.tourElem').css('margin-left').split('').slice(0, $('.tourElem').css('margin-left').split('').length-2).join(''));
-    //   console.log(marginL);
-    //   var marginLDown = marginL - 10;
-    //   var marginLUp = marginL + 10;
-    //   if(self.danceTimer%2 == 0){
-    //     $('.tourElem').animate({
-    //       marginLeft: marginLDown
-    //     });
-    //     $('.tourElem').animate({
-    //       marginLeft: marginLUp
-    //     });
-    //     self.danceTimer++
-    //   }
-    //   else {
-    //     console.log('nooooooo');
-    //     $('.tourElem').animate({
-    //       marginLeft: marginLUp
-    //     });
-    //     $('.tourElem').animate({
-    //       marginLeft: marginLDown
-    //     });
-    //     self.danceTimer++
-    //   }
-    // }, 200)
     ///////End Logic for Dashboard Tour////////////////
     ///////////////////////////////////////////////////
 

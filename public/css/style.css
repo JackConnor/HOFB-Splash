@@ -496,6 +496,7 @@
 .designerDashboardPage{
   font-family: 'Oxygen', sans-serif;
   color: #454444;
+  background-color: #FEFDFA;
 }
 
 .designerDashboardGlyphiconUp {
@@ -1033,7 +1034,7 @@
   width: 100%;
   background-color: black;
   position: fixed;
-  z-index: 5;
+  z-index: 6;
 }
 
 .newProductModal h3{
@@ -1838,13 +1839,39 @@ textarea#styled {
   display:inline-block;
 }
 
+.tourDesignerDashCurated {
+  display: inline-block;
+  background-color: #EBEBE9;
+  text-align: center;
+  font-size: 20px;
+  height: 40px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top: 1px solid #EFEEEC;
+  border-left: 1px solid #EFEEEC;
+  border-right: 1px solid #EFEEEC;
+  cursor:pointer;
+  position: absolute;
+}
+
 .tourElem {
   border: 6px solid #169AA9;
   background-color: #e6e6e6;
   border-radius: 10px;
-;
-
 }
+
+.tourProjectCellNewInner {
+  position: absolute;
+  background-color: black;
+  z-index: 5;
+}
+
+.tourProjectCellNewInner p{
+   font-size: 26px;
+   padding-top: 40%;
+   color: white;
+   text-align: center;
+ }
 
 .viewPictureImageIcon {
   font-size: 20px;
