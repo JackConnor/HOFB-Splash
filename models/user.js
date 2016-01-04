@@ -16,6 +16,7 @@ var userSchema = new Schema({
   ,submittedProducts: Array
   ,acceptedProducts: Array
   ,products: Array
+  ,signins: Number
 })
 
 userSchema.methods.generateHash = function(password) {

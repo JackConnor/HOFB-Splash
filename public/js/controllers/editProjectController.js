@@ -136,7 +136,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   //////global variables we'll be using for moving the carousel
   var carouselMargin = 0; ///keeps track of carousel's margin
   var carouselCounter = 0;///keeps track of carousel's postion in the queue
-  self.miniPhotoCounter = 0;
+  self.miniPhotoCounter;
   self.tempPhotoCache = [];
   self.tempPhotoHTMLCache = [];
   /////end global variables
@@ -465,10 +465,10 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   /////listens for change to file upload, creating an event every time there is a change
   function changeEffect(){
     $('#i_file').change( function(event) {
-      if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 4){
+      if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 8){
         frontendPhotoDisplay();
         $('#i_file').remove();
-        $('.inputFileHolder').append(
+        $('.inputFileHolder').prepend(
           '<input type="file" id="i_file" name="files">'
         )
         changeEffect()
@@ -488,21 +488,41 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
     console.log(self.tempPhotoHTMLCache);
     $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-    $('#newProductMiniImage'+self.miniPhotoCounter).css({
-      outline: "3px solid orange"
-    })
-    self.miniPhotoCounter++;
+    var sourceArray = [];
+    var sourceNum = [];
+    for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+      if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+        sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
+        sourceNum.push(i);
+        console.log('yuuuup');
+      }
+    }
+    var source = sourceArray[0];
+    self.miniPhotoCounter = sourceNum[0];
     highlightMini();
   }
   //////function to delete the photo inside of a mini photo on click
   function deleteMiniPhoto(evt){
-    var targetImage = $(evt.currentTarget.previousElementSibling);
+    var targetImage = $('#newProductMiniImage'+self.miniPhotoCounter);
+    console.log(targetImage);
     var placeInLine = targetImage[0].id.split('').pop();
     self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
     self.tempPhotoHTMLCache.splice(placeInLine, 1);///our master photo array should be adjusted
     $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[0]));
     self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
+    var sourceArray = [];
+    var sourceNum = [];
+    for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+      if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+        sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
+        sourceNum.push(i);
+        console.log('yuuuup');
+      }
+    }
+    var source = sourceArray[0];
+    self.miniPhotoCounter = sourceNum[0] - 1;
     highlightMini();
+    // self.miniPhotoCounter = (sourceNum[0]-1);
     ///////now we need to reorder all of the remaining mini photos so that there are no spaces
     var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
     for(var i = 0; i < allMiniPhotosLength; i++) {
@@ -524,27 +544,53 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
   function changeMiniPhoto(event){
-    var source = $(event.target)[0].src;
+    console.log($($(event.target)[0]).attr('src'));
+    if($($(event.target)[0]).attr('src') != ""){
+      var source = $(event.target)[0].src;
+      var elId = $(event.target).attr('id');
+      self.miniPhotoCounter = elId.split('').pop();
+    } else {
+      var sourceArray = [];
+      var sourceNum = [];
+      for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+        if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+          sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
+          sourceNum.push(i);
+          console.log('yuuuup');
+        }
+      }
+      var source = sourceArray[0];
+      self.miniPhotoCounter = sourceNum[0];
+    }
     $(".newProductCurrentImage").attr('src', source);
-    var photoNumber = $(event.target)[0].id.split('').pop();
-    self.miniPhotoCounter = photoNumber;
     highlightMini();
   }
   $('.newProductMiniImageImage').on('click', changeMiniPhoto)
 
   ///create function to highlight mini image that's about to be updated
   function highlightMini(){
-    var arrLength = $('.newProductMiniImage').length;
     for (var i = 0; i < 8; i++) {
       $('#newProductMiniImage'+i).css({
-        borderBottom: "1px solid white"
+        border: "1px solid white"
       })
     }
+    console.log(self.miniPhotoCounter);
     $('#newProductMiniImage'+self.miniPhotoCounter).css({
-      borderBottom: "12px solid #9F81F7"
+      border: "5px solid #858585"
     })
   }
-  highlightMini();
+  var miniPhotoCounterFunc = function(){
+    var sourceNum = [];
+    for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+      if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+        sourceNum.push(i);
+      }
+    }
+    self.miniPhotoCounter = sourceNum[0];
+    highlightMini();
+  };
+  setTimeout(miniPhotoCounterFunc, 1000);
+
   ////////End Logic for uploading photos/////
   ///////////////////////////////////////////
 

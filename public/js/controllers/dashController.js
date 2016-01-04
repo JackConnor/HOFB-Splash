@@ -14,7 +14,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     /////////onload event to add initial list of repeated projects
 
     var allSwatches = allSwatches;
-    console.log(allSwatches);
     function loadProjects(callback, arg){
       ///////decode user to pull data
       $http({
@@ -22,6 +21,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
       })
       .then(function(decodedToken){
+        console.log(decodedToken);
+        self.decodedToken = decodedToken;
         if(decodedToken.data.aud != "designer"){
           window.location.hash = '#/signin'
         }
@@ -45,29 +46,65 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           }
           //////add time-since-creation field
           var collectionName = ["All"];
+          // sel
           for (var i = 0; i < self.allProjects.length; i++) {
             function timeSince(){
               var nowDate = new Date();
               var timeProj = self.allProjects[i].timestamp;
+              console.log(timeProj);
+              //////project creation variables
               var projYear = timeProj.split('-')[0];
               var projMonth = timeProj.split('-')[1];
-              var projDay = timeProj.split('-')[2];
-              var yearsSince = nowDate.getFullYear() - projYear;
-              var monthsSince = nowDate.getMonth() - projMonth;
-              var daysSince = nowDate.getDate() - projDay;
-              if(yearsSince > 0){
-                return yearsSince+" years";
+              var projDay = timeProj.split('-')[2].slice(0,2);
+              var projDate = projMonth+"-"+projDay+"-"+projYear;
+
+              ///////current time variables
+              var nowMonth = nowDate.getMonth() + 1;
+              var nowYear  = nowDate.getFullYear();
+              var nowDay = nowDate.getDate();
+              var rigthNow = nowMonth+"-"+nowDay+"-"+nowYear;
+              // console.log(nowYear);
+              // console.log(projYear);
+              if(nowYear > projYear){
+                if(nowMonth > projMonth){
+                  console.log('greater than one year, less than 2');
+                   var months_since = (nowYear - projYear) + (nowMonth - projMonth);
+                   console.log(months_since);
+                   return months_since+ " months old"
+                }
+                else if ((nowYear - projYear == 1) && projMonth >= nowMonth ){
+                  if(projMonth == nowMonth){
+                    return "11 months old"
+                  }
+                  else {
+                    var mSince = ((12+nowMonth) - projMonth);
+                    if(mSince == 1){
+                      return  "less than "+(mSince+" month old");
+                    }
+                    else {
+                      return (mSince+" months old");
+                    }
+                  }
+
+                }
               }
-              else if(monthsSince > 0){
-                return monthsSince+" months";
-              }
-              else if(daysSince > 0 ){
-                return daysSince+" days"
-              } else {
-                return "Less Than 1 day";
+              else if(projYear == nowYear){
+                console.log(nowMonth);
+                console.log(projMonth);
+                console.log('happened this year');
+                if(nowMonth > projMonth+1){
+                  return (nowMonth - projMonth)+" months old";
+                }
+                else if(nowMonth-1 == projMonth){
+                  return "less than "+(nowMonth - projMonth)+" month old";
+                }
+                else if(nowMonth == projMonth){
+                  return nowDay - projDay+ " days old";
+                }
               }
             }
             self.allProjects[i].TimeSinceCreation = timeSince();
+            console.log(self.allProjects[i].TimeSinceCreation);
             /////get all collections
             for (var j = 0; j < self.allProjects[i].collections.length; j++) {
               collectionName.push(self.allProjects[i].collections[j])
@@ -122,13 +159,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           "</div>"
         )
         var allImages = self.allProjects[i].images;
-        console.log(allImages);
         for (var j = 0; j < allImages.length; j++) {
           $('#mini'+i).append(
             "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
           )
         }
-
       }
       $('.designerDashList').append(
         "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
@@ -152,6 +187,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.projectCellNewInner').on('click', function(){
         newProductPop();
       })
+      console.log(self.decodedToken.data);
+      if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
+        self.tourCounter = 0;///keeps track of where we are in the dashboard tour
+          dashboardTour();
+      }
       arg();
     }
     ///////will set self.allProjects as all our projects
@@ -278,8 +318,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           var productDataArray = listToFilter[i];
           var productTypeArray = productDataArray[filterType];
           for (var j = 0; j < productTypeArray.length; j++) {
-            console.log(productTypeArray[j]);
-            console.log(filterValue);
             if(productTypeArray[j] == filterValue){
               filteredArray.push(listToFilter[i]);
               self.filteredProjects = filteredArray;
@@ -423,7 +461,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           opacity: 0.08
         })
         ////we drill up in order to get the parent, so we can append the html buttons to it
-        console.log($hoverTarget);
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
@@ -446,11 +483,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           $('.bodyview').prepend(
             '<div class="designerDashDeleteProduct col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">'+
               "<p>Are you sure you want to delete this product?</p>"+
-              "<button class='deleteButton'>No</button>"+
-              "<button id='"+productId+"' class='deleteButton'>Yes</button>"+
+              "<button class='deleteButton deleteButtonNo'>No</button>"+
+              "<button id='"+productId+"' class='deleteButton deleteButtonYes'>Yes</button>"+
             "</div>"
           )
-          $('.deleteButton').on('click', function(evt){
+          $('.deleteButtonYes').on('click', function(evt){
             var idToDelete = $(evt.target)[0].id;
             $http({
               method: "DELETE"
@@ -462,6 +499,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               loadProjects(loadInitialList, addHoverToCell)
               $('.designerDashDeleteProduct').remove();
             })
+          })
+          $('.deleteButtonNo').on('click', function(){
+            $('.designerDashDeleteProduct').remove();
           })
         })
         $('.projectCellHoverContainer').on('mouseleave', function(evt){
@@ -492,7 +532,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         )
         $('.projectCellButtonView').on('click', function(evt){
           // var product = $(evt.target);
-          console.log($($(parentContainer)[0].parentNode)[0].id);
           var productId = $($(parentContainer)[0].parentNode)[0].id;
 
           window.location.hash = "#/view/product/"+productId;
@@ -504,11 +543,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           $('.bodyview').prepend(
             '<div class="designerDashDeleteProduct col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">'+
               "<p>Are you sure you want to delete this product?</p>"+
-              "<button class='deleteButton'>No</button>"+
-              "<button id='"+productId+"' class='deleteButton'>Yes</button>"+
+              "<button class='deleteButtonNo deleteButton'>No</button>"+
+              "<button id='"+productId+"' class='deleteButtonYes deleteButton'>Yes</button>"+
             "</div>"
           )
-          $('.deleteButton').on('click', function(evt){
+          $('.deleteButtonYes').on('click', function(evt){
             var idToDelete = $(evt.target)[0].id;
             $http({
               method: "DELETE"
@@ -520,6 +559,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               loadProjects(loadInitialList, addHoverToCell)
               $('.designerDashDeleteProduct').remove();
             })
+          })
+          $('.deleteButtonNo').on('click', function(){
+            $('.designerDashDeleteProduct').remove();
           })
         })
         $('.projectCellHoverContainer').on('mouseleave', function(evt){
@@ -575,8 +617,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var color = $(evt.target)[0].id.slice(6, 25);
         $('.designerDashList').html('');
         $('.colorFilter').remove();
-        console.log('yo');
-        console.log(color);
         if(self.curatedToggleCounter == 'active'){
           loadFilteredList("colors", color, self.allProjects);
         }
@@ -588,7 +628,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
     ////////filter dropdown frontend html logic
     $('.designerDashType').on('click', function(evt){
-      console.log('yoyoyo');
       $('.colorFilter').remove();
       $('.typeFilter').remove();
       $('.fabricFilter').remove();
@@ -630,10 +669,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
       $('.typeFilterCell').on('click', function(evt){
         var type = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
-        console.log(type);
         $('.designerDashList').html('');
         $('.typeFilter').remove();
-        console.log('yo');
         if(self.curatedToggleCounter == 'active'){
           loadFilteredList("productType", type, self.allProjects);
         }
@@ -686,10 +723,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
       $('.fabricFilterCell').on('click', function(evt){
         var fabric = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
-        console.log(fabric);
         $('.designerDashList').html('');
         $('.fabricFilter').remove();
-        console.log('yo');
         if(self.curatedToggleCounter == 'active'){
           loadFilteredList("fabrics", fabric, self.allProjects);
         }
@@ -733,8 +768,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           loadFilteredList("seasons", season, self.allProjects);
         }
         else if(self.curatedToggleCounter == 'curated'){
-          console.log(' curated list');
-          console.log(self.curatedProjects);
           loadFilteredList("seasons", season, self.curatedProjects);
         }
       })
@@ -817,6 +850,111 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover();
     });
+
+
+    ///////////////////////////////////////////////////
+    ///////Begin Logic for Dashboard Tour//////////////
+    self.tourCounter = 0;
+    function dashboardTour(){
+      if(self.tourCounter == 0){
+        $('.bodyview').prepend(
+          '<div class="dashTour0 tourElem">'+
+            "<div class='dashTourController'>"+
+              '<div class="dashYesTour">'+
+                "I'd like a tour"+
+              "</div>"+
+              '<div class="dashNoTour">'+
+                "No Thanks"+
+              "</div>"+
+            "</div>"+
+          '</div>'
+        );
+        $('.dashYesTour').on('click', function(){
+          self.tourCounter++;
+          dashboardTour();
+        });
+        $('.dashNoTour').on('click', function(){
+          $('.tourElem').remove();
+          self.tourCounter = 7;
+        })
+      }
+      else if(self.tourCounter == 1){
+        $('.tourElem').remove();
+        $('.bodyview').prepend(
+          '<div class="dashTour1 tourElem">'+
+            "<div class='dashTourBack'>"+
+              "Back"+
+            "</div>"+
+            "<div class='dashTourNext'>"+
+              "Next"+
+            "</div>"+
+          "<h4>Build a new Product to submit to our Curators, start by clicking here</h4>"+
+          "------------->>> ------------->>> ------------->>> ------------->>>"+
+          '</div>'
+        );
+        var topOff = $('.projectCellNew').offset().top;
+        var topLeft = $('.projectCellNew').offset().left;
+        var width = $('.projectCellNew').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        $('.dashTour1').css('margin-top', topOff + 30);
+        $('.dashTour1').css('margin-left', topLeft - width);
+        $('.dashTourNext').on('click', function(){
+          self.tourCounter++;
+          dashboardTour();
+        })
+      }
+      else if (self.tourCounter == 2){
+        $('.tourElem').remove();
+        $('.bodyview').prepend(
+          '<div class="dashTour1 tourElem">'+
+            "<div class='dashTourBack'>"+
+              "Back"+
+            "</div>"+
+            "<div class='dashTourNext'>"+
+              "Next"+
+            "</div>"+
+            "<div>"+
+              "<<<----------- <<<<---------- <<<<-------------"+
+            "</div>"+
+          "<h4>Look at Products you've already submitted for Curation by toggling your listview, here</h4>"+
+          '</div>'
+        );
+        var topOff = $('.designerDashCurated').offset().top;
+        var topLeft = $('.designerDashCurated').offset().left;
+        var width = $('.designerDashCurated').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        $('.dashTour1').css('margin-top', topOff);
+        $('.dashTour1').css('margin-left', topLeft+parseInt(width)+15+'px');
+      }
+    }
+    // self.danceTimer =  1;
+    //////code to make the guide holder move around
+    // setInterval(function(){
+    //   var marginL = ($('.tourElem').css('margin-left').split('').slice(0, $('.tourElem').css('margin-left').split('').length-2).join(''));
+    //   console.log(marginL);
+    //   var marginLDown = marginL - 10;
+    //   var marginLUp = marginL + 10;
+    //   if(self.danceTimer%2 == 0){
+    //     $('.tourElem').animate({
+    //       marginLeft: marginLDown
+    //     });
+    //     $('.tourElem').animate({
+    //       marginLeft: marginLUp
+    //     });
+    //     self.danceTimer++
+    //   }
+    //   else {
+    //     console.log('nooooooo');
+    //     $('.tourElem').animate({
+    //       marginLeft: marginLUp
+    //     });
+    //     $('.tourElem').animate({
+    //       marginLeft: marginLDown
+    //     });
+    //     self.danceTimer++
+    //   }
+    // }, 200)
+    ///////End Logic for Dashboard Tour////////////////
+    ///////////////////////////////////////////////////
+
   /////end dash controller
   ////////////////////////
   ////////////////////////
