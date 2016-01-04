@@ -191,7 +191,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       console.log(self.decodedToken.data);
       if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
         self.tourCounter = 0;///keeps track of where we are in the dashboard tour
-          dashboardTour();
+        dashboardTour();
       }
       arg();
     }
@@ -904,6 +904,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "<p>Build a New Product</p>"+
           "</div>"
         );
+        $('.projectCellNewInner').css({
+          opacity: 0.0
+        });
         $('.designerDashboardPage').css({
           opacity: 0.3
         });
@@ -923,12 +926,36 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
         $('.dashTour1').css('margin-top', topOff + 30);
         $('.dashTour1').css('margin-left', topLeft - width);
-        $('.dashTourNext').on('click', function(){
-          $('.projectCellNewInner').css({
+
+        /////add events to new elements
+        $('.tourProjectCellNewInner').on('mouseenter', function(evt){
+          $('.tourProjectCellNewInner').css({
+            opacity: 0.7
+          })
+        });
+        $('.tourProjectCellNewInner').on('mouseleave', function(evt){
+          $('.tourProjectCellNewInner').css({
             opacity: 1
           })
+        });
+        ////////allows users to actually make a new product then and there
+        $('.tourProjectCellNewInner').on('click', function(){
+          newProductPop();
+        })
+        $('.dashTourNext').on('click', function(){
           $('.tourProjectCellNewInner').remove();
+          $('.projectCellNewInner').css({
+            opacity: 1
+          });
           self.tourCounter++;
+          dashboardTour();
+        })
+        $('.dashTourBack').on('click', function(){
+          $('.tourProjectCellNewInner').remove();
+          $('.projectCellNewInner').css({
+            opacity: 1
+          });
+          self.tourCounter--;
           dashboardTour();
         })
       }
@@ -973,33 +1000,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.dashTour1').css('margin-left', topLeft+parseInt(width)+15+'px');
       }
     }
-    // self.danceTimer =  1;
-    //////code to make the guide holder move around
-    // setInterval(function(){
-    //   var marginL = ($('.tourElem').css('margin-left').split('').slice(0, $('.tourElem').css('margin-left').split('').length-2).join(''));
-    //   console.log(marginL);
-    //   var marginLDown = marginL - 10;
-    //   var marginLUp = marginL + 10;
-    //   if(self.danceTimer%2 == 0){
-    //     $('.tourElem').animate({
-    //       marginLeft: marginLDown
-    //     });
-    //     $('.tourElem').animate({
-    //       marginLeft: marginLUp
-    //     });
-    //     self.danceTimer++
-    //   }
-    //   else {
-    //     console.log('nooooooo');
-    //     $('.tourElem').animate({
-    //       marginLeft: marginLUp
-    //     });
-    //     $('.tourElem').animate({
-    //       marginLeft: marginLDown
-    //     });
-    //     self.danceTimer++
-    //   }
-    // }, 200)
     ///////End Logic for Dashboard Tour////////////////
     ///////////////////////////////////////////////////
 

@@ -1034,7 +1034,7 @@
   width: 100%;
   background-color: black;
   position: fixed;
-  z-index: 5;
+  z-index: 6;
 }
 
 .newProductModal h3{
@@ -1863,6 +1863,7 @@ textarea#styled {
 .tourProjectCellNewInner {
   position: absolute;
   background-color: black;
+  z-index: 5;
 }
 
 .tourProjectCellNewInner p{
