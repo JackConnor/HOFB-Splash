@@ -36,7 +36,6 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
           commentText: newCommentMessage,
       };
       self.allComments.push(myData)
-      console.log(myData);
       self.test=(myData);
       $http({
         method: "POST"
@@ -44,9 +43,6 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
         ,data: myData
       })
       .then(function(data){
-        console.log('updated!');
-        console.log(data);
-        console.log(self.allComments);
         $('#commentTextBox').animate({
           scrollTop: $('#commentTextBox')[0].scrollHeight
         }, 500)
@@ -88,11 +84,9 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     function populatePage(){
       checkstatus(window.localStorage.hofbToken)
         .then(function(decodedToken){
-          console.log(decodedToken);
           self.tokenData = decodedToken.data
           singleUser(decodedToken.data.name)
             .then(function(user){
-              console.log(user);
               self.currentUser = user.data;
               popContent();
               popSwatches();

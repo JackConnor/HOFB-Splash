@@ -20,11 +20,9 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory', 'si
         })
         .then(function(allConversations){
           self.allConversations = allConversations.data;
-          console.log(self.allConversations);
           setHtmlCallback(self.allConversations);
           singleUser(self.decodedToken.data.name)
             .then(function(userData){
-              console.log(userData);
               self.currentUser = userData.data;
             })
         })
@@ -32,7 +30,6 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory', 'si
     }
 
     function addEmailHtml(list){
-      console.log(list);
       for (var i = 0; i < list.length; i++) {
         $('.messageContainer').append(
           '<div class="messagesCell">'+
@@ -146,7 +143,7 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory', 'si
       $http({
         method: "POST"
         ,url: "/api/conversation"
-        ,data: {content: content, productId: self.currentProduct, sender: sender}
+        ,data: {commentText: content, productId: self.currentProduct, sender: sender}
       })
       .then(function(updatedConvo){
         console.log(updatedConvo);
