@@ -760,7 +760,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     ////////////////////////////////////////////////
     //////begin photo cropping stuff////////////////
-    
+    //
     $('.newProductCurrentImage').cropper({
       aspectRatio: 1 / 1,
       crop: function(e) {
