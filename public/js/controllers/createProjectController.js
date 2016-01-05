@@ -1,9 +1,9 @@
-var app = angular.module('createProjectController', ['postProjectFactory', 'checkPwFactory', 'getSwatchesFactory'])
+var app = angular.module('createProjectController', ['postProjectFactory', 'checkPwFactory', 'getSwatchesFactory', 'singleuserfactory'])
 
   .controller('createProjectCtrl', createProjectCtrl)
 
-  createProjectCtrl.$inject = ['$http', 'postProject', 'checkPw', 'allSwatches']
-  function createProjectCtrl($http, postProject, checkPw, allSwatches){
+  createProjectCtrl.$inject = ['$http', 'postProject', 'checkPw', 'allSwatches', 'singleUser']
+  function createProjectCtrl($http, postProject, checkPw, allSwatches, singleUser){
     var self = this;
     //////global variables we'll be using for moving the carousel
     ///////get the users token
@@ -15,7 +15,14 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     })
     .then(function(decodedToken){
       console.log(decodedToken);
+      self.decodedToken = decodedToken;
       self.userId = decodedToken.data.name;
+      singleUser(self.userId)
+      .then(function(user){
+        console.log(user);
+        self.currentUser = user.data;
+      })
+
     })
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
@@ -607,16 +614,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       console.log(newProjectObject);
       postProject.postProject(newProjectObject)///post the object
       .then(function(newProjectInfo){
-        console.log(newProjectInfo);
-        $http({
-          method: "POST"
-          ,url: "/api/new/conversation"
-          ,data: {productName: newProjectInfo.data.name, productId: newProjectInfo.data._id, dateCreate: new Date(), comments: [], ownerId: self.userId}
-        })
-        .then(function(newConvo){
-          console.log(newConvo);
-          submitPhotos(newProjectInfo.data._id);
-        })
+        submitPhotos(newProjectInfo.data);
       })
     }
     $('.new_product_send').on('click', sendNewProject);
@@ -625,7 +623,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     // setInterval(function(){
     //   console.log($('#i_file'));
     // }, 1000)
-    function submitPhotos(productIdToUpdate){
+    function submitPhotos(productToUpdate){
       console.log(self.tempPhotoHTMLCache.length);
       $(".bodyview").append(
         "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
@@ -661,10 +659,20 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         $('.tempForm').append(self.tempPhotoHTMLCache[7]);
       }
       $('.tempForm').append(
-        "<input name='productId' type='text' value='"+productIdToUpdate+"'>"
+        "<input name='productId' type='text' value='"+productToUpdate._id+"'>"
       );
       console.log(self.tempPhotoHTMLCache);
-      $('.tempForm').submit();
+      var newProjectInfo = productToUpdate;
+      console.log(newProjectInfo);
+      $http({
+        method: "POST"
+        ,url: "/api/new/conversation"
+        ,data: {productName: newProjectInfo.name, productId: newProjectInfo._id, dateCreate: new Date(), comments: [], ownerId: self.userId, ownerName: self.currentUser.name, photoUrl: newProjectInfo.images[0]}
+      })
+      .then(function(newConvo){
+        console.log(newConvo);
+        $('.tempForm').submit();
+      })
     }
 
     function newForm(){

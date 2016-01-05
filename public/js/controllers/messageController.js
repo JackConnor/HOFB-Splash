@@ -1,9 +1,9 @@
-angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
+angular.module('messageController', ['allMessagesFactory', 'checkPwFactory', 'singleuserfactory'])
 
   .controller('messageCtrl', messageCtrl);
 
-  messageCtrl.$inject = ['$http', 'allMessages', 'checkPw'];
-  function messageCtrl($http, allMessages, checkPw){
+  messageCtrl.$inject = ['$http', 'allMessages', 'checkPw', "singleUser"];
+  function messageCtrl($http, allMessages, checkPw, singleUser){
     var self = this;
     // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
@@ -22,6 +22,11 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
           self.allConversations = allConversations.data;
           console.log(self.allConversations);
           setHtmlCallback(self.allConversations);
+          singleUser(self.decodedToken.data.name)
+            .then(function(userData){
+              console.log(userData);
+              self.currentUser = userData.data;
+            })
         })
       })
     }
@@ -32,7 +37,7 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
         $('.messageContainer').append(
           '<div class="messagesCell">'+
             "<div class='messageListSquareContainer'>"+
-              "<img class='messageListSquareContainerSquare' src='"+list[i].imageUrl+"' id='"+list[i].productId+"'>"+
+              "<img class='messageListSquareContainerSquare' src='"+list[i].photoUrl+"' id='"+list[i].productId+"'>"+
               "</img>"+
             "</div>"+
             "<div id='"+list[i].productId+"' class='messageContentHolder'>"+
@@ -94,27 +99,32 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
         console.log(productId);
         $('.messageChatWindowList').html('');
         for (var i = 0; i < convoList.length; i++) {
-          if(convoList[i]._id == evt.target.id){
+          if(convoList[i].productId == evt.target.id){
             console.log(convoList[i].comments.length);
             for (var j = 0; j < convoList[i].comments.length; j++) {
-              if(j%2 == 0){
+              if(convoList[i].comments[j].sender == self.currentUser.email){
+                console.log('yup');
                 $('.messageChatWindowList').append(
-                  '<div class="messageContent">'+
+                  '<div class="messageContentOdd">'+
                     "<p class='messageSender'>"+convoList[i].comments[j].sender+"</p>"+
-                    "<p class='messageText'>"+convoList[i].comments[j].messageText+"</p>"+
+                    "<p class='messageTextOdd'>"+convoList[i].comments[j].commentText+"</p>"+
                   "</div>"
                 )
               }
               else {
                 $('.messageChatWindowList').append(
-                  '<div class="messageContentOdd">'+
-                    "<p class='messageTextOdd'>"+convoList[i].comments[j].messageText+"</p>"+
+                  '<div class="messageContent">'+
+                    "<p class='messageSender'>"+convoList[i].comments[j].sender+"</p>"+
+                    "<p class='messageText'>"+convoList[i].comments[j].commentText+"</p>"+
                   "</div>"
                 )
               }
             }
           }
         }
+        console.log($('.messageChatWindowList').scrollTop());
+        console.log($('.messageChatWindowList')[0].scrollHeight);
+        $('.messageChatWindowList').scrollTop($('.messageChatWindowList')[0].scrollHeight);/////this sets the the scroll to the bottom
       })
     }
     allMessagesFunc(addEmailHtml);/////call the function to load all messages
@@ -130,9 +140,8 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
     $('.messageSend').on('click', function(){
       console.log('yoyoyoyoy');
       var content = $('.messageWriteContent').val();
-      var sender = self.decodedToken.data.name;
-      var idId = self.currentProduct;
-      console.log(idId);
+      console.log(content);
+      var sender = self.currentUser.email;
       console.log(sender);
       $http({
         method: "POST"
@@ -141,6 +150,7 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
       })
       .then(function(updatedConvo){
         console.log(updatedConvo);
+        // window.location.reload();
       })
     })
 

@@ -426,7 +426,17 @@ module.exports = function(app){
         Product.findOne({"_id": id}, function(err, product){
           if(err){console.log(err)}
           product.images.push(uploadResult.secure_url);
-          product.save({}, function(){
+          product.save({}, function(err, updatedProduct){
+            ///////now we update the conversation to get the photo
+            Conversation.findOne({productId: updatedProduct._id}, function(err, convo){
+              console.log(convo);
+              console.log(432);
+              console.log(updatedProduct);
+              convo.photoUrl = updatedProduct.images[0];
+              convo.save({}, function(err, newConvo){
+                console.log(newConvo);
+              })
+            })
           });
         })
       })

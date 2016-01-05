@@ -740,6 +740,11 @@
   background-color: black;
 }
 
+.messageChatWindowList {
+  overflow: scroll;
+  max-height: 500px;
+}
+
 .messageContainer {
   display: inline-block;
 }
@@ -751,8 +756,8 @@
 .messageContentOdd {
   min-height: 100%;
   background-color: #F8F8FA;
-  width: 90%;
-  margin-left: 50px;
+  width: 70%;
+  margin-left: 20%;
 }
 
 .messageContentHolder {
