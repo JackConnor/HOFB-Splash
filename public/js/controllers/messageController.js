@@ -150,6 +150,18 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory', 'si
       })
       .then(function(updatedConvo){
         console.log(updatedConvo);
+        /////live add to site
+        $('.messageChatWindowList').append(
+          '<div class="messageContentOdd">'+
+            "<p class='messageSender'>"+sender+"</p>"+
+            "<p class='messageTextOdd'>"+content+"</p>"+
+          "</div>"
+        )
+        // $('.messageChatWindowList').scrollTop($('.messageChatWindowList')[0].scrollHeight);
+        $('.messageChatWindowList').animate({
+          scrollTop: $('.messageChatWindowList')[0].scrollHeight
+        }, 1000);
+        $('.messageWriteContent').val('');
         // window.location.reload();
       })
     })

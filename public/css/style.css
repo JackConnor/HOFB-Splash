@@ -742,7 +742,7 @@
 
 .messageChatWindowList {
   overflow: scroll;
-  max-height: 500px;
+  max-height: 400px;
 }
 
 .messageContainer {
