@@ -12,13 +12,6 @@ angular.module('postProjectFactory', [])
         ,url: "/api/products"
         ,data: projectArray
       })
-      .then(function(newProjectInfo){
-        console.log('posted project');
-        console.log(newProjectInfo);
-        console.log('that was just the Id to compare against');
-        callback(newProjectInfo.data._id);
-        // return newProjectInfo;
-      })
     }
 
     return {

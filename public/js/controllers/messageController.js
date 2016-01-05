@@ -27,6 +27,7 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
     }
 
     function addEmailHtml(list){
+      console.log(list);
       for (var i = 0; i < list.length; i++) {
         $('.messageContainer').append(
           '<div class="messagesCell">'+
@@ -34,7 +35,7 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
               "<img class='messageListSquareContainerSquare' src='"+list[i].imageUrl+"' id='"+list[i].productId+"'>"+
               "</img>"+
             "</div>"+
-            "<div id='"+list[i]._id+"' class='messageContentHolder'>"+
+            "<div id='"+list[i].productId+"' class='messageContentHolder'>"+
               "<div class='messageListContentTitle'>"+
                 list[i].productName +
               "</div>"+
@@ -88,6 +89,9 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
         window.location.hash = "#/view/product/"+productId;
       })
       $('.messageContentHolder').on('click', function(evt){
+        var productId = $(evt.target)[0].id;
+        self.currentProduct = productId;
+        console.log(productId);
         $('.messageChatWindowList').html('');
         for (var i = 0; i < convoList.length; i++) {
           if(convoList[i]._id == evt.target.id){
@@ -120,6 +124,29 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory'])
       window.localStorage.hofbToken = "";
       window.location.hash = "#/signin";
     })
+
+    //////////////////////////////////////
+    ////////////logic for sending messages
+    $('.messageSend').on('click', function(){
+      console.log('yoyoyoyoy');
+      var content = $('.messageWriteContent').val();
+      var sender = self.decodedToken.data.name;
+      var idId = self.currentProduct;
+      console.log(idId);
+      console.log(sender);
+      $http({
+        method: "POST"
+        ,url: "/api/conversation"
+        ,data: {content: content, productId: self.currentProduct, sender: sender}
+      })
+      .then(function(updatedConvo){
+        console.log(updatedConvo);
+      })
+    })
+
+    /////////end send message logic//////
+    /////////////////////////////////////
+
   /////////end of the messages controller
   ///////////////////////////////////////
   ///////////////////////////////////////

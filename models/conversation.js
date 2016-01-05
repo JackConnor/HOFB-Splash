@@ -5,7 +5,6 @@ var conversationSchema = new Schema({
   productName: String
   ,productId: String
   ,photoUrl: String
-  ,adminOrBuyer: Boolean
   ,dateCreated: Date
   ,lastUpdated: Date
   ,comments: Array///will all comments in chronological order

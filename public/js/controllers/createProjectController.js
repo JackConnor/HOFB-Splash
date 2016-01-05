@@ -605,7 +605,19 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,status: status
       }
       console.log(newProjectObject);
-      postProject.postProject(newProjectObject, submitPhotos)///post the object
+      postProject.postProject(newProjectObject)///post the object
+      .then(function(newProjectInfo){
+        console.log(newProjectInfo);
+        $http({
+          method: "POST"
+          ,url: "/api/new/conversation"
+          ,data: {productName: newProjectInfo.data.name, productId: newProjectInfo.data._id, dateCreate: new Date(), comments: [], ownerId: self.userId}
+        })
+        .then(function(newConvo){
+          console.log(newConvo);
+          submitPhotos(newProjectInfo.data._id);
+        })
+      })
     }
     $('.new_product_send').on('click', sendNewProject);
     $('.new_product_save').on('click', sendNewProject);

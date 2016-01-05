@@ -548,9 +548,7 @@ module.exports = function(app){
 
   //////logic for getting all conversations of a specific user
   app.get('/api/conversations/:user_id', function(req, res){
-    console.log(req.params.user_id);
     Conversation.find({'ownerId': req.params.user_id}, function(err, conversations){
-      console.log(conversations);
       res.json(conversations);
     })
   })
@@ -559,7 +557,23 @@ module.exports = function(app){
   app.post('/api/new/conversation', function(req, res){
     Conversation.create(req.body, function(err, newConvo){
       if(err){console.log(err)}
+      console.log(newConvo);
       res.json(newConvo)
+    })
+  })
+
+  /////Update a new message to a conversation
+  app.post('/api/conversation', function(req, res){
+    console.log(req.body);
+    Conversation.findOne({"productId": req.body.productId}, function(err, conversation){
+      if(err){console.log(err)}
+      // console.log(req.body);
+      console.log(conversation);
+      console.log(conversation);
+      conversation.comments.push({sender: req.body.sender, commentText: req.body.content, date: new Date(), receiver: 'admin'})
+      conversation.save(function(err, conversation){
+        res.json(conversation);
+      })
     })
   })
 
