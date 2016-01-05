@@ -563,6 +563,14 @@ module.exports = function(app){
     })
   })
 
+  //////logic for getting all conversations of a specific Product
+  app.get('/api/conversation/:product_id', function(req, res){
+    console.log(req.body);
+    Conversation.findOne({'productId': req.params.product_id}, function(err, conversations){
+      res.json(conversations);
+    })
+  })
+
   /////post a new conversation
   app.post('/api/new/conversation', function(req, res){
     Conversation.create(req.body, function(err, newConvo){
@@ -577,12 +585,10 @@ module.exports = function(app){
     console.log(req.body);
     Conversation.findOne({"productId": req.body.productId}, function(err, conversation){
       if(err){console.log(err)}
-      // console.log(req.body);
       console.log(conversation);
-      console.log(conversation);
-      conversation.comments.push({sender: req.body.sender, commentText: req.body.content, date: new Date(), receiver: 'admin'})
-      conversation.save(function(err, conversation){
-        res.json(conversation);
+      conversation.comments.push({sender: req.body.sender, commentText: req.body.commentText, date: new Date(), receiver: 'admin'})
+      conversation.save(function(err, newConversation){
+        res.json(newConversation);
       })
     })
   })

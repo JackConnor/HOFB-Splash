@@ -5,7 +5,6 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
   viewProductCtrl.$inject = ['$http', 'checkPw', 'getProduct', 'checkstatus', 'singleUser', 'allSwatches'];
   function viewProductCtrl($http, checkPw, getProduct, checkstatus, singleUser, allSwatches){
     var self = this;
-    console.log('viewProductController is working');
     self.test=('self test');
     // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
@@ -15,30 +14,42 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     // Submit comment button wiring
     $(".commentSubmitBtn").on('click', function(){
       console.log('Submit comment button is working');
-            addProductComment();
-      });
+      addProductComment();
+    });
+    setTimeout(function(){
+      $('#commentTextBox').animate({
+        scrollTop: $('#commentTextBox')[0].scrollHeight
+      }, 500)
+    }, 500)
 
-//function to collect and post comment
+    //function to collect and post comment
     function addProductComment() {
       // var targetFormId = $(this).attr('data-formId');
       // var targetForm = $(targetFormId);
       var newCommentId = $(productId)
-      var newCommentSender = $('.sender').val();
+      var newCommentSender = self.currentUser.email
       var newCommentMessage = $('.message').val();
 
       var myData = {
+          productId: window.location.hash.split('/')[3],
           sender: newCommentSender,
           commentText: newCommentMessage,
       };
+      self.allComments.push(myData)
       console.log(myData);
       self.test=(myData);
       $http({
         method: "POST"
-        ,url: "/api/product/comment"
+        ,url: "/api/conversation"
         ,data: myData
       })
       .then(function(data){
+        console.log('updated!');
         console.log(data);
+        console.log(self.allComments);
+        $('#commentTextBox').animate({
+          scrollTop: $('#commentTextBox')[0].scrollHeight
+        }, 500)
       })
     }
 
@@ -54,11 +65,11 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     function getProductComments(){
       $http({
        method:'GET'
-       ,url:'/api/view/product'
+       ,url:'/api/conversation/'+window.location.hash.split('/')[3]
       })
       .then(function(data){
-        console.log(data);
-        self.allComments=(data.data);
+        console.log(data.data.comments);
+        self.allComments=(data.data.comments);
       })
     }
     getProductComments();

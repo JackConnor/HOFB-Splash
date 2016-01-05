@@ -211,8 +211,8 @@
   top: 0;
   bottom: 0;
   right: 0;
-  overflow-y: scroll;
-  height:600px;
+  overflow: scroll;
+  max-height:400px;
   /*outline:2px solid red;*/
   /*width: 25%;*/
 }
@@ -742,7 +742,7 @@
 
 .messageChatWindowList {
   overflow: scroll;
-  max-height: 400px;
+  max-height: 375px;
 }
 
 .messageContainer {
@@ -843,6 +843,7 @@
 .messageWriteMessage {
   width: 90%;
   margin-left: 5%;
+  padding-top: 5px;
 }
 
 .messageWriteMessage textarea{
@@ -1343,7 +1344,7 @@
   display: block;
   height: 58px;
   background-color: #EFE9EB;
-  color: white;
+  /*color: white;*/
   font-size: 18px;
   text-align: center;
   padding-bottom: 70px;
