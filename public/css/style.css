@@ -790,6 +790,18 @@
   margin: 12px 12px;
 }
 
+.messageSend {
+  width: 160px;
+  height: 50px;
+  border: 4px solid #169AA9;
+  color: #169AA9;
+  border-radius: 5px;
+  margin-left: 60%;
+  padding-top: 5px;
+  font-size: 19px;
+  text-align: center;
+}
+
 .messageSender {
   height: 25%;
   font-size: 22px;
@@ -821,6 +833,18 @@
   margin-left: 20px;
   margin-top: 0px;
   padding: 15px 0;
+}
+
+.messageWriteMessage {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.messageWriteMessage textarea{
+  padding: 10px;
+  font-size: 14px;
+  width: 90%;
+  margin-left: 5%;
 }
 
 .modalFiller {
