@@ -561,6 +561,7 @@
   cursor:pointer;
 }
 
+
 .designerDashCurated:hover{
   box-shadow: 0 0 30px black;
 }
@@ -637,6 +638,24 @@
   height: 70px;
   margin-top: 20px;
   font-size: 22px;
+}
+
+
+.designerDashSubmitted {
+  display: inline-block;
+  height: 40px;
+  width: 225px;
+  background-color: #EBEBE9;
+  text-align: center;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-top: 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top: 1px solid #EFEEEC;
+  border-left: 1px solid #EFEEEC;
+  border-right: 1px solid #EFEEEC;
+  cursor:pointer;
 }
 
 .designerDashToggleContainer {

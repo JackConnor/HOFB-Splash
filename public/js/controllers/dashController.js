@@ -34,15 +34,22 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           var allProjects = products.data;
           var allProjectsSaved = [];
           var curatedProjectsArray = [];
+          var submittedProjectsArray = [];
           for (var i = 0; i < allProjects.length; i++) {
             if(allProjects[i].status == "saved"){
               allProjectsSaved.push(allProjects[i]);
             }
-            else if(allProjects[i].status == "submitted to curator" || "curated"){
+            else if(allProjects[i].status ==  "curated"){
               curatedProjectsArray.push(allProjects[i]);
+            }
+            else if(allProjects[i].status == "submitted to curator"){
+              submittedProjectsArray.push(allProjects[i]);
             }
             self.allProjects = allProjectsSaved;
             self.curatedProjects = curatedProjectsArray;
+            self.submittedProjects = submittedProjectsArray;
+            console.log(self.curatedProjects);
+            console.log(self.submittedProjects);
           }
           //////add time-since-creation field
           var collectionName = ["All"];
@@ -294,6 +301,71 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         newProductPop();
       })
     }
+    ////function for appending submitted list
+    function loadSubmittedList(){
+      var dataType = $('.dashDataType');
+      dataType.text('Sent-for-Curation Products');
+      for (var i = 0; i < self.submittedProjects.length; i++) {
+        function timeSince(){
+          var nowDate = new Date();
+          var timeProj = self.submittedProjects[i].timestamp;
+          var projYear = timeProj.split('-')[0];
+          var projMonth = timeProj.split('-')[1];
+          var projDay = timeProj.split('-')[2];
+          var yearsSince = nowDate.getFullYear() - projYear;
+          var monthsSince = nowDate.getMonth() - projMonth;
+          var daysSince = nowDate.getDate() - projDay;
+          if(yearsSince > 0){
+            return yearsSince+" years";
+          }
+          else if(monthsSince > 0){
+            return monthsSince+" months";
+          }
+          else if(daysSince > 0 ){
+            return daysSince+" days"
+          } else {
+            return "Less Than 1 day";
+          }
+        }
+        self.submittedProjects[i].TimeSinceCreation = timeSince();
+      }
+      for (var i = 0; i < self.submittedProjects.length; i++) {
+          $('.designerDashList').append(
+            "<div class='projectCell col-md-4 col-xs-12' id='"+self.submittedProjects[i]._id+"'>"+
+              "<div class='projectCellInner'>"+
+                "<div class='projectCellImageHolder'>"+
+                  "<img class='projectCellImage' src='"+self.submittedProjects[i].images[0]+"'>"+
+                "</div>"+
+                "<div class='projectCellContent'>"+
+                  "<p>"+self.submittedProjects[i].TimeSinceCreation+"</p>"+
+                  "<p>"+self.submittedProjects[i].name+"--curated</p>"+
+                "</div>"+
+              "</div>"+
+            "</div>"
+          )
+      }
+      $('.designerDashList').append(
+        "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
+          "<div class='projectCellNewInner'>"+
+            "<p>Build a New product</p>"+
+          "</div>"+
+        "</div>"
+      )
+      $('.projectCellNewInner').on('mouseenter', function(){
+        $('.projectCellNewInner').animate({
+          opacity: .6
+        }, 100)
+      })
+      $('.projectCellNewInner').on('mouseleave', function(){
+        $('.projectCellNewInner').animate({
+          outline: 'none'
+          ,opacity: 1
+        }, 100)
+      })
+      $('.projectCellNewInner').on('click', function(){
+        newProductPop();
+      })
+    }
 
     ////function for appending filtered lists from dropdown in realtime
     function loadFilteredList(filterType, filterValue, listToFilter){
@@ -410,6 +482,12 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       loadCuratedList();
       $('.sectionTitle').text('listing all curated projects')
     }
+    ////see all curated projects
+    function toggleSubmitted(){
+      $('.designerDashList').html('');
+      loadSubmittedList();
+      $('.sectionTitle').text('listing all curated projects')
+    }
 
     ////see all active projects
     function toggleActive(){
@@ -431,6 +509,18 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       })
       self.curatedToggleCounter = 'curated';
       toggleCurated();
+      addHoverToCuratedCell()
+    })
+    ////////toggle to submitted view
+    $('.designerDashSubmitted').on('click', function(){
+      $('.designerDashSubmitted').css({
+        backgroundColor: "#FEFDFA"
+      })
+      $('.designerDashSubmitted').css({
+        backgroundColor: "#EBEBE9"
+      })
+      self.curatedToggleCounter = 'Submitted';
+      toggleSubmitted();
       addHoverToCuratedCell()
     })
 
