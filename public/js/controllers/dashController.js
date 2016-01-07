@@ -21,8 +21,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
       })
       .then(function(decodedToken){
-        console.log(decodedToken);
         self.decodedToken = decodedToken;
+        ///////note: User Id is ""
+        console.log(self.decodedToken.data.name);
         if(decodedToken.data.aud != "designer"){
           window.location.hash = '#/signin'
         }
@@ -48,8 +49,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             self.allProjects = allProjectsSaved;
             self.curatedProjects = curatedProjectsArray;
             self.submittedProjects = submittedProjectsArray;
-            console.log(self.curatedProjects);
-            console.log(self.submittedProjects);
           }
           //////add time-since-creation field
           var collectionName = ["All"];

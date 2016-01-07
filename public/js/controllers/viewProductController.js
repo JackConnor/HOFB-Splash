@@ -13,7 +13,6 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
 
     // Submit comment button wiring
     $(".commentSubmitBtn").on('click', function(){
-      console.log('Submit comment button is working');
       addProductComment();
     });
     setTimeout(function(){
@@ -57,11 +56,18 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
       window.location.hash = "#/signin"
     })
 
+
+
     //Get request for ALL product comments
+    var windowStuff = window.location;
+    var productIdFromURl = window.location.hash;
+    var productIdUrlArray = window.location.hash.split('/');
+    var productId = window.location.hash.split('/')[3];
+
     function getProductComments(){
       $http({
        method:'GET'
-       ,url:'/api/conversation/'+window.location.hash.split('/')[3]
+       ,url:'/api/conversation/'+ productId
       })
       .then(function(data){
         console.log(data.data.comments);
@@ -71,7 +77,6 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     getProductComments();
 
     lastCommentBoxColor = function(){
-      console.log('commentbox color test is working');
     }
 
     //////////////////////////////////////////
@@ -106,13 +111,11 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
       ////get all colors
       var colorArrayFunc = function(){
         var prodcolors = self.productData.colors;
-        console.log(prodcolors);
         var colorArr = [];
         for (var i = 0; i < prodcolors.length; i++) {
           var prod = prodcolors[i].toLowerCase();
           // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
           colorArr.push(allSwatches.colors[prod]);
-          console.log(colorArr);
         }
         return colorArr;
       }
@@ -122,10 +125,8 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
         var fabricArr = [];
         for (var i = 0; i < self.productData.fabrics.length; i++) {
           var fabric = self.productData.fabrics[i].toLowerCase();
-          console.log(fabric);
           // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
           fabricArr.push(allSwatches.fabrics[fabric]);
-          console.log(fabricArr);
         }
         return fabricArr;
       }
@@ -135,9 +136,7 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
         var seasonArr = [];
         for (var i = 0; i < self.productData.seasons.length; i++) {
           var season = self.productData.seasons[i].toLowerCase();
-          console.log(season);
           seasonArr.push(allSwatches.seasons[season]);
-          console.log(seasonArr);
         }
         return seasonArr;
       }

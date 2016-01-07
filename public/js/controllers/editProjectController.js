@@ -5,6 +5,13 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   editProjectCtrl.$inject = ['$http', 'postProject', 'getProduct', 'editProject', 'checkPw']
   function editProjectCtrl($http, postProject, checkPw){
     var self = this;
+    //////global variables we'll be using for moving the carousel
+    var carouselMargin = 0; ///keeps track of carousel's margin
+    var carouselCounter = 0;///keeps track of carousel's postion in the queue
+    self.miniPhotoCounter;
+    self.tempPhotoCache = [];
+    self.tempPhotoHTMLCache = [];
+    /////end global variables
     // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
     var productId = window.location.hash.split('/')[3];
@@ -18,7 +25,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     })
 
     function loadData(productObject){
-      console.log(productObject);
       //////load text inputs
       $('.newProductTitle').val(productObject.name)
       $('.newProductDescription').val(productObject.description);
@@ -31,6 +37,9 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         $('.newProductCurrentImage').attr('src', productObject.images[0])
         for (var i = 0; i < productObject.images.length; i++) {
           $('#newProductMiniImage'+i).attr('src' , productObject.images[i]);
+          ////////load photo and html caches
+          self.tempPhotoCache.push(productObject.images[i]);
+          self.tempPhotoHTMLCache.push($('#newProductMiniImage'+i));
         }
       }
       addImgsFunc();
@@ -71,15 +80,10 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       addFabrics();
       function addStitches(){
         var stitchHtmlArray = $('.createStitch');
-        console.log(stitchHtmlArray);
         var currentValues = productObject.stitchPatterns;
-        console.log(currentValues);
         for (var i = 0; i < stitchHtmlArray.length; i++) {
           var elType = stitchHtmlArray[i].classList[1].slice(6, 20);
           for (var j = 0; j < currentValues.length; j++) {
-            console.log('------------------------');
-            console.log(currentValues[j]);
-            console.log(elType);
             if( elType == currentValues[j]){
               $(stitchHtmlArray[i]).addClass('picked');
               $(stitchHtmlArray[i]).attr('id', "picked_Stitch_"+currentValues[j]);
@@ -93,11 +97,9 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       addStitches();
       function addColors(){
         var colorsHtmlArray = $('.createColor');
-        console.log(colorsHtmlArray);
         var currentValues = productObject.colors;
         for (var i = 0; i < colorsHtmlArray.length; i++) {
           var elType = colorsHtmlArray[i].classList[1].slice(6, 20);
-          console.log(elType);
           for (var j = 0; j < currentValues.length; j++) {
             if( elType == currentValues[j]){
               $(colorsHtmlArray[i]).addClass('picked');
@@ -112,7 +114,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       addColors();
       function addButtons(){
         var buttonHtmlArray = $('.createButton');
-        console.log(buttonHtmlArray);
         var currentValues = productObject.buttons;
         for (var i = 0; i < buttonHtmlArray.length; i++) {
           var elType = buttonHtmlArray[i].classList[1].slice(6, 20);
@@ -133,13 +134,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   ////////////////////////////
   //////end edit controller///
   //////////begin code to controler all upload functions (mirrored from create page)
-  //////global variables we'll be using for moving the carousel
-  var carouselMargin = 0; ///keeps track of carousel's margin
-  var carouselCounter = 0;///keeps track of carousel's postion in the queue
-  self.miniPhotoCounter;
-  self.tempPhotoCache = [];
-  self.tempPhotoHTMLCache = [];
-  /////end global variables
 
   ////////////////////////////////////////
   /////////Effects for carousel//////////
@@ -486,7 +480,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
     self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
     self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-    console.log(self.tempPhotoHTMLCache);
     $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
     var sourceArray = [];
     var sourceNum = [];
@@ -494,7 +487,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       if(!$($('.newProductMiniImageImage')[i]).attr('src')){
         sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
         sourceNum.push(i);
-        console.log('yuuuup');
       }
     }
     var source = sourceArray[0];
@@ -503,34 +495,31 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   }
   //////function to delete the photo inside of a mini photo on click
   function deleteMiniPhoto(evt){
+    console.log(self.tempPhotoCache);
+    console.log(self.tempPhotoHTMLCache);
+    var potSource = $('#newProductMiniImage'+self.miniPhotoCounter).attr('src');
+    console.log(potSource);
+    if(!potSource){
+      self.miniPhotoCounter = self.tempPhotoCache.length-1;
+    }
     var targetImage = $('#newProductMiniImage'+self.miniPhotoCounter);
     console.log(targetImage);
     var placeInLine = targetImage[0].id.split('').pop();
+    console.log(placeInLine);
     self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
     self.tempPhotoHTMLCache.splice(placeInLine, 1);///our master photo array should be adjusted
-    $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[0]));
+    console.log(self.tempPhotoCache);
+    console.log(self.tempPhotoHTMLCache);
+    $('.newProductCurrentImage').attr('src', self.tempPhotoCache[self.tempPhotoCache.length-1]);
     self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
-    var sourceArray = [];
-    var sourceNum = [];
-    for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
-      if(!$($('.newProductMiniImageImage')[i]).attr('src')){
-        sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
-        sourceNum.push(i);
-        console.log('yuuuup');
-      }
-    }
-    var source = sourceArray[0];
-    self.miniPhotoCounter = sourceNum[0] - 1;
-    highlightMini();
-    // self.miniPhotoCounter = (sourceNum[0]-1);
     ///////now we need to reorder all of the remaining mini photos so that there are no spaces
     var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
     for(var i = 0; i < allMiniPhotosLength; i++) {
       $('#newProductMiniImage'+i).attr('src', '');
+      console.log(self.tempPhotoCache);
       if(i < self.tempPhotoCache.length){
         var imageShift = $('#newProductMiniImage'+i)[0];
-        $(imageShift).attr('src', URL.createObjectURL(self.tempPhotoCache[i]))
-        // $('#newProductMiniImage'+i).src( URL.createObjectURL(self.tempPhotoCache[i]))
+        $(imageShift).attr('src', self.tempPhotoCache[i]);
       }
       else if(i >= self.tempPhotoCache.length){
         var imageShift = $('#newProductMiniImage'+i)[0];
@@ -540,11 +529,11 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         })
       }
     }
+    highlightMini();
   }
   $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
   function changeMiniPhoto(event){
-    console.log($($(event.target)[0]).attr('src'));
     if($($(event.target)[0]).attr('src') != ""){
       var source = $(event.target)[0].src;
       var elId = $(event.target).attr('id');
@@ -556,7 +545,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         if(!$($('.newProductMiniImageImage')[i]).attr('src')){
           sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
           sourceNum.push(i);
-          console.log('yuuuup');
         }
       }
       var source = sourceArray[0];
@@ -574,7 +562,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         border: "1px solid white"
       })
     }
-    console.log(self.miniPhotoCounter);
     $('#newProductMiniImage'+self.miniPhotoCounter).css({
       border: "5px solid #858585"
     })
@@ -596,7 +583,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
   ///////////////function to send full create http request
   function editProject(evt){
-    console.log('something');
     var name = $('.newProductTitle').val();
     var timestamp = new Date();
     // var images = self.tempPhotoCache;
@@ -679,8 +665,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       ,buttons: buttons
       ,status: status
     }
-    console.log(newProjectObject);
-    console.log(newProjectObject);
     editProjectToDb(newProjectObject, submitPhotos)
     // editProject().editProject(newProjectObject, submitPhotos)///post the object
   }
@@ -689,35 +673,22 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
   /////function to update a project (will go in a factory)
   function editProjectToDb(projectArray, callback){
-    console.log('in factory');
-    console.log(projectArray);
     return $http({
       method: "POST"
       ,url: "/api/product/update"
       ,data: projectArray
     })
     .then(function(newProjectInfo){
-      console.log('posted project');
-      console.log(newProjectInfo);
-      console.log('that was just the Id to compare against');
       callback(newProjectInfo.data._id);
       // return newProjectInfo;
     })
   }
-  // setInterval(function(){
-  //   console.log($('#i_file'));
-  // }, 1000)
   function submitPhotos(productIdToUpdate){
-    console.log(self.tempPhotoHTMLCache.length);
     $(".bodyview").append(
       "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
       "</form>"
     )
     //
-    console.log($(self.tempPhotoHTMLCache[0]));
-    console.log($(self.tempPhotoHTMLCache[1]));
-    console.log($(self.tempPhotoHTMLCache[2]));
-    console.log($(self.tempPhotoHTMLCache[3]));
     if(self.tempPhotoHTMLCache[0]){
       $('.tempForm').append(self.tempPhotoHTMLCache[0]);
     }
@@ -733,7 +704,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     $('.tempForm').append(
       "<input name='productId' type='text' value='"+productIdToUpdate+"'>"
     );
-    console.log(self.tempPhotoHTMLCache);
     $('.tempForm').submit();
   }
 
@@ -747,7 +717,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     ///////////////////////////////////////////////
     //////Begin logic for photo popup modal////////
     $('.newProductCurrentImage').on('click', function(){
-      console.log($('.bodyview'));
       $('.bodyview').prepend(
         '<div class="photoModal">'+
           "<div class='modalFiller'>"+
