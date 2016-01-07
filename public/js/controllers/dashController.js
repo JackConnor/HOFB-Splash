@@ -219,10 +219,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<h4>Next, please select the type of clothing you would like to make</h4>"+
               '<select class="target newProductModalDropdown">'+
                 '<option selected="selected">Please Choose Your Clothing Type</option>'+
-                '<option value="Dress">Dress'+ '</option>'+
-              '  <option value="Pants" disabled>Pants</option>'+
-              '  <option value="Skirt" disabled>Skirt</option>'+
-              '  <option value="Shirt" disabled>Shirt</option>'+
+                '<option value="dress">Dress'+ '</option>'+
+              '  <option value="pants" disabled>Pants</option>'+
+              '  <option value="skirt" disabled>Skirt</option>'+
+              '  <option value="shirt" disabled>Shirt</option>'+
               '</select>'+
               "<input class='newProductBegin' value='Ok, lets start' type='button'>"+
             '</div>'+

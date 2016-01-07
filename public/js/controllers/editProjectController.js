@@ -21,6 +21,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     })
     .then(function(product){
       self.currentProduct = product.data;
+      console.log(self.currentProduct);
       loadData(self.currentProduct);
     })
 
