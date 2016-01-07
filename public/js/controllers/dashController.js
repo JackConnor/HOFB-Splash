@@ -151,7 +151,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<div class='projectCellMinis' id='mini"+i+"'>"+
               "</div>"+
               "<div class='projectCellContent'>"+
-                "<span class='fa fa-heart faa-pulse animated projectCellHeart'></span>"+
                 "<p class='projectCellContentName'>"+self.allProjects[i].name+"</p>"+
                 "<p class='projectCellContentTime'>"+self.allProjects[i].TimeSinceCreation+"</p>"+
               "</div>"+

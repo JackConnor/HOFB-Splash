@@ -65,6 +65,7 @@ module.exports = function(app){
 
   //get a single user
   app.get("/api/users/:id", function(req, res){
+    console.log(req.params);
     User.findOne({"_id":req.params.id}, function(err, user){
       if(err) throw err;
       res.json(user);
@@ -73,12 +74,20 @@ module.exports = function(app){
 
   //get a single user profile
   app.get("/api/user/profile/:id", function(req, res){
-    userProfile.findOne({"_id":req.params.id}, function(err, userProfile){
+    console.log(req.params);
+    User.findOne({"_id":req.params.id}, function(err, User){
       if(err) throw err;
-      res.json(userProfile);
-      console.log('userProfile - returns successful response 200 with correct ObjectID from DB, but no data - fails to return any response with a fake ObjectID');
+      res.json(User);
     })
   })
+
+  ///Post for updating user profile
+  // app.post("/api/user/profile", function(req, res){
+  //   User.insert(req.body, function(err, User){
+  //     if(err) throw err;
+  //     res.json(User);
+  //   })
+  // })
 
   ///create a new user
   app.post('/api/users', function(req, res){

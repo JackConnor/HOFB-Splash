@@ -88,11 +88,11 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'order'
     })
     //Could be double code here, added duplicate code below that's been modified.  Feel free to delete this route if not needed.
-    .when('/profile/:user_id', {
-      templateUrl: 'templates/_userProfile.html'
-      ,controller: 'userCtrl'
-      ,controllerAs: 'user'
-    })
+    // .when('/profile/:user_id', {
+    //   templateUrl: 'templates/_userProfile.html'
+    //   ,controller: 'userCtrl'
+    //   ,controllerAs: 'user'
+    // })
 
     //Get single user profile info
     .when('/profile/:user_id', {
