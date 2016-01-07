@@ -1440,18 +1440,19 @@
   margin-top: 1%;
   height: 98%;
   outline: 2px solid #E7E6E3;
+  overflow: scroll;
 }
 
 .projectCellMiniImage {
   height: 100%;
   margin: 2px;
   display: inline-block;
-  width: 12.5%;
+  width: 60px;
 }
 
 .projectCellMinis {
   height: 50px;
-  width: 100%;
+  width: 1000%;
   margin-bottom: 4px;
 }
 

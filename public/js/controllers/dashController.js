@@ -57,7 +57,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             function timeSince(){
               var nowDate = new Date();
               var timeProj = self.allProjects[i].timestamp;
-              console.log(timeProj);
               //////project creation variables
               var projYear = timeProj.split('-')[0];
               var projMonth = timeProj.split('-')[1];
@@ -96,9 +95,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 }
               }
               else if(projYear == nowYear){
-                console.log(nowMonth);
-                console.log(projMonth);
-                console.log('happened this year');
                 if(nowMonth > projMonth+1){
                   return (nowMonth - projMonth)+" months old";
                 }
@@ -111,7 +107,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               }
             }
             self.allProjects[i].TimeSinceCreation = timeSince();
-            console.log(self.allProjects[i].TimeSinceCreation);
             /////get all collections
             for (var j = 0; j < self.allProjects[i].collections.length; j++) {
               collectionName.push(self.allProjects[i].collections[j])
@@ -165,11 +160,46 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "</div>"+
           "</div>"
         )
+        //////we need to load up all the different element attributes to populate the boxes
+        var allAttributes = [];
         var allImages = self.allProjects[i].images;
-        for (var j = 0; j < allImages.length; j++) {
-          $('#mini'+i).append(
-            "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
-          )
+        for (var k = 0; k < allImages.length; k++) {
+          allAttributes.push(allImages[k]);
+        }
+        var allFabrics = self.allProjects[i].fabrics;
+        for (var k = 0; k < allFabrics.length; k++) {
+          console.log(allFabrics[k]);
+          //////compare against swatches, so we can send right swatch info
+          for (fabric in allSwatches.fabrics) {
+            console.log(fabric);
+            if(allFabrics[k].toLowerCase() == fabric){
+              console.log(fabric);
+              allAttributes.push(allSwatches.fabrics[fabric])
+            }
+          }
+        }
+        var allColors = self.allProjects[i].colors;
+        for (var k = 0; k < allColors.length; k++) {
+          //////compare against swatches, so we can send right swatch info
+          for (color in allSwatches.colors) {
+            if(allColors[k].toLowerCase() == color){
+              allAttributes.push(allSwatches.colors[color])
+            }
+          }
+        }
+        console.log(allAttributes);
+        for (var j = 0; j < allAttributes.length; j++) {
+          if(allAttributes[j].split('')[0] == "#"){
+            ///////we just checked for the beginning of a hex code, used by the octothorp
+            $('#mini'+i).append(
+              "<img style='background-color:"+allAttributes[j]+"' class='projectCellMiniImage'/>"
+            )
+          }
+          else{
+            $('#mini'+i).append(
+              "<img src='"+allAttributes[j]+"' class='projectCellMiniImage'/>"
+            )
+          }
         }
       }
       $('.designerDashList').append(
