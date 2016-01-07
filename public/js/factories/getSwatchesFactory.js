@@ -34,30 +34,12 @@ angular.module('getSwatchesFactory', [])
           ,hat: "http://ep.yimg.com/ay/oaklandraiders/oakland-raiders-girls-tailsweep-hat-3.jpg"
         }
         ,colors: {
-          red: '#B53F3F'
+          red: '#A80000'
           ,blue: "#58ACFA"
           ,white: "#FFFFFF"
           ,black: "#000000"
-          ,magenta: "#F781F3"
-          ,orange: "#FA8258"
+          ,green: "#458B00"
           ,yellow: "#F2F5A9"
-          ,aqua: "#58FAF4"
-          ,green: "#04B404"
-          ,blue1: "#58ACFA"
-          ,white1: "#FFFFFF"
-          ,black1: "#000000"
-          ,magenta1: "#F781F3"
-          ,orange1: "#FA8258"
-          ,yellow1: "#F2F5A9"
-          ,aqua2: "#58FAF4"
-          ,green2: "#04B404"
-          ,blue2: "#58ACFA"
-          ,white2: "#FFFFFF"
-          ,blac2k: "#000000"
-          ,magent3a: "#F781F3"
-          ,orang3e: "#FA8258"
-          ,yello3w: "#F2F5A9"
-          ,aqu3a: "#58FAF4"
         }
         ,stitch: {
           straight: ''

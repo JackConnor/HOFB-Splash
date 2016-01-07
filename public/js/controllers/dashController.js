@@ -166,42 +166,34 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         for (var k = 0; k < allImages.length; k++) {
           allAttributes.push(allImages[k]);
         }
-        var allFabrics = self.allProjects[i].fabrics;
-        console.log(self.allProjects[i]);
-        console.log(allFabrics);
-        for (var k = 0; k < allFabrics.length; k++) {
-          console.log(allFabrics[k]);
-          //////compare against swatches, so we can send right swatch info
-          for (fabric in allSwatches.fabrics) {
-            console.log(fabric);
-            if(allFabrics[k].toLowerCase() == fabric){
-              console.log(fabric);
-              allAttributes.push(allSwatches.fabrics[fabric])
-            }
-          }
-        }
-        var allColors = self.allProjects[i].colors;
-        for (var k = 0; k < allColors.length; k++) {
-          //////compare against swatches, so we can send right swatch info
-          for (color in allSwatches.colors) {
-            if(allColors[k].toLowerCase() == color){
-              allAttributes.push(allSwatches.colors[color])
-            }
-          }
-        }
+        // var allFabrics = self.allProjects[i].fabrics;
+        // console.log(self.allProjects[i]);
+        // console.log(allFabrics);
+        // for (var k = 0; k < allFabrics.length; k++) {
+        //   console.log(allFabrics[k]);
+        //   //////compare against swatches, so we can send right swatch info
+        //   for (fabric in allSwatches.fabrics) {
+        //     console.log(fabric);
+        //     if(allFabrics[k].toLowerCase() == fabric){
+        //       console.log(fabric);
+        //       allAttributes.push(allSwatches.fabrics[fabric])
+        //     }
+        //   }
+        // }
+        // var allColors = self.allProjects[i].colors;
+        // for (var k = 0; k < allColors.length; k++) {
+        //   //////compare against swatches, so we can send right swatch info
+        //   for (color in allSwatches.colors) {
+        //     if(allColors[k].toLowerCase() == color){
+        //       allAttributes.push(allSwatches.colors[color])
+        //     }
+        //   }
+        // }
         console.log(allAttributes);
         for (var j = 0; j < allAttributes.length; j++) {
-          if(allAttributes[j].split('')[0] == "#"){
-            ///////we just checked for the beginning of a hex code, used by the octothorp
-            $('#mini'+i).append(
-              "<img style='background-color:"+allAttributes[j]+"' class='projectCellMiniImage'/>"
-            )
-          }
-          else{
-            $('#mini'+i).append(
-              "<img src='"+allAttributes[j]+"' class='projectCellMiniImage'/>"
-            )
-          }
+          $('#mini'+i).append(
+            "<img src='"+allAttributes[j]+"' class='projectCellMiniImage'/>"
+          )
         }
       }
       $('.designerDashList').append(
@@ -319,23 +311,23 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         "<p class='curatedBarOrders'>"+
           "Orders"+
         "</p>"+
-        "<p class='curatedBarPercentage'>"+
-          "Percentage"+
-        "</p>"+
-        "<p class='curatedBarProfit'>"+
-          "Profit"+
-        "</p>"+
       "</div>"
       )
       for (var i = 0; i < self.curatedProjects.length; i++) {
         $('.designerDashList').append(
           "<div class='curatedCell' id='"+self.curatedProjects[i]._id+"'>"+
-            "<div class='curatedCellImage'>"+
+            "<div class='curatedCellImage' id='"+self.curatedProjects[i]._id+"'>"+
               "<img src='"+self.curatedProjects[i].images[0]+"'>"+
             "</div>"+
-            "<div class='curatedCellName'>"+
-              "<p class='curatedTitle'>"+self.curatedProjects[i].name+"</p>"+
-              "<p class='curatedTime'>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
+            "<div class='curatedCellName' id='"+self.curatedProjects[i]._id+"'>"+
+              "<p class='curatedTitle' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].name+"</p>"+
+              "<p class='curatedTime' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
+            "</div>"+
+            "<div class='curatedCellStatus'>"+
+
+            "</div>"+
+            "<div class='curatedCellOrders'>"+
+            "coming soon"+
             "</div>"+
           "</div>"
         )
@@ -352,10 +344,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           })
         })
         $('.curatedCell').on('click', function(evt){
-          console.log($(evt.target).attr('id'));
-          console.log($(evt.target));
-          console.log($(evt.target).id);
-          window.location.hash = "#/view/product/"+$(evt.target).attr('id')
+          var thisId = $(evt.target).attr('id');
+          console.log(thisId);
+          window.location.hash = "#/view/product/"+ thisId;
         })
       }
     }

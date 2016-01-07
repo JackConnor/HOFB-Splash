@@ -235,14 +235,13 @@
 }
 
 .createColorCellHolder {
-  height: 22%;
+  height: 150px;
 }
 
 .createColor {
-  width: 90%;
-  height: 90%;
-  margin: 5%;
-  background-color: pink;
+  width: 95%;
+  height: 95%;
+  margin: 2.5%;
 }
 
 .createColorContainer {
@@ -369,13 +368,6 @@
 }
 
 .curatedBarOrder {
-  float: right;
-  margin-right: 100px;
-  vertical-align: top;
-}
-
-.curatedBarPercentage {
-  float: right;
   margin-right: 100px;
   vertical-align: top;
 }
@@ -391,6 +383,10 @@
   width: 100%;
   background-color: #EFE9EB;
   margin-top: 3px;
+}
+
+.curatedCellStatus {
+
 }
 
 .curatedCellImage {
@@ -447,6 +443,7 @@
 
 .curatedTopBar p {
   display: inline-block;
+  padding-top: 10px;
 }
 
 #curatedTabIconSquare{
@@ -1540,7 +1537,7 @@
 
 .projectCellMinis {
   height: 50px;
-  width: 1000%;
+  width: 100%;
   margin-bottom: 4px;
 }
 

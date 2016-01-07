@@ -52,8 +52,9 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         var allcolors = [];
         for(color in allSwatches.colors){
           allcolors.push(color);
+          console.log(color);
           $('.createColorContainer').append(
-            '<div class="createColorCellHolder col-xs-2">'+
+            '<div class="createColorCellHolder col-xs-6">'+
               '<div class="createColor create'+color+'">'+
                 color+
               "</div>"+
