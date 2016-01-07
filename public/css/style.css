@@ -252,10 +252,9 @@
 }
 
 .createFabric {
-  width: 90%;
-  height: 90%;
-  margin: 5%;
-  background-color: pink;
+  width: 95%;
+  height: 95%;
+  margin: 2.5%;
 }
 
 .createFabricCellHolder {

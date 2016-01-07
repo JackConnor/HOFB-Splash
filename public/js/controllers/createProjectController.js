@@ -56,7 +56,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           $('.createColorContainer').append(
             '<div class="createColorCellHolder col-xs-6">'+
               '<div class="createColor create'+color+'">'+
-                color+
               "</div>"+
             "</div>"
           )
@@ -70,22 +69,22 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         return allcolors;
       }
       colorsfunc();
-      var stitchesfunc = function(){
-        var allstitches = [];
-        for(stitch in allSwatches.stitch){
-          allstitches.push(stitch);
-          $('.createStitchContainer').append(
-            '<div class="createStitchCellHolder col-xs-12">'+
-              '<div class="createStitch create'+stitch+'">'+
-                stitch+
-              "</div>"+
-            "</div>"
-          )
-        }
-        console.log(allstitches);
-        return allstitches;
-      }
-      stitchesfunc();
+      // var stitchesfunc = function(){
+      //   var allstitches = [];
+      //   for(stitch in allSwatches.stitch){
+      //     allstitches.push(stitch);
+      //     $('.createStitchContainer').append(
+      //       '<div class="createStitchCellHolder col-xs-12">'+
+      //         '<div class="createStitch create'+stitch+'">'+
+      //           stitch+
+      //         "</div>"+
+      //       "</div>"
+      //     )
+      //   }
+      //   console.log(allstitches);
+      //   return allstitches;
+      // }
+      // stitchesfunc();
     }
     setSwatches();
 

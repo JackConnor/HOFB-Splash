@@ -12,7 +12,7 @@ angular.module('getSwatchesFactory', [])
           ,camo: "http://wiganhydroprinting.co.uk/wp-content/uploads/2014/04/clear-camo-300x3001.jpg"
           ,veneer: "http://www.arrow.gb.net/images/pages/finish-colours/material-finishes/veneer/walnut-r.jpg"
           ,nylon: "http://static1.squarespace.com/static/52965deee4b0f580c1fe0b7d/52c88375e4b03b30610b4a0a/52c8845be4b0268360ddfb8c/1388874157418/LightRoyalNylon.jpg?format=300w"
-          ,leather: "https://s-media-cache-ak0.pinimg.com/736x/8b/c3/bf/8bc3bf43297bc2bc9983996ee8ed4cdb.jpg"
+          ,leather: "http://demandware.edgesuite.net/aakh_prd/on/demandware.static/-/Sites-main/default/dwa303e31f/images/large/L7871.jpg"
           ,cotton: "http://d6lw7to1547c3.cloudfront.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/308744.jpg"
           ,denim: "https://www.shoponeonline.com/wp-content/uploads/denim-swatch.png"
         }
