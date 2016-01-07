@@ -69,26 +69,9 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         return allcolors;
       }
       colorsfunc();
-      // var stitchesfunc = function(){
-      //   var allstitches = [];
-      //   for(stitch in allSwatches.stitch){
-      //     allstitches.push(stitch);
-      //     $('.createStitchContainer').append(
-      //       '<div class="createStitchCellHolder col-xs-12">'+
-      //         '<div class="createStitch create'+stitch+'">'+
-      //           stitch+
-      //         "</div>"+
-      //       "</div>"
-      //     )
-      //   }
-      //   console.log(allstitches);
-      //   return allstitches;
-      // }
-      // stitchesfunc();
     }
     setSwatches();
-
-
+    
     ////////////////////////////////////////
     /////////Effects for carousel//////////
     ////click effect for seasonsplash

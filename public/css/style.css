@@ -1148,6 +1148,8 @@
 
 .newProductMiniImage {
   height: 100%;
+  width: 130px;
+  display: inline-block;
 }
 
 .newProductMiniImage img {
@@ -1157,10 +1159,10 @@
 }
 
 .newProductMiniImagesHolder {
-  width: 80%;
+  width: 2000px;
   height: 100px;
   vertical-align: bottom;
-  margin-top: -215px;
+  margin-top: -110px;
 }
 
 .newProductModal {
