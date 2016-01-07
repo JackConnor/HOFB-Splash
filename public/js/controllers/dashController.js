@@ -216,6 +216,14 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<br>"+
               "<h4>The first step is giving your product a name</h4>"+
               "<input class='newProductName' placeholder='New Product Name'>"+
+              "<h4>Next, please select the type of clothing you would like to make</h4>"+
+              '<select class="target newProductModalDropdown">'+
+                '<option selected="selected">Please Choose Your Clothing Type</option>'+
+                '<option value="Dress">Dress'+ '</option>'+
+              '  <option value="Pants" disabled>Pants</option>'+
+              '  <option value="Skirt" disabled>Skirt</option>'+
+              '  <option value="Shirt" disabled>Shirt</option>'+
+              '</select>'+
               "<input class='newProductBegin' value='Ok, lets start' type='button'>"+
             '</div>'+
           '</div>'+
@@ -223,9 +231,14 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           "</div>"+
         '</div>'
       )
+      $('.dropList').on('change', function(){
+        console.log('yoyoy');
+      })
       $('.newProductBegin').on('click', function(){
         var name = $('.newProductName').val().split(' ').join('_');
-        window.location.hash = "#/create/project/"+name;
+        var type = $('.newProductModalDropdown').val();
+        console.log(type);
+        window.location.hash = "#/create/product/"+name+"/"+type;
       });////function to begin product build
       $('.modalFiller').on('click', function(){
         $('.newProductModal').remove();

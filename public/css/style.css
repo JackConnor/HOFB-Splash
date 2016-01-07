@@ -1103,13 +1103,20 @@
   margin-right: 10px;
 }
 
+.newProductModalDropdown {
+  display: block;
+  width: 80%;
+  font-size: 30px;
+  margin-left: 10%;
+}
+
 .newProductModalHolder {
   width: 40%;
   /*margin-left: 25%;*/
   vertical-align: top;
   background-color: white;
   outline: 2px solid gray;
-  height: 350px;
+  height: 550px;
   margin-top: 5%;
   z-index: 6;
   display: inline-block;
