@@ -234,6 +234,9 @@ module.exports = function(app){
       if (req.body.status) {
         product.status = req.body.status;
       }
+      if (req.body.images) {
+        product.images = req.body.images;
+      }
       if (req.body.purchaserInformation) {
         product.purchaserInformation = req.body.purchaserInformation;
       }

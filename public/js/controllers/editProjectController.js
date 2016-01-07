@@ -661,11 +661,15 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       ,colors: colors
       ,fabrics: fabrics
       ,seasons: seasons
+      ,images: self.tempPhotoCache
       ,stitchPatterns: stitches
       ,buttons: buttons
       ,status: status
     }
-    editProjectToDb(newProjectObject, submitPhotos)
+    console.log(newProjectObject);
+    editProjectToDb(newProjectObject, function(){
+      window.location.hash = "#/designer/dashboard";
+    })
     // editProject().editProject(newProjectObject, submitPhotos)///post the object
   }
   $('.new_product_send').on('click', editProject);
@@ -684,27 +688,29 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     })
   }
   function submitPhotos(productIdToUpdate){
-    $(".bodyview").append(
-      "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
-      "</form>"
-    )
-    //
-    if(self.tempPhotoHTMLCache[0]){
-      $('.tempForm').append(self.tempPhotoHTMLCache[0]);
-    }
-    if(self.tempPhotoHTMLCache[1]){
-      $('.tempForm').append(self.tempPhotoHTMLCache[1]);
-    }
-    if(self.tempPhotoHTMLCache[2]){
-      $('.tempForm').append(self.tempPhotoHTMLCache[2]);
-    }
-    if(self.tempPhotoHTMLCache[3]){
-      $('.tempForm').append(self.tempPhotoHTMLCache[3]);
-    }
-    $('.tempForm').append(
-      "<input name='productId' type='text' value='"+productIdToUpdate+"'>"
-    );
-    $('.tempForm').submit();
+    console.log('aint even worrying about it, since we already have the phtoo urls. Look in the edit project function.');
+
+    // $(".bodyview").append(
+    //   "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
+    //   "</form>"
+    // )
+    // //
+    // if(self.tempPhotoHTMLCache[0]){
+    //   $('.tempForm').append(self.tempPhotoHTMLCache[0]);
+    // }
+    // if(self.tempPhotoHTMLCache[1]){
+    //   $('.tempForm').append(self.tempPhotoHTMLCache[1]);
+    // }
+    // if(self.tempPhotoHTMLCache[2]){
+    //   $('.tempForm').append(self.tempPhotoHTMLCache[2]);
+    // }
+    // if(self.tempPhotoHTMLCache[3]){
+    //   $('.tempForm').append(self.tempPhotoHTMLCache[3]);
+    // }
+    // $('.tempForm').append(
+    //   "<input name='productId' type='text' value='"+productIdToUpdate+"'>"
+    // );
+    // $('.tempForm').submit();
   }
 
   ///logout button functionality
