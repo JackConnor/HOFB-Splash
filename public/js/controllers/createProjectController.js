@@ -95,12 +95,15 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     function swatchLogic(swatchType){
       ///////note: swatchType needs to be added as a capital, i.e. "Season"
       $('.create'+swatchType).on('click', function(evt){
+        var type = $(evt.target)[0].classList[1].slice(6, 1000);
+        console.log(type);
+
         if($(evt.target).css('opacity') == 1 ){
           $(evt.target).css({
             opacity: 0.5
             ,outline: "2px solid gray"
           })
-          $(evt.target).attr('id', 'picked_'+swatchType+"_"+evt.target.innerText.split(' ').join(''));
+          $(evt.target).attr('id', 'picked_'+swatchType+"_"+type)
           $(evt.target).addClass('picked');
         } else {
           $(evt.target).css({

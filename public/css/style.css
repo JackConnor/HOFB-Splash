@@ -356,6 +356,68 @@
   margin-left: 20%;
 }
 
+.curatedBarProduct {
+  margin-left: 140px;
+  margin-right: 250px;
+  vertical-align: top;
+}
+
+.curatedBarStatus {
+  float: right;
+  margin-right: 100px;
+  vertical-align: top;
+}
+
+.curatedBarOrder {
+  float: right;
+  margin-right: 100px;
+  vertical-align: top;
+}
+
+.curatedBarPercentage {
+  float: right;
+  margin-right: 100px;
+  vertical-align: top;
+}
+
+.curatedBarProfit {
+  float: right;
+  margin-right: 100px;
+  vertical-align: top;
+}
+
+.curatedCell {
+  height: 120px;
+  width: 100%;
+  background-color: #EFE9EB;
+  margin-top: 3px;
+}
+
+.curatedCellImage {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  margin-left: 10px;
+  padding-top: 10px;
+}
+
+.curatedCellImage img{
+  width: 100px;
+  height: 100%;
+}
+
+.curatedCellName {
+  margin-left: 20px;
+  width: 350px;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.curatedCellName p{
+  margin-left: 10px;
+}
+
 .curatePopup {
   height: 200px;
   width: 300px;
@@ -363,6 +425,28 @@
   background-color:gray;
   position: fixed;
   z-index: 3;
+}
+
+.curatedTitle {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.curatedTime {
+  font-size: 16px;
+}
+
+.curatedTopBar {
+  background-color: #232730;
+  height: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 20px;
+}
+
+.curatedTopBar p {
+  display: inline-block;
 }
 
 #curatedTabIconSquare{
@@ -487,11 +571,6 @@
   /*opacity: 1;*/
 }
 
-.designerDashActive:hover {
-  /*box-shadow: inset 0 0 0 5px #F9F7F5;*/
-  /*opacity: 0.75;*/
-  box-shadow: 0 0 30px black;
-}
 
 .designerDashboardPage{
   font-family: 'Oxygen', sans-serif;
@@ -561,11 +640,6 @@
   cursor:pointer;
 }
 
-
-.designerDashCurated:hover{
-  box-shadow: 0 0 30px black;
-}
-
 .designerDashDashTitle {
   font-size: 20px;
   background-color: #F6FDFA;
@@ -589,7 +663,22 @@
   outline: 4px solid aqua;
   z-index: 3
 }
+.designerDashActive:hover {
+  border-left: 2px solid #afafa6;
+  border-top: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;
+}
+.designerDashCurated:hover {
+  border-left: 2px solid #afafa6;
+  border-top: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;
+}
 
+.designerDashSubmitted:hover {
+  border-left: 2px solid #afafa6;
+  border-top: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;
+}
 .designerDashFilter {
   display: inline-block;
   height: 55px;
@@ -1440,7 +1529,6 @@
   margin-top: 1%;
   height: 98%;
   outline: 2px solid #E7E6E3;
-  overflow: scroll;
 }
 
 .projectCellMiniImage {

@@ -167,6 +167,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           allAttributes.push(allImages[k]);
         }
         var allFabrics = self.allProjects[i].fabrics;
+        console.log(self.allProjects[i]);
+        console.log(allFabrics);
         for (var k = 0; k < allFabrics.length; k++) {
           console.log(allFabrics[k]);
           //////compare against swatches, so we can send right swatch info
@@ -306,42 +308,56 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         }
         self.curatedProjects[i].TimeSinceCreation = timeSince();
       }
-      for (var i = 0; i < self.curatedProjects.length; i++) {
-          $('.designerDashList').append(
-            "<div class='projectCell col-md-4 col-xs-12' id='"+self.curatedProjects[i]._id+"'>"+
-              "<div class='projectCellInner'>"+
-                "<div class='projectCellImageHolder'>"+
-                  "<img class='projectCellImage' src='"+self.curatedProjects[i].images[0]+"'>"+
-                "</div>"+
-                "<div class='projectCellContent'>"+
-                  "<p>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
-                  "<p>"+self.curatedProjects[i].name+"--curated</p>"+
-                "</div>"+
-              "</div>"+
-            "</div>"
-          )
-      }
       $('.designerDashList').append(
-        "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
-          "<div class='projectCellNewInner'>"+
-            "<p>Build a New product</p>"+
-          "</div>"+
-        "</div>"
+        "<div class='curatedTopBar'>"+
+        "<p class='curatedBarProduct'>"+
+          "Product"+
+        "</p>"+
+        "<p class='curatedBarStatus'>"+
+          "Status"+
+        "</p>"+
+        "<p class='curatedBarOrders'>"+
+          "Orders"+
+        "</p>"+
+        "<p class='curatedBarPercentage'>"+
+          "Percentage"+
+        "</p>"+
+        "<p class='curatedBarProfit'>"+
+          "Profit"+
+        "</p>"+
+      "</div>"
       )
-      $('.projectCellNewInner').on('mouseenter', function(){
-        $('.projectCellNewInner').animate({
-          opacity: .6
-        }, 100)
-      })
-      $('.projectCellNewInner').on('mouseleave', function(){
-        $('.projectCellNewInner').animate({
-          outline: 'none'
-          ,opacity: 1
-        }, 100)
-      })
-      $('.projectCellNewInner').on('click', function(){
-        newProductPop();
-      })
+      for (var i = 0; i < self.curatedProjects.length; i++) {
+        $('.designerDashList').append(
+          "<div class='curatedCell' id='"+self.curatedProjects[i]._id+"'>"+
+            "<div class='curatedCellImage'>"+
+              "<img src='"+self.curatedProjects[i].images[0]+"'>"+
+            "</div>"+
+            "<div class='curatedCellName'>"+
+              "<p class='curatedTitle'>"+self.curatedProjects[i].name+"</p>"+
+              "<p class='curatedTime'>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
+            "</div>"+
+          "</div>"
+        )
+        $('.curatedCell').on('mouseenter', function(){
+          $(this).css({
+            backgroundColor: '#D7D1D3'
+            ,opacity: .8
+          })
+        })
+        $('.curatedCell').on('mouseleave', function(){
+          $(this).css({
+            backgroundColor: '#efe9eb'
+            ,opacity: 1
+          })
+        })
+        $('.curatedCell').on('click', function(evt){
+          console.log($(evt.target).attr('id'));
+          console.log($(evt.target));
+          console.log($(evt.target).id);
+          window.location.hash = "#/view/product/"+$(evt.target).attr('id')
+        })
+      }
     }
     ////function for appending submitted list
     function loadSubmittedList(){
@@ -546,6 +562,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.designerDashCurated').css({
         backgroundColor: "#FEFDFA"
       })
+      $('.designerDashSubmitted').css({
+        backgroundColor: "#EBEBE9"
+      })
       $('.designerDashActive').css({
         backgroundColor: "#EBEBE9"
       })
@@ -558,7 +577,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.designerDashSubmitted').css({
         backgroundColor: "#FEFDFA"
       })
-      $('.designerDashSubmitted').css({
+      $('.designerDashCurated').css({
+        backgroundColor: "#EBEBE9"
+      })
+      $('.designerDashActive').css({
         backgroundColor: "#EBEBE9"
       })
       self.curatedToggleCounter = 'Submitted';
