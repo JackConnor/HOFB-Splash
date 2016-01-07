@@ -1,1 +1,90 @@
-<h1>Profile goes heeeeere, {{user.test}}</h1>
+<!-- Navigation Bar -->
+<div class="navigationBar">
+ <div class="navTitle">
+   HOFB
+ </div>
+ <div class="logoutButton">
+   Logout
+ </div>
+</div>
+<!-- end nav bar -->
+<!-- Start of settings bar, below nav bar -->
+<div class="userProfileSettingsBar">
+<h1 class='userProfileSettingsBarTitle '>Settings</h1>
+</div>
+<!-- end of settings bar -->
+<!-- start of user profile  -->
+<div class="container userProfileContainer">
+  <h2>Profile</h2>
+  <div class='userProfileFormDataContainer'>
+  <form class="form-horizontal userProfileFormData" role="form">
+    <div class="form-group">
+      <label class="control-label col-sm-2">Username</label>
+      <div class="col-sm-6">
+        <h4>{{userProfile.user.data.username}}</h4>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Email</label>
+      <div class="col-sm-6">
+        <input type="email" class="form-control" id="email" placeholder="{{userProfile.user.data.email}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2">First Name</label>
+      <div class="col-sm-6">
+        <input class="form-control" id="userProfileFirstName" placeholder="{{userProfile.user.data.firstname}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Last Name</label>
+      <div class="col-sm-6">
+        <input class="form-control" id="userProfileLastName" placeholder="{{userProfile.user.data.lastname}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2">Location</label>
+      <div class="col-sm-6">
+        <input class="form-control" id="userProfileLocation" placeholder="{{userProfile.user.data.location}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2">Bio</label>
+      <div class="col-sm-6">
+        <input class="form-control" id="userProfileBio" placeholder="{{userProfile.user.data.bio}}">
+      </div>
+
+    </div>
+
+
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-6">
+        <button type="submit" class="btn btn-default userProfileSubmitBtn">UPDATE</button>
+      </div>
+    </div>
+  </form>
+  <div class="column-sm-2">
+  <div class="userProfileImage">
+    <input style='display:none;' type="file" class="userProfileImageFileUpload" id='userProfileImageFileUpload'><button onclick="document.getElementById('userProfileImageFileUpload').click();" src="http://vignette1.wikia.nocookie.net/vsbattles/images/a/a3/Black-windows_542931.jpg/revision/latest?cb=20150317090032" class="img-circle userProfileImageRound" >
+</input>
+
+  </div>
+</div>
+</div>
+  <h2>Security</h2>
+  <div class='userProfilePwdContainer'>
+    <div class="form-group userProfilePwdInfo">
+      <label class="control-label col-sm-2" >Password:</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end of user profile -->
