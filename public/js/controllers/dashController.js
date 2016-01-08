@@ -195,9 +195,40 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           )
         }
       }
+      moveDashMinis();
+
+      self.activeMinis = '';///this is were we'll keep track of which mini photo thing should be moving
+      self.miniMarg = 0;
+      self.intervalCounter = 0;////this is to run and not run the moving phtoos on the dashboard side that we're going to use
+      function moveDashMinis() {
+        //////We create the logic for the mini photos. these run on an interval, that switches to the photos being move (margin-left being added)
+        setInterval(function(){
+          if(self.intervalCounter == 0){
+            self.miniMarg = 0;
+            console.log('looking good there guy');
+          }
+          else {
+            console.log(self.activeMinis);
+            self.activeMinis.css({
+              marginLeft: self.miniMarg
+            })
+            self.miniMarg += 1;
+          }
+        }, 50)
+        $('.projectCellMinis').on('mouseenter', function(evt){
+          console.log($(evt.target));
+          self.intervalCounter = 1;
+          self.activeMinis = $(evt.target);
+        })
+        $('.projectCellMinis').on('mouseleave', function(){
+          self.intervalCounter = 0;
+          self.activeMinis = "none";
+        })
+      }
+
+
       ///////////////////////////////////////////////////////
       ///////////////begin logic for the photo popup windows/
-
       function setPopup(){
         $('.projectCellMiniImage').on('click', function(evt){
           $('.invisModal').remove();
@@ -232,12 +263,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       setPopup();
       setTimeout(setPopup(), 1000)
       setTimeout(setPopup(), 3000)
-      // $('.bodyview').on('click', function(evt){
-      //   console.log(evt);
-      //   if($(evt.target)[0].classList[0] != 'photoPopup' || $(evt.target)[0].classList[0] != 'photoPopupImage' || $(evt.target)[0].classList[0] != 'projectCellMiniImage' || $(evt.target)[0].classList[0] != 'projectCellMinis'){
-      //     $('.photoPopup').remove();
-      //   }
-      // })
       /////////////end logic for the photo popup windows/////
       ///////////////////////////////////////////////////////
       $('.designerDashList').append(
