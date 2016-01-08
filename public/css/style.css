@@ -1235,17 +1235,6 @@
   vertical-align: top;
 }
 
-.newProductScrollImagesRight {
-  height: 50px;
-  width: 30px;
-  font-size: 25px;
-  position: absolute;
-  background-color: black;
-  display: block;
-  border-bottom: 1px solid gray;
-  color: white;
-}
-
 .newProductScrollImagesLeft {
   height: 50px;
   width: 30px;
@@ -1254,6 +1243,19 @@
   position: absolute;
   background-color: black;
   display: block;
+  color: white;
+  margin-top: -50px;
+}
+
+.newProductScrollImagesRight {
+  height: 50px;
+  width: 30px;
+  font-size: 25px;
+  margin-top: -100px;
+  position: absolute;
+  background-color: black;
+  display: block;
+  border-bottom: 1px solid gray;
   color: white;
 }
 

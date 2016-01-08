@@ -407,6 +407,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           )
           changeEffect()
           self.miniPhotoCounter = self.tempPhotoCache.length;
+          adjustMiniMarginUpload();
         }
         else{
           alert('better delete some photos if you want to add more')
@@ -764,32 +765,49 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
     })
 
-    $(document).ready(function(){
-      setTimeout(function(){
-        $('.newProductScrollImagesLeft').css({
-          marginLeft: $('.newProductImageFrame').width() - 30
-        })
-        $('.newProductScrollImagesRight').css({
-          marginLeft: $('.newProductImageFrame').width() - 30
-        })
-      }, 51)
-    })
-    $(window).resize(function(){
+    /////function to make sure the tabs for the scrol on th emini photos stays in place, which is triggered pretty much every time the mini photo thing is moved
+    function resizeScrollTabs(){
       $('.newProductScrollImagesLeft').css({
         marginLeft: $('.newProductImageFrame').width() - 30
       })
       $('.newProductScrollImagesRight').css({
         marginLeft: $('.newProductImageFrame').width() - 30
       })
+    }
+
+    $(document).ready(function(){
+      resizeScrollTabs()
+      setTimeout(function(){
+        resizeScrollTabs();
+      }, 1000);
     })
+    $(window).resize(function(){
+      resizeScrollTabs();
+      setTimeout(function(){
+        resizeScrollTabs();
+      }, 1000);
+    })
+    setInterval(function(){
+      resizeScrollTabs();
+    }, 100);
 
     ////////function to check the margin everytime the mini photo counter is changed (i.e. a photo is added or deleted), and adjust it accordingly
-    function adjustMiniMarginUploadDelete() {
+    function adjustMiniMarginUpload() {
       console.log('hallllllo');
-      self.imageHolderMargin = 0;
-      $('.newProductMiniImagesHolder').css({
-        marginLeft: self.imageHolderMargin+"px"
-      })
+      // self.imageHolderMargin = 0;
+      console.log(self.miniPhotoCounter);
+      if(self.miniPhotoCounter > 3){
+        console.log('yooo');
+        var maxWidth = ($('.newProductMiniImage').width()*(self.miniPhotoCounter))- ($('.newProductImageFrame').width()/2);
+        console.log(maxWidth);
+        $('.newProductMiniImagesHolder').css({
+          marginLeft: -maxWidth+"px"
+        })
+        resizeScrollTabs();
+        console.log("Pre reset:"+self.imageHolderMargin);
+        self.imageHolderMargin = -maxWidth;
+        console.log("Post reset:"+self.imageHolderMargin);
+      }
     }
 
 
