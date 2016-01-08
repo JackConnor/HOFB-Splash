@@ -781,6 +781,12 @@
   position: absolute;
 }
 
+.fileUploadWrapper {
+  font-size: 45px;
+  margin-left: 72%;
+  display: inline-block;
+}
+
 .howToCell {
   min-height: 100%;
   width: 33%;
@@ -795,9 +801,13 @@
 
 #i_file {
   position: absolute;
-  width: 20%;
+  width: 50px;
+  font-size: 30px;
   display: inline-block;
   cursor:pointer;
+  margin-left: 0px;
+  margin-top:  -45px;
+  opacity: 0;
 }
 
 .inputFileHolder {
@@ -1081,9 +1091,10 @@
 }
 
 .newProductDeleteMini {
-  font-size: 25px;
-  width: 10%;
-  margin-left: 82%;
+  font-size: 35px;
+  margin-left: 20px;
+  display: inline-block;
+  vertical-align: top;
   text-align: right;
   color: white;
 }
