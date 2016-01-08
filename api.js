@@ -442,6 +442,7 @@ module.exports = function(app){
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination
       cloudinary.uploader.upload(destination+fileName, function(uploadResult){
+        console.log(uploadResult);
         var id = req.body.productId;
         Product.findOne({"_id": id}, function(err, product){
           if(err){console.log(err)}

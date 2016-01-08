@@ -747,7 +747,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
-            "<div class='projectCellTrash'>X </div>"+
             '<div class="projectCellButton projectCellButtonView" >VIEW</div>'+
           "</div>"
         )
@@ -1006,23 +1005,26 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     ///////////////////////
     //////load collections/
     function loadCollection(collections){
-      self.collectionCounter = false;///so that we only load collections once
-      for (var i = 0; i < collections.length; i++) {
+      if(self.collectionCounter){
+        for (var i = 0; i < collections.length; i++) {
+          $('.designerDashCollectionDropdown').append(
+            '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
+              collections[i]+
+            "</div>"
+          )
+        }
         $('.designerDashCollectionDropdown').append(
-          '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
-            collections[i]+
+          "<div class='designerDashCollectionAddMore'>"+
+            "<span class='glyphicon glyphicon-plus'>"+
+              "<p class='designerDashCollectionAddText'>add collection</p>"+
+            "</span>"+
           "</div>"
         )
+        self.collectionCounter = false;///so that we only load collections once
       }
-      //////////////////////////////////////////////////
-      ///////no we add the "add more collections logic"/
-      $('.designerDashCollectionDropdown').append(
-        "<div class='designerDashCollectionAddMore'>"+
-          "<span class='glyphicon glyphicon-plus'>"+
-            "<p class='designerDashCollectionAddText'>add collection</p>"+
-          "</span>"+
-        "</div>"
-      )
+
+      ///////////////////////////////////////////////////
+      ///////now we add the "add more collections logic"/
       $('.designerDashCollectionAddMore').on('mouseenter', function(evt){
           $('.designerDashCollectionAddMore').css({
               backgroundColor: '#BDBDBD'
@@ -1056,15 +1058,18 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var collections = $('.designerDashCollectionCell');
         for (var i = 0; i < collections.length; i++) {
           $(collections[i]).css({
-            backgroundColor: 'white'
+            backgroundColor: '#F9F7F5'
             ,color: "black"
+            ,border: 'none'
           })
         }
         var collectionValue = $($(evt.target)[0])[0].id;
         $($(evt.target)[0]).css({
           backgroundColor: "#1C1C1C"
-          ,color: 'white'
+          ,color: '#F9F7F5'
+          ,border: '4px solid gray'
         })
+
         if(self.curatedToggleCounter == 'active'){
           if(collectionValue == 'All'){
             $('.designerDashList').html("");
