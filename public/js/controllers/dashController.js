@@ -205,11 +205,23 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           }
           else {
             var imageCount = $(self.activeMinis)[0].children.length;
-            var totalLengthPhotos = imageCount*60;
-            $(self.activeMinis).css({
-              marginLeft: self.miniMarg
-            })
-            self.miniMarg += -1;
+            console.log(imageCount);
+            var totalLengthPhotos = ((imageCount+.3)*64);
+            console.log(totalLengthPhotos);
+            var viewWindow = $('.projectCellImageHolder').width();
+            console.log(viewWindow);
+            var maxMovement = (-totalLengthPhotos) + viewWindow;
+            console.log(maxMovement);
+            console.log(self.miniMarg);
+            if(self.miniMarg >= maxMovement && maxMovement < 0){
+              $(self.activeMinis).css({
+                marginLeft: self.miniMarg
+              })
+              self.miniMarg += -1;
+            }
+            else {
+              console.log('no room for movement there');
+            }
           }
         }, 20)
         $('.projectCellMinis').on('mouseenter', function(evt){
@@ -1002,6 +1014,33 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           "</div>"
         )
       }
+      //////////////////////////////////////////////////
+      ///////no we add the "add more collections logic"/
+      $('.designerDashCollectionDropdown').append(
+        "<div class='designerDashCollectionAddMore'>"+
+          "<span class='glyphicon glyphicon-plus'>"+
+            "<p class='designerDashCollectionAddText'>add collection</p>"+
+          "</span>"+
+        "</div>"
+      )
+      $('.designerDashCollectionAddMore').on('mouseenter', function(evt){
+          $('.designerDashCollectionAddMore').css({
+              backgroundColor: '#BDBDBD'
+          })
+      })
+      $('.designerDashCollectionAddMore').on('mouseleave', function(evt){
+          $('.designerDashCollectionAddMore').css({
+            backgroundColor: '#F9F7F5'
+            ,color: "black"
+          })
+      })
+      ////////////on click we popout a modal to enter your collection name
+
+
+
+
+      //////end we add the "add more collections logic"/
+      //////////////////////////////////////////////////
       $('.designerDashCollectionCell').on('mouseenter', function(evt){
           $(evt.target).css({
               backgroundColor: '#BDBDBD'

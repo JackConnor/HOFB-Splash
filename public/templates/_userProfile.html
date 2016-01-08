@@ -10,52 +10,52 @@
 <!-- end nav bar -->
 <!-- Start of settings bar, below nav bar -->
 <div class="userProfileSettingsBar">
-<h1 class='userProfileSettingsBarTitle '>Settings</h1>
+<h1 class='userProfileTitleBar '>Settings</h1>
 </div>
 <!-- end of settings bar -->
 <!-- start of user profile  -->
 <div class="container userProfileContainer">
-  <h2>Profile</h2>
+  <h2 class='userProfileTitle'>Profile</h2>
   <div class='userProfileFormDataContainer'>
   <form class="form-horizontal userProfileFormData" role="form">
     <div class="form-group">
-      <label class="control-label col-sm-2">Username</label>
+      <label class="control-label col-sm-2 userProfileFormTextTitle" >Username</label>
       <div class="col-sm-6">
-        <h4>{{userProfile.user.data.username}}</h4>
+        <h4 id='userProfileUsernameTitle'>{{userProfile.user.data.username}}</h4>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2">Email</label>
+      <label class="control-label col-sm-2 userProfileFormTextTitle">Email</label>
       <div class="col-sm-6">
-        <input type="email" class="form-control" id="email" placeholder="{{userProfile.user.data.email}}">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="control-label col-sm-2">First Name</label>
-      <div class="col-sm-6">
-        <input class="form-control" id="userProfileFirstName" placeholder="{{userProfile.user.data.firstname}}">
+        <input type="email" class="form-control userProfileFormFields" id="userProfileEmail" value="{{userProfile.user.data.email}}">
       </div>
     </div>
 
     <div class="form-group">
-      <label class="control-label col-sm-2" >Last Name</label>
+      <label class="control-label col-sm-2 userProfileFormTextTitle">First Name</label>
       <div class="col-sm-6">
-        <input class="form-control" id="userProfileLastName" placeholder="{{userProfile.user.data.lastname}}">
+        <input class="form-control userProfileFormFields" id="userProfileFirstName" value="{{userProfile.user.data.firstname}}">
       </div>
     </div>
 
     <div class="form-group">
-      <label class="control-label col-sm-2">Location</label>
+      <label class="control-label col-sm-2 userProfileFormTextTitle" >Last Name</label>
       <div class="col-sm-6">
-        <input class="form-control" id="userProfileLocation" placeholder="{{userProfile.user.data.location}}">
+        <input class="form-control userProfileFormFields" id="userProfileLastName" value="{{userProfile.user.data.lastname}}">
       </div>
     </div>
 
     <div class="form-group">
-      <label class="control-label col-sm-2">Bio</label>
+      <label class="control-label col-sm-2 userProfileFormTextTitle">Location</label>
       <div class="col-sm-6">
-        <input class="form-control" id="userProfileBio" placeholder="{{userProfile.user.data.bio}}">
+        <input class="form-control userProfileFormFields" id="userProfileLocation" value="{{userProfile.user.data.location}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2 userProfileFormTextTitle">Bio</label>
+      <div class="col-sm-6">
+        <input rows="3" class="form-control userProfileFormFields" id="userProfileBio" value="{{userProfile.user.data.bio}}">
       </div>
 
     </div>
@@ -76,14 +76,27 @@
   </div>
 </div>
 </div>
-  <h2>Security</h2>
+  <h2 class='userProfileSecurityTitle'>Security</h2>
   <div class='userProfilePwdContainer'>
+    <form data-toggle="validator" role="form">
     <div class="form-group userProfilePwdInfo">
-      <label class="control-label col-sm-2" >Password:</label>
+      <label class="control-label col-sm-2 userProfilePasswordTitle" >Password:</label>
       <div class="col-sm-6">
-        <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+        <div class="form-group">
+        <div class="form-group col-sm-6">
+          <input type="password" data-minlength="6" class="form-control inputPassword" id="inputPassword" placeholder="Password" required>
+          <span style='width= 600px;'class="help-block">Minimum of 6 characters - No special characters</span>
+        </div>
+        <div class="form-group col-sm-6">
+          <input type="password" class="form-control inputPasswordConfirm" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
+          <div class="help-block with-errors"></div>
+          <h2 class="userProfileChangePw">Change Password</h2>
+        </div>
+        </div>
       </div>
     </div>
+  </form>
+  </div>
   </div>
 </div>
 
