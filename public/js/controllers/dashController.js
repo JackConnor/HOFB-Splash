@@ -109,24 +109,28 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             }
             self.allCollectionsRaw = collectionName;
             console.log(self.allCollectionsRaw);
-            checkDuplicate();
           }
+          checkDuplicate();
           callback(arg)
         })
       })
     }
 
+    //////simple function to return just the unique items from an array, very useful for many purposes
+    function unique(list) {
+      var result = [];
+      $.each(list, function(i, e) {
+        if ($.inArray(e, result) == -1) result.push(e);
+      });
+      return result;
+    }
+
     function checkDuplicate(){
       //////must make sure there are no duplicates
-      self.allCollections = [];
+      self.allCollections = unique(self.allCollectionsRaw);
       console.log(self.allCollectionsRaw);
-      for (var i = 0; i < self.allCollectionsRaw.length; i++) {
-        
-      }
-      if(true){
-        console.log(self.allCollectionsRaw);
-        loadCollection(self.allCollections);
-      }
+      console.log(self.allCollections);
+      loadCollection(self.allCollections);
     }
 
     /////load all active projects into the dashboard view
