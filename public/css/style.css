@@ -226,6 +226,7 @@
   height: 90%;
   margin: 5%;
   background-color: pink;
+  cursor:pointer;
 }
 
 .createButtonContainer {
@@ -242,6 +243,7 @@
   width: 95%;
   height: 95%;
   margin: 2.5%;
+  cursor:pointer;
 }
 
 .createColorContainer {
@@ -255,6 +257,7 @@
   width: 95%;
   height: 95%;
   margin: 2.5%;
+  cursor:pointer;
 }
 
 .createFabricCellHolder {
@@ -294,6 +297,7 @@
   height: 90%;
   margin: 5%;
   background-color: pink;
+  cursor:pointer;
 }
 
 .createSeasonCellHolder {
@@ -312,6 +316,7 @@
   height: 90%;
   margin: 5%;
   background-color: pink;
+  cursor:pointer;
 }
 
 .createStitchCellHolder {
@@ -792,6 +797,7 @@
   position: absolute;
   width: 20%;
   display: inline-block;
+  cursor:pointer;
 }
 
 .inputFileHolder {
@@ -1018,6 +1024,7 @@
   text-align: center;
   font-size: 20px;
   border-radius: 5px;
+  cursor:pointer;
 }
 
 .new_product_send {
@@ -1033,6 +1040,7 @@
   text-align: center;
   font-size: 20px;
   border-radius: 5px;
+  cursor:pointer;
 }
 
 .newProductCenterColumn {
@@ -1158,6 +1166,9 @@
   height: 100%;
   /*position: absolute;*/
 }
+.newProductMiniImageImage{
+  cursor:pointer;
+}
 
 .newProductMiniImagesHolder {
   width: 2000px;
@@ -1271,6 +1282,7 @@
   text-align: center;
   border-top-left-radius:8px;
   border-top-right-radius:8px;
+  cursor:pointer;
 }
 
 .newProductTagsHolder {
@@ -1302,6 +1314,7 @@
   width: 80%;
   margin-left: 10%;
   font-size: 16px;
+  cursor:pointer;
 }
 
 .newProductTypeHolder {
@@ -1457,6 +1470,7 @@
   color: white;
   border-radius: 3px;
   padding-top: 10px;
+  cursor:pointer;
 }
 
 .projectCellButtonOrder {
@@ -1468,6 +1482,7 @@
   border-radius: 3px;
   font-size: 18px;
   padding-top: 10px;
+  cursor:pointer;
 }
 
 .projectCellButtonShow {
@@ -1653,6 +1668,7 @@
   font-size: 24px;
   padding-top: 5px;
   text-align: center;
+  cursor:pointer;
 }
 
 .purchaseOther {
@@ -1678,8 +1694,11 @@
 .purchaseSizeSlider {
   display: inline-block;
   margin-right: 10px;
+  cursor:pointer;
 }
-
+.purchaseSizeSlider {
+  cursor:pointer;
+}
 .purchaseSizeSliders p{
   display: inline-block;
   width: 100px;
@@ -1880,7 +1899,12 @@
   text-align: center;
   background-color: #e5ccff;
 }
-
+#slider{
+  cursor:pointer;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover{
+  cursor:pointer;
+}
 .splashBackgroundImageContainer {
   width: 100%;
   min-height: 100%;
@@ -2028,6 +2052,59 @@ textarea#styled {
   position: absolute;
   background-color: black;
   z-index: 5;
+}
+.ui-slider-handle{
+  cursor:pointer;
+}
+.userProfileContainer{
+    margin-bottom: 370px;
+}
+.userProfileFormData{
+  margin-top:100px;
+}
+.userProfileFormDataContainer{
+  border: 1px solid blue;
+  height: 500px;
+  border-radius:3px
+}
+.userProfileImage{
+  float:right;
+  margin-top: -200px;
+}
+.userProfileImageFileUpload{
+  padding: 60px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  border-radius: 60px;
+  position: absolute;
+  margin-top: -205px;
+  display: none;
+}
+.userProfileImageRound{
+  height:180px;
+  width:180px;
+  margin-top: -500px;
+  margin-right: 60px;
+  margin-bottom: -250px;
+  background-image:url('http://vignette1.wikia.nocookie.net/vsbattles/images/a/a3/Black-windows_542931.jpg/revision/latest?cb=20150317090032');
+}
+.userProfilePwdContainer{
+  border: 1px solid red;
+  height: 110px;
+  border-radius:3px
+}
+.userProfilePwdInfo{
+  /*margin-top:35px;*/
+}
+.userProfileSettingsBar{
+  outline: 2px solid blue;
+  height: 40px;
+  margin-top: -20px;
+}
+
+.userProfileSubmitBtn{
+  float:right;
+>>>>>>> userProfilev2
 }
 
 .tourProjectCellNewInner p{

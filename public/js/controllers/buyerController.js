@@ -886,7 +886,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
                           "Extra Small:"+
                         "</p>"+
                       "</div>"+
-                      '<div class="xsSlider purchaseSizeSlider col-xs-8"></div>'+
+                      '<div class="xsSlider purchaseSizeSlider col-xs-8" ></div>'+
                       '<div class="col-xs-1">0</div>'+
                     '</div>'+
                     '<div class="purchaseSizeSliderHolder row">'+
