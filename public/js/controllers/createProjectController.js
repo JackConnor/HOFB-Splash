@@ -745,7 +745,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.newProductScrollImagesRight').on('click', function(){
       //////check to make sure it's not at either end
       console.log(self.imageHolderMargin);
-      if(self.imageHolderMargin > -650){
+      var maxWidth = ($('.newProductMiniImage').width()*8) - $('.newProductImageFrame').width();
+      if(self.imageHolderMargin > -(maxWidth+15)){
         self.imageHolderMargin -= 130;
         $('.newProductMiniImagesHolder').animate({
           marginLeft: self.imageHolderMargin+"px"

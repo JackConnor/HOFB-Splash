@@ -1238,6 +1238,7 @@
 .newProductScrollImagesRight {
   height: 50px;
   width: 30px;
+  font-size: 25px;
   position: absolute;
   background-color: black;
   display: block;
@@ -1248,6 +1249,7 @@
 .newProductScrollImagesLeft {
   height: 50px;
   width: 30px;
+  font-size: 25px;
   margin-top: 50px;
   position: absolute;
   background-color: black;
