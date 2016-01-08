@@ -205,20 +205,27 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         setInterval(function(){
           if(self.intervalCounter == 0){
             self.miniMarg = 0;
-            console.log('looking good there guy');
           }
           else {
-            console.log(self.activeMinis);
-            self.activeMinis.css({
+            var imageCount = $(self.activeMinis)[0].children.length;
+            var totalLengthPhotos = imageCount*60;
+            console.log(imageCount);
+            $(self.activeMinis).css({
               marginLeft: self.miniMarg
             })
-            self.miniMarg += 1;
+            self.miniMarg += -1;
           }
-        }, 50)
+        }, 20)
         $('.projectCellMinis').on('mouseenter', function(evt){
           console.log($(evt.target));
           self.intervalCounter = 1;
-          self.activeMinis = $(evt.target);
+          if($(evt.target)[0].classList[0] == 'projectCellMinis'){
+            self.activeMinis = $(evt.target)[0];
+          }
+          else {
+            self.activeMinis = $(evt.target)[0].parentNode;
+            console.log('activeMinis');
+          }
         })
         $('.projectCellMinis').on('mouseleave', function(){
           self.intervalCounter = 0;
