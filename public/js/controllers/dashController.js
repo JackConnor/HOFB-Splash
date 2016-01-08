@@ -23,7 +23,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       .then(function(decodedToken){
         self.decodedToken = decodedToken;
         ///////note: User Id is ""
-        console.log(self.decodedToken.data.name);
         if(decodedToken.data.aud != "designer"){
           window.location.hash = '#/signin'
         }
@@ -68,13 +67,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               var nowYear  = nowDate.getFullYear();
               var nowDay = nowDate.getDate();
               var rigthNow = nowMonth+"-"+nowDay+"-"+nowYear;
-              // console.log(nowYear);
-              // console.log(projYear);
               if(nowYear > projYear){
                 if(nowMonth > projMonth){
-                  console.log('greater than one year, less than 2');
                    var months_since = (nowYear - projYear) + (nowMonth - projMonth);
-                   console.log(months_since);
                    return months_since+ " months old"
                 }
                 else if ((nowYear - projYear == 1) && projMonth >= nowMonth ){
@@ -109,9 +104,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             self.allProjects[i].TimeSinceCreation = timeSince();
             /////get all collections
             for (var j = 0; j < self.allProjects[i].collections.length; j++) {
+              console.log(self.allProjects[i].collections[j]);
               collectionName.push(self.allProjects[i].collections[j])
             }
             self.allCollectionsRaw = collectionName;
+            console.log(self.allCollectionsRaw);
             checkDuplicate();
           }
           callback(arg)
@@ -122,18 +119,12 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     function checkDuplicate(){
       //////must make sure there are no duplicates
       self.allCollections = [];
+      console.log(self.allCollectionsRaw);
       for (var i = 0; i < self.allCollectionsRaw.length; i++) {
-        var passBool = true;
-        for (var j = 0; j < self.allCollections.length; j++) {
-          if(self.allCollectionsRaw[i] == self.allCollections[j]){
-            passBool = false;
-          }
-        }
-        if(passBool && self.allCollectionsRaw[i] != ""){
-          self.allCollections.push(self.allCollectionsRaw[i])
-        }
+        
       }
-      if(self.collectionCounter){
+      if(true){
+        console.log(self.allCollectionsRaw);
         loadCollection(self.allCollections);
       }
     }
@@ -188,7 +179,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         //     }
         //   }
         // }
-        console.log(allAttributes);
         for (var j = 0; j < allAttributes.length; j++) {
           $('#mini'+i).append(
             "<img src='"+allAttributes[j]+"' class='projectCellMiniImage' id='miniCell"+j+"'/>"
@@ -209,7 +199,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           else {
             var imageCount = $(self.activeMinis)[0].children.length;
             var totalLengthPhotos = imageCount*60;
-            console.log(imageCount);
             $(self.activeMinis).css({
               marginLeft: self.miniMarg
             })
@@ -217,14 +206,12 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           }
         }, 20)
         $('.projectCellMinis').on('mouseenter', function(evt){
-          console.log($(evt.target));
           self.intervalCounter = 1;
           if($(evt.target)[0].classList[0] == 'projectCellMinis'){
             self.activeMinis = $(evt.target)[0];
           }
           else {
             self.activeMinis = $(evt.target)[0].parentNode;
-            console.log('activeMinis');
           }
         })
         $('.projectCellMinis').on('mouseleave', function(){
@@ -240,7 +227,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.projectCellMiniImage').on('click', function(evt){
           $('.invisModal').remove();
           var source = $(evt.target).attr('src');
-          console.log(source);
           var marTop = $(evt)[0].pageY;
           var marLeft = $(evt)[0].pageX;
           $('.bodyview').append(
@@ -258,8 +244,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           $('.invisModal').on('click', function(evt){
             var thisClass = $(evt.target)[0].classList[0];
             if(thisClass == 'photoPopup' || thisClass == 'photoPopupImage'){
-              // $('.invisModal').remove();
-              console.log('yoooo');
             }
             else {
               $('.invisModal').remove();
@@ -294,7 +278,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.projectCellNewInner').on('click', function(){
         newProductPop();
       })
-      console.log(self.decodedToken.data);
       if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
         self.tourCounter = 0;///keeps track of where we are in the dashboard tour
         dashboardTour();
@@ -332,12 +315,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         '</div>'
       )
       $('.dropList').on('change', function(){
-        console.log('yoyoy');
       })
       $('.newProductBegin').on('click', function(){
         var name = $('.newProductName').val().split(' ').join('_');
         var type = $('.newProductModalDropdown').val();
-        console.log(type);
         window.location.hash = "#/create/product/"+name+"/"+type;
       });////function to begin product build
       $('.modalFiller').on('click', function(){
@@ -421,7 +402,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         })
         $('.curatedCell').on('click', function(evt){
           var thisId = $(evt.target).attr('id');
-          console.log(thisId);
           window.location.hash = "#/view/product/"+ thisId;
         })
       }
@@ -1209,7 +1189,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           opacity: 0
         })
         var topOff = $('.designerDashCurated').offset().top;
-        console.log($('.designerDashCurated').offset());
         var topLeft = $('.designerDashCurated').offset().left;
         var width = $('.designerDashCurated').css('width').split('').slice(0, $('.designerDashCurated').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
         ////add new temporary element to show tutees

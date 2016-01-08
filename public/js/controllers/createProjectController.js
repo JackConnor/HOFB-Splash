@@ -626,10 +626,10 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       );
       var newProjectInfo = productToUpdate;
         ////now we make a post request to create a new conversation, which we do for every single project that is made. It's here in the submit photos simply because this is the last stop on a callback series, and this should probably go last
-        newConversation();
+        newConversation(newProjectInfo);
     }
 
-    function newConversation(){
+    function newConversation(newProjectInfo){
       ////now we make a post request to create a new conversation, which we do for every single project that is made
       $http({
         method: "POST"
