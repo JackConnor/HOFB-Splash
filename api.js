@@ -99,36 +99,44 @@ module.exports = function(app){
     })
   })
 
-  /////update a user
+  /////post call to update a user profile
   app.post('/api/users/update', function(req, res){
-    User.findOne({"_id":req.body.id}, function(err, user){
+    console.log(req.body);
+    User.findOne({"_id":req.body.userId}, function(err, user){
+      console.log(user);
       if(err){console.log(err)}
       if(req.body.email){
         user.email = req.body.email
       }
       if(req.body.password){
-        user.email = req.body.password
+        user.password = req.body.password
       }
       if(req.body.location){
-        user.email = req.body.location
+        user.location = req.body.location
       }
       if(req.body.firstname){
-        user.email = req.body.firstname;
+        user.firstname = req.body.firstname;
       }
       if(req.body.lastname){
-        user.email = req.body.lastname;
+        user.lastname = req.body.lastname;
       }
       if(req.body.address){
-        user.email = req.body.address;
+        user.address = req.body.address;
       }
       if(req.body.city){
-        user.email = req.body.city;
+        user.city = req.body.city;
       }
       if(req.body.profession){
-        user.email = req.body.profession;
+        user.profession = req.body.profession;
       }
       if(req.body.status){
         user.status = req.body.status;
+      }
+      if(req.body.username){
+        user.username = req.body.username
+      }
+      if(req.body.bio){
+        user.bio = req.body.bio
       }
       user.save(function(err, user){
         res.json(user)

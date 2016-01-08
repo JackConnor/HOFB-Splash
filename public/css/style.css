@@ -497,12 +497,14 @@
   /*opacity: 0.75;*/
   box-shadow: 0 0 30px black;
 }
-
-.designerDashboardPage{
+/*////////////////////Universal CSS class////////////////////////////////////////*/
+/*add top level div class of page to apply the below font and text colors to entire page*/
+.designerDashboardPage, .userProfileContainer, .userProfileSettingsBar{
   font-family: 'Oxygen', sans-serif;
   color: #454444;
   background-color: #FEFDFA;
 }
+/*/////////////////////////////////////////////////////////////////////////////*/
 
 .designerDashboardGlyphiconUp {
     padding-left: 10px;
@@ -703,10 +705,13 @@
   display: inline-block;
   margin: 0;
 }
-
+.help-block{
+  width:600px;
+}
 .howToCell img{
   width: 100%;
 }
+
 
 #i_file {
   position: absolute;
@@ -1949,16 +1954,37 @@ textarea#styled {
 .ui-slider-handle{
   cursor:pointer;
 }
+.userProfileChangePw{
+  float: right;
+  font-size: 17px;
+  font-weight: bold;
+  margin-right: -255px;
+  margin-top: -37px;
+  color:#169AA9;
+  cursor:pointer;
+}
 .userProfileContainer{
     margin-bottom: 370px;
+    margin-left: 243px;
 }
 .userProfileFormData{
   margin-top:100px;
 }
 .userProfileFormDataContainer{
-  border: 1px solid blue;
-  height: 500px;
+  border: 1px solid #CCCCCC;
+  height: 550px;
+  width:1030px;
   border-radius:3px
+}
+.userProfileFormFields{
+  height:40px;
+  width:500px;
+  font-weight: bolder;
+  font-size: 17px;
+}
+.userProfileFormTextTitle{
+  color: #A1A1A1;
+  font-size: 17px;
 }
 .userProfileImage{
   float:right;
@@ -1982,24 +2008,61 @@ textarea#styled {
   background-image:url('http://vignette1.wikia.nocookie.net/vsbattles/images/a/a3/Black-windows_542931.jpg/revision/latest?cb=20150317090032');
 }
 .userProfilePwdContainer{
-  border: 1px solid red;
+  border: 1px solid #CCCCCC;
   height: 110px;
+  width:1030px;
   border-radius:3px
 }
+.userProfilePasswordTitle{
+  font-size:17px;
+  color:#686868;
+  margin-left: 48px;
+  margin-top: 5px;
+}
 .userProfilePwdInfo{
-  /*margin-top:35px;*/
+  margin-top:35px;
+}
+.userProfileSecurityTitle{
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 8px;
 }
 .userProfileSettingsBar{
-  outline: 2px solid blue;
-  height: 40px;
+  outline: 2px solid #F6F5F2;
+  height: 80px;
   margin-top: -20px;
+  height: 60px;
+  margin-top: -37px;
 }
 
 .userProfileSubmitBtn{
   float:right;
->>>>>>> userProfilev2
+  width: 110px;
+  height: 47px;
+  background-color: #169AA9;
+  color: white;
+  font-weight: bolder;
 }
 
+.userProfileTitle{
+  margin-left: 8px;
+  background-color: #FEFDFA;
+  font-weight: bold;
+  font-size:20px;
+}
+.userProfileTitleBar{
+  color:#575756;
+  font-size:22px;
+  margin-top: 40px;
+  margin-left: 40px;
+  background-color: #F6FDFA;
+  padding-top: 10px;
+}
+
+#userProfileUsernameTitle{
+  margin-left: 5px;
+  font-weight: bolder;
+}
 .tourProjectCellNewInner p{
    font-size: 26px;
    padding-top: 40%;
