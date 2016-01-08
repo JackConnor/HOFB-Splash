@@ -456,6 +456,9 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         }
       }
       highlightMini();
+      $('.newProductMiniImagesHolder').css({
+        marginLeft: 0+"px"
+      })
       // adjustMiniMarginUploadDelete();
     }
     $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
@@ -793,20 +796,13 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     ////////function to check the margin everytime the mini photo counter is changed (i.e. a photo is added or deleted), and adjust it accordingly
     function adjustMiniMarginUpload() {
-      console.log('hallllllo');
-      // self.imageHolderMargin = 0;
-      console.log(self.miniPhotoCounter);
       if(self.miniPhotoCounter > 3){
-        console.log('yooo');
         var maxWidth = ($('.newProductMiniImage').width()*(self.miniPhotoCounter))- ($('.newProductImageFrame').width()/2);
-        console.log(maxWidth);
         $('.newProductMiniImagesHolder').css({
           marginLeft: -maxWidth+"px"
         })
         resizeScrollTabs();
-        console.log("Pre reset:"+self.imageHolderMargin);
         self.imageHolderMargin = -maxWidth;
-        console.log("Post reset:"+self.imageHolderMargin);
       }
     }
 

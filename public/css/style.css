@@ -1082,7 +1082,8 @@
 
 .newProductDeleteMini {
   font-size: 25px;
-  width: 95%;
+  width: 10%;
+  margin-left: 82%;
   text-align: right;
   color: white;
 }
