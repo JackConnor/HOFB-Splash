@@ -591,6 +591,10 @@
   cursor:pointer;
 }
 
+.designerDashCollectionDropdown {
+  overflow: hidden;
+}
+
 .designerDashCollections {
   height: 40px;
   border-bottom: 1px solid #EFEEEC;

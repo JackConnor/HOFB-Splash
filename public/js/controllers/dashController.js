@@ -105,7 +105,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             /////get all collections
             for (var j = 0; j < self.allProjects[i].collections.length; j++) {
               console.log(self.allProjects[i].collections[j]);
-              collectionName.push(self.allProjects[i].collections[j])
+              if(self.allProjects[i].collections[j].split('').length > 1){
+                console.log('ccepted');
+                collectionName.push(self.allProjects[i].collections[j]);
+              }
             }
             self.allCollectionsRaw = collectionName;
             console.log(self.allCollectionsRaw);
@@ -1000,21 +1003,15 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         )
       }
       $('.designerDashCollectionCell').on('mouseenter', function(evt){
-        var color = $(evt.target).css('backgroundColor');
-        if( color != 'rgb(28, 28, 28)'){
-          $($(evt.target)[0]).css({
+          $(evt.target).css({
               backgroundColor: '#BDBDBD'
           })
-        }
       })
       $('.designerDashCollectionCell').on('mouseleave', function(evt){
-        var color = $(evt.target).css('backgroundColor');
-        if( color != 'rgb(28, 28, 28)'){
-          $($(evt.target)[0]).css({
-            backgroundColor: 'white'
+          $(evt.target).css({
+            backgroundColor: '#F9F7F5'
             ,color: "black"
           })
-        }
       })
       $('.designerDashCollectionCell').on('click', function(evt){
         var collections = $('.designerDashCollectionCell');
