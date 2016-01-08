@@ -402,10 +402,10 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 8){
           frontendPhotoDisplay();
           $('#i_file').remove();
-          $('.inputFileHolder').prepend(
+          $('.fileUploadWrapper').append(
             '<input type="file" id="i_file" name="files">'
           )
-          changeEffect()
+          changeEffect();
           self.miniPhotoCounter = self.tempPhotoCache.length;
           adjustMiniMarginUpload();
         }
@@ -662,7 +662,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     ///////////////////////////////////////////////
     //////Begin logic for photo popup modal////////
-    $('.newProductCurrentImage').on('click', function(){
+    $('.expandPhoto').on('click', function(){
       $('.bodyview').prepend(
         '<div class="photoModal">'+
           "<div class='modalFiller'>"+

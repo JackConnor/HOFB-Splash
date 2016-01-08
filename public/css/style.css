@@ -762,6 +762,15 @@
     border-radius: 3px;
 }
 
+.expandPhoto {
+  display: inline-block;
+  float: left;
+  position: absolute;
+  font-size: 29px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
 .fabricFilter {
   height: 210px;
   width: 210px;
@@ -801,12 +810,12 @@
 
 #i_file {
   position: absolute;
-  width: 50px;
-  font-size: 30px;
+  font-size: 24px;
   display: inline-block;
   cursor:pointer;
-  margin-left: 0px;
-  margin-top:  -45px;
+  width: 50px;
+  margin-left: -95px;
+  margin-top:  -41px;
   opacity: 0;
 }
 
@@ -1092,7 +1101,7 @@
 
 .newProductDeleteMini {
   font-size: 35px;
-  margin-left: 20px;
+  margin-left: 30px;
   display: inline-block;
   vertical-align: top;
   text-align: right;
