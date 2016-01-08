@@ -455,10 +455,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         }
       }
       highlightMini();
+      // adjustMiniMarginUploadDelete();
     }
-    // function setMiniCounterDelete(func){
-    //   self.miniPhotoCounter =
-    // }
     $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
     function changeMiniPhoto(event){
@@ -606,50 +604,29 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.new_product_send').on('click', sendNewProject);
     $('.new_product_save').on('click', sendNewProject);
 
-    // setInterval(function(){
-    //   console.log($('#i_file'));
-    // }, 1000)
+    //////this is the function to submit photos, which are added turned into url links on the api, and added to the product object we make previously to submitting the photos
     function submitPhotos(productToUpdate){
       console.log(self.tempPhotoHTMLCache.length);
       $(".bodyview").append(
         "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
         "</form>"
       )
-      //
-      console.log($(self.tempPhotoHTMLCache[0]));
-      console.log($(self.tempPhotoHTMLCache[1]));
-      console.log($(self.tempPhotoHTMLCache[2]));
-      console.log($(self.tempPhotoHTMLCache[3]));
-      if(self.tempPhotoHTMLCache[0]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[0]);
-      }
-      if(self.tempPhotoHTMLCache[1]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[1]);
-      }
-      if(self.tempPhotoHTMLCache[2]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[2]);
-      }
-      if(self.tempPhotoHTMLCache[3]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[3]);
-      }
-      if(self.tempPhotoHTMLCache[4]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[4]);
-      }
-      if(self.tempPhotoHTMLCache[5]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[5]);
-      }
-      if(self.tempPhotoHTMLCache[6]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[6]);
-      }
-      if(self.tempPhotoHTMLCache[7]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[7]);
+      ///////check each of the photos individually for to see if it has a photo
+      for (var i = 0; i < 7; i++) {
+        if(self.tempPhotoHTMLCache[i]){
+          $('.tempForm').append(self.tempPhotoHTMLCache[i]);
+        }
       }
       $('.tempForm').append(
         "<input name='productId' type='text' value='"+productToUpdate._id+"'>"
       );
-      console.log(self.tempPhotoHTMLCache);
       var newProjectInfo = productToUpdate;
-      console.log(newProjectInfo);
+        ////now we make a post request to create a new conversation, which we do for every single project that is made. It's here in the submit photos simply because this is the last stop on a callback series, and this should probably go last
+        newConversation();
+    }
+
+    function newConversation(){
+      ////now we make a post request to create a new conversation, which we do for every single project that is made
       $http({
         method: "POST"
         ,url: "/api/new/conversation"
@@ -682,7 +659,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     ///////////////////////////////////////////////
     //////Begin logic for photo popup modal////////
     $('.newProductCurrentImage').on('click', function(){
-      console.log($('.bodyview'));
       $('.bodyview').prepend(
         '<div class="photoModal">'+
           "<div class='modalFiller'>"+
@@ -805,6 +781,17 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         marginLeft: $('.newProductImageFrame').width() - 30
       })
     })
+
+    ////////function to check the margin everytime the mini photo counter is changed (i.e. a photo is added or deleted), and adjust it accordingly
+    function adjustMiniMarginUploadDelete() {
+      console.log('hallllllo');
+      self.imageHolderMargin = 0;
+      $('.newProductMiniImagesHolder').css({
+        marginLeft: self.imageHolderMargin+"px"
+      })
+    }
+
+
   /////end createProject controller
   ////////////////////////
   ////////////////////////
