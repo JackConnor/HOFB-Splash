@@ -12,7 +12,7 @@ angular.module('getSwatchesFactory', [])
           ,camo: "http://wiganhydroprinting.co.uk/wp-content/uploads/2014/04/clear-camo-300x3001.jpg"
           ,veneer: "http://www.arrow.gb.net/images/pages/finish-colours/material-finishes/veneer/walnut-r.jpg"
           ,nylon: "http://static1.squarespace.com/static/52965deee4b0f580c1fe0b7d/52c88375e4b03b30610b4a0a/52c8845be4b0268360ddfb8c/1388874157418/LightRoyalNylon.jpg?format=300w"
-          ,leather: "https://s-media-cache-ak0.pinimg.com/736x/8b/c3/bf/8bc3bf43297bc2bc9983996ee8ed4cdb.jpg"
+          ,leather: "http://demandware.edgesuite.net/aakh_prd/on/demandware.static/-/Sites-main/default/dwa303e31f/images/large/L7871.jpg"
           ,cotton: "http://d6lw7to1547c3.cloudfront.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/308744.jpg"
           ,denim: "https://www.shoponeonline.com/wp-content/uploads/denim-swatch.png"
         }
@@ -34,30 +34,12 @@ angular.module('getSwatchesFactory', [])
           ,hat: "http://ep.yimg.com/ay/oaklandraiders/oakland-raiders-girls-tailsweep-hat-3.jpg"
         }
         ,colors: {
-          red: '#B53F3F'
+          red: '#A80000'
           ,blue: "#58ACFA"
           ,white: "#FFFFFF"
           ,black: "#000000"
-          ,magenta: "#F781F3"
-          ,orange: "#FA8258"
+          ,green: "#458B00"
           ,yellow: "#F2F5A9"
-          ,aqua: "#58FAF4"
-          ,green: "#04B404"
-          ,blue1: "#58ACFA"
-          ,white1: "#FFFFFF"
-          ,black1: "#000000"
-          ,magenta1: "#F781F3"
-          ,orange1: "#FA8258"
-          ,yellow1: "#F2F5A9"
-          ,aqua2: "#58FAF4"
-          ,green2: "#04B404"
-          ,blue2: "#58ACFA"
-          ,white2: "#FFFFFF"
-          ,blac2k: "#000000"
-          ,magent3a: "#F781F3"
-          ,orang3e: "#FA8258"
-          ,yello3w: "#F2F5A9"
-          ,aqu3a: "#58FAF4"
         }
         ,stitch: {
           straight: ''

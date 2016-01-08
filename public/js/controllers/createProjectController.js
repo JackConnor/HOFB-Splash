@@ -52,10 +52,10 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         var allcolors = [];
         for(color in allSwatches.colors){
           allcolors.push(color);
+          console.log(color);
           $('.createColorContainer').append(
-            '<div class="createColorCellHolder col-xs-2">'+
+            '<div class="createColorCellHolder col-xs-6">'+
               '<div class="createColor create'+color+'">'+
-                color+
               "</div>"+
             "</div>"
           )
@@ -69,25 +69,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         return allcolors;
       }
       colorsfunc();
-      var stitchesfunc = function(){
-        var allstitches = [];
-        for(stitch in allSwatches.stitch){
-          allstitches.push(stitch);
-          $('.createStitchContainer').append(
-            '<div class="createStitchCellHolder col-xs-12">'+
-              '<div class="createStitch create'+stitch+'">'+
-                stitch+
-              "</div>"+
-            "</div>"
-          )
-        }
-        console.log(allstitches);
-        return allstitches;
-      }
-      stitchesfunc();
     }
     setSwatches();
-
 
     ////////////////////////////////////////
     /////////Effects for carousel//////////
@@ -95,12 +78,15 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     function swatchLogic(swatchType){
       ///////note: swatchType needs to be added as a capital, i.e. "Season"
       $('.create'+swatchType).on('click', function(evt){
+        var type = $(evt.target)[0].classList[1].slice(6, 1000);
+        console.log(type);
+
         if($(evt.target).css('opacity') == 1 ){
           $(evt.target).css({
             opacity: 0.5
             ,outline: "2px solid gray"
           })
-          $(evt.target).attr('id', 'picked_'+swatchType+"_"+evt.target.innerText.split(' ').join(''));
+          $(evt.target).attr('id', 'picked_'+swatchType+"_"+type)
           $(evt.target).addClass('picked');
         } else {
           $(evt.target).css({
@@ -416,11 +402,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 8){
           frontendPhotoDisplay();
           $('#i_file').remove();
-          $('.inputFileHolder').prepend(
+          $('.fileUploadWrapper').append(
             '<input type="file" id="i_file" name="files">'
           )
-          changeEffect()
+          changeEffect();
           self.miniPhotoCounter = self.tempPhotoCache.length;
+          adjustMiniMarginUpload();
         }
         else{
           alert('better delete some photos if you want to add more')
@@ -469,10 +456,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         }
       }
       highlightMini();
+      $('.newProductMiniImagesHolder').css({
+        marginLeft: 0+"px"
+      })
+      // adjustMiniMarginUploadDelete();
     }
-    // function setMiniCounterDelete(func){
-    //   self.miniPhotoCounter =
-    // }
     $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
     function changeMiniPhoto(event){
@@ -620,50 +608,29 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.new_product_send').on('click', sendNewProject);
     $('.new_product_save').on('click', sendNewProject);
 
-    // setInterval(function(){
-    //   console.log($('#i_file'));
-    // }, 1000)
+    //////this is the function to submit photos, which are added turned into url links on the api, and added to the product object we make previously to submitting the photos
     function submitPhotos(productToUpdate){
       console.log(self.tempPhotoHTMLCache.length);
       $(".bodyview").append(
         "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
         "</form>"
       )
-      //
-      console.log($(self.tempPhotoHTMLCache[0]));
-      console.log($(self.tempPhotoHTMLCache[1]));
-      console.log($(self.tempPhotoHTMLCache[2]));
-      console.log($(self.tempPhotoHTMLCache[3]));
-      if(self.tempPhotoHTMLCache[0]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[0]);
-      }
-      if(self.tempPhotoHTMLCache[1]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[1]);
-      }
-      if(self.tempPhotoHTMLCache[2]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[2]);
-      }
-      if(self.tempPhotoHTMLCache[3]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[3]);
-      }
-      if(self.tempPhotoHTMLCache[4]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[4]);
-      }
-      if(self.tempPhotoHTMLCache[5]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[5]);
-      }
-      if(self.tempPhotoHTMLCache[6]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[6]);
-      }
-      if(self.tempPhotoHTMLCache[7]){
-        $('.tempForm').append(self.tempPhotoHTMLCache[7]);
+      ///////check each of the photos individually for to see if it has a photo
+      for (var i = 0; i < 7; i++) {
+        if(self.tempPhotoHTMLCache[i]){
+          $('.tempForm').append(self.tempPhotoHTMLCache[i]);
+        }
       }
       $('.tempForm').append(
         "<input name='productId' type='text' value='"+productToUpdate._id+"'>"
       );
-      console.log(self.tempPhotoHTMLCache);
       var newProjectInfo = productToUpdate;
-      console.log(newProjectInfo);
+        ////now we make a post request to create a new conversation, which we do for every single project that is made. It's here in the submit photos simply because this is the last stop on a callback series, and this should probably go last
+        newConversation();
+    }
+
+    function newConversation(){
+      ////now we make a post request to create a new conversation, which we do for every single project that is made
       $http({
         method: "POST"
         ,url: "/api/new/conversation"
@@ -695,8 +662,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     ///////////////////////////////////////////////
     //////Begin logic for photo popup modal////////
-    $('.newProductCurrentImage').on('click', function(){
-      console.log($('.bodyview'));
+    $('.expandPhoto').on('click', function(){
       $('.bodyview').prepend(
         '<div class="photoModal">'+
           "<div class='modalFiller'>"+
@@ -777,6 +743,69 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     //////end cropping stuff////////////////////////
     ////////////////////////////////////////////////
+
+    //////function to keep scroll-right for mini images in the right placeholder
+    self.imageHolderMargin = 0;
+    $('.newProductScrollImagesRight').on('click', function(){
+      //////check to make sure it's not at either end
+      console.log(self.imageHolderMargin);
+      var maxWidth = ($('.newProductMiniImage').width()*8) - $('.newProductImageFrame').width();
+      if(self.imageHolderMargin > -(maxWidth+15)){
+        self.imageHolderMargin -= 130;
+        $('.newProductMiniImagesHolder').animate({
+          marginLeft: self.imageHolderMargin+"px"
+        }, 100)
+      }
+
+    })
+    $('.newProductScrollImagesLeft').on('click', function(){
+      console.log(self.imageHolderMargin);
+      if(self.imageHolderMargin < 0){
+        self.imageHolderMargin += 130;
+        $('.newProductMiniImagesHolder').animate({
+          marginLeft: self.imageHolderMargin+"px"
+        }, 100)
+      }
+    })
+
+    /////function to make sure the tabs for the scrol on th emini photos stays in place, which is triggered pretty much every time the mini photo thing is moved
+    function resizeScrollTabs(){
+      $('.newProductScrollImagesLeft').css({
+        marginLeft: $('.newProductImageFrame').width() - 30
+      })
+      $('.newProductScrollImagesRight').css({
+        marginLeft: $('.newProductImageFrame').width() - 30
+      })
+    }
+
+    $(document).ready(function(){
+      resizeScrollTabs()
+      setTimeout(function(){
+        resizeScrollTabs();
+      }, 1000);
+    })
+    $(window).resize(function(){
+      resizeScrollTabs();
+      setTimeout(function(){
+        resizeScrollTabs();
+      }, 1000);
+    })
+    setInterval(function(){
+      resizeScrollTabs();
+    }, 100);
+
+    ////////function to check the margin everytime the mini photo counter is changed (i.e. a photo is added or deleted), and adjust it accordingly
+    function adjustMiniMarginUpload() {
+      if(self.miniPhotoCounter > 3){
+        var maxWidth = ($('.newProductMiniImage').width()*(self.miniPhotoCounter))- ($('.newProductImageFrame').width()/2);
+        $('.newProductMiniImagesHolder').css({
+          marginLeft: -maxWidth+"px"
+        })
+        resizeScrollTabs();
+        self.imageHolderMargin = -maxWidth;
+      }
+    }
+
 
   /////end createProject controller
   ////////////////////////

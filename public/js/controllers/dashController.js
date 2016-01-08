@@ -165,42 +165,113 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         for (var k = 0; k < allImages.length; k++) {
           allAttributes.push(allImages[k]);
         }
-        var allFabrics = self.allProjects[i].fabrics;
-        for (var k = 0; k < allFabrics.length; k++) {
-          console.log(allFabrics[k]);
-          //////compare against swatches, so we can send right swatch info
-          for (fabric in allSwatches.fabrics) {
-            console.log(fabric);
-            if(allFabrics[k].toLowerCase() == fabric){
-              console.log(fabric);
-              allAttributes.push(allSwatches.fabrics[fabric])
-            }
-          }
-        }
-        var allColors = self.allProjects[i].colors;
-        for (var k = 0; k < allColors.length; k++) {
-          //////compare against swatches, so we can send right swatch info
-          for (color in allSwatches.colors) {
-            if(allColors[k].toLowerCase() == color){
-              allAttributes.push(allSwatches.colors[color])
-            }
-          }
-        }
+        // var allFabrics = self.allProjects[i].fabrics;
+        // console.log(self.allProjects[i]);
+        // console.log(allFabrics);
+        // for (var k = 0; k < allFabrics.length; k++) {
+        //   console.log(allFabrics[k]);
+        //   //////compare against swatches, so we can send right swatch info
+        //   for (fabric in allSwatches.fabrics) {
+        //     console.log(fabric);
+        //     if(allFabrics[k].toLowerCase() == fabric){
+        //       console.log(fabric);
+        //       allAttributes.push(allSwatches.fabrics[fabric])
+        //     }
+        //   }
+        // }
+        // var allColors = self.allProjects[i].colors;
+        // for (var k = 0; k < allColors.length; k++) {
+        //   //////compare against swatches, so we can send right swatch info
+        //   for (color in allSwatches.colors) {
+        //     if(allColors[k].toLowerCase() == color){
+        //       allAttributes.push(allSwatches.colors[color])
+        //     }
+        //   }
+        // }
         console.log(allAttributes);
         for (var j = 0; j < allAttributes.length; j++) {
-          if(allAttributes[j].split('')[0] == "#"){
-            ///////we just checked for the beginning of a hex code, used by the octothorp
-            $('#mini'+i).append(
-              "<img style='background-color:"+allAttributes[j]+"' class='projectCellMiniImage'/>"
-            )
-          }
-          else{
-            $('#mini'+i).append(
-              "<img src='"+allAttributes[j]+"' class='projectCellMiniImage'/>"
-            )
-          }
+          $('#mini'+i).append(
+            "<img src='"+allAttributes[j]+"' class='projectCellMiniImage' id='miniCell"+j+"'/>"
+          )
         }
       }
+      moveDashMinis();
+
+      self.activeMinis = '';///this is were we'll keep track of which mini photo thing should be moving
+      self.miniMarg = 0;
+      self.intervalCounter = 0;////this is to run and not run the moving phtoos on the dashboard side that we're going to use
+      function moveDashMinis() {
+        //////We create the logic for the mini photos. these run on an interval, that switches to the photos being move (margin-left being added)
+        setInterval(function(){
+          if(self.intervalCounter == 0){
+            self.miniMarg = 0;
+          }
+          else {
+            var imageCount = $(self.activeMinis)[0].children.length;
+            var totalLengthPhotos = imageCount*60;
+            console.log(imageCount);
+            $(self.activeMinis).css({
+              marginLeft: self.miniMarg
+            })
+            self.miniMarg += -1;
+          }
+        }, 20)
+        $('.projectCellMinis').on('mouseenter', function(evt){
+          console.log($(evt.target));
+          self.intervalCounter = 1;
+          if($(evt.target)[0].classList[0] == 'projectCellMinis'){
+            self.activeMinis = $(evt.target)[0];
+          }
+          else {
+            self.activeMinis = $(evt.target)[0].parentNode;
+            console.log('activeMinis');
+          }
+        })
+        $('.projectCellMinis').on('mouseleave', function(){
+          self.intervalCounter = 0;
+          self.activeMinis = "none";
+        })
+      }
+
+
+      ///////////////////////////////////////////////////////
+      ///////////////begin logic for the photo popup windows/
+      function setPopup(){
+        $('.projectCellMiniImage').on('click', function(evt){
+          $('.invisModal').remove();
+          var source = $(evt.target).attr('src');
+          console.log(source);
+          var marTop = $(evt)[0].pageY;
+          var marLeft = $(evt)[0].pageX;
+          $('.bodyview').append(
+            "<div class='invisModal'>"+
+              "<div class='photoPopup'>"+
+                "<img class='photoPopupImage' src='"+source+"'>"+
+              "</div>"+
+            "</div>"
+          )
+          $(".photoPopup").css({
+            marginTop: marTop - 450
+            ,marginLeft: marLeft - 75
+          })
+          $('.invisModal').height($(document).height())
+          $('.invisModal').on('click', function(evt){
+            var thisClass = $(evt.target)[0].classList[0];
+            if(thisClass == 'photoPopup' || thisClass == 'photoPopupImage'){
+              // $('.invisModal').remove();
+              console.log('yoooo');
+            }
+            else {
+              $('.invisModal').remove();
+            }
+          })
+        })
+      }
+      setPopup();
+      setTimeout(setPopup(), 1000)
+      setTimeout(setPopup(), 3000)
+      /////////////end logic for the photo popup windows/////
+      ///////////////////////////////////////////////////////
       $('.designerDashList').append(
         "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
           "<div class='projectCellNewInner'>"+
@@ -305,42 +376,55 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         }
         self.curatedProjects[i].TimeSinceCreation = timeSince();
       }
-      for (var i = 0; i < self.curatedProjects.length; i++) {
-          $('.designerDashList').append(
-            "<div class='projectCell col-md-4 col-xs-12' id='"+self.curatedProjects[i]._id+"'>"+
-              "<div class='projectCellInner'>"+
-                "<div class='projectCellImageHolder'>"+
-                  "<img class='projectCellImage' src='"+self.curatedProjects[i].images[0]+"'>"+
-                "</div>"+
-                "<div class='projectCellContent'>"+
-                  "<p>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
-                  "<p>"+self.curatedProjects[i].name+"--curated</p>"+
-                "</div>"+
-              "</div>"+
-            "</div>"
-          )
-      }
       $('.designerDashList').append(
-        "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
-          "<div class='projectCellNewInner'>"+
-            "<p>Build a New product</p>"+
-          "</div>"+
-        "</div>"
+        "<div class='curatedTopBar'>"+
+        "<p class='curatedBarProduct'>"+
+          "Product"+
+        "</p>"+
+        "<p class='curatedBarStatus'>"+
+          "Status"+
+        "</p>"+
+        "<p class='curatedBarOrders'>"+
+          "Orders"+
+        "</p>"+
+      "</div>"
       )
-      $('.projectCellNewInner').on('mouseenter', function(){
-        $('.projectCellNewInner').animate({
-          opacity: .6
-        }, 100)
-      })
-      $('.projectCellNewInner').on('mouseleave', function(){
-        $('.projectCellNewInner').animate({
-          outline: 'none'
-          ,opacity: 1
-        }, 100)
-      })
-      $('.projectCellNewInner').on('click', function(){
-        newProductPop();
-      })
+      for (var i = 0; i < self.curatedProjects.length; i++) {
+        $('.designerDashList').append(
+          "<div class='curatedCell' id='"+self.curatedProjects[i]._id+"'>"+
+            "<div class='curatedCellImage' id='"+self.curatedProjects[i]._id+"'>"+
+              "<img src='"+self.curatedProjects[i].images[0]+"'>"+
+            "</div>"+
+            "<div class='curatedCellName' id='"+self.curatedProjects[i]._id+"'>"+
+              "<p class='curatedTitle' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].name+"</p>"+
+              "<p class='curatedTime' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
+            "</div>"+
+            "<div class='curatedCellStatus'>"+
+
+            "</div>"+
+            "<div class='curatedCellOrders'>"+
+            "coming soon"+
+            "</div>"+
+          "</div>"
+        )
+        $('.curatedCell').on('mouseenter', function(){
+          $(this).css({
+            backgroundColor: '#D7D1D3'
+            ,opacity: .8
+          })
+        })
+        $('.curatedCell').on('mouseleave', function(){
+          $(this).css({
+            backgroundColor: '#efe9eb'
+            ,opacity: 1
+          })
+        })
+        $('.curatedCell').on('click', function(evt){
+          var thisId = $(evt.target).attr('id');
+          console.log(thisId);
+          window.location.hash = "#/view/product/"+ thisId;
+        })
+      }
     }
     ////function for appending submitted list
     function loadSubmittedList(){
@@ -545,6 +629,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.designerDashCurated').css({
         backgroundColor: "#FEFDFA"
       })
+      $('.designerDashSubmitted').css({
+        backgroundColor: "#EBEBE9"
+      })
       $('.designerDashActive').css({
         backgroundColor: "#EBEBE9"
       })
@@ -557,7 +644,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.designerDashSubmitted').css({
         backgroundColor: "#FEFDFA"
       })
-      $('.designerDashSubmitted').css({
+      $('.designerDashCurated').css({
+        backgroundColor: "#EBEBE9"
+      })
+      $('.designerDashActive').css({
         backgroundColor: "#EBEBE9"
       })
       self.curatedToggleCounter = 'Submitted';

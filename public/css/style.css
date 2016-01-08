@@ -236,14 +236,13 @@
 }
 
 .createColorCellHolder {
-  height: 22%;
+  height: 150px;
 }
 
 .createColor {
-  width: 90%;
-  height: 90%;
-  margin: 5%;
-  background-color: pink;
+  width: 95%;
+  height: 95%;
+  margin: 2.5%;
   cursor:pointer;
 }
 
@@ -255,10 +254,9 @@
 }
 
 .createFabric {
-  width: 90%;
-  height: 90%;
-  margin: 5%;
-  background-color: pink;
+  width: 95%;
+  height: 95%;
+  margin: 2.5%;
   cursor:pointer;
 }
 
@@ -361,6 +359,65 @@
   margin-left: 20%;
 }
 
+.curatedBarProduct {
+  margin-left: 140px;
+  margin-right: 250px;
+  vertical-align: top;
+}
+
+.curatedBarStatus {
+  float: right;
+  margin-right: 100px;
+  vertical-align: top;
+}
+
+.curatedBarOrder {
+  margin-right: 100px;
+  vertical-align: top;
+}
+
+.curatedBarProfit {
+  float: right;
+  margin-right: 100px;
+  vertical-align: top;
+}
+
+.curatedCell {
+  height: 120px;
+  width: 100%;
+  background-color: #EFE9EB;
+  margin-top: 3px;
+}
+
+.curatedCellStatus {
+
+}
+
+.curatedCellImage {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  margin-left: 10px;
+  padding-top: 10px;
+}
+
+.curatedCellImage img{
+  width: 100px;
+  height: 100%;
+}
+
+.curatedCellName {
+  margin-left: 20px;
+  width: 350px;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.curatedCellName p{
+  margin-left: 10px;
+}
+
 .curatePopup {
   height: 200px;
   width: 300px;
@@ -368,6 +425,29 @@
   background-color:gray;
   position: fixed;
   z-index: 3;
+}
+
+.curatedTitle {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.curatedTime {
+  font-size: 16px;
+}
+
+.curatedTopBar {
+  background-color: #232730;
+  height: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 20px;
+}
+
+.curatedTopBar p {
+  display: inline-block;
+  padding-top: 10px;
 }
 
 #curatedTabIconSquare{
@@ -500,6 +580,7 @@
 /*////////////////////Universal CSS class////////////////////////////////////////*/
 /*add top level div class of page to apply the below font and text colors to entire page*/
 .designerDashboardPage, .userProfileContainer, .userProfileSettingsBar{
+
   font-family: 'Oxygen', sans-serif;
   color: #454444;
   background-color: #FEFDFA;
@@ -568,11 +649,6 @@
   cursor:pointer;
 }
 
-
-.designerDashCurated:hover{
-  box-shadow: 0 0 30px black;
-}
-
 .designerDashDashTitle {
   font-size: 20px;
   background-color: #F6FDFA;
@@ -596,7 +672,22 @@
   outline: 4px solid aqua;
   z-index: 3
 }
+.designerDashActive:hover {
+  border-left: 2px solid #afafa6;
+  border-top: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;
+}
+.designerDashCurated:hover {
+  border-left: 2px solid #afafa6;
+  border-top: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;
+}
 
+.designerDashSubmitted:hover {
+  border-left: 2px solid #afafa6;
+  border-top: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;
+}
 .designerDashFilter {
   display: inline-block;
   height: 55px;
@@ -679,6 +770,15 @@
     border-radius: 3px;
 }
 
+.expandPhoto {
+  display: inline-block;
+  float: left;
+  position: absolute;
+  font-size: 29px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
 .fabricFilter {
   height: 210px;
   width: 210px;
@@ -698,6 +798,12 @@
   position: absolute;
 }
 
+.fileUploadWrapper {
+  font-size: 45px;
+  margin-left: 72%;
+  display: inline-block;
+}
+
 .howToCell {
   min-height: 100%;
   width: 33%;
@@ -715,9 +821,13 @@
 
 #i_file {
   position: absolute;
-  width: 20%;
+  font-size: 24px;
   display: inline-block;
   cursor:pointer;
+  width: 50px;
+  margin-left: 0px;
+  margin-top:  -41px;
+  opacity: 0;
 }
 
 .inputFileHolder {
@@ -726,6 +836,13 @@
   vertical-align: top;
   margin-top: 10px;
   margin-left: 10px;
+}
+
+.invisModal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color:rgba(0, 0, 0, 0.2)
 }
 
 .logoImage {
@@ -930,6 +1047,7 @@
 .newProductButtonHolder {
   display: inline-block;
   float: right;
+  margin-right: -60px;
 }
 
 .new_product_save {
@@ -1001,8 +1119,10 @@
 }
 
 .newProductDeleteMini {
-  font-size: 25px;
-  width: 95%;
+  font-size: 35px;
+  margin-left: 35px;
+  display: inline-block;
+  vertical-align: top;
   text-align: right;
   color: white;
 }
@@ -1060,6 +1180,7 @@
   height: 700px;
   background-color: 	#b3b3b3;
   border-radius: 3px;
+  overflow: hidden;
 }
 
 .newProductLeftColumn {
@@ -1076,6 +1197,8 @@
 
 .newProductMiniImage {
   height: 100%;
+  width: 130px;
+  display: inline-block;
 }
 
 .newProductMiniImage img {
@@ -1088,10 +1211,10 @@
 }
 
 .newProductMiniImagesHolder {
-  width: 80%;
+  width: 2000px;
   height: 100px;
   vertical-align: bottom;
-  margin-top: -215px;
+  margin-top: -110px;
 }
 
 .newProductModal {
@@ -1150,6 +1273,30 @@
   display: inline-block;
   height: 100%;
   vertical-align: top;
+}
+
+.newProductScrollImagesLeft {
+  height: 50px;
+  width: 30px;
+  font-size: 25px;
+  margin-top: 50px;
+  position: absolute;
+  background-color: black;
+  display: block;
+  color: white;
+  margin-top: -50px;
+}
+
+.newProductScrollImagesRight {
+  height: 50px;
+  width: 30px;
+  font-size: 25px;
+  margin-top: -100px;
+  position: absolute;
+  background-color: black;
+  display: block;
+  border-bottom: 1px solid gray;
+  color: white;
 }
 
 .newProductSubmitBar {
@@ -1290,6 +1437,19 @@
   position: fixed;
   background-color: black;
   z-index: 5;
+}
+
+.photoPopup {
+  background-color: #996666;
+  height: 350px;
+  width: 250px;
+  position: absolute;
+}
+
+.photoPopup img{
+  width: 95%;
+  height: 95%;
+  margin: 2.5%;
 }
 
 .productAccessoryBox{
@@ -1460,7 +1620,7 @@
   margin-top: 1%;
   height: 98%;
   outline: 2px solid #E7E6E3;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .projectCellMiniImage {
@@ -1472,7 +1632,7 @@
 
 .projectCellMinis {
   height: 50px;
-  width: 1000%;
+  width: 300%;
   margin-bottom: 4px;
 }
 

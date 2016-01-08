@@ -37,7 +37,7 @@ angular.module('app.routes', ['ngRoute'])
       ,controller: 'buyerCtrl'
       ,controllerAs: 'buyer'
     })
-
+    
     //create new project
     .when('/create/product/:project_name/:type', {
       templateUrl: 'templates/_newProject.html'
