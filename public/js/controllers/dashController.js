@@ -191,10 +191,55 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         console.log(allAttributes);
         for (var j = 0; j < allAttributes.length; j++) {
           $('#mini'+i).append(
-            "<img src='"+allAttributes[j]+"' class='projectCellMiniImage'/>"
+            "<img src='"+allAttributes[j]+"' class='projectCellMiniImage' id='miniCell"+j+"'/>"
           )
         }
       }
+      ///////////////////////////////////////////////////////
+      ///////////////begin logic for the photo popup windows/
+
+      function setPopup(){
+        $('.projectCellMiniImage').on('click', function(evt){
+          $('.invisModal').remove();
+          var source = $(evt.target).attr('src');
+          console.log(source);
+          var marTop = $(evt)[0].pageY;
+          var marLeft = $(evt)[0].pageX;
+          $('.bodyview').append(
+            "<div class='invisModal'>"+
+              "<div class='photoPopup'>"+
+                "<img class='photoPopupImage' src='"+source+"'>"+
+              "</div>"+
+            "</div>"
+          )
+          $(".photoPopup").css({
+            marginTop: marTop - 450
+            ,marginLeft: marLeft - 75
+          })
+          $('.invisModal').height($(document).height())
+          $('.invisModal').on('click', function(evt){
+            var thisClass = $(evt.target)[0].classList[0];
+            if(thisClass == 'photoPopup' || thisClass == 'photoPopupImage'){
+              // $('.invisModal').remove();
+              console.log('yoooo');
+            }
+            else {
+              $('.invisModal').remove();
+            }
+          })
+        })
+      }
+      setPopup();
+      setTimeout(setPopup(), 1000)
+      setTimeout(setPopup(), 3000)
+      // $('.bodyview').on('click', function(evt){
+      //   console.log(evt);
+      //   if($(evt.target)[0].classList[0] != 'photoPopup' || $(evt.target)[0].classList[0] != 'photoPopupImage' || $(evt.target)[0].classList[0] != 'projectCellMiniImage' || $(evt.target)[0].classList[0] != 'projectCellMinis'){
+      //     $('.photoPopup').remove();
+      //   }
+      // })
+      /////////////end logic for the photo popup windows/////
+      ///////////////////////////////////////////////////////
       $('.designerDashList').append(
         "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
           "<div class='projectCellNewInner'>"+
