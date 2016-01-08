@@ -71,7 +71,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       colorsfunc();
     }
     setSwatches();
-    
+
     ////////////////////////////////////////
     /////////Effects for carousel//////////
     ////click effect for seasonsplash
@@ -764,6 +764,47 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     //////end cropping stuff////////////////////////
     ////////////////////////////////////////////////
 
+    //////function to keep scroll-right for mini images in the right placeholder
+    self.imageHolderMargin = 0;
+    $('.newProductScrollImagesRight').on('click', function(){
+      //////check to make sure it's not at either end
+      console.log(self.imageHolderMargin);
+      if(self.imageHolderMargin > -650){
+        self.imageHolderMargin -= 130;
+        $('.newProductMiniImagesHolder').animate({
+          marginLeft: self.imageHolderMargin+"px"
+        }, 100)
+      }
+
+    })
+    $('.newProductScrollImagesLeft').on('click', function(){
+      console.log(self.imageHolderMargin);
+      if(self.imageHolderMargin < 0){
+        self.imageHolderMargin += 130;
+        $('.newProductMiniImagesHolder').animate({
+          marginLeft: self.imageHolderMargin+"px"
+        }, 100)
+      }
+    })
+
+    $(document).ready(function(){
+      setTimeout(function(){
+        $('.newProductScrollImagesLeft').css({
+          marginLeft: $('.newProductImageFrame').width() - 30
+        })
+        $('.newProductScrollImagesRight').css({
+          marginLeft: $('.newProductImageFrame').width() - 30
+        })
+      }, 51)
+    })
+    $(window).resize(function(){
+      $('.newProductScrollImagesLeft').css({
+        marginLeft: $('.newProductImageFrame').width() - 30
+      })
+      $('.newProductScrollImagesRight').css({
+        marginLeft: $('.newProductImageFrame').width() - 30
+      })
+    })
   /////end createProject controller
   ////////////////////////
   ////////////////////////

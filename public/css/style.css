@@ -1132,6 +1132,7 @@
   height: 700px;
   background-color: 	#b3b3b3;
   border-radius: 3px;
+  overflow: hidden;
 }
 
 .newProductLeftColumn {
@@ -1221,6 +1222,26 @@
   display: inline-block;
   height: 100%;
   vertical-align: top;
+}
+
+.newProductScrollImagesRight {
+  height: 50px;
+  width: 30px;
+  position: absolute;
+  background-color: black;
+  display: block;
+  border-bottom: 1px solid gray;
+  color: white;
+}
+
+.newProductScrollImagesLeft {
+  height: 50px;
+  width: 30px;
+  margin-top: 50px;
+  position: absolute;
+  background-color: black;
+  display: block;
+  color: white;
 }
 
 .newProductSubmitBar {
