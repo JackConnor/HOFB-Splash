@@ -131,8 +131,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     function checkDuplicate(){
       //////must make sure there are no duplicates
       self.allCollections = unique(self.allCollectionsRaw);
-      console.log(self.allCollectionsRaw);
-      console.log(self.allCollections);
       loadCollection(self.allCollections);
     }
 
@@ -577,18 +575,18 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         "</div>"
       )
       //////add hover events to 'addNew' box
-      $('.projectCellNewInner').on('mouseenter', function(){
+      $('.projectCellImage').on('mouseenter', function(){
         $('.projectCellNewInner').animate({
           opacity: .6
         }, 100)
       })
-      $('.projectCellNewInner').on('mouseleave', function(){
+      $('.projectCellIMage').on('mouseleave', function(){
         $('.projectCellNewInner').animate({
           outline: 'none'
           ,opacity: 1
         }, 100)
       })
-      $('.projectCellNewInner').on('click', function(){
+      $('.projectCellImage').on('click', function(){
         window.location.hash = "#/create/project";
         window.location.reload();
       })
@@ -1020,6 +1018,71 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "</span>"+
           "</div>"
         )
+        $('.designerDashCollectionAddMore').on('click', function(){
+          $('.bodyview').append(
+            "<div class='invisModal'>"+
+              "<div class='collectionModalContainer'>"+
+                "<input class='collectionModalName' placeholder='Enter New Collection Name'>"+
+                "<p> Please Pick a Product to Add to Your Collection, to Get Started</p>"+
+                "<div class='collectionModalPickContainer'>"+
+                "</div>"+
+                "<div class='submitModal'>"+
+                  "Add Collection"+
+                "</div>"+
+              "</div>"+
+            "</div>"
+          )
+
+          //////now we add the projects to the modal
+          console.log(self.allProjects);
+          var collectionProductCounters = [];
+          for (var i = 0; i < self.allProjects.length; i++) {
+            collectionProductCounters[i] = true;
+            $('.collectionModalPickContainer').append(
+              "<div class='collectionModalProductCell'>"+
+                "<img class='modalProductImage "+self.allProjects[i]._id+"' id='modalProduct"+i+"' src='"+self.allProjects[i].images[0]+"'>"+
+              "</div>"
+            )
+          }
+          $('.submitModal').on('click', function(evt){
+            //////add post request for the modal
+            var allPickedModal = $('.collectionProdYes');
+            for (var i = 0; i < allPickedModal.length; i++) {
+              var newCollection = $('.collectionModalName').val();
+              var productId = $(allPickedModal[i])[0].classList[1];
+              console.log(productId);
+              $http({
+                method: "POST"
+                ,url: "/api/product/update"
+                ,data: {projectId: productId, collections: [newCollection]ß}
+              })
+              .then(function(updatedProduct){
+                console.log(updatedProduct);
+              })
+            }
+          })
+
+          $('.modalProductImage').on('click', function(evt){
+            console.log(collectionProductCounters);
+            var prodCount = $(evt.target).attr('id').split('t')[1];
+            console.log(prodCount);
+            if(collectionProductCounters[prodCount]){
+              $(evt.target).css({
+                border: "5px solid green"
+              })
+              $(evt.target).addClass('collectionProdYes')
+              collectionProductCounters[prodCount] = false;
+            }
+            else {
+              $(evt.target).css({
+                border: "none"
+              })
+              $(evt.target).removeClass('collectionProdYes')
+              collectionProductCounters[prodCount] = true;
+            }
+            console.log(collectionProductCounters);
+          })
+        })
         self.collectionCounter = false;///so that we only load collections once
       }
 
