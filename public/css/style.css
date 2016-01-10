@@ -402,7 +402,7 @@
 
 .curatedBarProduct {
   margin-left: 140px;
-  margin-right: 250px;
+  margin-right: 300px;
   vertical-align: top;
 }
 
@@ -410,11 +410,13 @@
   float: right;
   margin-right: 100px;
   vertical-align: top;
+  display: inline-block;
 }
 
 .curatedBarOrder {
   margin-right: 100px;
   vertical-align: top;
+  display: inline-block;
 }
 
 .curatedBarProfit {
@@ -428,10 +430,6 @@
   width: 100%;
   background-color: #EFE9EB;
   margin-top: 3px;
-}
-
-.curatedCellStatus {
-
 }
 
 .curatedCellImage {
@@ -457,6 +455,24 @@
 
 .curatedCellName p{
   margin-left: 10px;
+}
+
+.curatedCellOrders {
+  margin-right: 100px;
+  font-size: 22px;
+  width: 150px;
+  vertical-align: top;
+  display: inline-block;
+  padding-top: 20px;
+}
+
+.curatedCellStatus {
+  width: 200px;
+  font-size: 22px;
+  padding-top: 20px;
+  display: inline-block;
+  float: right;
+  margin-right: 30px;
 }
 
 .curatePopup {
@@ -901,7 +917,8 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color:rgba(0, 0, 0, 0.2)
+  background-color:rgba(0, 0, 0, 0.2);
+  z-index: 5;
 }
 
 .logoImage {
@@ -1448,6 +1465,58 @@
   height: 400px;
 }
 
+.orderSampleDelete {
+  width: 30px;
+  font-size: 20px;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+
+.orderSampleModalContainer {
+  width: 40%;
+  margin-left: 30%;
+  position: fixed;
+  height: 500px;
+  margin-top: 150px;
+  background-color: white;
+  z-index: 6;
+}
+
+.orderSampleModalInputBox {
+  width: 60%;
+  height: 300px;
+  margin-left: 20%;
+}
+.orderSampleModalInputBox input{
+  margin-top: 10px;
+}
+
+.orderSampleModalInputBox{
+  display: block;
+}
+
+.orderSampleModalTextBox {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.orderSampleModalTextBox h2{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.orderSampleModalTextBox h4{
+  text-align: center;
+  margin-top: 10px;
+}
+
+.orderSampleModalTextBox p{
+  text-align: center;
+  margin-top: 15px;
+}
+
 .panel-product {
   -moz-transition: all .3s ease;
   -o-transition: all .3s ease;
@@ -1881,6 +1950,54 @@
   margin-left: 37.5%;
 }
 
+.sampleAddress {
+  width: 100%;
+  height: 40px;
+  font-size: 25px;
+}
+
+.sampleCompany {
+  width: 100%;
+  height: 40px;
+  font-size: 25px;
+}
+
+.sampleName {
+  width: 100%;
+  height: 40px;
+  font-size: 25px;
+}
+
+.samplePhone {
+  width: 100%;
+  height: 40px;
+  font-size: 25px;
+}
+
+.sampleRequestedCover {
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  font-size: 30px;
+  background-color: black;
+  color: white;
+  opacity: .5;
+  margin-top: -120px;
+}
+
+.sampleState {
+  width: 25%;
+  height: 40px;
+  font-size: 25px;
+}
+
+.sampleZip {
+  width: 73%;
+  margin-left: 2%;
+  height: 40px;
+  font-size: 25px;
+}
+
 .seasonFilter {
   height: 210px;
   width: 210px;
@@ -2030,6 +2147,19 @@
   margin-top: 24px;
   font-size: 25px;
   padding-top: 15px;
+  text-align: center;
+}
+
+.submitSampleModal {
+  width: 100%;
+  height: 40px;
+  float: right;
+  /*margin-right: 10%;*/
+  margin-top: 15px;
+  background-color: green;
+  color: white;
+  border-radius: 3px;
+  font-size: 22px;
   text-align: center;
 }
 
