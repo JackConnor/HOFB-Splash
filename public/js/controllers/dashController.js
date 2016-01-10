@@ -1003,7 +1003,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     ///////////////////////
     //////load collections/
     function loadCollection(collections){
+      console.log('in the function');
       if(self.collectionCounter){
+        console.log('adding');
+        console.log(collections);
         for (var i = 0; i < collections.length; i++) {
           $('.designerDashCollectionDropdown').append(
             '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
@@ -1054,12 +1057,36 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               $http({
                 method: "POST"
                 ,url: "/api/product/update"
-                ,data: {projectId: productId, collections: [newCollection]ß}
+                ,data: {projectId: productId, collections: [newCollection]}
               })
               .then(function(updatedProduct){
                 console.log(updatedProduct);
+                if(updatedProduct){
+                  // var newCollectionHtml =
+                  // '<div class="designerDashCollectionCell" id="'+updatedProduct.data.collections[updatedProduct.data.collections.length - 1]+'">'+
+                  //   updatedProduct.data.collections[updatedProduct.data.collections.length - 1]+
+                  // "</div>"
+                  // console.log(newCollectionHtml);
+                  // $(newCollectionHtml).insertBefore('.designerDashCollectionAddMore');
+                  self.allCollections.push(newCollection);
+                  $('.invisModal').remove();
+                }
+                self.collectionCounter = true;
+                var newColl = unique(self.allCollections);
+                self.allCollections = newColl;
+                console.log(self.allCollections);
+                $('.designerDashCollectionDropdown').html('');
+                loadCollection(newColl);
+                self.collectionCounter = false;
               })
             }
+            self.collectionCounter = true;
+            var newColl = unique(self.allCollections);
+            self.allCollections = newColl;
+            console.log(self.allCollections);
+            $('.designerDashCollectionDropdown').html('');
+            loadCollection(newColl);
+            // setTimeout(loadCollection(newColl), 2000)
           })
 
           $('.modalProductImage').on('click', function(evt){
@@ -1310,7 +1337,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     }
     ///////End Logic for Dashboard Tour////////////////
     ///////////////////////////////////////////////////
-
+    console.log($('.bodyview'));
   /////end dash controller
   ////////////////////////
   ////////////////////////
