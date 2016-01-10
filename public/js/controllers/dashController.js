@@ -39,7 +39,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             if(allProjects[i].status == "saved"){
               allProjectsSaved.push(allProjects[i]);
             }
-            else if(allProjects[i].status ==  "curated"){
+            else if(allProjects[i].status ==  "curated" || allProjects[i].status ==  "sampleRequested"){
               curatedProjectsArray.push(allProjects[i]);
             }
             else if(allProjects[i].status == "submitted to curator"){
@@ -397,14 +397,21 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<p class='curatedTitle' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].name+"</p>"+
               "<p class='curatedTime' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
             "</div>"+
-            "<div class='curatedCellStatus'>"+
-
-            "</div>"+
             "<div class='curatedCellOrders'>"+
-            "coming soon"+
+              "coming soon"+
+            "</div>"+
+            "<div class='curatedCellStatus'>"+
+              self.curatedProjects[i].status+
             "</div>"+
           "</div>"
         )
+        if(self.curatedProjects[i].status == "sampleRequested"){
+          $("#"+self.curatedProjects[i]._id).append(
+            "<div class='sampleRequestedCover'>"+
+              "Sameple Requested"+
+            "</div>"
+          )
+        }
         $('.curatedCell').on('mouseenter', function(){
           $(this).css({
             backgroundColor: '#D7D1D3'
@@ -419,7 +426,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         })
         $('.curatedCell').on('click', function(evt){
           var thisId = $(evt.target).attr('id');
-          window.location.hash = "#/view/product/"+ thisId;
+          // window.location.hash = "#/view/product/"+ thisId;
         })
       }
     }
