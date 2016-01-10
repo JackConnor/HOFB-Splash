@@ -1449,6 +1449,14 @@
   height: 400px;
 }
 
+.orderSampleDelete {
+  width: 30px;
+  font-size: 20px;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
 
 .orderSampleModalContainer {
   width: 40%;
@@ -1479,15 +1487,18 @@
 }
 
 .orderSampleModalTextBox h2{
-  text-align: center
+  text-align: center;
+  margin-top: 20px;
 }
 
 .orderSampleModalTextBox h4{
-  text-align: center
+  text-align: center;
+  margin-top: 10px;
 }
 
 .orderSampleModalTextBox p{
-  text-align: center
+  text-align: center;
+  margin-top: 15px;
 }
 
 .panel-product {

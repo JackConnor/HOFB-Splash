@@ -481,10 +481,13 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         )
         ////activate purchase modal on click
         clickPurchaseModal();
-        $('.projectCellButtonSample').on('click', function(){
+        $('.projectCellButtonSample').on('click', function(evt){
+          var productId = $(evt.target)[0].parentNode.id;
+          console.log(productId);
           $('.bodyview').prepend(
             "<div class='invisModal'>"+
               "<div class='orderSampleModalContainer'>"+
+                "<div class='orderSampleDelete'>X</div>"+
                 "<div class='orderSampleModalTextBox'>"+
                   "<h2>Order Free Sample</h2>"+
                   "<p>Before We Send a Sample, We Need Some Information<p>"+
@@ -498,13 +501,31 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
                   "<input type='text' placeholder='State' class='sampleState'>"+
                   "<input type='text' placeholder='Zip Code' class='sampleZip'>"+
                   "<input type='text' placeholder='Phone Number' class='samplePhone'>"+
-                  "<div class='submitSampleModal'>"+
+                  "<div class='submitSampleModal' id='"+productId+"'>"+
                     "Order Sample"+
                   "</div>"+
                 "</div>"+
-
               "</div>"
           )
+          ///////////////////////////////////////
+          //////begin events for the sample modal
+          $('.orderSampleDelete').on('click', function(){
+            console.log('deleting');
+            $('.invisModal').remove();
+          })
+          ///////we change the status on the product
+          $('.submitSampleModal').on('click', function(){
+            $http({
+              method: "POST"
+              ,url: "/api/product/update"
+              ,data: {projectId: productId, status: "sampleRequested"}
+            })
+            .then(function(updatedProd){
+              console.log(updatedProd);
+              $('.invisModal').remove();
+            })
+          })
+          //////////submit the sample request, changing the product's status
         })
 
         // $('#projectCellButtonEdit').on('click', function(evt){
