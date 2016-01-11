@@ -213,7 +213,9 @@ module.exports = function(app){
 
   /////update a product
   app.post('/api/product/update', function(req, res){
+    console.log(req.body);
     Product.findOne({"_id":req.body.projectId}, function(err, product){
+      console.log(product);
       if(err){console.log(err)}
       if (req.body.name) {
         product.name = req.body.name;
@@ -231,7 +233,9 @@ module.exports = function(app){
         product.description = req.body.description;
       }
       if (req.body.collections) {
-        product.collections = req.body.collections;
+        for (var i = 0; i < req.body.collections.length; i++) {
+          product.collections.push(req.body.collections[i]);
+        }
       }
       if (req.body.colors) {
         product.colors = req.body.colors;
@@ -439,10 +443,12 @@ module.exports = function(app){
 
   app.post('/api/pictures', upload.array('files', 8), function(req,res){
     for (var i = 0; i < req.files.length; i++) {
+      console.log();
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination
       //Uploads to cloudinary, returns URL -> uploadResult is the new photo URL
       cloudinary.uploader.upload(destination+fileName, function(uploadResult){
+        // console.log(uploadResult);
         var id = req.body.productId;
         //grabs ID from above line, does a search on DB with that ID below
         Product.findOne({"_id": id}, function(err, product){
@@ -454,12 +460,12 @@ module.exports = function(app){
           product.save({}, function(err, updatedProduct){
             ///////now we update the conversation to get the photo
             Conversation.findOne({productId: updatedProduct._id}, function(err, convo){
-              console.log(convo);
-              console.log(432);
+              // console.log(convo);
+              // console.log(432);
               console.log(updatedProduct);
               convo.photoUrl = updatedProduct.images[0];
               convo.save({}, function(err, newConvo){
-                console.log(newConvo);
+                // console.log(newConvo);
               })
             })
           });

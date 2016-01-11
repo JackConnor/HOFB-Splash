@@ -111,6 +111,47 @@
   display: inline-block;
 }
 
+.collectionModalContainer {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 80px;
+  height: 600px;
+  background-color: white;
+  border: 4px solid gray
+}
+
+.collectionModalName {
+  width: 80%;
+  font-size: 25px;
+  text-align: center;
+  margin-left: 10%;
+  height: 50px;
+  margin-top: 50px;
+}
+
+.collectionModalPickContainer {
+  height: 300px;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  outline: 2px solid gray;
+  background-color: black;
+  overflow: scroll;
+}
+
+.collectionModalProductCell {
+  width: 200px;
+  height: 200px;
+  outline: 1px solid gray;
+  display: inline-block;
+}
+
+.collectionModalProductCell img{
+  width: 100%;
+  height: 100%;
+}
+
 .colorFilter {
   height: 210px;
   width: 210px;
@@ -361,7 +402,7 @@
 
 .curatedBarProduct {
   margin-left: 140px;
-  margin-right: 250px;
+  margin-right: 300px;
   vertical-align: top;
 }
 
@@ -369,11 +410,13 @@
   float: right;
   margin-right: 100px;
   vertical-align: top;
+  display: inline-block;
 }
 
 .curatedBarOrder {
   margin-right: 100px;
   vertical-align: top;
+  display: inline-block;
 }
 
 .curatedBarProfit {
@@ -387,10 +430,6 @@
   width: 100%;
   background-color: #EFE9EB;
   margin-top: 3px;
-}
-
-.curatedCellStatus {
-
 }
 
 .curatedCellImage {
@@ -416,6 +455,24 @@
 
 .curatedCellName p{
   margin-left: 10px;
+}
+
+.curatedCellOrders {
+  margin-right: 100px;
+  font-size: 22px;
+  width: 150px;
+  vertical-align: top;
+  display: inline-block;
+  padding-top: 20px;
+}
+
+.curatedCellStatus {
+  width: 200px;
+  font-size: 22px;
+  padding-top: 20px;
+  display: inline-block;
+  float: right;
+  margin-right: 30px;
 }
 
 .curatePopup {
@@ -550,6 +607,21 @@
   color: purple;
 }
 
+/*////////////////////Universal CSS class////////////////////////////////////////*/
+/*add top level div class of page to apply the below font and text colors to entire page*/
+.designerDashboardPage, .userProfileContainer, .userProfileSettingsBar{
+
+  font-family: 'Oxygen', sans-serif;
+  color: #454444;
+  background-color: #FEFDFA;
+}
+/*/////////////////////////////////////////////////////////////////////////////*/
+
+.designerDashboardGlyphiconUp {
+    padding-left: 10px;
+    font-size: 10px;
+}
+
 .designerDashActive {
   display: inline-block;
   height: 40px;
@@ -573,23 +645,24 @@
 }
 
 .designerDashActive:hover {
-  /*box-shadow: inset 0 0 0 5px #F9F7F5;*/
-  /*opacity: 0.75;*/
-  box-shadow: 0 0 30px black;
+  /*border-left: 2px solid #afafa6;
+  border-top: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;*/
+  border-bottom: 1px solid #afafa6;
 }
-/*////////////////////Universal CSS class////////////////////////////////////////*/
-/*add top level div class of page to apply the below font and text colors to entire page*/
-.designerDashboardPage, .userProfileContainer, .userProfileSettingsBar{
 
-  font-family: 'Oxygen', sans-serif;
-  color: #454444;
-  background-color: #FEFDFA;
+.designerDashCollectionAddMore {
+  width: 80%;
+  margin-left: 10%;
+  font-size: 15px;
+  text-align: center;
+  padding-top: 10px;
 }
-/*/////////////////////////////////////////////////////////////////////////////*/
 
-.designerDashboardGlyphiconUp {
-    padding-left: 10px;
-    font-size: 10px;
+.designerDashCollectionAddText {
+  display: inline-block;
+  margin-top: -7px;
+  margin-left: 3px;
 }
 
 .designerDashCollectionCell {
@@ -597,6 +670,10 @@
   font-size: 26px;
   padding-left: 40px;
   cursor:pointer;
+}
+
+.designerDashCollectionDropdown {
+  overflow: hidden;
 }
 
 .designerDashCollections {
@@ -672,21 +749,19 @@
   outline: 4px solid aqua;
   z-index: 3
 }
-.designerDashActive:hover {
-  border-left: 2px solid #afafa6;
-  border-top: 2px solid #afafa6;
-  border-right: 2px solid #afafa6;
-}
+
 .designerDashCurated:hover {
-  border-left: 2px solid #afafa6;
+  /*border-left: 2px solid #afafa6;
   border-top: 2px solid #afafa6;
-  border-right: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;*/
+  border-bottom: 1px solid #afafa6;
 }
 
 .designerDashSubmitted:hover {
-  border-left: 2px solid #afafa6;
+  /*border-left: 2px solid #afafa6;
   border-top: 2px solid #afafa6;
-  border-right: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;*/
+  border-bottom: 1px solid #afafa6;
 }
 .designerDashFilter {
   display: inline-block;
@@ -842,7 +917,8 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color:rgba(0, 0, 0, 0.2)
+  background-color:rgba(0, 0, 0, 0.2);
+  z-index: 5;
 }
 
 .logoImage {
@@ -1389,6 +1465,58 @@
   height: 400px;
 }
 
+.orderSampleDelete {
+  width: 30px;
+  font-size: 20px;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+
+.orderSampleModalContainer {
+  width: 40%;
+  margin-left: 30%;
+  position: fixed;
+  height: 500px;
+  margin-top: 150px;
+  background-color: white;
+  z-index: 6;
+}
+
+.orderSampleModalInputBox {
+  width: 60%;
+  height: 300px;
+  margin-left: 20%;
+}
+.orderSampleModalInputBox input{
+  margin-top: 10px;
+}
+
+.orderSampleModalInputBox{
+  display: block;
+}
+
+.orderSampleModalTextBox {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.orderSampleModalTextBox h2{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.orderSampleModalTextBox h4{
+  text-align: center;
+  margin-top: 10px;
+}
+
+.orderSampleModalTextBox p{
+  text-align: center;
+  margin-top: 15px;
+}
+
 .panel-product {
   -moz-transition: all .3s ease;
   -o-transition: all .3s ease;
@@ -1823,6 +1951,54 @@
   margin-left: 37.5%;
 }
 
+.sampleAddress {
+  width: 100%;
+  height: 40px;
+  font-size: 25px;
+}
+
+.sampleCompany {
+  width: 100%;
+  height: 40px;
+  font-size: 25px;
+}
+
+.sampleName {
+  width: 100%;
+  height: 40px;
+  font-size: 25px;
+}
+
+.samplePhone {
+  width: 100%;
+  height: 40px;
+  font-size: 25px;
+}
+
+.sampleRequestedCover {
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  font-size: 30px;
+  background-color: black;
+  color: white;
+  opacity: .5;
+  margin-top: -120px;
+}
+
+.sampleState {
+  width: 25%;
+  height: 40px;
+  font-size: 25px;
+}
+
+.sampleZip {
+  width: 73%;
+  margin-left: 2%;
+  height: 40px;
+  font-size: 25px;
+}
+
 .seasonFilter {
   height: 210px;
   width: 210px;
@@ -1961,6 +2137,33 @@
 #slider{
   cursor:pointer;
 }
+
+.submitModal{
+  display: inline-block;
+  width: 200px;
+  height: 70px;
+  margin-left: 60%;
+  color: green;
+  outline: 2px solid green;
+  margin-top: 24px;
+  font-size: 25px;
+  padding-top: 15px;
+  text-align: center;
+}
+
+.submitSampleModal {
+  width: 100%;
+  height: 40px;
+  float: right;
+  /*margin-right: 10%;*/
+  margin-top: 15px;
+  background-color: green;
+  color: white;
+  border-radius: 3px;
+  font-size: 22px;
+  text-align: center;
+}
+
 .ui-state-hover, .ui-widget-content .ui-state-hover{
   cursor:pointer;
 }

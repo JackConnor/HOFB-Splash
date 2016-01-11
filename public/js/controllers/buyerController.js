@@ -480,34 +480,82 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
             '<div class="projectCellMore">Learn More</div>'+
           "</div>"
         )
+        ////activate purchase modal on click
         clickPurchaseModal();
-        $('#projectCellButtonEdit').on('click', function(evt){
-          var prodIdToUpdate = $($(evt.target)[0].parentNode)[0].id;
+        $('.projectCellButtonSample').on('click', function(evt){
+          var productId = $(evt.target)[0].parentNode.id;
+          console.log(productId);
           $('.bodyview').prepend(
-            '<div class="curatePopup">'+
-              "<h2>Purchase or request a sample?</h2>"+
-              "<br>"+
-              '<button>no thanks</button>'+
-              '<button class="addToPurchased bought" id="'+prodIdToUpdate+'">Purchase an order</button>'+
-              '<button class="addToPurchased sample" id="'+prodIdToUpdate+'">Request a Sample</button>'+
-            '</div>'
+            "<div class='invisModal'>"+
+              "<div class='orderSampleModalContainer'>"+
+                "<div class='orderSampleDelete'>X</div>"+
+                "<div class='orderSampleModalTextBox'>"+
+                  "<h2>Order Free Sample</h2>"+
+                  "<p>Before We Send a Sample, We Need Some Information<p>"+
+                  "<p><p>"+
+                  "<h4>One Sample Product</h4>"+
+                "</div>"+
+                "<div class='orderSampleModalInputBox'>"+
+                  "<input type='text' placeholder='Full Name' class='sampleName'>"+
+                  "<input type='text' placeholder='Company Name' class='sampleCompany'>"+
+                  "<input type='text' placeholder='Address' class='sampleAddress'>"+
+                  "<input type='text' placeholder='State' class='sampleState'>"+
+                  "<input type='text' placeholder='Zip Code' class='sampleZip'>"+
+                  "<input type='text' placeholder='Phone Number' class='samplePhone'>"+
+                  "<div class='submitSampleModal' id='"+productId+"'>"+
+                    "Order Sample"+
+                  "</div>"+
+                "</div>"+
+              "</div>"
           )
-          $('.addToPurchased').on('click', function(evt){
-            var prodId = $(evt.target)[0].id;
-            var purchaseType = $(evt.target)[0].classList[1];
-            var purchaserInformation = [{"purchaserId": self.buyerId, "companyName":"Dummy Company"}]
+          ///////////////////////////////////////
+          //////begin events for the sample modal
+          $('.orderSampleDelete').on('click', function(){
+            console.log('deleting');
+            $('.invisModal').remove();
+          })
+          ///////we change the status on the product
+          $('.submitSampleModal').on('click', function(){
             $http({
               method: "POST"
               ,url: "/api/product/update"
-              ,data: {status: purchaseType, projectId: prodId, purchaserInformation: purchaserInformation}
+              ,data: {projectId: productId, status: "sampleRequested"}
             })
-            .then(function(updatedProduct){
-              if (updatedProduct) {
-                window.location.reload();
-              }
+            .then(function(updatedProd){
+              console.log(updatedProd);
+              $('.invisModal').remove();
             })
           })
+          //////////submit the sample request, changing the product's status
         })
+
+        // $('#projectCellButtonEdit').on('click', function(evt){
+        //   var prodIdToUpdate = $($(evt.target)[0].parentNode)[0].id;
+        //   $('.bodyview').prepend(
+        //     '<div class="curatePopup">'+
+        //       "<h2>Purchase or request a sample?</h2>"+
+        //       "<br>"+
+        //       '<button>no thanks</button>'+
+        //       '<button class="addToPurchased bought" id="'+prodIdToUpdate+'">Purchase an order</button>'+
+        //       '<button class="addToPurchased sample" id="'+prodIdToUpdate+'">Request a Sample</button>'+
+        //     '</div>'
+        //   )
+        //   $('.addToPurchased').on('click', function(evt){
+        //     var prodId = $(evt.target)[0].id;
+        //     var purchaseType = $(evt.target)[0].classList[1];
+        //     var purchaserInformation = [{"purchaserId": self.buyerId, "companyName":"Dummy Company"}]
+        //     $http({
+        //       method: "POST"
+        //       ,url: "/api/product/update"
+        //       ,data: {status: purchaseType, projectId: prodId, purchaserInformation: purchaserInformation}
+        //     })
+        //     .then(function(updatedProduct){
+        //       if (updatedProduct) {
+        //         window.location.reload();
+        //       }
+        //     })
+        //   })
+        // })
         $('.projectCellHoverContainer').on('mouseleave', function(evt){
           $hoverTarget.css({
             opacity: 1

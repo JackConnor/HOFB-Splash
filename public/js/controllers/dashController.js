@@ -23,7 +23,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       .then(function(decodedToken){
         self.decodedToken = decodedToken;
         ///////note: User Id is ""
-        console.log(self.decodedToken.data.name);
         if(decodedToken.data.aud != "designer"){
           window.location.hash = '#/signin'
         }
@@ -40,7 +39,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             if(allProjects[i].status == "saved"){
               allProjectsSaved.push(allProjects[i]);
             }
-            else if(allProjects[i].status ==  "curated"){
+            else if(allProjects[i].status ==  "curated" || allProjects[i].status ==  "sampleRequested"){
               curatedProjectsArray.push(allProjects[i]);
             }
             else if(allProjects[i].status == "submitted to curator"){
@@ -68,13 +67,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               var nowYear  = nowDate.getFullYear();
               var nowDay = nowDate.getDate();
               var rigthNow = nowMonth+"-"+nowDay+"-"+nowYear;
-              // console.log(nowYear);
-              // console.log(projYear);
               if(nowYear > projYear){
                 if(nowMonth > projMonth){
-                  console.log('greater than one year, less than 2');
                    var months_since = (nowYear - projYear) + (nowMonth - projMonth);
-                   console.log(months_since);
                    return months_since+ " months old"
                 }
                 else if ((nowYear - projYear == 1) && projMonth >= nowMonth ){
@@ -109,33 +104,34 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             self.allProjects[i].TimeSinceCreation = timeSince();
             /////get all collections
             for (var j = 0; j < self.allProjects[i].collections.length; j++) {
-              collectionName.push(self.allProjects[i].collections[j])
+              console.log(self.allProjects[i].collections[j]);
+              if(self.allProjects[i].collections[j].split('').length > 1){
+                console.log('ccepted');
+                collectionName.push(self.allProjects[i].collections[j]);
+              }
             }
             self.allCollectionsRaw = collectionName;
-            checkDuplicate();
+            console.log(self.allCollectionsRaw);
           }
+          checkDuplicate();
           callback(arg)
         })
       })
     }
 
+    //////simple function to return just the unique items from an array, very useful for many purposes
+    function unique(list) {
+      var result = [];
+      $.each(list, function(i, e) {
+        if ($.inArray(e, result) == -1) result.push(e);
+      });
+      return result;
+    }
+
     function checkDuplicate(){
       //////must make sure there are no duplicates
-      self.allCollections = [];
-      for (var i = 0; i < self.allCollectionsRaw.length; i++) {
-        var passBool = true;
-        for (var j = 0; j < self.allCollections.length; j++) {
-          if(self.allCollectionsRaw[i] == self.allCollections[j]){
-            passBool = false;
-          }
-        }
-        if(passBool && self.allCollectionsRaw[i] != ""){
-          self.allCollections.push(self.allCollectionsRaw[i])
-        }
-      }
-      if(self.collectionCounter){
-        loadCollection(self.allCollections);
-      }
+      self.allCollections = unique(self.allCollectionsRaw);
+      loadCollection(self.allCollections);
     }
 
     /////load all active projects into the dashboard view
@@ -188,7 +184,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         //     }
         //   }
         // }
-        console.log(allAttributes);
         for (var j = 0; j < allAttributes.length; j++) {
           $('#mini'+i).append(
             "<img src='"+allAttributes[j]+"' class='projectCellMiniImage' id='miniCell"+j+"'/>"
@@ -208,23 +203,32 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           }
           else {
             var imageCount = $(self.activeMinis)[0].children.length;
-            var totalLengthPhotos = imageCount*60;
             console.log(imageCount);
-            $(self.activeMinis).css({
-              marginLeft: self.miniMarg
-            })
-            self.miniMarg += -1;
+            var totalLengthPhotos = ((imageCount+.3)*64);
+            console.log(totalLengthPhotos);
+            var viewWindow = $('.projectCellImageHolder').width();
+            console.log(viewWindow);
+            var maxMovement = (-totalLengthPhotos) + viewWindow;
+            console.log(maxMovement);
+            console.log(self.miniMarg);
+            if(self.miniMarg >= maxMovement && maxMovement < 0){
+              $(self.activeMinis).css({
+                marginLeft: self.miniMarg
+              })
+              self.miniMarg += -1;
+            }
+            else {
+              console.log('no room for movement there');
+            }
           }
         }, 20)
         $('.projectCellMinis').on('mouseenter', function(evt){
-          console.log($(evt.target));
           self.intervalCounter = 1;
           if($(evt.target)[0].classList[0] == 'projectCellMinis'){
             self.activeMinis = $(evt.target)[0];
           }
           else {
             self.activeMinis = $(evt.target)[0].parentNode;
-            console.log('activeMinis');
           }
         })
         $('.projectCellMinis').on('mouseleave', function(){
@@ -240,7 +244,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.projectCellMiniImage').on('click', function(evt){
           $('.invisModal').remove();
           var source = $(evt.target).attr('src');
-          console.log(source);
           var marTop = $(evt)[0].pageY;
           var marLeft = $(evt)[0].pageX;
           $('.bodyview').append(
@@ -258,8 +261,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           $('.invisModal').on('click', function(evt){
             var thisClass = $(evt.target)[0].classList[0];
             if(thisClass == 'photoPopup' || thisClass == 'photoPopupImage'){
-              // $('.invisModal').remove();
-              console.log('yoooo');
             }
             else {
               $('.invisModal').remove();
@@ -294,7 +295,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.projectCellNewInner').on('click', function(){
         newProductPop();
       })
-      console.log(self.decodedToken.data);
       if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
         self.tourCounter = 0;///keeps track of where we are in the dashboard tour
         dashboardTour();
@@ -332,12 +332,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         '</div>'
       )
       $('.dropList').on('change', function(){
-        console.log('yoyoy');
       })
       $('.newProductBegin').on('click', function(){
         var name = $('.newProductName').val().split(' ').join('_');
         var type = $('.newProductModalDropdown').val();
-        console.log(type);
         window.location.hash = "#/create/product/"+name+"/"+type;
       });////function to begin product build
       $('.modalFiller').on('click', function(){
@@ -399,14 +397,21 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<p class='curatedTitle' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].name+"</p>"+
               "<p class='curatedTime' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
             "</div>"+
-            "<div class='curatedCellStatus'>"+
-
-            "</div>"+
             "<div class='curatedCellOrders'>"+
-            "coming soon"+
+              "coming soon"+
+            "</div>"+
+            "<div class='curatedCellStatus'>"+
+              self.curatedProjects[i].status+
             "</div>"+
           "</div>"
         )
+        if(self.curatedProjects[i].status == "sampleRequested"){
+          $("#"+self.curatedProjects[i]._id).append(
+            "<div class='sampleRequestedCover'>"+
+              "Sameple Requested"+
+            "</div>"
+          )
+        }
         $('.curatedCell').on('mouseenter', function(){
           $(this).css({
             backgroundColor: '#D7D1D3'
@@ -421,8 +426,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         })
         $('.curatedCell').on('click', function(evt){
           var thisId = $(evt.target).attr('id');
-          console.log(thisId);
-          window.location.hash = "#/view/product/"+ thisId;
+          // window.location.hash = "#/view/product/"+ thisId;
         })
       }
     }
@@ -578,18 +582,18 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         "</div>"
       )
       //////add hover events to 'addNew' box
-      $('.projectCellNewInner').on('mouseenter', function(){
+      $('.projectCellImage').on('mouseenter', function(){
         $('.projectCellNewInner').animate({
           opacity: .6
         }, 100)
       })
-      $('.projectCellNewInner').on('mouseleave', function(){
+      $('.projectCellIMage').on('mouseleave', function(){
         $('.projectCellNewInner').animate({
           outline: 'none'
           ,opacity: 1
         }, 100)
       })
-      $('.projectCellNewInner').on('click', function(){
+      $('.projectCellImage').on('click', function(){
         window.location.hash = "#/create/project";
         window.location.reload();
       })
@@ -748,7 +752,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
-            "<div class='projectCellTrash'>X </div>"+
             '<div class="projectCellButton projectCellButtonView" >VIEW</div>'+
           "</div>"
         )
@@ -1007,44 +1010,163 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     ///////////////////////
     //////load collections/
     function loadCollection(collections){
-      self.collectionCounter = false;///so that we only load collections once
-      for (var i = 0; i < collections.length; i++) {
+      console.log('in the function');
+      if(self.collectionCounter){
+        console.log('adding');
+        console.log(collections);
+        for (var i = 0; i < collections.length; i++) {
+          $('.designerDashCollectionDropdown').append(
+            '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
+              collections[i]+
+            "</div>"
+          )
+        }
         $('.designerDashCollectionDropdown').append(
-          '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
-            collections[i]+
+          "<div class='designerDashCollectionAddMore'>"+
+            "<span class='glyphicon glyphicon-plus'>"+
+              "<p class='designerDashCollectionAddText'>add collection</p>"+
+            "</span>"+
           "</div>"
         )
+        $('.designerDashCollectionAddMore').on('click', function(){
+          $('.bodyview').append(
+            "<div class='invisModal'>"+
+              "<div class='collectionModalContainer'>"+
+                "<input class='collectionModalName' placeholder='Enter New Collection Name'>"+
+                "<p> Please Pick a Product to Add to Your Collection, to Get Started</p>"+
+                "<div class='collectionModalPickContainer'>"+
+                "</div>"+
+                "<div class='submitModal'>"+
+                  "Add Collection"+
+                "</div>"+
+              "</div>"+
+            "</div>"
+          )
+
+          //////now we add the projects to the modal
+          console.log(self.allProjects);
+          var collectionProductCounters = [];
+          for (var i = 0; i < self.allProjects.length; i++) {
+            collectionProductCounters[i] = true;
+            $('.collectionModalPickContainer').append(
+              "<div class='collectionModalProductCell'>"+
+                "<img class='modalProductImage "+self.allProjects[i]._id+"' id='modalProduct"+i+"' src='"+self.allProjects[i].images[0]+"'>"+
+              "</div>"
+            )
+          }
+          $('.submitModal').on('click', function(evt){
+            //////add post request for the modal
+            var allPickedModal = $('.collectionProdYes');
+            for (var i = 0; i < allPickedModal.length; i++) {
+              var newCollection = $('.collectionModalName').val();
+              var productId = $(allPickedModal[i])[0].classList[1];
+              console.log(productId);
+              $http({
+                method: "POST"
+                ,url: "/api/product/update"
+                ,data: {projectId: productId, collections: [newCollection]}
+              })
+              .then(function(updatedProduct){
+                console.log(updatedProduct);
+                if(updatedProduct){
+                  // var newCollectionHtml =
+                  // '<div class="designerDashCollectionCell" id="'+updatedProduct.data.collections[updatedProduct.data.collections.length - 1]+'">'+
+                  //   updatedProduct.data.collections[updatedProduct.data.collections.length - 1]+
+                  // "</div>"
+                  // console.log(newCollectionHtml);
+                  // $(newCollectionHtml).insertBefore('.designerDashCollectionAddMore');
+                  self.allCollections.push(newCollection);
+                  $('.invisModal').remove();
+                }
+                self.collectionCounter = true;
+                var newColl = unique(self.allCollections);
+                self.allCollections = newColl;
+                console.log(self.allCollections);
+                $('.designerDashCollectionDropdown').html('');
+                loadCollection(newColl);
+                self.collectionCounter = false;
+              })
+            }
+            self.collectionCounter = true;
+            var newColl = unique(self.allCollections);
+            self.allCollections = newColl;
+            console.log(self.allCollections);
+            $('.designerDashCollectionDropdown').html('');
+            loadCollection(newColl);
+            // setTimeout(loadCollection(newColl), 2000)
+          })
+
+          $('.modalProductImage').on('click', function(evt){
+            console.log(collectionProductCounters);
+            var prodCount = $(evt.target).attr('id').split('t')[1];
+            console.log(prodCount);
+            if(collectionProductCounters[prodCount]){
+              $(evt.target).css({
+                border: "5px solid green"
+              })
+              $(evt.target).addClass('collectionProdYes')
+              collectionProductCounters[prodCount] = false;
+            }
+            else {
+              $(evt.target).css({
+                border: "none"
+              })
+              $(evt.target).removeClass('collectionProdYes')
+              collectionProductCounters[prodCount] = true;
+            }
+            console.log(collectionProductCounters);
+          })
+        })
+        self.collectionCounter = false;///so that we only load collections once
       }
-      $('.designerDashCollectionCell').on('mouseenter', function(evt){
-        var color = $(evt.target).css('backgroundColor');
-        if( color != 'rgb(28, 28, 28)'){
-          $($(evt.target)[0]).css({
+
+      ///////////////////////////////////////////////////
+      ///////now we add the "add more collections logic"/
+      $('.designerDashCollectionAddMore').on('mouseenter', function(evt){
+          $('.designerDashCollectionAddMore').css({
               backgroundColor: '#BDBDBD'
           })
-        }
       })
-      $('.designerDashCollectionCell').on('mouseleave', function(evt){
-        var color = $(evt.target).css('backgroundColor');
-        if( color != 'rgb(28, 28, 28)'){
-          $($(evt.target)[0]).css({
-            backgroundColor: 'white'
+      $('.designerDashCollectionAddMore').on('mouseleave', function(evt){
+          $('.designerDashCollectionAddMore').css({
+            backgroundColor: '#F9F7F5'
             ,color: "black"
           })
-        }
+      })
+      ////////////on click we popout a modal to enter your collection name
+
+
+
+
+      //////end we add the "add more collections logic"/
+      //////////////////////////////////////////////////
+      $('.designerDashCollectionCell').on('mouseenter', function(evt){
+          $(evt.target).css({
+              backgroundColor: '#BDBDBD'
+          })
+      })
+      $('.designerDashCollectionCell').on('mouseleave', function(evt){
+          $(evt.target).css({
+            backgroundColor: '#F9F7F5'
+            ,color: "black"
+          })
       })
       $('.designerDashCollectionCell').on('click', function(evt){
         var collections = $('.designerDashCollectionCell');
         for (var i = 0; i < collections.length; i++) {
           $(collections[i]).css({
-            backgroundColor: 'white'
+            backgroundColor: '#F9F7F5'
             ,color: "black"
+            ,border: 'none'
           })
         }
         var collectionValue = $($(evt.target)[0])[0].id;
         $($(evt.target)[0]).css({
           backgroundColor: "#1C1C1C"
-          ,color: 'white'
+          ,color: '#F9F7F5'
+          ,border: '4px solid gray'
         })
+
         if(self.curatedToggleCounter == 'active'){
           if(collectionValue == 'All'){
             $('.designerDashList').html("");
@@ -1209,7 +1331,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           opacity: 0
         })
         var topOff = $('.designerDashCurated').offset().top;
-        console.log($('.designerDashCurated').offset());
         var topLeft = $('.designerDashCurated').offset().left;
         var width = $('.designerDashCurated').css('width').split('').slice(0, $('.designerDashCurated').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
         ////add new temporary element to show tutees
@@ -1223,7 +1344,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     }
     ///////End Logic for Dashboard Tour////////////////
     ///////////////////////////////////////////////////
-
+    console.log($('.bodyview'));
   /////end dash controller
   ////////////////////////
   ////////////////////////
