@@ -431,12 +431,28 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               '<div class="invisModal">'+
                 '<div class="sampleRequestAcceptContainer">'+
                   "<div class='deleteSampleRequestAcc'>X</div>"+
-                  "<h2>Congratulations</h2>"+
-                  "<h4>Your design has been selected for sampling</h4>"+
-                  "<p>If changes are requested to the product you will be alerted through the dashboard. Thank you for helping build the future of fashion.</p>"+
+                  "<span class='sampleRequestCongrats'><h2>Congratulations</h2></span>"+
+                  "<span class='sampleRequestInfo'>Your design has been selected for sampling</span>"+
+                  "<span class='sampleRequestChanges'>"+
+                    "<p>If changes are requested to the product you will be alerted through the dashboard. Thank you for helping build the future of fashion.</p>"+
+                  "</span>"+
                   "<div class='sampleRequestToggleContainer'>"+
-                    "<h3>How would you like to send the sample?</h3>"+
-                    "<input type='radio'/>"+
+                    "<span class='sampleHow'>How would you like to send the sample?</span>"+
+                    "<span class='sampleSuggestHofb'>"+
+                      "<input class='sampleRequestHofb' type='radio' value='hofb'/>"+
+                      "<p><span style='font-style:bold'>HOFB</span> (suggested)</p>"+
+                    "</span>"+
+                    "<span class='sampleRequestAboutHofb'>We will produce the sample based on your images and send it to the buyer</span>"+
+                    "<div class='sampleLearnMoreHOFB'>learn more</div>"+
+                    "<div class='sampleSuggestDesigner'>"+
+                      "<input class='sampleRequestMe' type='radio' value='designer'/>"+
+                      "<span class='sampleDiyTitle'>DIY Option</span>"+
+                    "</div>"+
+                    "<span class='sampleDiyDescription'>I will produce my own sample and send it to HOFB</span>"+
+                    "<div class='sampleLearnMoreMe'>learn more</div>"+
+                    "<div class='sampleFinishRequest'>"+
+                      "Submit"+
+                    "</div>"+
                   "</div>"+
                 "</div>"+
               "</div>"
