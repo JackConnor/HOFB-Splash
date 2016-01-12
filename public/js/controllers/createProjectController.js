@@ -33,6 +33,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////end global variables
 
     ////////set our global variables for our our html to create the swatches from
+/// correct code
     function setSwatches(){
       var fabricsfunc = function(){
         var allFabrics = [];
