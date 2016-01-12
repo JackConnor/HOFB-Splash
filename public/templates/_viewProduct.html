@@ -36,30 +36,28 @@
       </div>
 
       <div class='productAccessoryBox'>
-        <h3 class='productAccessoryBoxCatagories'>Colors</h3>
-        <div class="viewColorHolder" ng-repeat='color in viewProduct.allColors'>
-          <div class="viewProductColorBox" style="background-color:{{color}}">
+        <div class="viewProductSwatchCell">
+          <h3 class='productAccessoryBoxCatagories'>Colors</h3>
+          <div class="viewColorHolder" ng-repeat='color in viewProduct.allColors'>
+            <div class="viewProductColorBox" style="background-color:{{color}}">
+            </div>
           </div>
         </div>
-        <br>
-        <h3 class='productAccessoryBoxCatagories'>Fabrics</h3>
-        <div class="viewProductHolder" ng-repeat='fabric in viewProduct.allFabrics'>
-          <img class="viewProductFabricBox" src='{{fabric}}'></img>
+        <div class="viewProductSwatchCell">
+          <h3 class='productAccessoryBoxCatagories'>Fabrics</h3>
+          <div class="viewProductHolder" ng-repeat='fabric in viewProduct.allFabrics'>
+            <img class="viewProductFabricBox" src='{{fabric}}'></img>
+          </div>
         </div>
-        <br>
-         <h3 class='productAccessoryBoxCatagories'>Seasons</h3>
-        <div class="viewProductHolder" ng-repeat='season in viewProduct.allSeasons'>
-          <img class="viewProductFabricBox" src='{{season}}'></img>
+        <div class="viewProductSwatchCell">
+          <h3 class='productAccessoryBoxCatagories'>Accessories</h3>
+          <div class="viewProductAccessoryBox" style="background-color:#B9B1AF;"></div>
+          <div class="viewProductAccessoryBox" style="background-color:#A7A39F;"></div>
+          <div class="viewProductAccessoryBox" style="background-color:#ECE9EF;"></div>
         </div>
-      </br>
-        <h3 class='productAccessoryBoxCatagories'>Accessories</h3>
-        <div class="viewProductAccessoryBox" style="background-color:#B9B1AF;"></div>
-        <div class="viewProductAccessoryBox" style="background-color:#A7A39F;"></div>
-        <div class="viewProductAccessoryBox" style="background-color:#ECE9EF;"></div>
-      </br>
+      </div>
     </div>
   </div>
-</div>
       <!-- /item -->
 
 <!-- //////////////////2nd one -->

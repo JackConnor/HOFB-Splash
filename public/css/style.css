@@ -2542,6 +2542,17 @@ textarea#styled {
   padding-top: 45px;
 }
 
+.viewProductSwatchCell {
+  display: block;
+  margin-top: 15px;
+  height: 100px;
+}
+
+.viewProductSwatchCell h3{
+  padding: 0px;
+  margin: 0px;
+}
+
 .viewProductTitle{
   font-size: 31px;
 }
