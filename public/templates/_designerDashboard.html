@@ -1,15 +1,32 @@
 <link rel="stylesheet" href="/css/removePaddingBootstrap.css" media="screen" title="no title" charset="utf-8">
 <link rel="stylesheet" href="/css/masterFont.css" media="screen" title="no title" charset="utf-8">
 <div class="designerDashboardPage">
-<div class="navigationBar">
-  <div class="navTitle">
-    HOFB
-    <!-- DESIGNER  datatype: <span class='dashDataType'></span> -->
+  <div class="navigationBar">
+    <div class="navTitle">
+      HOFB
+      <div class='navTitleUnderline'></div>
+    </div>
+    <div class='navTitleRightLine'></div>
+
+
+    <div class="dropdown">
+  <button  class="dropbtn">Dropdown</button>
+    <div id="myDropdown" class="dropdown-content">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
-  <div class="logoutButton">
-    Logout
+
+
+    <div class="fa fa-caret-down" id='navBarTriangleDown'></div>
+    <div class="fa fa-circle" id='navBarCircleIcon'></div>
+    <div class="glyphicon glyphicon-envelope" id='navBarEnvelopeIcon'></div>
+
+    <div class="logoutButton">
+      Logout
+    </div>
   </div>
-</div>
 <div class='designerDashDashTitle'>Dashboard</div>
 </br>
 
@@ -40,9 +57,8 @@
   <div class="designerDashSearchFilterContainer">
     <div class="designerDashFilter col-xs-12">
       <div class="designerDashColor dashFilter">color<span class="glyphicon glyphicon-menu-down designerDashboardGlyphiconUp"></span></div>
-      <div class="designerDashType dashFilter ">product type<span class="glyphicon glyphicon-menu-down designerDashboardGlyphiconUp"></span></div>
       <div class="designerDashFabric dashFilter">fabric<span class="glyphicon glyphicon-menu-down designerDashboardGlyphiconUp"></span></div>
-      <div class="designerDashSeason dashFilter">season<span class="glyphicon glyphicon-menu-down designerDashboardGlyphiconUp"></span></div>
+      <div class="designerDashSeason dashFilter">accessories<span class="glyphicon glyphicon-menu-down designerDashboardGlyphiconUp"></span></div>
     </div>
   </div>
   <div class="designerDashBottomContainer">

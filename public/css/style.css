@@ -1111,18 +1111,108 @@
   display: inline-block;
 }
 
+
+/*need to rename these classes*/
+/*/*/
+/*/*/
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+/*/*/
+/*/*/
+/*end of rename*/
+
+
 .navigationBar {
-  height: 45px;
+  height: 50px;
   font-size: 30px;
-  background-color: black;
+  background-color: #232730;
   color: white;
   display: block;
+  padding-top: 5px;
+  border-top: 1px solid #FEFDFA;
+}
+#navBarCircleIcon{
+  display: inline-block;
+  float: right;
+  padding-right: 22px;
+  font-size: 30px;
+  padding-top: 5px;
+  color:#FDFDFD;
+}
+#navBarTriangleDown{
+  display: inline-block;
+  float: right;
+  padding-right: 22px;
+  font-size: 23px;
+  padding-top: 5px;
+  margin-left: -10px;
+  color:#FDFDFD;
+}
+#navBarEnvelopeIcon{
+  display: inline-block;
+  float: right;
+  padding-right: 22px;
+  font-size: 23px;
+  padding-top: 7px;
+  color:#FDFDFD;
 }
 
 .navTitle {
   display: inline-block;
+  padding-left: 20px;
+  font-size: 27px;
+  color:#FDFDFD;
 }
-
+.navTitleRightLine{
+  /*width: 120px;*/
+  border-right: 2px solid #FEFDFA;
+  height: 43px;
+  display: inline;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+}
+.navTitleUnderline {
+    margin-top: -8px;
+    outline: 1px solid #30a0b0;
+    width: 68px;
+    margin-left: 3px;
+}
 .newProductBegin {
   width: 160px;
   height: 50px;
