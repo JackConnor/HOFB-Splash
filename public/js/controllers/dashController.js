@@ -439,13 +439,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                   "<div class='sampleRequestToggleContainer'>"+
                     "<span class='sampleHow'>How would you like to send the sample?</span>"+
                     "<span class='sampleSuggestHofb'>"+
-                      "<input class='sampleRequestHofb' type='radio' value='hofb'/>"+
+                      "<input class='radioBtn sampleRequestHofb' type='radio' value='hofb'/>"+
                       "<p><span style='font-style:bold'>HOFB</span> (suggested)</p>"+
                     "</span>"+
                     "<span class='sampleRequestAboutHofb'>We will produce the sample based on your images and send it to the buyer</span>"+
                     "<div class='sampleLearnMoreHOFB'>learn more</div>"+
                     "<div class='sampleSuggestDesigner'>"+
-                      "<input class='sampleRequestMe' type='radio' value='designer'/>"+
+                      "<input class='radioBtn sampleRequestMe' type='radio' value='designer'/>"+
                       "<span class='sampleDiyTitle'>DIY Option</span>"+
                     "</div>"+
                     "<span class='sampleDiyDescription'>I will produce my own sample and send it to HOFB</span>"+
@@ -464,6 +464,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 ,color: 'white'
               })
             })
+            /////the delete button hover states
             $('.deleteSampleRequestAcc').on('mouseleave', function(){
               $(this).css({
                 backgroundColor: "white"
@@ -474,8 +475,23 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               console.log('yoyoy');
               $('.invisModal').remove();
             })
+            /////////function to submit the sample fulfillment
+            $('.sampleFinishRequest').on('click', function(){
+              if($('.sampleRequestMe').prop('checked') == true){
+                console.log('You gonna make it yoself, huh?');
+              }
+              else if($('.sampleRequestHofb').prop('checked') == true){
+                console.log('Smart move cupcake');
+              }
+            })
+            ///////function to make sure only one radio button is checked at a time
+            $('.radioBtn').on('click', function(){
+              $('.radioBtn').prop('checked', false);
+              $(this).prop('checked', true);
+            })
           })
         }
+        $()
         $('.curatedCell').on('mouseenter', function(){
           $(this).css({
             backgroundColor: '#D7D1D3'

@@ -2084,8 +2084,8 @@
   width: 150px;
   height: 40px;
   font-size: 19px;
-  margin: 20px auto 0 auto;
-  background-color: green;
+  margin: 30px auto 0 auto;
+  background-color: #3CB878;
   color: white;
   text-align: center;
   padding-top: 5px;
@@ -2129,7 +2129,7 @@
 .sampleRequestAcceptContainer {
   width: 600px;
   height: 600px;
-  margin-top: 100px;
+  /*margin-top: 100px;*/
   background-color: white;
   margin-left: auto;
   margin-right: auto;
