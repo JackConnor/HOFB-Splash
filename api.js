@@ -448,7 +448,7 @@ module.exports = function(app){
       var destination = req.files[i].destination
       //Uploads to cloudinary, returns URL -> uploadResult is the new photo URL
       cloudinary.uploader.upload(destination+fileName, function(uploadResult){
-        // console.log(uploadResult);
+        console.log(uploadResult);
         var id = req.body.productId;
         //grabs ID from above line, does a search on DB with that ID below
         Product.findOne({"_id": id}, function(err, product){
@@ -470,7 +470,15 @@ module.exports = function(app){
             })
           });
         })
-      })
+      },
+      {
+        eager: [
+           { width: 150, height: 150,
+             crop: "fill", format: "png" },
+           { width: 500, height: 700,
+             crop: "fill", format: "png" }
+        ]
+       })
     }
     res.redirect('/#/designer/dashboard');
   });
