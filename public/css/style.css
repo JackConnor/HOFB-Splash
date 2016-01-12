@@ -2094,7 +2094,26 @@
 
 .sampleRequestAcceptContainer h2 {
   text-align: center;
+  display: block;
   padding-top: 40px;
+}
+
+.sampleRequestAcceptContainer h4 {
+  text-align: center;
+  display: block;
+  padding-top: 15px;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.sampleRequestAcceptContainer p{
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin-left: 0px;
+  padding-top: 5px;
+  width: 60%;
+  margin-left: 20%;
 }
 
 .sampleRequestButton {
@@ -2117,6 +2136,14 @@
   color: white;
   opacity: .5;
   margin-top: -120px;
+}
+
+.sampleRequestToggleContainer {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 40px;
+  height: 300px;
+  outline: 2px solid black;
 }
 
 .sampleState {

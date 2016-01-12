@@ -432,6 +432,12 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 '<div class="sampleRequestAcceptContainer">'+
                   "<div class='deleteSampleRequestAcc'>X</div>"+
                   "<h2>Congratulations</h2>"+
+                  "<h4>Your design has been selected for sampling</h4>"+
+                  "<p>If changes are requested to the product you will be alerted through the dashboard. Thank you for helping build the future of fashion.</p>"+
+                  "<div class='sampleRequestToggleContainer'>"+
+                    "<h3>How would you like to send the sample?</h3>"+
+                    "<input type='radio'/>"+
+                  "</div>"+
                 "</div>"+
               "</div>"
             )
