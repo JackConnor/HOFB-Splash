@@ -5,7 +5,10 @@ angular.module('startSessionFactory', [])
   startSession.$inject = ['$http'];
   function startSession($http){
 
-    function start(email, password, callback){
+    function start(email, password){
+      console.log('in the favtory');
+      console.log(email);
+      console.log(password);
       $http({
         method: "POST"
         ,url: "/api/startsession"
@@ -17,8 +20,9 @@ angular.module('startSessionFactory', [])
         if(sessionToken.data.data == "sorry no token"){
           alert('name or password were incorrect');
         }
-        window.localStorage.hofbToken = sessionToken.data;
-        callback(sessionToken.data);
+        else{
+          window.localStorage.hofbToken = sessionToken.data;
+        }
       })
     }
     return {

@@ -31,6 +31,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           ,url: '/api/'+decodedToken.data.name+'/products'
         })
         .then(function(products){
+          console.log(products);
           var allProjects = products.data;
           var allProjectsSaved = [];
           var curatedProjectsArray = [];
