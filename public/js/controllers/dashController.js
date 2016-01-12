@@ -409,9 +409,50 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         if(self.curatedProjects[i].status == "sampleRequested"){
           $("#"+self.curatedProjects[i]._id).append(
             "<div class='sampleRequestedCover'>"+
-              "Sameple Requested"+
+              "<div class='sampleRequestButton sampleRequestButton"+i+"'>"+
+                "Sample Requested"+
+              "</div>"+
             "</div>"
           )
+          $(".sampleRequestButton").on('mouseenter', function(){
+            $(this).css({
+              backgroundColor: "white",
+              color: "black"
+            })
+          })
+          $(".sampleRequestButton").on('mouseleave', function(){
+            $(this).css({
+              backgroundColor: "black",
+              color: "white"
+            })
+          })
+          $(".sampleRequestButton"+i).on('click', function(){
+            $('.bodyview').prepend(
+              '<div class="invisModal">'+
+                '<div class="sampleRequestAcceptContainer">'+
+                  "<div class='deleteSampleRequestAcc'>X</div>"+
+                  "<h2>Congratulations</h2>"+
+                "</div>"+
+              "</div>"
+            )
+            /////first, we make a function to delete modal
+            $('.deleteSampleRequestAcc').on('mouseenter', function(){
+              $(this).css({
+                backgroundColor: "black"
+                ,color: 'white'
+              })
+            })
+            $('.deleteSampleRequestAcc').on('mouseleave', function(){
+              $(this).css({
+                backgroundColor: "white"
+                ,color: 'black'
+              })
+            })
+            $('.deleteSampleRequestAcc').on('click', function(){
+              console.log('yoyoy');
+              $('.invisModal').remove();
+            })
+          })
         }
         $('.curatedCell').on('mouseenter', function(){
           $(this).css({
