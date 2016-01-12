@@ -480,6 +480,30 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               if($('.sampleRequestMe').prop('checked') == true){
                 ///////they're making it themselves
                 console.log('You gonna make it yoself, huh?');
+                console.log('Smart move cupcake');
+                var productId = this.id;
+                console.log(productId);
+                $http({
+                  method: "POST"
+                  ,url: "/api/product/update"
+                  ,data: {projectId: productId, status: "sampleSent"}
+                })
+                .then(function(updatedProduct){
+                  console.log(updatedProduct);
+                  var sampleProducer = self.decodedToken.data.name;
+                  console.log(sampleProducer);
+                  $http({
+                    method: "POST"
+                    ,url: "/api/update/sample"
+                    ,data: {sampleProducer: sampleProducer, status: "inProduction", productId: productId}
+                  })
+                  .then(function(updatedSample){
+                    console.log(updatedSample);
+                    $('.invisModal').remove();
+                    window.location.reload();
+
+                  })
+                })
               }
               else if($('.sampleRequestHofb').prop('checked') == true){
                 ////////////we're making it
@@ -507,6 +531,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
                   })
                 })
+              }
+              else {
+                alert("You need to select who will create the sample, just click on one of the buttons below");
               }
             })
             ///////function to make sure only one radio button is checked at a time
