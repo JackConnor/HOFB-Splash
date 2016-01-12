@@ -732,6 +732,20 @@ module.exports = function(app){
       res.json(newSample);
     })
   })
+
+  app.post('/api/update/sample', function(req, res){
+    console.log(req.body);
+    Sample.findOne({"productId":req.body.productId}, function(err, sample){
+      if(err){console.log(err)}
+      console.log('before');
+      console.log(sample);
+      sample.status = req.body.status;
+      sample.sampleCreator = req.body.sampleCreator;
+      sample.save(function(){
+        res.json(sample);
+      });
+    })
+  })
   /////////End Routes for Sampling and Purchasing//
   /////////////////////////////////////////////////
 }

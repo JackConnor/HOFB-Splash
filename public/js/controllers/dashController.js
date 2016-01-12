@@ -493,9 +493,19 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 })
                 .then(function(updatedProduct){
                   console.log(updatedProduct);
-                  var sampleProducer = self.decodedToken.data.name;
-                  console.log(sampleProducer);
-                  $()
+                  // var sampleProducer = self.decodedToken.data.name;
+                  // console.log(sampleProducer);
+                  $http({
+                    method: "POST"
+                    ,url: "/api/update/sample"
+                    ,data: {sampleProducer: "HOFB", status: "inProduction", productId: productId}
+                  })
+                  .then(function(updatedSample){
+                    console.log(updatedSample);
+                    $('.invisModal').remove();
+                    window.location.reload();
+
+                  })
                 })
               }
             })
