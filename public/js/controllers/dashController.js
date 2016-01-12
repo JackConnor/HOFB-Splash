@@ -683,6 +683,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       /////create mouseenter event listener to cause frontend changes
       $('.projectCellImage').on('mouseenter', function(evt){
         var $hoverTarget = $(evt.target);
+        console.log($hoverTarget);
         $hoverTarget.css({
           opacity: 0.08
         })
