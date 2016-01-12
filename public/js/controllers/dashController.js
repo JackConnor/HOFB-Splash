@@ -472,15 +472,12 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               })
             })
             $('.deleteSampleRequestAcc').on('click', function(){
-              console.log('yoyoy');
               $('.invisModal').remove();
             })
             /////////function to submit the sample fulfillment
             $('.sampleFinishRequest').on('click', function(){
               if($('.sampleRequestMe').prop('checked') == true){
                 ///////they're making it themselves
-                console.log('You gonna make it yoself, huh?');
-                console.log('Smart move cupcake');
                 var productId = this.id;
                 console.log(productId);
                 $http({
@@ -489,16 +486,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                   ,data: {projectId: productId, status: "sampleSent"}
                 })
                 .then(function(updatedProduct){
-                  console.log(updatedProduct);
                   var sampleProducer = self.decodedToken.data.name;
-                  console.log(sampleProducer);
                   $http({
                     method: "POST"
                     ,url: "/api/update/sample"
                     ,data: {sampleProducer: sampleProducer, status: "inProduction", productId: productId}
                   })
                   .then(function(updatedSample){
-                    console.log(updatedSample);
                     $('.invisModal').remove();
                     window.location.reload();
 
@@ -507,25 +501,19 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               }
               else if($('.sampleRequestHofb').prop('checked') == true){
                 ////////////we're making it
-                console.log('Smart move cupcake');
                 var productId = this.id;
-                console.log(productId);
                 $http({
                   method: "POST"
                   ,url: "/api/product/update"
                   ,data: {projectId: productId, status: "sampleSent"}
                 })
                 .then(function(updatedProduct){
-                  console.log(updatedProduct);
-                  // var sampleProducer = self.decodedToken.data.name;
-                  // console.log(sampleProducer);
                   $http({
                     method: "POST"
                     ,url: "/api/update/sample"
                     ,data: {sampleProducer: "HOFB", status: "inProduction", productId: productId}
                   })
                   .then(function(updatedSample){
-                    console.log(updatedSample);
                     $('.invisModal').remove();
                     window.location.reload();
 
