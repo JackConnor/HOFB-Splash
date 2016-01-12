@@ -40,7 +40,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             if(allProjects[i].status == "saved"){
               allProjectsSaved.push(allProjects[i]);
             }
-            else if(allProjects[i].status ==  "curated" || allProjects[i].status ==  "sampleRequested"){
+            else if(allProjects[i].status ==  "curated" || allProjects[i].status ==  "sampleRequested" || allProjects[i].status ==  "sampleSent"){
               curatedProjectsArray.push(allProjects[i]);
             }
             else if(allProjects[i].status == "submitted to curator"){
@@ -424,7 +424,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               backgroundColor: "#169AA9"
             })
           })
-          $(".sampleRequestButton"+i).on('click', function(){
+          $(".sampleRequestButton"+i).on('click', function(evt){
+            var productId = $($(evt.target)[0].parentNode)[0].parentNode.id;
+            console.log(productId);
             $('.bodyview').prepend(
               '<div class="invisModal">'+
                 '<div class="sampleRequestAcceptContainer">'+
@@ -448,7 +450,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                     "</div>"+
                     "<span class='sampleDiyDescription'>I will produce my own sample and send it to HOFB</span>"+
                     "<div class='sampleLearnMoreMe'>learn more</div>"+
-                    "<div class='sampleFinishRequest'>"+
+                    "<div id='"+productId+"' class='sampleFinishRequest'>"+
                       "Submit"+
                     "</div>"+
                   "</div>"+
@@ -482,6 +484,19 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               else if($('.sampleRequestHofb').prop('checked') == true){
                 ////////////we're making it
                 console.log('Smart move cupcake');
+                var productId = this.id;
+                console.log(productId);
+                $http({
+                  method: "POST"
+                  ,url: "/api/product/update"
+                  ,data: {projectId: productId, status: "sampleSent"}
+                })
+                .then(function(updatedProduct){
+                  console.log(updatedProduct);
+                  var sampleProducer = self.decodedToken.data.name;
+                  console.log(sampleProducer);
+                  $()
+                })
               }
             })
             ///////function to make sure only one radio button is checked at a time
