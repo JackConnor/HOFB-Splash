@@ -1,9 +1,9 @@
-var app = angular.module('editProjectController', ['postProjectFactory', 'getProductFactory', 'editProjectFactory', 'checkPwFactory'])
+var app = angular.module('editProjectController', ['postProjectFactory', 'getProductFactory', 'editProjectFactory', 'checkPwFactory', 'getSwatchesFactory'])
 
   .controller('editProjectCtrl', editProjectCtrl)
 
-  editProjectCtrl.$inject = ['$http', 'postProject', 'getProduct', 'editProject', 'checkPw']
-  function editProjectCtrl($http, postProject, checkPw){
+  editProjectCtrl.$inject = ['$http', 'postProject', 'getProduct', 'editProject', 'checkPw', 'allSwatches']
+  function editProjectCtrl($http, postProject, checkPw, allSwatches){
     var self = this;
     //////global variables we'll be using for moving the carousel
     var carouselMargin = 0; ///keeps track of carousel's margin
@@ -25,143 +25,220 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       loadData(self.currentProduct);
     })
 
-    function loadData(productObject){
-      //////load text inputs
-      $('.newProductTitle').val(productObject.name)
-      $('.newProductDescription').val(productObject.description);
-      $('.newProductTagsInput').val(productObject.tags.join(', '))
-      $('.newProductCollectionsInput').val(productObject.collections.join(', '))
-      $('.newProductType').val(productObject.productType);
-      $('.newProductVendor').val(productObject.vendor);
-      /////add photos
-      var addImgsFunc = function(){
-        $('.newProductCurrentImage').attr('src', productObject.images[0])
-        for (var i = 0; i < productObject.images.length; i++) {
-          $('#newProductMiniImage'+i).attr('src' , productObject.images[i]);
-          ////////load photo and html caches
-          self.tempPhotoCache.push(productObject.images[i]);
-          self.tempPhotoHTMLCache.push($('#newProductMiniImage'+i));
-        }
-      }
-      addImgsFunc();
-      //////functions for addding swatches
-      function addSeasons(){
-        var seasonHtmlArray = $('.createSeason');
-        var currentValues = productObject.seasons;
-        for (var i = 0; i < seasonHtmlArray.length; i++) {
-          var elType = seasonHtmlArray[i].classList[1].slice(6, 20);
-          for (var j = 0; j < currentValues.length; j++) {
-            if( elType == currentValues[j]){
-              $(seasonHtmlArray[i]).addClass('picked');
-              $(seasonHtmlArray[i]).attr('id', "picked_Season_"+currentValues[j]);
-              $(seasonHtmlArray[i]).css({
-                  backgroundColor: "blue"
-              })
-            }
-          }
-        }
-      }
-      addSeasons();
-      function addFabrics(){
-        var fabricHtmlArray = $('.createFabric');
-        var currentValues = productObject.fabrics;
-        for (var i = 0; i < fabricHtmlArray.length; i++) {
-          var elType = fabricHtmlArray[i].classList[1].slice(6, 20);
-          for (var j = 0; j < currentValues.length; j++) {
-            if( elType == currentValues[j]){
-              $(fabricHtmlArray[i]).addClass('picked');
-              $(fabricHtmlArray[i]).attr('id', "picked_Fabric_"+currentValues[j]);
-              $(fabricHtmlArray[i]).css({
-                backgroundColor: "blue"
-              })
-            }
-          }
-        }
-      }
-      addFabrics();
-      function addStitches(){
-        var stitchHtmlArray = $('.createStitch');
-        var currentValues = productObject.stitchPatterns;
-        for (var i = 0; i < stitchHtmlArray.length; i++) {
-          var elType = stitchHtmlArray[i].classList[1].slice(6, 20);
-          for (var j = 0; j < currentValues.length; j++) {
-            if( elType == currentValues[j]){
-              $(stitchHtmlArray[i]).addClass('picked');
-              $(stitchHtmlArray[i]).attr('id', "picked_Stitch_"+currentValues[j]);
-              $(stitchHtmlArray[i]).css({
-                backgroundColor: "blue"
-              })
-            }
-          }
-        }
-      }
-      addStitches();
-      function addColors(){
-        var colorsHtmlArray = $('.createColor');
-        var currentValues = productObject.colors;
-        for (var i = 0; i < colorsHtmlArray.length; i++) {
-          var elType = colorsHtmlArray[i].classList[1].slice(6, 20);
-          for (var j = 0; j < currentValues.length; j++) {
-            if( elType == currentValues[j]){
-              $(colorsHtmlArray[i]).addClass('picked');
-              $(colorsHtmlArray[i]).attr('id', "picked_Color_"+currentValues[j]);
-              $(colorsHtmlArray[i]).css({
-                backgroundColor: "blue"
-              })
-            }
-          }
-        }
-      }
-      addColors();
-      function addButtons(){
-        var buttonHtmlArray = $('.createButton');
-        var currentValues = productObject.buttons;
-        for (var i = 0; i < buttonHtmlArray.length; i++) {
-          var elType = buttonHtmlArray[i].classList[1].slice(6, 20);
-          for (var j = 0; j < currentValues.length; j++) {
-            if( elType == currentValues[j]){
-              $(buttonHtmlArray[i]).addClass('picked');
-              $(buttonHtmlArray[i]).attr('id', "picked_Button_"+currentValues[j]);
-              $(buttonHtmlArray[i]).css({
-                backgroundColor: "blue"
-              })
-            }
-          }
-        }
-      }
-      addButtons();
-    }
-  ////////////////////////////
-  ////////////////////////////
-  //////end edit controller///
-  //////////begin code to controler all upload functions (mirrored from create page)
+    self.allSwatches = allSwatches;
+    /////end global variables
 
-  ////////////////////////////////////////
-  /////////Effects for carousel//////////
-  ////click effect for seasonsplash
-  function swatchLogic(swatchType){
-    ///////note: swatchType needs to be added as a capital, i.e. "Season"
-    $('.create'+swatchType).on('click', function(evt){
-      if($(evt.target).css('opacity') == 1 ){
-        $(evt.target).css({
-          opacity: 0.5
-          ,backgroundColor: "blue"
-        })
-        $(evt.target).attr('id', 'picked_'+swatchType+"_"+evt.target.innerText.split(' ').join(''));
-        $(evt.target).addClass('picked');
-      } else {
-        $(evt.target).css({
-          opacity: 1
-          ,backgroundColor: "black"
-        })
+    ////////set our global variables for our our html to create the swatches from
+/// correct code
+    function setSwatches(){
+      var fabricsfunc = function(){
+        var allFabrics = [];
+        for(fabric in allSwatches.fabrics){
+          allFabrics.push(fabric);
+          $('.createFabricContainer').append(
+            '<div class="createFabricCellHolder col-xs-4">'+
+              '<img src='+allSwatches.fabrics[fabric]+' class="createFabric create'+fabric+'">'+
+            "</div>"
+          )
+        }
+        console.log(allFabrics);
+        return allFabrics;
       }
-    })
-  }
-  swatchLogic("Season");
-  swatchLogic("Fabric");
-  swatchLogic("Color");
-  swatchLogic("Button");
-  swatchLogic("Stitch");
+      fabricsfunc();
+      var colorsfunc = function(){
+        var allcolors = [];
+        for(color in allSwatches.colors){
+          allcolors.push(color);
+          console.log(color);
+          $('.createColorContainer').append(
+            '<div class="createColorCellHolder col-xs-6">'+
+              '<div class="createColor create'+color+'">'+
+              "</div>"+
+            "</div>"
+          )
+          console.log(allSwatches.colors[color]);
+          $('.create'+color).css({
+            backgroundColor: allSwatches.colors[color]
+            ,outline: "1px solid #E0E0E0"
+          })
+        }
+        console.log(allcolors);
+        return allcolors;
+      }
+      colorsfunc();
+    }
+    setSwatches();
+
+    ////////////////////////////////////////
+    /////////Effects for carousel//////////
+    ////click effect for seasonsplash
+    function swatchLogic(swatchType){
+      ///////note: swatchType needs to be added as a capital, i.e. "Season"
+      $('.create'+swatchType).on('click', function(evt){
+        var type = $(evt.target)[0].classList[1].slice(6, 1000);
+        console.log(type);
+
+        if($(evt.target).css('opacity') == 1 ){
+          $(evt.target).css({
+            opacity: 0.5
+            ,outline: "2px solid gray"
+          })
+          $(evt.target).attr('id', 'picked_'+swatchType+"_"+type)
+          $(evt.target).addClass('picked');
+        } else {
+          $(evt.target).css({
+            opacity: 1
+            ,outline: "none"
+          })
+        }
+      })
+    }
+    swatchLogic("Season");
+    swatchLogic("Fabric");
+    swatchLogic("Color");
+    swatchLogic("Button");
+    swatchLogic("Stitch");
+
+    ///////////////////////////////////////////////////
+
+
+  //   function loadData(productObject){
+  //     //////load text inputs
+  //     $('.newProductTitle').val(productObject.name)
+  //     $('.newProductDescription').val(productObject.description);
+  //     $('.newProductTagsInput').val(productObject.tags.join(', '))
+  //     $('.newProductCollectionsInput').val(productObject.collections.join(', '))
+  //     $('.newProductType').val(productObject.productType);
+  //     $('.newProductVendor').val(productObject.vendor);
+  //     /////add photos
+  //     var addImgsFunc = function(){
+  //       $('.newProductCurrentImage').attr('src', productObject.images[0])
+  //       for (var i = 0; i < productObject.images.length; i++) {
+  //         $('#newProductMiniImage'+i).attr('src' , productObject.images[i]);
+  //         ////////load photo and html caches
+  //         self.tempPhotoCache.push(productObject.images[i]);
+  //         self.tempPhotoHTMLCache.push($('#newProductMiniImage'+i));
+  //       }
+  //     }
+  //     addImgsFunc();
+  //     //////functions for addding swatches
+  //     function addSeasons(){
+  //       var seasonHtmlArray = $('.createSeason');
+  //       var currentValues = productObject.seasons;
+  //       for (var i = 0; i < seasonHtmlArray.length; i++) {
+  //         var elType = seasonHtmlArray[i].classList[1].slice(6, 20);
+  //         for (var j = 0; j < currentValues.length; j++) {
+  //           if( elType == currentValues[j]){
+  //             $(seasonHtmlArray[i]).addClass('picked');
+  //             $(seasonHtmlArray[i]).attr('id', "picked_Season_"+currentValues[j]);
+  //             $(seasonHtmlArray[i]).css({
+  //                 backgroundColor: "blue"
+  //             })
+  //           }
+  //         }
+  //       }
+  //     }
+  //     addSeasons();
+  //     function addFabrics(){
+  //       var fabricHtmlArray = $('.createFabric');
+  //       var currentValues = productObject.fabrics;
+  //       for (var i = 0; i < fabricHtmlArray.length; i++) {
+  //         var elType = fabricHtmlArray[i].classList[1].slice(6, 20);
+  //         for (var j = 0; j < currentValues.length; j++) {
+  //           if( elType == currentValues[j]){
+  //             $(fabricHtmlArray[i]).addClass('picked');
+  //             $(fabricHtmlArray[i]).attr('id', "picked_Fabric_"+currentValues[j]);
+  //             $(fabricHtmlArray[i]).css({
+  //               backgroundColor: "blue"
+  //             })
+  //           }
+  //         }
+  //       }
+  //     }
+  //     addFabrics();
+  //     function addStitches(){
+  //       var stitchHtmlArray = $('.createStitch');
+  //       var currentValues = productObject.stitchPatterns;
+  //       for (var i = 0; i < stitchHtmlArray.length; i++) {
+  //         var elType = stitchHtmlArray[i].classList[1].slice(6, 20);
+  //         for (var j = 0; j < currentValues.length; j++) {
+  //           if( elType == currentValues[j]){
+  //             $(stitchHtmlArray[i]).addClass('picked');
+  //             $(stitchHtmlArray[i]).attr('id', "picked_Stitch_"+currentValues[j]);
+  //             $(stitchHtmlArray[i]).css({
+  //               backgroundColor: "blue"
+  //             })
+  //           }
+  //         }
+  //       }
+  //     }
+  //     addStitches();
+  //     function addColors(){
+  //       var colorsHtmlArray = $('.createColor');
+  //       var currentValues = productObject.colors;
+  //       for (var i = 0; i < colorsHtmlArray.length; i++) {
+  //         var elType = colorsHtmlArray[i].classList[1].slice(6, 20);
+  //         for (var j = 0; j < currentValues.length; j++) {
+  //           if( elType == currentValues[j]){
+  //             $(colorsHtmlArray[i]).addClass('picked');
+  //             $(colorsHtmlArray[i]).attr('id', "picked_Color_"+currentValues[j]);
+  //             $(colorsHtmlArray[i]).css({
+  //               backgroundColor: "blue"
+  //             })
+  //           }
+  //         }
+  //       }
+  //     }
+  //     addColors();
+  //     function addButtons(){
+  //       var buttonHtmlArray = $('.createButton');
+  //       var currentValues = productObject.buttons;
+  //       for (var i = 0; i < buttonHtmlArray.length; i++) {
+  //         var elType = buttonHtmlArray[i].classList[1].slice(6, 20);
+  //         for (var j = 0; j < currentValues.length; j++) {
+  //           if( elType == currentValues[j]){
+  //             $(buttonHtmlArray[i]).addClass('picked');
+  //             $(buttonHtmlArray[i]).attr('id', "picked_Button_"+currentValues[j]);
+  //             $(buttonHtmlArray[i]).css({
+  //               backgroundColor: "blue"
+  //             })
+  //           }
+  //         }
+  //       }
+  //     }
+  //     addButtons();
+  //   }
+  // ////////////////////////////
+  // ////////////////////////////
+  // //////end edit controller///
+  // //////////begin code to controler all upload functions (mirrored from create page)
+  //
+  // ////////////////////////////////////////
+  // /////////Effects for carousel//////////
+  // ////click effect for seasonsplash
+  // function swatchLogic(swatchType){
+  //   ///////note: swatchType needs to be added as a capital, i.e. "Season"
+  //   $('.create'+swatchType).on('click', function(evt){
+  //     if($(evt.target).css('opacity') == 1 ){
+  //       $(evt.target).css({
+  //         opacity: 0.5
+  //         ,backgroundColor: "blue"
+  //       })
+  //       $(evt.target).attr('id', 'picked_'+swatchType+"_"+evt.target.innerText.split(' ').join(''));
+  //       $(evt.target).addClass('picked');
+  //     } else {
+  //       $(evt.target).css({
+  //         opacity: 1
+  //         ,backgroundColor: "black"
+  //       })
+  //     }
+  //   })
+  // }
+  // swatchLogic("Season");
+  // swatchLogic("Fabric");
+  // swatchLogic("Color");
+  // swatchLogic("Button");
+  // swatchLogic("Stitch");
 
   ///////////////////////////////////////////////////
   ///////////////build function to collect and submit
