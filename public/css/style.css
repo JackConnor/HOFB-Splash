@@ -1100,7 +1100,7 @@
 }
 
 .navigationBar {
-  height: 40px;
+  height: 45px;
   font-size: 30px;
   background-color: black;
   color: white;
@@ -1591,9 +1591,15 @@
   display: block;
 }
 
+.productContainer{
+  font-family: 'Oxygen', sans-serif;
+  position: relative;
+  background-color: #FEFDF9;
+  height: 100%;
+}
+
 .productContainerLeft{
-  margin-right:-40px;
-  margin-left: 80px;
+
 }
 
 .productDescriptionBox{
@@ -2250,14 +2256,6 @@
   position: absolute;
 }
 
-
-.productContainer{
-  border-top:2px solid yellow;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-family: 'Oxygen', sans-serif;
-}
-
 .sub-text {
     color:#aaa;
     font-family:verdana;
@@ -2434,6 +2432,15 @@ textarea#styled {
    text-align: center;
  }
 
+ .viewMiniCell {
+   width: 100%;
+   min-height: 100%;
+ }
+
+ .viewMiniImage {
+   width: 100%;
+ }
+
 .viewPictureImageIcon {
   font-size: 20px;
   color: #858585;
@@ -2442,7 +2449,8 @@ textarea#styled {
 }
 
 .viewProductBar {
-  font-size: 25px;
+  font-size: 20px;
+  height: 50px;
 }
 
 .viewProductColorBox, .viewProductAccessoryBox, .viewProductFabricBox, .viewProductStitchBox {
@@ -2455,14 +2463,38 @@ textarea#styled {
     border-color: rgba(0,0,0,.2);*/
 }
 
+.viewProductDashboard {
+  color: #30A0B0;
+  padding-right: 5px;
+}
+
+.viewProductDashInfo {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 30px;
+  vertical-align: top;
+}
+
+.viewProductDescription {
+  font-size: 14px;
+}
+
+.viewProductDescriptionTitle {
+  font-size: 17px;
+  margin-top: 15px;
+}
+
+.viewProductDetailsContainer {
+}
+
 .viewProductHolder {
   display: block;
 }
 
 .viewProductImage{
-  background-image:url('smiley.gif');
-background-repeat:no-repeat;
-background-size:100% 100%;
+  display: inline-block;
+  width: 80%;
+  height: 700px;
 }
 
 .viewProductImageContainer {
@@ -2471,7 +2503,26 @@ background-size:100% 100%;
 
 .viewProductImageMain {
     width: 100%;
-    height: auto;
+    height: 500px;
+}
+
+.viewProductLeftHolder {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 20px;
+}
+
+.viewProductMiniHolder {
+  vertical-align: top;
+  width: 18%;
+  margin-left: 1%;
+  height: 100%;
+  outline: 3px solid red;
+  display: inline-block;
+}
+
+.viewProductName{
+  padding-top: 12px;
 }
 
 .viewProductPageContainer{
@@ -2492,7 +2543,7 @@ background-size:100% 100%;
 }
 
 .viewProductTitle{
-  /*outline:2px solid black;*/
+  font-size: 31px;
 }
 
 .viewProductTitleUnderline{
@@ -2504,9 +2555,10 @@ background-size:100% 100%;
 }
 
 .viewProductType{
-  margin-top:-9px;
+  /*margin-top:-9px;*/
   margin-left: 2px;
-  font-size:17px;
+  font-size:15px;
+  font-style: bold;
   /*outline:2px solid green;*/
 }
 
