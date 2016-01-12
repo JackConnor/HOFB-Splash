@@ -409,10 +409,89 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         if(self.curatedProjects[i].status == "sampleRequested"){
           $("#"+self.curatedProjects[i]._id).append(
             "<div class='sampleRequestedCover'>"+
-              "Sameple Requested"+
+              "<div class='sampleRequestButton sampleRequestButton"+i+"'>"+
+                "Sample Requested"+
+              "</div>"+
             "</div>"
           )
+          $(".sampleRequestButton").on('mouseenter', function(){
+            $(this).css({
+              backgroundColor: "white",
+              color: "black"
+            })
+          })
+          $(".sampleRequestButton").on('mouseleave', function(){
+            $(this).css({
+              backgroundColor: "black",
+              color: "white"
+            })
+          })
+          $(".sampleRequestButton"+i).on('click', function(){
+            $('.bodyview').prepend(
+              '<div class="invisModal">'+
+                '<div class="sampleRequestAcceptContainer">'+
+                  "<div class='deleteSampleRequestAcc'>X</div>"+
+                  "<span class='sampleRequestCongrats'><h2>Congratulations</h2></span>"+
+                  "<span class='sampleRequestInfo'>Your design has been selected for sampling</span>"+
+                  "<span class='sampleRequestChanges'>"+
+                    "<p>If changes are requested to the product you will be alerted through the dashboard. Thank you for helping build the future of fashion.</p>"+
+                  "</span>"+
+                  "<div class='sampleRequestToggleContainer'>"+
+                    "<span class='sampleHow'>How would you like to send the sample?</span>"+
+                    "<span class='sampleSuggestHofb'>"+
+                      "<input class='radioBtn sampleRequestHofb' type='radio' value='hofb'/>"+
+                      "<p><span style='font-style:bold'>HOFB</span> (suggested)</p>"+
+                    "</span>"+
+                    "<span class='sampleRequestAboutHofb'>We will produce the sample based on your images and send it to the buyer</span>"+
+                    "<div class='sampleLearnMoreHOFB'>learn more</div>"+
+                    "<div class='sampleSuggestDesigner'>"+
+                      "<input class='radioBtn sampleRequestMe' type='radio' value='designer'/>"+
+                      "<span class='sampleDiyTitle'>DIY Option</span>"+
+                    "</div>"+
+                    "<span class='sampleDiyDescription'>I will produce my own sample and send it to HOFB</span>"+
+                    "<div class='sampleLearnMoreMe'>learn more</div>"+
+                    "<div class='sampleFinishRequest'>"+
+                      "Submit"+
+                    "</div>"+
+                  "</div>"+
+                "</div>"+
+              "</div>"
+            )
+            /////first, we make a function to delete modal
+            $('.deleteSampleRequestAcc').on('mouseenter', function(){
+              $(this).css({
+                backgroundColor: "black"
+                ,color: 'white'
+              })
+            })
+            /////the delete button hover states
+            $('.deleteSampleRequestAcc').on('mouseleave', function(){
+              $(this).css({
+                backgroundColor: "white"
+                ,color: 'black'
+              })
+            })
+            $('.deleteSampleRequestAcc').on('click', function(){
+              console.log('yoyoy');
+              $('.invisModal').remove();
+            })
+            /////////function to submit the sample fulfillment
+            $('.sampleFinishRequest').on('click', function(){
+              if($('.sampleRequestMe').prop('checked') == true){
+                console.log('You gonna make it yoself, huh?');
+              }
+              else if($('.sampleRequestHofb').prop('checked') == true){
+                console.log('Smart move cupcake');
+              }
+            })
+            ///////function to make sure only one radio button is checked at a time
+            $('.radioBtn').on('click', function(){
+              $('.radioBtn').prop('checked', false);
+              $(this).prop('checked', true);
+            })
+          })
         }
+        $()
         $('.curatedCell').on('mouseenter', function(){
           $(this).css({
             backgroundColor: '#D7D1D3'

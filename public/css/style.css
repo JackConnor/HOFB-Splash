@@ -607,6 +607,16 @@
   color: purple;
 }
 
+.deleteSampleRequestAcc {
+  width: 30px;
+  text-align: center;
+  font-style: bold;
+  font-size: 25px;
+  float: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
 /*////////////////////Universal CSS class////////////////////////////////////////*/
 /*add top level div class of page to apply the below font and text colors to entire page*/
 .designerDashboardPage, .userProfileContainer, .userProfileSettingsBar{
@@ -919,7 +929,7 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color:rgba(0, 0, 0, 1);
+  background-color:rgba(0, 0, 0, .08);
   z-index: 5;
 }
 
@@ -2061,6 +2071,44 @@
   font-size: 25px;
 }
 
+.sampleDiyDescription {
+  margin-left: 30px;
+  margin-top: 15px;
+}
+
+.sampleDiyTitle {
+  margin-left: 15px;
+}
+
+.sampleFinishRequest {
+  width: 150px;
+  height: 40px;
+  font-size: 19px;
+  margin: 30px auto 0 auto;
+  background-color: #3CB878;
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+  border-radius: 3px;
+}
+
+.sampleHow {
+  margin-left: 0px;
+  font-size: 19px;
+  padding-bottom: 30px;
+  display: block;
+}
+
+.sampleLearnMoreHOFB {
+  margin-left: 30px;
+  color: #33A2AF;
+}
+
+.sampleLearnMoreMe {
+  margin-left: 30px;
+  color: #33A2AF;
+}
+
 .sampleName {
   width: 100%;
   height: 40px;
@@ -2073,21 +2121,108 @@
   font-size: 25px;
 }
 
+.sampleRequestAboutHofb {
+  display: block;
+  margin-left: 30px;
+}
+
+.sampleRequestAcceptContainer {
+  width: 600px;
+  height: 600px;
+  /*margin-top: 100px;*/
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.sampleRequestButton {
+  width: 200px;
+  height: 50px;
+  outline: 2px solid white;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 35px;
+  text-align: center;
+  padding-top: 5px;
+}
+
+.sampleRequestChanges{
+  text-align: center;
+  display: block;
+  padding-top: 5px;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.sampleRequestCongrats {
+  text-align: center;
+  display: block;
+  padding-top: 40px;
+}
+
 .sampleRequestedCover {
   position: absolute;
   width: 100%;
   height: 120px;
-  font-size: 30px;
+  font-size: 22px;
   background-color: black;
   color: white;
   opacity: .5;
   margin-top: -120px;
 }
 
+.sampleRequestHofb {
+  padding-right: 15px;
+  padding-top: 30px;
+}
+
+.sampleRequestInfo{
+  text-align: center;
+  display: block;
+  padding-top: 15px;
+  margin: 0px;
+  font-size: 16px;
+  font-style: bold;
+}
+
+.sampleRequestMe {
+  margin-top: 20px;
+}
+
+.sampleRequestToggleContainer {
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 40px;
+  height: 300px;
+}
+
+.sampleRequestToggleContainer p{
+  text-align: left;
+}
+
+
 .sampleState {
   width: 25%;
   height: 40px;
   font-size: 25px;
+}
+
+.sampleSuggestDesigner {
+  margin-left: 5px;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.sampleSuggestHofb {
+  margin-left: 5px;
+  margin-top: 25px;
+  font-size: 16px;
+}
+
+.sampleSuggestHofb p{
+  margin-left: 15px;
+  display: inline-block;
 }
 
 .sampleZip {
