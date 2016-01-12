@@ -1023,7 +1023,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "</div>"
           )
         }
-        $('.designerDashCollectionDropdown').append(
+        $('.designerDashCollectionDropdown').after(
           "<div class='designerDashCollectionAddMore'>"+
             "<span class='glyphicon glyphicon-plus'>"+
               "<p class='designerDashCollectionAddText'>add collection</p>"+
