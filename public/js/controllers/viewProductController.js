@@ -145,6 +145,8 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
 
     function popImages(){
       self.allImages = self.productData.images;
+      self.allThumbs = self.productData.thumbnails;
+      loadThumbs();
     }
 
     function addPhotoModal(){
@@ -173,14 +175,14 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
           if(i <= 4){
             $('.viewProductModalMiniHolder').append(
               "<div class='viewProductModalMiniCell'>"+
-                "<img class='viewProductModalMiniCellImage' src='"+self.allImages[i]+"'>"+
+                "<img class='viewProductModalMiniCellImage' src='"+self.allThumbs[i]+"'>"+
               '</div>'
             )
           }
           else {
             $('.viewProductModalMiniHolder1').append(
               "<div class='viewProductModalMiniCell'>"+
-                "<img class='viewProductModalMiniCellImage' src='"+self.allImages[i]+"'>"+
+                "<img class='viewProductModalMiniCellImage' src='"+self.allThumbs[i]+"'>"+
               '</div>'
             )
           }
@@ -196,6 +198,20 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     //////////logic to populate page on load//
     //////////////////////////////////////////
 
+    function loadThumbs(){
+      for (var i = 0; i < self.allThumbs.length; i++) {
+        $('.viewProductMiniHolder').append(
+          '<div class="viewMiniCell" >'+
+            "<img class='viewMiniImage' id='"+self.allImages[i]+"' src='"+self.allThumbs[i]+"' />"+
+          "</div>"
+        )
+      }
+      $('.viewMiniImage').on('click', function(evt){
+        var bigSource = $(evt.target)[0].id;
+        console.log(bigSource);
+        $(".viewProductImageMain").attr('src', bigSource);
+      })
+    }
   /////end viewProduct controller
   ////////////////////////
   ////////////////////////

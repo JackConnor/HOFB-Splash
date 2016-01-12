@@ -453,8 +453,9 @@ module.exports = function(app){
         //grabs ID from above line, does a search on DB with that ID below
         Product.findOne({"_id": id}, function(err, product){
           if(err){console.log(err)}
-          //push is for an array, if profile photo is a string might need to use a diff
-          product.images.push(uploadResult.secure_url);
+          //push 500x700 adn 150x150 images for all images
+          product.thumbnails.push(uploadResult.eager[0].secure_url);
+          product.images.push(uploadResult.eager[1].secure_url);
           //user.photo = uploadResult.secure_url
           //consol.log uploadResult.secure_url for userProfile
           product.save({}, function(err, updatedProduct){
@@ -476,7 +477,7 @@ module.exports = function(app){
            { width: 150, height: 150,
              crop: "fill", format: "png" },
            { width: 500, height: 700,
-             crop: "fill", format: "png" }
+            format: "png" }
         ]
        })
     }
