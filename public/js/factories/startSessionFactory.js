@@ -5,7 +5,7 @@ angular.module('startSessionFactory', [])
   startSession.$inject = ['$http'];
   function startSession($http){
 
-    function start(email, password){
+    function start(email, password, callback){
       console.log('in the favtory');
       console.log(email);
       console.log(password);
@@ -22,6 +22,7 @@ angular.module('startSessionFactory', [])
         }
         else{
           window.localStorage.hofbToken = sessionToken.data;
+          callback(sessionToken.data);
         }
       })
     }

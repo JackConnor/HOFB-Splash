@@ -30,7 +30,6 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     ///////function to signin a new user from signin page
     function signinUser(email, pw){
       startSession.startSession(email, pw, function(token){
-        console.log(token);
         $http({
           method:"GET"
           ,url: '/api/checkstatus/'+token
