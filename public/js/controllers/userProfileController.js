@@ -21,15 +21,27 @@ angular.module('userProfileController', ['singleuserfactory'])
   $(".userProfileSubmitBtn").on('click', function(){
     console.log('Update button is working');
           updateUserProfile();
-          location.reload();
+          // location.reload();
     });
 // Update user password button wiring
   $(".userProfileChangePw").on('click', function(){
     console.log('Update PW button is working');
     updateUserProfilePassword();
     });
+// user profile photo upload
+$(".userProfileImageFileUpload").on('change', function (){
+  console.log('profile upload on change is working');
+  console.log($(".userProfileImageFileUpload"));
+  });
 
-
+  /////collect email for password verification email
+  $('.userProfileChangePw').on('click', function(){
+    var emailAddress = $('#userProfileEmail').val();
+    console.log(emailAddress);
+    var date = new Date();
+    console.log(date);
+    postPasswordVericationEmail({email: emailAddress, date: date});
+  })
 
 
     function updateUserProfile() {
@@ -59,7 +71,11 @@ angular.module('userProfileController', ['singleuserfactory'])
       })
       .then(function(data){
         console.log(data);
+        // newForm();
       })
+      if (status = '200'){
+        alert('Your profile has been updated')
+      }
     }
 
     function checkPassword(password){
@@ -72,15 +88,13 @@ angular.module('userProfileController', ['singleuserfactory'])
     }
 
 function updateUserProfilePassword(){
-  console.log('on click works');
     var pass1 = $('.inputPassword').val();
     var pass2 = $('.inputPasswordConfirm').val();
     console.log(pass1);
     console.log(pass2);
     if(pass1 == pass2){
-      checkPassword(pass1);
-      console.log(checkPassword);
-      if (true){
+      var checkedPassword = checkPassword(pass1);
+      if (checkedPassword){
         var pwHash = pass1
         var userProfileId = $(userProfileHashData);
         var userPwData ={
@@ -98,11 +112,61 @@ function updateUserProfilePassword(){
           console.log(data);
         })
       }
+      else{
+        alert('Minimum of 6 characters - No special characters in password, please re-enter your password and try again.')
+      }
     }
     else{
       alert('Please make sure your passwords match');
     }
+    if (status = '200'){
+      alert('Your password is now updated')
+    }
 }
+
+/////////////post for password verification email////////////////
+function postPasswordVericationEmail(userEmailInfo){
+  console.log(userEmailInfo);
+  $http({
+    method: "POST"
+    ,url: "/api/email/password"
+    ,data: {email: userEmailInfo.email, date: userEmailInfo.date}
+  })
+  .then(function(email){
+    $http({
+      method: "POST"
+      ,url: "/api/sendemail"
+      ,data: {email: email.data.email}
+    })
+    .then(function(email){
+      alert('password verification link has been sent to your email')
+    })
+  })
+}
+
+
+
+//////////////multer form///////////////
+//////////////////////////////////////
+function newForm(){
+  $('.bodyview').append(
+    "<form class='tempForm' action='/api/profile/pictures' method='POST' enctype='multipart/form-data'>"+
+    "</form>"
+  )
+  $('.tempForm').append($('#userProfileImageFileUpload')[0]);
+  $('.tempForm').append(
+    "<input name='userId' type='text' value='"+userProfileHashData+"'>"
+  );
+  console.log('.tempForm');
+  $('.tempForm').submit(function(){
+    console.log('submitted');
+  });
+}
+// $(".userProfileSubmitBtn").on('click', newForm)
+///////////end of multer form/////////////
+//////////////////////////////////////
+
+
 
   ////////end userProfile controller//////
   /////////////////////////////////

@@ -446,12 +446,17 @@ module.exports = function(app){
       console.log();
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination
+      //Uploads to cloudinary, returns URL -> uploadResult is the new photo URL
       cloudinary.uploader.upload(destination+fileName, function(uploadResult){
         // console.log(uploadResult);
         var id = req.body.productId;
+        //grabs ID from above line, does a search on DB with that ID below
         Product.findOne({"_id": id}, function(err, product){
           if(err){console.log(err)}
+          //push is for an array, if profile photo is a string might need to use a diff
           product.images.push(uploadResult.secure_url);
+          //user.photo = uploadResult.secure_url
+          //consol.log uploadResult.secure_url for userProfile
           product.save({}, function(err, updatedProduct){
             ///////now we update the conversation to get the photo
             Conversation.findOne({productId: updatedProduct._id}, function(err, convo){
@@ -479,6 +484,58 @@ module.exports = function(app){
   /////End photo uploading logic/////////
   ///////////////////////////////////////
 
+  ///////////////////////////////////////
+  /////Begin user profile photo upload logic///////
+  // var uploading = multer({
+  //   dest: __dirname + '../public/uploads/',
+  // })
+
+  app.post('/api/profile/pictures', upload.single('profile'), function(req,res){
+    // console.log(req.body);
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log('yo');
+    console.log(req.files); // as soon as req.files starts showing on the API side.
+    // for (var i = 0; i < req.files.length; i++) {
+    //   var fileName = req.files[i].filename;
+    //   console.log(filename);
+    //   var destination = req.files[i].destination
+    //   console.log(destination);
+    //   //Uploads to cloudinary, returns URL -> uploadResult is the new photo URL
+    //   cloudinary.uploader.upload(destination+fileName, function(uploadResult){
+    //     console.log(uploadResult);
+    //     var id = req.body.userId;
+    //     console.log(id);
+    //     //grabs ID from above line, does a search on DB with that ID below
+    //   //   User.findOne({"_id": id}, function(err, user){
+    //   //     console.log(user);
+    //   //     if(err){console.log(err)}
+    //   //     //push is for an array, if profile photo is a string might need to use a diff
+    //   //     product.images.push(uploadResult.secure_url);
+    //   //     //user.photo = uploadResult.secure_url
+    //   //     //consol.log uploadResult.secure_url for userProfile
+    //   //     product.save({}, function(err, userData){
+    //   //       console.log(userData);
+    //   //     })
+    //   // })
+    // })
+  // }
+})
+
+
+  /////End user profile photo upload logic/////////
+  ////////////////////////////////////////////////
 
   //////////////////////////////////////////
   /////begin email stuff////////////////////
@@ -505,6 +562,30 @@ module.exports = function(app){
     })
   })
 
+  ///////////Password verification email /////////////////
+  app.post('/api/email/password', function(req, res){
+    mandrill_client.messages.send({
+      message: {
+        from_email: "support@hofb.com"
+        ,html:
+        "<divs>"+
+          "<img src='http://i.imgur.com/f5T6U5B.png' style='width:250px'>"+
+          "<h2 style='color:#737373'>Thank you for joining HOFB. We’re gearing up to introduce you to our exciting new platform, created solely for the purpose of making your work and life easier! In the coming days and weeks, you will receive a link via e-mail which will invite you to enter and start using the closed beta HOFB platform. "+
+          "<br>"+
+          "Please bear with us while we onboard users gradually.</h2>"+
+          "<h2 style='color:#293d3d'>HOFB</h2>"+
+          "<h3 style='color:#293d3d'>Los Angeles</h3>"+
+        "</div>"
+        ,subject: "HOFB Password Verification"
+        ,to:[{
+          email: req.body.email
+        }]
+      }
+    }, function(data){
+      res.json(data)
+    })
+  })
+///////////////////////////////////////////////////////////////
   /////get all emails from splash collection to email back to us
   app.get('/api/emails', function(req, res){
     Emailcapture.find({}, function(err, emails){
