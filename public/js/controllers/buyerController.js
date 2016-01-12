@@ -535,7 +535,17 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
             })
             .then(function(updatedProd){
               console.log(updatedProd);
-              $('.invisModal').remove();
+              $http({
+                url: '/api/new/sample'
+                ,method: "POST"
+                ,data: {requesterId: self.buyerId, productId: updatedProd.data._id, status: "requestSent"}
+              })
+              .then(function(updatedSample){
+                console.log(updatedSample);
+                $('.invisModal').remove();
+                window.location.reload();
+              })
+
             })
           })
           //////////submit the sample request, changing the product's status

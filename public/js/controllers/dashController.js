@@ -416,14 +416,12 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           )
           $(".sampleRequestButton").on('mouseenter', function(){
             $(this).css({
-              backgroundColor: "white",
-              color: "black"
+              backgroundColor: "#1cc3d6"
             })
           })
           $(".sampleRequestButton").on('mouseleave', function(){
             $(this).css({
-              backgroundColor: "black",
-              color: "white"
+              backgroundColor: "#169AA9"
             })
           })
           $(".sampleRequestButton"+i).on('click', function(){
@@ -478,9 +476,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             /////////function to submit the sample fulfillment
             $('.sampleFinishRequest').on('click', function(){
               if($('.sampleRequestMe').prop('checked') == true){
+                ///////they're making it themselves
                 console.log('You gonna make it yoself, huh?');
               }
               else if($('.sampleRequestHofb').prop('checked') == true){
+                ////////////we're making it
                 console.log('Smart move cupcake');
               }
             })

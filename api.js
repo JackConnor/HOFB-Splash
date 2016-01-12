@@ -34,8 +34,8 @@ var Photo              = require('./models/photo.js');
 var productComment     = require('./models/productComment.js');
 var Conversation       = require('./models/conversation.js');
 var Purchase           = require('./models/purchase.js')
+var Sample             = require('./models/sample.js')
 console.log("david");
-// console.log(Purchase);
 console.log('bowie');
 ///////finish bringing models////
 /////////////////////////////////
@@ -724,6 +724,16 @@ module.exports = function(app){
     }
   })
 
+  /////////////////////////////////////////////////
+  /////////Begin Routes for Sampling and Purchasing
+  app.post('/api/new/sample', function(req, res){
+    Sample.create(req.body, function(err, newSample){
+      console.log(newSample);
+      res.json(newSample);
+    })
+  })
+  /////////End Routes for Sampling and Purchasing//
+  /////////////////////////////////////////////////
 }
 
 
