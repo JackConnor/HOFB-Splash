@@ -914,10 +914,10 @@
 }
 
 .invisModal {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
-  background-color:rgba(0, 0, 0, 0.2);
+  background-color:rgba(0, 0, 0, 1);
   z-index: 5;
 }
 
@@ -2510,6 +2510,47 @@ textarea#styled {
   width: 80%;
   margin-left: 10%;
   margin-top: 20px;
+}
+
+.viewProductModalImage {
+  width: 750px;
+  height: 1050px;
+  display: inline-block;
+}
+
+.viewProductModalMiniCell {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin-top: 5px;
+}
+
+.viewProductModalMiniCell img{
+  position: absolute;
+  width: 150px;
+  height: 150px;
+}
+
+.viewProductModalMiniHolder {
+  display: inline-block;
+  vertical-align: top;
+  height: 1050px;
+  width: 155px;
+}
+
+.viewProductModalMiniHolder1 {
+  display: inline-block;
+  vertical-align: top;
+  height: 1050px;
+  width: 155px;
+}
+
+.viewProductModalShowPhotos {
+  height: 1050px;
+  width: 1150px;
+  outline: 2px solid black;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .viewProductMiniHolder {
