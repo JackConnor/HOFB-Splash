@@ -373,23 +373,42 @@ module.exports = function(app){
   			res.redirect( '/')
   		} else {
         //////situation where no user is found (aka email is unique)
-  			var newUser = new User();
-  			newUser.email = req.body.email
-  			newUser.passwordDigest = newUser.generateHash( req.body.password )
+				//AUTHENTICATE USER HERE
+        var product = new Product();
+        var newUser = new User();
+        var conversation = new Conversation();
+
+        product.name = "Demo Product";
+        product.status = 'saved';
+        product.timestamp = new Date();
+        product.images = ['https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg'];
+
+        newUser.email = req.body.email;
+        newUser.passwordDigest = newUser.generateHash( req.body.password );
+        newUser.products.push(product);
         newUser.status = req.body.status;
-  			newUser.save( function( err, user ) {
-  				if ( err ) { console.log(err) }
-  				//AUTHENTICATE USER HERE
-          console.log(user);
-          Product.create({'name':"Demo Product", userId: user._id, status: 'saved', timestamp: new Date(), images:['https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg']}, function(err, product){
-            console.log(product);
-            res.json(user)
-          })
-  			})
+        newUser.save(function(err, newUserData){
+          console.log('testing');
+          console.log(newUserData);
+          product.userId = newUserData._id;
+          product.save(function(err, newProductData){
+            console.log(newProductData);
+            // res.json(newProductData)
+            /////now we make the Conversation that goes with every product
+            conversation.productName = newProductData.name;
+            conversation.productId = newProductData._id;
+            conversation.dateCreated = new Date();
+            conversation.comments = [{sender: "Admin", receiver: newUserData._id, date: new Date(), text: "Hello, welcome to your first comment"}];
+            conversation.save(function(err, newConvo){
+              if(err){console.log(err)}
+              console.log(newConvo);
+              res.json(newConvo)
+            })
+          });
+        })
   		}
   	})
-
-  } )
+  })
 
   //////session and token stuff
   ///////begin the session
@@ -403,7 +422,7 @@ module.exports = function(app){
         }
         console.log('before');
         console.log(user);
-        user.signins = user.signins+1;
+        user.signins += 1;
         console.log('after');
         console.log(user);
         user.save(function(err, user){
@@ -448,13 +467,14 @@ module.exports = function(app){
       var destination = req.files[i].destination
       //Uploads to cloudinary, returns URL -> uploadResult is the new photo URL
       cloudinary.uploader.upload(destination+fileName, function(uploadResult){
-        // console.log(uploadResult);
+        console.log(uploadResult);
         var id = req.body.productId;
         //grabs ID from above line, does a search on DB with that ID below
         Product.findOne({"_id": id}, function(err, product){
           if(err){console.log(err)}
-          //push is for an array, if profile photo is a string might need to use a diff
-          product.images.push(uploadResult.secure_url);
+          //push 500x700 adn 150x150 images for all images
+          product.thumbnails.push(uploadResult.eager[0].secure_url);
+          product.images.push(uploadResult.eager[1].secure_url);
           //user.photo = uploadResult.secure_url
           //consol.log uploadResult.secure_url for userProfile
           product.save({}, function(err, updatedProduct){
@@ -470,7 +490,15 @@ module.exports = function(app){
             })
           });
         })
-      })
+      },
+      {
+        eager: [
+           { width: 150, height: 150,
+             crop: "fill", format: "png" },
+           { width: 750, height: 1050,
+            format: "png" }
+        ]
+       })
     }
     res.redirect('/#/designer/dashboard');
   });
@@ -491,21 +519,7 @@ module.exports = function(app){
   // })
 
   app.post('/api/profile/pictures', upload.single('profile'), function(req,res){
-    // console.log(req.body);
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
-    console.log('yo');
+
     console.log(req.files); // as soon as req.files starts showing on the API side.
     // for (var i = 0; i < req.files.length; i++) {
     //   var fileName = req.files[i].filename;

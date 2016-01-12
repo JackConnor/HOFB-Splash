@@ -21,7 +21,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
         signupUser.signup(startSession.startSession, password, status);
         setTimeout(function(){
           window.location.hash = "#/"+status+"/dashboard"
-        }, 1000)
+        }, 1500)
       } else {
         alert('your passwords dont match');
       }
@@ -30,7 +30,6 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     ///////function to signin a new user from signin page
     function signinUser(email, pw){
       startSession.startSession(email, pw, function(token){
-        console.log(token);
         $http({
           method:"GET"
           ,url: '/api/checkstatus/'+token

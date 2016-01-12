@@ -145,10 +145,73 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
 
     function popImages(){
       self.allImages = self.productData.images;
+      self.allThumbs = self.productData.thumbnails;
+      loadThumbs();
     }
+
+    function addPhotoModal(){
+      $('.viewProductImage').on('click', function(){
+        $('.bodyview').prepend(
+          '<div class="invisModal">'+
+            "<div class='viewProductModalShowPhotos'>"+
+              '<img class="viewProductModalImage" src="'+self.allImages[0]+'"/>'+
+              '<div class="viewProductModalMiniHolder">' +
+              '</div>'+
+              '<div class="viewProductModalMiniHolder1">' +
+              '</div>'+
+            '</div>'+
+          '</div>'
+        )
+        ///////function to close the modal
+        $('.invisModal').on('click', function(evt){
+          var elClass = $(evt.target)[0].classList[0];
+          console.log(elClass);
+          if(elClass == 'invisModal'){
+            $('.'+elClass).remove();
+          }
+        })
+        /////now we append the mini photos
+        for (var i = 0; i < self.allImages.length; i++) {
+          if(i <= 4){
+            $('.viewProductModalMiniHolder').append(
+              "<div class='viewProductModalMiniCell'>"+
+                "<img class='viewProductModalMiniCellImage' src='"+self.allThumbs[i]+"'>"+
+              '</div>'
+            )
+          }
+          else {
+            $('.viewProductModalMiniHolder1').append(
+              "<div class='viewProductModalMiniCell'>"+
+                "<img class='viewProductModalMiniCellImage' src='"+self.allThumbs[i]+"'>"+
+              '</div>'
+            )
+          }
+        }
+        $('.viewProductModalMiniCellImage').on('click', function(evt){
+          var source = $(evt.target).attr('src');
+          console.log(source);
+          $('.viewProductModalImage').attr('src', source);
+        })
+      })
+    }
+    addPhotoModal();
     //////////logic to populate page on load//
     //////////////////////////////////////////
 
+    function loadThumbs(){
+      for (var i = 0; i < self.allThumbs.length; i++) {
+        $('.viewProductMiniHolder').append(
+          '<div class="viewMiniCell" >'+
+            "<img class='viewMiniImage' id='"+self.allImages[i]+"' src='"+self.allThumbs[i]+"' />"+
+          "</div>"
+        )
+      }
+      $('.viewMiniImage').on('click', function(evt){
+        var bigSource = $(evt.target)[0].id;
+        console.log(bigSource);
+        $(".viewProductImageMain").attr('src', bigSource);
+      })
+    }
   /////end viewProduct controller
   ////////////////////////
   ////////////////////////

@@ -470,16 +470,28 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         $hoverTarget.css({
           opacity: 0.5
         })
+        ////////
+        if(self.curatedToggleCounter == 'active'){
+          var orderType = "Order";
+        }
+        else {
+          var orderType = "Re-order";
+        }
         ////we drill up in order to get the parent, so we can append the html buttons to it
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer' id='"+$(evt.target)[0].id+"'>"+
             '<div class="projectCellButtonSample">Request A Sample'+
             '</div>'+
-            '<div class="projectCellButtonOrder">Re-Order</div>'+
+            '<div class="projectCellButtonOrder">Place an '+orderType+'</div>'+
             '<div class="projectCellMore">Learn More</div>'+
           "</div>"
         )
+        $('.projectCellMore').on('click', function(evt){
+          var productId = $(evt.target)[0].parentNode.id;
+          console.log(productId);
+          window.location.hash = "#/view/product/"+productId;
+        })
         ////activate purchase modal on click
         clickPurchaseModal();
         $('.projectCellButtonSample').on('click', function(evt){
@@ -529,33 +541,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           //////////submit the sample request, changing the product's status
         })
 
-        // $('#projectCellButtonEdit').on('click', function(evt){
-        //   var prodIdToUpdate = $($(evt.target)[0].parentNode)[0].id;
-        //   $('.bodyview').prepend(
-        //     '<div class="curatePopup">'+
-        //       "<h2>Purchase or request a sample?</h2>"+
-        //       "<br>"+
-        //       '<button>no thanks</button>'+
-        //       '<button class="addToPurchased bought" id="'+prodIdToUpdate+'">Purchase an order</button>'+
-        //       '<button class="addToPurchased sample" id="'+prodIdToUpdate+'">Request a Sample</button>'+
-        //     '</div>'
-        //   )
-        //   $('.addToPurchased').on('click', function(evt){
-        //     var prodId = $(evt.target)[0].id;
-        //     var purchaseType = $(evt.target)[0].classList[1];
-        //     var purchaserInformation = [{"purchaserId": self.buyerId, "companyName":"Dummy Company"}]
-        //     $http({
-        //       method: "POST"
-        //       ,url: "/api/product/update"
-        //       ,data: {status: purchaseType, projectId: prodId, purchaserInformation: purchaserInformation}
-        //     })
-        //     .then(function(updatedProduct){
-        //       if (updatedProduct) {
-        //         window.location.reload();
-        //       }
-        //     })
-        //   })
-        // })
         $('.projectCellHoverContainer').on('mouseleave', function(evt){
           $hoverTarget.css({
             opacity: 1

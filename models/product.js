@@ -8,6 +8,7 @@ var productSchema = new Schema({
   ,purchaserInformation: Array
   ,timestamp: Date
   ,images: Array
+  ,thumbnails: Array
   ,collections: Array
   ,description: String
   ,productType: String

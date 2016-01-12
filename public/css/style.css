@@ -657,6 +657,7 @@
   font-size: 15px;
   text-align: center;
   padding-top: 10px;
+  font-size: 14px;
 }
 
 .designerDashCollectionAddText {
@@ -667,13 +668,14 @@
 
 .designerDashCollectionCell {
   height: 40px;
-  font-size: 26px;
+  font-size: 17px;
   padding-left: 40px;
   cursor:pointer;
 }
 
 .designerDashCollectionDropdown {
-  overflow: hidden;
+  overflow: scroll;
+  height: 300px;
 }
 
 .designerDashCollections {
@@ -914,10 +916,10 @@
 }
 
 .invisModal {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
-  background-color:rgba(0, 0, 0, 0.2);
+  background-color:rgba(0, 0, 0, 1);
   z-index: 5;
 }
 
@@ -1681,9 +1683,15 @@
   display: block;
 }
 
+.productContainer{
+  font-family: 'Oxygen', sans-serif;
+  position: relative;
+  background-color: #FEFDF9;
+  height: 100%;
+}
+
 .productContainerLeft{
-  margin-right:-40px;
-  margin-left: 80px;
+
 }
 
 .productDescriptionBox{
@@ -1809,7 +1817,7 @@
 .projectCellHoverContainer {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 408px;
   z-index: 2;
   font-size: 28px;
   text-align: center;
@@ -2340,14 +2348,6 @@
   position: absolute;
 }
 
-
-.productContainer{
-  border-top:2px solid yellow;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-family: 'Oxygen', sans-serif;
-}
-
 .sub-text {
     color:#aaa;
     font-family:verdana;
@@ -2524,6 +2524,15 @@ textarea#styled {
    text-align: center;
  }
 
+ .viewMiniCell {
+   width: 100%;
+   min-height: 100%;
+ }
+
+ .viewMiniImage {
+   width: 100%;
+ }
+
 .viewPictureImageIcon {
   font-size: 20px;
   color: #858585;
@@ -2532,7 +2541,8 @@ textarea#styled {
 }
 
 .viewProductBar {
-  font-size: 25px;
+  font-size: 20px;
+  height: 50px;
 }
 
 .viewProductColorBox, .viewProductAccessoryBox, .viewProductFabricBox, .viewProductStitchBox {
@@ -2545,14 +2555,38 @@ textarea#styled {
     border-color: rgba(0,0,0,.2);*/
 }
 
+.viewProductDashboard {
+  color: #30A0B0;
+  padding-right: 5px;
+}
+
+.viewProductDashInfo {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 30px;
+  vertical-align: top;
+}
+
+.viewProductDescription {
+  font-size: 14px;
+}
+
+.viewProductDescriptionTitle {
+  font-size: 17px;
+  margin-top: 15px;
+}
+
+.viewProductDetailsContainer {
+}
+
 .viewProductHolder {
   display: block;
 }
 
 .viewProductImage{
-  background-image:url('smiley.gif');
-background-repeat:no-repeat;
-background-size:100% 100%;
+  display: inline-block;
+  width: 80%;
+  height: 700px;
 }
 
 .viewProductImageContainer {
@@ -2561,7 +2595,67 @@ background-size:100% 100%;
 
 .viewProductImageMain {
     width: 100%;
-    height: auto;
+    height: 500px;
+}
+
+.viewProductLeftHolder {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 20px;
+}
+
+.viewProductModalImage {
+  width: 750px;
+  height: 1050px;
+  display: inline-block;
+}
+
+.viewProductModalMiniCell {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin-top: 5px;
+}
+
+.viewProductModalMiniCell img{
+  position: absolute;
+  width: 150px;
+  height: 150px;
+}
+
+.viewProductModalMiniHolder {
+  display: inline-block;
+  vertical-align: top;
+  height: 1050px;
+  width: 155px;
+}
+
+.viewProductModalMiniHolder1 {
+  display: inline-block;
+  vertical-align: top;
+  height: 1050px;
+  width: 155px;
+}
+
+.viewProductModalShowPhotos {
+  height: 1050px;
+  width: 1150px;
+  outline: 2px solid black;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.viewProductMiniHolder {
+  vertical-align: top;
+  width: 18%;
+  margin-left: 1%;
+  height: 100%;
+  outline: 3px solid red;
+  display: inline-block;
+}
+
+.viewProductName{
+  padding-top: 12px;
 }
 
 .viewProductPageContainer{
@@ -2581,8 +2675,19 @@ background-size:100% 100%;
   padding-top: 45px;
 }
 
+.viewProductSwatchCell {
+  display: block;
+  margin-top: 15px;
+  height: 100px;
+}
+
+.viewProductSwatchCell h3{
+  padding: 0px;
+  margin: 0px;
+}
+
 .viewProductTitle{
-  /*outline:2px solid black;*/
+  font-size: 31px;
 }
 
 .viewProductTitleUnderline{
@@ -2594,9 +2699,10 @@ background-size:100% 100%;
 }
 
 .viewProductType{
-  margin-top:-9px;
+  /*margin-top:-9px;*/
   margin-left: 2px;
-  font-size:17px;
+  font-size:15px;
+  font-style: bold;
   /*outline:2px solid green;*/
 }
 

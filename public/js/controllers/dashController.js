@@ -31,6 +31,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           ,url: '/api/'+decodedToken.data.name+'/products'
         })
         .then(function(products){
+          console.log(products);
           var allProjects = products.data;
           var allProjectsSaved = [];
           var curatedProjectsArray = [];
@@ -683,6 +684,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       /////create mouseenter event listener to cause frontend changes
       $('.projectCellImage').on('mouseenter', function(evt){
         var $hoverTarget = $(evt.target);
+        console.log($hoverTarget);
         $hoverTarget.css({
           opacity: 0.08
         })
@@ -1021,7 +1023,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "</div>"
           )
         }
-        $('.designerDashCollectionDropdown').append(
+        $('.designerDashCollectionDropdown').after(
           "<div class='designerDashCollectionAddMore'>"+
             "<span class='glyphicon glyphicon-plus'>"+
               "<p class='designerDashCollectionAddText'>add collection</p>"+
