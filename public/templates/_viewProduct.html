@@ -19,7 +19,7 @@
   <div class="row">
       <!-- item -->
     <div class='productContainerLeft'>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class='viewProductDetailsContainer' >
         <h1 class='viewProductTitle'>Details</h1>
         <h1 class='viewProductTitleUnderline'></h1>
@@ -57,31 +57,19 @@
       <!-- /item -->
 
       <!-- item -->
-      <div class="col-md-4 text-center">
-          <div class="panel panel-danger panel-product viewProductImageContainer">
-            <i class="glyphicon glyphicon-resize-full viewPictureImageIcon"></i>
-              <div class="viewProductImage">
-                  <img class='viewProductImageMain' src="{{viewProduct.allImages[0]}}">
-                  <div class="newProductMiniImagesHolder" ng-repeat='image in viewProduct.allImages'>
-                    <div class="newProductMiniImage col-xs-3">
-                      <img src="{{image}}" class='newProductMiniImageImage' alt="" id='newProductMiniImage0'/>
-                      <div class="newProductDeleteMini">X</div>
-                    </div>
-                  </div>
-                    <!-- <div class="newProductMiniImage col-xs-3">
-                      <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage1'/>
-                      <div class="newProductDeleteMini">X</div>
-                    </div>
-                    <div class="newProductMiniImage col-xs-3">
-                      <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage2'/>
-                      <div class="newProductDeleteMini">X</div>
-                    </div>
-                    <div class="newProductMiniImage col-xs-3">
-                      <img src="" class='newProductMiniImageImage' alt="" id='newProductMiniImage3'/>
-                      <div class="newProductDeleteMini">X</div>
-                    </div> -->
+      <div class="col-md-5 text-center">
+        <div class="panel panel-danger panel-product viewProductImageContainer">
+          <i class="glyphicon glyphicon-resize-full viewPictureImageIcon"></i>
+          <div class="viewProductImage">
+              <img class='viewProductImageMain' src="{{viewProduct.allImages[0]}}">
+              <div class="newProductMiniImagesHolder" ng-repeat='image in viewProduct.allImages'>
+                <div class="newProductMiniImage col-xs-3">
+                  <img src="{{image}}" class='newProductMiniImageImage' alt="" id='newProductMiniImage0'/>
+                  <div class="newProductDeleteMini">X</div>
+                </div>
               </div>
           </div>
+        </div>
       </div>
       <!-- /item -->
 
@@ -93,26 +81,26 @@
           <div class="actionBox">
             <div id="commentTextBox">
   <!-- comment in angular is referring each individual data within an array -->
-          <div ng-repeat="comment in viewProduct.allComments" repeat-complete='lastCommentBoxColor()'class='text-left commentFile' >
-            <div ng-class-odd="'commentBoxTextBackgroundColorOdd'" ng-class-even="'commentBoxTextBackgroundColorEven'" >
-            <a class="btn btn-default btn-circle-default-user-icon"><i class="fa fa-user"></i></a>
-            <h1 class='commentBoxName'>{{comment.sender}}</h1>
-            <h2 class='commentBoxDate'>{{comment.date}}</h2>
-            <h2 class='commentBoxText'>{{comment.commentText}}</h2>
-          </div>
-          </div>
-        </div>
-          <form class="form-inline" role="form">
-        <div class="form-group">
-          <textarea class="form-control message" type="text" placeholder="Leave a reply"></textarea>
-        </div>
-          </form>
-          <div class='col-md-4 text-center viewProductReplyButtonBox'>
-            <input type="button" value="Reply" class="btn btn-default commentSubmitBtn" id="cmdSubmitComment">
+              <div ng-repeat="comment in viewProduct.allComments" repeat-complete='lastCommentBoxColor()'class='text-left commentFile' >
+                <div ng-class-odd="'commentBoxTextBackgroundColorOdd'" ng-class-even="'commentBoxTextBackgroundColorEven'" >
+                <a class="btn btn-default btn-circle-default-user-icon"><i class="fa fa-user"></i></a>
+                <h1 class='commentBoxName'>{{comment.sender}}</h1>
+                <h2 class='commentBoxDate'>{{comment.date}}</h2>
+                <h2 class='commentBoxText'>{{comment.commentText}}</h2>
+              </div>
+              </div>
+            </div>
+            <form class="form-inline" role="form">
+              <div class="form-group">
+                <textarea class="form-control message" type="text" placeholder="Leave a reply"></textarea>
+              </div>
+            </form>
+            <div class='col-md-4 text-center viewProductReplyButtonBox'>
+              <input type="button" value="Reply" class="btn btn-default commentSubmitBtn" id="cmdSubmitComment">
+            </div>
           </div>
         </div>
       </div>
-    </div>
       <!-- /item -->
     </div>
   </div>
