@@ -376,11 +376,12 @@ module.exports = function(app){
 				//AUTHENTICATE USER HERE
         var product = new Product();
         var newUser = new User();
+        var conversation = new Conversation();
 
         product.name = "Demo Product";
         product.status = 'saved';
         product.timestamp = new Date();
-        product.images = ['https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg'];
+        product.images = ['https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg'];
 
         newUser.email = req.body.email;
         newUser.passwordDigest = newUser.generateHash( req.body.password );
@@ -392,7 +393,17 @@ module.exports = function(app){
           product.userId = newUserData._id;
           product.save(function(err, newProductData){
             console.log(newProductData);
-            res.json(newProductData)
+            // res.json(newProductData)
+            /////now we make the Conversation that goes with every product
+            conversation.productName = newProductData.name;
+            conversation.productId = newProductData._id;
+            conversation.dateCreated = new Date();
+            conversation.comments = [{sender: "Admin", receiver: newUserData._id, date: new Date(), text: "Hello, welcome to your first comment"}];
+            conversation.save(function(err, newConvo){
+              if(err){console.log(err)}
+              console.log(newConvo);
+              res.json(newConvo)
+            })
           });
         })
   		}
