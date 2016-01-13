@@ -1498,6 +1498,133 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
         $('.dashTour1').css('margin-top', topOff - 30);
         $('.dashTour1').css('margin-left', topLeft+parseInt(width)+15+'px');
+        $('.dashTourNext').on('click', function(){
+          $('.tourDesignerDashCurated').remove();
+          $('.designerDashCurated').css({
+            opacity: 1
+          })
+          self.tourCounter++;
+          dashboardTour();
+        })
+        $('.dashTourBack').on('click', function(){
+          $('.tourDesignerDashCurated').remove();
+          $('.designerDashCurated').css({
+            opacity: 1
+          })
+          self.tourCounter--;
+          dashboardTour();
+        })
+      }
+      else if (self.tourCounter == 3){
+        $('.tourElem').remove();
+        $('.bodyview').prepend(
+          '<div class="dashTour2 tourElem">'+
+            "<div class='dashTourBack'>"+
+              "Back"+
+            "</div>"+
+            "<div class='dashTourNext'>"+
+              "Next"+
+            "</div>"+
+          "<h4>These Are your Collections, where you can organize the products that you create</h4>"+
+          '</div>'
+        );
+        $('.bodyview').prepend(
+          "<p class='tourDesignerDashCollections'>"+
+                "Collections"+
+          "</p>"
+        );
+        $('.designerDashboardPage').css({
+          opacity: 0.3
+        });
+        $('.designerDashCollections').css({
+          opacity: 0
+        })
+        var topOff = $('.designerDashCollections').offset().top;
+        console.log(topOff);
+        var topLeft = $('.designerDashCollections').offset().left;
+        var width = $('.designerDashCollections').css('width').split('').slice(0, $('.designerDashCollections').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        ////add new temporary element to show tutees
+        $('.tourDesignerDashCollections').css('top', topOff);
+        $('.tourDesignerDashCollections').css('left', topLeft);
+        $('.tourDesignerDashCollections').css('width', width);
+
+        $('.dashTour2').css('margin-top', topOff - 30);
+        $('.dashTour2').css('margin-left', topLeft+parseInt(width)+15+'px');
+        $('.dashTourNext').on('click', function(){
+          $('.tourDesignerDashCollections').remove();
+          $('.tourProjectCellNewInner').remove();
+          $('.designerDashCollections').css({
+            opacity: 1
+          });
+          self.tourCounter++;
+          dashboardTour();
+        })
+        $('.dashTourBack').on('click', function(){
+          $('.tourDesignerDashCollections').remove();
+          $('.designerDashCollections').css({
+            opacity: 1
+          });
+          self.tourCounter--;
+          dashboardTour();
+        })
+      }
+      else if (self.tourCounter == 4){
+        $('.tourElem').remove();
+        $('.bodyview').prepend(
+          '<div class="dashTour4 tourElem">'+
+            "<div class='dashTourBack'>"+
+              "Back"+
+            "</div>"+
+            "<div class='dashTourNext'>"+
+              "Next"+
+            "</div>"+
+          "<h4>You can start a new collection by clicking here</h4>"+
+          '</div>'
+        );
+        $('.bodyview').prepend(
+          "<div class='tourDesignerDashCollectionAddMore'>"+
+            "<span class='glyphicon glyphicon-plus'></span>"+
+            "<p class='designerDashCollectionAddText'>"+
+              "add collection"+
+            "</p>"+
+          "</div>"
+        );
+        $('.designerDashboardPage').css({
+          opacity: 0.3
+        });
+        $('.designerDashCollectionAddMore').css({
+          opacity: 0
+        });
+        var topOff = $('.designerDashCollectionAddMore').offset().top;
+        console.log(topOff);
+        var topLeft = $('.designerDashCollectionAddMore').offset().left;
+        var width = $('.designerDashCollectionAddMore').css('width').split('').slice(0, $('.designerDashCollectionAddMore').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        ////add new temporary element to show tutees
+        $('.tourDesignerDashCollectionAddMore').css('top', topOff);
+        $('.tourDesignerDashCollectionAddMore').css('left', topLeft);
+        $('.tourDesignerDashCollectionAddMore').css('width', width);
+
+        $('.dashTour4').css('margin-top', topOff - 30);
+        $('.dashTour4').css('margin-left', topLeft+parseInt(width)+15+'px');
+        $('.dashTourNext').on('click', function(){
+          $('.tourDesignerDashCollectionAddMore').remove();
+          $('.designerDashCollectionAddMore').css({
+            opacity: 1
+          });
+          $('.tourElem').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
+          self.tourCounter = 7;
+        })
+        $('.dashTourBack').on('click', function(){
+          $('.designerDashCollectionAddMore').css({
+            opacity: 1
+          });
+          $('.tourDesignerDashCollectionAddMore').remove();
+          self.tourCounter--;
+          dashboardTour();
+        })
       }
     }
     ///////End Logic for Dashboard Tour////////////////

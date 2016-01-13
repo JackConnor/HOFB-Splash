@@ -548,13 +548,36 @@
   margin-top: 150px;
   z-index: 3;
 }
+
 .dashTour1 {
   width: 350px;
   height: 150px;
   background-color: gray;
   position: absolute;
-  /*margin-left: 15%;*/
-  /*margin-top: 350px;*/
+  z-index: 3;
+}
+
+.dashTour2 {
+  width: 350px;
+  height: 150px;
+  background-color: gray;
+  position: absolute;
+  z-index: 3;
+}
+
+.dashTour3 {
+  width: 350px;
+  height: 150px;
+  background-color: gray;
+  position: absolute;
+  z-index: 3;
+}
+
+.dashTour4 {
+  width: 350px;
+  height: 150px;
+  background-color: gray;
+  position: absolute;
   z-index: 3;
 }
 
@@ -2547,6 +2570,32 @@ textarea#styled {
   color:#444;
   margin:0;
   display:inline-block;
+}
+
+.tourDesignerDashCollectionAddMore {
+  width: 80%;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 18px;
+  position: absolute;
+}
+
+.tourDesignerDashCollectionAddText {
+  display: inline-block;
+  margin-top: -7px;
+  margin-left: 3px;
+  position: absolute;
+  font-size: 20px;
+  text-align: center;
+}
+
+.tourDesignerDashCollections {
+  height: 40px;
+  border-bottom: 1px solid #EFEEEC;
+  width: 100%;
+  padding-left: 40px;
+  position: absolute;
+  font-size: 18px;
 }
 
 .tourDesignerDashCurated {
