@@ -1234,6 +1234,7 @@
   display: inline-block;
   padding-left: 20px;
   font-size: 27px;
+  font-family: 'Oxygen', sans-serif;
   color:#FDFDFD;
 }
 .navTitleRightLine{
@@ -1246,11 +1247,12 @@
   padding-left: 15px;
 }
 .navTitleUnderline {
-    margin-top: -8px;
-    outline: 1px solid #30a0b0;
-    width: 68px;
-    margin-left: 3px;
+  margin-top: -6px;
+  outline: 1px solid #30a0b0;
+  width: 64px;
+  margin-left: 3px;
 }
+
 .newProductBegin {
   width: 160px;
   height: 50px;
