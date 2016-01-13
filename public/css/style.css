@@ -943,6 +943,8 @@
   float: right;
   margin-right: 20px;
   cursor:pointer;
+  color: #232730;
+  padding-right: 15px;
 }
 
 .messageBar {
@@ -1116,12 +1118,12 @@
 /*/*/
 /*/*/
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #FEFDFA;
     color: white;
-    padding: 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    opacity: 0;
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -1131,6 +1133,8 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    z-index: 1;
+    float: right;
 }
 
 .dropdown-content {
