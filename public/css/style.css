@@ -1151,7 +1151,8 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
-    /*opacity: 0;*/
+    padding-top: 10px;
+    opacity: 0;
     margin-left: -72px;
 }
 
@@ -1173,6 +1174,7 @@
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin-left: -142px;
 }
 
 .dropdown-content a {
@@ -1198,6 +1200,8 @@
   display: block;
   padding-top: 5px;
   border-top: 1px solid #FEFDFA;
+  position: relative;
+  z-index: 100;
 }
 #navBarCircleIcon{
   display: inline-block;
@@ -1223,6 +1227,7 @@
   font-size: 23px;
   padding-top: 7px;
   color:#FDFDFD;
+  cursor:pointer;
 }
 
 .navTitle {
