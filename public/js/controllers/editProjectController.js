@@ -843,6 +843,39 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     $('#navBarEnvelopeIcon').on('click', function(){
       window.location.hash = "#/messages";
     })
+
+
+        ///////functions to add outline to edit tools on hover
+        $('.newProductDeleteMini').on('mouseenter', function(){
+          $('.newProductDeleteMini').css({
+            outline: "2px solid gray"
+          })
+        })
+        $('.newProductDeleteMini').on('mouseleave', function(){
+          $('.newProductDeleteMini').css({
+            outline: "none"
+          })
+        })
+        $('.expandPhoto').on('mouseenter', function(){
+          $('.expandPhoto').css({
+            outline: "2px solid gray"
+          })
+        })
+        $('.expandPhoto').on('mouseleave', function(){
+          $('.expandPhoto').css({
+            outline: "none"
+          })
+        })
+        $('.fileUploadWrapper').on('mouseenter', function(){
+          $('.fileUploadWrapper').css({
+            outline: "2px solid gray"
+          })
+        })
+        $('.fileUploadWrapper').on('mouseleave', function(){
+          $('.fileUploadWrapper').css({
+            outline: "none"
+          })
+        })
   ////////////////////////////////
   ///////////////////////////////
   ///////End all controller Code///

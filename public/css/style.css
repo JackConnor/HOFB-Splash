@@ -702,17 +702,13 @@
 }
 
 .designerDashCollectionAddMore {
-  width: 80%;
-  margin-left: 10%;
-  font-size: 15px;
-  text-align: center;
-  padding-top: 10px;
-  font-size: 14px;
+  margin-left: 37px;
+  margin-top: 10px;
+  color: #169aa9;
 }
 
 .designerDashCollectionAddText {
   display: inline-block;
-  margin-top: -7px;
   margin-left: 3px;
 }
 
@@ -721,7 +717,7 @@
   font-size: 16px;
   font-weight: 300;
   text-transform: capitalize;
-  color: #333333designerDashCollectionCell;
+  color: #333333;
   padding-left: 40px;
   cursor:pointer;
 }
@@ -748,8 +744,7 @@
 }
 
 .designerDashCollectionsContainer p{
-  font-size: 18px;
-  font-style: bolder;
+
 }
 
 .designerDashContainer{
@@ -904,9 +899,12 @@
   display: inline-block;
   float: left;
   position: absolute;
-  font-size: 29px;
-  margin-top: 5px;
-  margin-left: 5px;
+  font-size: 17px;
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
 }
 
 .fabricFilter {
@@ -929,9 +927,14 @@
 }
 
 .fileUploadWrapper {
-  font-size: 45px;
-  margin-left: 72%;
+  font-size: 17px;
+  float: right;
   display: inline-block;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-right: 10px;
 }
 
 .howToCell {
@@ -955,17 +958,17 @@
   display: inline-block;
   cursor:pointer;
   width: 50px;
-  margin-left: 0px;
-  margin-top:  -41px;
+  margin-left: -33px;
   opacity: 0;
 }
 
 .inputFileHolder {
-  position: absolute;
+  color: white;
+  font-size: 16px;
   width: 90%;
+  position: absolute;
   vertical-align: top;
   margin-top: 10px;
-  margin-left: 10px;
 }
 
 .invisModal {
@@ -1351,12 +1354,16 @@
 }
 
 .newProductDeleteMini {
-  font-size: 35px;
-  margin-left: 35px;
+  font-size: 20px;
+  float: right;
+  margin-right: 10px;
   display: inline-block;
   vertical-align: top;
-  text-align: right;
   color: white;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding-top: 5px;
 }
 
 .newProductDescription {

@@ -829,6 +829,38 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     }
     /////end of navbar dropdown logic/////////////
     ////////////////////////////////////////////////
+
+    ///////functions to add outline to edit tools on hover
+    $('.newProductDeleteMini').on('mouseenter', function(){
+      $('.newProductDeleteMini').css({
+        outline: "2px solid gray"
+      })
+    })
+    $('.newProductDeleteMini').on('mouseleave', function(){
+      $('.newProductDeleteMini').css({
+        outline: "none"
+      })
+    })
+    $('.expandPhoto').on('mouseenter', function(){
+      $('.expandPhoto').css({
+        outline: "2px solid gray"
+      })
+    })
+    $('.expandPhoto').on('mouseleave', function(){
+      $('.expandPhoto').css({
+        outline: "none"
+      })
+    })
+    $('.fileUploadWrapper').on('mouseenter', function(){
+      $('.fileUploadWrapper').css({
+        outline: "2px solid gray"
+      })
+    })
+    $('.fileUploadWrapper').on('mouseleave', function(){
+      $('.fileUploadWrapper').css({
+        outline: "none"
+      })
+    })
   /////end createProject controller
   ////////////////////////
   ////////////////////////

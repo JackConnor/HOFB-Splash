@@ -821,7 +821,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "<div class='projectCellTrash'><i class='fa fa-times'></i></div>"+
             "<div class='projectCellHoverContent'>"+
             "</div>" +
-            '<div class="projectCellButton" id="projectCellButtonEdit">Edit Project</div>"'+
+            '<div class="projectCellButton" id="projectCellButtonEdit">EDIT PROJECT</div>"'+
           "</div>"
         )
         //////begin to call hover actions
@@ -1253,13 +1253,12 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       ///////now we add the "add more collections logic"/
       $('.designerDashCollectionAddMore').on('mouseenter', function(evt){
           $('.designerDashCollectionAddMore').css({
-              backgroundColor: '#BDBDBD'
+              color: 'black'
           })
       })
       $('.designerDashCollectionAddMore').on('mouseleave', function(evt){
           $('.designerDashCollectionAddMore').css({
-            backgroundColor: '#F9F7F5'
-            ,color: "black"
+            color: "#169aa9"
           })
       })
       ////////////on click we popout a modal to enter your collection name
