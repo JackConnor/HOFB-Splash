@@ -2,8 +2,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
   .controller('editProjectCtrl', editProjectCtrl)
 
-  editProjectCtrl.$inject = ['$http', 'postProject', 'getProduct', 'editProject', 'checkPw', 'allSwatches'];
-  function editProjectCtrl($http, allSwatches, postProject, checkPw){
+  editProjectCtrl.$inject = ['$http', 'allSwatches', 'postProject', 'checkPw', 'getProduct', 'editProject'];
+  function editProjectCtrl($http, allSwatches, postProject, checkPw, getProduct, editProject){
     console.log(allSwatches);
     var self = this;
     //////global variables we'll be using for moving the carousel
