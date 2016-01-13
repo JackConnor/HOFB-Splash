@@ -876,6 +876,69 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
             outline: "none"
           })
         })
+
+
+
+        //////function to keep scroll-right for mini images in the right placeholder
+        self.imageHolderMargin = 0;
+        $('.newProductScrollImagesRight').on('click', function(){
+          //////check to make sure it's not at either end
+          var maxWidth = ($('.newProductMiniImage').width()*8) - $('.newProductImageFrame').width();
+          if(self.imageHolderMargin > -(maxWidth+15)){
+            self.imageHolderMargin -= 130;
+            $('.newProductMiniImagesHolder').animate({
+              marginLeft: self.imageHolderMargin+"px"
+            }, 100)
+          }
+
+        })
+        $('.newProductScrollImagesLeft').on('click', function(){
+          if(self.imageHolderMargin < 0){
+            self.imageHolderMargin += 130;
+            $('.newProductMiniImagesHolder').animate({
+              marginLeft: self.imageHolderMargin+"px"
+            }, 100)
+          }
+        })
+
+        /////function to make sure the tabs for the scrol on th emini photos stays in place, which is triggered pretty much every time the mini photo thing is moved
+        function resizeScrollTabs(){
+          $('.newProductScrollImagesLeft').css({
+            marginLeft: 0
+          })
+          $('.newProductScrollImagesRight').css({
+            marginLeft: $('.newProductImageFrame').width() - 30
+          })
+        }
+
+        $(document).ready(function(){
+          resizeScrollTabs()
+          setTimeout(function(){
+            resizeScrollTabs();
+          }, 1000);
+        })
+        $(window).resize(function(){
+          resizeScrollTabs();
+          setTimeout(function(){
+            resizeScrollTabs();
+          }, 1000);
+        })
+        setInterval(function(){
+          resizeScrollTabs();
+        }, 100);
+
+      ////////function to check the margin everytime the mini photo counter is changed (i.e. a photo is added or deleted), and adjust it accordingly
+      function adjustMiniMarginUpload() {
+        if(self.miniPhotoCounter > 3){
+          var maxWidth = ($('.newProductMiniImage').width()*(self.miniPhotoCounter))- ($('.newProductImageFrame').width()/2);
+          $('.newProductMiniImagesHolder').css({
+            marginLeft: -maxWidth+"px"
+          })
+          resizeScrollTabs();
+          self.imageHolderMargin = -maxWidth;
+        }
+      }
+
   ////////////////////////////////
   ///////////////////////////////
   ///////End all controller Code///
