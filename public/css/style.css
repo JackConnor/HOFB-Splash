@@ -36,14 +36,13 @@
 .carouselBacking {
   width: 833.333%;
   height: 500px;
-  /*outline: 4px solid green;*/
 }
 
 .carouselControl {
   height: 100px;
   width: 60%;
   margin-left: 20%;
-  outline: 4px solid green;
+  outline: 4px solid #3CB878;
 }
 
 .carouselCount {
@@ -303,7 +302,6 @@
 
 .createFabricCellHolder {
   height: 33.33%;
-  /*outline: 2px solid green;*/
 }
 
 .createFabricContainer {
@@ -612,7 +610,7 @@
   width: 200px;
   height: 40px;
   opacity: .5;
-  background-color:green;
+  background-color: #3CB878;
   color: white;
   font-size: 18px;
   vertical-align: center;
@@ -1043,7 +1041,7 @@
   display: inline-block;
   width: 59px;
   height: 59px;
-  background-color: green;
+  background-color: #3CB878;
   margin: 12px 12px;
 }
 
@@ -1290,7 +1288,7 @@
 
 .newProductCenterColumn {
   display: inline-block;
-  outline: 2px solid green;
+  outline: 2px solid #3CB878;
   height: 100%;
   vertical-align: top;
 }
@@ -1837,7 +1835,6 @@
   font-size: 18px;
   text-align: center;
   padding-bottom: 70px;
-  /*outline: 2px solid green;*/
 }
 
 .projectCellContentName {
@@ -2422,8 +2419,8 @@
   width: 200px;
   height: 70px;
   margin-left: 60%;
-  color: green;
-  outline: 2px solid green;
+  color: #3CB878;
+  outline: 2px solid #3CB878;
   margin-top: 24px;
   font-size: 25px;
   padding-top: 15px;
@@ -2436,7 +2433,7 @@
   float: right;
   /*margin-right: 10%;*/
   margin-top: 15px;
-  background-color: green;
+  background-color: #3CB878;
   color: white;
   border-radius: 3px;
   font-size: 22px;
@@ -2884,7 +2881,6 @@ textarea#styled {
   margin-left: 2px;
   font-size:15px;
   font-style: bold;
-  /*outline:2px solid green;*/
 }
 
 .wordwrap {
