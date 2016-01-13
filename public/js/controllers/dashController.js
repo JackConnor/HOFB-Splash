@@ -54,70 +54,72 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           var collectionName = ["All"];
           // sel
           for (var i = 0; i < self.allProjects.length; i++) {
-            function timeSince(){
-              var nowDate = new Date();
-              var timeProj = self.allProjects[i].timestamp;
-              //////project creation variables
-              var projYear = timeProj.split('-')[0];
-              var projMonth = timeProj.split('-')[1];
-              var projDay = timeProj.split('-')[2].slice(0,2);
-              var projDate = projMonth+"-"+projDay+"-"+projYear;
-
-              ///////current time variables
-              var nowMonth = nowDate.getMonth() + 1;
-              var nowYear  = nowDate.getFullYear();
-              var nowDay = nowDate.getDate();
-              var rigthNow = nowMonth+"-"+nowDay+"-"+nowYear;
-              if(nowYear > projYear){
-                if(nowMonth > projMonth){
-                   var months_since = (nowYear - projYear) + (nowMonth - projMonth);
-                   return months_since+ " months old"
-                }
-                else if ((nowYear - projYear == 1) && projMonth >= nowMonth ){
-                  if(projMonth == nowMonth){
-                    return "11 months old"
-                  }
-                  else {
-                    var mSince = ((12+nowMonth) - projMonth);
-
-                    if(mSince == 1){
-                      return  "less than "+mSince+" month old";
-                    }
-                    else {
-                      return (mSince+" months old");
-                    }
-                  }
-
-                }
-              }
-              else if(projYear == nowYear){
-                if(nowMonth > projMonth+1){
-                  return (nowMonth - projMonth)+" months old";
-                }
-                else if(nowMonth-1 == projMonth){
-                  return "less than "+(nowMonth - projMonth)+" month old";
-                }
-                else if(nowMonth == projMonth){
-                  return nowDay - projDay+ " days old";
-                }
-              }
-            }
-            self.allProjects[i].TimeSinceCreation = timeSince();
+            var nowDateIso = new Date();
+            var nowDate = nowDateIso.getTime();
+            var timeProj = self.allProjects[i].timestamp;
+            var timeDist = getTimeDistance(timeProj, nowDate);
+            self.allProjects[i].TimeSinceCreation = timeDist;
             /////get all collections
             for (var j = 0; j < self.allProjects[i].collections.length; j++) {
-              console.log(self.allProjects[i].collections[j]);
               if(self.allProjects[i].collections[j].split('').length > 1){
-                console.log('ccepted');
                 collectionName.push(self.allProjects[i].collections[j]);
               }
             }
             self.allCollectionsRaw = collectionName;
-            console.log(self.allCollectionsRaw);
           }
           checkDuplicate();
           callback(arg)
         })
       })
+    }
+
+    ////a quick simple function to take two millisecond times, and spits out how long it's been in seconds, minutes, days, hours, etc....
+    function getTimeDistance(milli1, milli2){
+      var milliDistance = Math.abs(milli1 - milli2);
+      if(parseInt(milliDistance) <= 60000){
+        var seconds = Math.floor(milliDistance/1000);
+        if(seconds > 1){
+          return seconds + ' seconds'
+        } else {
+          return  seconds + " second";
+        }
+
+      }
+      else if(milliDistance > 60000 && milliDistance <= 3600000){
+        var timeInMinutes = Math.floor(milliDistance/60000);
+        if(timeInMinutes > 1){
+          return timeInMinutes + ' minutes'
+        } else {
+          return  timeInMinutes + " minute";
+        }
+      }
+      else if(milliDistance > 3600000 && milliDistance <= 86400000){
+        console.log('less than one day');
+        var totalHours = Math.floor(milliDistance/3600000);
+        if(totalHours > 1){
+          return totalHours + ' hours'
+        } else {
+          return  totalHours + " hour";
+        }
+      }
+      else if(milliDistance > 86400000 && milliDistance <= 2419200000){
+        console.log('less than four weeks');
+        var totalDays = Math.floor(milliDistance/3600000);
+        if(totalDays > 1){
+          return totalDays + ' days'
+        } else {
+          return  totalDays + " days";
+        }
+        return +" days";
+      }
+      else {
+        var totalWeeks = Math.floor(milliDistance/604800000);
+        if(totalWeeks > 1){
+          return totalWeeks + ' weeks'
+        } else {
+          return  totalWeeks + " week";
+        }
+      }
     }
 
     //////simple function to return just the unique items from an array, very useful for many purposes
@@ -1629,6 +1631,14 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     }
     ///////End Logic for Dashboard Tour////////////////
     ///////////////////////////////////////////////////
+
+    //////navbar click events
+    $('.navTitle').on('click', function(){
+      window.location.hash = "#/designer/dashboard";
+    });
+    $('#navBarEnvelopeIcon').on('click', function(){
+      window.location.hash = "#/messages";
+    })
     console.log($('.bodyview'));
   /////end dash controller
   ////////////////////////

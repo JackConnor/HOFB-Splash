@@ -166,7 +166,13 @@ function newForm(){
 ///////////end of multer form/////////////
 //////////////////////////////////////
 
-
+//////navbar click events
+$('.navTitle').on('click', function(){
+  window.location.hash = "#/designer/dashboard";
+});
+$('#navBarEnvelopeIcon').on('click', function(){
+  window.location.hash = "#/messages";
+})
 
   ////////end userProfile controller//////
   /////////////////////////////////

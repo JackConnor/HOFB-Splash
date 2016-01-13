@@ -212,6 +212,13 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
         $(".viewProductImageMain").attr('src', bigSource);
       })
     }
+    //////navbar click events
+    $('.navTitle').on('click', function(){
+      window.location.hash = "#/designer/dashboard";
+    });
+    $('#navBarEnvelopeIcon').on('click', function(){
+      window.location.hash = "#/messages";
+    })
   /////end viewProduct controller
   ////////////////////////
   ////////////////////////

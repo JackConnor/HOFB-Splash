@@ -832,7 +832,13 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     });
     //////End logic for photo popup modal//////////
     ///////////////////////////////////////////////
-
+    //////navbar click events
+    $('.navTitle').on('click', function(){
+      window.location.hash = "#/designer/dashboard";
+    });
+    $('#navBarEnvelopeIcon').on('click', function(){
+      window.location.hash = "#/messages";
+    })
   ////////////////////////////////
   ///////////////////////////////
   ///////End all controller Code///

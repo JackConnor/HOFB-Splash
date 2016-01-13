@@ -165,7 +165,13 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory', 'si
 
     /////////end send message logic//////
     /////////////////////////////////////
-
+    //////navbar click events
+    $('.navTitle').on('click', function(){
+      window.location.hash = "#/designer/dashboard";
+    });
+    $('#navBarEnvelopeIcon').on('click', function(){
+      window.location.hash = "#/messages";
+    })
   /////////end of the messages controller
   ///////////////////////////////////////
   ///////////////////////////////////////

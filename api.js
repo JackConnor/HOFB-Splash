@@ -206,7 +206,6 @@ module.exports = function(app){
   ////post a single product
   app.post('/api/products', function(req, res){
     console.log(req.body);
-    console.log('yo it me');
     Product.create(req.body, function(err, product){
       if(err) throw err;
       res.json(product);
@@ -215,9 +214,7 @@ module.exports = function(app){
 
   /////update a product
   app.post('/api/product/update', function(req, res){
-    console.log(req.body);
     Product.findOne({"_id":req.body.projectId}, function(err, product){
-      console.log(product);
       if(err){console.log(err)}
       if (req.body.name) {
         product.name = req.body.name;
@@ -234,7 +231,7 @@ module.exports = function(app){
       if (req.body.description) {
         product.description = req.body.description;
       }
-      console.log(typeof(req.body.collections) );
+      //////below, if you send through an array, it knows you are adding to collections, and does that automatically. If you send a single, it knows to subtract that from your current collections 
       /////this is to add collections
       if (req.body.collections && typeof(req.body.collections) == 'array') {
         for (var i = 0; i < req.body.collections.length; i++) {

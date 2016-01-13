@@ -19,7 +19,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       self.userId = decodedToken.data.name;
       singleUser(self.userId)
       .then(function(user){
-        console.log(user);
         self.currentUser = user.data;
       })
 
@@ -45,7 +44,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             "</div>"
           )
         }
-        console.log(allFabrics);
         return allFabrics;
       }
       fabricsfunc();
@@ -53,7 +51,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         var allcolors = [];
         for(color in allSwatches.colors){
           allcolors.push(color);
-          console.log(color);
           $('.createColorContainer').append(
             '<div class="createColorCellHolder col-xs-6">'+
               '<div class="createColor create'+color+'">'+
@@ -66,7 +63,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             ,outline: "1px solid #E0E0E0"
           })
         }
-        console.log(allcolors);
         return allcolors;
       }
       colorsfunc();
@@ -80,7 +76,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       ///////note: swatchType needs to be added as a capital, i.e. "Season"
       $('.create'+swatchType).on('click', function(evt){
         var type = $(evt.target)[0].classList[1].slice(6, 1000);
-        console.log(type);
 
         if($(evt.target).css('opacity') == 1 ){
           $(evt.target).css({
@@ -106,7 +101,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     ///////////////////////////////////////////////////
     ///////////////build function to collect and submit
     $('.createSubmit').on('click', function(){
-      console.log(window.location.hash.split('/')[5]);
       self.createNewProject = {
         name: $('.carouselNameEntry').val()
         ,timestamp: ""
@@ -142,7 +136,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,data: self.createNewProject
       })
       .then(function(newProjectStuff){
-        console.log(newProjectStuff);
       })
     })
 
@@ -428,7 +421,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
       var potSource = $('#newProductMiniImage'+self.miniPhotoCounter).attr('src');
-      console.log(potSource);
       if(!potSource){
         self.miniPhotoCounter = self.tempPhotoCache.length-1;
       }
@@ -464,7 +456,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
     function changeMiniPhoto(event){
-      console.log($($(event.target)[0]).attr('src'));
       if($($(event.target)[0]).attr('src') != ""){
         var source = $(event.target)[0].src;
         var elId = $(event.target).attr('id');
@@ -476,7 +467,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           if(!$($('.newProductMiniImageImage')[i]).attr('src')){
             sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
             sourceNum.push(i);
-            console.log('yuuuup');
           }
         }
         var source = sourceArray[0];
@@ -517,7 +507,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     ///////////////function to send full create http request
     function sendNewProject(evt){
       var name = $('.newProductTitle').val();
-      var timestamp = new Date();
+      var timestampIso = new Date();
+      var timestamp = timestampIso.getTime();
       var imagesHTML = self.tempPhotoHTMLCache;
       var userId = self.userId;
       var collections = $('.newProductCollectionsInput').val().split(' ');
@@ -602,6 +593,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       console.log(newProjectObject);
       postProject.postProject(newProjectObject)///post the object
       .then(function(newProjectInfo){
+        console.log(newProjectInfo);
         submitPhotos(newProjectInfo.data);
       })
     }
@@ -610,7 +602,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     //////this is the function to submit photos, which are added turned into url links on the api, and added to the product object we make previously to submitting the photos
     function submitPhotos(productToUpdate){
-      console.log(self.tempPhotoHTMLCache.length);
       $(".bodyview").append(
         "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
         "</form>"
@@ -637,7 +628,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,data: {productName: newProjectInfo.name, productId: newProjectInfo._id, dateCreate: new Date(), comments: [], ownerId: self.userId, ownerName: self.currentUser.name, photoUrl: newProjectInfo.images[0]}
       })
       .then(function(newConvo){
-        console.log(newConvo);
         $('.tempForm').submit();
       })
     }
@@ -671,7 +661,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         '</div>'
       )
       $('.invisModal').on('click', function(evt){
-        console.log($(evt.target)[0].classList[0]);
         if($(evt.target)[0].classList[0] == "invisModal"){
           $('.invisModal').remove();
         }
@@ -715,7 +704,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////////Logic to load intial params name//////
     function loadName(){
       var name = window.location.hash.split('/')[3].split('_').join(' ');
-      console.log(name);
       $('.newProductTitle').val(name);
     }
     loadName();
@@ -747,7 +735,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     self.imageHolderMargin = 0;
     $('.newProductScrollImagesRight').on('click', function(){
       //////check to make sure it's not at either end
-      console.log(self.imageHolderMargin);
       var maxWidth = ($('.newProductMiniImage').width()*8) - $('.newProductImageFrame').width();
       if(self.imageHolderMargin > -(maxWidth+15)){
         self.imageHolderMargin -= 130;
@@ -758,7 +745,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     })
     $('.newProductScrollImagesLeft').on('click', function(){
-      console.log(self.imageHolderMargin);
       if(self.imageHolderMargin < 0){
         self.imageHolderMargin += 130;
         $('.newProductMiniImagesHolder').animate({
@@ -805,7 +791,13 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
     }
 
-
+    //////navbar click events
+    $('.navTitle').on('click', function(){
+      window.location.hash = "#/designer/dashboard";
+    });
+    $('#navBarEnvelopeIcon').on('click', function(){
+      window.location.hash = "#/messages";
+    })
   /////end createProject controller
   ////////////////////////
   ////////////////////////
