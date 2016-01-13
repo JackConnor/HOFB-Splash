@@ -756,7 +756,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////function to make sure the tabs for the scrol on th emini photos stays in place, which is triggered pretty much every time the mini photo thing is moved
     function resizeScrollTabs(){
       $('.newProductScrollImagesLeft').css({
-        marginLeft: $('.newProductImageFrame').width() - 30
+        marginLeft: 0
       })
       $('.newProductScrollImagesRight').css({
         marginLeft: $('.newProductImageFrame').width() - 30

@@ -1413,7 +1413,7 @@
 
 .newProductMiniImage {
   height: 100%;
-  width: 130px;
+  width: 71.5px;
   display: inline-block;
 }
 
@@ -1429,8 +1429,9 @@
 .newProductMiniImagesHolder {
   width: 2000px;
   height: 100px;
+  margin-left: 30px;
   vertical-align: bottom;
-  margin-top: -110px;
+  margin-top: -160px;
 }
 
 .newProductModal {
@@ -1513,24 +1514,24 @@
 }
 
 .newProductScrollImagesLeft {
-  height: 50px;
+  height: 100px;
   width: 30px;
   font-size: 25px;
   margin-top: 50px;
   position: absolute;
-  background-color: black;
+  background-color: gray;
   display: block;
   color: white;
-  margin-top: -50px;
+  margin-top: -100px;
 }
 
 .newProductScrollImagesRight {
-  height: 50px;
+  height: 100px;
   width: 30px;
   font-size: 25px;
   margin-top: -100px;
   position: absolute;
-  background-color: black;
+  background-color: gray;
   display: block;
   border-bottom: 1px solid gray;
   color: white;

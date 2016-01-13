@@ -555,7 +555,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         })
         $('.curatedCell').on('click', function(evt){
           var thisId = $(evt.target).attr('id');
-          // window.location.hash = "#/view/product/"+ thisId;
+          window.location.hash = "#/view/product/"+ thisId;
         })
       }
     }
