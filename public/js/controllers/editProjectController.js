@@ -785,6 +785,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     //////End logic for photo popup modal//////////
     ///////////////////////////////////////////////
 
+    /////start of navbar dropdown logic/////////////
+    ////////////////////////////////////////////////
     $(".dropbtn").on('click', function(){
       console.log('dropbtn is working');
             myFunction();
@@ -811,6 +813,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         }
       }
     }
+    /////end of navbar dropdown logic/////////////
+    ////////////////////////////////////////////////
 
     ///////////////////////////////////////////////
     //////Begin logic for photo popup modal////////
