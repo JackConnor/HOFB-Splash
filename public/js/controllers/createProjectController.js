@@ -665,17 +665,16 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.expandPhoto').on('click', function(){
       $('.bodyview').prepend(
         '<div class="invisModal">'+
-          "<div class='modalFiller'>"+
-          "</div>"+
           "<div class='modalPhotoHolder'>"+
             "<img class='modalImage' src='"+$('.newProductCurrentImage').attr('src')+"'>"+
           '</div>'+
-          "<div class='modalFiller'>"+
-          "</div>"+
         '</div>'
       )
-      $('.modalFiller').on('click', function(){
-        $('.photoModal').remove();
+      $('.invisModal').on('click', function(evt){
+        console.log($(evt.target)[0].classList[0]);
+        if($(evt.target)[0].classList[0] == "invisModal"){
+          $('.invisModal').remove();
+        }
       })/////function to view a full page modal on click
     });
     //////End logic for photo popup modal//////////

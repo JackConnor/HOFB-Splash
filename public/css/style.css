@@ -1117,20 +1117,11 @@
 
 .modalPhotoHolder {
   width: 625px;
-  /*margin-left: 25%;*/
-  vertical-align: top;
-  outline: 2px solid gray;
   height: 875px;
-  margin-top: 1%;
-  z-index: 6;
-  display: inline-block;
-  overflow: scroll;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-
-/*need to rename these classes*/
-/*/*/
-/*/*/
 .dropbtn {
     background-color: #FEFDFA;
     color: white;
