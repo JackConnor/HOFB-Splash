@@ -245,30 +245,32 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       ///////////////begin logic for the photo popup windows/
       function setPopup(){
         $('.projectCellMiniImage').on('click', function(evt){
-          $('.invisModal').remove();
-          var source = $(evt.target).attr('src');
-          var marTop = $(evt)[0].pageY;
-          var marLeft = $(evt)[0].pageX;
-          $('.bodyview').append(
-            "<div class='invisModal'>"+
-              "<div class='photoPopup'>"+
-                "<img class='photoPopupImage' src='"+source+"'>"+
-              "</div>"+
-            "</div>"
-          )
-          $(".photoPopup").css({
-            marginTop: marTop - 450
-            ,marginLeft: marLeft - 75
-          })
-          $('.invisModal').height($(document).height())
-          $('.invisModal').on('click', function(evt){
-            var thisClass = $(evt.target)[0].classList[0];
-            if(thisClass == 'photoPopup' || thisClass == 'photoPopupImage'){
-            }
-            else {
-              $('.invisModal').remove();
-            }
-          })
+          console.log('waaat');
+          console.log($(evt.target));
+        //   $('.invisModal').remove();
+        //   var source = $(evt.target).attr('src');
+        //   var marTop = $(evt)[0].pageY;
+        //   var marLeft = $(evt)[0].pageX;
+        //   $('.bodyview').append(
+        //     "<div class='invisModal'>"+
+        //       "<div class='photoPopup'>"+
+        //         "<img class='photoPopupImage' src='"+source+"'>"+
+        //       "</div>"+
+        //     "</div>"
+        //   )
+        //   $(".photoPopup").css({
+        //     marginTop: marTop - 450
+        //     ,marginLeft: marLeft - 75
+        //   })
+        //   $('.invisModal').height($(document).height())
+        //   $('.invisModal').on('click', function(evt){
+        //     var thisClass = $(evt.target)[0].classList[0];
+        //     if(thisClass == 'photoPopup' || thisClass == 'photoPopupImage'){
+        //     }
+        //     else {
+        //       $('.invisModal').remove();
+        //     }
+        //   })
         })
       }
       setPopup();
@@ -742,7 +744,17 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
     /////////////////////////////////////////////////////////
     //////////click functions for toggling designer dashboard
-
+    //////hover startSession
+    $('.designerDashCurated').on('mouseenter', function(){
+      $('.tabTextCurated').css({
+        fontWeight: 700
+      })
+    })
+    $('.designerDashCurated').on('mouseleave', function(){
+      $('.tabTextCurated').css({
+        fontWeight: 400
+      })
+    })
     ////////toggle to curated view
     $('.designerDashCurated').on('click', function(){
       $('.designerDashCurated').css({
@@ -809,7 +821,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "<div class='projectCellTrash'><i class='fa fa-times'></i></div>"+
             "<div class='projectCellHoverContent'>"+
             "</div>" +
-            '<div class="projectCellButton" id="projectCellButtonEdit">EDIT</div>"'+
+            '<div class="projectCellButton" id="projectCellButtonEdit">Edit Project</div>"'+
           "</div>"
         )
         //////begin to call hover actions
@@ -970,9 +982,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     ////////filter dropdown frontend html logic
     $('.designerDashType').on('click', function(evt){
       $('.colorFilter').remove();
-      $('.typeFilter').remove();
       $('.fabricFilter').remove();
       $('.seasonFilter').remove();
+      $('.accesoryFilter').remove();
+      $('.typeFilter').remove();
       $(evt.target).append(
         "<div class='typeFilter'>"+
           "<div  id='filterShirt' class='typeFilterCell col-xs-4'>"+
@@ -1024,9 +1037,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     ////////filter Fabric
     $('.designerDashFabric').on('click', function(evt){
       $('.colorFilter').remove();
-      $('.typeFilter').remove();
       $('.fabricFilter').remove();
       $('.seasonFilter').remove();
+      $('.accessoryFilter').remove();
       $(evt.target).append(
         "<div class='fabricFilter'>"+
           "<div  id='filterSeersucker' class='fabricFilterCell col-xs-4'>"+
@@ -1060,7 +1073,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       )
       $('.fabricFilter').on('mouseleave', function(){
         $('.fabricFilter').remove();
-      })
+      });
 
       $('.fabricFilterCell').on('click', function(evt){
         var fabric = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
