@@ -929,7 +929,7 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color:rgba(0, 0, 0, .08);
+  background-color:rgba(0, 0, 0, .7);
   z-index: 5;
 }
 
@@ -1259,6 +1259,15 @@
   cursor:pointer;
 }
 
+.newProductBegin {
+  height: 40px;
+  width: 70%;
+  margin-left: 15%;
+  background-color: #3CB878;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+
 .newProductCenterColumn {
   display: inline-block;
   outline: 2px solid green;
@@ -1317,10 +1326,6 @@
   display: inline-block;
   width: 100%;
   border-radius: 3px;
-}
-
-.newProductDescriptionHolder h2, h4 {
-  margin-left: 10%;
 }
 
 .newProductDetailsHolder {
@@ -1409,8 +1414,13 @@
 
 .newProductModalContent {
   margin-top: 50px;
+  text-align: center;
+}
+
+.newProductModalContent h4{
   width: 80%;
   margin-left: 10%;
+  margin-top: 50px;
   text-align: center;
 }
 
@@ -1420,11 +1430,28 @@
   margin-right: 10px;
 }
 
-.newProductModalDropdown {
+#newProductModalDropdown {
   display: block;
-  width: 80%;
-  font-size: 30px;
-  margin-left: 10%;
+  width: 70%;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 18px;
+  overflow: hidden;
+  margin-top: 15px;
+  margin-left: 15%;
+}
+
+.newProductModalDropdownSeason {
+  display: block;
+  width: 70%;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 18px;
+  overflow: hidden;
+  margin-top: 15px;
+  margin-left: 15%;
 }
 
 .newProductModalHolder {
@@ -1440,9 +1467,8 @@
 }
 
 .newProductName {
-  width: 80%;
-  margin-left: 10%;
   height: 30px;
+  width: 70%;
   font-size: 20px;
   text-align: center;
 }

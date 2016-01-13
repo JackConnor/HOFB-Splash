@@ -106,6 +106,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     ///////////////////////////////////////////////////
     ///////////////build function to collect and submit
     $('.createSubmit').on('click', function(){
+      console.log(window.location.hash.split('/')[5]);
       self.createNewProject = {
         name: $('.carouselNameEntry').val()
         ,timestamp: ""
@@ -118,14 +119,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,fabrics: []
         ,buttons: ""
         ,stitchPattern: ""
-        ,season: ""
+        ,season: window.location.hash.split('/')[5]
       }
       var pickedElems = $('.picked');
       for (var i = 0; i < pickedElems.length; i++) {
-        if(pickedElems[i].id.split('_')[1] == "Season"){
-          self.createNewProject.season = pickedElems[i].id.split('_')[2];
-        }
-        else if(pickedElems[i].id.split('_')[1] == "Color"){
+        if(pickedElems[i].id.split('_')[1] == "Color"){
           self.createNewProject.colors.push(pickedElems[i].id.split('_')[2])
         }
         else if(pickedElems[i].id.split('_')[1] == "Fabric"){
@@ -144,6 +142,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,data: self.createNewProject
       })
       .then(function(newProjectStuff){
+        console.log(newProjectStuff);
       })
     })
 
@@ -595,7 +594,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,vendor: vendor
         ,colors: colors
         ,fabrics: fabrics
-        ,seasons: seasons
+        ,season: window.location.hash.split('/')[5]
         ,stitchPatterns: stitches
         ,buttons: buttons
         ,status: status

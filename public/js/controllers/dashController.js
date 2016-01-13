@@ -306,7 +306,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     setTimeout(loadProjects(loadInitialList, addHoverToCell), 700)
     function newProductPop(){
       $('.bodyview').prepend(
-        '<div class="newProductModal">'+
+        '<div class="invisModal">'+
           "<div class='modalFiller'>"+
           "</div>"+
           "<div class='newProductModalHolder'>"+
@@ -314,18 +314,23 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "<div class='newProductModalContent'>"+
               "<h3>Welcome to your New Product</h3>"+
               "<h4>Here we will be building your new Product. It's important to give us as much detail as possible, so that our buyers can evaluate what they are getting</h4>"+
-              "<br>"+
-              "<h4>The first step is giving your product a name</h4>"+
+              "<h4>Let's start with these small details.</h4>"+
               "<input class='newProductName' placeholder='New Product Name'>"+
-              "<h4>Next, please select the type of clothing you would like to make</h4>"+
-              '<select class="target newProductModalDropdown">'+
+              '<select class="target newProductModalDropdown" id="newProductModalDropdown">'+
                 '<option selected="selected">Please Choose Your Clothing Type</option>'+
                 '<option value="dress">Dress'+ '</option>'+
               '  <option value="pants" disabled>Pants</option>'+
               '  <option value="skirt" disabled>Skirt</option>'+
               '  <option value="shirt" disabled>Shirt</option>'+
               '</select>'+
-              "<input class='newProductBegin' value='Ok, lets start' type='button'>"+
+              '<select class="target newProductModalDropdownSeason">'+
+                '<option selected="selected">Please Choose Your Season</option>'+
+                '<option value="summer">Summer'+ '</option>'+
+              '  <option value="spring">Spring</option>'+
+              '  <option value="fall">Fall</option>'+
+              '  <option value="winter">Winter</option>'+
+              '</select>'+
+              "<div class='newProductBegin'>Ok, lets start</div>"+
             '</div>'+
           '</div>'+
           "<div class='modalFiller'>"+
@@ -336,8 +341,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       })
       $('.newProductBegin').on('click', function(){
         var name = $('.newProductName').val().split(' ').join('_');
+        var season = $('.newProductModalDropdownSeason').val();
+        console.log(season);
         var type = $('.newProductModalDropdown').val();
-        window.location.hash = "#/create/product/"+name+"/"+type;
+        window.location.hash = "#/create/product/"+name+"/"+type+"/"+season;
       });////function to begin product build
       $('.modalFiller').on('click', function(){
         $('.newProductModal').remove();
