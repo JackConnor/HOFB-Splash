@@ -686,7 +686,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         }
         for (var i = 0; i < self.filteredProjects.length; i++) {
           $('.designerDashList').append(
-            "<div class='projectCell col-md-4 col-xs-12'>"+
+            "<div id='"+self.filteredProjects[i]._id+"' class='projectCell col-md-4 col-xs-12'>"+
               "<div class='projectCellInner'>"+
                 "<div class='projectCellImageHolder'>"+
                   "<img class='projectCellImage' src='"+self.filteredProjects[i].images[0]+"'>"+
@@ -701,13 +701,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         }
       //////end if statement for self.filtered
       }
-      $('.designerDashList').append(
-        "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
-          "<div class='projectCellNewInner'>"+
-            "<p>Build a New product</p>"+
-          "</div>"+
-        "</div>"
-      )
       //////add hover events to 'addNew' box
       $('.projectCellImage').on('mouseenter', function(){
         $('.projectCellNewInner').animate({
@@ -1280,6 +1273,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           })
       })
       $('.designerDashCollectionCell').on('click', function(evt){
+        self.currentCollection = $(evt.target)[0].id;
+        console.log(self.currentCollection);
         var collections = $('.designerDashCollectionCell');
         for (var i = 0; i < collections.length; i++) {
           $(collections[i]).css({
@@ -1303,6 +1298,41 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           else {
             $('.designerDashList').html("");
             loadFilteredList('collections', collectionValue, self.allProjects);
+            for (var i = 0; i < $('.projectCell').length; i++) {
+              ///////we're adding the "remove from collection" button, which is unique to this dash view
+              $($('.projectCell')[i]).append(
+                "<div class='deleteFromCollection' id='removeFromCollection"+i+"'>"+
+                  "remove from collection"+
+                "</div>"
+              )
+              ////hover events
+              $('#removeFromCollection'+i).on('mouseenter', function(){
+                $(this).css({
+                  opacity: .8
+                })
+              })
+              $('#removeFromCollection'+i).on('mouseleave', function(){
+                $(this).css({
+                  opacity: .5
+                })
+              })
+              ///////the submit event, which updates that project, and then reloads only the dash view
+              $('#removeFromCollection'+i).on('click', function(evt){
+                var productId = $($(evt.target)[0].parentNode)[0].id;
+                var collectionToRemove = $(evt.target);
+                console.log(collectionToRemove);
+                $http({
+                  method: "POST"
+                  ,url: "/api/product/update"
+                  ,data: {projectId: productId, collections: self.currentCollection}
+                })
+                .then(function(updatedCollection){
+                  console.log(updatedCollection);
+                  window.location.reload();
+                })
+              })
+
+            }
           }
         }
         else if(self.curatedToggleCounter == 'curated'){

@@ -607,6 +607,21 @@
   color: purple;
 }
 
+.deleteFromCollection {
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  opacity: .5;
+  background-color:green;
+  color: white;
+  font-size: 18px;
+  vertical-align: center;
+  padding-top: 5px;
+  margin-top: -110px;
+  margin-left: 2%;
+  z-index: 10;
+}
+
 .deleteSampleRequestAcc {
   width: 30px;
   text-align: center;

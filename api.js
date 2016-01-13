@@ -234,9 +234,19 @@ module.exports = function(app){
       if (req.body.description) {
         product.description = req.body.description;
       }
-      if (req.body.collections) {
+      console.log(typeof(req.body.collections) );
+      /////this is to add collections
+      if (req.body.collections && typeof(req.body.collections) == 'array') {
         for (var i = 0; i < req.body.collections.length; i++) {
           product.collections.push(req.body.collections[i]);
+        }
+      }
+      ////this is to delete a specific collection
+      if(req.body.collections && typeof(req.body.collections) == 'string'){
+        for (var i = 0; i < product.collections.length; i++) {
+          if(product.collections[i] == req.body.collections){
+            product.collections.splice(i, 1);
+          }
         }
       }
       if (req.body.colors) {
