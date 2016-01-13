@@ -500,7 +500,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           $('.bodyview').prepend(
             "<div class='invisModal'>"+
               "<div class='orderSampleModalContainer'>"+
-                "<div class='orderSampleDelete'>X</div>"+
+                "<div class='orderSampleDelete'><i class='fa fa-times'></i></div>"+
                 "<div class='orderSampleModalTextBox'>"+
                   "<h2>Order Free Sample</h2>"+
                   "<p>Before We Send a Sample, We Need Some Information<p>"+

@@ -312,7 +312,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           "<div class='modalFiller'>"+
           "</div>"+
           "<div class='newProductModalHolder'>"+
-            "<div class='newProductModalDelete'>X</div>"+
+            "<div class='newProductModalDelete'><i class='fa fa-times'></i></div>"+
             "<div class='newProductModalContent'>"+
               "<h3>Welcome to your New Product</h3>"+
               "<h4>Here we will be building your new Product. It's important to give us as much detail as possible, so that our buyers can evaluate what they are getting</h4>"+
@@ -439,7 +439,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             $('.bodyview').prepend(
               '<div class="invisModal">'+
                 '<div class="sampleRequestAcceptContainer">'+
-                  "<div class='deleteSampleRequestAcc'>X</div>"+
+                  "<div class='deleteSampleRequestAcc'><i class='fa fa-times'></i></div>"+
                   "<span class='sampleRequestCongrats'><h2>Congratulations</h2></span>"+
                   "<span class='sampleRequestInfo'>Your design has been selected for sampling</span>"+
                   "<span class='sampleRequestChanges'>"+
@@ -602,13 +602,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "</div>"
           )
       }
-      $('.designerDashList').append(
-        "<div class='col-md-4 col-xs-12 projectCell projectCellNew'>"+
-          "<div class='projectCellNewInner'>"+
-            "<p>Build a New product</p>"+
-          "</div>"+
-        "</div>"
-      )
       $('.projectCellNewInner').on('mouseenter', function(){
         $('.projectCellNewInner').animate({
           opacity: .6
@@ -813,7 +806,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer'>"+
-            "<div class='projectCellTrash'>X </div>"+
+            "<div class='projectCellTrash'><i class='fa fa-times'></i></div>"+
             "<div class='projectCellHoverContent'>"+
             "</div>" +
             '<div class="projectCellButton" id="projectCellButtonEdit">EDIT</div>"'+
@@ -1420,7 +1413,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var topLeft = $('.projectCellNew').offset().left;
         var width = $('.projectCellNew').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
         var height = $('.projectCellNew').css('height').split('').slice(0, $('.projectCellNew').css('height').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
-
         /////
         $('.tourProjectCellNewInner').css('top', topOff);
         $('.tourProjectCellNewInner').css('left', topLeft);
