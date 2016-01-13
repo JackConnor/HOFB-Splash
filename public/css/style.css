@@ -941,7 +941,7 @@
 .invisModal {
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: 120%;
   background-color:rgba(0, 0, 0, .7);
   z-index: 5;
 }
@@ -1116,14 +1116,15 @@
 }
 
 .modalPhotoHolder {
-  width: 50%;
+  width: 625px;
   /*margin-left: 25%;*/
   vertical-align: top;
   outline: 2px solid gray;
-  height: 80%;
-  margin-top: 5%;
+  height: 875px;
+  margin-top: 1%;
   z-index: 6;
   display: inline-block;
+  overflow: scroll;
 }
 
 

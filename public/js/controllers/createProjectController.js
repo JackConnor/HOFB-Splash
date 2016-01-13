@@ -664,7 +664,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     //////Begin logic for photo popup modal////////
     $('.expandPhoto').on('click', function(){
       $('.bodyview').prepend(
-        '<div class="photoModal">'+
+        '<div class="invisModal">'+
           "<div class='modalFiller'>"+
           "</div>"+
           "<div class='modalPhotoHolder'>"+
