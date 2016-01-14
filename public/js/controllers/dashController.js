@@ -1179,6 +1179,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               var allPickedModal = $('.collectionProdYes');
               for (var i = 0; i < allPickedModal.length; i++) {
                 var newCollection = $('.collectionModalName').val();
+                console.log(newCollection);
                 var productId = $(allPickedModal[i])[0].classList[1];
                 console.log(productId);
                 $http({
@@ -1201,13 +1202,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                   self.collectionCounter = false;
                 })
               }
-              self.collectionCounter = true;
-              var newColl = unique(self.allCollections);
-              self.allCollections = newColl;
-              console.log(self.allCollections);
-              $('.designerDashCollectionDropdown').html('');
-              loadCollection(newColl);
-              // setTimeout(loadCollection(newColl), 2000)
             })
 
             $('.modalProductImage').on('click', function(evt){

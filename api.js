@@ -214,6 +214,8 @@ module.exports = function(app){
 
   /////update a product
   app.post('/api/product/update', function(req, res){
+    console.log(req.body);
+    console.log(typeof(req.body.collections));
     Product.findOne({"_id":req.body.projectId}, function(err, product){
       if(err){console.log(err)}
       if (req.body.name) {
@@ -231,9 +233,10 @@ module.exports = function(app){
       if (req.body.description) {
         product.description = req.body.description;
       }
-      //////below, if you send through an array, it knows you are adding to collections, and does that automatically. If you send a single, it knows to subtract that from your current collections 
+      //////below, if you send through an array, it knows you are adding to collections, and does that automatically. If you send a single, it knows to subtract that from your current collections
       /////this is to add collections
-      if (req.body.collections && typeof(req.body.collections) == 'array') {
+      if (req.body.collections && (typeof(req.body.collections) == 'array' || typeof(req.body.collections) == 'object')) {
+        console.log('in here');
         for (var i = 0; i < req.body.collections.length; i++) {
           product.collections.push(req.body.collections[i]);
         }
@@ -271,6 +274,7 @@ module.exports = function(app){
         product.purchaserInformation = req.body.purchaserInformation;
       }
       product.save(function(err, product){
+        console.log(product);
       res.json(product)
       });
     })
