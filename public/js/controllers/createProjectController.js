@@ -78,28 +78,20 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             "MetalTrims"+
           "</div>"
         )
-
         for(drawCord in allSwatches.accessories.drawCords){
           console.log('drawcord');
           console.log(drawCord);
           allAccessories.push(drawCord);
           $('.drawCords').after(
-            '<div class="createAccessoryCellHolder col-xs-4">'+
-              "<img src='"+allSwatches.accessories.drawCords[drawCord]+"' class='createAccessory create"+drawCord+"'/>"+
-            "</div>"
+            "<img src='"+allSwatches.accessories.drawCords[drawCord]+"' class='createAccessory create"+drawCord+" createAccessoryCellHolder col-xs-4'/>"
           )
         }
-
         for(metalTrim in allSwatches.accessories.metalTrims){
           console.log('metal cords');
           console.log(metalTrim);
           allAccessories.push(metalTrim);
           $('.metalTrims').after(
-            '<div class="createAccessoryCellHolder col-xs-4">'+
-              '<div>'+
-                "<img src='"+allSwatches.accessories.metalTrims[metalTrim]+"' class='createAccessory create"+metalTrim+"'/>"+
-              "</div>"+
-            "</div>"
+            "<img src='"+allSwatches.accessories.metalTrims[metalTrim]+"' class='createAccessory create"+metalTrim+" createAccessoryCellHolder col-xs-4'/>"
           )
         }
         return allAccessories;
@@ -618,16 +610,17 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         return stitchesArray;
       }
       var stitches = stitchesFunc();
-      var buttonsFunc = function(){
+      var accessoriesFunc = function(){
         var allPicked = $(".picked");
-        var stitchesArray = [];
+        var accessoriesArray = [];
         for (var i = 0; i < allPicked.length; i++) {
-          if(allPicked[i].id.split('_')[1] == 'Button')
-          stitchesArray.push(allPicked[i].id.split('_')[2])
+          console.log(allPicked[i]);
+          if(allPicked[i].id.split('_')[1] == 'Accessory')
+          accessoriesArray.push(allPicked[i].id.split('_')[2])
         }
-        return stitchesArray;
+        return accessoriesArray;
       }
-      var buttons = buttonsFunc();
+      var accessories = accessoriesFunc();
       var statusVar = $(evt.target)[0].className.split('_')[2];
       if(statusVar == 'send'){
         var status = 'submitted to curator'
@@ -640,6 +633,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,userId: userId
         ,timestamp: timestamp
         ,images: []
+        ,accessories: accessories
         ,description: description
         ,productType: productType
         ,tags: tags
@@ -649,7 +643,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,fabrics: fabrics
         ,season: window.location.hash.split('/')[5]
         ,stitchPatterns: stitches
-        ,buttons: buttons
         ,status: status
       }
       console.log(newProjectObject);
@@ -713,9 +706,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     }
 
     function newForm(){
-      // var request = new XMLHttpRequest();
-      // request.open("POST", "/api/pictures");
-      // request.send(formNew);
       $('.appendDiv').append(
         "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
         "</form>"
