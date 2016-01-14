@@ -401,6 +401,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           changeEffect();
           self.miniPhotoCounter = self.tempPhotoCache.length;
           adjustMiniMarginUpload();
+          frontBackSide(self.miniPhotoCounter);
         }
         else{
           alert('better delete some photos if you want to add more')
@@ -882,28 +883,66 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     /////////////////////////////////////////////////////////
     //////////functions to add the front-side-back html to the page as a user uploads photos
-    function frontBackSide(){
-      $(".newProductImageHolder").prepend(
-        '<div class="fontChallenge">'+
-          '<div class="imageBox">'+
-            '<i class="fa fa-file-image-o"></i>'+
-          '</div>'+
-          '<div class="plusBox">'+
-            '<i class="fa fa-plus"></i>'+
-          '</div>'+
-          "<div class='sideText'>Image Upload</div>"+
-        "</div>"+
-        "<div class='sideBanner'>"+
-          "<div class='bannerTop'>"+
-            "Facing Forward"+
-          "</div>"+
-          "<div class='bannerBottom'>"+
-            "1 of 4 Required Images"+
-          "</div>"+
-        '</div>'
-      )
+    function frontBackSide(counter){
+      ////make sure there is no previous html from this guide before we precede
+      $('.fontChallenge').remove();
+      $('.sideBanner').remove();
+      /////html we will be adding for each of or four first photos;
+      function addHtmlGuide(view, imageCount){
+        var htmlToPrepend =
+                '<div class="fontChallenge">'+
+                  '<div class="imageBox">'+
+                    '<i class="fa fa-file-image-o"></i>'+
+                  '</div>'+
+                  '<div class="plusBox">'+
+                    '<i class="fa fa-plus"></i>'+
+                  '</div>'+
+                  "<div class='sideText'>Image Upload</div>"+
+                "</div>"+
+                "<div class='sideBanner'>"+
+                  "<div class='bannerTop'>"+
+                    "Facing "+ view +
+                  "</div>"+
+                  "<div class='bannerBottom'>"+
+                    imageCount+" of 4 Required Images"+
+                  "</div>"+
+                '</div>'
+        ////now we run the function
+        $(".newProductImageHolder").prepend(htmlToPrepend);
+      }
+
+      console.log('in the guide function');
+      console.log(counter);
+      if(counter == 0){
+        $('.newProductCurrentImage').attr('src', '');
+        var view = "Forward";
+        var imageCount = self.miniPhotoCounter + 1;
+        addHtmlGuide(view, imageCount);
+      }
+      else if(counter == 1){
+        $('.newProductCurrentImage').attr('src', '');
+        var view = "Left Side";
+        var imageCount = self.miniPhotoCounter + 1;
+        addHtmlGuide(view, imageCount);
+      }
+      else if(counter == 2){
+        $('.newProductCurrentImage').attr('src', '');
+        var view = "Right Side";
+        var imageCount = self.miniPhotoCounter + 1;
+        addHtmlGuide(view, imageCount);
+
+      }
+      else if(counter == 3){
+        $('.newProductCurrentImage').attr('src', '');
+        var view = "Back";
+        var imageCount = self.miniPhotoCounter + 1;
+        addHtmlGuide(view, imageCount);
+      }
+      else {
+        return null;
+      }
     }
-    frontBackSide();
+    frontBackSide(self.miniPhotoCounter);
 
     /////////////////////////////////////////////////////////
     //////////end functions to add the front-side-back html
