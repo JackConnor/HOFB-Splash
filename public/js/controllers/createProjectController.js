@@ -951,7 +951,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         $('#i_file').css({
           height: ""
           ,width: '50px'
-          ,marginLeft: '-33px'
+          ,marginLeft: '-38px'
           ,marginTop: 0
         })
         return null;

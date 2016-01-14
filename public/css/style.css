@@ -982,7 +982,7 @@
   height: 40px;
   text-align: center;
   padding-top: 10px;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .fontChallenge {
@@ -1023,7 +1023,7 @@
   display: inline-block;
   cursor:pointer;
   width: 50px;
-  margin-left: -33px;
+  margin-left: -38px;
   opacity: 0;
 }
 
@@ -1416,9 +1416,15 @@
 
 
 .newProductCurrentImage {
-  width: 100%;
-  height: 100%;
+  width: 500px;
+  height: 700px;
   border-radius: 3px;
+  -ms-background-position-x: center;
+  -ms-background-position-y: bottom;
+  background-position: center bottom;
+  /* scale bg image proportionately */
+  background-size: cover;
+  /*position: absolute;*/
 }
 
 .newProductDeleteMini {
@@ -1471,6 +1477,8 @@
 }
 
 .newProductImageFrame {
+  overflow: hidden;
+  border-right: 1px solid silver;
   width: 100%;
   height: 100%;
 }
