@@ -417,6 +417,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
       $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
       self.miniPhotoCounter++;
+      frontBackSide(self.miniPhotoCounter);
       highlightMini();
     }
     //////function to delete the photo inside of a mini photo on click
@@ -449,6 +450,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         }
       }
       highlightMini();
+      ////add guide, if it's less than 4
+      frontBackSide(self.miniPhotoCounter);
       $('.newProductMiniImagesHolder').css({
         marginLeft: 0+"px"
       })
@@ -909,6 +912,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
                 '</div>'
         ////now we run the function
         $(".newProductImageHolder").prepend(htmlToPrepend);
+        $('#i_file').css({
+          height: "120px"
+          ,width: '89px'
+          ,marginLeft: '-45%'
+          ,marginTop: 0
+        })
       }
 
       console.log('in the guide function');
@@ -939,6 +948,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         addHtmlGuide(view, imageCount);
       }
       else {
+        $('#i_file').css({
+          height: ""
+          ,width: '50px'
+          ,marginLeft: '-33px'
+          ,marginTop: 0
+        })
         return null;
       }
     }
