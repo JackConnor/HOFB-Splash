@@ -12,7 +12,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     // checkPw.checkPassword();
     /////////////////////////////////////////////////////
     /////////onload event to add initial list of repeated projects
-
+    self.addMoreFirstTimeThroughCheck = true;
     var allSwatches = allSwatches;
     function loadProjects(callback, arg){
       ///////decode user to pull data
@@ -1141,102 +1141,99 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "</div>"
           )
         }
-        $('.designerDashCollectionDropdown').after(
-          "<div class='designerDashCollectionAddMore'>"+
-            "<span class='glyphicon glyphicon-plus'>"+
-              "<p class='designerDashCollectionAddText'>add collection</p>"+
-            "</span>"+
-          "</div>"
-        )
-        $('.designerDashCollectionAddMore').on('click', function(){
-          $('.bodyview').append(
-            "<div class='invisModal'>"+
-              "<div class='collectionModalContainer'>"+
-                "<input class='collectionModalName' placeholder='Enter New Collection Name'>"+
-                "<p> Please Pick a Product to Add to Your Collection, to Get Started</p>"+
-                "<div class='collectionModalPickContainer'>"+
-                "</div>"+
-                "<div class='submitModal'>"+
-                  "Add Collection"+
-                "</div>"+
-              "</div>"+
+        if (self.addMoreFirstTimeThroughCheck) {
+          $('.designerDashCollectionDropdown').after(
+            "<div class='designerDashCollectionAddMore'>"+
+              "<span class='glyphicon glyphicon-plus'>"+
+                "<p class='designerDashCollectionAddText'>add collection</p>"+
+              "</span>"+
             "</div>"
           )
-
-          //////now we add the projects to the modal
-          console.log(self.allProjects);
-          var collectionProductCounters = [];
-          for (var i = 0; i < self.allProjects.length; i++) {
-            collectionProductCounters[i] = true;
-            $('.collectionModalPickContainer').append(
-              "<div class='collectionModalProductCell'>"+
-                "<img class='modalProductImage "+self.allProjects[i]._id+"' id='modalProduct"+i+"' src='"+self.allProjects[i].images[0]+"'>"+
+          $('.designerDashCollectionAddMore').on('click', function(){
+            $('.bodyview').append(
+              "<div class='invisModal'>"+
+                "<div class='collectionModalContainer'>"+
+                  "<input class='collectionModalName' placeholder='Enter New Collection Name'>"+
+                  "<p> Please Pick a Product to Add to Your Collection, to Get Started</p>"+
+                  "<div class='collectionModalPickContainer'>"+
+                  "</div>"+
+                  "<div class='submitModal'>"+
+                    "Add Collection"+
+                  "</div>"+
+                "</div>"+
               "</div>"
             )
-          }
-          $('.submitModal').on('click', function(evt){
-            //////add post request for the modal
-            var allPickedModal = $('.collectionProdYes');
-            for (var i = 0; i < allPickedModal.length; i++) {
-              var newCollection = $('.collectionModalName').val();
-              var productId = $(allPickedModal[i])[0].classList[1];
-              console.log(productId);
-              $http({
-                method: "POST"
-                ,url: "/api/product/update"
-                ,data: {projectId: productId, collections: [newCollection]}
-              })
-              .then(function(updatedProduct){
-                console.log(updatedProduct);
-                if(updatedProduct){
-                  // var newCollectionHtml =
-                  // '<div class="designerDashCollectionCell" id="'+updatedProduct.data.collections[updatedProduct.data.collections.length - 1]+'">'+
-                  //   updatedProduct.data.collections[updatedProduct.data.collections.length - 1]+
-                  // "</div>"
-                  // console.log(newCollectionHtml);
-                  // $(newCollectionHtml).insertBefore('.designerDashCollectionAddMore');
-                  self.allCollections.push(newCollection);
-                  $('.invisModal').remove();
-                }
-                self.collectionCounter = true;
-                var newColl = unique(self.allCollections);
-                self.allCollections = newColl;
-                console.log(self.allCollections);
-                $('.designerDashCollectionDropdown').html('');
-                loadCollection(newColl);
-                self.collectionCounter = false;
-              })
+            //////now we add the projects to the modal
+            console.log(self.allProjects);
+            var collectionProductCounters = [];
+            for (var i = 0; i < self.allProjects.length; i++) {
+              collectionProductCounters[i] = true;
+              $('.collectionModalPickContainer').append(
+                "<div class='collectionModalProductCell'>"+
+                  "<img class='modalProductImage "+self.allProjects[i]._id+"' id='modalProduct"+i+"' src='"+self.allProjects[i].images[0]+"'>"+
+                "</div>"
+              )
             }
-            self.collectionCounter = true;
-            var newColl = unique(self.allCollections);
-            self.allCollections = newColl;
-            console.log(self.allCollections);
-            $('.designerDashCollectionDropdown').html('');
-            loadCollection(newColl);
-            // setTimeout(loadCollection(newColl), 2000)
-          })
+            $('.submitModal').on('click', function(evt){
+              //////add post request for the modal
+              var allPickedModal = $('.collectionProdYes');
+              for (var i = 0; i < allPickedModal.length; i++) {
+                var newCollection = $('.collectionModalName').val();
+                var productId = $(allPickedModal[i])[0].classList[1];
+                console.log(productId);
+                $http({
+                  method: "POST"
+                  ,url: "/api/product/update"
+                  ,data: {projectId: productId, collections: [newCollection]}
+                })
+                .then(function(updatedProduct){
+                  console.log(updatedProduct);
+                  if(updatedProduct){
+                    self.allCollections.push(newCollection);
+                    $('.invisModal').remove();
+                  }
+                  self.collectionCounter = true;
+                  var newColl = unique(self.allCollections);
+                  self.allCollections = newColl;
+                  console.log(self.allCollections);
+                  $('.designerDashCollectionDropdown').html('');
+                  loadCollection(newColl);
+                  self.collectionCounter = false;
+                })
+              }
+              self.collectionCounter = true;
+              var newColl = unique(self.allCollections);
+              self.allCollections = newColl;
+              console.log(self.allCollections);
+              $('.designerDashCollectionDropdown').html('');
+              loadCollection(newColl);
+              // setTimeout(loadCollection(newColl), 2000)
+            })
 
-          $('.modalProductImage').on('click', function(evt){
-            console.log(collectionProductCounters);
-            var prodCount = $(evt.target).attr('id').split('t')[1];
-            console.log(prodCount);
-            if(collectionProductCounters[prodCount]){
-              $(evt.target).css({
-                border: "5px solid green"
-              })
-              $(evt.target).addClass('collectionProdYes')
-              collectionProductCounters[prodCount] = false;
-            }
-            else {
-              $(evt.target).css({
-                border: "none"
-              })
-              $(evt.target).removeClass('collectionProdYes')
-              collectionProductCounters[prodCount] = true;
-            }
-            console.log(collectionProductCounters);
+            $('.modalProductImage').on('click', function(evt){
+              console.log(collectionProductCounters);
+              var prodCount = $(evt.target).attr('id').split('t')[1];
+              console.log(prodCount);
+              if(collectionProductCounters[prodCount]){
+                $(evt.target).css({
+                  border: "5px solid green"
+                })
+                $(evt.target).addClass('collectionProdYes')
+                collectionProductCounters[prodCount] = false;
+              }
+              else {
+                $(evt.target).css({
+                  border: "none"
+                })
+                $(evt.target).removeClass('collectionProdYes')
+                collectionProductCounters[prodCount] = true;
+              }
+              console.log(collectionProductCounters);
+            })
           })
-        })
+          self.addMoreFirstTimeThroughCheck = false;
+        }
+
         self.collectionCounter = false;///so that we only load collections once
       }
 
