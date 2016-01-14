@@ -393,7 +393,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     function changeEffect(){
       $('#i_file').change( function(event) {
         if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 8){
-          frontendPhotoDisplay();
+          //////so now we add the modal here, where they have to select their area before they can move on;
+          frontendPhotoDisplay(event);
           $('#i_file').remove();
           $('.fileUploadWrapper').append(
             '<input type="file" id="i_file" name="files">'
@@ -410,15 +411,29 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     }
     changeEffect();
 
-    function frontendPhotoDisplay(){
+    function frontendPhotoDisplay(event){
       var tmppath = URL.createObjectURL(event.target.files[0]);//new temp url
-      $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
-      self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
-      self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-      $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-      self.miniPhotoCounter++;
-      frontBackSide(self.miniPhotoCounter);
-      highlightMini();
+      /////let's check for blob ratio, then just nota ccept and ask for a new on eif it's not a proper ratio
+      var blob = new Image();
+      blob.src = tmppath;
+      blob.onload = function(){
+        console.log(this.width);
+        console.log(this.height);
+        var ratio = (this.width/this.height);
+        console.log(ratio);
+        if(ratio > .7 && ratio <= .725){
+          $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
+          self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
+          self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
+          $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
+          self.miniPhotoCounter++;
+          frontBackSide(self.miniPhotoCounter);
+          highlightMini();
+        }
+        else {
+          alert('please choose a photo that is in a 5/7 ratio, please');
+        }
+      }
     }
     //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
