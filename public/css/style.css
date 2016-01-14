@@ -1462,8 +1462,8 @@
 
 
 .newProductCurrentImage {
-  width: 500px;
-  height: 700px;
+  width: 550px;
+  height: 750px;
   border-radius: 3px;
   -ms-background-position-x: center;
   -ms-background-position-y: bottom;
@@ -1534,7 +1534,7 @@
 
 
 .newProductImageHolder {
-  width: 90%;
+  width: 95%;
   /*margin-left: 5%;*/
   margin-top: 15px;
   height: 700px;
@@ -2491,7 +2491,7 @@
 .sideBanner {
   position: absolute;
   margin-top: 240px;
-  width: 90%;
+  width: 95%;
   height: 150px;
   background-color: white;
   border-right: 1px solid silver;
