@@ -976,6 +976,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     /////////////////////////////////////////////////////////
     //////////end functions to add the front-side-back html
+    
   /////end createProject controller
   ////////////////////////
   ////////////////////////

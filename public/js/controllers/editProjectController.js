@@ -9,7 +9,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     //////global variables we'll be using for moving the carousel
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
-    self.miniPhotoCounter;
+    self.miniPhotoCounter = 0;
     self.tempPhotoCache = [];
     self.tempPhotoHTMLCache = [];
     /////end global variables
@@ -122,6 +122,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           self.tempPhotoCache.push(productObject.images[i]);
           self.tempPhotoHTMLCache.push($('#newProductMiniImage'+i));
         }
+        console.log(self.miniPhotoCounter);
+        frontBackSide(self.miniPhotoCounter);
       }
       addImgsFunc();
       //////functions for addding swatches to the html once its' loaded
@@ -544,6 +546,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         }
         var source = sourceArray[0];
         self.miniPhotoCounter = sourceNum[0];
+        frontBackSide(self.miniPhotoCounter);
         highlightMini();
       }
       else {
@@ -570,6 +573,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     console.log(self.tempPhotoHTMLCache);
     $('.newProductCurrentImage').attr('src', self.tempPhotoCache[self.tempPhotoCache.length-1]);
     self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
+    frontBackSide(self.miniPhotoCounter);
     ///////now we need to reorder all of the remaining mini photos so that there are no spaces
     var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
     for(var i = 0; i < allMiniPhotosLength; i++) {
@@ -952,6 +956,83 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           self.imageHolderMargin = -maxWidth;
         }
       }
+
+      /////////////////////////////////////////////////////////
+      //////////functions to add the front-side-back html to the page as a user uploads photos
+      function frontBackSide(counter){
+        ////make sure there is no previous html from this guide before we precede
+        $('.fontChallenge').remove();
+        $('.sideBanner').remove();
+        /////html we will be adding for each of or four first photos;
+        function addHtmlGuide(view, imageCount){
+          var htmlToPrepend =
+                  '<div class="fontChallenge">'+
+                    '<div class="imageBox">'+
+                      '<i class="fa fa-file-image-o"></i>'+
+                    '</div>'+
+                    '<div class="plusBox">'+
+                      '<i class="fa fa-plus"></i>'+
+                    '</div>'+
+                    "<div class='sideText'>Image Upload</div>"+
+                  "</div>"+
+                  "<div class='sideBanner'>"+
+                    "<div class='bannerTop'>"+
+                      "Facing "+ view +
+                    "</div>"+
+                    "<div class='bannerBottom'>"+
+                      imageCount+" of 4 Required Images"+
+                    "</div>"+
+                  '</div>'
+          ////now we run the function
+          $(".newProductImageHolder").prepend(htmlToPrepend);
+          $('#i_file').css({
+            height: "120px"
+            ,width: '89px'
+            ,marginLeft: '-45%'
+            ,marginTop: 0
+          })
+        }
+
+        console.log('in the guide function');
+        console.log(counter);
+        if(counter == 0){
+          $('.newProductCurrentImage').attr('src', '');
+          var view = "Forward";
+          var imageCount = self.miniPhotoCounter + 1;
+          addHtmlGuide(view, imageCount);
+        }
+        else if(counter == 1){
+          $('.newProductCurrentImage').attr('src', '');
+          var view = "Left Side";
+          var imageCount = self.miniPhotoCounter + 1;
+          addHtmlGuide(view, imageCount);
+        }
+        else if(counter == 2){
+          $('.newProductCurrentImage').attr('src', '');
+          var view = "Right Side";
+          var imageCount = self.miniPhotoCounter + 1;
+          addHtmlGuide(view, imageCount);
+
+        }
+        else if(counter == 3){
+          $('.newProductCurrentImage').attr('src', '');
+          var view = "Back";
+          var imageCount = self.miniPhotoCounter + 1;
+          addHtmlGuide(view, imageCount);
+        }
+        else {
+          $('#i_file').css({
+            height: ""
+            ,width: '50px'
+            ,marginLeft: '-38px'
+            ,marginTop: 0
+          })
+          return null;
+        }
+      }
+
+      /////////////////////////////////////////////////////////
+      //////////end functions to add the front-side-back html
 
   ////////////////////////////////
   ///////////////////////////////
