@@ -733,11 +733,37 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     }
     console.log(newProjectObject);
     editProjectToDb(newProjectObject, function(){
-      window.location.hash = "#/designer/dashboard";
+      // window.location.hash = "#/designer/dashboard";
     })
   }
   $('.new_product_send').on('click', editProject);
   $('.new_product_save').on('click', editProject);
+  ////hover states
+  $('.new_product_send').on('mouseenter', function(){
+    $('.new_product_send').css({
+      backgroundColor: "#169AA9"
+      ,color: "white"
+    })
+  })
+  $('.new_product_send').on('mouseleave', function(){
+    $('.new_product_send').css({
+      backgroundColor: ""
+      ,color: "#169AA9"
+    })
+  })
+
+  $('.new_product_save').on('mouseenter', function(){
+    $('.new_product_save').css({
+      backgroundColor: "#169AA9"
+      ,color: "white"
+    })
+  })
+  $('.new_product_save').on('mouseleave', function(){
+    $('.new_product_save').css({
+      backgroundColor: ""
+      ,color: "#169AA9"
+    })
+  })
 
   /////function to update a project (will go in a factory)
   function editProjectToDb(projectArray, callback){

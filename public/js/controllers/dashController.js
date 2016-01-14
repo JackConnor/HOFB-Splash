@@ -215,43 +215,17 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       ///////////////////////////////////////////////////////
       ///////////////begin logic for the photo popup windows/
       function setPopup(){
-        $('.projectCellMiniImage').on('click', function(evt){
-          console.log('waaat');
-          console.log($(evt.target));
-          var source = $(evt.target).attr('src');
-          var nextTarget = $($($($($(evt.target)[0].parentNode)[0].parentNode)[0].firstElementChild)[0])[0].firstChild;
-          console.log(source);
-          console.log(nextTarget);
-          $(nextTarget).attr('src', source);
-        //   $('.invisModal').remove();
-        //
-        //   var marTop = $(evt)[0].pageY;
-        //   var marLeft = $(evt)[0].pageX;
-        //   $('.bodyview').append(
-        //     "<div class='invisModal'>"+
-        //       "<div class='photoPopup'>"+
-        //         "<img class='photoPopupImage' src='"+source+"'>"+
-        //       "</div>"+
-        //     "</div>"
-        //   )
-        //   $(".photoPopup").css({
-        //     marginTop: marTop - 450
-        //     ,marginLeft: marLeft - 75
-        //   })
-        //   $('.invisModal').height($(document).height())
-        //   $('.invisModal').on('click', function(evt){
-        //     var thisClass = $(evt.target)[0].classList[0];
-        //     if(thisClass == 'photoPopup' || thisClass == 'photoPopupImage'){
-        //     }
-        //     else {
-        //       $('.invisModal').remove();
-        //     }
-        //   })
-        })
+        // $('.projectCellMiniImage').on('click', function(evt){
+        //   console.log('waaat');
+        //   console.log($(evt.target));
+        //   var source = $(evt.target).attr('src');
+        //   var nextTarget = $($($($($(evt.target)[0].parentNode)[0].parentNode)[0].firstElementChild)[0])[0].firstChild;
+        //   console.log(source);
+        //   console.log(nextTarget);
+        //   $(nextTarget).attr('src', source);
+        // })
       }
       setPopup();
-      setTimeout(setPopup(), 1000)
-      setTimeout(setPopup(), 3000)
       /////////////end logic for the photo popup windows/////
       ///////////////////////////////////////////////////////
       $('.designerDashList').append(
@@ -879,7 +853,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         )
         $('.projectCellButtonView').on('click', function(evt){
           // var product = $(evt.target);
-          var productId = $($(parentContainer)[0].parentNode)[0].id;
+          var productId = $($($($($(parentContainer)[0].parentNode)[0].children[0])[0].children[1])[0].children[0])[0].id
+          console.log(productId);
 
           window.location.hash = "#/view/product/"+productId;
           window.location.reload();

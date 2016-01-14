@@ -84,6 +84,7 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     getProduct(window.location.hash.split('/')[3])
       .then(function(productData){
         self.productData = productData.data;
+        console.log(self.productData);
         populatePage();
       });
     function populatePage(){
@@ -131,16 +132,6 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
         return fabricArr;
       }
       self.allFabrics = fabricArrayFunc();
-      //////get seasons
-      var seasonArrayFunc = function(){
-        var seasonArr = [];
-        for (var i = 0; i < self.productData.seasons.length; i++) {
-          var season = self.productData.seasons[i].toLowerCase();
-          seasonArr.push(allSwatches.seasons[season]);
-        }
-        return seasonArr;
-      }
-      self.allSeasons = seasonArrayFunc();
     }
 
     function popImages(){
@@ -199,6 +190,7 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     //////////////////////////////////////////
 
     function loadThumbs(){
+      console.log(self.allImages);
       for (var i = 0; i < self.allThumbs.length; i++) {
         $('.viewProductMiniHolder').append(
           '<div class="viewMiniCell" >'+
@@ -250,7 +242,7 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     }
     /////end of navbar dropdown logic/////////////
     ////////////////////////////////////////////////
-    
+
   /////end viewProduct controller
   ////////////////////////
   ////////////////////////
