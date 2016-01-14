@@ -340,7 +340,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       })
       for (var i = 1; i < 8; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
@@ -350,12 +350,12 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         color: 'black'
       })
       $('.circle0').css({
-        backgroundColor: "black",
+        backgroundColor: "#232730",
         color: 'white'
       })
       for (var i = 2; i < 8; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
@@ -366,13 +366,13 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       })
       for (var i = 3; i < 8; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
       for (var i = 0; i < 2; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
@@ -383,13 +383,13 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       })
       for (var i = 4; i < 8; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
       for (var i = 0; i < 3; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
@@ -400,20 +400,20 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       })
       for (var i = 0; i < 4; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
       for (var i = 5; i < 8; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
     } else if(carouselCounter == 5){
       $('.circle5').css({
         backgroundColor: 'white',
-        color: 'black'
+        color: '#232730'
       })
       for (var i = 0; i < 5; i++) {
         $('.circle'+i).css({
@@ -423,7 +423,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       }
       for (var i = 6; i < 8; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
@@ -434,20 +434,20 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       })
       for (var i = 0; i < 6; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
       for (var i = 7; i < 8; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }
     } else if(carouselCounter == 7){
       for (var i = 0; i < 7; i++) {
         $('.circle'+i).css({
-          backgroundColor: "black",
+          backgroundColor: "#232730",
           color: 'white'
         })
       }

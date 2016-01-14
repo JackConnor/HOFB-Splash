@@ -1535,7 +1535,7 @@
 
 .newProductImageHolder {
   width: 90%;
-  margin-left: 5%;
+  /*margin-left: 5%;*/
   margin-top: 15px;
   height: 700px;
   background-color: 	#EBEBEB;
@@ -1697,14 +1697,14 @@
 .newProductSwatchTabs {
   height: 45px;
   width: 100%;
-  background-color: black;
+  background-color: #232730;
 }
 
 .newProductTab {
   height: 30px;
   margin-top: 15px;
   color: white;
-  background-color: black;
+  background-color: #232730;
   font-size: 16px;
   text-align: center;
   border-top-left-radius:8px;
