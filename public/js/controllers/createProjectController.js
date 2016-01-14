@@ -879,6 +879,34 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         outline: "none"
       })
     })
+
+    /////////////////////////////////////////////////////////
+    //////////functions to add the front-side-back html to the page as a user uploads photos
+    function frontBackSide(){
+      $(".newProductImageHolder").prepend(
+        '<div class="fontChallenge">'+
+          '<div class="imageBox">'+
+            '<i class="fa fa-file-image-o"></i>'+
+          '</div>'+
+          '<div class="plusBox">'+
+            '<i class="fa fa-plus"></i>'+
+          '</div>'+
+          "<div class='sideText'>Image Upload</div>"+
+        "</div>"+
+        "<div class='sideBanner'>"+
+          "<div class='bannerTop'>"+
+            "Facing Forward"+
+          "</div>"+
+          "<div class='bannerBottom'>"+
+            "1 of 4 Required Images"+
+          "</div>"+
+        '</div>'
+      )
+    }
+    frontBackSide();
+
+    /////////////////////////////////////////////////////////
+    //////////end functions to add the front-side-back html
   /////end createProject controller
   ////////////////////////
   ////////////////////////
