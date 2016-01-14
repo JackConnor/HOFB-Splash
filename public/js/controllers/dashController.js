@@ -293,6 +293,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       )
       $('.dropList').on('change', function(){
       })
+      $('.newProductModalDelete').on('click', function(){
+        $('.invisModal').remove();
+      })
       $('.newProductBegin').on('click', function(){
         var name = $('.newProductName').val().split(' ').join('_');
         var season = $('.newProductModalDropdownSeason').val();

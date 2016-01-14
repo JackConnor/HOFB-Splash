@@ -109,7 +109,7 @@ module.exports = function(app){
         user.email = req.body.email
       }
       if(req.body.password){
-        user.password = req.body.password
+        user.passwordDigest = user.generateHash( req.body.password );
       }
       if(req.body.location){
         user.location = req.body.location
@@ -591,6 +591,9 @@ module.exports = function(app){
 
   ///////////Password verification email /////////////////
   app.post('/api/email/password', function(req, res){
+    console.log('yooo');
+    console.log(req.body);
+    var resetLink = req.body.resetLink;
     mandrill_client.messages.send({
       message: {
         from_email: "support@hofb.com"
@@ -602,6 +605,7 @@ module.exports = function(app){
           "Click on the link within this email to update your passsword</h2>"+
           "<h2 style='color:#293d3d'>HOFB</h2>"+
           "<h3 style='color:#293d3d'>Los Angeles</h3>"+
+            resetLink+
         "</div>"
         ,subject: "HOFB Password Verification"
         ,to:[{
@@ -735,6 +739,15 @@ module.exports = function(app){
     if(req.body.password == "SledFive"){
       res.json(true);
     }
+  })
+
+  //////////////api route to check verify a password to a new Password
+  app.post('/api/check/password', function(req, res){
+    var oldPassword = req.body.password;
+    User.findOne({"_id": req.body.userId}, function(err, user){
+      var bool = user.validPassword(oldPassword);
+      res.json(bool)
+    })
   })
 
   /////////////////////////////////////////////////

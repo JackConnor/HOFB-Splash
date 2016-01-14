@@ -100,6 +100,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controller: 'messageCtrl'
       ,controllerAs: 'message'
     })
+
+    .when('/password/reset/:encrypted_id', {
+      templateUrl: 'templates/_changePassword.html'
+      ,controller: 'userProfileCtrl'
+      ,controllerAs: 'userProfile'
+    })
     /////////default to home
     .otherwise('/');
 

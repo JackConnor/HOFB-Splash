@@ -10,12 +10,13 @@ angular.module('userProfileController', ['singleuserfactory'])
     var userProfileHashData = window.location.hash.split('/')[2];////grab the id of the data in order to prepopulate the page
 
 //test userId with all data, except image - 568c3b81be426e0ad0bd5248
-    singleUser(userProfileHashData)
-    .then(function (user){
-      console.log(user);
-      self.user = user
+    if(window.location.hash.split('/')[1] == "profile"){
+      singleUser(userProfileHashData)
+      .then(function (user){
+        console.log(user);
+        self.user = user
+      })
     }
-  )
 
   // User profile update button wiring
   $(".userProfileSubmitBtn").on('click', function(){
@@ -26,8 +27,16 @@ angular.module('userProfileController', ['singleuserfactory'])
 // Update user password button wiring
   $(".userProfileChangePw").on('click', function(){
     console.log('Update PW button is working');
-    updateUserProfilePassword();
-    });
+    var resetLink = "hofb.com/#/reset/password/"+window.location.hash.split('/')[2];
+    $http({
+      method: "POST"
+      ,url: "/api/email/password"
+      ,data: {resetLink: resetLink, email: self.user.data.email}
+    })
+    .then(function(){
+      window.location.hash = "#/"
+    })
+  });
 // user profile photo upload
 $(".userProfileImageFileUpload").on('change', function (){
   console.log('profile upload on change is working');
@@ -35,13 +44,13 @@ $(".userProfileImageFileUpload").on('change', function (){
   });
 
   /////collect email for password verification email
-  $('.userProfileChangePw').on('click', function(){
-    var emailAddress = $('#userProfileEmail').val();
-    console.log(emailAddress);
-    var date = new Date();
-    console.log(date);
-    postPasswordVericationEmail({email: emailAddress, date: date});
-  })
+  // $('.userProfileChangePw').on('click', function(){
+  //   var emailAddress = $('#userProfileEmail').val();
+  //   console.log(emailAddress);
+  //   var date = new Date();
+  //   console.log(date);
+  //   postPasswordVericationEmail({email: emailAddress, date: date});
+  // })
 
 
     function updateUserProfile() {
@@ -88,37 +97,55 @@ $(".userProfileImageFileUpload").on('change', function (){
     }
 
 function updateUserProfilePassword(){
+    var passOld = $('.inputOldPassword').val();
     var pass1 = $('.inputPassword').val();
     var pass2 = $('.inputPasswordConfirm').val();
+    var userId =  window.location.hash.split('/')[3];
+    console.log(userId);
+    console.log(passOld);
     console.log(pass1);
     console.log(pass2);
-    if(pass1 == pass2){
-      var checkedPassword = checkPassword(pass1);
-      if (checkedPassword){
-        var pwHash = pass1
-        var userProfileId = $(userProfileHashData);
-        var userPwData ={
-          passwordDigest:pwHash,
-          userId: userProfileId.selector,
+    $http({
+      method: "POST"
+      ,url: "/api/check/password"
+      ,data: {userId:userId, password: passOld}
+    })
+    .then(function(result){
+      console.log(result);
+      ////////////first check - is the original password correct?
+      if(result.data == true){
+        //////second check - do the two new passwords match?
+        if(pass1 == pass2){
+          console.log('worked');
+          var checkedPassword = checkPassword(pass1);
+          if (checkedPassword){
+            var pwHash = pass1
+            var userProfileId = window.location.hash.split('/')[3];
+            console.log(userProfileId);
+            var userPwData ={
+              password:pwHash,
+              userId: userProfileId
+            }
+            console.log(userPwData);
+            self.test=(userPwData);
+            $http({
+              method: "POST"
+              ,url: "/api/users/update"
+              ,data: userPwData
+            })
+            .then(function(data){
+              console.log(data);
+            })
+          }
+          else{
+            alert('Minimum of 6 characters - No special characters in password, please re-enter your password and try again.')
+          }
         }
-        console.log(userPwData);
-        self.test=(userPwData);
-        $http({
-          method: "POST"
-          ,url: "/api/users/update"
-          ,data: userPwData
-        })
-        .then(function(data){
-          console.log(data);
-        })
+        else{
+          alert('Please make sure your passwords match');
+        }
       }
-      else{
-        alert('Minimum of 6 characters - No special characters in password, please re-enter your password and try again.')
-      }
-    }
-    else{
-      alert('Please make sure your passwords match');
-    }
+    })
     if (status = '200'){
       alert('Your password is now updated')
     }
