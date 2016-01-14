@@ -34,6 +34,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     ////////set our global variables for our our html to create the swatches from
 /// correct code
     function setSwatches(){
+      ////////loads all the fabric swatches
       var fabricsfunc = function(){
         var allFabrics = [];
         for(fabric in allSwatches.fabrics){
@@ -47,6 +48,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         return allFabrics;
       }
       fabricsfunc();
+      //////loads all the color swatches
       var colorsfunc = function(){
         var allcolors = [];
         for(color in allSwatches.colors){
@@ -57,7 +59,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
               "</div>"+
             "</div>"
           )
-          console.log(allSwatches.colors[color]);
           $('.create'+color).css({
             backgroundColor: allSwatches.colors[color]
             ,outline: "1px solid #E0E0E0"
@@ -66,6 +67,44 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         return allcolors;
       }
       colorsfunc();
+      ///////accessories function
+      var accessoriesfunc = function(){
+        var allAccessories = [];
+        $('.createAccessoryContainer').append(
+          '<div class="createAccessoryLabel drawCords col-xs-12">'+
+            "Draw Cords"+
+          "</div>"+
+          '<div class="createAccessoryLabel metalTrims col-xs-12">'+
+            "MetalTrims"+
+          "</div>"
+        )
+
+        for(drawCord in allSwatches.accessories.drawCords){
+          console.log('drawcord');
+          console.log(drawCord);
+          allAccessories.push(drawCord);
+          $('.drawCords').after(
+            '<div class="createAccessoryCellHolder col-xs-4">'+
+              "<img src='"+allSwatches.accessories.drawCords[drawCord]+"' class='createAccessory create"+drawCord+"'/>"+
+            "</div>"
+          )
+        }
+
+        for(metalTrim in allSwatches.accessories.metalTrims){
+          console.log('metal cords');
+          console.log(metalTrim);
+          allAccessories.push(metalTrim);
+          $('.metalTrims').after(
+            '<div class="createAccessoryCellHolder col-xs-4">'+
+              '<div>'+
+                "<img src='"+allSwatches.accessories.metalTrims[metalTrim]+"' class='createAccessory create"+metalTrim+"'/>"+
+              "</div>"+
+            "</div>"
+          )
+        }
+        return allAccessories;
+      }
+      accessoriesfunc();
     }
     setSwatches();
 
@@ -73,8 +112,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////////Effects for carousel//////////
     ////click effect for seasonsplash
     function swatchLogic(swatchType){
+      console.log(swatchType);
       ///////note: swatchType needs to be added as a capital, i.e. "Season"
       $('.create'+swatchType).on('click', function(evt){
+        console.log('yoo');
+        console.log($(evt.target));
         var type = $(evt.target)[0].classList[1].slice(6, 1000);
 
         if($(evt.target).css('opacity') == 1 ){
@@ -93,6 +135,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       })
     }
     swatchLogic("Season");
+    swatchLogic("Accessory");
     swatchLogic("Fabric");
     swatchLogic("Color");
     swatchLogic("Button");
@@ -976,7 +1019,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     /////////////////////////////////////////////////////////
     //////////end functions to add the front-side-back html
-    
+
   /////end createProject controller
   ////////////////////////
   ////////////////////////

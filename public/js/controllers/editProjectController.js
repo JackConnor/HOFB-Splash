@@ -115,6 +115,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       $('.newProductVendor').val(productObject.vendor);
       /////add photos
       var addImgsFunc = function(){
+        console.log(productObject);
         $('.newProductCurrentImage').attr('src', productObject.images[0])
         for (var i = 0; i < productObject.images.length; i++) {
           $('#newProductMiniImage'+i).attr('src' , productObject.images[i]);
@@ -733,7 +734,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     }
     console.log(newProjectObject);
     editProjectToDb(newProjectObject, function(){
-      // window.location.hash = "#/designer/dashboard";
+      window.location.hash = "#/designer/dashboard";
     })
   }
   $('.new_product_send').on('click', editProject);

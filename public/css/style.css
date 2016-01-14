@@ -298,6 +298,34 @@
   padding-top: 60px;
 }
 
+.createAccessory {
+  height: 130px;
+}
+
+.createAccessory img{
+  height: 95%;
+  width: 95%;
+  margin-left: 2.5%;
+  margin-top: 2.5%;
+  outline: 1px solid silver;
+}
+
+.createAccessoryContainer {
+  width: 90%;
+  margin-left: 5%;
+  height: 100%;
+}
+
+.createAccessoryLabel {
+  height: 40px;
+  font-size: 23px;
+  padding-top: 3px;
+  text-align: center;
+  background-color: gray;
+  color: white;
+  margin-top: 3px;
+}
+
 .createButtonCellHolder {
   height: 50%;
 }

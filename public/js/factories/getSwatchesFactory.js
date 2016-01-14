@@ -16,6 +16,21 @@ angular.module('getSwatchesFactory', [])
           ,cotton: "http://d6lw7to1547c3.cloudfront.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/308744.jpg"
           ,denim: "https://www.shoponeonline.com/wp-content/uploads/denim-swatch.png"
         }
+        ,accessories: {
+          drawCords: {
+            cotton: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
+            ,polyester: 'http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg'
+            ,nylon: 'http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg'
+          }
+          ,metalTrims: {
+            buttons: 'http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg'
+            ,rivets: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
+            ,eyelets: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
+            ,buckles: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
+            ,zippers: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
+            ,hooksStoppers: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
+          }
+        }
         ,seasons: {
           spring: "http://organically.server276.com/blog/wp-content/uploads/2014/03/18_spring-300x300.jpg"
           ,summer: "http://r2rdesigns.com/wp-content/uploads/2014/06/summer-beach-hd-desktop-wallpaper-300x300.jpg"
