@@ -409,7 +409,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<p class='curatedTime' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].TimeSinceCreation+"</p>"+
             "</div>"+
             "<div class='curatedCellOrders'>"+
-              "coming soon"+
+              "Coming Soon"+
             "</div>"+
             "<div class='curatedCellStatus'>"+
               self.curatedProjects[i].status+

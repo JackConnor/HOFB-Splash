@@ -472,20 +472,21 @@
 
 .curatedCellOrders {
   margin-right: 100px;
-  font-size: 22px;
+  font-size: 17px;
+  font-weight: 400;
   width: 150px;
   vertical-align: top;
   display: inline-block;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .curatedCellStatus {
   width: 200px;
-  font-size: 22px;
-  padding-top: 20px;
+  font-size: 17px;
+  padding-top: 40px;
   display: inline-block;
   float: right;
-  margin-right: 30px;
+  margin-right: 10px;
 }
 
 .curateConfirmDescription {
@@ -506,7 +507,8 @@
 
 .curatedTitle {
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 17px;
+  font-weight: 400;
 }
 
 .curatedTime {
@@ -963,6 +965,21 @@
   text-align: center;
   padding-top: 10px;
   margin-right: 10px;
+}
+
+.fontChallenge {
+  position: absolute;
+  margin-top: 300px;
+  width: 89px;
+  height: 89px;
+  background-color: #169aa9;
+  color: white;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 48px;
+  padding-top: 10px;
+  padding-left: 25px;
 }
 
 .howToCell {
@@ -1790,6 +1807,25 @@
   width: 95%;
   height: 95%;
   margin: 2.5%;
+}
+
+.plusBox {
+  position: absolute;
+  margin-top: -9px;
+  width: 23px;
+  height: 23px;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  margin-left: 45%;
+  font-size: 21px;
+  padding-bottom: 10px;
+  padding-left: 3px;
+}
+
+.plusBox i{
+  position: absolute;
+  margin-top: 2px;
 }
 
 .productAccessoryBox{
