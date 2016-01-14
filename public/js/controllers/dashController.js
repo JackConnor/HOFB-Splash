@@ -160,7 +160,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         )
         //////we need to load up all the different element attributes to populate the boxes
         var allAttributes = [];
-        var allImages = self.allProjects[i].images;
+        var allImages = self.allProjects[i].thumbnails;
         for (var k = 0; k < allImages.length; k++) {
           allAttributes.push(allImages[k]);
         }
@@ -379,7 +379,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.designerDashList').append(
           "<div class='curatedCell' id='"+self.curatedProjects[i]._id+"'>"+
             "<div class='curatedCellImage' id='"+self.curatedProjects[i]._id+"'>"+
-              "<img src='"+self.curatedProjects[i].images[0]+"'>"+
+              "<img src='"+self.curatedProjects[i].thumbnails[0]+"'>"+
             "</div>"+
             "<div class='curatedCellName' id='"+self.curatedProjects[i]._id+"'>"+
               "<p class='curatedTitle' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].name+"</p>"+
@@ -672,14 +672,17 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         }
         for (var i = 0; i < self.filteredProjects.length; i++) {
           $('.designerDashList').append(
-            "<div id='"+self.filteredProjects[i]._id+"' class='projectCell col-md-4 col-xs-12'>"+
+            "<div class='col-md-4 col-xs-12 projectCell'>"+
               "<div class='projectCellInner'>"+
                 "<div class='projectCellImageHolder'>"+
-                  "<img class='projectCellImage' src='"+self.filteredProjects[i].images[0]+"'>"+
+                  "<img class='projectCellImage' id='"+self.filteredProjects[i]._id+"'"+
+                "src='"+self.filteredProjects[i].images[0]+"'>"+
+                "</div>"+
+                "<div class='projectCellMinis' id='mini"+i+"'>"+
                 "</div>"+
                 "<div class='projectCellContent'>"+
-                  "<p>"+self.filteredProjects[i].TimeSinceCreation+"</p>"+
-                  "<p>"+self.filteredProjects[i].name+"</p>"+
+                  "<p class='projectCellContentName'>"+self.filteredProjects[i].name+"</p>"+
+                  "<p class='projectCellContentTime'>"+self.filteredProjects[i].TimeSinceCreation+" ago</p>"+
                 "</div>"+
               "</div>"+
             "</div>"
@@ -1170,7 +1173,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               collectionProductCounters[i] = true;
               $('.collectionModalPickContainer').append(
                 "<div class='collectionModalProductCell'>"+
-                  "<img class='modalProductImage "+self.allProjects[i]._id+"' id='modalProduct"+i+"' src='"+self.allProjects[i].images[0]+"'>"+
+                  "<img class='modalProductImage "+self.allProjects[i]._id+"' id='modalProduct"+i+"' src='"+self.allProjects[i].thumbnails[0]+"'>"+
                 "</div>"
               )
             }
@@ -1307,7 +1310,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               })
               ///////the submit event, which updates that project, and then reloads only the dash view
               $('#removeFromCollection'+i).on('click', function(evt){
-                var productId = $($(evt.target)[0].parentNode)[0].id;
+                var productId = $($($($($(evt.target)[0].parentNode)[0])[0].children[0])[0].children[0])[0].firstChild.id
+                console.log(productId);
                 var collectionToRemove = $(evt.target);
                 console.log(collectionToRemove);
                 $http({
