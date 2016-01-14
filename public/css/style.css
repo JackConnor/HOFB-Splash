@@ -275,6 +275,14 @@
   /*width: 25%;*/
 }
 
+.confirmDeleteText {
+  font-size: 22px;
+  padding-top: 60px;
+  text-align: center;
+  width: 60%;
+  margin-left: 20%;
+}
+
 .confirmSave {
   text-align: center;
   width: 600px;
@@ -664,10 +672,24 @@
 }
 
 .deleteButton {
-  margin-left: 10%;
-  width: 35%;
-  margin-top: 10px;
-  color: purple;
+  color: white;
+  font-size: 20px;
+  padding-top: 5px;
+  border-radius: 3px;
+  width: 25%;
+  height: 40px;
+  background-color: #3cb878;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.deleteButtonNo {
+  margin-left: 24%;
+}
+
+.deleteButtonYes {
+  float: right;
+  margin-right: 24%;
 }
 
 .deleteCurateModal {

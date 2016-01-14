@@ -824,10 +824,12 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           var product = $(parentContainer);
           var productId = $($(product[0].children[1])[0].children[0])[0].id
           $('.bodyview').prepend(
-            '<div class="designerDashDeleteProduct col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2">'+
-              "<p>Are you sure you want to delete this product?</p>"+
-              "<button class='deleteButton deleteButtonNo'>No</button>"+
-              "<button id='"+productId+"' class='deleteButton deleteButtonYes'>Yes</button>"+
+            "<div class='invisModal'>"+
+              "<div class='confirmSave'>"+
+                "<p class='confirmDeleteText'>Are you sure you want to delete this product?</p>"+
+                "<div class='deleteButton deleteButtonNo'>No</div>"+
+                "<div id='"+productId+"' class='deleteButton deleteButtonYes'>Yes</div>"+
+              "</div>"+
             "</div>"
           )
           $('.deleteButtonYes').on('click', function(evt){
@@ -840,7 +842,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               /////reload cells
               $('.designerDashList').html('');
               loadProjects(loadInitialList, addHoverToCell)
-              $('.designerDashDeleteProduct').remove();
+              $('.invisModal').remove();
             })
           })
           $('.deleteButtonNo').on('click', function(){
