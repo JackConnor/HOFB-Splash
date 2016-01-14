@@ -504,9 +504,9 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   function changeEffect(){
     $('#i_file').change( function(event) {
       if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 8){
-        frontendPhotoDisplay();
+        frontendPhotoDisplay(event);
         $('#i_file').remove();
-        $('.inputFileHolder').prepend(
+        $('.fileUploadWrapper').prepend(
           '<input type="file" id="i_file" name="files">'
         )
         changeEffect()
@@ -519,23 +519,37 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   }
   changeEffect();
 
-  function frontendPhotoDisplay(){
+  function frontendPhotoDisplay(event){
     var tmppath = URL.createObjectURL(event.target.files[0]);//new temp url
-    $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
-    self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
-    self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-    $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-    var sourceArray = [];
-    var sourceNum = [];
-    for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
-      if(!$($('.newProductMiniImageImage')[i]).attr('src')){
-        sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
-        sourceNum.push(i);
+    /////let's check for blob ratio, then just nota ccept and ask for a new on eif it's not a proper ratio
+    var blob = new Image();
+    blob.src = tmppath;
+    blob.onload = function(){
+      console.log(this.width);
+      console.log(this.height);
+      var ratio = (this.width/this.height);
+      console.log(ratio);
+      if(ratio > .7 && ratio <= .725){
+        $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
+        self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
+        self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
+        $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
+        var sourceArray = [];
+        var sourceNum = [];
+        for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+          if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+            sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
+            sourceNum.push(i);
+          }
+        }
+        var source = sourceArray[0];
+        self.miniPhotoCounter = sourceNum[0];
+        highlightMini();
+      }
+      else {
+          alert('Please Uploadf a photo that is in a 5/7 ratio');
       }
     }
-    var source = sourceArray[0];
-    self.miniPhotoCounter = sourceNum[0];
-    highlightMini();
   }
   //////function to delete the photo inside of a mini photo on click
   function deleteMiniPhoto(evt){
