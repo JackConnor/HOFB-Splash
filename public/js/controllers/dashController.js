@@ -206,14 +206,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           }
           else {
             var imageCount = $(self.activeMinis)[0].children.length;
-            console.log(imageCount);
             var totalLengthPhotos = ((imageCount+.3)*64);
-            console.log(totalLengthPhotos);
             var viewWindow = $('.projectCellImageHolder').width();
-            console.log(viewWindow);
             var maxMovement = (-totalLengthPhotos) + viewWindow;
-            console.log(maxMovement);
-            console.log(self.miniMarg);
             if(self.miniMarg >= maxMovement && maxMovement < 0){
               $(self.activeMinis).css({
                 marginLeft: self.miniMarg
@@ -221,7 +216,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               self.miniMarg += -1;
             }
             else {
-              console.log('no room for movement there');
             }
           }
         }, 20)
@@ -247,8 +241,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.projectCellMiniImage').on('click', function(evt){
           console.log('waaat');
           console.log($(evt.target));
+          var source = $(evt.target).attr('src');
+          var nextTarget = $($($($($(evt.target)[0].parentNode)[0].parentNode)[0].firstElementChild)[0])[0].firstChild;
+          console.log(source);
+          console.log(nextTarget);
+          $(nextTarget).attr('src', source);
         //   $('.invisModal').remove();
-        //   var source = $(evt.target).attr('src');
+        //
         //   var marTop = $(evt)[0].pageY;
         //   var marLeft = $(evt)[0].pageX;
         //   $('.bodyview').append(
