@@ -231,7 +231,7 @@ module.exports = function(app){
       if (req.body.description) {
         product.description = req.body.description;
       }
-      //////below, if you send through an array, it knows you are adding to collections, and does that automatically. If you send a single, it knows to subtract that from your current collections 
+      //////below, if you send through an array, it knows you are adding to collections, and does that automatically. If you send a single, it knows to subtract that from your current collections
       /////this is to add collections
       if (req.body.collections && typeof(req.body.collections) == 'array') {
         for (var i = 0; i < req.body.collections.length; i++) {
@@ -593,9 +593,9 @@ module.exports = function(app){
         ,html:
         "<divs>"+
           "<img src='http://i.imgur.com/f5T6U5B.png' style='width:250px'>"+
-          "<h2 style='color:#737373'>Thank you for joining HOFB. We’re gearing up to introduce you to our exciting new platform, created solely for the purpose of making your work and life easier! In the coming days and weeks, you will receive a link via e-mail which will invite you to enter and start using the closed beta HOFB platform. "+
+          "<h2 style='PW reset Link here"+
           "<br>"+
-          "Please bear with us while we onboard users gradually.</h2>"+
+          "Click on the link within this email to update your passsword</h2>"+
           "<h2 style='color:#293d3d'>HOFB</h2>"+
           "<h3 style='color:#293d3d'>Los Angeles</h3>"+
         "</div>"

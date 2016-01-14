@@ -124,44 +124,45 @@ function updateUserProfilePassword(){
     }
 }
 
-/////////////post for password verification email////////////////
-function postPasswordVericationEmail(userEmailInfo){
-  console.log(userEmailInfo);
-  $http({
-    method: "POST"
-    ,url: "/api/email/password"
-    ,data: {email: userEmailInfo.email, date: userEmailInfo.date}
-  })
-  .then(function(email){
+
+  /////////////post for password verification email////////////////
+  function postPasswordVericationEmail(userEmailInfo){
+    console.log(userEmailInfo);
     $http({
       method: "POST"
-      ,url: "/api/sendemail"
-      ,data: {email: email.data.email}
+      ,url: "/api/email/password"
+      ,data: {email: userEmailInfo.email, date: userEmailInfo.date}
     })
     .then(function(email){
-      alert('password verification link has been sent to your email')
+      $http({
+        method: "POST"
+        ,url: "/api/sendemail"
+        ,data: {email: email.data.email}
+      })
+      .then(function(email){
+        alert('your password has been emailed to you')
+      })
     })
-  })
-}
+  }
 
 
 
-//////////////multer form///////////////
-//////////////////////////////////////
-function newForm(){
-  $('.bodyview').append(
-    "<form class='tempForm' action='/api/profile/pictures' method='POST' enctype='multipart/form-data'>"+
-    "</form>"
-  )
-  $('.tempForm').append($('#userProfileImageFileUpload')[0]);
-  $('.tempForm').append(
-    "<input name='userId' type='text' value='"+userProfileHashData+"'>"
-  );
-  console.log('.tempForm');
-  $('.tempForm').submit(function(){
-    console.log('submitted');
-  });
-}
+  //////////////multer form///////////////
+  //////////////////////////////////////
+  function newForm(){
+    $('.bodyview').append(
+      "<form class='tempForm' action='/api/profile/pictures' method='POST' enctype='multipart/form-data'>"+
+      "</form>"
+    )
+    $('.tempForm').append($('#userProfileImageFileUpload')[0]);
+    $('.tempForm').append(
+      "<input name='userId' type='text' value='"+userProfileHashData+"'>"
+    );
+    console.log('.tempForm');
+    $('.tempForm').submit(function(){
+      console.log('submitted');
+    });
+  }
 // $(".userProfileSubmitBtn").on('click', newForm)
 ///////////end of multer form/////////////
 //////////////////////////////////////
