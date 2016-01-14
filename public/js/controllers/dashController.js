@@ -153,7 +153,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "</div>"+
               "<div class='projectCellContent'>"+
                 "<p class='projectCellContentName'>"+self.allProjects[i].name+"</p>"+
-                "<p class='projectCellContentTime'>"+self.allProjects[i].TimeSinceCreation+"</p>"+
+                "<p class='projectCellContentTime'>"+self.allProjects[i].TimeSinceCreation+" ago</p>"+
               "</div>"+
             "</div>"+
           "</div>"
@@ -164,29 +164,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         for (var k = 0; k < allImages.length; k++) {
           allAttributes.push(allImages[k]);
         }
-        // var allFabrics = self.allProjects[i].fabrics;
-        // console.log(self.allProjects[i]);
-        // console.log(allFabrics);
-        // for (var k = 0; k < allFabrics.length; k++) {
-        //   console.log(allFabrics[k]);
-        //   //////compare against swatches, so we can send right swatch info
-        //   for (fabric in allSwatches.fabrics) {
-        //     console.log(fabric);
-        //     if(allFabrics[k].toLowerCase() == fabric){
-        //       console.log(fabric);
-        //       allAttributes.push(allSwatches.fabrics[fabric])
-        //     }
-        //   }
-        // }
-        // var allColors = self.allProjects[i].colors;
-        // for (var k = 0; k < allColors.length; k++) {
-        //   //////compare against swatches, so we can send right swatch info
-        //   for (color in allSwatches.colors) {
-        //     if(allColors[k].toLowerCase() == color){
-        //       allAttributes.push(allSwatches.colors[color])
-        //     }
-        //   }
-        // }
         for (var j = 0; j < allAttributes.length; j++) {
           $('#mini'+i).append(
             "<img src='"+allAttributes[j]+"' class='projectCellMiniImage' id='miniCell"+j+"'/>"
@@ -590,18 +567,31 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       }
       for (var i = 0; i < self.submittedProjects.length; i++) {
           $('.designerDashList').append(
-            "<div class='projectCell col-md-4 col-xs-12' id='"+self.submittedProjects[i]._id+"'>"+
+            "<div class='col-md-4 col-xs-12 projectCell'>"+
               "<div class='projectCellInner'>"+
                 "<div class='projectCellImageHolder'>"+
-                  "<img class='projectCellImage' src='"+self.submittedProjects[i].images[0]+"'>"+
+                  "<img class='projectCellImage' id='"+self.submittedProjects[i]._id+"'"+
+                "src='"+self.submittedProjects[i].images[0]+"'>"+
+                "</div>"+
+                "<div class='projectCellMinis' id='mini"+i+"'>"+
                 "</div>"+
                 "<div class='projectCellContent'>"+
-                  "<p>"+self.submittedProjects[i].TimeSinceCreation+"</p>"+
-                  "<p>"+self.submittedProjects[i].name+"--curated</p>"+
+                  "<p class='projectCellContentName'>"+self.submittedProjects[i].name+"</p>"+
+                  "<p class='projectCellContentTime'>"+self.submittedProjects[i].TimeSinceCreation+" ago</p>"+
                 "</div>"+
               "</div>"+
             "</div>"
           )
+          var allAttributes = [];
+          var allImages = self.submittedProjects[i].images;
+          for (var k = 0; k < allImages.length; k++) {
+            allAttributes.push(allImages[k]);
+          }
+          for (var j = 0; j < allAttributes.length; j++) {
+            $('#mini'+i).append(
+              "<img src='"+allAttributes[j]+"' class='projectCellMiniImage' id='miniCell"+j+"'/>"
+            )
+          }
       }
       $('.projectCellNewInner').on('mouseenter', function(){
         $('.projectCellNewInner').animate({
