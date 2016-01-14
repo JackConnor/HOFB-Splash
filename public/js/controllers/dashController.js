@@ -820,7 +820,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "<div class='projectCellTrash'><i class='fa fa-times'></i></div>"+
             "<div class='projectCellHoverContent'>"+
             "</div>" +
-            '<div class="projectCellButton" id="projectCellButtonEdit">EDIT PROJECT</div>"'+
+            '<div class="projectCellButton" id="projectCellButtonEdit">EDIT PROJECT</div>'+
           "</div>"
         )
         //////begin to call hover actions

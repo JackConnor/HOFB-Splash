@@ -597,7 +597,25 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         submitPhotos(newProjectInfo.data);
       })
     }
-    $('.new_product_send').on('click', sendNewProject);
+    $('.new_product_send').on('click', function(){
+      $('.bodyview').prepend(
+        "<div class='invisModal'>"+
+          "<div class='confirmSave'>"+
+            '<i class="fa fa-times deleteCurateModal"></i>'+
+            "<h2>You are Curating a Project</h2>"+
+            "<div class='curateConfirmDescription'>You will not be able to edit the project once it has been submitted. If changes are requested to the product you will be alerted through the dashboard</div>"+
+            "<div class='blah_blah_send submitProject'>SUBMIT</div>"+
+          "</div>"+
+        "</div>"
+      )
+      $('.submitProject').on('click', function(evt){
+        console.log('yoooo');
+        sendNewProject(evt);
+      })
+      $('.deleteCurateModal').on('click', function(){
+        $('.invisModal').remove();
+      })
+    });
     $('.new_product_save').on('click', sendNewProject);
 
     //////this is the function to submit photos, which are added turned into url links on the api, and added to the product object we make previously to submitting the photos
