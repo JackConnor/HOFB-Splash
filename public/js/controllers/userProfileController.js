@@ -27,7 +27,7 @@ angular.module('userProfileController', ['singleuserfactory'])
 // Update user password button wiring
   $(".userProfileChangePw").on('click', function(){
     console.log('Update PW button is working');
-    var resetLink = "hofb.com/#/reset/password/"+window.location.hash.split('/')[2];
+    var resetLink = "hofb.com/#/password/reset/"+window.location.hash.split('/')[2];
     $http({
       method: "POST"
       ,url: "/api/email/password"
