@@ -33,8 +33,9 @@ angular.module('userProfileController', ['singleuserfactory'])
       ,url: "/api/email/password"
       ,data: {resetLink: resetLink, email: self.user.data.email}
     })
-    .then(function(){
-      window.location.hash = "#/"
+    .then(function(data){
+      console.log(data);
+      // window.location.hash = "#/"
     })
   });
 // user profile photo upload
@@ -42,15 +43,6 @@ $(".userProfileImageFileUpload").on('change', function (){
   console.log('profile upload on change is working');
   console.log($(".userProfileImageFileUpload"));
   });
-
-  /////collect email for password verification email
-  // $('.userProfileChangePw').on('click', function(){
-  //   var emailAddress = $('#userProfileEmail').val();
-  //   console.log(emailAddress);
-  //   var date = new Date();
-  //   console.log(date);
-  //   postPasswordVericationEmail({email: emailAddress, date: date});
-  // })
 
 
     function updateUserProfile() {
@@ -96,7 +88,8 @@ $(".userProfileImageFileUpload").on('change', function (){
         }
     }
 
-function updateUserProfilePassword(){
+  function updateUserProfilePassword(){
+    console.log('changing');
     var passOld = $('.inputOldPassword').val();
     var pass1 = $('.inputPassword').val();
     var pass2 = $('.inputPasswordConfirm').val();
@@ -135,6 +128,8 @@ function updateUserProfilePassword(){
             })
             .then(function(data){
               console.log(data);
+              alert('Your Password is Updated');
+              window.location.hash = "#/designer/dashboard";
             })
           }
           else{
@@ -145,11 +140,14 @@ function updateUserProfilePassword(){
           alert('Please make sure your passwords match');
         }
       }
+      else{
+        alert('You need to enter your old password correctly, in order to update to a new password');
+      }
     })
-    if (status = '200'){
-      alert('Your password is now updated')
-    }
-}
+  }
+  $('.changePassword').on('click', function(){
+    updateUserProfilePassword();
+  });
 
 
   /////////////post for password verification email////////////////
