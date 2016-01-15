@@ -15,6 +15,9 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
     var url = "5660e162312d9bf1f2d2dce6";
     console.log(singleUser(url));
 
+    ///////if someon is a beta user we want to kick them to dashboard, which kicks them to sigup if they're not logged in
+    console.log(window.location.host.split('').slice(0,4).join(''));
+
     /////post a new user
 
     /////collect all of our emails on splash page
