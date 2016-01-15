@@ -620,15 +620,15 @@
 }
 
 .dashNoTour {
-  width: 135px;
+  width: 115px;
   margin-top: 25px;
   height: 45px;
   margin-left: 62px;
   display: inline-block;
   background-color: #F9F7F5;
-  font-size: 20px;
+  font-size: 17px;
   text-align: center;
-  padding-top: 5px;
+  padding-top: 7px;
   vertical-align: top;
   border: 1px solid #598527;
   border-radius: 3px;
@@ -643,19 +643,19 @@
 }
 
 .dashTour1 {
-  width: 350px;
+  /*width: 350px;
   height: 150px;
   background-color: gray;
   position: absolute;
-  z-index: 3;
+  z-index: 3;*/
 }
 
 .dashTour2 {
-  width: 350px;
+  /*width: 350px;
   height: 150px;
   background-color: gray;
   position: absolute;
-  z-index: 3;
+  z-index: 3;*/
 }
 
 .dashTour3 {
@@ -674,6 +674,21 @@
   z-index: 3;
 }
 
+.dashTourBack {
+  width: 135px;
+  margin-top: 25px;
+  height: 45px;
+  margin-left: 62px;
+  display: inline-block;
+  background-color: #F9F7F5;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 5px;
+  vertical-align: top;
+  border: 1px solid #598527;
+  border-radius: 3px;
+}
+
 .dashTourController {
   vertical-align: top;
   height: 100%;
@@ -689,20 +704,9 @@
   color: white;
   font-size: 25px;
   font-weight: 300;
-  padding: 0px 0 0 14px;
+  padding: 0px 0 0 12px;
   vertical-align: top;
   display: inline-block;
-}
-
-.dashTourBack {
-  height: 40px;
-  margin-top: 5px;
-  width: 60px;
-  display: inline-block;
-  margin-left: 10px;
-  font-size: 20px;
-  background-color: teal;
-  text-align: center;
 }
 
 .dashTourDescription {
@@ -713,32 +717,12 @@
 }
 
 .dashTourInner {
-  width: 80%;
-  margin-left: 10%;
+  width: 90%;
+  margin-left: 5%;
   padding-top: 25px;
 }
 
 .dashTourNext {
-  height: 40px;
-  margin-top: 5px;
-  width: 60px;
-  margin-left: 5px;
-  display: inline-block;
-  font-size: 20px;
-  background-color: teal;
-  text-align: center;
-}
-
-.dashTourTitle {
-  display: inline-block;
-  width: 250px;
-  color: #666666;
-  font-size: 24px;
-  margin-left: 5px;
-  padding-top: 2px;
-}
-
-.dashYesTour {
   width: 135px;
   height: 45px;
   margin-left: 5px;
@@ -751,6 +735,30 @@
   border: 1px solid #598527;
   border-radius: 3px;
   padding-top: 5px;
+}
+
+.dashTourTitle {
+  display: inline-block;
+  width: 250px;
+  color: #666666;
+  font-size: 24px;
+  margin-left: 5px;
+  padding-top: 2px;
+}
+
+.dashYesTour {
+  width: 105px;
+  height: 45px;
+  margin-left: 5px;
+  margin-top: 25px;
+  display: inline-block;
+  background-color: #3CB878;
+  font-size: 17px;
+  text-align: center;
+  vertical-align: top;
+  border: 1px solid #598527;
+  border-radius: 3px;
+  padding-top: 7px;
 }
 
 .deleteButton {
@@ -2944,7 +2952,7 @@ textarea#styled {
   position: absolute;
   border: 2px solid #CCCCCC;
   border-radius: 3px;
-  width: 460px;
+  width: 400px;
   height: 235px;
   z-index: 3;
 }

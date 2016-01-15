@@ -1346,7 +1346,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                   "No Thanks"+
                 "</div>"+
                 '<div class="dashYesTour">'+
-                  "I'd like a tour"+
+                  "TAKE TOUR"+
                 "</div>"+
               "</div>"+
             "</div>"+
@@ -1378,14 +1378,24 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.tourElem').remove();
         $('.bodyview').prepend(
           '<div class="dashTour1 tourElem">'+
-            "<div class='dashTourBack'>"+
-              "Back"+
+            "<div class='dashTourController'>"+
+              "<i class='fa fa-times deleteTour'></i>"+
+              "<div class='dashTourInner'>"+
+                "<div class='dashTourCountIcon'>"+
+                  2+
+                "</div>"+
+                "<div class='dashTourTitle'>New Project</div>"+
+                "<div class='dashTourDescription'>"+
+                  "You start building your fashion portfolio on HOFB by clicking on this box to visit our design studio and create your pieces."+
+                "</div>"+
+                "<div class='dashTourBack'>"+
+                  "Back"+
+                "</div>"+
+                "<div class='dashTourNext'>"+
+                  "Next"+
+                "</div>"+
+              "</div>"+
             "</div>"+
-            "<div class='dashTourNext'>"+
-              "Next"+
-            "</div>"+
-          "<h4>Build a new Product to submit to our Curators, start by clicking here</h4>"+
-          "------------->>> ------------->>> ------------->>> ------------->>>"+
           '</div>'
         );
         $('.bodyview').prepend(
@@ -1402,9 +1412,21 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.projectCellNewInner').css({
           opacity: 0
         })
+        $('.deleteTour').on('click', function(){
+          $('.tourElem').remove();
+          $('.tourProjectCellNewInner').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
+          $('.projectCellNewInner').css({
+            opacity: 1
+          })
+          self.tourCounter = 7;
+        })
         var topOff = $('.projectCellNew').offset().top;
         var topLeft = $('.projectCellNew').offset().left;
         var width = $('.projectCellNew').css('width').split('').slice(0, $('.projectCellNew').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
+        console.log('width: '+width);
         var height = $('.projectCellNew').css('height').split('').slice(0, $('.projectCellNew').css('height').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
         /////
         $('.tourProjectCellNewInner').css('top', topOff);
@@ -1412,8 +1434,22 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.tourProjectCellNewInner').css('width', width);
         $('.tourProjectCellNewInner').css('height', height);
 
-        $('.dashTour1').css('margin-top', topOff + 30);
-        $('.dashTour1').css('margin-left', topLeft - width);
+        ///////function to place tour elements
+
+        /////this if statement checks screen width, and sees which side it should put the tour elem on
+        if(topLeft > 470){
+          $('.dashTour1').css('margin-top', topOff + 30);
+          $('.dashTour1').css('margin-left', topLeft - $('.dashTour1').width() - 35);
+          $('html, body').animate({
+            scrollTop: topOff + 30+"px"
+          }, 800)        }
+        else {
+          $('.dashTour1').css('margin-top', topOff + 30);
+          $('.dashTour1').css('margin-left', topLeft+380);
+          $('html, body').animate({
+            scrollTop: topOff + 30
+          }, 800)
+        }
 
         /////add events to new elements
         $('.tourProjectCellNewInner').on('mouseenter', function(evt){
@@ -1437,30 +1473,45 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           });
           self.tourCounter++;
           dashboardTour();
+          $('html, body').animate({
+            scrollTop: 0
+          }, 800)
         })
         $('.dashTourBack').on('click', function(){
+          $('.tourElem').remove();
           $('.tourProjectCellNewInner').remove();
           $('.projectCellNewInner').css({
             opacity: 1
           });
           self.tourCounter--;
           dashboardTour();
+          $('html, body').animate({
+            scrollTop: 0
+          }, 800)
         })
       }
       else if (self.tourCounter == 2){
         $('.tourElem').remove();
         $('.bodyview').prepend(
-          '<div class="dashTour1 tourElem">'+
-            "<div class='dashTourBack'>"+
-              "Back"+
+          '<div class="dashTour2 tourElem">'+
+            "<div class='dashTourController'>"+
+              "<i class='fa fa-times deleteTour'></i>"+
+              "<div class='dashTourInner'>"+
+                "<div class='dashTourCountIcon'>"+
+                  3+
+                "</div>"+
+                "<div class='dashTourTitle'>Viewing Projects</div>"+
+                "<div class='dashTourDescription'>"+
+                  "View your projects at all states of submission by clicking on these tabs."+
+                "</div>"+
+                "<div class='dashTourBack'>"+
+                  "Back"+
+                "</div>"+
+                "<div class='dashTourNext'>"+
+                  "Next"+
+                "</div>"+
+              "</div>"+
             "</div>"+
-            "<div class='dashTourNext'>"+
-              "Next"+
-            "</div>"+
-            "<div>"+
-              "<<<----------- <<<<---------- <<<<-------------"+
-            "</div>"+
-          "<h4>Look at Products you've already submitted for Curation by toggling your listview, here</h4>"+
           '</div>'
         );
         $('.bodyview').prepend(
@@ -1483,8 +1534,19 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.tourDesignerDashCurated').css('left', topLeft);
         $('.tourDesignerDashCurated').css('width', width);
 
-        $('.dashTour1').css('margin-top', topOff - 30);
-        $('.dashTour1').css('margin-left', topLeft+parseInt(width)+15+'px');
+        $('.dashTour2').css('margin-top', topOff - 30);
+        $('.dashTour2').css('margin-left', topLeft+parseInt(width)+15+'px');
+        $('.deleteTour').on('click', function(){
+          $('.tourElem').remove();
+          $('.tourProjectCellNewInner').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
+          $('.projectCellNewInner').css({
+            opacity: 1
+          })
+          self.tourCounter = 7;
+        })
         $('.dashTourNext').on('click', function(){
           $('.tourDesignerDashCurated').remove();
           $('.designerDashCurated').css({
@@ -1505,14 +1567,25 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       else if (self.tourCounter == 3){
         $('.tourElem').remove();
         $('.bodyview').prepend(
-          '<div class="dashTour2 tourElem">'+
-            "<div class='dashTourBack'>"+
-              "Back"+
+          '<div class="dashTour3 tourElem">'+
+            "<div class='dashTourController'>"+
+              "<i class='fa fa-times deleteTour'></i>"+
+              "<div class='dashTourInner'>"+
+                "<div class='dashTourCountIcon'>"+
+                  4+
+                "</div>"+
+                "<div class='dashTourTitle'>Collections</div>"+
+                "<div class='dashTourDescription'>"+
+                  "Create a collection to organize and categorize the projects you create."+
+                "</div>"+
+                "<div class='dashTourBack'>"+
+                  "Back"+
+                "</div>"+
+                "<div class='dashTourNext'>"+
+                  "Next"+
+                "</div>"+
+              "</div>"+
             "</div>"+
-            "<div class='dashTourNext'>"+
-              "Next"+
-            "</div>"+
-          "<h4>These Are your Collections, where you can organize the products that you create</h4>"+
           '</div>'
         );
         $('.bodyview').prepend(
@@ -1535,8 +1608,22 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.tourDesignerDashCollections').css('left', topLeft);
         $('.tourDesignerDashCollections').css('width', width);
 
-        $('.dashTour2').css('margin-top', topOff - 30);
-        $('.dashTour2').css('margin-left', topLeft+parseInt(width)+15+'px');
+        $('.dashTour3').css('margin-top', topOff - 30);
+        $('.dashTour3').css('margin-left', topLeft+parseInt(width)+15+'px');
+        $('html, body').animate({
+          scrollTop: topOff - 50
+        }, 800);
+        $('.deleteTour').on('click', function(){
+          $('.tourElem').remove();
+          $('.tourProjectCellNewInner').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
+          $('.projectCellNewInner').css({
+            opacity: 1
+          })
+          self.tourCounter = 7;
+        });
         $('.dashTourNext').on('click', function(){
           $('.tourDesignerDashCollections').remove();
           $('.tourProjectCellNewInner').remove();
@@ -1559,13 +1646,24 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.tourElem').remove();
         $('.bodyview').prepend(
           '<div class="dashTour4 tourElem">'+
-            "<div class='dashTourBack'>"+
-              "Back"+
+            "<div class='dashTourController'>"+
+              "<i class='fa fa-times deleteTour'></i>"+
+              "<div class='dashTourInner'>"+
+                "<div class='dashTourCountIcon'>"+
+                  5+
+                "</div>"+
+                "<div class='dashTourTitle'>Create Collection</div>"+
+                "<div class='dashTourDescription'>"+
+                  "Create your new collection simply by clicking here, and walking through our easy process."+
+                "</div>"+
+                "<div class='dashTourBack'>"+
+                  "Back"+
+                "</div>"+
+                "<div class='dashTourNext'>"+
+                  "Next"+
+                "</div>"+
+              "</div>"+
             "</div>"+
-            "<div class='dashTourNext'>"+
-              "Next"+
-            "</div>"+
-          "<h4>You can start a new collection by clicking here</h4>"+
           '</div>'
         );
         $('.bodyview').prepend(
@@ -1593,6 +1691,20 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
         $('.dashTour4').css('margin-top', topOff - 30);
         $('.dashTour4').css('margin-left', topLeft+parseInt(width)+15+'px');
+        $('html, body').animate({
+          scrollTop: topOff - 50
+        }, 800);
+        $('.deleteTour').on('click', function(){
+          $('.tourElem').remove();
+          $('.tourProjectCellNewInner').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
+          $('.projectCellNewInner').css({
+            opacity: 1
+          })
+          self.tourCounter = 7;
+        });
         $('.dashTourNext').on('click', function(){
           $('.tourDesignerDashCollectionAddMore').remove();
           $('.designerDashCollectionAddMore').css({
