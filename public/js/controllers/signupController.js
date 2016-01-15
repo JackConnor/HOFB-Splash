@@ -42,28 +42,29 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
           $http({
             method: "POST"
             ,url: "/api/users"
-            ,data: {email: email, password: password, firstname: firstName, lastname: lastName}
+            ,data: {email: email, password: password}
           })
           .then(function(newUser){
-            console.log(newUser);
-            $http({
-              method: "POST"
-              ,url: "/api/startsession"
-              ,data: {email: email, password: password}
-            })
-            .then(function(sessionToken){
-              console.log(sessionToken);
-              if(sessionToken.data.data == "sorry no token"){
-                alert('name or password were incorrect');
-              }
-              else{
-                window.localStorage.hofbToken = sessionToken.data;
-                // setTimeout(function(){
-                //   window.location.hash = "#/"+status+"/dashboard"
-                // }, 800);
-              }
-            })
+            signinUser(newUser.data.email, password);
+            // console.log(newUser);
           })
+          setTimeout(          $http({
+                      method: "POST"
+                      ,url: "/api/startsession"
+                      ,data: {email: newUser.data.email, password: password}
+                    })
+                    .then(function(sessionToken){
+                      console.log(sessionToken);
+                      if(sessionToken.data.data == "sorry no token"){
+                        alert('name or password were incorrect');
+                      }
+                      else{
+                        window.localStorage.hofbToken = sessionToken.data;
+                        // setTimeout(function(){
+                        //   window.location.hash = "#/"+status+"/dashboard"
+                        // }, 800);
+                      }
+                    }), 2000)
         }
         else {
           alert('whoops, looks like those two passwords dont match')
