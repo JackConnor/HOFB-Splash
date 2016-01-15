@@ -24,6 +24,7 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
         window.location.reload();
       }
     }
+    checkBetaUrl();
     /////post a new user
 
     /////collect all of our emails on splash page
