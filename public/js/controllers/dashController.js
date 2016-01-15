@@ -1135,8 +1135,12 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             $('.bodyview').append(
               "<div class='invisModal'>"+
                 "<div class='collectionModalContainer'>"+
-                  "<input class='collectionModalName' placeholder='Enter New Collection Name'>"+
-                  "<p> Please Pick a Product to Add to Your Collection, to Get Started</p>"+
+                  "<div class='newProductModalDelete'><i class='fa fa-times'></i></div>"+
+                  "<div class='collectionModalTitle'>"+
+                    "Create a new custom collection"+
+                  "</div>"+
+                  "<input class='collectionModalName' placeholder='Collection Name'>"+
+                  "<p class='collNote'> (e.g. wedding, formal)</p>"+
                   "<div class='collectionModalPickContainer'>"+
                   "</div>"+
                   "<div class='submitModal'>"+
@@ -1145,6 +1149,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 "</div>"+
               "</div>"
             )
+            $('.newProductModalDelete').on('click', function(){
+              $('.invisModal').remove();
+            })
             //////now we add the projects to the modal
             console.log(self.allProjects);
             var collectionProductCounters = [];
