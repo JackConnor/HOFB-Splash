@@ -394,7 +394,7 @@ module.exports = function(app){
   		if (err ) {
   				res.json( err )
   		} else if ( user ) {
-  			res.redirect( '/')
+  			res.json("user exists")
   		} else {
         //////situation where no user is found (aka email is unique)
 				//AUTHENTICATE USER HERE
@@ -427,7 +427,6 @@ module.exports = function(app){
             conversation.comments = [{sender: "Admin", receiver: newUserData._id, date: new Date(), text: "Hello, welcome to your first comment"}];
             conversation.save(function(err, newConvo){
               if(err){console.log(err)}
-              console.log(newConvo);
               res.json(newUserData)
             })
           });

@@ -46,7 +46,14 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
           })
           .then(function(newUser){
             console.log(newUser);
-            signinUser(newUser.data.email, $('.signupPassword').val());
+            if(newUser.data == "user exists"){
+              alert('That email is already in our system, please try a new email');
+              window.location.reload();
+            }
+            else{
+              console.log(newUser);
+              signinUser(newUser.data.email, $('.signupPassword').val());
+            }
           })
         }
         else {
