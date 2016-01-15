@@ -56,6 +56,11 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
       window.location.hash = "#/signin"
     })
 
+    // $('.logoutButton').on('click', function(){
+    //   window.localStorage.hofbToken = "";
+    //   window.location.hash = "#/designer/loginportal"
+    // })
+
 
 
     //Get request for ALL product comments
@@ -242,6 +247,13 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     }
     /////end of navbar dropdown logic/////////////
     ////////////////////////////////////////////////
+
+    ///viewUserProfile button functionality
+
+    // $('.viewUserProfile').on('click', function(){
+    //   window.localStorage.hofbToken = "";
+    //   window.location.hash = "#/signin"
+    // })
 
   /////end viewProduct controller
   ////////////////////////

@@ -13,7 +13,31 @@ var methodOverride = require('method-override');
 var passport       = require('passport');
 var passportlocal = require('passport-local');
 var cloudinary     = require('cloudinary');
-var app            = express();
+
+
+//////////////////////////////////////////////////////////////////
+// var fs             = require('fs');
+// var privateKey  = fs.readFileSync('security/hofb.com.key', 'utf8');
+// var certificate = fs.readFileSync('security/hofb.com.crt', 'utf8');
+// var credentials = {key: privateKey, cert: certificate};
+// var https         = require('https');
+
+
+// var httpServer = http.createServer(app);
+// var httpsServer = https.createServer(credentials, app);
+
+// httpServer.listen(80);
+// httpsServer.listen(5555);
+
+// var options        = {
+//           key: fs.readFileSync('security/hofb.com.key'),
+//           cert: fs.readFileSync('security/hofb.com.crt'),
+//           ca: fs.readFileSync('security/gd_bundle_hofb.com.crt')
+//         };
+//////////////////////////////////////////////////////////////////
+var app           = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -65,6 +89,17 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(process.env.PORT || '5555');
+//////////////////////////////////////////////////////////////////
+// app.listen(options, (req, res) => {
+//   res.writeHead(200);
+//   res.end('hello world\n');
+// }).listen(5555);
+
+// https.createServer(options, (req, res) => {
+//   res.writeHead(200);
+//   res.end('hello world\n');
+// }).listen(5555);
+/////////////////////////////////////////////////////////////////
 
 app.get('*', function(req, res){
 
