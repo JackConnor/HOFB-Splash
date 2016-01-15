@@ -41,30 +41,13 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
           ////checked that passwords matched and passed our password filters
           $http({
             method: "POST"
-            ,url: "/api/users"
-            ,data: {email: email, password: password}
+            ,url: "/api/signup"
+            ,data: {email: email, password: $('.signupPassword').val()}
           })
           .then(function(newUser){
-            signinUser(newUser.data.email, password);
-            // console.log(newUser);
+            console.log(newUser);
+            signinUser(newUser.data.email, $('.signupPassword').val());
           })
-          setTimeout(          $http({
-                      method: "POST"
-                      ,url: "/api/startsession"
-                      ,data: {email: newUser.data.email, password: password}
-                    })
-                    .then(function(sessionToken){
-                      console.log(sessionToken);
-                      if(sessionToken.data.data == "sorry no token"){
-                        alert('name or password were incorrect');
-                      }
-                      else{
-                        window.localStorage.hofbToken = sessionToken.data;
-                        // setTimeout(function(){
-                        //   window.location.hash = "#/"+status+"/dashboard"
-                        // }, 800);
-                      }
-                    }), 2000)
         }
         else {
           alert('whoops, looks like those two passwords dont match')
@@ -95,11 +78,9 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
         .then(function(decToken){
           console.log('in here');
           console.log(decToken);
-          setTimeout(function(){
-            var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
-            console.log(newUrl);
-            window.location.hash = newUrl;
-          })
+          var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
+          console.log(newUrl);
+          window.location.hash = newUrl;
         })
       });
     }

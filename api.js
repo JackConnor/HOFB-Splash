@@ -85,22 +85,28 @@ module.exports = function(app){
     })
   })
 
-  ///Post for updating user profile
-  // app.post("/api/user/profile", function(req, res){
-  //   User.insert(req.body, function(err, User){
-  //     if(err) throw err;
-  //     res.json(User);
-  //   })
-  // })
 
   ///create a new user
   app.post('/api/users', function(req, res){
-    User.create(req.body, function(err, user){
-      if(err){console.log(err)}
-      user.passwordDigest = user.generateHash(req.body.password);
-      ////json with info of new user we created
+    console.log(req.body);
+    console.log('no doing the User stuff');
+    var user = new User();
+    user.passwordDigest = user.generateHash(req.body.password);
+    user.email = req.body.email;
+    console.log(user);
+    user.lasstname = req.body.lastname;
+    user.lastname = req.body.lastname;
+    user.save(function(err, user){
       console.log(user);
-      res.json(user)
+      res.json(user);
+    })
+  })
+
+  app.post('/api/new/user', function(req, res){
+    console.log(req.body);
+    User.create(req.body, function(err, user){
+      console.log(user);
+      res.json(user);
     })
   })
 
@@ -402,6 +408,8 @@ module.exports = function(app){
         product.images = ['https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg'];
 
         newUser.email = req.body.email;
+        newUser.firstname = req.body.firstname;
+        newUser.lastname = req.body.lastname;
         newUser.passwordDigest = newUser.generateHash( req.body.password );
         newUser.products.push(product);
         newUser.status = req.body.status;
@@ -420,7 +428,7 @@ module.exports = function(app){
             conversation.save(function(err, newConvo){
               if(err){console.log(err)}
               console.log(newConvo);
-              res.json(newConvo)
+              res.json(newUserData)
             })
           });
         })
@@ -437,6 +445,9 @@ module.exports = function(app){
     User.findOne({'email': req.body.email}, function(err, user){
       if(err){console.log(err)}
       console.log(user);
+      console.log(user.password);
+      console.log(user.passwordDigest);
+      console.log(req.body.password);
       console.log(user.validPassword(req.body.password));
       if (user && user.validPassword(password)) {
         console.log(user);
@@ -454,7 +465,7 @@ module.exports = function(app){
           var secret = process.env.JWT_TOKEN_SECRET;
           //////user password verified
           ///////iss == issuer (us), name = the user's id, and sub = the number of times they've logged in
-          var token = jwt.sign({iss: "hofb.com", name: user._id, sub: user.signins}, secret, {expiresIn: "24h", audience: user.status})
+          var token = jwt.sign({iss: "hofb.com", name: user._id, sub: user.signins, aud: "designer"}, secret, {expiresIn: "2h", audience: user.status})
           res.json(token);
         })
       }
