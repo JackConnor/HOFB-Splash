@@ -915,23 +915,17 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.seasonFilter').remove();
       $(evt.target).append(
         "<div class='colorFilter'>"+
-          "<div  id='filterRed' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.red+">"+
+          "<div  id='filterRed' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.red+">"+
           "</div>"+
-          "<div id='filterBlue' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.blue+">"+
+          "<div id='filterBlue' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.blue+">"+
           "</div>"+
-          "<div id='filterWhite' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.white+">"+
+          "<div id='filterWhite' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.white+">"+
           "</div>"+
-          "<div id='filterBlack' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.black+">"+
+          "<div id='filterBlack' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.black+">"+
           "</div>"+
-          "<div id='filterOrange' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.orange+">"+
+          "<div id='filterYellow' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.yellow+">"+
           "</div>"+
-          "<div id='filterYellow' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.yellow+">"+
-          "</div>"+
-          "<div id='filterMagenta' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.magenta+">"+
-          "</div>"+
-          "<div id='filterAqua' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.aqua+">"+
-          "</div>"+
-          "<div id='filterGreen' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.green+">"+
+          "<div id='filterGreen' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.green+">"+
           "</div>"+
         "</div>"
       )
