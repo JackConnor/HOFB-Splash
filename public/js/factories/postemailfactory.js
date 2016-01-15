@@ -16,7 +16,7 @@ angular.module('newemailfactory', [])
         $http({
           method: "POST"
           ,url: "/api/email/betasignup"
-          ,data: {email: email.data.email, signupLink: 'beta.hofb.com/#/signin/'}
+          ,data: {email: email.data.email, signupLink: 'beta.hofb.com/#/designer/loginportal'}
         })
         .then(function(email){
           console.log(email);
