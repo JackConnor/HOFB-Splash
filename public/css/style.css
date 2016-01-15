@@ -16,6 +16,12 @@
   color: #6BB7C2;
 }
 
+.allSignsContainer {
+  width: 900px;
+  height: 500px;
+
+}
+
 .bannerBottom {
   font-size: 18px;
   text-align: center;
@@ -2616,11 +2622,11 @@
 
 .signupContainer {
   position: absolute;
-  width: 60%;
+  width: 45%;
   height: 525px;
   background-color: gray;
-  margin-left: 20%;
-  margin-top: 100px;
+  margin: 100px 0 0 2%;
+  display: inline-block;
 }
 
 .signupContent {
@@ -2656,12 +2662,10 @@
 }
 
 .signinContainer {
-  position: absolute;
-  width: 60%;
-  height: 525px;
-  background-color: gray;
-  margin-left: 20%;
-  margin-top: 100px;
+  width: 45%;
+  margin-left: 2%;
+  outline: 2px solid blue;
+  display: inline-block;
 }
 
 .signinContent {
