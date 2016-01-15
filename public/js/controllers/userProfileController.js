@@ -11,8 +11,24 @@ angular.module('userProfileController', ['singleuserfactory'])
 
 //test userId with all data, except image - 568c3b81be426e0ad0bd5248
     if(window.location.hash.split('/')[1] == "profile"){
+      function checkToken(){
+        var token = window.localStorage.hofbToken;
+        if(token){
+          console.log('aight');
+        }
+        else {
+          alert('Please login or sign up to view this page');
+          window.location.hash = "#/designer/loginportal";
+          window.location.reload();
+        }
+      }
+      checkToken();
       singleUser(userProfileHashData)
       .then(function (user){
+        if(user == 'no id'){
+          window.location.hash = "#/designer/dashboard";
+          window.location.hash.reload();
+        }
         console.log(user);
         self.user = user
       })

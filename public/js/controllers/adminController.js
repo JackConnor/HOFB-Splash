@@ -21,7 +21,8 @@ angular.module('adminController', ['allProjectsFactory', 'checkPwFactory', 'getS
       })
       .then(function(decodedToken){
         if(decodedToken.data.aud != "admin"){
-          window.location.hash = '#/signin'
+          window.location.hash = '#/designer/loginportal';
+          window.location.reload();
         }
         $http({
           method: "GET"

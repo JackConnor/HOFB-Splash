@@ -1088,10 +1088,21 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           return null;
         }
       }
-
       /////////////////////////////////////////////////////////
       //////////end functions to add the front-side-back html
 
+      function checkToken(){
+        var token = window.localStorage.hofbToken;
+        if(token){
+          console.log('aight');
+        }
+        else {
+          alert('Please login or sign up to view this page');
+          window.location.hash = "#/designer/loginportal";
+          window.location.reload();
+        }
+      }
+      checkToken();
   ////////////////////////////////
   ///////////////////////////////
   ///////End all controller Code///

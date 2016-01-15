@@ -36,10 +36,24 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
           })
           .then(function(newUser){
             console.log(newUser);
+            $http({
+              method: "POST"
+              ,url: "/api/startsession"
+              ,data: {email: email, password: password}
+            })
+            .then(function(sessionToken){
+              console.log(sessionToken);
+              if(sessionToken.data.data == "sorry no token"){
+                alert('name or password were incorrect');
+              }
+              else{
+                window.localStorage.hofbToken = sessionToken.data;
+                // setTimeout(function(){
+                //   window.location.hash = "#/"+status+"/dashboard"
+                // }, 800);
+              }
+            })
           })
-          setTimeout(function(){
-            window.location.hash = "#/"+status+"/dashboard"
-          }, 800)
         }
         else {
           alert('whoops, looks like those two passwords dont match')

@@ -15,6 +15,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     })
     .then(function(decodedToken){
       console.log(decodedToken);
+      console.log(decodedToken);
+      if(decodedToken.data.aud != 'designer'){
+        alert('You must signin with the proper credentials to view this page');
+        window.location.hash = "#/designer/loginportal";
+        window.location.reload();
+      }
       self.decodedToken = decodedToken;
       self.userId = decodedToken.data.name;
       singleUser(self.userId)

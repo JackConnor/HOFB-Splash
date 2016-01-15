@@ -171,7 +171,8 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         self.buyerId = decodedToken.data.name;
         getBoughtList();/////run on load in order for list to be set on toggle
         if(decodedToken.data.aud.split('-')[0] != "buyer"){
-          window.location.hash = '#/signin'
+          window.location.hash = '#/designer/loginportal';
+          window.location.reload();
         }
         $http({
           method: "GET"

@@ -71,7 +71,7 @@ module.exports = function(app){
   app.get("/api/users/:id", function(req, res){
     console.log(req.params);
     User.findOne({"_id":req.params.id}, function(err, user){
-      if(err) throw err;
+      if(err) res.json('no id');
       res.json(user);
     })
   })
