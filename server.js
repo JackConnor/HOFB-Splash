@@ -13,7 +13,7 @@ var methodOverride = require('method-override');
 var passport       = require('passport');
 var passportlocal = require('passport-local');
 var cloudinary     = require('cloudinary');
-console.log(1);
+
 
 //////////////////////////////////////////////////////////////////
 // var fs             = require('fs');
@@ -50,14 +50,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-console.log(2);
+
 /////signup stuff
 app.use(passport.initialize());
 app.use(passport.session());
 require('./passport.js')(passport);
 
 require('./api.js')(app);
-console.log(3);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -65,7 +65,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 // error handlers
-console.log(4);
+
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -87,7 +87,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-console.log(5);
+
 app.listen(process.env.PORT || '5555');
 //////////////////////////////////////////////////////////////////
 // app.listen(options, (req, res) => {
@@ -100,11 +100,11 @@ app.listen(process.env.PORT || '5555');
 //   res.end('hello world\n');
 // }).listen(5555);
 /////////////////////////////////////////////////////////////////
-console.log(6);
+
 app.get('*', function(req, res){
 
   res.sendFile( __dirname + '/public/index.html')
 })
 
-console.log(7);
+
 module.exports = app;
