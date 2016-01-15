@@ -68,6 +68,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controller: 'signupCtrl'
       ,contollerAs: 'signup'
     })
+    ////designer login from link
+    .when('/designer/loginportal/:email', {
+      templateUrl: 'templates/_signup.html'
+      ,controller: 'signupCtrl'
+      ,contollerAs: 'signup'
+    })
     //view a single Product
     .when('/view/product/:id', {
       templateUrl: 'templates/_viewProduct.html'

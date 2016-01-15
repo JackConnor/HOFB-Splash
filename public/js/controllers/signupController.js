@@ -10,6 +10,16 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
     /////event to sign up a new user from signup page
+    function checkFromEmailLink(){
+      if(window.location.hash.split('/')[3] && window.location.hash.split('/')[2] == 'loginportal'){
+        console.log('made it');
+        var email = window.location.hash.split('/')[3];
+        console.log(email);
+        $('.signupEmail').val(email);
+      }
+    }
+    checkFromEmailLink();
+
     $('.signupSubmit').on('click', function(){
       console.log('lolll');
       var email = $('.signupEmail').val();
