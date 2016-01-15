@@ -19,7 +19,11 @@
 .allSignsContainer {
   width: 900px;
   height: 500px;
-
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #F6FDFA;
+  border: 2px solid #CCCCCC;
+  border-radius: 3px;
 }
 
 .bannerBottom {
@@ -2620,79 +2624,92 @@
   color: #A7A7A7;
 }
 
-.signupContainer {
-  position: absolute;
-  width: 45%;
-  height: 525px;
-  background-color: gray;
-  margin: 100px 0 0 2%;
-  display: inline-block;
-}
-
-.signupContent {
-  display: block;
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 35px;
-  font-size: 30px;
-  text-align: center;
-  position: relative;
-  font-style: bolder;
-}
-
-.signupControls {
-  display: block;
-}
-
-.signupInput {
-  height: 55px;
-  font-size: 28px;
-  width: 70%;
-  margin-left: 15%;
-  margin-top: 35px;
-  text-align: center;
-}
-
-.signupSubmit {
-  width: 25%;
-  margin-left: 37.50%;
-  height: 60px;
-  margin-top: 25px;
-  font-size: 25px;
-}
-
 .signinContainer {
-  width: 45%;
+  width: 437px;
   margin-left: 2%;
-  outline: 2px solid blue;
   display: inline-block;
-}
-
-.signinContent {
-  display: block;
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 35px;
-  font-size: 30px;
-  text-align: center;
-  position: relative;
-  font-style: bolder;
+  margin-top: 25px;
 }
 
 .signinControls {
   display: block;
 }
 
-.signinInput {
-  height: 55px;
-  font-size: 28px;
-  width: 70%;
-  margin-left: 15%;
-  margin-top: 35px;
+.signinDescription {
+  color: #999999;
+  font-size: 16px;
+  margin-top: 30px;
+}
+
+.signinDescriptionBreak {
+  display: inline-block;
+  margin-top: 30px;
+}
+
+.signinEmail {
+  margin-top: 15px;
+}
+
+.signinIn {
+  width: 95%;
+  height: 35px;
+  font-size: 15px;
+  padding-left: 10px;
+  margin-top: 15px;
+}
+
+.signinPassword {
+  margin-top: 25px;
+}
+
+.signinReturning {
+  font-weight: 800;
+  margin-top: 45px;
+}
+
+.signinSend {
+  width: 140px;
+  height: 45px;
+  color: white;
+  background-color: #3CB878;
+  border-radius: 3px;
+  margin-top: 65px;
+  font-size: 16px;
+  padding-top: 7px;
   text-align: center;
 }
 
-.signinSubmit {
+.signinWelcome {
+  font-size: 31px;
+  color: #666666;
+}
+
+.signupContainer {
+  position: absolute;
+  width: 437px;
+  margin-left: 10px;
+  height: 90%;
+  display: inline-block;
+  border-left: 1px solid #CCCCCC;
+  margin-top: 20px;
+
+}
+
+
+.signupControls {
+  display: block;
+  width: 95%;
+  margin-left: 5%;
+}
+
+.signupInput {
+  width: 90%;
+  height: 35px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.signupSubmit {
   width: 25%;
   margin-left: 37.50%;
   height: 60px;

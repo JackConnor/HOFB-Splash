@@ -272,10 +272,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<input class='newProductName' placeholder='New Product Name'>"+
               '<select class="target newProductModalDropdown" id="newProductModalDropdown">'+
                 '<option selected="selected">Please Choose Your Clothing Type</option>'+
-                '<option value="dress">Dress'+ '</option>'+
-              '  <option value="pants" disabled>Pants</option>'+
-              '  <option value="skirt" disabled>Skirt</option>'+
-              '  <option value="shirt" disabled>Shirt</option>'+
+                '<option value="dress">Dress</option>'+
+              '  <option value="pants">Pants</option>'+
+              '  <option value="skirt">Skirt</option>'+
+              '  <option value="shirt">Shirt</option>'+
               '</select>'+
               '<select class="target newProductModalDropdownSeason">'+
                 '<option selected="selected">Please Choose Your Season</option>'+
@@ -806,7 +806,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           $('.bodyview').prepend(
             "<div class='invisModal'>"+
               "<div class='confirmSave'>"+
-                "<p class='confirmDeleteText'>Are you sure you want to delete this product?</p>"+
+                "<p class='confirmDeleteText'>Are you sure you want to delete this project?</p>"+
                 "<div class='deleteButton deleteButtonNo'>No</div>"+
                 "<div id='"+productId+"' class='deleteButton deleteButtonYes'>Yes</div>"+
               "</div>"+
@@ -827,6 +827,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           })
           $('.deleteButtonNo').on('click', function(){
             $('.designerDashDeleteProduct').remove();
+            $('.invisModal').remove();
           })
         })
         $('.projectCellHoverContainer').on('mouseleave', function(evt){
@@ -1340,7 +1341,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 "</div>"+
                 "<div class='dashTourTitle'>TOUR HOFB</div>"+
                 "<div class='dashTourDescription'>"+
-                  "You've just landed on the dashboard, where you manage all of your projects. Would you liek a Tour to get started?"+
+                  "You've just landed on the dashboard, where you manage all of your projects. Would you like a Tour to get started?"+
                 "</div>"+
                 '<div class="dashNoTour">'+
                   "No Thanks"+

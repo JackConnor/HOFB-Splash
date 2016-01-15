@@ -13,6 +13,10 @@ var passportLocal  = require('passport-local');
 var multer         = require('multer');
 var upload         = multer({ dest: './uploads/'});
 var cloudinary     = require('cloudinary');
+var https = require('https');
+console.log(https);
+var fs = require('fs');
+console.log(fs);
 
 cloudinary.config({
   cloud_name: 'hofb'
