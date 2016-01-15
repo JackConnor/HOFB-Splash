@@ -443,33 +443,38 @@ module.exports = function(app){
     console.log(password);
     User.findOne({'email': req.body.email}, function(err, user){
       if(err){console.log(err)}
-      console.log(user);
-      console.log(user.password);
-      console.log(user.passwordDigest);
-      console.log(req.body.password);
-      console.log(user.validPassword(req.body.password));
-      if (user && user.validPassword(password)) {
-        console.log(user);
-        if(!user.signins){
-          user.signins = 0;
-        }
-        console.log('before');
-        console.log(user);
-        user.signins += 1;
-        console.log('after');
-        console.log(user);
-        user.save(function(err, user){
-          var userId = user._id;
-          var status = user.status;
-          var secret = process.env.JWT_TOKEN_SECRET;
-          //////user password verified
-          ///////iss == issuer (us), name = the user's id, and sub = the number of times they've logged in
-          var token = jwt.sign({iss: "hofb.com", name: user._id, sub: user.signins, aud: "designer"}, secret, {expiresIn: "2h", audience: user.status})
-          res.json(token);
-        })
+      else if(user == null){
+        res.json('no user')
       }
       else {
-        res.json({data: 'sorry no token'})
+        console.log(user);
+        console.log(user.password);
+        console.log(user.passwordDigest);
+        console.log(req.body.password);
+        console.log(user.validPassword(req.body.password));
+        if (user.validPassword(password)) {
+          console.log(user);
+          if(!user.signins){
+            user.signins = 0;
+          }
+          console.log('before');
+          console.log(user);
+          user.signins += 1;
+          console.log('after');
+          console.log(user);
+          user.save(function(err, user){
+            var userId = user._id;
+            var status = user.status;
+            var secret = process.env.JWT_TOKEN_SECRET;
+            //////user password verified
+            ///////iss == issuer (us), name = the user's id, and sub = the number of times they've logged in
+            var token = jwt.sign({iss: "hofb.com", name: user._id, sub: user.signins, aud: "designer"}, secret, {expiresIn: "2h", audience: user.status})
+            res.json(token);
+          })
+        }
+        else {
+          res.json({data: 'password incorrect'})
+        }
       }
     })
   })
@@ -477,7 +482,9 @@ module.exports = function(app){
   ///////check the users status from the jwt web token (as "audience")/////
   app.get('/api/checkstatus/:jwt', function(req, res){
     var token = req.params.jwt;
+    console.log(token);
     jwt.verify(token, process.env.JWT_TOKEN_SECRET, function(err, decodedToken){
+      console.log(decodedToken);
       if(err){console.log(err)}
       ////////this returns either the string "designer", "buyer", "admin", or "superAdmin"
       res.json(decodedToken);
