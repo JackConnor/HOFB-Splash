@@ -844,20 +844,20 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
     ///////////////////////////////////////////////
     //////Begin logic for photo popup modal////////
-    $('.newProductCurrentImage').on('click', function(){
-      $('.bodyview').prepend(
-        '<div class="invisModal">'+
-          "<div class='modalPhotoHolder'>"+
-            "<img class='modalImage' src='"+$('.newProductCurrentImage').attr('src')+"'>"+
-          '</div>'+
-        '</div>'
-      )
-      $('.invisModal').on('click', function(evt){
-        if($(evt.target)[0].classList[0] == "invisModal"){
-          $('.invisModal').remove();
-        }
-      })/////function to view a full page modal on click
-    });
+    // $('.newProductCurrentImage').on('click', function(){
+    //   $('.bodyview').prepend(
+    //     '<div class="invisModal">'+
+    //       "<div class='modalPhotoHolder'>"+
+    //         "<img class='modalImage' src='"+$('.newProductCurrentImage').attr('src')+"'>"+
+    //       '</div>'+
+    //     '</div>'
+    //   )
+    //   $('.invisModal').on('click', function(evt){
+    //     if($(evt.target)[0].classList[0] == "invisModal"){
+    //       $('.invisModal').remove();
+    //     }
+    //   })/////function to view a full page modal on click
+    // });
     //////End logic for photo popup modal//////////
     ///////////////////////////////////////////////
 
