@@ -17,7 +17,13 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
 
     ///////if someon is a beta user we want to kick them to dashboard, which kicks them to sigup if they're not logged in
     console.log(window.location.host.split('').slice(0,4).join(''));
-
+    function checkBetaUrl(){
+      var clip = window.location.host.split('').slice(0,4).join('');
+      if(clip == 'beta'){
+        window.location.hash = "/designer/dashboard";
+        window.location.reload();
+      }
+    }
     /////post a new user
 
     /////collect all of our emails on splash page
