@@ -136,6 +136,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
 
     function loadData(productObject){
+      console.log(productObject);
       //////load text inputs
       $('.newProductTitle').val(productObject.name)
       $('.newProductDescription').val(productObject.description);
@@ -194,25 +195,26 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         }
       }
       addColors();
-      // function addAccessories(){
-      //   var buttonHtmlArray = $('.createButton');
-      //   var currentValues = productObject.buttons;
-      //   for (var i = 0; i < buttonHtmlArray.length; i++) {
-      //     var elType = buttonHtmlArray[i].classList[1].slice(6, 20);
-      //     for (var j = 0; j < currentValues.length; j++) {
-      //       if( elType == currentValues[j]){
-      //         $(buttonHtmlArray[i]).addClass('picked');
-      //         $(buttonHtmlArray[i]).attr('id', "picked_Button_"+currentValues[j]);
-      //         $(buttonHtmlArray[i]).css({
-      //           backgroundColor: "blue"
-      //         })
-      //       }
-      //     }
-      //   }
-      // }
-      // addAccessories();
+      function addAccessories(){
+        var buttonHtmlArray = $('.createButton');
+        var currentValues = productObject.buttons;
+        for (var i = 0; i < buttonHtmlArray.length; i++) {
+          var elType = buttonHtmlArray[i].classList[1].slice(6, 20);
+          for (var j = 0; j < currentValues.length; j++) {
+            if( elType == currentValues[j]){
+              $(buttonHtmlArray[i]).addClass('picked');
+              $(buttonHtmlArray[i]).attr('id', "picked_Button_"+currentValues[j]);
+              $(buttonHtmlArray[i]).css({
+                backgroundColor: "blue"
+              })
+            }
+          }
+        }
+      }
+      addAccessories();
       swatchLogic("Fabric");
       swatchLogic("Color");
+      swatchLogic("Accessory");
     }
   ////////////////////////////
   ////////////////////////////
@@ -246,7 +248,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   swatchLogic("Fabric");
   swatchLogic("Color");
   swatchLogic("Button");
-  swatchLogic("Stitch");
+  swatchLogic("Accessory");
 
   ///////////////////////////////////////////////////
   ///////////////build function to collect and submit
