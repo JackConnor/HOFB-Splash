@@ -2693,13 +2693,18 @@
   margin-top: 15px;
 }
 
+.signinLogo {
+  width: 100px;
+}
+
+
 .signinPassword {
   margin-top: 25px;
 }
 
 .signinReturning {
   font-weight: 800;
-  margin-top: 45px;
+  margin-top: 30px;
 }
 
 .signinSend {
@@ -2708,7 +2713,7 @@
   color: white;
   background-color: #3CB878;
   border-radius: 3px;
-  margin-top: 65px;
+  margin-top: 30px;
   font-size: 16px;
   padding-top: 7px;
   text-align: center;
