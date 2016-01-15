@@ -63,7 +63,7 @@ angular.module('app.routes', ['ngRoute'])
       ,contollerAs: 'signup'
     })
 
-    .when('/designer/signup', {
+    .when('/designer/loginportal', {
       templateUrl: 'templates/_signup.html'
       ,controller: 'signupCtrl'
       ,contollerAs: 'signup'

@@ -4,7 +4,6 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
 
   signupCtrl.$inject = ['$http', 'checkstatus', 'signupUser', 'startSession', 'checkPw'];
   function signupCtrl($http, checkstatus, signupUser, startSession, checkPw){
-    window.localStorage.testing = "blahhhh";
     var self = this;
 
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
@@ -13,19 +12,53 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     /////event to sign up a new user from signup page
     $('.signupSubmit').on('click', function(){
       console.log('lolll');
+      var email = $('.signupEmail').val();
+      console.log(email);
+      var firstName = $('.signupFirstName').val();
+      console.log(firstName);
+      var lastName = $('.signupLastName').val();
+      console.log(lastName);
       var password = $('.signupPassword').val();
+      console.log(password);
       var rePassword = $('.signupPasswordRepeat').val();
+      console.log(rePassword);
+      var checked = document.querySelector('.signupCheck').checked;
+      console.log(checked);
       var status = window.location.hash.split('/')[1];
-      console.log(status);
-      if(password == rePassword){
-        signupUser.signup(startSession.startSession, password, status);
-        setTimeout(function(){
-          window.location.hash = "#/"+status+"/dashboard"
-        }, 1500)
-      } else {
-        alert('your passwords dont match');
+      if(email != '' && firstName != '' && lastName != '' && password != '' && rePassword != '' && checked){
+        ///////throught first layer to check that all firelds were filled
+        if(checkPassword(password) == checkPassword(rePassword)){
+          ////checked that passwords matched and passed our password filters
+          $http({
+            method: "POST"
+            ,url: "/api/users"
+            ,data: {email: email, password: password, firstname: firstName, lastname: lastName}
+          })
+          .then(function(newUser){
+            console.log(newUser);
+          })
+          setTimeout(function(){
+            window.location.hash = "#/"+status+"/dashboard"
+          }, 800)
+        }
+        else {
+          alert('whoops, looks like those two passwords dont match')
+        }
+      }
+      else {
+        alert("You missed a field, please take a second look, thank you")
       }
     })
+
+    /////a function to check that passwords are a-z 1-9
+    function checkPassword(password){
+        var pattern = /^[a-zA-Z0-9_-]{6,15}$/;
+        if(pattern.test(password)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     ///////function to signin a new user from signin page
     function signinUser(email, pw){
@@ -37,26 +70,20 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
         .then(function(decToken){
           console.log('in here');
           console.log(decToken);
-          var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
-          console.log(newUrl);
-          window.location.hash = newUrl;
+          setTimeout(function(){
+            var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
+            console.log(newUrl);
+            window.location.hash = newUrl;
+          })
         })
       });
     }
 
     // event to trigger starting a session from signin page
-    $('.signinSubmit').on('click', function(){
+    $('.signinSend').on('click', function(){
       var email = $('.signinEmail').val();
       var password = $('.signinPassword').val();
-      var rePassword = $('.signinPasswordRepeat').val();
-      if(password == rePassword){
-        console.log('tryig to sign in');
-        signinUser(email, password);
-        // window.location.hash = "#/designer/dashboard"
-
-      } else {
-        console.log('not matching dude');
-      }
+      signinUser(email, password);
     })
     ///////////////////////////////////////////
     /////////logic for the navbar and toggle///
