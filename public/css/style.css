@@ -2271,6 +2271,7 @@
   font-size: 30px;
   color: white;
   margin-right: 30px;
+  cursor: pointer;
 }
 
 .purchaseCloseModal {
