@@ -25,6 +25,7 @@
   border: 2px solid #CCCCCC;
   border-radius: 3px;
   margin-top: 115px;
+  font-family: 'Oxygen', sans-serif;
 }
 
 .bannerBottom {
@@ -49,6 +50,7 @@
   min-height: 100%;
   width: 100%;
   position: absolute;
+  font-family: 'Oxygen', sans-serif;
 }
 
 .btn-circle-default-user-icon {
@@ -534,6 +536,7 @@
   width: 100%;
   background-color: #EFE9EB;
   margin-top: 3px;
+  cursor:pointer;
 }
 
 .curatedCellImage {
@@ -849,15 +852,14 @@
   color: #666666;
 }
 
-/*////////////////////Universal CSS class////////////////////////////////////////*/
-/*add top level div class of page to apply the below font and text colors to entire page*/
+
 .designerDashboardPage, .userProfileContainer, .userProfileSettingsBar{
 
   font-family: 'Oxygen', sans-serif;
   color: #454444;
   background-color: #FEFDFA;
 }
-/*/////////////////////////////////////////////////////////////////////////////*/
+
 
 .designerDashboardGlyphiconUp {
     padding-left: 10px;
@@ -906,6 +908,7 @@
 .designerDashCollectionAddText {
   display: inline-block;
   margin-left: 3px;
+  cursor:pointer;
 }
 
 .designerDashCollectionCell {
@@ -1506,6 +1509,7 @@
   font-size: 27px;
   font-family: 'Oxygen', sans-serif;
   color:#FDFDFD;
+  cursor: pointer;
 }
 .navTitleRightLine{
   /*width: 120px;*/
@@ -1922,6 +1926,7 @@
   float: right;
   margin-right: 10px;
   margin-top: 5px;
+  cursor:pointer;
 }
 
 
@@ -2266,6 +2271,7 @@
   font-size: 30px;
   color: white;
   margin-right: 30px;
+  cursor: pointer;
 }
 
 .purchaseCloseModal {
@@ -2826,6 +2832,7 @@
   border-radius: 3px;
   font-size: 22px;
   text-align: center;
+  cursor:pointer;
 }
 
 .ui-state-hover, .ui-widget-content .ui-state-hover{
