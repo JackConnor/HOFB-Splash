@@ -1153,6 +1153,8 @@
   padding-left: 25px;
 }
 
+
+
 .howToCell {
   min-height: 100%;
   width: 33%;
@@ -1230,7 +1232,7 @@
   position: fixed;
   width: 100%;
   height: 120%;
-  background-color:rgba(0, 0, 0, .7);
+  background-color:rgba(38, 38, 57, .9);
   z-index: 5;
 }
 
@@ -1530,10 +1532,14 @@
 .newProductBegin {
   width: 160px;
   height: 50px;
-  margin-top: 20px;
+  margin-top: 15px;
   margin-left: auto;
   font-size: 22px;
   padding: 0;
+  color: #fff;
+  font-weight: 300;
+  cursor: pointer;
+  padding-top: 9px;
 }
 
 .newProductButtonHolder {
@@ -1570,12 +1576,14 @@
 }
 
 .newProductBegin {
-  height: 40px;
+  height: 42px;
   width: 70%;
   margin-left: 15%;
   background-color: #3CB878;
-  margin-top: 10px;
+  margin-top: 15px;
   border-radius: 3px;
+  font-size:16px;
+  border:1px solid #598527;
 }
 
 .newProductCenterColumn {
@@ -1742,12 +1750,13 @@
 .newProductModalContent {
   margin-top: 50px;
   text-align: center;
+  background-color: #f6fdfa;
 }
 
 .newProductModalContent h4{
   width: 80%;
   margin-left: 10%;
-  margin-top: 50px;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -1755,18 +1764,26 @@
   font-size: 24px;
   float: right;
   margin-right: 10px;
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+}
+
+.newProductModalDelete:hover {
+  color: #333;
 }
 
 #newProductModalDropdown {
   display: block;
   width: 70%;
-  padding: 0;
+  padding:5px 20px;
   border: 1px solid #ccc;
   border-radius: 3px;
-  font-size: 18px;
+  font-size: 15px;
   overflow: hidden;
   margin-top: 15px;
   margin-left: 15%;
+  color: #666;
 }
 
 .newProductModalDropdownSeason {
@@ -1779,25 +1796,48 @@
   overflow: hidden;
   margin-top: 15px;
   margin-left: 15%;
+  padding:5px 20px;
 }
 
 .newProductModalHolder {
   width: 40%;
   /*margin-left: 25%;*/
   vertical-align: top;
-  background-color: white;
-  outline: 2px solid gray;
+  background-color: #f6fdfa;
+  border-radius: 3px;
+  /*outline: 2px solid gray;*/
   height: 550px;
   margin-top: 5%;
   z-index: 6;
   display: inline-block;
 }
 
+.newProductModalDropdown, .newProductModalDropdownSeason{
+  border-radius: 3px;
+  border:1px solid #c2c2c2;
+  padding:5px 20px;
+  font-size: 15px;
+  color: #666;
+  cursor: pointer;
+}
+
+.newProductModalTitle{
+    font-size: 30px;
+    color: #666;
+}
+
+.newProductModalSubTitle{
+    color: #666;
+}
+
 .newProductName {
   height: 30px;
   width: 70%;
-  font-size: 20px;
-  text-align: center;
+  font-size: 15px;
+  border-radius: 3px;
+  border:1px solid #c2c2c2;
+  padding:5px 20px;
+  color: #666;
 }
 
 .newProductRightColumn {
