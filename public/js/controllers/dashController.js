@@ -1333,15 +1333,32 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.bodyview').prepend(
           '<div class="dashTour0 tourElem">'+
             "<div class='dashTourController'>"+
-              '<div class="dashYesTour">'+
-                "I'd like a tour"+
-              "</div>"+
-              '<div class="dashNoTour">'+
-                "No Thanks"+
+              "<i class='fa fa-times deleteTour'></i>"+
+              "<div class='dashTourInner'>"+
+                "<div class='dashTourCountIcon'>"+
+                  1+
+                "</div>"+
+                "<div class='dashTourTitle'>TOUR HOFB</div>"+
+                "<div class='dashTourDescription'>"+
+                  "You've just landed on the dashboard, where you manage all of your projects. Would you liek a Tour to get started?"+
+                "</div>"+
+                '<div class="dashNoTour">'+
+                  "No Thanks"+
+                "</div>"+
+                '<div class="dashYesTour">'+
+                  "I'd like a tour"+
+                "</div>"+
               "</div>"+
             "</div>"+
           '</div>'
         );
+        $('.deleteTour').on('click', function(){
+          $('.tourElem').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
+          self.tourCounter = 7;
+        })
         $('.designerDashboardPage').css({
           opacity: 0.3
         });
