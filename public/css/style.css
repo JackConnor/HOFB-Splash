@@ -2706,6 +2706,7 @@
   font-size: 16px;
   padding-top: 7px;
   text-align: center;
+  cursor: pointer;
 }
 
 .signinWelcome {
@@ -2716,6 +2717,7 @@
 .signupCheck {
   display: inline-block;
   padding-left: 5px;
+  cursor: pointer;
 }
 .signupCheckHolder {
   margin-top: 20px;
@@ -2759,6 +2761,7 @@
   font-size: 16px;
   padding-top: 7px;
   text-align: center;
+  cursor: pointer;
 }
 
 .singleContentHolder {

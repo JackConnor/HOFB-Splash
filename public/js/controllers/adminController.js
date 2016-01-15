@@ -650,10 +650,10 @@ angular.module('adminController', ['allProjectsFactory', 'checkPwFactory', 'getS
     ////End Filtering///////////////
     ////////////////////////////////
 
-    ///logout button functionality
+    // logout button functionality
     $('.logoutButton').on('click', function(){
       window.localStorage.hofbToken = "";
-      window.location.hash = "#/signin"
+      window.location.hash = "#/designer/loginportal"
     })
 
     ///////////////////////

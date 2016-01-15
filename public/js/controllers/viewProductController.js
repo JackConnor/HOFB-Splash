@@ -50,16 +50,11 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
 
     var productId = window.location.hash.split('/')[3];////grab the id of the data in order to prepopulate the page
 
-    ///logout button functionality
+    // logout button functionality
     $('.logoutButton').on('click', function(){
       window.localStorage.hofbToken = "";
-      window.location.hash = "#/signin"
+      window.location.hash = "#/designer/loginportal"
     })
-
-    // $('.logoutButton').on('click', function(){
-    //   window.localStorage.hofbToken = "";
-    //   window.location.hash = "#/designer/loginportal"
-    // })
 
 
 
