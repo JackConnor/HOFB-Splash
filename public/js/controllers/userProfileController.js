@@ -250,4 +250,11 @@ $(".userProfileImageFileUpload").on('change', function (){
   }
   /////end of navbar dropdown logic/////////////
   ////////////////////////////////////////////////
+
+  // logout button functionality
+  $('.logoutButton').on('click', function(){
+    window.localStorage.hofbToken = "";
+    window.location.hash = "#/designer/loginportal"
+  })
+
 }

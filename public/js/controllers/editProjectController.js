@@ -837,10 +837,10 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     // $('.tempForm').submit();
   }
 
-  ///logout button functionality
+  // logout button functionality
   $('.logoutButton').on('click', function(){
     window.localStorage.hofbToken = "";
-    window.location.hash = "#/signin"
+    window.location.hash = "#/designer/loginportal"
   })
 
 
