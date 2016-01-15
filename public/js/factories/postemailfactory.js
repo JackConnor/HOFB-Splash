@@ -15,11 +15,11 @@ angular.module('newemailfactory', [])
       .then(function(email){
         $http({
           method: "POST"
-          ,url: "/api/sendemail"
-          ,data: {email: email.data.email}
+          ,url: "/api/email/betasignup"
+          ,data: {email: email.data.email, signupLink: 'beta.hofb.com/#/signin/'}
         })
         .then(function(email){
-          window.location.reload();
+          console.log(email);
         })
       })
     }

@@ -573,7 +573,7 @@ module.exports = function(app){
         ,html:
         "<divs>"+
           "<img src='http://i.imgur.com/f5T6U5B.png' style='width:250px'>"+
-          "<h2 style='color:#737373'>Thank you for joining HOFB. We’re gearing up to introduce you to our exciting new platform, created solely for the purpose of making your work and life easier! In the coming days and weeks, you will receive a link via e-mail which will invite you to enter and start using the closed beta HOFB platform. "+
+          "<h2 style='color:#737373'>Thank you for joining HOFB. We’re gearing up to introduce you to our exciting new platform, created solely for the purpose of making your work and life easier! In the coming days and weeks, you will receive a link via e-mail which will invite you to enter and start using the closed beta HOFB platform.</h2> "+
           "<br>"+
           "Please bear with us while we onboard users gradually.</h2>"+
           "<h2 style='color:#293d3d'>HOFB</h2>"+
@@ -591,23 +591,45 @@ module.exports = function(app){
 
   ///////////Password verification email /////////////////
   app.post('/api/email/password', function(req, res){
-    console.log('yooo');
-    console.log(req.body);
     var resetLink = req.body.resetLink;
     mandrill_client.messages.send({
       message: {
         from_email: "support@hofb.com"
         ,html:
-        "<divs>"+
+        "<div>"+
           "<img src='http://i.imgur.com/f5T6U5B.png' style='width:250px'>"+
           "<h2 style='PW reset Link here"+
           "<br>"+
           "Click on the link within this email to update your passsword</h2>"+
           "<h2 style='color:#293d3d'>HOFB</h2>"+
           "<h3 style='color:#293d3d'>Los Angeles</h3>"+
-            resetLink+
+          "<h2>Reset Your Password Here:"+resetLink+"</h2>"+
         "</div>"
         ,subject: "HOFB Password Verification"
+        ,to:[{
+          email: req.body.email
+        }]
+      }
+    }, function(data){
+      res.json(data)
+    })
+  })
+
+  ///////////Beta Signup Email /////////////////
+  app.post('/api/email/betasignup', function(req, res){
+    var signupLink = req.body.signupLink;
+    mandrill_client.messages.send({
+      message: {
+        from_email: "support@hofb.com"
+        ,html:
+        "<div>"+
+          "<img src='http://i.imgur.com/f5T6U5B.png' style='width:250px'>"+
+          "<h2 style='color:#737373'>Thank you for joining HOFB. We’re gearing up to introduce you to our exciting new platform, created solely for the purpose of making your work and life easier! In the coming days and weeks, you will receive a link via e-mail which will invite you to enter and start using the closed beta HOFB platform.</h2> "+
+          "<h2 style='color:#293d3d'>HOFB</h2>"+
+          "<h3 style='color:#293d3d'>Los Angeles</h3>"+
+          "<h2>Signup Here:"+signupLink+"</h2>"+
+        "</div>"
+        ,subject: "HOFB Signup"
         ,to:[{
           email: req.body.email
         }]
