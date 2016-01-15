@@ -24,7 +24,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         self.decodedToken = decodedToken;
         ///////note: User Id is ""
         if(decodedToken.data.aud != "designer"){
-          window.location.hash = '#/signin'
+          window.location.hash = '#/designer/loginportal'
         }
         $http({
           method: "GET"
