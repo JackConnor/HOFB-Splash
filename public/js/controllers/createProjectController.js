@@ -44,10 +44,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var fabricsfunc = function(){
         var allFabrics = [];
         for(fabric in allSwatches.fabrics){
+          console.log(fabric);
           allFabrics.push(fabric);
           $('.createFabricContainer').append(
             '<div class="createFabricCellHolder col-xs-4">'+
-              '<img src='+allSwatches.fabrics[fabric]+' class="createFabric create'+fabric+'">'+
+              '<img src='+allSwatches.fabrics[fabric].url+' class="createFabric create'+fabric+'">'+
             "</div>"
           )
         }

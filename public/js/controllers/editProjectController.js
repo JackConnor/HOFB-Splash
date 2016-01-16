@@ -39,7 +39,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           allFabrics.push(fabric);
           $('.createFabricContainer').append(
             '<div class="createFabricCellHolder col-xs-4">'+
-              '<img src='+allSwatches.fabrics[fabric]+' class="createFabric create'+fabric+'">'+
+              '<img src='+allSwatches.fabrics[fabric].url+' class="createFabric create'+fabric+'">'+
             "</div>"
           )
         }

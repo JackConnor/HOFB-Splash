@@ -153,7 +153,11 @@
 }
 
 .circle0 {
-  margin-left: 55px;
+  margin-left: 75px;
+}
+
+.circle2 {
+  margin-left: 35px;
 }
 
 .circleContainer {
@@ -1958,15 +1962,19 @@
 }
 
 .newProductTab {
-  height: 30px;
-  margin-top: 15px;
+  height: 35px;
+  /*margin-left: 25px;*/
+  width: 105px;
+  margin-top: 10px;
   color: white;
   background-color: #232730;
   font-size: 16px;
   text-align: center;
-  border-top-left-radius:8px;
-  border-top-right-radius:8px;
+  border-top-left-radius:3px;
+  border-top-right-radius:3px;
   cursor:pointer;
+  padding-top: 5px;
+  font-size: 15px;
 }
 
 .newProductTagsHolder {
