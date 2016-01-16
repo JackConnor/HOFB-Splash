@@ -158,7 +158,9 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           /////function to add colors to the popup
           for(color in allColors){
             $('.colorModalColorContainer').append(
-              "<div class='colorModalColorCell colorModal"+color+" col-xs-6'>"+
+              "<div class='colorModalColorCell col-xs-6'>"+
+                "<div class='colorModalCellInner colorModal"+color+"'>"+
+                "</div>"+
               "</div>"
             )
             console.log(allColors[color]);
