@@ -268,7 +268,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "<div class='newProductModalContent'>"+
               "<h3 class='newProductModalTitle'>Welcome to your new project</h3>"+
               "<h4>Studio page is for you to create design projects. Enter all the important details for your projects to be curated for our mass retail partners. Let’s start with these small details.</h4>"+
-              "<h4>Let's start with these small details.</h4>"+
+              "<h4 class='newProductModalSubTitle'>Let's start with these small details.</h4>"+
               "<input class='newProductName' placeholder='Project Name'>"+
               '<select class="target newProductModalDropdownSeason">'+
                 '<option selected="selected">Season</option>'+
