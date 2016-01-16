@@ -266,12 +266,19 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           "<div class='newProductModalHolder'>"+
             "<div class='newProductModalDelete'><i class='fa fa-times'></i></div>"+
             "<div class='newProductModalContent'>"+
-              "<h3>Welcome to your New Product</h3>"+
-              "<h4>Here we will be building your new Product. It's important to give us as much detail as possible, so that our buyers can evaluate what they are getting</h4>"+
+              "<h3 class='newProductModalTitle'>Welcome to your new project</h3>"+
+              "<h4>Studio page is for you to create design projects. Enter all the important details for your projects to be curated for our mass retail partners. Let’s start with these small details.</h4>"+
               "<h4>Let's start with these small details.</h4>"+
-              "<input class='newProductName' placeholder='New Product Name'>"+
+              "<input class='newProductName' placeholder='Project Name'>"+
+              '<select class="target newProductModalDropdownSeason">'+
+                '<option selected="selected">Season</option>'+
+                '<option value="summer">Summer'+ '</option>'+
+              '  <option value="spring">Spring</option>'+
+              '  <option value="fall">Fall</option>'+
+              '  <option value="winter">Winter</option>'+
+              '</select>'+
               '<select class="target newProductModalDropdown" id="newProductModalDropdown">'+
-                '<option selected="selected">Please Choose Your Clothing Type</option>'+
+                '<option selected="selected">Product Type</option>'+
                 '<option value="dress">Dress</option>'+
               '  <option value="pants" disabled>Pants</option>'+
               '  <option value="skirt" disabled>Skirt</option>'+
@@ -284,7 +291,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               '  <option value="fall" disabled>Fall</option>'+
               '  <option value="winter" disabled>Winter</option>'+
               '</select>'+
-              "<div class='newProductBegin'>Ok, lets start</div>"+
+              ///////////////////////////////////////////////////////////////////
+              "<div class='newProductBegin'>START PROJECT</div>"+
             '</div>'+
           '</div>'+
           "<div class='modalFiller'>"+
