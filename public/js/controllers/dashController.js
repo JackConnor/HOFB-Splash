@@ -270,13 +270,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<h4>Studio page is for you to create design projects. Enter all the important details for your projects to be curated for our mass retail partners. Let’s start with these small details.</h4>"+
               "<h4>Let's start with these small details.</h4>"+
               "<input class='newProductName' placeholder='Project Name'>"+
-              '<select class="target newProductModalDropdownSeason">'+
-                '<option selected="selected">Season</option>'+
-                '<option value="summer">Summer'+ '</option>'+
-              '  <option value="spring">Spring</option>'+
-              '  <option value="fall">Fall</option>'+
-              '  <option value="winter">Winter</option>'+
-              '</select>'+
               '<select class="target newProductModalDropdown" id="newProductModalDropdown">'+
                 '<option selected="selected">Product Type</option>'+
                 '<option value="dress">Dress</option>'+
