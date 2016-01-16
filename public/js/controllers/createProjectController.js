@@ -126,6 +126,18 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
               "<div class='colorModalContainer'>"+
               '<i class="fa fa-times deleteColorModal"></i>'+
                 "<div class='colorModalInner'>"+
+                  "<div class='colorModalLeftColumn'>" +
+                    "<div class='colorModalMainImage'>"+
+                    "</div>"+
+                    "<div class='colorModalTitle'>"+
+                      "This Fabric"+
+                    "</div>"+
+                    "<div class='colorModalDescription'>"+
+                      "Fabric description goes here"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='colorModalRightColumn'>" +
+                  "</div>"+
                 "</div>"+
               "</div>"+
             "</div>"
