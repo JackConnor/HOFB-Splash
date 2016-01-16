@@ -1234,6 +1234,19 @@
   z-index: 5;
 }
 
+.learnModalHofb {
+  width: 250px;
+  height: 350px;
+  top: 200px;
+  left: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid gray;
+  z-index: 16;
+  position: absolute;
+  background-color: white;
+}
+
 .logoImage {
   height: 173px;
 }

@@ -273,16 +273,16 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               '<select class="target newProductModalDropdown" id="newProductModalDropdown">'+
                 '<option selected="selected">Please Choose Your Clothing Type</option>'+
                 '<option value="dress">Dress</option>'+
-              '  <option value="pants">Pants</option>'+
-              '  <option value="skirt">Skirt</option>'+
-              '  <option value="shirt">Shirt</option>'+
+              '  <option value="pants" disabled>Pants</option>'+
+              '  <option value="skirt" disabled>Skirt</option>'+
+              '  <option value="shirt" disabled>Shirt</option>'+
               '</select>'+
               '<select class="target newProductModalDropdownSeason">'+
                 '<option selected="selected">Please Choose Your Season</option>'+
                 '<option value="summer">Summer'+ '</option>'+
-              '  <option value="spring">Spring</option>'+
-              '  <option value="fall">Fall</option>'+
-              '  <option value="winter">Winter</option>'+
+              '  <option value="spring" disabled>Spring</option>'+
+              '  <option value="fall" disabled>Fall</option>'+
+              '  <option value="winter" disabled>Winter</option>'+
               '</select>'+
               "<div class='newProductBegin'>Ok, lets start</div>"+
             '</div>'+
@@ -395,10 +395,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               '<div class="invisModal">'+
                 '<div class="sampleRequestAcceptContainer">'+
                   "<div class='deleteSampleRequestAcc'><i class='fa fa-times'></i></div>"+
-                  "<span class='sampleRequestCongrats'><h2>Congratulations</h2></span>"+
+                  "<span class='sampleRequestCongrats'><h2>Congratulations!</h2></span>"+
                   "<span class='sampleRequestInfo'>Your design has been selected for sampling</span>"+
                   "<span class='sampleRequestChanges'>"+
-                    "<p>If changes are requested to the product you will be alerted through the dashboard. Thank you for helping build the future of fashion.</p>"+
+                    "<p>If changes are requested to a selected design you will receive a dashboard notice. <br>Thank you!.</p>"+
                   "</span>"+
                   "<div class='sampleRequestToggleContainer'>"+
                     "<span class='sampleHow'>How would you like to send the sample?</span>"+
@@ -421,6 +421,18 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 "</div>"+
               "</div>"
             )
+
+            $('.sampleLearnMoreHOFB').on('mouseenter', function(evt){
+              console.log('trimm');
+              $('.sampleLearnMoreHOFB').append(
+                "<div class='learnModalHofb'>"+
+                  "Selecting HOFB saves you time and reduces DYI cost!<br>We handle all materials sourcing and pattern making!We handle any pattern revisions, garment alterations and sample revisions!<br>We handle all necessary details of for all sampling and manufacturing of the product. <br>Two quality control teams inspect sample(s) before they are sent to retailers.<br>You will receive one FREE sample copy of your selected product.<br>You will receive status update and live tracking of making of your samples and delivery notice to retailer."+
+                "</div>"
+              )
+            })
+            $('.sampleLearnMoreHOFB').on('mouseleave', function(evt){
+              $('.learnModalHofb').remove();
+            })
             /////first, we make a function to delete modal
             $('.deleteSampleRequestAcc').on('mouseenter', function(){
               $(this).css({
@@ -508,7 +520,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             ,opacity: 1
           })
         })
-        $('.curatedCell').on('click', function(evt){
+        $('.curatedCellImage').on('click', function(evt){
           var thisId = $(evt.target).attr('id');
           window.location.hash = "#/view/product/"+ thisId;
         })
