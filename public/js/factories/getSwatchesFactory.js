@@ -8,6 +8,7 @@ angular.module('getSwatchesFactory', [])
         fabrics: {
           cotton_voile: {
             url: "http://cdn.shopify.com/s/files/1/0400/5101/products/FFseernavy_grande.jpg?v=1437514918"
+            ,description: "Voile is a lightweight, semi-sheer fabric with a great drape."
             ,colors: {
               red: '#A80000'
               ,blue: "#58ACFA"
@@ -19,6 +20,7 @@ angular.module('getSwatchesFactory', [])
           }
           ,cotton_lawn: {
             url: "http://i.ebayimg.com/images/g/EB8AAOSwk5FUvXtS/s-l300.jpg"
+            ,description: "Lawn is very similar to cotton voile but is slightly crisper."
             ,colors: {
               red: '#A80000'
               ,blue: "#58ACFA"
@@ -30,6 +32,7 @@ angular.module('getSwatchesFactory', [])
           }
           ,rayon_challis: {
             url: "https://dtpmhvbsmffsz.cloudfront.net/posts/2015/05/08/554d8bdbbcd4a73a1d00565b/s_554d8bdbbcd4a73a1d00565c.jpg"
+            ,description: "Rayon challis is a smooth, lightweight fabric. It drapes well and is slightly heavier than other lightweight fabrics, like cotton voile and cotton lawn."
             ,colors: {
               red: '#A80000'
               ,blue: "#58ACFA"
@@ -41,6 +44,7 @@ angular.module('getSwatchesFactory', [])
           }
           ,double_gauze: {
             url: "http://wiganhydroprinting.co.uk/wp-content/uploads/2014/04/clear-camo-300x3001.jpg"
+            ,description: "The double layer of Double gauze eradicates the main problem of gauze (the sheerness), while being light and breathabler."
             ,colors: {
               red: '#A80000'
               ,blue: "#58ACFA"
@@ -52,6 +56,7 @@ angular.module('getSwatchesFactory', [])
           }
           ,knit: {
             url: "http://www.arrow.gb.net/images/pages/finish-colours/material-finishes/veneer/walnut-r.jpg"
+            ,description: "Knit fabric is your go-to for any garment that needs to have a great deal of stretch."
             ,colors: {
               red: '#A80000'
               ,blue: "#58ACFA"
@@ -63,6 +68,7 @@ angular.module('getSwatchesFactory', [])
           }
           ,silk: {
             url: "http://static1.squarespace.com/static/52965deee4b0f580c1fe0b7d/52c88375e4b03b30610b4a0a/52c8845be4b0268360ddfb8c/1388874157418/LightRoyalNylon.jpg?format=300w"
+            ,description: "Silk is a lightweight, delicate fabric that drapes well. It has a slightly shimmery appearance. It also makes a great lining fabric."
             ,colors: {
               red: '#A80000'
               ,blue: "#58ACFA"
@@ -74,6 +80,7 @@ angular.module('getSwatchesFactory', [])
           }
           ,satin: {
             url: "http://demandware.edgesuite.net/aakh_prd/on/demandware.static/-/Sites-main/default/dwa303e31f/images/large/L7871.jpg"
+            ,description: "Satin can vary from lightweight to heavyweight, depending on the type of satin. Like silk, it has a glossy appearance."
             ,colors: {
               red: '#A80000'
               ,blue: "#58ACFA"
@@ -85,6 +92,7 @@ angular.module('getSwatchesFactory', [])
           }
           ,linen:{
             url: "http://d6lw7to1547c3.cloudfront.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/308744.jpg"
+            ,description: "Linen is a medium-weight fabric with little elasticity (hence the wrinkles), and is a popular choice for warm-weather anything."
             ,colors: {
               red: '#A80000'
               ,blue: "#58ACFA"
@@ -96,6 +104,7 @@ angular.module('getSwatchesFactory', [])
           }
           ,wool: {
             url: "https://www.shoponeonline.com/wp-content/uploads/denim-swatch.png"
+            ,description: "Wool is extremely hard-wearing and versatile. It’s also very warm and a good choice for colder weather garments."
             ,colors: {
               red: '#A80000'
               ,blue: "#58ACFA"

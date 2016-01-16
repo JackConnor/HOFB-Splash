@@ -119,6 +119,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         $('.create'+swatchType).on('click', function(evt){
           var target = $(evt.target);
           var fabricType = target[0].classList[1].slice(6, 100);
+          var fabricDescription = allSwatches.fabrics[fabricType].description;
           console.log(target);
           var allColors = allSwatches.fabrics[fabricType].colors;
           console.log(allColors);
@@ -134,10 +135,10 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
                     "<div class='colorModalMainImage'>"+
                     "</div>"+
                     "<div class='colorModalTitle'>"+
-                      "This Fabric"+
+                      fabricType.split('_').join(' ').toUpperCase() +
                     "</div>"+
                     "<div class='colorModalDescription'>"+
-                      "Fabric description goes here"+
+                      fabricDescription +
                     "</div>"+
                   "</div>"+
                   "<div class='colorModalRightColumn'>" +
