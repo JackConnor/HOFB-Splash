@@ -109,29 +109,51 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     ////////////////////////////////////////
     /////////Effects for carousel//////////
-    ////click effect for seasonsplash
+    ////click effect for highlighting
     function swatchLogic(swatchType){
       console.log(swatchType);
       ///////note: swatchType needs to be added as a capital, i.e. "Season"
-      $('.create'+swatchType).on('click', function(evt){
-        console.log('yoo');
-        console.log($(evt.target));
-        var type = $(evt.target)[0].classList[1].slice(6, 1000);
 
-        if($(evt.target).css('opacity') == 1 ){
-          $(evt.target).css({
-            opacity: 0.5
-            ,outline: "2px solid gray"
+      ///////fabrics hav a color popup modal, which we take care of here
+      if(swatchType == "Fabric"){
+        $('.create'+swatchType).on('click', function(evt){
+          var target = $(evt.target);
+          console.log(target);
+          $(evt.target).addClass('fabricColor');
+          ////////we add the color picking modal
+          $('.bodyview').append(
+            "<div class='invisModal'>"+
+              "<div class='colorModalContainer'>"+
+              '<i class="fa fa-times deleteColorModal"></i>'+
+                "<div class='colorModalInner'>"+
+                "</div>"+
+              "</div>"+
+            "</div>"
+          )
+          $('.deleteColorModal').on('click', function(){
+            $('.invisModal').remove();
           })
-          $(evt.target).attr('id', 'picked_'+swatchType+"_"+type)
-          $(evt.target).addClass('picked');
-        } else {
-          $(evt.target).css({
-            opacity: 1
-            ,outline: "none"
-          })
-        }
-      })
+        })
+      }
+      else {
+        $('.create'+swatchType).on('click', function(evt){
+          var type = $(evt.target)[0].classList[1].slice(6, 1000);
+
+          if($(evt.target).css('opacity') == 1 ){
+            $(evt.target).css({
+              opacity: 0.5
+              ,outline: "2px solid gray"
+            })
+            $(evt.target).attr('id', 'picked_'+swatchType+"_"+type)
+            $(evt.target).addClass('picked');
+          } else {
+            $(evt.target).css({
+              opacity: 1
+              ,outline: "none"
+            })
+          }
+        })
+      }
     }
     swatchLogic("Season");
     swatchLogic("Accessory");
@@ -577,15 +599,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var tags = $('.newProductTagsInput').val().split(' ');
       var vendor = $('.newProductVendor').val();
       var description = $('.newProductDescription').val();
-      var colorsFunc = function(){
-        var allPicked = $(".picked");
-        var colorsArray = [];
-        for (var i = 0; i < allPicked.length; i++) {
-          if(allPicked[i].id.split('_')[1] == 'Color')
-          colorsArray.push(allPicked[i].id.split('_')[2])
-        }
-        return colorsArray;
-      }
       var colors = colorsFunc();
       var fabricsFunc = function(){
         var allPicked = $(".picked");
@@ -597,25 +610,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         return fabricsArray;
       }
       var fabrics = fabricsFunc();
-      var seasonsFunc = function(){
-        var allPicked = $(".picked");
-        var seasonsArray = [];
-        for (var i = 0; i < allPicked.length; i++) {
-          if(allPicked[i].id.split('_')[1] == 'Season')
-          seasonsArray.push(allPicked[i].id.split('_')[2])
-        }
-        return seasonsArray;
-      }
-      var seasons = seasonsFunc();
-      var stitchesFunc = function(){
-        var allPicked = $(".picked");
-        var stitchesArray = [];
-        for (var i = 0; i < allPicked.length; i++) {
-          if(allPicked[i].id.split('_')[1] == 'Stitch')
-          stitchesArray.push(allPicked[i].id.split('_')[2])
-        }
-        return stitchesArray;
-      }
       var stitches = stitchesFunc();
       var accessoriesFunc = function(){
         var allPicked = $(".picked");

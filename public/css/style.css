@@ -232,6 +232,23 @@
   height: 70px;
 }
 
+.colorModalContainer {
+  width: 540px;
+  height: 415px;
+  margin-top: 80px;
+  background-color: #F6FDFA;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.colorModalInner {
+  position: absolute;
+  width: 460px;
+  height: 335px;
+  outline: 2px solid gray;
+  margin: 40px;
+}
+
 .commentBox {
     padding:10px;
     border-top:1px dotted #bbb;
@@ -834,6 +851,12 @@
 .deleteButtonYes {
   float: right;
   margin-right: 24%;
+}
+
+.deleteColorModal {
+  float: right;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
 .deleteCurateModal {
