@@ -6,15 +6,105 @@ angular.module('getSwatchesFactory', [])
     getSwatches = function(){
       var swatches = {
         fabrics: {
-          seersucker: "http://cdn.shopify.com/s/files/1/0400/5101/products/FFseernavy_grande.jpg?v=1437514918"
-          ,pleather: "http://i.ebayimg.com/images/g/EB8AAOSwk5FUvXtS/s-l300.jpg",
-          dockers: "https://dtpmhvbsmffsz.cloudfront.net/posts/2015/05/08/554d8bdbbcd4a73a1d00565b/s_554d8bdbbcd4a73a1d00565c.jpg"
-          ,camo: "http://wiganhydroprinting.co.uk/wp-content/uploads/2014/04/clear-camo-300x3001.jpg"
-          ,veneer: "http://www.arrow.gb.net/images/pages/finish-colours/material-finishes/veneer/walnut-r.jpg"
-          ,nylon: "http://static1.squarespace.com/static/52965deee4b0f580c1fe0b7d/52c88375e4b03b30610b4a0a/52c8845be4b0268360ddfb8c/1388874157418/LightRoyalNylon.jpg?format=300w"
-          ,leather: "http://demandware.edgesuite.net/aakh_prd/on/demandware.static/-/Sites-main/default/dwa303e31f/images/large/L7871.jpg"
-          ,cotton: "http://d6lw7to1547c3.cloudfront.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/308744.jpg"
-          ,denim: "https://www.shoponeonline.com/wp-content/uploads/denim-swatch.png"
+          cotton_voile: {
+            url: "http://cdn.shopify.com/s/files/1/0400/5101/products/FFseernavy_grande.jpg?v=1437514918"
+            ,colors: {
+              red: '#A80000'
+              ,blue: "#58ACFA"
+              ,white: "#FFFFFF"
+              ,black: "#000000"
+              ,green: "#458B00"
+              ,yellow: "#F2F5A9"
+            }
+          }
+          ,cotton_lawn: {
+            url: "http://i.ebayimg.com/images/g/EB8AAOSwk5FUvXtS/s-l300.jpg"
+            ,colors: {
+              red: '#A80000'
+              ,blue: "#58ACFA"
+              ,white: "#FFFFFF"
+              ,black: "#000000"
+              ,green: "#458B00"
+              ,yellow: "#F2F5A9"
+            }
+          }
+          ,rayon_challis: {
+            url: "https://dtpmhvbsmffsz.cloudfront.net/posts/2015/05/08/554d8bdbbcd4a73a1d00565b/s_554d8bdbbcd4a73a1d00565c.jpg"
+            ,colors: {
+              red: '#A80000'
+              ,blue: "#58ACFA"
+              ,white: "#FFFFFF"
+              ,black: "#000000"
+              ,green: "#458B00"
+              ,yellow: "#F2F5A9"
+            }
+          }
+          ,double_gauze: {
+            url: "http://wiganhydroprinting.co.uk/wp-content/uploads/2014/04/clear-camo-300x3001.jpg"
+            ,colors: {
+              red: '#A80000'
+              ,blue: "#58ACFA"
+              ,white: "#FFFFFF"
+              ,black: "#000000"
+              ,green: "#458B00"
+              ,yellow: "#F2F5A9"
+            }
+          }
+          ,knit: {
+            url: "http://www.arrow.gb.net/images/pages/finish-colours/material-finishes/veneer/walnut-r.jpg"
+            ,colors: {
+              red: '#A80000'
+              ,blue: "#58ACFA"
+              ,white: "#FFFFFF"
+              ,black: "#000000"
+              ,green: "#458B00"
+              ,yellow: "#F2F5A9"
+            }
+          }
+          ,silk: {
+            url: "http://static1.squarespace.com/static/52965deee4b0f580c1fe0b7d/52c88375e4b03b30610b4a0a/52c8845be4b0268360ddfb8c/1388874157418/LightRoyalNylon.jpg?format=300w"
+            ,colors: {
+              red: '#A80000'
+              ,blue: "#58ACFA"
+              ,white: "#FFFFFF"
+              ,black: "#000000"
+              ,green: "#458B00"
+              ,yellow: "#F2F5A9"
+            }
+          }
+          ,satin: {
+            url: "http://demandware.edgesuite.net/aakh_prd/on/demandware.static/-/Sites-main/default/dwa303e31f/images/large/L7871.jpg"
+            ,colors: {
+              red: '#A80000'
+              ,blue: "#58ACFA"
+              ,white: "#FFFFFF"
+              ,black: "#000000"
+              ,green: "#458B00"
+              ,yellow: "#F2F5A9"
+            }
+          }
+          ,linen:{
+            url: "http://d6lw7to1547c3.cloudfront.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/308744.jpg"
+            ,colors: {
+              red: '#A80000'
+              ,blue: "#58ACFA"
+              ,white: "#FFFFFF"
+              ,black: "#000000"
+              ,green: "#458B00"
+              ,yellow: "#F2F5A9"
+            }
+          }
+          ,wool: {
+            url: "https://www.shoponeonline.com/wp-content/uploads/denim-swatch.png"
+            ,colors: {
+              red: '#A80000'
+              ,blue: "#58ACFA"
+              ,white: "#FFFFFF"
+              ,black: "#000000"
+              ,green: "#458B00"
+              ,yellow: "#F2F5A9"
+            }
+          }
         }
         ,accessories: {
           drawCords: {

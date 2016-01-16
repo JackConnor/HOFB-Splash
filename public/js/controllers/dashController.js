@@ -804,6 +804,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.designerDashCurated').css({
         backgroundColor: "#EBEBE9"
       })
+      $('.designerDashSubmitted').css({
+        backgroundColor: "#EBEBE9"
+      })
       $('.designerDashActive').css({
         backgroundColor: "#FEFDFA"
       })
