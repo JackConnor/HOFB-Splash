@@ -431,15 +431,28 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             )
 
             $('.sampleLearnMoreHOFB').on('mouseenter', function(evt){
-              console.log('trimm');
+              $('.learnModalMe').remove();
+              $('.learnModalHofb').remove();
               $('.sampleLearnMoreHOFB').append(
                 "<div class='learnModalHofb'>"+
-                  "Selecting HOFB saves you time and reduces DYI cost!<br>We handle all materials sourcing and pattern making!We handle any pattern revisions, garment alterations and sample revisions!<br>We handle all necessary details of for all sampling and manufacturing of the product. <br>Two quality control teams inspect sample(s) before they are sent to retailers.<br>You will receive one FREE sample copy of your selected product.<br>You will receive status update and live tracking of making of your samples and delivery notice to retailer."+
+                  "Selecting HOFB saves you time and reduces DYI cost!<br><span class='fa fa-li fa-check-square'></span>We handle all materials sourcing and pattern making!<li>We handle any pattern revisions, garment alterations and sample revisions!</li><li>We handle all necessary details of for all sampling and manufacturing of the product.</li> <li>Two quality control teams inspect sample(s) before they are sent to retailers.</li><li>You will receive one FREE sample copy of your selected product.</li><li>You will receive status update and live tracking of making of your samples and delivery notice to retailer.</li>"+
                 "</div>"
               )
             })
             $('.sampleLearnMoreHOFB').on('mouseleave', function(evt){
               $('.learnModalHofb').remove();
+            })
+            $('.sampleLearnMoreMe').on('mouseenter', function(evt){
+              $('.learnModalMe').remove();
+              $('.learnModalHofb').remove();
+              $('.sampleLearnMoreMe').append(
+                "<div class='learnModalMe'>"+
+                  "You will produce your own sample and mail it to HOFB. Selected sample(s) should be mailed and received by our office within 9 days from the time of product selection notice on your dashboard. All mailing samples should be certified and signature required. A return label should be created and emailed to sample@hofb.com .<br>Send sample(s) to HOFB @ 3709 Medford St, Suite # 2, Los Angeles CA 90063.<br>Note: in the event HOFB does not receive DIY sample within the giving 9 days period, HOFB reserves the right to handle the sampling of the product. You will receive a notification about it. To learn more go to www.hofb.com/faq<br>sample shipping instructions:<br>All samples should have HOFB sample tags which you can print here at www.hofb.com/sample<br>Sample should be labeled as shown here www.hofb.com/sample<br>All samples should be shipped via courier service and product should be sealed in a plastic material to protect from elements."+
+                "</div>"
+              )
+            })
+            $('.sampleLearnMoreMe').on('mouseleave', function(evt){
+              $('.learnModalMe').remove();
             })
             /////first, we make a function to delete modal
             $('.deleteSampleRequestAcc').on('mouseenter', function(){
