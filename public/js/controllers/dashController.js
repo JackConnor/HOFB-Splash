@@ -267,7 +267,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "<div class='newProductModalDelete'><i class='fa fa-times'></i></div>"+
             "<div class='newProductModalContent'>"+
               "<h3 class='newProductModalTitle'>Welcome to your new project</h3>"+
-              "<h4>Studio page is for you to create design projects. Enter all the important details for your projects to be curated for our mass retail partners. Let’s start with these small details.</h4>"+
+              "<h4>Studio page is for you to create design projects. Enter all the important details for your projects to be curated for our retail partners. Let’s start with these small details.</h4>"+
               "<h4>Let's start with these small details.</h4>"+
               "<input class='newProductName' placeholder='Project Name'>"+
               '<select class="target newProductModalDropdown" id="newProductModalDropdown">'+
@@ -608,7 +608,17 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         }, 100)
       })
       $('.projectCellNewInner').on('click', function(){
+        console.log('yooooo');
+        $('.invisModal').remove();
+        $('.tourProjectCellNewInner').remove();
         newProductPop();
+
+      })
+      $('.tourProjectCellNewInner').on('click', function(){
+        $('.invisModal').remove();
+        $('.tourProjectCellNewInner').remove();
+        newProductPop();
+
       })
     }
 
