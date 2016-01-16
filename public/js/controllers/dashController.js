@@ -270,6 +270,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<h4>Studio page is for you to create design projects. Enter all the important details for your projects to be curated for our retail partners. Let’s start with these small details.</h4>"+
               "<h4>Let's start with these small details.</h4>"+
               "<input class='newProductName' placeholder='Project Name'>"+
+              '<select class="target newProductModalDropdownSeason">'+
+                '<option selected="selected">Season</option>'+
+                '<option value="summer">Summer</option>'+
+              '  <option value="spring" disabled>Spring</option>'+
+              '  <option value="fall" disabled>Fall</option>'+
+              '  <option value="winter" disabled>Winter</option>'+
+              '</select>'+
               '<select class="target newProductModalDropdown" id="newProductModalDropdown">'+
                 '<option selected="selected">Product Type</option>'+
                 '<option value="dress">Dress</option>'+
@@ -277,12 +284,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               '  <option value="skirt" disabled>Skirt</option>'+
               '  <option value="shirt" disabled>Shirt</option>'+
               '</select>'+
-              '<select class="target newProductModalDropdownSeason">'+
-                '<option selected="selected">Please Choose Your Season</option>'+
-                '<option value="summer">Summer'+ '</option>'+
-              '  <option value="spring" disabled>Spring</option>'+
-              '  <option value="fall" disabled>Fall</option>'+
-              '  <option value="winter" disabled>Winter</option>'+
+              '<select class="target newProductModalDropdownStyle">'+
+                '<option>Style</option>'+
+                '<option value="formal">Formal</option>'+
+                '<option value="cocktail">Cocktail & Party</option>'+
+              '  <option value="evening">Evening</option>'+
+              '  <option value="work">Work</option>'+
+              '  <option value="casual">Casual</option>'+
               '</select>'+
               ///////////////////////////////////////////////////////////////////
               "<div class='newProductBegin'>START PROJECT</div>"+

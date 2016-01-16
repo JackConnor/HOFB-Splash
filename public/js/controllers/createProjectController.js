@@ -759,7 +759,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.new_product_save').on('mouseleave', function(){
       $('.new_product_save').css({
         backgroundColor: ''
-        ,color: '#169AA9'
+        ,color: 'black'
       })
     })
     $('.new_product_send').on('mouseenter', function(){
@@ -772,7 +772,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.new_product_send').on('mouseleave', function(){
       $('.new_product_send').css({
         backgroundColor: ''
-        ,color: '#169AA9'
+        ,color: 'black'
       })
     })
     ////////end hover states
@@ -956,11 +956,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
                   '<div class="plusBox">'+
                     '<i class="fa fa-plus"></i>'+
                   '</div>'+
-                  "<div class='sideText'>Image Upload</div>"+
+                  "<div class='sideText'>IMAGE UPLOAD</div>"+
                 "</div>"+
                 "<div class='sideBanner'>"+
                   "<div class='bannerTop'>"+
-                    "Facing "+ view +
+                    "FACING<br>"+ view +
                   "</div>"+
                   "<div class='bannerBottom'>"+
                     imageCount+" of 4 Required Images"+
@@ -980,26 +980,26 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       console.log(counter);
       if(counter == 0){
         $('.newProductCurrentImage').attr('src', '');
-        var view = "Forward";
+        var view = "FORWARD";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
       }
       else if(counter == 1){
         $('.newProductCurrentImage').attr('src', '');
-        var view = "Left Side";
+        var view = "LEFT SIDE";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
       }
       else if(counter == 2){
         $('.newProductCurrentImage').attr('src', '');
-        var view = "Right Side";
+        var view = "RIGHT SIDE";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
 
       }
       else if(counter == 3){
         $('.newProductCurrentImage').attr('src', '');
-        var view = "Back";
+        var view = "BACK";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
       }
