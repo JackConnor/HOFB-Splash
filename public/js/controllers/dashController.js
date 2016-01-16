@@ -1363,15 +1363,12 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "<div class='dashTourController'>"+
               "<i class='fa fa-times deleteTour'></i>"+
               "<div class='dashTourInner'>"+
-                "<div class='dashTourCountIcon'>"+
-                  1+
-                "</div>"+
-                "<div class='dashTourTitle'>TOUR HOFB</div>"+
+                "<div class='dashTourTitleFirst'>TOUR HOFB</div>"+
                 "<div class='dashTourDescription'>"+
-                  "You've just landed on the dashboard, where you manage all of your projects. Would you like a Tour to get started?"+
+                  "You've just landed on the studio, where you manage all of your projects. Would you like a Tour to get started?"+
                 "</div>"+
                 '<div class="dashNoTour">'+
-                  "No Thanks"+
+                  "NO THANKS"+
                 "</div>"+
                 '<div class="dashYesTour">'+
                   "TAKE TOUR"+
@@ -1410,17 +1407,17 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<i class='fa fa-times deleteTour'></i>"+
               "<div class='dashTourInner'>"+
                 "<div class='dashTourCountIcon'>"+
-                  2+
+                  1+
                 "</div>"+
                 "<div class='dashTourTitle'>New Project</div>"+
                 "<div class='dashTourDescription'>"+
-                  "You start building your fashion portfolio on HOFB by clicking on this box to visit our design studio and create your pieces."+
+                  "You start building your fashion portfolio on HOFB by clicking here to visit the design studio."+
                 "</div>"+
                 "<div class='dashTourBack'>"+
-                  "Back"+
+                  "PREVIOUS"+
                 "</div>"+
                 "<div class='dashTourNext'>"+
-                  "Next"+
+                  "NEXT"+
                 "</div>"+
               "</div>"+
             "</div>"+
@@ -1533,10 +1530,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                   "View your projects at all states of submission by clicking on these tabs."+
                 "</div>"+
                 "<div class='dashTourBack'>"+
-                  "Back"+
+                  "PREVIOUS"+
                 "</div>"+
                 "<div class='dashTourNext'>"+
-                  "Next"+
+                  "NEXT"+
                 "</div>"+
               "</div>"+
             "</div>"+
@@ -1563,7 +1560,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.tourDesignerDashCurated').css('width', width);
 
         $('.dashTour2').css('margin-top', topOff - 30);
-        $('.dashTour2').css('margin-left', topLeft+parseInt(width)+15+'px');
+        $('.dashTour2').css('margin-left', topLeft+parseInt(width)+'px');
         $('.deleteTour').on('click', function(){
           $('.tourElem').remove();
           $('.tourProjectCellNewInner').remove();
@@ -1604,13 +1601,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 "</div>"+
                 "<div class='dashTourTitle'>Collections</div>"+
                 "<div class='dashTourDescription'>"+
-                  "Create a collection to organize and categorize the projects you create."+
+                  "Create a collection to organize and categorize your projects."+
                 "</div>"+
                 "<div class='dashTourBack'>"+
-                  "Back"+
+                  "PREVIOUS"+
                 "</div>"+
                 "<div class='dashTourNext'>"+
-                  "Next"+
+                  "NEXT"+
                 "</div>"+
               "</div>"+
             "</div>"+
@@ -1685,10 +1682,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                   "Create your new collection simply by clicking here, and walking through our easy process."+
                 "</div>"+
                 "<div class='dashTourBack'>"+
-                  "Back"+
+                  "PREVIOUS"+
                 "</div>"+
                 "<div class='dashTourNext'>"+
-                  "Next"+
+                  "NEXT"+
                 "</div>"+
               "</div>"+
             "</div>"+

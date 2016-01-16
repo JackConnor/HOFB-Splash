@@ -88,7 +88,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen( 80 || process.env.PORT || '5555');
+app.listen(process.env.PORT || '5555' || 80);
 //////////////////////////////////////////////////////////////////
 // app.listen(options, (req, res) => {
 //   res.writeHead(200);

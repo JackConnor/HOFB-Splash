@@ -646,10 +646,10 @@
 }
 
 .dashNoTour {
-  width: 115px;
+  width: 150px;
   margin-top: 25px;
-  height: 45px;
-  margin-left: 62px;
+  height: 40px;
+  /*margin-left: 10%;*/
   display: inline-block;
   background-color: #F9F7F5;
   font-size: 17px;
@@ -701,18 +701,17 @@
 }
 
 .dashTourBack {
-  width: 135px;
+  width: 150px;
+  height: 40px;
+  /*margin-left: 10%;*/
   margin-top: 25px;
-  height: 45px;
-  margin-left: 62px;
   display: inline-block;
-  background-color: #F9F7F5;
-  font-size: 20px;
+  font-size: 17px;
   text-align: center;
-  padding-top: 5px;
   vertical-align: top;
   border: 1px solid #598527;
   border-radius: 3px;
+  padding-top: 7px;
 }
 
 .dashTourController {
@@ -733,34 +732,37 @@
   padding: 0px 0 0 12px;
   vertical-align: top;
   display: inline-block;
+  position: absolute;
+  margin-left: -50px;
 }
 
 .dashTourDescription {
   color: #999999;
   font-size: 14px;
   margin-top: 20px;
-  margin-left: 10%;
+  /*margin-left: 10%;*/
 }
 
 .dashTourInner {
-  width: 90%;
-  margin-left: 5%;
+  width: 313px;
+  margin-left: 75px;
   padding-top: 25px;
 }
 
 .dashTourNext {
-  width: 135px;
-  height: 45px;
+  width: 150px;
+  height: 40px;
   margin-left: 5px;
   margin-top: 25px;
   display: inline-block;
   background-color: #3CB878;
-  font-size: 20px;
+  font-size: 17px;
   text-align: center;
   vertical-align: top;
   border: 1px solid #598527;
   border-radius: 3px;
-  padding-top: 5px;
+  padding-top: 7px;
+  color: white;
 }
 
 .dashTourStart {
@@ -773,13 +775,22 @@
   width: 250px;
   color: #666666;
   font-size: 24px;
-  margin-left: 5px;
+  /*margin-left: 10%;*/
+  padding-top: 2px;
+}
+
+.dashTourTitleFirst {
+  display: inline-block;
+  width: 250px;
+  color: #666666;
+  font-size: 24px;
+  margin-left: 10%;
   padding-top: 2px;
 }
 
 .dashYesTour {
-  width: 105px;
-  height: 45px;
+  width: 150px;
+  height: 40px;
   margin-left: 5px;
   margin-top: 25px;
   display: inline-block;
@@ -790,6 +801,7 @@
   border: 1px solid #598527;
   border-radius: 3px;
   padding-top: 7px;
+  color: white;
 }
 
 .deleteButton {
@@ -852,6 +864,9 @@
   color: #666666;
 }
 
+.deleteTour:hover{
+  color: #333;
+}
 
 .designerDashboardPage, .userProfileContainer, .userProfileSettingsBar{
 
@@ -2767,6 +2782,7 @@
 }
 
 .signinReturning {
+  font-size: 10px;
   font-weight: 800;
   margin-top: 30px;
 }
@@ -2836,6 +2852,11 @@
   font-size: 16px;
   padding-top: 7px;
   text-align: center;
+  cursor: pointer;
+}
+
+.signupTos {
+  color: blue;
   cursor: pointer;
 }
 
@@ -3097,7 +3118,7 @@ textarea#styled {
   position: absolute;
   border: 2px solid #CCCCCC;
   border-radius: 3px;
-  width: 400px;
+  width: 430px;
   height: 235px;
   z-index: 3;
 }
