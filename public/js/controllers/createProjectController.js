@@ -118,7 +118,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       if(swatchType == "Fabric"){
         $('.create'+swatchType).on('click', function(evt){
           var target = $(evt.target);
+          var fabricType = target[0].classList[1].slice(6, 100);
           console.log(target);
+          var allColors = allSwatches.fabrics[fabricType].colors;
+          console.log(allColors);
+          console.log(fabricType);
           $(evt.target).addClass('fabricColor');
           ////////we add the color picking modal
           $('.bodyview').append(
@@ -137,6 +141,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
                     "</div>"+
                   "</div>"+
                   "<div class='colorModalRightColumn'>" +
+                    "<p>Color options for fabric</p>"+
+                    "<div class='colorModalColorContainer'>"+
+                    "</div>"+
+                    "<div class='colorModalSubmit'>"+
+                      "SUBMIT"+
+                    "</div>"+
                   "</div>"+
                 "</div>"+
               "</div>"+
@@ -145,6 +155,17 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           $('.deleteColorModal').on('click', function(){
             $('.invisModal').remove();
           })
+          /////function to add colors to the popup
+          for(color in allColors){
+            $('.colorModalColorContainer').append(
+              "<div class='colorModalColorCell colorModal"+color+" col-xs-6'>"+
+              "</div>"
+            )
+            console.log(allColors[color]);
+            $(".colorModal"+color).css({
+              backgroundColor: allColors[color]
+            })
+          }
         })
       }
       else {

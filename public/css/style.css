@@ -232,6 +232,16 @@
   height: 70px;
 }
 
+.colorModalColorCell {
+  height: 80px;
+  outline: 2px solid green;
+}
+
+.colorModalColorContainer {
+  height: 240px;
+  outline: 1px solid silver;
+}
+
 .colorModalContainer {
   width: 540px;
   height: 415px;
@@ -278,6 +288,16 @@
   margin-left: 22px;
   display: inline-block;
   vertical-align: top;
+}
+
+.colorModalSubmit {
+  height: 40px;
+  width: 100%;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  background-color: #3CB878;
+  margin-top: 25px;
 }
 
 .colorModalTitle {
