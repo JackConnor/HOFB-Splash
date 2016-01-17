@@ -725,6 +725,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var timestampIso = new Date();
       var timestamp = timestampIso.getTime();
       var imagesHTML = self.tempPhotoHTMLCache;
+      if(imagesHTML.length < 1){
+        alert('Must include at least one photo to save a project');
+        $('.invisModal').remove();
+        return;
+      }
       var userId = self.userId;
       var collections = $('.newProductCollectionsInput').val().split(' ');
       var productType = window.location.hash.split('/')[4];
@@ -824,7 +829,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       );
       var newProjectInfo = productToUpdate;
         ////now we make a post request to create a new conversation, which we do for every single project that is made. It's here in the submit photos simply because this is the last stop on a callback series, and this should probably go last
-        // newConversation(newProjectInfo);
+        newConversation(newProjectInfo);
     }
 
     function newConversation(newProjectInfo){

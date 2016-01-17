@@ -682,6 +682,11 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     var timestamp = new Date();
     // var images = self.tempPhotoCache;
     var imagesHTML = self.tempPhotoHTMLCache;
+    if(imagesHTML.length < 1){
+      alert('Must include at least one photo to save a project');
+      $('.invisModal').remove();
+      return;
+    }
     var collections = $('.newProductCollectionsInput').val().split(' ');
     var productType = $('.newProductTypeDropdown').val();
     var tags = $('.newProductTagsInput').val().split(' ');
