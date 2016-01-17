@@ -125,6 +125,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           console.log(allColors);
           console.log(fabricType);
           $(evt.target).addClass('fabricColor');
+          $(evt.target).addClass('fabricColorList');
           ////////we add the color picking modal
           $('.bodyview').append(
             "<div class='invisModal'>"+
@@ -160,7 +161,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           for(color in allColors){
             $('.colorModalColorContainer').append(
               "<div class='colorModalColorCell col-xs-6'>"+
-                "<div class='colorModalCellInner colorModal"+color+"'>"+
+                "<div class='colorModalCellInner colorModal"+color+"' id='"+allSwatches.fabrics[fabricType].colors[color]+"'>"+
                 "</div>"+
               "</div>"
             )
@@ -168,7 +169,50 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             $(".colorModal"+color).css({
               backgroundColor: allColors[color]
             })
+            /////////function that changes css and adds a "colorPicked" class which we will use later to tally up the total colors
+            $('.colorModal'+ color).on('click', function(evt){
+              console.log(allSwatches.fabrics[fabricType].colors[color]);
+              if(!$(evt.target).hasClass('colorPicked')){
+                $('.colorModalMainImage').css({
+                  backgroundColor: evt.target.id
+                })
+                $(evt.target).addClass('colorPicked');
+                $(evt.target).css({
+                  border: "4px solid #289DAE"
+                });
+              }
+              else {
+                $('.colorModalMainImage').css({
+                  backgroundColor: ''
+                })
+                $(evt.target).removeClass('colorPicked');
+                $(evt.target).css({
+                  border: "1px solid #A4D4C7"
+                });
+              }
+            })
           }
+          ////////function to submit the modal with all your color choices
+          $('.colorModalSubmit').on('click', function(){
+            for (var i = 0; i < $('.colorModalCellInner').length; i++) {
+              if($($('.colorModalCellInner')[i]).hasClass('colorPicked')){
+                var colorName = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
+                console.log(colorName);
+                console.log(target);
+                var colorList = $(target[0])[0].classList[3];
+                console.log(colorList);
+                target.removeClass(colorList);
+                var colorList = colorList + "_" + colorName;
+                target.addClass(colorList);
+                target.css({
+                  border: "4px solid #289DAE"
+                })
+                target.attr('id', 'picked_'+swatchType+"_"+fabricType)
+                target.addClass('picked');
+                $('.invisModal').remove();
+              }
+            }
+          })
         })
       }
       else {

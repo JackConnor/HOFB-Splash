@@ -237,17 +237,16 @@
   height: 90%;
   margin-left: 10%;
   margin-top: 5%;
+  cursor: pointer;
   border: #A4D4C7;
 }
 
 .colorModalColorCell {
   height: 80px;
-  /*outline: 2px solid green;*/
 }
 
 .colorModalColorContainer {
   height: 240px;
-  outline: 1px solid silver;
 }
 
 .colorModalContainer {
@@ -308,6 +307,7 @@
   margin-top: 25px;
   border: 1px solid #40A153;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .colorModalTitle {
