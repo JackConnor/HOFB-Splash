@@ -305,7 +305,9 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           self.tempPhotoHTMLCache.push($('#newProductMiniImage'+i));
         }
         console.log(self.miniPhotoCounter);
-        frontBackSide(self.miniPhotoCounter);
+        if(self.tempPhotoHTMLCache < 4){
+          frontBackSide(self.miniPhotoCounter);
+        }
       }
       addImgsFunc();
       //////functions for addding swatches to the html once its' loaded
