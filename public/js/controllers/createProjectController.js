@@ -111,7 +111,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////////Effects for carousel//////////
     ////click effect for highlighting
     function swatchLogic(swatchType){
-      console.log(swatchType);
       ///////note: swatchType needs to be added as a capital, i.e. "Season"
 
       ///////fabrics hav a color popup modal, which we take care of here
@@ -165,7 +164,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             })
             /////////function that changes css and adds a "colorPicked" class which we will use later to tally up the total colors
             $('.colorModal'+ color).on('click', function(evt){
-              console.log(allSwatches.fabrics[fabricType].colors[color]);
               if(!$(evt.target).hasClass('colorPicked')){
                 $('.colorModalMainImage').css({
                   backgroundColor: evt.target.id
@@ -189,7 +187,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           //////////now we split based on if the modal is being picked for the first time, or editing a previously picked choice
           /////if this is a first time color choice for this fabric......
           if(!target.hasClass('picked')){
-            console.log('new one');
             $(evt.target).addClass('fabricColor');
             $(evt.target).addClass('fabricColorList');
             ////////function to submit the modal with all your color choices
@@ -240,11 +237,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
                 return;
               }
               target.removeClass('picked');
-              console.log(target);
               var colorList = $(target[0])[0].classList[3];
-              console.log(colorList);
               $(target[0]).removeClass(colorList);
-              console.log(target);
               var colorList = "fabricColorList"
               for (var i = 0; i < newColorList.length; i++) {
                 colorList = colorList + "_" + newColorList[i]
@@ -720,30 +714,32 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var tags = $('.newProductTagsInput').val().split(' ');
       var vendor = $('.newProductVendor').val();
       var description = $('.newProductDescription').val();
-      var colors = colorsFunc();
       var fabricsFunc = function(){
         var allPicked = $(".picked");
         var fabricsArray = [];
         for (var i = 0; i < allPicked.length; i++) {
           if(allPicked[i].id.split('_')[1] == 'Fabric')
-          fabricsArray.push(allPicked[i].id.split('_')[2])
+          fabricsArray.push({name: allPicked[i].id.split('_')[2],  colors: []})
+          console.log($(allPicked[i])[0].classList[3]);
+          var colorString = $(allPicked[i])[0].classList[3];
+          var colorArray = colorString.split('_').slice(1, 100);
+          console.log(colorArray);
+          fabricsArray[i].colors = colorArray;
         }
         return fabricsArray;
       }
       var fabrics = fabricsFunc();
-      var stitches = stitchesFunc();
+      console.log(fabrics);
       var accessoriesFunc = function(){
         var allPicked = $(".picked");
         var accessoriesArray = [];
         for (var i = 0; i < allPicked.length; i++) {
-          console.log(allPicked[i]);
           if(allPicked[i].id.split('_')[1] == 'Accessory')
           accessoriesArray.push(allPicked[i].id.split('_')[2])
         }
         return accessoriesArray;
       }
       var accessories = accessoriesFunc();
-      console.log(accessories);
       var statusVar = $(evt.target)[0].className.split('_')[2];
       if(statusVar == 'send'){
         var status = 'submitted to curator'
@@ -762,10 +758,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,tags: tags
         ,collections: collections
         ,vendor: vendor
-        ,colors: colors
         ,fabrics: fabrics
         ,season: window.location.hash.split('/')[5]
-        ,stitchPatterns: stitches
         ,status: status
       }
       console.log(newProjectObject);
@@ -813,7 +807,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       );
       var newProjectInfo = productToUpdate;
         ////now we make a post request to create a new conversation, which we do for every single project that is made. It's here in the submit photos simply because this is the last stop on a callback series, and this should probably go last
-        newConversation(newProjectInfo);
+        // newConversation(newProjectInfo);
     }
 
     function newConversation(newProjectInfo){
