@@ -270,14 +270,12 @@
   position: absolute;
   width: 460px;
   height: 335px;
-  outline: 2px solid gray;
   margin: 40px;
 }
 
 .colorModalLeftColumn {
   width: 180px;
   height: 100%;
-  outline: 1px solid silver;
   display: inline-block;
   vertical-align: top;
 }
@@ -299,7 +297,6 @@
 .colorModalRightColumn {
   width: 240px;
   height: 100%;
-  outline: 1px solid silver;
   margin-left: 22px;
   display: inline-block;
   vertical-align: top;
