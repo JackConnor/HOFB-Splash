@@ -865,37 +865,35 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       return;
     }
     else {
-      $('.new_product_send').on('click', function(){
-        $('.bodyview').prepend(
-          "<div class='invisModal'>"+
-            "<div class='confirmSave'>"+
-              '<i class="fa fa-times deleteCurateModal"></i>'+
-              "<h2>You are Curating a Project</h2>"+
-              "<div class='curateConfirmDescription'>You will not be able to edit the project once it has been submitted. If changes are requested to the product you will be alerted through the dashboard</div>"+
-              "<div class='blah_blah_send submitProject send'>SUBMIT</div>"+
-            "</div>"+
-          "</div>"
-        )
-        $('.submitProject').on('click', function(evt){
-          if(self.tempPhotoHTMLCache.length < 4){
-            alert('Must include at least one photo to save a project');
-            $('.invisModal').remove();
-            return;
-          }
-          else {
-            console.log('yoooo');
-            editProject(evt);
-          }
-        })
-        $('.deleteCurateModal').on('click', function(){
+      $('.bodyview').prepend(
+        "<div class='invisModal'>"+
+          "<div class='confirmSave'>"+
+            '<i class="fa fa-times deleteCurateModal"></i>'+
+            "<h2>You are Curating a Project</h2>"+
+            "<div class='curateConfirmDescription'>You will not be able to edit the project once it has been submitted. If changes are requested to the product you will be alerted through the dashboard</div>"+
+            "<div class='blah_blah_send submitProject send'>SUBMIT</div>"+
+          "</div>"+
+        "</div>"
+      )
+      $('.submitProject').on('click', function(evt){
+        if(self.tempPhotoHTMLCache.length < 4){
+          alert('Must include at least one photo to save a project');
           $('.invisModal').remove();
-        })
-        $('.invisModal').on('click', function(evt){
-          if($(evt.target)[0].classList[0] == "invisModal"){
-            $('.invisModal').remove();
-          }
-        })
-      });
+          return;
+        }
+        else {
+          console.log('yoooo');
+          editProject(evt);
+        }
+      })
+      $('.deleteCurateModal').on('click', function(){
+        $('.invisModal').remove();
+      })
+      $('.invisModal').on('click', function(evt){
+        if($(evt.target)[0].classList[0] == "invisModal"){
+          $('.invisModal').remove();
+        }
+      })
     }
   })
 

@@ -176,43 +176,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       self.activeMinis = '';///this is were we'll keep track of which mini photo thing should be moving
       self.miniMarg = 0;
       self.intervalCounter = 0;////this is to run and not run the moving phtoos on the dashboard side that we're going to use
-      function moveDashMinis() {
-        //////We create the logic for the mini photos. these run on an interval, that switches to the photos being move (margin-left being added)
-        setInterval(function(){
-          if(self.intervalCounter == 0){
-            self.miniMarg = 0;
-          }
-          else {
-            var imageCount = $(self.activeMinis)[0].children.length;
-            var totalLengthPhotos = ((imageCount+.3)*64);
-            var viewWindow = $('.projectCellImageHolder').width();
-            var maxMovement = (-totalLengthPhotos) + viewWindow;
-            if(self.miniMarg >= maxMovement && maxMovement < 0){
-              $(self.activeMinis).css({
-                marginLeft: self.miniMarg
-              })
-              self.miniMarg += -1;
-            }
-            else {
-            }
-          }
-        }, 20)
-        $('.projectCellMinis').on('mouseenter', function(evt){
-          self.intervalCounter = 1;
-          if($(evt.target)[0].classList[0] == 'projectCellMinis'){
-            self.activeMinis = $(evt.target)[0];
-          }
-          else {
-            self.activeMinis = $(evt.target)[0].parentNode;
-          }
-        })
-        $('.projectCellMinis').on('mouseleave', function(){
-          self.intervalCounter = 0;
-          self.activeMinis = "none";
-        })
-      }
-
-
       ///////////////////////////////////////////////////////
       ///////////////begin logic for the photo popup windows/
       setPopup();
@@ -246,8 +209,43 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       }
       arg();
     }
+    function moveDashMinis() {
+      //////We create the logic for the mini photos. these run on an interval, that switches to the photos being move (margin-left being added)
+      setInterval(function(){
+        if(self.intervalCounter == 0){
+          self.miniMarg = 0;
+        }
+        else {
+          var imageCount = $(self.activeMinis)[0].children.length;
+          var totalLengthPhotos = ((imageCount+.3)*64);
+          var viewWindow = $('.projectCellImageHolder').width();
+          var maxMovement = (-totalLengthPhotos) + viewWindow;
+          if(self.miniMarg >= maxMovement && maxMovement < 0){
+            $(self.activeMinis).css({
+              marginLeft: self.miniMarg
+            })
+            self.miniMarg += -1;
+          }
+          else {
+          }
+        }
+      }, 20)
+      $('.projectCellMinis').on('mouseenter', function(evt){
+        self.intervalCounter = 1;
+        if($(evt.target)[0].classList[0] == 'projectCellMinis'){
+          self.activeMinis = $(evt.target)[0];
+        }
+        else {
+          self.activeMinis = $(evt.target)[0].parentNode;
+        }
+      })
+      $('.projectCellMinis').on('mouseleave', function(){
+        self.intervalCounter = 0;
+        self.activeMinis = "none";
+      })
+    }
     ///////will set self.allProjects as all our projects
-    setTimeout(loadProjects(loadInitialList, addHoverToCell), 700)
+    setTimeout(loadProjects(loadInitialList, addHoverToCell), 300)
     function newProductPop(){
       $('.bodyview').prepend(
         '<div class="invisModal">'+
@@ -637,6 +635,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
       })
       setPopup();
+      moveDashMinis();
     }
 
     ////function for appending filtered lists from dropdown in realtime
@@ -738,6 +737,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       })
       addHoverToCell();
       self.filteredProjects = [];
+      setPopup();
+      moveDashMinis();
     }
 
 
