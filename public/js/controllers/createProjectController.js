@@ -703,11 +703,9 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           if(allPicked[i].id.split('_')[1] == 'Fabric'){
             var name = allPicked[i].id.split('_').slice(2, 100).join("_");
             fabricsArray.push({name: name,  colors: []})
-            console.log($(allPicked[i])[0].classList[3]);
             var colorString = $(allPicked[i])[0].classList[3];
             var colorArray = colorString.split('_').slice(1, 100);
           }
-          console.log(colorArray);
           fabricsArray[i].colors = colorArray;
         }
         return fabricsArray;
