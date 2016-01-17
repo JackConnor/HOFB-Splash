@@ -696,7 +696,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         return;
       }
       var userId = self.userId;
-      var collections = $('.newProductCollectionsInput').val().split(' ');
+      var collections = $('.newProductCollectionsInput').val().split(',');
+      console.log(collections);
       var productType = window.location.hash.split('/')[4];
       var tags = $('.newProductTagsInput').val().split(' ');
       var vendor = $('.newProductVendor').val();
@@ -716,7 +717,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         return fabricsArray;
       }
       var fabrics = fabricsFunc();
-      console.log(fabrics);
       var accessoriesFunc = function(){
         var allPicked = $(".picked");
         var accessoriesArray = [];
