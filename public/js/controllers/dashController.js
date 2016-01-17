@@ -49,6 +49,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             self.allProjects = allProjectsSaved;
             self.curatedProjects = curatedProjectsArray;
             self.submittedProjects = submittedProjectsArray;
+            console.log(self.submittedProjects);
           }
           //////add time-since-creation field
           var collectionName = ["All"];
@@ -214,17 +215,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
       ///////////////////////////////////////////////////////
       ///////////////begin logic for the photo popup windows/
-      function setPopup(){
-        // $('.projectCellMiniImage').on('click', function(evt){
-        //   console.log('waaat');
-        //   console.log($(evt.target));
-        //   var source = $(evt.target).attr('src');
-        //   var nextTarget = $($($($($(evt.target)[0].parentNode)[0].parentNode)[0].firstElementChild)[0])[0].firstChild;
-        //   console.log(source);
-        //   console.log(nextTarget);
-        //   $(nextTarget).attr('src', source);
-        // })
-      }
       setPopup();
       /////////////end logic for the photo popup windows/////
       ///////////////////////////////////////////////////////
@@ -316,6 +306,19 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           $('.invisModal').remove();
         }
       })
+    }
+    function setPopup(){
+      // $('.projectCellMiniImage').on('click', function(evt){
+      //   console.log($(evt.target));
+      //   console.log('waaat');
+      //   console.log($(evt.target));
+      //   var source = $(evt.target)[0].classList[1];
+      //   console.log(source);
+      //   var nextTarget = $($($($($(evt.target)[0].parentNode)[0].parentNode)[0].firstElementChild)[0])[0].firstChild;
+      //   console.log(source);
+      //   console.log(nextTarget);
+      //   $(nextTarget).attr('src', source);
+      // })
     }
 
     ////function for appending active list
@@ -555,6 +558,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     function loadSubmittedList(){
       var dataType = $('.dashDataType');
       dataType.text('Sent-for-Curation Products');
+      console.log(self.submittedProjects);
       for (var i = 0; i < self.submittedProjects.length; i++) {
         function timeSince(){
           var nowDate = new Date();
@@ -598,12 +602,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           )
           var allAttributes = [];
           var allImages = self.submittedProjects[i].images;
+          var allThumbs = self.submittedProjects[i].thumbnails;
           for (var k = 0; k < allImages.length; k++) {
             allAttributes.push(allImages[k]);
           }
           for (var j = 0; j < allAttributes.length; j++) {
             $('#mini'+i).append(
-              "<img src='"+allAttributes[j]+"' class='projectCellMiniImage' id='miniCell"+j+"'/>"
+              "<img src='"+allAttributes[j]+"' class='projectCellMiniImage "+allThumbs[i]+"' id='miniCell"+j+"'/>"
             )
           }
       }
@@ -631,6 +636,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         newProductPop();
 
       })
+      setPopup();
     }
 
     ////function for appending filtered lists from dropdown in realtime
@@ -742,12 +748,14 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     function toggleCurated(){
       $('.designerDashList').html('');
       loadCuratedList();
+
       $('.sectionTitle').text('listing all curated projects')
     }
     ////see all curated projects
     function toggleSubmitted(){
       $('.designerDashList').html('');
       loadSubmittedList();
+      setPopup();
       $('.sectionTitle').text('listing all curated projects')
     }
 
@@ -1166,11 +1174,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         console.log('adding');
         console.log(collections);
         for (var i = 0; i < collections.length; i++) {
-          $('.designerDashCollectionDropdown').append(
-            '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
-              collections[i]+
-            "</div>"
-          )
+          if(collections[i] != ''){
+            $('.designerDashCollectionDropdown').append(
+              '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
+                collections[i]+
+              "</div>"
+            )
+          }
         }
         if (self.addMoreFirstTimeThroughCheck) {
           $('.designerDashCollectionDropdown').after(

@@ -728,7 +728,9 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
       var accessories = accessoriesFunc();
       var statusVar = $(evt.target)[0].className.split('_')[2];
-      if(statusVar == 'send'){
+      var otherStatus = $(evt.target)[0].classList[2];
+      console.log(statusVar);
+      if(statusVar == 'send' || otherStatus == 'send'){
         var status = 'submitted to curator'
       } else if(statusVar == 'save'){
         var status = 'saved'
@@ -763,7 +765,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             '<i class="fa fa-times deleteCurateModal"></i>'+
             "<h2>You are Curating a Project</h2>"+
             "<div class='curateConfirmDescription'>You will not be able to edit the project once it has been submitted. If changes are requested to the product you will be alerted through the dashboard</div>"+
-            "<div class='blah_blah_send submitProject'>SUBMIT</div>"+
+            "<div class='blah_blah_send submitProject send'>SUBMIT</div>"+
           "</div>"+
         "</div>"
       )
