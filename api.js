@@ -438,30 +438,18 @@ module.exports = function(app){
   //////session and token stuff
   ///////begin the session
   app.post('/api/startsession', function(req, res){
-    console.log(req.body);
     var password = req.body.password;
-    console.log(password);
     User.findOne({'email': req.body.email}, function(err, user){
       if(err){console.log(err)}
       else if(user == null){
         res.json('no user')
       }
       else {
-        console.log(user);
-        console.log(user.password);
-        console.log(user.passwordDigest);
-        console.log(req.body.password);
-        console.log(user.validPassword(req.body.password));
         if (user.validPassword(password)) {
-          console.log(user);
           if(!user.signins){
             user.signins = 0;
           }
-          console.log('before');
-          console.log(user);
           user.signins += 1;
-          console.log('after');
-          console.log(user);
           user.save(function(err, user){
             var userId = user._id;
             var status = user.status;
@@ -476,6 +464,17 @@ module.exports = function(app){
           res.json({data: 'password incorrect'})
         }
       }
+    })
+  })
+
+  app.get('/api/endtour/:userId', function(req, res){
+    User.findOne({_id: req.params.userId}, function(err, user){
+      console.log(user);
+      user.signins = user.signins+1;
+      user.save(function(err, user){
+        var token = jwt.sign({iss: "hofb.com", name: user._id, sub: user.signins, aud: "designer"}, process.env.JWT_TOKEN_SECRET, {expiresIn: "2h", audience: user.status})
+        res.json(token);
+      })
     })
   })
 

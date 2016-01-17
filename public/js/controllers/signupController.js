@@ -21,19 +21,12 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     checkFromEmailLink();
 
     $('.signupSubmit').on('click', function(){
-      console.log('lolll');
       var email = $('.signupEmail').val();
-      console.log(email);
       var firstName = $('.signupFirstName').val();
-      console.log(firstName);
       var lastName = $('.signupLastName').val();
-      console.log(lastName);
       var password = $('.signupPassword').val();
-      console.log(password);
       var rePassword = $('.signupPasswordRepeat').val();
-      console.log(rePassword);
       var checked = document.querySelector('.signupCheck').checked;
-      console.log(checked);
       var status = window.location.hash.split('/')[1];
       if(email != '' && firstName != '' && lastName != '' && password != '' && rePassword != '' && checked){
         ///////throught first layer to check that all firelds were filled
@@ -78,17 +71,13 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     ///////function to signin a new user from signin page
     function signinUser(email, pw){
       startSession.startSession(email, pw, function(token){
-        console.log(token);
         $http({
           method:"GET"
           ,url: '/api/checkstatus/'+token
         })
         .then(function(decToken){
-          console.log(decToken);
-          console.log('in here');
-          console.log(decToken);
           var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
-          console.log(newUrl);
+          window,localStorage.hofbTourOff = false;
           window.location.hash = newUrl;
         })
       });

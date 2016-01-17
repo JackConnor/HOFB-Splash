@@ -22,6 +22,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       })
       .then(function(decodedToken){
         self.decodedToken = decodedToken;
+        console.log(decodedToken);
         ///////note: User Id is ""
         if(decodedToken.data.aud != "designer"){
           window.location.hash = '#/designer/loginportal'
@@ -31,7 +32,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           ,url: '/api/'+decodedToken.data.name+'/products'
         })
         .then(function(products){
-          console.log(products);
           var allProjects = products.data;
           var allProjectsSaved = [];
           var curatedProjectsArray = [];
@@ -203,7 +203,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.projectCellNewInner').on('click', function(){
         newProductPop();
       })
-      if(self.decodedToken.data.sub <= 3 && !window.localStorage.hofbTourOff){////this if statement controls how many times a client uses our app before they stop getting the tutorial
+      if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
         self.tourCounter = 0;///keeps track of where we are in the dashboard tour
         dashboardTour();
       }
@@ -1442,7 +1442,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             opacity: 1
           });
           self.tourCounter = 7;
-          window.localStorage.hofbTourOff = true;
+          $http({
+            method: "GET"
+            ,url: "/api/endtour/"+self.decodedToken.data.name
+          })
+          .then(function(newToken){
+            window.localStorage.hofbToken = newToken.data;
+          })
         })
       }
       else if(self.tourCounter == 1){
