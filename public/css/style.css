@@ -288,6 +288,14 @@
   border: 1px solid #4A9642;
 }
 
+.colorModalRemoveColors {
+  font-size: 12px;
+  float: right;
+  margin-top: 5px;
+  cursor: pointer;
+  color: #289DAE;
+}
+
 .colorModalRightColumn {
   width: 240px;
   height: 100%;

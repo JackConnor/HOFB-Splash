@@ -143,12 +143,29 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
                     "<div class='colorModalSubmit'>"+
                       "SUBMIT"+
                     "</div>"+
+                    "<div class='colorModalRemoveColors'>"+
+                      "remove colors?"+
+                    "</div>"+
                   "</div>"+
                 "</div>"+
               "</div>"+
             "</div>"
           )
+          ///////removes the modal, wihtout saving any of your selection
           $('.deleteColorModal').on('click', function(){
+            $('.invisModal').remove();
+          })
+          ///////////remove the modal and unselect all colors, and the fabric
+          $('.colorModalRemoveColors').on('click', function(){
+            target.removeClass('picked');
+            target.removeClass('fabricColor');
+            var colorListClass = target[0].classList[2];
+            target.removeClass('fabricColor');
+            target.removeClass(colorListClass);
+            target.attr('id', '')
+            target.css({
+              border: '0px'
+            })
             $('.invisModal').remove();
           })
           /////function to add colors to the popup
