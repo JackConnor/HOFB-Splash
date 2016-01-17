@@ -751,10 +751,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,season: window.location.hash.split('/')[5]
         ,status: status
       }
-      console.log(newProjectObject);
       postProject.postProject(newProjectObject)///post the object
       .then(function(newProjectInfo){
-        console.log(newProjectInfo);
         submitPhotos(newProjectInfo.data);
       })
     }
