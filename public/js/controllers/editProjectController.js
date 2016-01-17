@@ -138,6 +138,11 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           $('.deleteColorModal').on('click', function(){
             $('.invisModal').remove();
           })
+          $('.invisModal').on('click', function(evt){
+            if($(evt.target)[0].classList[0] == "invisModal"){
+              $('.invisModal').remove();
+            }
+          })
           ///////////remove the modal and unselect all colors, and the fabric
           $('.colorModalRemoveColors').on('click', function(){
             target.removeClass('picked');
@@ -975,18 +980,16 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     $('.expandPhoto').on('click', function(){
       $('.bodyview').prepend(
         '<div class="invisModal">'+
-          "<div class='modalFiller'>"+
-          "</div>"+
           "<div class='modalPhotoHolder'>"+
             "<img class='modalImage' src='"+$('.newProductCurrentImage').attr('src')+"'>"+
           '</div>'+
-          "<div class='modalFiller'>"+
-          "</div>"+
         '</div>'
       )
-      $('.modalFiller').on('click', function(){
-        $('.photoModal').remove();
-      })/////function to view a full page modal on click
+      $('.invisModal').on('click', function(evt){
+        if($(evt.target)[0].classList[0] == "invisModal"){
+          $('.invisModal').remove();
+        }
+      })
     });
     //////End logic for photo popup modal//////////
     ///////////////////////////////////////////////

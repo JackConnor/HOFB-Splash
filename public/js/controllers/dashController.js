@@ -261,8 +261,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     function newProductPop(){
       $('.bodyview').prepend(
         '<div class="invisModal">'+
-          "<div class='modalFiller'>"+
-          "</div>"+
           "<div class='newProductModalHolder'>"+
             "<div class='newProductModalDelete'><i class='fa fa-times'></i></div>"+
             "<div class='newProductModalContent'>"+
@@ -296,8 +294,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<div class='newProductBegin'>START PROJECT</div>"+
             '</div>'+
           '</div>'+
-          "<div class='modalFiller'>"+
-          "</div>"+
         '</div>'
       )
       $('.dropList').on('change', function(){
@@ -312,11 +308,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var type = $('.newProductModalDropdown').val();
         window.location.hash = "#/create/product/"+name+"/"+type+"/"+season;
       });////function to begin product build
-      $('.modalFiller').on('click', function(){
-        $('.newProductModal').remove();
-      });/////function to go back to dashboard
       $('.newProductModalDelete').on('click', function(){
         $('.newProductModal').remove();
+      })
+      $('.invisModal').on('click', function(evt){
+        if($(evt.target)[0].classList[0] == "invisModal"){
+          $('.invisModal').remove();
+        }
       })
     }
 
@@ -471,6 +469,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             })
             $('.deleteSampleRequestAcc').on('click', function(){
               $('.invisModal').remove();
+            })
+            $('.invisModal').on('click', function(evt){
+              if($(evt.target)[0].classList[0] == "invisModal"){
+                $('.invisModal').remove();
+              }
             })
             /////////function to submit the sample fulfillment
             $('.sampleFinishRequest').on('click', function(){
@@ -859,6 +862,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "</div>"+
             "</div>"
           )
+          $('.invisModal').on('click', function(evt){
+            if($(evt.target)[0].classList[0] == "invisModal"){
+              $('.invisModal').remove();
+            }
+          })
           $('.deleteButtonYes').on('click', function(evt){
             var idToDelete = $(evt.target)[0].id;
             $http({
@@ -1192,6 +1200,11 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             )
             $('.newProductModalDelete').on('click', function(){
               $('.invisModal').remove();
+            })
+            $('.invisModal').on('click', function(evt){
+              if($(evt.target)[0].classList[0] == "invisModal"){
+                $('.invisModal').remove();
+              }
             })
             //////now we add the projects to the modal
             console.log(self.allProjects);

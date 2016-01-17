@@ -527,6 +527,11 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
             console.log('deleting');
             $('.invisModal').remove();
           })
+          $('.invisModal').on('click', function(evt){
+            if($(evt.target)[0].classList[0] == "invisModal"){
+              $('.invisModal').remove();
+            }
+          })
           ///////we change the status on the product
           $('.submitSampleModal').on('click', function(){
             $http({

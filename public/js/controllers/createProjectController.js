@@ -156,6 +156,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           $('.deleteColorModal').on('click', function(){
             $('.invisModal').remove();
           })
+          $('.invisModal').on('click', function(evt){
+            if($(evt.target)[0].classList[0] == "invisModal"){
+              $('.invisModal').remove();
+            }
+          })
           ///////////remove the modal and unselect all colors, and the fabric
           $('.colorModalRemoveColors').on('click', function(){
             target.removeClass('picked');
@@ -768,6 +773,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       })
       $('.deleteCurateModal').on('click', function(){
         $('.invisModal').remove();
+      })
+      $('.invisModal').on('click', function(evt){
+        if($(evt.target)[0].classList[0] == "invisModal"){
+          $('.invisModal').remove();
+        }
       })
     });
     $('.new_product_save').on('click', sendNewProject);
