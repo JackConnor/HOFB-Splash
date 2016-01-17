@@ -582,7 +582,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         console.log(this.height);
         var ratio = (this.width/this.height);
         console.log(ratio);
-        if(ratio > .7 && ratio <= .725){
+        if(ratio > .6 && ratio <= .76){
           $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
           self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
           self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
