@@ -37,7 +37,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       var status = window.location.hash.split('/')[1];
       if(email != '' && firstName != '' && lastName != '' && password != '' && rePassword != '' && checked){
         ///////throught first layer to check that all firelds were filled
-        if(checkPassword(password) == checkPassword(rePassword)){
+        if(checkPassword(password) && checkPassword(rePassword) && (password == rePassword)){
           ////checked that passwords matched and passed our password filters
           $http({
             method: "POST"
