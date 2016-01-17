@@ -311,13 +311,21 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         for (var i = 0; i < fabricsHtmlArray.length; i++) {
           var elType = fabricsHtmlArray[i].classList[1].slice(6, 20);
           for (var j = 0; j < currentValues.length; j++) {
+            var colorListClassFunc = function(){
+              var fabricNameArray = []
+              for (var p = 0; p < currentValues[j].colors.length; p++) {
+                fabricNameArray.push(currentValues[j].colors[p]);
+              }
+              return "fabricColorList_"+fabricNameArray.join('_');
+            }
+            var colorListClassName = colorListClassFunc();
             console.log(elType);
             console.log(currentValues[j].name);
             if( elType == currentValues[j].name){
               $(fabricsHtmlArray[i]).addClass('fabricColorList');
-              $(fabricsHtmlArray[i]).addClass('fabricColorList_'+currentValues.join("_"));
+              $(fabricsHtmlArray[i]).addClass(colorListClassName);
               $(fabricsHtmlArray[i]).addClass('picked');
-              $(fabricsHtmlArray[i]).attr('id', "picked_Fabric_"+currentValues[j]);
+              $(fabricsHtmlArray[i]).attr('id', "picked_Fabric_"+currentValues[j].name);
               $(fabricsHtmlArray[i]).css({
                 border: "4px solid #289DAE"
               })
@@ -794,8 +802,13 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       var allPicked = $(".picked");
       var fabricsArray = [];
       for (var i = 0; i < allPicked.length; i++) {
-        if(allPicked[i].id.split('_')[1] == 'Fabric')
-        fabricsArray.push(allPicked[i].id.split('_')[2])
+        if(allPicked[i].id.split('_')[1] == 'Fabric'){
+          var name = allPicked[i].id.split('_').slice(2, 100).join("_");
+          fabricsArray.push({name: name,  colors: []})
+          var colorString = $(allPicked[i])[0].classList[3];
+          var colorArray = colorString.split('_').slice(1, 100);
+        }
+        fabricsArray[i].colors = colorArray;
       }
       return fabricsArray;
     }

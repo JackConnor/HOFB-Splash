@@ -295,47 +295,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     swatchLogic("Button");
     swatchLogic("Stitch");
 
-    ///////////////////////////////////////////////////
-    ///////////////build function to collect and submit
-    // $('.createSubmit').on('click', function(){
-    //   self.createNewProject = {
-    //     name: $('.carouselNameEntry').val()
-    //     ,timestamp: ""
-    //     ,images: []
-    //     ,groups: []
-    //     ,productType: ""
-    //     ,tags: []
-    //     ,vendor: ""
-    //     ,colors: []
-    //     ,fabrics: []
-    //     ,buttons: ""
-    //     ,stitchPattern: ""
-    //     ,season: window.location.hash.split('/')[5]
-    //   }
-    //   var pickedElems = $('.picked');
-    //   for (var i = 0; i < pickedElems.length; i++) {
-    //     if(pickedElems[i].id.split('_')[1] == "Color"){
-    //       self.createNewProject.colors.push(pickedElems[i].id.split('_')[2])
-    //     }
-    //     else if(pickedElems[i].id.split('_')[1] == "Fabric"){
-    //       self.createNewProject.fabrics.push(pickedElems[i].id.split('_')[2])
-    //     }
-    //     else if(pickedElems[i].id.split('_')[1] == "Buttons"){
-    //       self.createNewProject.buttons = pickedElems[i].id.split('_')[2];
-    //     }
-    //     else if(pickedElems[i].id.split('_')[1] == "Stitch"){
-    //       self.createNewProject.stitchPattern = pickedElems[i].id.split('_')[2];
-    //     }
-    //   }
-    //   $http({
-    //     method: "POST"
-    //     ,url: "/api/products"
-    //     ,data: self.createNewProject
-    //   })
-    //   .then(function(newProjectStuff){
-    //   })
-    // })
-
     /////////Effects for carousel//////////
     ////////////////////////////////////////
 
