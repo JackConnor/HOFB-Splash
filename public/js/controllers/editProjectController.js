@@ -4,7 +4,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
   editProjectCtrl.$inject = ['$http', 'allSwatches', 'postProject', 'checkPw', 'getProduct', 'editProject'];
   function editProjectCtrl($http, allSwatches, postProject, checkPw, getProduct, editProject){
-    console.log(allSwatches);
     var self = this;
     //////global variables we'll be using for moving the carousel
     var carouselMargin = 0; ///keeps track of carousel's margin
@@ -22,12 +21,10 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     })
     .then(function(product){
       self.currentProduct = product.data;
-      console.log(self.currentProduct);
       loadData(self.currentProduct);
     })
 
     self.allSwatches = allSwatches;
-    console.log(self.allSwatches);
     /////end global variables
 
     ////////set our global variables for our our html to create the swatches from
@@ -43,7 +40,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
             "</div>"
           )
         }
-        console.log(allFabrics);
         return allFabrics;
       }
       fabricsfunc();
@@ -51,20 +47,17 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         var allcolors = [];
         for(color in allSwatches.colors){
           allcolors.push(color);
-          console.log(color);
           $('.createColorContainer').append(
             '<div class="createColorCellHolder col-xs-6">'+
               '<div class="createColor create'+color+'">'+
               "</div>"+
             "</div>"
           )
-          console.log(allSwatches.colors[color]);
           $('.create'+color).css({
             backgroundColor: allSwatches.colors[color]
             ,outline: "1px solid #E0E0E0"
           })
         }
-        console.log(allcolors);
         return allcolors;
       }
       colorsfunc();
@@ -79,16 +72,12 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           "</div>"
         )
         for(drawCord in allSwatches.accessories.drawCords){
-          console.log('drawcord');
-          console.log(drawCord);
           allAccessories.push(drawCord);
           $('.drawCords').after(
             "<img src='"+allSwatches.accessories.drawCords[drawCord]+"' class='createAccessory create"+drawCord+" createAccessoryCellHolder col-xs-4'/>"
           )
         }
         for(metalTrim in allSwatches.accessories.metalTrims){
-          console.log('metal cords');
-          console.log(metalTrim);
           allAccessories.push(metalTrim);
           $('.metalTrims').after(
             "<img src='"+allSwatches.accessories.metalTrims[metalTrim]+"' class='createAccessory create"+metalTrim+" createAccessoryCellHolder col-xs-4'/>"
@@ -102,28 +91,184 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
     ////////////////////////////////////////
     /////////Effects for carousel//////////
-    ////click effect for seasonsplash
+    ////click effect for highlighting
     function swatchLogic(swatchType){
-      console.log('aww ya');
       ///////note: swatchType needs to be added as a capital, i.e. "Season"
-      $('.create'+swatchType).on('click', function(evt){
-        var type = $(evt.target)[0].classList[1].slice(6, 1000);
-        console.log(type);
 
-        if($(evt.target).css('opacity') == 1 ){
-          $(evt.target).css({
-            opacity: 0.5
-            ,outline: "4px solid #3CB878"
+      ///////fabrics hav a color popup modal, which we take care of here
+      if(swatchType == "Fabric"){
+        $('.create'+swatchType).on('click', function(evt){
+          var target = $(evt.target);
+          var fabricType = target[0].classList[1].slice(6, 100);
+          var fabricDescription = allSwatches.fabrics[fabricType].description;
+          var allColors = allSwatches.fabrics[fabricType].colors;
+          console.log(allColors);
+          ////////we add the color picking modal
+          $('.bodyview').append(
+            "<div class='invisModal'>"+
+              "<div class='colorModalContainer'>"+
+              '<i class="fa fa-times deleteColorModal"></i>'+
+                "<div class='colorModalInner'>"+
+                  "<div class='colorModalLeftColumn'>" +
+                    "<div class='colorModalMainImage'>"+
+                    "</div>"+
+                    "<div class='colorModalTitle'>"+
+                      fabricType.split('_').join(' ').toUpperCase() +
+                    "</div>"+
+                    "<div class='colorModalDescription'>"+
+                      fabricDescription +
+                    "</div>"+
+                  "</div>"+
+                  "<div class='colorModalRightColumn'>" +
+                    "<p>Color options for fabric</p>"+
+                    "<div class='colorModalColorContainer'>"+
+                    "</div>"+
+                    "<div class='colorModalSubmit'>"+
+                      "SUBMIT"+
+                    "</div>"+
+                    "<div class='colorModalRemoveColors'>"+
+                      "remove colors?"+
+                    "</div>"+
+                  "</div>"+
+                "</div>"+
+              "</div>"+
+            "</div>"
+          )
+          ///////removes the modal, wihtout saving any of your selection
+          $('.deleteColorModal').on('click', function(){
+            $('.invisModal').remove();
           })
-          $(evt.target).attr('id', 'picked_'+swatchType+"_"+type)
-          $(evt.target).addClass('picked');
-        } else {
-          $(evt.target).css({
-            opacity: 1
-            ,outline: "none"
+          ///////////remove the modal and unselect all colors, and the fabric
+          $('.colorModalRemoveColors').on('click', function(){
+            target.removeClass('picked');
+            target.removeClass('fabricColor');
+            var colorListClass = target[0].classList[2];
+            target.removeClass('fabricColor');
+            target.removeClass(colorListClass);
+            target.attr('id', '')
+            target.css({
+              border: '0px'
+            })
+            $('.invisModal').remove();
           })
-        }
-      })
+          /////function to add colors to the popup
+          for(color in allColors){
+            $('.colorModalColorContainer').append(
+              "<div class='colorModalColorCell col-xs-6'>"+
+                "<div class='colorModalCellInner colorModal"+color+"' id='"+allSwatches.fabrics[fabricType].colors[color]+"'>"+
+                "</div>"+
+              "</div>"
+            )
+            $(".colorModal"+color).css({
+              backgroundColor: allColors[color]
+            })
+            /////////function that changes css and adds a "colorPicked" class which we will use later to tally up the total colors
+            $('.colorModal'+ color).on('click', function(evt){
+              if(!$(evt.target).hasClass('colorPicked')){
+                $('.colorModalMainImage').css({
+                  backgroundColor: evt.target.id
+                })
+                $(evt.target).addClass('colorPicked');
+                $(evt.target).css({
+                  border: "4px solid #289DAE"
+                });
+              }
+              else {
+                $('.colorModalMainImage').css({
+                  backgroundColor: ''
+                })
+                $(evt.target).removeClass('colorPicked');
+                $(evt.target).css({
+                  border: "1px solid #A4D4C7"
+                });
+              }
+            })
+          }
+          //////////now we split based on if the modal is being picked for the first time, or editing a previously picked choice
+          /////if this is a first time color choice for this fabric......
+          if(!target.hasClass('picked')){
+            $(evt.target).addClass('fabricColor');
+            $(evt.target).addClass('fabricColorList');
+            ////////function to submit the modal with all your color choices
+            $('.colorModalSubmit').on('click', function(){
+              for (var i = 0; i < $('.colorModalCellInner').length; i++) {
+                if($($('.colorModalCellInner')[i]).hasClass('colorPicked')){
+                  var colorName = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
+                  var colorList = $(target[0])[0].classList[3];
+                  target.removeClass(colorList);
+                  var colorList = colorList + "_" + colorName;
+                  target.addClass(colorList);
+                  target.css({
+                    border: "4px solid #289DAE"
+                  })
+                }
+              }
+              target.attr('id', 'picked_'+swatchType+"_"+fabricType)
+              target.addClass('picked');
+              $('.invisModal').remove();
+            })
+          }
+          else {
+            ///////////////first we need to load up the already-picked colors
+            var colors = $(target[0])[0].classList[3].split("_").slice(1, 100);
+            console.log(colors);
+            for (var i = 0; i < $('.colorModalCellInner').length; i++) {
+              var swatchColorType = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
+              console.log(swatchColorType);
+              for (var k = 0; k < colors.length; k++) {
+                if(colors[k] == swatchColorType){
+                  $($('.colorModalCellInner')[i]).css({
+                    border: "4px solid #289DAE"
+                  })
+                  $($('.colorModalCellInner')[i]).addClass('colorPicked');
+                }
+              }
+            }
+            $('.colorModalSubmit').on('click', function(){
+              var newColorList = [];
+              for (var i = 0; i < $('.colorModalCellInner').length; i++) {
+                if($($('.colorModalCellInner')[i]).hasClass('colorPicked')){
+                  var colorName = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
+                  newColorList.push(colorName);
+                }
+              }
+              if(newColorList == 0){
+                alert('Please select at least one color to continue');
+                return;
+              }
+              target.removeClass('picked');
+              var colorList = $(target[0])[0].classList[3];
+              $(target[0]).removeClass(colorList);
+              var colorList = "fabricColorList"
+              for (var i = 0; i < newColorList.length; i++) {
+                colorList = colorList + "_" + newColorList[i]
+              }
+              target.addClass(colorList);
+              target.addClass('picked');
+              $('.invisModal').remove();
+            })
+          }
+        })
+      }
+      else {
+        $('.create'+swatchType).on('click', function(evt){
+          var type = $(evt.target)[0].classList[1].slice(6, 1000);
+
+          if($(evt.target).css('opacity') == 1 ){
+            $(evt.target).css({
+              opacity: 0.5
+              ,outline: "2px solid gray"
+            })
+            $(evt.target).attr('id', 'picked_'+swatchType+"_"+type)
+            $(evt.target).addClass('picked');
+          } else {
+            $(evt.target).css({
+              opacity: 1
+              ,outline: "none"
+            })
+          }
+        })
+      }
     }
     // swatchLogic("Season");
     swatchLogic("Fabric");
@@ -162,39 +307,25 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       function addFabrics(){
         var fabricsHtmlArray = $('.createFabric');
         var currentValues = productObject.fabrics;
+        console.log(currentValues);
         for (var i = 0; i < fabricsHtmlArray.length; i++) {
           var elType = fabricsHtmlArray[i].classList[1].slice(6, 20);
           for (var j = 0; j < currentValues.length; j++) {
-            if( elType == currentValues[j]){
+            console.log(elType);
+            console.log(currentValues[j].name);
+            if( elType == currentValues[j].name){
+              $(fabricsHtmlArray[i]).addClass('fabricColorList');
+              $(fabricsHtmlArray[i]).addClass('fabricColorList_'+currentValues.join("_"));
               $(fabricsHtmlArray[i]).addClass('picked');
               $(fabricsHtmlArray[i]).attr('id', "picked_Fabric_"+currentValues[j]);
               $(fabricsHtmlArray[i]).css({
-                opacity: .5
-                ,outline: "4px solid #3CB878"
+                border: "4px solid #289DAE"
               })
             }
           }
         }
       }
       addFabrics();
-      function addColors(){
-        var colorsHtmlArray = $('.createColor');
-        var currentValues = productObject.colors;
-        for (var i = 0; i < colorsHtmlArray.length; i++) {
-          var elType = colorsHtmlArray[i].classList[1].slice(6, 20);
-          for (var j = 0; j < currentValues.length; j++) {
-            if( elType == currentValues[j]){
-              $(colorsHtmlArray[i]).addClass('picked');
-              $(colorsHtmlArray[i]).attr('id', "picked_Color_"+currentValues[j]);
-              $(colorsHtmlArray[i]).css({
-                opacity: .5
-                ,outline: "4px solid #3CB878"
-              })
-            }
-          }
-        }
-      }
-      addColors();
       function addAccessories(){
         var buttonHtmlArray = $('.createButton');
         var currentValues = productObject.buttons;
@@ -213,7 +344,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       }
       addAccessories();
       swatchLogic("Fabric");
-      swatchLogic("Color");
       swatchLogic("Accessory");
     }
   ////////////////////////////
@@ -223,32 +353,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
   ////////////////////////////////////////
   /////////Effects for carousel//////////
-  ////click effect for seasonsplash
-  function swatchLogic(swatchType){
-    ///////note: swatchType needs to be added as a capital, i.e. "Season"
-    $('.create'+swatchType).on('click', function(evt){
-      console.log($(evt.target)[0].classList[1].slice(6, 100));
-      if($(evt.target).css('opacity') == 1 ){
-        $(evt.target).css({
-          opacity: 0.5
-          ,outline: "4px solid #3CB878"
-        })
-        $(evt.target).attr('id', 'picked_'+swatchType+"_"+$(evt.target)[0].classList[1].slice(6, 100));
-        $(evt.target).addClass('picked');
-      } else {
-        $(evt.target).css({
-          opacity: 1
-          ,outline: 'none'
-        })
-        $(evt.target).removeClass('picked');
-      }
-    })
-  }
-  swatchLogic("Season");
-  swatchLogic("Fabric");
-  swatchLogic("Color");
-  swatchLogic("Button");
-  swatchLogic("Accessory");
 
   ///////////////////////////////////////////////////
   ///////////////build function to collect and submit
@@ -611,7 +715,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
     for(var i = 0; i < allMiniPhotosLength; i++) {
       $('#newProductMiniImage'+i).attr('src', '');
-      console.log(self.tempPhotoCache);
       if(i < self.tempPhotoCache.length){
         var imageShift = $('#newProductMiniImage'+i)[0];
         $(imageShift).attr('src', self.tempPhotoCache[i]);
@@ -682,29 +785,11 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     var timestamp = new Date();
     // var images = self.tempPhotoCache;
     var imagesHTML = self.tempPhotoHTMLCache;
-    if(imagesHTML.length < 1){
-      alert('Must include at least one photo to save a project');
-      $('.invisModal').remove();
-      return;
-    }
     var collections = $('.newProductCollectionsInput').val().split(' ');
     var productType = $('.newProductTypeDropdown').val();
     var tags = $('.newProductTagsInput').val().split(' ');
     var vendor = $('.newProductVendor').val();
     var description = $('.newProductDescription').val();
-    var colorsFunc = function(){
-      var allPicked = $(".picked");
-      var colorsArray = [];
-      for (var i = 0; i < allPicked.length; i++) {
-        console.log('we got one');
-        console.log(allPicked[i].id);
-        if(allPicked[i].id.split('_')[1] == 'Color')
-        colorsArray.push(allPicked[i].id.split('_')[2])
-      }
-      return colorsArray;
-    }
-    var colors = colorsFunc();
-    console.log(colors);
     var fabricsFunc = function(){
       var allPicked = $(".picked");
       var fabricsArray = [];
@@ -715,26 +800,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       return fabricsArray;
     }
     var fabrics = fabricsFunc();
-    var seasonsFunc = function(){
-      var allPicked = $(".picked");
-      var seasonsArray = [];
-      for (var i = 0; i < allPicked.length; i++) {
-        if(allPicked[i].id.split('_')[1] == 'Season')
-        seasonsArray.push(allPicked[i].id.split('_')[2])
-      }
-      return seasonsArray;
-    }
-    var seasons = seasonsFunc();
-    var stitchesFunc = function(){
-      var allPicked = $(".picked");
-      var stitchesArray = [];
-      for (var i = 0; i < allPicked.length; i++) {
-        if(allPicked[i].id.split('_')[1] == 'Stitch')
-        stitchesArray.push(allPicked[i].id.split('_')[2])
-      }
-      return stitchesArray;
-    }
-    var stitches = stitchesFunc();
     var accessoriesFunc = function(){
       var allPicked = $(".picked");
       var accessoriesArray = [];
@@ -762,11 +827,8 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       ,tags: tags
       ,collections: collections
       ,vendor: vendor
-      ,colors: colors
       ,fabrics: fabrics
-      ,seasons: seasons
       ,images: self.tempPhotoCache
-      ,stitchPatterns: stitches
       ,accessories: accessories
       ,status: status
     }
@@ -775,8 +837,27 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       window.location.hash = "#/designer/dashboard";
     })
   }
-  $('.new_product_send').on('click', editProject);
-  $('.new_product_save').on('click', editProject);
+  $('.new_product_send').on('click', function(evt){
+    console.log(self.tempPhotoHTMLCache);
+    if(self.tempPhotoHTMLCache.length < 4){
+      alert('Must include at least four photos from four front, back, and both sides to save a project');
+      $('.invisModal').remove();
+      return;
+    }
+    else {
+      editProject(evt);
+    }
+  })
+  $('.new_product_save').on('click', function(evt){
+    if(self.tempPhotoHTMLCache.length < 1){
+      alert('Must include at least one photo to save a project');
+      $('.invisModal').remove();
+      return;
+    }
+    else {
+      editProject(evt);
+    }
+  });
   ////hover states
   $('.new_product_send').on('mouseenter', function(){
     $('.new_product_send').css({
@@ -806,40 +887,17 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
   /////function to update a project (will go in a factory)
   function editProjectToDb(projectArray, callback){
+    console.log('over here now');
     return $http({
       method: "POST"
       ,url: "/api/product/update"
       ,data: projectArray
     })
     .then(function(newProjectInfo){
+      console.log(newProjectInfo);
       callback(newProjectInfo.data._id);
       // return newProjectInfo;
     })
-  }
-  function submitPhotos(productIdToUpdate){
-    console.log('aint even worrying about it, since we already have the phtoo urls. Look in the edit project function.');
-
-    // $(".bodyview").append(
-    //   "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
-    //   "</form>"
-    // )
-    // //
-    // if(self.tempPhotoHTMLCache[0]){
-    //   $('.tempForm').append(self.tempPhotoHTMLCache[0]);
-    // }
-    // if(self.tempPhotoHTMLCache[1]){
-    //   $('.tempForm').append(self.tempPhotoHTMLCache[1]);
-    // }
-    // if(self.tempPhotoHTMLCache[2]){
-    //   $('.tempForm').append(self.tempPhotoHTMLCache[2]);
-    // }
-    // if(self.tempPhotoHTMLCache[3]){
-    //   $('.tempForm').append(self.tempPhotoHTMLCache[3]);
-    // }
-    // $('.tempForm').append(
-    //   "<input name='productId' type='text' value='"+productIdToUpdate+"'>"
-    // );
-    // $('.tempForm').submit();
   }
 
   // logout button functionality

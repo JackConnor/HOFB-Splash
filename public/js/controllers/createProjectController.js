@@ -111,6 +111,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////////Effects for carousel//////////
     ////click effect for highlighting
     function swatchLogic(swatchType){
+      console.log(swatchType);
       ///////note: swatchType needs to be added as a capital, i.e. "Season"
 
       ///////fabrics hav a color popup modal, which we take care of here
@@ -296,44 +297,44 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     ///////////////////////////////////////////////////
     ///////////////build function to collect and submit
-    $('.createSubmit').on('click', function(){
-      self.createNewProject = {
-        name: $('.carouselNameEntry').val()
-        ,timestamp: ""
-        ,images: []
-        ,groups: []
-        ,productType: ""
-        ,tags: []
-        ,vendor: ""
-        ,colors: []
-        ,fabrics: []
-        ,buttons: ""
-        ,stitchPattern: ""
-        ,season: window.location.hash.split('/')[5]
-      }
-      var pickedElems = $('.picked');
-      for (var i = 0; i < pickedElems.length; i++) {
-        if(pickedElems[i].id.split('_')[1] == "Color"){
-          self.createNewProject.colors.push(pickedElems[i].id.split('_')[2])
-        }
-        else if(pickedElems[i].id.split('_')[1] == "Fabric"){
-          self.createNewProject.fabrics.push(pickedElems[i].id.split('_')[2])
-        }
-        else if(pickedElems[i].id.split('_')[1] == "Buttons"){
-          self.createNewProject.buttons = pickedElems[i].id.split('_')[2];
-        }
-        else if(pickedElems[i].id.split('_')[1] == "Stitch"){
-          self.createNewProject.stitchPattern = pickedElems[i].id.split('_')[2];
-        }
-      }
-      $http({
-        method: "POST"
-        ,url: "/api/products"
-        ,data: self.createNewProject
-      })
-      .then(function(newProjectStuff){
-      })
-    })
+    // $('.createSubmit').on('click', function(){
+    //   self.createNewProject = {
+    //     name: $('.carouselNameEntry').val()
+    //     ,timestamp: ""
+    //     ,images: []
+    //     ,groups: []
+    //     ,productType: ""
+    //     ,tags: []
+    //     ,vendor: ""
+    //     ,colors: []
+    //     ,fabrics: []
+    //     ,buttons: ""
+    //     ,stitchPattern: ""
+    //     ,season: window.location.hash.split('/')[5]
+    //   }
+    //   var pickedElems = $('.picked');
+    //   for (var i = 0; i < pickedElems.length; i++) {
+    //     if(pickedElems[i].id.split('_')[1] == "Color"){
+    //       self.createNewProject.colors.push(pickedElems[i].id.split('_')[2])
+    //     }
+    //     else if(pickedElems[i].id.split('_')[1] == "Fabric"){
+    //       self.createNewProject.fabrics.push(pickedElems[i].id.split('_')[2])
+    //     }
+    //     else if(pickedElems[i].id.split('_')[1] == "Buttons"){
+    //       self.createNewProject.buttons = pickedElems[i].id.split('_')[2];
+    //     }
+    //     else if(pickedElems[i].id.split('_')[1] == "Stitch"){
+    //       self.createNewProject.stitchPattern = pickedElems[i].id.split('_')[2];
+    //     }
+    //   }
+    //   $http({
+    //     method: "POST"
+    //     ,url: "/api/products"
+    //     ,data: self.createNewProject
+    //   })
+    //   .then(function(newProjectStuff){
+    //   })
+    // })
 
     /////////Effects for carousel//////////
     ////////////////////////////////////////
@@ -740,11 +741,13 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         var allPicked = $(".picked");
         var fabricsArray = [];
         for (var i = 0; i < allPicked.length; i++) {
-          if(allPicked[i].id.split('_')[1] == 'Fabric')
-          fabricsArray.push({name: allPicked[i].id.split('_')[2],  colors: []})
-          console.log($(allPicked[i])[0].classList[3]);
-          var colorString = $(allPicked[i])[0].classList[3];
-          var colorArray = colorString.split('_').slice(1, 100);
+          if(allPicked[i].id.split('_')[1] == 'Fabric'){
+            var name = allPicked[i].id.split('_').slice(2, 100).join("_");
+            fabricsArray.push({name: name,  colors: []})
+            console.log($(allPicked[i])[0].classList[3]);
+            var colorString = $(allPicked[i])[0].classList[3];
+            var colorArray = colorString.split('_').slice(1, 100);
+          }
           console.log(colorArray);
           fabricsArray[i].colors = colorArray;
         }
