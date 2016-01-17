@@ -120,12 +120,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           var target = $(evt.target);
           var fabricType = target[0].classList[1].slice(6, 100);
           var fabricDescription = allSwatches.fabrics[fabricType].description;
-          console.log(target);
           var allColors = allSwatches.fabrics[fabricType].colors;
-          console.log(allColors);
-          console.log(fabricType);
-          $(evt.target).addClass('fabricColor');
-          $(evt.target).addClass('fabricColorList');
           ////////we add the color picking modal
           $('.bodyview').append(
             "<div class='invisModal'>"+
@@ -165,7 +160,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
                 "</div>"+
               "</div>"
             )
-            console.log(allColors[color]);
             $(".colorModal"+color).css({
               backgroundColor: allColors[color]
             })
@@ -192,27 +186,74 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
               }
             })
           }
-          ////////function to submit the modal with all your color choices
-          $('.colorModalSubmit').on('click', function(){
+          //////////now we split based on if the modal is being picked for the first time, or editing a previously picked choice
+          /////if this is a first time color choice for this fabric......
+          if(!target.hasClass('picked')){
+            console.log('new one');
+            $(evt.target).addClass('fabricColor');
+            $(evt.target).addClass('fabricColorList');
+            ////////function to submit the modal with all your color choices
+            $('.colorModalSubmit').on('click', function(){
+              for (var i = 0; i < $('.colorModalCellInner').length; i++) {
+                if($($('.colorModalCellInner')[i]).hasClass('colorPicked')){
+                  var colorName = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
+                  var colorList = $(target[0])[0].classList[3];
+                  target.removeClass(colorList);
+                  var colorList = colorList + "_" + colorName;
+                  target.addClass(colorList);
+                  target.css({
+                    border: "4px solid #289DAE"
+                  })
+                }
+              }
+              target.attr('id', 'picked_'+swatchType+"_"+fabricType)
+              target.addClass('picked');
+              $('.invisModal').remove();
+            })
+          }
+          else {
+            ///////////////first we need to load up the already-picked colors
+            var colors = $(target[0])[0].classList[3].split("_").slice(1, 100);
+            console.log(colors);
             for (var i = 0; i < $('.colorModalCellInner').length; i++) {
-              if($($('.colorModalCellInner')[i]).hasClass('colorPicked')){
-                var colorName = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
-                console.log(colorName);
-                console.log(target);
-                var colorList = $(target[0])[0].classList[3];
-                console.log(colorList);
-                target.removeClass(colorList);
-                var colorList = colorList + "_" + colorName;
-                target.addClass(colorList);
-                target.css({
-                  border: "4px solid #289DAE"
-                })
-                target.attr('id', 'picked_'+swatchType+"_"+fabricType)
-                target.addClass('picked');
-                $('.invisModal').remove();
+              var swatchColorType = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
+              console.log(swatchColorType);
+              for (var k = 0; k < colors.length; k++) {
+                if(colors[k] == swatchColorType){
+                  $($('.colorModalCellInner')[i]).css({
+                    border: "4px solid #289DAE"
+                  })
+                  $($('.colorModalCellInner')[i]).addClass('colorPicked');
+                }
               }
             }
-          })
+            $('.colorModalSubmit').on('click', function(){
+              var newColorList = [];
+              for (var i = 0; i < $('.colorModalCellInner').length; i++) {
+                if($($('.colorModalCellInner')[i]).hasClass('colorPicked')){
+                  var colorName = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
+                  newColorList.push(colorName);
+                }
+              }
+              if(newColorList == 0){
+                alert('Please select at least one color to continue');
+                return;
+              }
+              target.removeClass('picked');
+              console.log(target);
+              var colorList = $(target[0])[0].classList[3];
+              console.log(colorList);
+              $(target[0]).removeClass(colorList);
+              console.log(target);
+              var colorList = "fabricColorList"
+              for (var i = 0; i < newColorList.length; i++) {
+                colorList = colorList + "_" + newColorList[i]
+              }
+              target.addClass(colorList);
+              target.addClass('picked');
+              $('.invisModal').remove();
+            })
+          }
         })
       }
       else {
