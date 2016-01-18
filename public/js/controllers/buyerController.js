@@ -166,7 +166,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       .then(function(decodedToken){
         var tier = decodedToken.data.aud.split("-")[1];
         self.buyerId = decodedToken.data.name;
-        // loadFavorites();
         getBoughtList();/////run on load in order for list to be set on toggle
         if(decodedToken.data.aud.split('-')[0] != "buyer"){
           window.location.hash = '#/designer/loginportal';
@@ -220,68 +219,87 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
     function loadInitialList(arg){
       var dataType = $('.dashDataType');
       dataType.text('Curated, fed to your Tier');
-      for (var i = 0; i < self.alreadyCurated.length; i++) {
-        $('.designerDashList').append(
-          "<div class='col-md-4 col-xs-12 projectCell'>"+
-            "<div class='projectCellInner'>"+
-              "<div class='projectCellImageHolder'>"+
-                "<img class='projectCellImage' id='"+self.alreadyCurated[i]._id+"'"+
-              "src='"+self.alreadyCurated[i].images[0]+"'>"+
+      $http({
+        method: "GET"
+        ,url: "/api/users/"+self.buyerId
+      })
+      .then(function(user){
+        self.allFavorites = user.data.favorites;
+        console.log(self.allFavorites);
+        for (var i = 0; i < self.alreadyCurated.length; i++) {
+          $('.designerDashList').append(
+            "<div class='col-md-4 col-xs-12 projectCell'>"+
+              "<div class='projectCellInner'>"+
+                "<div class='projectCellImageHolder'>"+
+                  "<img class='projectCellImage' id='"+self.alreadyCurated[i]._id+"'"+
+                "src='"+self.alreadyCurated[i].images[0]+"'>"+
+                "</div>"+
+                "<div class='projectCellMinis' id='mini"+i+"'>"+
+                "</div>"+
+                "<div class='projectCellContent'>"+
+                  "<span class='glyphicon glyphicon-heart projectCellHeart boomHeart"+i+"' id='"+self.alreadyCurated[i]._id+"'></span>"+
+                  "<p class='projectCellContentName'>"+self.alreadyCurated[i].name+"</p>"+
+                  "<p class='projectCellContentTime'>"+self.alreadyCurated[i].TimeSinceCreation+"</p>"+
+                "</div>"+
               "</div>"+
-              "<div class='projectCellMinis' id='mini"+i+"'>"+
-              "</div>"+
-              "<div class='projectCellContent'>"+
-                "<span class='glyphicon glyphicon-heart projectCellHeart' id='"+self.alreadyCurated[i]._id+"'></span>"+
-                "<p class='projectCellContentName'>"+self.alreadyCurated[i].name+"</p>"+
-                "<p class='projectCellContentTime'>"+self.alreadyCurated[i].TimeSinceCreation+"</p>"+
-              "</div>"+
-            "</div>"+
-          "</div>"
-          )
-          var allImages = self.alreadyCurated[i].images;
-          for (var j = 0; j < allImages.length; j++) {
-            $('#mini'+i).append(
-              "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
+            "</div>"
             )
-          }
-      }
-      arg();
+            var allImages = self.alreadyCurated[i].images;
+            for (var j = 0; j < allImages.length; j++) {
+              $('#mini'+i).append(
+                "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
+              )
+            }
+            for (var k = 0; k < self.allFavorites.length; k++) {
+              console.log(self.allFavorites[k]);
+              if(self.allFavorites[k] == self.alreadyCurated[i]._id){
+                console.log('got one');
+                $('.boomHeart'+i).addClass('favorited');
+                $('.boomHeart'+i).css({
+                  color: "#292D36"
+                })
+              }
+            }
+        }
+        addFavorites(self.buyerId);
+        arg();
+      })
     }
     ///////will set self.allProjects as all our projects
     loadProjects(loadInitialList, addHoverToCell);
 
-    function loadFavoritesList(arg){
-      var dataType = $('.dashDataType');
-      dataType.text('Curated, fed to your Tier');
-      for (var i = 0; i < self.allFavorites.length; i++) {
-        console.log(self.allFavorites[i]);
-        $('.designerDashList').append(
-          "<div class='col-md-4 col-xs-12 projectCell'>"+
-            "<div class='projectCellInner'>"+
-              "<div class='projectCellImageHolder'>"+
-                "<img class='projectCellImage' id='"+self.allFavorites[i]._id+"'"+
-              "src='"+self.allFavorites[i].images[0]+"'>"+
-              "</div>"+
-              "<div class='projectCellMinis' id='mini"+i+"'>"+
-              "</div>"+
-              "<div class='projectCellContent'>"+
-                "<span class='glyphicon glyphicon-heart projectCellHeart' id='"+self.allFavorites[i]._id+"'></span>"+
-                "<p class='projectCellContentName'>"+self.allFavorites[i].name+"</p>"+
-                "<p class='projectCellContentTime'>"+self.allFavorites[i].TimeSinceCreation+"</p>"+
-              "</div>"+
-            "</div>"+
-          "</div>"
-          )
-          var allImages = self.allFavorites[i].images;
-          for (var j = 0; j < allImages.length; j++) {
-            $('#mini'+i).append(
-              "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
-            )
-          }
-      }
-      arg();
-      addHoverToCell();
-    }
+    // function loadFavoritesList(arg){
+    //   var dataType = $('.dashDataType');
+    //   dataType.text('Curated, fed to your Tier');
+    //   for (var i = 0; i < self.allFavorites.length; i++) {
+    //     console.log(self.allFavorites[i]);
+    //     $('.designerDashList').append(
+    //       "<div class='col-md-4 col-xs-12 projectCell'>"+
+    //         "<div class='projectCellInner'>"+
+    //           "<div class='projectCellImageHolder'>"+
+    //             "<img class='projectCellImage' id='"+self.allFavorites[i]._id+"'"+
+    //           "src='"+self.allFavorites[i].images[0]+"'>"+
+    //           "</div>"+
+    //           "<div class='projectCellMinis' id='mini"+i+"'>"+
+    //           "</div>"+
+    //           "<div class='projectCellContent'>"+
+    //             "<span class='glyphicon glyphicon-heart projectCellHeart' id='"+self.allFavorites[i]._id+"'></span>"+
+    //             "<p class='projectCellContentName'>"+self.allFavorites[i].name+"</p>"+
+    //             "<p class='projectCellContentTime'>"+self.allFavorites[i].TimeSinceCreation+"</p>"+
+    //           "</div>"+
+    //         "</div>"+
+    //       "</div>"
+    //       )
+    //       var allImages = self.allFavorites[i].images;
+    //       for (var j = 0; j < allImages.length; j++) {
+    //         $('#mini'+i).append(
+    //           "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
+    //         )
+    //       }
+    //   }
+    //   arg();
+    //   addHoverToCell();
+    // }
     ///////will set self.allProjects as all our projects
 
     ////function for appending active list
@@ -332,6 +350,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           "</div>"
         )
       }
+      addFavorites(self.buyerId);
     }
     function getBoughtList(){
       $http({
@@ -425,6 +444,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
             "</div>"
           )
         }
+        addFavorites(self.buyerId);
       //////end if statement for self.filtered
       }
       addHoverToCell();
@@ -1072,69 +1092,76 @@ function loadCorrectHoverState(){
     /////////////////////////////////////////////////
     /////////////logic for favorites////////////////
     function loadFavorites(){
-      var buyerId = self.buyerId;
-      console.log(buyerId);
-      $('.designerDashList').html('');
-      console.log('hettin');
-      $http({
-        method: "GET"
-        ,url: "/api/users/"+buyerId
-      })
-      .then(function(user){
-        console.log(user);
-        var allFavorites = [];
-        for (var i = 0; i < user.data.favorites.length; i++) {
-          console.log(user.data.favorites[i]);
-          if(user.data.favorites[i] != null){
-            $http({
-              method: 'GET'
-              ,url: "/api/product/"+user.data.favorites[i]
-            })
-            .then(function(fave){
-              allFavorites.push(fave.data);
-              self.allFavorites = allFavorites;
-              console.log(self.allFavorites);
-              var dataType = $('.dashDataType');
-              dataType.text('Curated, fed to your Tier');
-              for (var i = 0; i < self.allFavorites.length; i++) {
-                console.log(self.allFavorites[i]);
-                $('.designerDashList').append(
-                  "<div class='col-md-4 col-xs-12 projectCell'>"+
-                    "<div class='projectCellInner'>"+
-                      "<div class='projectCellImageHolder'>"+
-                        "<img class='projectCellImage' id='"+self.allFavorites[i]._id+"'"+
-                      "src='"+self.allFavorites[i].images[0]+"'>"+
+      if(self.curatedToggleCounter == 'favorites'){
+
+      }
+      else {
+        var buyerId = self.buyerId;
+        console.log(buyerId);
+        $('.designerDashList').html('');
+        console.log('hettin');
+        $http({
+          method: "GET"
+          ,url: "/api/users/"+buyerId
+        })
+        .then(function(user){
+          console.log(user);
+          var allFavorites = [];
+          for (var i = 0; i < user.data.favorites.length; i++) {
+            console.log(user.data.favorites[i]);
+            if(user.data.favorites[i] != null){
+              $http({
+                method: 'GET'
+                ,url: "/api/product/"+user.data.favorites[i]
+              })
+              .then(function(fave){
+                allFavorites.push(fave.data);
+                self.allFavorites = allFavorites;
+                console.log(self.allFavorites);
+                var dataType = $('.dashDataType');
+                dataType.text('Curated, fed to your Tier');
+                for (var i = 0; i < self.allFavorites.length; i++) {
+                  console.log(self.allFavorites[i]);
+                  $('.designerDashList').append(
+                    "<div class='col-md-4 col-xs-12 projectCell'>"+
+                      "<div class='projectCellInner'>"+
+                        "<div class='projectCellImageHolder'>"+
+                          "<img class='projectCellImage' id='"+self.allFavorites[i]._id+"'"+
+                        "src='"+self.allFavorites[i].images[0]+"'>"+
+                        "</div>"+
+                        "<div class='projectCellMinis' id='mini"+i+"'>"+
+                        "</div>"+
+                        "<div class='projectCellContent'>"+
+                          "<span class='glyphicon glyphicon-heart projectCellHeart' id='"+self.allFavorites[i]._id+"'></span>"+
+                          "<p class='projectCellContentName'>"+self.allFavorites[i].name+"</p>"+
+                          "<p class='projectCellContentTime'>"+self.allFavorites[i].TimeSinceCreation+"</p>"+
+                        "</div>"+
                       "</div>"+
-                      "<div class='projectCellMinis' id='mini"+i+"'>"+
-                      "</div>"+
-                      "<div class='projectCellContent'>"+
-                        "<span class='glyphicon glyphicon-heart projectCellHeart' id='"+self.allFavorites[i]._id+"'></span>"+
-                        "<p class='projectCellContentName'>"+self.allFavorites[i].name+"</p>"+
-                        "<p class='projectCellContentTime'>"+self.allFavorites[i].TimeSinceCreation+"</p>"+
-                      "</div>"+
-                    "</div>"+
-                  "</div>"
-                  )
-                  var allImages = self.allFavorites[i].images;
-                  for (var j = 0; j < allImages.length; j++) {
-                    $('#mini'+i).append(
-                      "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
+                    "</div>"
                     )
-                  }
-              }
-              addHoverToCell();
-            })
+                    var allImages = self.allFavorites[i].images;
+                    for (var j = 0; j < allImages.length; j++) {
+                      $('#mini'+i).append(
+                        "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
+                      )
+                    }
+                }
+                addHoverToCell();
+                self.curatedToggleCounter = 'favorites'
+              })
+            }
           }
-        }
-      })
+        })
+      }
     }
 
     $('.designerDashFavorites').on('click', loadFavorites);
 
-    function addFavorites(){
+    function addFavorites(buyerId){
       $('.projectCellHeart').on('click', function(evt){
         var favorite = $(evt.target)[0].id;
         console.log(favorite);
+        console.log('old favorite');
         if($(evt.target).hasClass('favorited')){
           $(evt.target).removeClass('favorited');
           $(evt.target).css({
@@ -1143,13 +1170,14 @@ function loadCorrectHoverState(){
           $http({
             method: "POST"
             ,url: "/api/users/update"
-            ,data: {userId: self.buyerId, removeFavorite: favorite}
+            ,data: {userId: buyerId, removeFavorite: favorite}
           })
           .then(function(updatedUser){
             console.log(updatedUser);
           })
         }
         else {
+          console.log('new favorite');
           $(evt.target).addClass('favorited');
           console.log(favorite);
           $(evt.target).css({
