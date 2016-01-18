@@ -262,7 +262,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
               }
             }
         }
-        moveDashMinis();
+        // moveDashMinis();
         addFavorites(self.buyerId);
         arg();
       })
@@ -320,7 +320,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         )
       }
       addFavorites(self.buyerId);
-      moveDashMinis();
+      // moveDashMinis();
       addFavorites(self.buyerId);
     }
     function getBoughtList(){
@@ -436,7 +436,8 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
     ////see all active projects
     function toggleActive(){
       $('.designerDashList').html('');
-      loadInitialList(function(){console.log('boom')});
+      ///////will set self.allProjects as all our projects
+      loadProjects(loadInitialList, addHoverToCell);
       $('.sectionTitle').text('listing all active projects')
     }
 
@@ -1141,7 +1142,7 @@ function loadCorrectHoverState(){
                   $('.boomHeart'+fave.data._id).css({
                     color: "#292D36"
                   })
-                  moveDashMinis();
+                  // moveDashMinis();
                   addFavorites(self.buyerId)
                   addHoverToCell();
                   self.curatedToggleCounter = 'favorites'
@@ -1193,41 +1194,41 @@ function loadCorrectHoverState(){
     }
     ///////////end favorites////////////////////////
     ////////////////////////////////////////////////
-    function moveDashMinis() {
-      //////We create the logic for the mini photos. these run on an interval, that switches to the photos being move (margin-left being added)
-      setInterval(function(){
-        if(self.intervalCounter == 0){
-          self.miniMarg = 0;
-        }
-        else {
-          var imageCount = $(self.activeMinis)[0].children.length;
-          var totalLengthPhotos = ((imageCount+.3)*64);
-          var viewWindow = $('.projectCellImageHolder').width();
-          var maxMovement = (-totalLengthPhotos) + viewWindow;
-          if(self.miniMarg >= maxMovement && maxMovement < 0){
-            $(self.activeMinis).css({
-              marginLeft: self.miniMarg
-            })
-            self.miniMarg += -1;
-          }
-          else {
-          }
-        }
-      }, 20)
-      $('.projectCellMinis').on('mouseenter', function(evt){
-        self.intervalCounter = 1;
-        if($(evt.target)[0].classList[0] == 'projectCellMinis'){
-          self.activeMinis = $(evt.target)[0];
-        }
-        else {
-          self.activeMinis = $(evt.target)[0].parentNode;
-        }
-      })
-      $('.projectCellMinis').on('mouseleave', function(){
-        self.intervalCounter = 0;
-        self.activeMinis = "none";
-      })
-    }
+    // function moveDashMinis() {
+    //   //////We create the logic for the mini photos. these run on an interval, that switches to the photos being move (margin-left being added)
+    //   setInterval(function(){
+    //     if(self.intervalCounter == 0){
+    //       self.miniMarg = 0;
+    //     }
+    //     else {
+    //       var imageCount = $(self.activeMinis)[0].children.length;
+    //       var totalLengthPhotos = ((imageCount+.3)*64);
+    //       var viewWindow = $('.projectCellImageHolder').width();
+    //       var maxMovement = (-totalLengthPhotos) + viewWindow;
+    //       if(self.miniMarg >= maxMovement && maxMovement < 0){
+    //         $(self.activeMinis).css({
+    //           marginLeft: self.miniMarg
+    //         })
+    //         self.miniMarg += -1;
+    //       }
+    //       else {
+    //       }
+    //     }
+    //   }, 20)
+    //   $('.projectCellMinis').on('mouseenter', function(evt){
+    //     self.intervalCounter = 1;
+    //     if($(evt.target)[0].classList[0] == 'projectCellMinis'){
+    //       self.activeMinis = $(evt.target)[0];
+    //     }
+    //     else {
+    //       self.activeMinis = $(evt.target)[0].parentNode;
+    //     }
+    //   })
+    //   $('.projectCellMinis').on('mouseleave', function(){
+    //     self.intervalCounter = 0;
+    //     self.activeMinis = "none";
+    //   })
+    // }
   /////end admin controller
   ////////////////////////
   ////////////////////////

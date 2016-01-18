@@ -917,20 +917,20 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   $('.new_product_send').on('mouseleave', function(){
     $('.new_product_send').css({
       backgroundColor: ""
-      ,color: "#169AA9"
+      ,color: "#666"
     })
   })
 
   $('.new_product_save').on('mouseenter', function(){
     $('.new_product_save').css({
-      backgroundColor: "#169AA9"
+      backgroundColor: "black"
       ,color: "white"
     })
   })
   $('.new_product_save').on('mouseleave', function(){
     $('.new_product_save').css({
       backgroundColor: ""
-      ,color: "#169AA9"
+      ,color: "#666"
     })
   })
 
@@ -1144,6 +1144,9 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
                       '<i class="fa fa-plus"></i>'+
                     '</div>'+
                     "<div class='sideText'>Image Upload</div>"+
+                    "<div class='imageUploadInfoEdit'>"+
+                      "Suggested upload photo size: 561px by 700px"+
+                    "</div>"+
                   "</div>"+
                   "<div class='sideBanner'>"+
                     "<div class='bannerTop'>"+

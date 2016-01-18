@@ -1402,6 +1402,23 @@
   opacity: 0;
 }
 
+.imageUploadInfo {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  margin-left: -230px;
+  color: #232730;
+}
+
+.imageUploadInfoEdit {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  margin-left: -115px;
+  width: 300px;
+  color: #232730;
+}
+
 .inputFileHolder {
   color: white;
   font-size: 16px;
@@ -1698,6 +1715,12 @@
 /*/*/
 /*end of rename*/
 
+.navbarHeart {
+  padding-right: 5px;
+  font-size: 17px;
+  margin-top: 3px;
+  color: rgb(41, 45, 54);
+}
 
 .navigationBar {
   height: 50px;
@@ -2996,7 +3019,7 @@
   vertical-align: center;
   width: 400px;
   margin-top: 12px;
-  margin-left: -40px;
+  margin-left: -45px;
   color: #A1A1A1;
 }
 

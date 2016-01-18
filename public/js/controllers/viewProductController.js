@@ -113,23 +113,27 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
       var colorArrayFunc = function(){
         var prodcolors = self.productData.colors;
         var colorArr = [];
-        for (var i = 0; i < prodcolors.length; i++) {
-          var prod = prodcolors[i].toLowerCase();
-          // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
-          colorArr.push(allSwatches.colors[prod]);
+        if(prodcolors > 0){
+          for (var i = 0; i < prodcolors.length; i++) {
+            var prod = prodcolors[i].toLowerCase();
+            // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
+            colorArr.push(allSwatches.colors[prod]);
+          }
+          return colorArr;
         }
-        return colorArr;
       }
       self.allColors = colorArrayFunc();
       //////get all fabrics
       var fabricArrayFunc = function(){
         var fabricArr = [];
-        for (var i = 0; i < self.productData.fabrics.length; i++) {
-          var fabric = self.productData.fabrics[i].toLowerCase();
-          // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
-          fabricArr.push(allSwatches.fabrics[fabric]);
+        if(self.productData.fabrics.length){
+          for (var i = 0; i < self.productData.fabrics.length; i++) {
+            var fabric = self.productData.fabrics[i].toLowerCase();
+            // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
+            fabricArr.push(allSwatches.fabrics[fabric]);
+          }
+          return fabricArr;  
         }
-        return fabricArr;
       }
       self.allFabrics = fabricArrayFunc();
     }

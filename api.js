@@ -539,7 +539,6 @@ module.exports = function(app){
 
   app.post('/api/pictures', upload.array('files', 8), function(req,res){
     for (var i = 0; i < req.files.length; i++) {
-      console.log();
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination
       //Uploads to cloudinary, returns URL -> uploadResult is the new photo URL
@@ -572,8 +571,8 @@ module.exports = function(app){
         eager: [
            { width: 150, height: 150,
              crop: "fill", format: "png" },
-           { width: 750, height: 1050,
-            format: "png" }
+           { width: 560, height: 700,
+            crop: 'fill', format: "png" }
         ]
        })
     }

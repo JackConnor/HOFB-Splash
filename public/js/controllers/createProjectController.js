@@ -580,9 +580,9 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       blob.onload = function(){
         console.log(this.width);
         console.log(this.height);
-        var ratio = (this.width/this.height);
+        var ratio = 0.7
         console.log(ratio);
-        if(ratio > .6 && ratio <= .76){
+        if(ratio > 0 && ratio <= 1){
           $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
           self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
           self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
@@ -1058,7 +1058,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
                   '<div class="plusBox">'+
                     '<i class="fa fa-plus"></i>'+
                   '</div>'+
-                  "<div class='sideText'>IMAGE UPLOAD</div>"+
+                  "<div class='sideText'>IMAGE UPLOAD"+
+                    "<div class='imageUploadInfo'>"+
+                      "Suggested upload photo size: 561px by 700px"+
+                    "</div>"+
+                  "</div>"+
                 "</div>"+
                 "<div class='sideBanner'>"+
                   "<div class='bannerTop'>"+
