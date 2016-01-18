@@ -16,6 +16,7 @@ var userSchema = new Schema({
   ,submittedProducts: Array
   ,acceptedProducts: Array
   ,products: Array
+  ,favorites: Array
   ,signins: Number
   ,bio: String
   ,username: String

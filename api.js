@@ -469,7 +469,6 @@ module.exports = function(app){
 
   app.get('/api/endtour/:userId', function(req, res){
     User.findOne({_id: req.params.userId}, function(err, user){
-      console.log(user);
       user.signins = user.signins+1;
       user.save(function(err, user){
         var token = jwt.sign({iss: "hofb.com", name: user._id, sub: user.signins, aud: "designer"}, process.env.JWT_TOKEN_SECRET, {expiresIn: "2h", audience: user.status})

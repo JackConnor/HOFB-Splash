@@ -1134,6 +1134,11 @@
   border-right: 2px solid #afafa6;*/
   border-bottom: 1px solid #afafa6;
 }
+
+.designerDashFavorites {
+  text-align: center;
+  font-size: 17px;
+}
 .designerDashFilter {
   display: inline-block;
   height: 46px;
@@ -2458,6 +2463,17 @@
   margin-bottom: 4px;
 }
 
+.projectCellMore {
+  font-size: 15px;
+  color: white;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.projectCellMore:hover {
+  color: purple;
+}
+
 .projectCellNewInner {
   width: 98%;
   height: 532px;
@@ -3038,6 +3054,7 @@
   font-size: 19px;
   text-align: center;
   background-color: #3CB878;
+  cursor: pointer;
   padding-top: 5px;
 }
 

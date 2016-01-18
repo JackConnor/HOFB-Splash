@@ -11,9 +11,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
     // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
     /////////////////////////////////////////////////////
-    /////////onload event to add initial list of repeated projects
-
-
     //////////////////////////////////
     //////////////////////////////////
     ////Order Purchase Only///////////
