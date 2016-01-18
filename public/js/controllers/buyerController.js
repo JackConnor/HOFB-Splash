@@ -1106,6 +1106,7 @@ function loadCorrectHoverState(){
         })
         .then(function(user){
           console.log(user);
+          self.allFavorites = [];
           var allFavorites = [];
           for (var i = 0; i < user.data.favorites.length; i++) {
             console.log(user.data.favorites[i]);
@@ -1120,34 +1121,36 @@ function loadCorrectHoverState(){
                 console.log(self.allFavorites);
                 var dataType = $('.dashDataType');
                 dataType.text('Curated, fed to your Tier');
-                for (var i = 0; i < self.allFavorites.length; i++) {
-                  console.log(self.allFavorites[i]);
-                  $('.designerDashList').append(
-                    "<div class='col-md-4 col-xs-12 projectCell'>"+
-                      "<div class='projectCellInner'>"+
-                        "<div class='projectCellImageHolder'>"+
-                          "<img class='projectCellImage' id='"+self.allFavorites[i]._id+"'"+
-                        "src='"+self.allFavorites[i].images[0]+"'>"+
-                        "</div>"+
-                        "<div class='projectCellMinis' id='mini"+i+"'>"+
-                        "</div>"+
-                        "<div class='projectCellContent'>"+
-                          "<span class='glyphicon glyphicon-heart projectCellHeart' id='"+self.allFavorites[i]._id+"'></span>"+
-                          "<p class='projectCellContentName'>"+self.allFavorites[i].name+"</p>"+
-                          "<p class='projectCellContentTime'>"+self.allFavorites[i].TimeSinceCreation+"</p>"+
-                        "</div>"+
+                $('.designerDashList').append(
+                  "<div class='col-md-4 col-xs-12 projectCell'>"+
+                    "<div class='projectCellInner'>"+
+                      "<div class='projectCellImageHolder'>"+
+                        "<img class='projectCellImage' id='"+fave.data._id+"'"+
+                      "src='"+fave.data.images[0]+"'>"+
                       "</div>"+
-                    "</div>"
+                      "<div class='projectCellMinis' id='mini"+fave.data._id+"'>"+
+                      "</div>"+
+                      "<div class='projectCellContent'>"+
+                        "<span class='glyphicon glyphicon-heart projectCellHeart boomHeart"+fave.data._id+"' id='"+fave.data._id+"'></span>"+
+                        "<p class='projectCellContentName'>"+fave.data.name+"</p>"+
+                        "<p class='projectCellContentTime'>"+fave.data.TimeSinceCreation+"</p>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"
+                  )
+                  var allImages = fave.data.images;
+                  for (var k = 0; k < allImages.length; k++) {
+                    $('#mini'+fave.data._id).append(
+                      "<img src='"+allImages[k]+"' class='projectCellMiniImage'/>"
                     )
-                    var allImages = self.allFavorites[i].images;
-                    for (var j = 0; j < allImages.length; j++) {
-                      $('#mini'+i).append(
-                        "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
-                      )
-                    }
-                }
-                addHoverToCell();
-                self.curatedToggleCounter = 'favorites'
+                  }
+                  $('.boomHeart'+fave.data._id).addClass('favorited');
+                  $('.boomHeart'+fave.data._id).css({
+                    color: "#292D36"
+                  })
+                  addFavorites(self.buyerId)
+                  addHoverToCell();
+                  self.curatedToggleCounter = 'favorites'
               })
             }
           }

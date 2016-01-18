@@ -1018,6 +1018,13 @@
   font-weight: bolder;
 }
 
+.designerDashAll {
+  display: block;
+  text-align: center;
+  font-size: 17px;
+  cursor: pointer;
+}
+
 .designerDashBottomContainer {
   margin-top: 7px;
 }
@@ -1096,6 +1103,14 @@
   cursor:pointer;
 }
 
+.designerDashCurated:hover {
+  /*border-left: 2px solid #afafa6;
+  border-top: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;*/
+  border-bottom: 1px solid #afafa6;
+  font-weight: bolder;
+}
+
 .designerDashDashTitle {
   font-size: 20px;
   background-color: #F6FDFA;
@@ -1120,25 +1135,11 @@
   z-index: 3
 }
 
-.designerDashCurated:hover {
-  /*border-left: 2px solid #afafa6;
-  border-top: 2px solid #afafa6;
-  border-right: 2px solid #afafa6;*/
-  border-bottom: 1px solid #afafa6;
-  font-weight: bolder;
-}
-
-.designerDashSubmitted:hover {
-  /*border-left: 2px solid #afafa6;
-  border-top: 2px solid #afafa6;
-  border-right: 2px solid #afafa6;*/
-  border-bottom: 1px solid #afafa6;
-}
-
 .designerDashFavorites {
   text-align: center;
   font-size: 17px;
   cursor: pointer;
+  display: block;
 }
 .designerDashFilter {
   display: inline-block;
@@ -1207,6 +1208,13 @@
   border-left: 1px solid #EFEEEC;
   border-right: 1px solid #EFEEEC;
   cursor:pointer;
+}
+
+.designerDashSubmitted:hover {
+  /*border-left: 2px solid #afafa6;
+  border-top: 2px solid #afafa6;
+  border-right: 2px solid #afafa6;*/
+  border-bottom: 1px solid #afafa6;
 }
 
 .designerDashToggleContainer {
