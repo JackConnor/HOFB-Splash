@@ -2464,14 +2464,14 @@
 }*/
 
 .projectCellButton {
-  width: 165px;
-  height: 39px;
+  width: 140px;
+  height: 40px;
   background-color: #3cb878;
   margin: 150px auto 0 auto;
   color: white;
   border: 1px solid #007236;
   border-radius: 3px;
-  padding-top: 5px;
+  padding-top: 7px;
   font-family: 'Oxygen', sans-serif;
   cursor:pointer;
   font-size: 20px;

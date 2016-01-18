@@ -436,8 +436,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
     ////see all active projects
     function toggleActive(){
       $('.designerDashList').html('');
-      ///////will set self.allProjects as all our projects
-      loadProjects(loadInitialList, addHoverToCell);
+      loadInitialList(function(){console.log('boom')});
       $('.sectionTitle').text('listing all active projects')
     }
 

@@ -1077,31 +1077,31 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $(evt.target).append(
         "<div class='fabricFilter'>"+
           "<div  id='filterSeersucker' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.seersucker+"'>" +
+            "<img src='"+allSwatches.fabrics.cotton_voile.url+"'>" +
           "</div>"+
           "<div  id='filterPleather' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.pleather+"'>" +
+            "<img src='"+allSwatches.fabrics.cotton_lawn.url+"'>" +
           "</div>"+
           "<div  id='filterDockers' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.dockers+"'>" +
+            "<img src='"+allSwatches.fabrics.rayon_challis.url+"'>" +
           "</div>"+
           "<div  id='filterCamo' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.camo+"'>" +
+            "<img src='"+allSwatches.fabrics.double_gauze.url+"'>" +
           "</div>"+
           "<div  id='filterVeneer' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.veneer+"'>" +
+            "<img src='"+allSwatches.fabrics.knit.url+"'>" +
           "</div>"+
           "<div  id='filterNylon' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.nylon+"'>" +
+            "<img src='"+allSwatches.fabrics.silk.url+"'>" +
           "</div>"+
           "<div  id='filterLeather' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.leather+"'>" +
+            "<img src='"+allSwatches.fabrics.satin.url+"'>" +
           "</div>"+
           "<div  id='filterCotton' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.cotton+"'>" +
+            "<img src='"+allSwatches.fabrics.linen.url+"'>" +
           "</div>"+
           "<div  id='filterDenim' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.denim+"'>" +
+            "<img src='"+allSwatches.fabrics.wool.url+"'>" +
           "</div>"+
         "</div>"
       )
