@@ -455,7 +455,8 @@ module.exports = function(app){
         res.json('no user')
       }
       else {
-        if (user.validPassword(password)) {
+        console.log(user.validPassword(password));
+        if (user.validPassword(password) == true) {
           if(!user.signins){
             user.signins = 0;
           }
@@ -471,7 +472,7 @@ module.exports = function(app){
           })
         }
         else {
-          res.json({data: 'password incorrect'})
+          res.json("password incorrect");
         }
       }
     })

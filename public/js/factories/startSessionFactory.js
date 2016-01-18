@@ -18,8 +18,13 @@ angular.module('startSessionFactory', [])
         console.log('made it?');
         console.log(sessionToken);
         console.log(sessionToken.data);
-        if(sessionToken.data == "no user"){
-          alert('name or password were incorrect');
+        var tokenStatus = sessionToken.data;
+        if(tokenStatus == "no user"){
+          alert('we cannot find that user, please try again');
+        }
+        else if(tokenStatus == "password incorrect"){
+          console.log('wrong pw');
+          alert('password incorrect, please try again');
         }
         else{
           window.localStorage.hofbToken = sessionToken.data;
