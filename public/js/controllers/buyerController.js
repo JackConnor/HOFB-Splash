@@ -166,7 +166,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       .then(function(decodedToken){
         var tier = decodedToken.data.aud.split("-")[1];
         self.buyerId = decodedToken.data.name;
-        $('.designerDashFavorites').on('click', loadFavorites(loadFavoritesList, self.buyerId));
         // loadFavorites();
         getBoughtList();/////run on load in order for list to be set on toggle
         if(decodedToken.data.aud.split('-')[0] != "buyer"){
@@ -1072,7 +1071,10 @@ function loadCorrectHoverState(){
 
     /////////////////////////////////////////////////
     /////////////logic for favorites////////////////
-    function loadFavorites(arg, buyerId){
+    function loadFavorites(){
+      var buyerId = self.buyerId;
+      console.log(buyerId);
+      $('.designerDashList').html('');
       console.log('hettin');
       $http({
         method: "GET"
@@ -1092,12 +1094,43 @@ function loadCorrectHoverState(){
               allFavorites.push(fave.data);
               self.allFavorites = allFavorites;
               console.log(self.allFavorites);
-            })  
+              var dataType = $('.dashDataType');
+              dataType.text('Curated, fed to your Tier');
+              for (var i = 0; i < self.allFavorites.length; i++) {
+                console.log(self.allFavorites[i]);
+                $('.designerDashList').append(
+                  "<div class='col-md-4 col-xs-12 projectCell'>"+
+                    "<div class='projectCellInner'>"+
+                      "<div class='projectCellImageHolder'>"+
+                        "<img class='projectCellImage' id='"+self.allFavorites[i]._id+"'"+
+                      "src='"+self.allFavorites[i].images[0]+"'>"+
+                      "</div>"+
+                      "<div class='projectCellMinis' id='mini"+i+"'>"+
+                      "</div>"+
+                      "<div class='projectCellContent'>"+
+                        "<span class='glyphicon glyphicon-heart projectCellHeart' id='"+self.allFavorites[i]._id+"'></span>"+
+                        "<p class='projectCellContentName'>"+self.allFavorites[i].name+"</p>"+
+                        "<p class='projectCellContentTime'>"+self.allFavorites[i].TimeSinceCreation+"</p>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"
+                  )
+                  var allImages = self.allFavorites[i].images;
+                  for (var j = 0; j < allImages.length; j++) {
+                    $('#mini'+i).append(
+                      "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
+                    )
+                  }
+              }
+              addHoverToCell();
+            })
           }
         }
-        arg();
       })
     }
+
+    $('.designerDashFavorites').on('click', loadFavorites);
+
     function addFavorites(){
       $('.projectCellHeart').on('click', function(evt){
         var favorite = $(evt.target)[0].id;

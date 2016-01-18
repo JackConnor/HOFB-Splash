@@ -1138,6 +1138,7 @@
 .designerDashFavorites {
   text-align: center;
   font-size: 17px;
+  cursor: pointer;
 }
 .designerDashFilter {
   display: inline-block;
