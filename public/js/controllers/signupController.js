@@ -184,6 +184,27 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     /////////////End logic for signup page////
     //////////////////////////////////////////
 
+    ////////////////functions controller buyer/designer signup process
+    function buyerDesigner(){
+      var userType = window.location.hash.split('/')[1];
+      if(userType == 'buyer'){
+        $('.signinToggle').html('designer');
+        $('.signinToggleActive').html('designer login portal');
+        $('.signinToggleActive').on('click', function(){
+          window.location.hash = "#/designer/loginportal";
+          window.location.reload();
+        })
+      }
+      else if(userType == 'designer'){
+        $('.signinToggle').html('buyer');
+        $('.signinToggleActive').html('buyer login portal');
+        $('.signinToggleActive').on('click', function(){
+          window.location.hash = "#/buyer/loginportal";
+          window.location.reload();
+        })
+      }
+    }
+    buyerDesigner();
   //////////////End signup controller////
   ///////////////////////////////////////
   ///////////////////////////////////////

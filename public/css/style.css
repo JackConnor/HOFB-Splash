@@ -2955,6 +2955,16 @@
   cursor: pointer;
 }
 
+.signinToggleActive {
+  color: blue;
+  cursor: pointer;
+}
+
+.signinToggleLink {
+  margin-top: 17px;
+  font-size: 13px;
+}
+
 .signinWelcome {
   font-size: 31px;
   color: #666666;

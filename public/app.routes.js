@@ -13,12 +13,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controller: 'emailCtrl'
       ,controllerAs: 'email'
     })
-
-    .when('/signin', {
-      templateUrl: 'templates/_signin.html'
-      ,controller: 'signupCtrl'
-      ,controllerAs: 'signin'
-    })
+    //
+    // .when('/signin', {
+    //   templateUrl: 'templates/_signin.html'
+    //   ,controller: 'signupCtrl'
+    //   ,controllerAs: 'signin'
+    // })
 
     .when('/admin/dashboard', {
       templateUrl: 'templates/_adminDashboard.html'
@@ -57,7 +57,7 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'signup'
     })
 
-    .when('/buyer/signup', {
+    .when('/buyer/loginportal', {
       templateUrl: 'templates/_signup.html'
       ,controller: 'signupCtrl'
       ,contollerAs: 'signup'
