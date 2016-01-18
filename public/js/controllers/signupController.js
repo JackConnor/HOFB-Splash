@@ -20,6 +20,16 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     }
     checkFromEmailLink();
 
+    function checkEmail(email){
+        var pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        if(pattern.test(email)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
     $('.signupSubmit').on('click', function(){
       var email = $('.signupEmail').val();
       var firstName = $('.signupFirstName').val();
@@ -28,35 +38,43 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       var rePassword = $('.signupPasswordRepeat').val();
       var checked = document.querySelector('.signupCheck').checked;
       var status = window.location.hash.split('/')[1];
-      if(email != '' && firstName != '' && lastName != '' && password != '' && rePassword != '' && checked){
-        ///////throught first layer to check that all firelds were filled
-        if(checkPassword(password) && checkPassword(rePassword) && (password == rePassword)){
-          ////checked that passwords matched and passed our password filters
-          $http({
-            method: "POST"
-            ,url: "/api/signup"
-            ,data: {email: email, password: $('.signupPassword').val(), firstname: firstName, lastname: lastName, status: status}
-          })
-          .then(function(newUser){
-            console.log(newUser);
-            if(newUser.data == "user exists"){
-              alert('That email is already in our system, please try a new email');
-              window.location.reload();
+      var validatedEmail = checkEmail(email);
+
+        if (validatedEmail == false) {
+        alert("You must enter a valid email address.");
+       }
+        if (validatedEmail == true){
+          if(email != '' && firstName != '' && lastName != '' && password != '' && rePassword != '' && checked){
+            ///////throught first layer to check that all firelds were filled
+            if(checkPassword(password) && checkPassword(rePassword) && (password == rePassword)){
+              ////checked that passwords matched and passed our password filters
+              $http({
+                method: "POST"
+                ,url: "/api/signup"
+                ,data: {email: email, password: $('.signupPassword').val(), firstname: firstName, lastname: lastName, status: status}
+              })
+              .then(function(newUser){
+                console.log(newUser);
+                if(newUser.data == "user exists"){
+                  alert('That email is already in our system, please try a new email');
+                  window.location.reload();
+                }
+                else{
+                  console.log(newUser);
+                  signinUser(newUser.data.email, $('.signupPassword').val());
+                }
+              })
             }
-            else{
-              console.log(newUser);
-              signinUser(newUser.data.email, $('.signupPassword').val());
+            else {
+              alert('whoops, looks like those two passwords dont match')
             }
-          })
+          }
         }
-        else {
-          alert('whoops, looks like those two passwords dont match')
-        }
-      }
-      else {
-        alert("You missed a field, please take a second look, thank you")
-      }
-    })
+        else{
+            alert("You missed a field, please take a second look, thank you")
+          }
+      })
+
 
     /////a function to check that passwords are a-z 1-9
     function checkPassword(password){
