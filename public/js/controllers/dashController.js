@@ -1184,6 +1184,28 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 collections[i]+
               "</div>"
             )
+            if(i == 0){
+              $('#'+collections[i]).css({
+                backgroundColor: 'black'
+                ,color: 'white'
+              })
+              $('#'+collections[i]).addClass('clicked');
+              $('.designerDashCollectionCell').on('mouseenter', function(evt){
+                if(!$(evt.target).hasClass('clicked')){
+                  $(evt.target).css({
+                      backgroundColor: '#BDBDBD'
+                  })
+                }
+              })
+              $('.designerDashCollectionCell').on('mouseleave', function(evt){
+                if(!$(evt.target).hasClass('clicked')){
+                  $(evt.target).css({
+                    backgroundColor: '#F9F7F5'
+                    ,color: "black"
+                  })
+                }
+              })
+            }
           }
         }
         if (self.addMoreFirstTimeThroughCheck) {
@@ -1267,7 +1289,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               console.log(prodCount);
               if(collectionProductCounters[prodCount]){
                 $(evt.target).css({
-                  border: "5px solid green"
+                  border: "2px solid green"
                 })
                 $(evt.target).addClass('collectionProdYes')
                 collectionProductCounters[prodCount] = false;
@@ -1308,15 +1330,19 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       //////end we add the "add more collections logic"/
       //////////////////////////////////////////////////
       $('.designerDashCollectionCell').on('mouseenter', function(evt){
+        if(!$(evt.target).hasClass('clicked')){
           $(evt.target).css({
               backgroundColor: '#BDBDBD'
           })
+        }
       })
       $('.designerDashCollectionCell').on('mouseleave', function(evt){
+        if(!$(evt.target).hasClass('clicked')){
           $(evt.target).css({
             backgroundColor: '#F9F7F5'
             ,color: "black"
           })
+        }
       })
       $('.designerDashCollectionCell').on('click', function(evt){
         self.currentCollection = $(evt.target)[0].id;
@@ -1326,15 +1352,16 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           $(collections[i]).css({
             backgroundColor: '#F9F7F5'
             ,color: "black"
-            ,border: 'none'
+            // ,border: 'none'
           })
+          $(collections[i]).removeClass('clicked');
         }
-        var collectionValue = $($(evt.target)[0])[0].id;
+        $(evt.target).addClass('clicked');
         $($(evt.target)[0]).css({
           backgroundColor: "#1C1C1C"
           ,color: '#F9F7F5'
-          ,border: '4px solid gray'
         })
+        var collectionValue = $($(evt.target)[0])[0].id
 
         if(self.curatedToggleCounter == 'active'){
           if(collectionValue == 'All'){
