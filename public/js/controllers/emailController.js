@@ -15,14 +15,14 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
     var url = "5660e162312d9bf1f2d2dce6";
 
     ///////if someon is a beta user we want to kick them to dashboard, which kicks them to sigup if they're not logged in
-    // function checkBetaUrl(){
-    //   var clip = window.location.host.split('').slice(0,4).join('');
-    //   if(clip == 'beta'){
-    //     window.location.hash = "/designer/dashboard";
-    //     window.location.reload();
-    //   }
-    // }
-    // checkBetaUrl();
+    function checkBetaUrl(){
+      var clip = window.location.host.split('').slice(0,4).join('');
+      if(clip == 'beta'){
+        window.location.hash = "/beta";
+        window.location.reload();
+      }
+    }
+    checkBetaUrl();
     /////post a new user
 
     /////collect all of our emails on splash page

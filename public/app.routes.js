@@ -51,7 +51,7 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'editProject'
     })
 
-    .when('/betasplash', {
+    .when('/beta', {
       templateUrl: 'templates/_beta_gotologin.html'
       ,controller: 'signupCtrl'
       ,controllerAs: 'signup'
