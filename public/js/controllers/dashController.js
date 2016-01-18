@@ -203,6 +203,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.projectCellNewInner').on('click', function(){
         newProductPop();
       })
+      $('.newProjectButton').on('click', function(){
+        newProductPop();
+      })
       if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
         self.tourCounter = 0;///keeps track of where we are in the dashboard tour
         dashboardTour();
@@ -1400,8 +1403,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
     ///////////////////////////////////////////////////
     ///////Begin Logic for Dashboard Tour//////////////
-    self.tourCounter = 0;
     function dashboardTour(){
+      if(self.tourCounter == 0){
+        self.tourCounter = 1;
+      }
       if(self.tourCounter == 0){
         $('.bodyview').prepend(
           '<div class="dashTour0 tourElem">'+
@@ -1420,6 +1425,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 "</div>"+
               "</div>"+
             "</div>"+
+          '</div>'+
+          "<div class='tourTriangle'>"+
           '</div>'
         );
         $('.deleteTour').on('click', function(){
@@ -1473,6 +1480,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 "</div>"+
               "</div>"+
             "</div>"+
+          '</div>'+
+          "<div class='tourTriangle'>"+
           '</div>'
         );
         $('.bodyview').prepend(
@@ -1506,6 +1515,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         console.log('width: '+width);
         var height = $('.projectCellNew').css('height').split('').slice(0, $('.projectCellNew').css('height').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
         /////
+        $('.tourTriangle').css('top', topOff + 130);
+        $('.tourTriangle').css('left', topLeft - 32);
         $('.tourProjectCellNewInner').css('top', topOff);
         $('.tourProjectCellNewInner').css('left', topLeft);
         $('.tourProjectCellNewInner').css('width', width);
@@ -1544,6 +1555,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           newProductPop();
         })
         $('.dashTourNext').on('click', function(){
+          $('.tourTriangle').remove();
           $('.tourProjectCellNewInner').remove();
           $('.projectCellNewInner').css({
             opacity: 1
@@ -1589,7 +1601,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 "</div>"+
               "</div>"+
             "</div>"+
-          '</div>'
+          '</div>'+
+          "<div class='tourTriangleLeft'></div>"
         );
         $('.bodyview').prepend(
           "<div class='tourDesignerDashCurated'>"+
@@ -1607,6 +1620,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var topLeft = $('.designerDashCurated').offset().left;
         var width = $('.designerDashCurated').css('width').split('').slice(0, $('.designerDashCurated').css('width').split('').length - 2).join('');////this finds the width of the object without that pesky "px"
         ////add new temporary element to show tutees
+        $('.tourTriangleLeft').css('top', topOff + 130);
+        $('.tourTriangleLeft').css('left', topLeft - 24);
         $('.tourDesignerDashCurated').css('top', topOff);
         $('.tourDesignerDashCurated').css('left', topLeft);
         $('.tourDesignerDashCurated').css('width', width);

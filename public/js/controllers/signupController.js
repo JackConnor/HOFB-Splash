@@ -189,15 +189,15 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       var userType = window.location.hash.split('/')[1];
       if(userType == 'buyer'){
         $('.signinToggle').html('designer');
-        $('.signinToggleActive').html('designer login portal');
+        $('.signinToggleActive').html('designer login');
         $('.signinToggleActive').on('click', function(){
           window.location.hash = "#/designer/loginportal";
           window.location.reload();
         })
       }
       else if(userType == 'designer'){
-        $('.signinToggle').html('buyer');
-        $('.signinToggleActive').html('buyer login portal');
+        $('.signinToggle').html('retailer');
+        $('.signinToggleActive').html('retailer login');
         $('.signinToggleActive').on('click', function(){
           window.location.hash = "#/buyer/loginportal";
           window.location.reload();

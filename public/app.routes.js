@@ -53,8 +53,8 @@ angular.module('app.routes', ['ngRoute'])
 
     .when('/beta', {
       templateUrl: 'templates/_beta_gotologin.html'
-      ,controller: 'signupCtrl'
-      ,controllerAs: 'signup'
+      ,controller: 'emailCtrl'
+      ,controllerAs: 'email'
     })
 
     .when('/buyer/loginportal', {

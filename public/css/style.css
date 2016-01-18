@@ -814,6 +814,7 @@
   border: 1px solid #598527;
   border-radius: 3px;
   padding-top: 7px;
+  cursor: pointer;
 }
 
 .dashTourController {
@@ -865,6 +866,7 @@
   border-radius: 3px;
   padding-top: 7px;
   color: white;
+  cursor: pointer;
 }
 
 .dashTourStart {
@@ -2207,6 +2209,30 @@
   padding-top: 20px;
 }
 
+.newProjectButton {
+  margin-top: 33px;
+  position: absolute;
+  color: white;
+  font-size: 40px;
+  padding-left: 17px;
+  margin-left: 94%;
+  z-index: 2;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #3cb878;
+  cursor: pointer;
+}
+
+.newProjectButton:hover {
+  background-color: #339864
+}
+
+.newProjectButton p {
+  position: absolute;
+  margin-top: -5px;
+}
+
 .newprojectcontainer {
   background-color: #E0FFFF;
   height: 100px;
@@ -3379,6 +3405,28 @@ textarea#styled {
   background-color: black;
   z-index: 5;
 }
+
+.tourTriangle {
+  width: 0px;
+  height: 0px;
+  display:inline;
+  border-style: solid;
+  border-width: 24px 0 24px 24px;
+  border-color: transparent transparent transparent #ccc;
+  position:absolute;
+}
+
+.tourTriangleLeft {
+  width: 0px;
+  height: 0px;
+  display:inline;
+  border-style: solid;
+  float: right;
+  border-width: 24px 0 24px -24px;
+  border-color: transparent transparent transparent #ccc;
+  position:absolute;
+}
+
 .ui-slider-handle{
   cursor:pointer;
 }
