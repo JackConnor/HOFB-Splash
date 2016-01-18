@@ -261,6 +261,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
               }
             }
         }
+        moveDashMinis();
         addFavorites(self.buyerId);
         arg();
       })
@@ -268,39 +269,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
     ///////will set self.allProjects as all our projects
     loadProjects(loadInitialList, addHoverToCell);
 
-    // function loadFavoritesList(arg){
-    //   var dataType = $('.dashDataType');
-    //   dataType.text('Curated, fed to your Tier');
-    //   for (var i = 0; i < self.allFavorites.length; i++) {
-    //     console.log(self.allFavorites[i]);
-    //     $('.designerDashList').append(
-    //       "<div class='col-md-4 col-xs-12 projectCell'>"+
-    //         "<div class='projectCellInner'>"+
-    //           "<div class='projectCellImageHolder'>"+
-    //             "<img class='projectCellImage' id='"+self.allFavorites[i]._id+"'"+
-    //           "src='"+self.allFavorites[i].images[0]+"'>"+
-    //           "</div>"+
-    //           "<div class='projectCellMinis' id='mini"+i+"'>"+
-    //           "</div>"+
-    //           "<div class='projectCellContent'>"+
-    //             "<span class='glyphicon glyphicon-heart projectCellHeart' id='"+self.allFavorites[i]._id+"'></span>"+
-    //             "<p class='projectCellContentName'>"+self.allFavorites[i].name+"</p>"+
-    //             "<p class='projectCellContentTime'>"+self.allFavorites[i].TimeSinceCreation+"</p>"+
-    //           "</div>"+
-    //         "</div>"+
-    //       "</div>"
-    //       )
-    //       var allImages = self.allFavorites[i].images;
-    //       for (var j = 0; j < allImages.length; j++) {
-    //         $('#mini'+i).append(
-    //           "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
-    //         )
-    //       }
-    //   }
-    //   arg();
-    //   addHoverToCell();
-    // }
-    ///////will set self.allProjects as all our projects
 
     ////function for appending active list
     function loadBoughtList(){
@@ -350,6 +318,8 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           "</div>"
         )
       }
+      addFavorites(self.buyerId);
+      moveDashMinis();
       addFavorites(self.buyerId);
     }
     function getBoughtList(){
@@ -512,6 +482,28 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       toggleActive();
       addHoverToCell();
     })
+
+    $('.designerDashAll').on('click', function(){
+      $('.designerDashCurated').css({
+        backgroundColor: "#EBEBE9"
+        ,borderTop: "0px solid #EFEEEC"
+        ,borderLeft: '0px solid #EFEEEC'
+        ,borderRight: '0px solid #EFEEEC'
+
+      })
+      $('.designerDashActive').css({
+        backgroundColor: "#FEFDFA"
+        ,borderTop: "1px solid #EFEEEC"
+        ,borderLeft: '1px solid #EFEEEC'
+        ,borderRight: '1px solid #EFEEEC'
+
+      })
+      self.curatedToggleCounter = 'active';
+      toggleActive();
+      addHoverToCell();
+    })
+
+    $()
 
     /////////////////////////////
     /////////Cell Hover effect///
@@ -1148,6 +1140,7 @@ function loadCorrectHoverState(){
                   $('.boomHeart'+fave.data._id).css({
                     color: "#292D36"
                   })
+                  moveDashMinis();
                   addFavorites(self.buyerId)
                   addHoverToCell();
                   self.curatedToggleCounter = 'favorites'
@@ -1199,6 +1192,41 @@ function loadCorrectHoverState(){
     }
     ///////////end favorites////////////////////////
     ////////////////////////////////////////////////
+    function moveDashMinis() {
+      //////We create the logic for the mini photos. these run on an interval, that switches to the photos being move (margin-left being added)
+      setInterval(function(){
+        if(self.intervalCounter == 0){
+          self.miniMarg = 0;
+        }
+        else {
+          var imageCount = $(self.activeMinis)[0].children.length;
+          var totalLengthPhotos = ((imageCount+.3)*64);
+          var viewWindow = $('.projectCellImageHolder').width();
+          var maxMovement = (-totalLengthPhotos) + viewWindow;
+          if(self.miniMarg >= maxMovement && maxMovement < 0){
+            $(self.activeMinis).css({
+              marginLeft: self.miniMarg
+            })
+            self.miniMarg += -1;
+          }
+          else {
+          }
+        }
+      }, 20)
+      $('.projectCellMinis').on('mouseenter', function(evt){
+        self.intervalCounter = 1;
+        if($(evt.target)[0].classList[0] == 'projectCellMinis'){
+          self.activeMinis = $(evt.target)[0];
+        }
+        else {
+          self.activeMinis = $(evt.target)[0].parentNode;
+        }
+      })
+      $('.projectCellMinis').on('mouseleave', function(){
+        self.intervalCounter = 0;
+        self.activeMinis = "none";
+      })
+    }
   /////end admin controller
   ////////////////////////
   ////////////////////////
