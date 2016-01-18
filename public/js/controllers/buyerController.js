@@ -173,9 +173,10 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         }
         $http({
           method: "GET"
-          ,url: '/api/buyer/products/'+tier
+          ,url: '/api/buyer/products'
         })
         .then(function(products){
+          console.log(products);
           var allProjects = products.data;
           var allProjectsAlreadyCurated = [];
           for (var i = 0; i < allProjects.length; i++) {

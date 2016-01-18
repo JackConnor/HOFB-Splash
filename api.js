@@ -217,6 +217,33 @@ module.exports = function(app){
     })
   })
 
+  ////get all curated projects for beta buyers (this si all tiers)
+  app.get("/api/buyer/products", function(req, res){
+    var allProducts = []
+    Product.find({"status":"curated"}, function(err, products){
+      // console.log(products);
+      for (var i = 0; i < products.length; i++) {
+        console.log('another one');
+        console.log('another one');
+        console.log('another one');
+        console.log(products[i]);
+        allProducts.push(products[i])
+      }
+      Product.find({"status":"sampleRequested"}, function(err, products){
+        for (var i = 0; i < products.length; i++) {
+          allProducts.push(products[i])
+        }
+        Product.find({"status":"sampleSent"}, function(err, products){
+          for (var i = 0; i < products.length; i++) {
+            allProducts.push(products[i])
+          }
+          console.log(allProducts);
+          res.json(allProducts)
+        })
+      })
+    })
+  })
+
   ///get a single product
   app.get('/api/projects/:id', function(req, res){
     Product.findOne({"_id":req.params.id}, function(err, product){
