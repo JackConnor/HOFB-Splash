@@ -166,6 +166,8 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       .then(function(decodedToken){
         var tier = decodedToken.data.aud.split("-")[1];
         self.buyerId = decodedToken.data.name;
+        $('.designerDashFavorites').on('click', loadFavorites(loadFavoritesList, self.buyerId));
+        // loadFavorites();
         getBoughtList();/////run on load in order for list to be set on toggle
         if(decodedToken.data.aud.split('-')[0] != "buyer"){
           window.location.hash = '#/designer/loginportal';
@@ -230,7 +232,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
               "<div class='projectCellMinis' id='mini"+i+"'>"+
               "</div>"+
               "<div class='projectCellContent'>"+
-                "<span class='glyphicon glyphicon-heart projectCellHeart'></span>"+
+                "<span class='glyphicon glyphicon-heart projectCellHeart' id='"+self.alreadyCurated[i]._id+"'></span>"+
                 "<p class='projectCellContentName'>"+self.alreadyCurated[i].name+"</p>"+
                 "<p class='projectCellContentTime'>"+self.alreadyCurated[i].TimeSinceCreation+"</p>"+
               "</div>"+
@@ -248,6 +250,40 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
     }
     ///////will set self.allProjects as all our projects
     loadProjects(loadInitialList, addHoverToCell);
+
+    function loadFavoritesList(arg){
+      var dataType = $('.dashDataType');
+      dataType.text('Curated, fed to your Tier');
+      for (var i = 0; i < self.allFavorites.length; i++) {
+        console.log(self.allFavorites[i]);
+        $('.designerDashList').append(
+          "<div class='col-md-4 col-xs-12 projectCell'>"+
+            "<div class='projectCellInner'>"+
+              "<div class='projectCellImageHolder'>"+
+                "<img class='projectCellImage' id='"+self.allFavorites[i]._id+"'"+
+              "src='"+self.allFavorites[i].images[0]+"'>"+
+              "</div>"+
+              "<div class='projectCellMinis' id='mini"+i+"'>"+
+              "</div>"+
+              "<div class='projectCellContent'>"+
+                "<span class='glyphicon glyphicon-heart projectCellHeart' id='"+self.allFavorites[i]._id+"'></span>"+
+                "<p class='projectCellContentName'>"+self.allFavorites[i].name+"</p>"+
+                "<p class='projectCellContentTime'>"+self.allFavorites[i].TimeSinceCreation+"</p>"+
+              "</div>"+
+            "</div>"+
+          "</div>"
+          )
+          var allImages = self.allFavorites[i].images;
+          for (var j = 0; j < allImages.length; j++) {
+            $('#mini'+i).append(
+              "<img src='"+allImages[j]+"' class='projectCellMiniImage'/>"
+            )
+          }
+      }
+      arg();
+      addHoverToCell();
+    }
+    ///////will set self.allProjects as all our projects
 
     ////function for appending active list
     function loadBoughtList(){
@@ -1032,6 +1068,72 @@ function loadCorrectHoverState(){
       }
     }
     /////end of navbar dropdown logic/////////////
+    ////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////
+    /////////////logic for favorites////////////////
+    function loadFavorites(arg, buyerId){
+      console.log('hettin');
+      $http({
+        method: "GET"
+        ,url: "/api/users/"+buyerId
+      })
+      .then(function(user){
+        console.log(user);
+        var allFavorites = [];
+        for (var i = 0; i < user.data.favorites.length; i++) {
+          console.log(user.data.favorites[i]);
+          if(user.data.favorites[i] != null){
+            $http({
+              method: 'GET'
+              ,url: "/api/product/"+user.data.favorites[i]
+            })
+            .then(function(fave){
+              allFavorites.push(fave.data);
+              self.allFavorites = allFavorites;
+              console.log(self.allFavorites);
+            })  
+          }
+        }
+        arg();
+      })
+    }
+    function addFavorites(){
+      $('.projectCellHeart').on('click', function(evt){
+        var favorite = $(evt.target)[0].id;
+        console.log(favorite);
+        if($(evt.target).hasClass('favorited')){
+          $(evt.target).removeClass('favorited');
+          $(evt.target).css({
+            color: "#CCCCCC"
+          })
+          $http({
+            method: "POST"
+            ,url: "/api/users/update"
+            ,data: {userId: self.buyerId, removeFavorite: favorite}
+          })
+          .then(function(updatedUser){
+            console.log(updatedUser);
+          })
+        }
+        else {
+          $(evt.target).addClass('favorited');
+          console.log(favorite);
+          $(evt.target).css({
+            color: "#292D36"
+          })
+          $http({
+            method: "POST"
+            ,url: "/api/users/update"
+            ,data: {userId: self.buyerId, favorite: favorite}
+          })
+          .then(function(updatedUser){
+            console.log(updatedUser);
+          })
+        }
+      })
+    }
+    ///////////end favorites////////////////////////
     ////////////////////////////////////////////////
   /////end admin controller
   ////////////////////////

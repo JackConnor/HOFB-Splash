@@ -125,6 +125,16 @@ module.exports = function(app){
       if(req.body.location){
         user.location = req.body.location
       }
+      if(req.body.favorite){
+        user.favorites.push(req.body.favorite);
+      }
+      if(req.body.removeFavorite){
+        for (var i = 0; i < user.favorites.length; i++) {
+          if(user.favorites[i] == req.body.removeFavorite){
+            user.favorites.splice(i, 1);
+          }
+        }
+      }
       if(req.body.firstname){
         user.firstname = req.body.firstname;
       }
