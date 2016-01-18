@@ -65,6 +65,16 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
       })
     }
 
+    //////////functions for linking to signin pages
+    $('.goToBuyerLogin').on('click', function(){
+      window.location.hash = "/buyer/loginportal"
+    })
+
+    $('.goToDesignerLogin').on('click', function(){
+      window.location.hash = "/designer/loginportal"
+    })
+
+
   ////////end email controller//////
   ////////////////////////////////////
   ////////////////////////////////////

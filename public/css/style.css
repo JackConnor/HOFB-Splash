@@ -1292,7 +1292,42 @@
   padding-left: 25px;
 }
 
+.goTologinContainer {
+  width: 300px;
+  margin-top: 45px;
+  margin-left: 100%;
+  margin-right: 100%;
+}
 
+.goToBuyerLogin {
+  background-color: #3CB878;
+  color: white;
+  width: 140px;
+  height: 45px;
+  display: inline-block;
+  text-align: center;
+  padding-top: 7px;
+  font-size: 16px;
+  border-radius: 3px;
+  margin-top: 45px;
+  cursor: pointer;
+}
+
+
+.goToDesignerLogin {
+  background-color: #3CB878;
+  color: white;
+  width: 140px;
+  height: 45px;
+  display: inline-block;
+  text-align: center;
+  padding-top: 7px;
+  font-size: 16px;
+  border-radius: 3px;
+  margin-top: 45px;
+  margin-left: 5px;
+  cursor: pointer;
+}
 
 .howToCell {
   min-height: 100%;
