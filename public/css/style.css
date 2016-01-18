@@ -1292,24 +1292,55 @@
   padding-left: 25px;
 }
 
-.goTologinContainer {
+.goToAreyou {
+  text-align: center;
+  font-size: 12px;
+}
+
+.goToBetaText {
+  width: 200px;
+  height: 300px;
+  float: right;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.goToLoginBetaLogo {
+  float: right;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.goToLoginContainer {
   width: 300px;
   margin-top: 45px;
-  margin-left: 100%;
-  margin-right: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.goToLoginContainer img{
+  width: 144px;
+  margin-left: 78px;
+}
+
+.goToLoginHolder {
+  margin-top: 200px;
+  width: 100%;
+  height: 1px;
 }
 
 .goToBuyerLogin {
   background-color: #3CB878;
   color: white;
   width: 140px;
-  height: 45px;
+  height: 40px;
   display: inline-block;
   text-align: center;
   padding-top: 7px;
   font-size: 16px;
   border-radius: 3px;
-  margin-top: 45px;
+  margin-left: 5px;
+  margin-top: 10px;
   cursor: pointer;
 }
 
@@ -1318,14 +1349,14 @@
   background-color: #3CB878;
   color: white;
   width: 140px;
-  height: 45px;
+  height: 40px;
   display: inline-block;
   text-align: center;
   padding-top: 7px;
   font-size: 16px;
   border-radius: 3px;
-  margin-top: 45px;
   margin-left: 5px;
+  margin-top: 10px;
   cursor: pointer;
 }
 
@@ -2942,7 +2973,7 @@
 .signinDescription {
   color: #999999;
   font-size: 16px;
-  margin-top: 30px;
+  margin-top: -10px;
 }
 
 .signinDescriptionBreak {
@@ -2960,6 +2991,10 @@
   font-size: 15px;
   padding-left: 10px;
   margin-top: 15px;
+}
+
+.signinInputs {
+  margin-top: 120px;
 }
 
 .signinLogo {

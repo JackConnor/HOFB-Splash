@@ -14,11 +14,11 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'email'
     })
     //
-    // .when('/signin', {
-    //   templateUrl: 'templates/_signin.html'
-    //   ,controller: 'signupCtrl'
-    //   ,controllerAs: 'signin'
-    // })
+    .when('/signin', {
+      templateUrl: 'templates/_signin.html'
+      ,controller: 'signupCtrl'
+      ,controllerAs: 'signin'
+    })
 
     .when('/admin/dashboard', {
       templateUrl: 'templates/_adminDashboard.html'
@@ -52,7 +52,7 @@ angular.module('app.routes', ['ngRoute'])
     })
 
     .when('/betasplash', {
-      templateUrl: 'templates/_beta_splash.html'
+      templateUrl: 'templates/_beta_gotologin.html'
       ,controller: 'signupCtrl'
       ,controllerAs: 'signup'
     })
