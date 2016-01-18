@@ -443,7 +443,7 @@ module.exports = function(app){
         product.name = "Demo Product";
         product.status = 'saved';
         product.timestamp = new Date();
-        product.images = ['https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg', 'https://www.easygenerator.com/wp-content/uploads/2013/09/demo.jpg'];
+        product.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
 
         newUser.email = req.body.email;
         newUser.firstname = req.body.firstname;

@@ -2367,6 +2367,11 @@
   margin: 0px;
 }
 
+.passwordLength {
+  font-size: 10px;
+  color: #666666;
+}
+
 .photoModal {
   width: 100%;
   height: 100%;
