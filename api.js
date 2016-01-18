@@ -94,7 +94,8 @@ module.exports = function(app){
     user.passwordDigest = user.generateHash(req.body.password);
     user.email = req.body.email;
     console.log(user);
-    user.lasstname = req.body.lastname;
+    user.status = req.body.status;
+    user.firstname = req.body.firstname;
     user.lastname = req.body.lastname;
     user.save(function(err, user){
       console.log(user);
@@ -467,7 +468,7 @@ module.exports = function(app){
             var secret = process.env.JWT_TOKEN_SECRET;
             //////user password verified
             ///////iss == issuer (us), name = the user's id, and sub = the number of times they've logged in
-            var token = jwt.sign({iss: "hofb.com", name: user._id, sub: user.signins, aud: "designer"}, secret, {expiresIn: "2h", audience: user.status})
+            var token = jwt.sign({iss: "hofb.com", name: user._id, sub: user.signins, aud: status}, secret, {expiresIn: "2h", audience: user.status})
             res.json(token);
           })
         }

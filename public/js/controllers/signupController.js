@@ -35,7 +35,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
           $http({
             method: "POST"
             ,url: "/api/signup"
-            ,data: {email: email, password: $('.signupPassword').val()}
+            ,data: {email: email, password: $('.signupPassword').val(), firstname: firstName, lastname: lastName, status: status}
           })
           .then(function(newUser){
             console.log(newUser);
