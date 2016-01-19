@@ -1619,6 +1619,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         })
         $('.dashTourBack').on('click', function(){
           $('.tourElem').remove();
+          $('.tourTriangle').remove();
           $('.tourProjectCellNewInner').remove();
           $('.projectCellNewInner').css({
             opacity: 1
@@ -1693,6 +1694,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.dashTour2').css('margin-left', topLeft+parseInt(width)+'px');
         $('.deleteTour').on('click', function(){
           $('.tourElem').remove();
+          $('.tourTriangle').remove();
           $('.tourProjectCellNewInner').remove();
           $('.designerDashboardPage').css({
             opacity: 1
