@@ -291,10 +291,32 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.newProductBegin').on('click', function(){
         var name = $('.newProductName').val().split(' ').join('_');
         var season = $('.newProductModalDropdownSeason').val();
-        console.log(season);
         var type = $('.newProductModalDropdown').val();
-        window.location.hash = "#/create/product/"+name+"/"+type+"/"+season;
-      });////function to begin product build
+        console.log(name);
+        console.log(type);
+        console.log(season);
+        if(name.split('').join(' ').split('').length > 0 && type != null && season != null){
+          window.location.hash = "#/create/product/"+name+"/"+type+"/"+season;
+        }
+        else {
+          alert('please fill out all fields before creating a new project');
+        }
+      });
+      $('body').keypress(function(evt){
+        if($('.newProductModalHolder') && $(evt)[0].charCode == 13){
+          console.log("returned");
+          var name = $('.newProductName').val().split(' ').join('_');
+          var season = $('.newProductModalDropdownSeason').val();
+          console.log(season);
+          var type = $('.newProductModalDropdown').val();
+          if(name.split('').join(' ').split('').length > 0 && type != null && season != null){
+            window.location.hash = "#/create/product/"+name+"/"+type+"/"+season;
+          }
+          else {
+            alert('please fill out all fields before creating a new project');
+          }
+        }
+      });
       $('.newProductModalDelete').on('click', function(){
         $('.newProductModal').remove();
       })

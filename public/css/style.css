@@ -1929,6 +1929,7 @@ input#signUpCheckBox {
 .newProductCollectionsInput {
   width: 100%;
   font-size: 16px;
+  padding-left: 15px;
 }
 
 .newProductCollectionsHolder h4 {
@@ -2261,6 +2262,7 @@ input#signUpCheckBox {
 .newProductTagsInput {
   width: 100%;
   font-size: 16px;
+  padding-left: 15px;
 }
 
 .newProductTitle {
