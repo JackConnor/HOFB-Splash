@@ -582,18 +582,13 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         console.log(this.height);
         var ratio = 0.7
         console.log(ratio);
-        if(ratio > 0 && ratio <= 1){
-          $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
-          self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
-          self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-          $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-          self.miniPhotoCounter++;
-          frontBackSide(self.miniPhotoCounter);
-          highlightMini();
-        }
-        else {
-          alert('please choose a photo that is in a 5/7 ratio, please');
-        }
+        $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
+        self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
+        self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
+        $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
+        self.miniPhotoCounter++;
+        frontBackSide(self.miniPhotoCounter);
+        highlightMini();
       }
     }
     //////function to delete the photo inside of a mini photo on click

@@ -111,11 +111,17 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     function popSwatches(){
       ////get all colors
       var colorArrayFunc = function(){
-        var prodcolors = self.productData.colors;
+        var prodfabrics = self.productData.fabrics;
         var colorArr = [];
-        if(prodcolors > 0){
-          for (var i = 0; i < prodcolors.length; i++) {
-            var prod = prodcolors[i].toLowerCase();
+        for (var i = 0; i < prodfabrics.length; i++) {
+          for (var j = 0; j < prodfabrics[i].colors.length; j++) {
+            colorArr.push(prodfabrics[i].colors[j]);
+          }
+        }
+        console.log(colorArr);
+        if(colorArr > 0){
+          for (var i = 0; i < colorArr.length; i++) {
+            var prod = colorArr[i].toLowerCase();
             // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
             colorArr.push(allSwatches.colors[prod]);
           }
@@ -132,7 +138,7 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
             // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
             fabricArr.push(allSwatches.fabrics[fabric]);
           }
-          return fabricArr;  
+          return fabricArr;
         }
       }
       self.allFabrics = fabricArrayFunc();
