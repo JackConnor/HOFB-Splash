@@ -1321,6 +1321,10 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       // setInterval(function(){
       //   frontBackSide(self.miniPhotoCounter)
       // }, 1000)
+      ////////click event for designer studio logo button
+      $('.designerDashNavBarTitle').on('click', function(){
+        window.location.hash = "#/designer/dashboard";
+      })
   ////////////////////////////////
   ///////////////////////////////
   ///////End all controller Code///

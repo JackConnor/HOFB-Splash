@@ -1182,11 +1182,23 @@
   display: block;
 }
 
-.designerDashNavBarTitle{
-    float: right;
-    padding-right: 1173px;
-    padding-top: 9px;
+.designerDashNavBarMain{
+    position: absolute;
+    top: 0;
+    margin-top: 10px;
+    margin-left: 130px;
     font-size: 17px;
+    padding-bottom: 11px;
+    border-bottom: 4px solid #169aa9;
+}
+
+.designerDashNavBarTitle{
+    position: absolute;
+    top: 0;
+    margin-top: 10px;
+    margin-left: 130px;
+    font-size: 17px;
+    cursor: pointer;
 }
 
 .designerDashNavBarTitleUnderline{

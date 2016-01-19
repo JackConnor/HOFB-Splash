@@ -1192,10 +1192,13 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
     }
     frontBackSide(self.miniPhotoCounter);
-
-
     /////////////////////////////////////////////////////////
     //////////end functions to add the front-side-back html
+
+    ////////click event for designer studio logo button
+    $('.designerDashNavBarTitle').on('click', function(){
+      window.location.hash = "#/designer/dashboard";
+    })
 
   /////end createProject controller
   ////////////////////////
