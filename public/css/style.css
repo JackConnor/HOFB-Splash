@@ -3677,8 +3677,8 @@ textarea#styled {
 }
 
 .viewProductImageMain {
-    width: 100%;
-    height: 500px;
+    width: 450px;
+    height: 562.5px;
 }
 
 .viewProductLeftHolder {
@@ -3760,7 +3760,7 @@ textarea#styled {
 .viewProductSwatchCell {
   display: block;
   margin-top: 15px;
-  height: 100px;
+  height: 60px;
 }
 
 .viewProductSwatchCell h3{

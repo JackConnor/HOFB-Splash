@@ -100,7 +100,13 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
             })
         })
       }
-
+    function unique(list) {
+      var result = [];
+      $.each(list, function(i, e) {
+        if ($.inArray(e, result) == -1) result.push(e);
+      });
+      return result;
+    }
     function popContent(){
       // $('.viewProductTypeData').text(self.productData.productType);
       // $('.viewProductDescription').text(self.productData.description);
@@ -112,6 +118,7 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
       ////get all colors
       var colorArrayFunc = function(){
         var prodfabrics = self.productData.fabrics;
+        console.log(prodfabrics);
         var colorArr = [];
         for (var i = 0; i < prodfabrics.length; i++) {
           for (var j = 0; j < prodfabrics[i].colors.length; j++) {
@@ -119,14 +126,14 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
           }
         }
         console.log(colorArr);
-        if(colorArr > 0){
-          for (var i = 0; i < colorArr.length; i++) {
-            var prod = colorArr[i].toLowerCase();
-            // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
-            colorArr.push(allSwatches.colors[prod]);
-          }
-          return colorArr;
+        var colorArr = unique(colorArr)
+        console.log(colorArr);
+        var colorList = [];
+        for (var i = 0; i < colorArr.length; i++) {
+          console.log(allSwatches.colors[colorArr[i]]);
+          colorList.push(allSwatches.colors[colorArr[i]])
         }
+        return colorList;
       }
       self.allColors = colorArrayFunc();
       //////get all fabrics
@@ -134,10 +141,11 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
         var fabricArr = [];
         if(self.productData.fabrics.length){
           for (var i = 0; i < self.productData.fabrics.length; i++) {
-            var fabric = self.productData.fabrics[i].toLowerCase();
+            var fabric = self.productData.fabrics[i].name.toLowerCase();
             // console.log(allSwatches.color[prodcolors[i].toLowerCase]);
-            fabricArr.push(allSwatches.fabrics[fabric]);
+            fabricArr.push(allSwatches.fabrics[fabric].url);
           }
+          console.log(fabricArr);
           return fabricArr;
         }
       }
