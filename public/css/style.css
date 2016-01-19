@@ -1044,6 +1044,8 @@
   display: inline-block;
   margin-left: 3px;
   cursor:pointer;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 12px;
 }
 
 .designerDashCollectionCell {
@@ -1180,6 +1182,21 @@
   display: block;
 }
 
+.designerDashNavBarTitle{
+    float: right;
+    padding-right: 1029px;
+    padding-top: 9px;
+    font-size: 17px;
+}
+
+.designerDashNavBarTitleUnderline{
+    float: right;
+    border: 2px solid #169aa9;
+    width: 122px;
+    margin-right: 1164px;
+    margin-top: -2px;
+}
+
 .designerDashSearchFilterContainer {
   height: 41px;
   display: block;
@@ -1223,6 +1240,10 @@
   border-right: 2px solid #afafa6;*/
   color: #414141;
   font-weight: bolder;
+}
+
+.designerDashTextSpace{
+    opacity: 0;
 }
 
 .designerDashDashTitle {
@@ -3363,7 +3384,7 @@ input#signUpCheckBox {
   vertical-align: top;
   display: inline-block;
   margin-left: 20px;
-  margin-top: 10px;
+  margin-top: 7px;
   font-size: 17px;
   color: #7d7c7c;
   font-weight:normal;
