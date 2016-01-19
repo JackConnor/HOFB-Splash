@@ -1246,8 +1246,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         if (self.addMoreFirstTimeThroughCheck) {
           $('.designerDashCollectionDropdown').after(
             "<div class='designerDashCollectionAddMore'>"+
-              "<span class='glyphicon glyphicon-plus'>"+
-                "<p class='designerDashCollectionAddText'>add collection</p>"+
+              "<span>"+
+                "<p class='designerDashCollectionAddText'>+ add<span class='designerDashTextSpace'>4</span>collection</p>"+
               "</span>"+
             "</div>"
           )
