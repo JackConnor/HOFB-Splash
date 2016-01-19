@@ -354,9 +354,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         "<p class='curatedBarStatus'>"+
           "Status"+
         "</p>"+
-        "<p class='curatedBarOrders'>"+
-          "Orders"+
-        "</p>"+
+        // "<p class='curatedBarOrders'>"+
+        //   "Orders"+
+        // "</p>"+
       "</div>"
       )
       for (var i = 0; i < self.curatedProjects.length; i++) {
