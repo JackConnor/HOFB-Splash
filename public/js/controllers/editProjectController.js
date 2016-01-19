@@ -36,7 +36,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           allFabrics.push(fabric);
           $('.createFabricContainer').append(
             '<div class="createFabricCellHolder col-xs-4">'+
-              "<span class='hoverText hoverText"+fabric+"'><p>"+fabric.split('_').join(' ').toUpperCase()+"</p></span>"+
+              "<span class='hoverText create"+fabric+" createFabric hoverText"+fabric+"'>"+fabric.split('_').join(' ').toUpperCase()+"</span>"+
               '<img src='+allSwatches.fabrics[fabric].url+' class="createFabric create'+fabric+'">'+
             "</div>"
           )
@@ -89,7 +89,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           allAccessories.push(drawCord);
           $('.drawCords').after(
             "<div class='createAccessory create"+drawCord+" createAccessoryCellHolder col-xs-4'>"+
-            "<span class='hoverText hoverText"+drawCord+"'><p>"+drawCord.split('_').join(' ').toUpperCase()+"</p></span>"+
+            "<span class='hoverText  hoverText"+drawCord+"'><p>"+drawCord.split('_').join(' ').toUpperCase()+"</p></span>"+
               "<img src='"+allSwatches.accessories.drawCords[drawCord]+"'/>"+
             "</div>"
           )

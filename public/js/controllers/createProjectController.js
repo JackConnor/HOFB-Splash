@@ -48,7 +48,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           allFabrics.push(fabric);
           $('.createFabricContainer').append(
             '<div class="createFabricCellHolder col-xs-4">'+
-              "<span class='hoverText hoverText"+fabric+"'><p>"+fabric.split('_').join(' ').toUpperCase()+"</p></span>"+
+              "<span class='hoverText create"+fabric+" createFabric hoverText"+fabric+"'>"+fabric.split('_').join(' ').toUpperCase()+"</span>"+
               '<img src='+allSwatches.fabrics[fabric].url+' class="createFabric create'+fabric+'">'+
             "</div>"
           )
@@ -141,7 +141,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           })
         }
         return allAccessories;
-        return allAccessories;
       }
       accessoriesfunc();
     }
@@ -159,6 +158,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         $('.create'+swatchType).on('click', function(evt){
           var target = $(evt.target);
           var fabricType = target[0].classList[1].slice(6, 100);
+          console.log(fabricType);
           var fabricDescription = allSwatches.fabrics[fabricType].description;
           var allColors = allSwatches.fabrics[fabricType].colors;
           ////////we add the color picking modal
@@ -334,7 +334,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
     }
     swatchLogic("Season");
-    swatchLogic("Accessory");
+    swatchLogic("Accessories");
     swatchLogic("Fabric");
     swatchLogic("Color");
     swatchLogic("Button");
