@@ -425,8 +425,9 @@ module.exports = function(app){
       console.log(user);
   		if (err) {
   			res.json( err )
-  		} else if (user && user != null ) {
-  			res.json("user exists")
+      }
+      else if (user != null) {
+  			res.json('user exists')
   		} else {
         //////situation where no user is found (aka email is unique)
 				//AUTHENTICATE USER HERE
@@ -470,8 +471,6 @@ module.exports = function(app){
                 res.json(newUserData)
               })
             })
-            // res.json(newProductData)
-            /////now we make the Conversation that goes with every product
           });
         })
   		}
@@ -498,7 +497,6 @@ module.exports = function(app){
             var userId = user._id;
             var status = user.status;
             var secret = process.env.JWT_TOKEN_SECRET;
-            //////user password verified
             ///////iss == issuer (us), name = the user's id, and sub = the number of times they've logged in
             var token = jwt.sign({iss: "hofb.com", name: user._id, sub: user.signins, aud: status}, secret, {expiresIn: "2h", audience: user.status})
             res.json(token);
