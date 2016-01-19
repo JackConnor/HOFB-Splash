@@ -1157,6 +1157,7 @@
   /*outline: 1px solid #EFEEEC;*/
   border: 1px solid #EFEEEC;
   position: relative;
+  border-radius: 3px;
 }
 
 .designerDashFilter:after {
