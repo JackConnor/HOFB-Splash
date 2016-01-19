@@ -117,17 +117,17 @@ angular.module('getSwatchesFactory', [])
         }
         ,accessories: {
           drawCords: {
-            cotton: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
-            ,polyester: 'http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg'
-            ,nylon: 'http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg'
+            cotton: "http://4.imimg.com/data4/OG/QE/MY-1726519/polyester-drawcords-250x250.jpg"
+            ,polyester: 'http://thumbs2.ebaystatic.com/d/l225/m/mmxvo97AZNtTNT0hDBQNueg.jpg'
+            ,nylon: 'http://3.imimg.com/data3/TS/LE/IMFCP-2897143/img-nylon_main-250x250.gif'
           }
           ,metalTrims: {
-            buttons: 'http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg'
-            ,rivets: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
-            ,eyelets: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
-            ,buckles: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
-            ,zippers: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
-            ,hooksStoppers: "http://www.keepyourpantson.com/image/cache/data/product-by-category/belt-buckles/center-bar/womens-belt-buckles-5691-500x500.jpg"
+            buttons: 'http://d6lw7to1547c3.cloudfront.net/media/catalog/product/cache/1/small_image/300x300/9df78eab33525d08d6e5fb8d27136e95/109844.jpg'
+            ,rivets: "http://img.auctiva.com/imgdata/9/9/6/8/3/1/webimg/586387289_o.jpg"
+            ,eyelets: "http://ecx.images-amazon.com/images/I/511mlg44gPL._SY300_.jpg"
+            ,buckles: "http://lgcdn.countrybrookdesign.com/media/catalog/product/cache/1/small_image/300x/9df78eab33525d08d6e5fb8d27136e95/d/b/dbb-nic-1-double-bar-buckle_1_6.jpg"
+            ,zippers: "https://bagmakersupply.com/img/itm/baaaaaa/BAAAAAA285_0000x0000_0300x0300.jpg"
+            ,hooksStoppers: "http://ecx.images-amazon.com/images/I/21L4Yw0FDmL._QL70_.jpg"
           }
         }
         ,seasons: {

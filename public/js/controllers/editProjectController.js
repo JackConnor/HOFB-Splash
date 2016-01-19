@@ -36,10 +36,24 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           allFabrics.push(fabric);
           $('.createFabricContainer').append(
             '<div class="createFabricCellHolder col-xs-4">'+
+              "<span class='hoverText hoverText"+fabric+"'><p>"+fabric.split('_').join(' ').toUpperCase()+"</p></span>"+
               '<img src='+allSwatches.fabrics[fabric].url+' class="createFabric create'+fabric+'">'+
             "</div>"
           )
+          $('.hoverText'+fabric).on('mouseenter', function(evt){
+            console.log($(evt.target));
+            $(evt.target).css({
+              opacity: 0.58
+            })
+          })
+          $('.hoverText'+fabric).on('mouseleave', function(evt){
+            console.log($(evt.target));
+            $(evt.target).css({
+              opacity: 0
+            })
+          })
         }
+        /////hover state
         return allFabrics;
       }
       fabricsfunc();
