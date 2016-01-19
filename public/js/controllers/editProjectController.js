@@ -1167,18 +1167,21 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           var view = "Forward";
           var imageCount = self.miniPhotoCounter + 1;
           addHtmlGuide(view, imageCount);
+          toggleDeleteHover();
         }
         else if(counter == 1){
           $('.newProductCurrentImage').attr('src', '');
           var view = "Left Side";
           var imageCount = self.miniPhotoCounter + 1;
           addHtmlGuide(view, imageCount);
+          toggleDeleteHover();
         }
         else if(counter == 2){
           $('.newProductCurrentImage').attr('src', '');
           var view = "Right Side";
           var imageCount = self.miniPhotoCounter + 1;
           addHtmlGuide(view, imageCount);
+          toggleDeleteHover();
 
         }
         else if(counter == 3){
@@ -1186,8 +1189,10 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           var view = "Back";
           var imageCount = self.miniPhotoCounter + 1;
           addHtmlGuide(view, imageCount);
+          toggleDeleteHover();
         }
         else {
+          toggleDeleteHover();
           $('#i_file').css({
             height: ""
             ,width: '50px'
@@ -1212,6 +1217,58 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         }
       }
       checkToken();
+
+      ///////////////////
+      ///////hover events for photo upload
+      function toggleDeleteHover(){
+        console.log('rloaded baby');
+        $('.fileUploadWrapper').css({
+          opacity: 1
+        })
+        if(self.miniPhotoCounter >= 4){
+          $('.fileUploadWrapper').on('mouseenter', function(){
+            console.log(self.miniPhotoCounter);
+            $('.fileUploadWrapper').css({
+              outline: "2px solid green"
+            })
+          })
+          $('.fileUploadWrapper').on('mouseleave', function(){
+            $('.fileUploadWrapper').css({
+              outline: "none"
+            })
+          })
+        }
+        else {
+          console.log('below four');
+          $('.fileUploadWrapper').css({
+            opacity: 0
+          })
+          $('.fontChallenge').on('mouseenter', function(){
+            console.log(self.miniPhotoCounter);
+            $('.fontChallenge').css({
+              backgroundColor: "#138592"
+            })
+          })
+          $('.fontChallenge').on('mouseleave', function(){
+            $('.fontChallenge').css({
+              backgroundColor: ""
+            })
+          })
+          $('#i_file').on('mouseenter', function(){
+            $('.fontChallenge').css({
+              backgroundColor: "#138592"
+            })
+          })
+          $('#i_file').on('mouseleave', function(){
+            $('.fontChallenge').css({
+              backgroundColor: ""
+            })
+          })
+        }
+      }
+      ////////end hover events
+      ////////////////////////
+
   ////////////////////////////////
   ///////////////////////////////
   ///////End all controller Code///
