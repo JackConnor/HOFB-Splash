@@ -422,9 +422,10 @@ module.exports = function(app){
   ///////Signup, Login, Authorization, and Sessions
   app.post('/api/signup', function( req, res ) {
   	User.findOne( { email: req.body.email }, function(err, user){
-  		if (err ) {
-  				res.json( err )
-  		} else if ( user ) {
+      console.log(user);
+  		if (err) {
+  			res.json( err )
+  		} else if (user && user != null ) {
   			res.json("user exists")
   		} else {
         //////situation where no user is found (aka email is unique)
