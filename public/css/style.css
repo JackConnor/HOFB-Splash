@@ -2699,9 +2699,10 @@ input#signUpCheckBox {
 
 .projectCellTrash {
   float: right;
-  font-size: 30px;
+  font-size: 17px;
   color: white;
   margin-right: 30px;
+  margin-top: 10px;
   cursor: pointer;
 }
 
