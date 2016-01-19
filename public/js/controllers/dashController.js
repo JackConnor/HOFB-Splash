@@ -206,10 +206,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.newProjectButton').on('click', function(){
         newProductPop();
       })
-      if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
-        self.tourCounter = 0;///keeps track of where we are in the dashboard tour
-        dashboardTour();
-      }
       arg();
     }
     function moveDashMinis() {
@@ -824,6 +820,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.designerDashCurated').css({
         backgroundColor: "#FEFDFA"
       })
+      self.tourCounter = 7;
       $('.designerDashSubmitted').css({
         backgroundColor: "#EBEBE9"
       })
@@ -839,6 +836,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.designerDashSubmitted').css({
         backgroundColor: "#FEFDFA"
       })
+      self.tourCounter = 7;
       $('.designerDashCurated').css({
         backgroundColor: "#EBEBE9"
       })
@@ -855,6 +853,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.designerDashCurated').css({
         backgroundColor: "#EBEBE9"
       })
+      self.tourCounter = 7;
       $('.designerDashSubmitted').css({
         backgroundColor: "#EBEBE9"
       })
@@ -1494,6 +1493,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         );
         $('.deleteTour').on('click', function(){
           $('.tourElem').remove();
+          $('.tourTriangle').remove();
           $('.designerDashboardPage').css({
             opacity: 1
           });
@@ -1506,20 +1506,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           self.tourCounter++;
           dashboardTour();
         });
-        $('.dashNoTour').on('click', function(){
-          $('.tourElem').remove();
-          $('.designerDashboardPage').css({
-            opacity: 1
-          });
-          self.tourCounter = 7;
-          $http({
-            method: "GET"
-            ,url: "/api/endtour/"+self.decodedToken.data.name
-          })
-          .then(function(newToken){
-            window.localStorage.hofbToken = newToken.data;
-          })
-        })
+
       }
       else if(self.tourCounter == 1){
         $('.tourElem').remove();
@@ -1563,6 +1550,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         })
         $('.deleteTour').on('click', function(){
           $('.tourElem').remove();
+          $('.tourTriangle').remove();
           $('.tourProjectCellNewInner').remove();
           $('.designerDashboardPage').css({
             opacity: 1
@@ -1673,6 +1661,18 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 "CURATED"+
           "</div>"
         );
+        $('.deleteTour').on('click', function(){
+          $('.tourElem').remove();
+          $('.tourTriangle').remove();
+          $('.tourProjectCellNewInner').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
+          $('.projectCellNewInner').css({
+            opacity: 1
+          })
+          self.tourCounter = 7;
+        })
         $('.designerDashboardPage').css({
           opacity: 0.3
         });
@@ -1748,6 +1748,18 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                 "Collections"+
           "</p>"
         );
+        $('.deleteTour').on('click', function(){
+          $('.tourElem').remove();
+          $('.tourTriangle').remove();
+          $('.tourProjectCellNewInner').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
+          $('.projectCellNewInner').css({
+            opacity: 1
+          })
+          self.tourCounter = 7;
+        })
         $('.designerDashboardPage').css({
           opacity: 0.3
         });
@@ -1829,6 +1841,18 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             "</p>"+
           "</div>"
         );
+        $('.deleteTour').on('click', function(){
+          $('.tourElem').remove();
+          $('.tourTriangle').remove();
+          $('.tourProjectCellNewInner').remove();
+          $('.designerDashboardPage').css({
+            opacity: 1
+          });
+          $('.projectCellNewInner').css({
+            opacity: 1
+          })
+          self.tourCounter = 7;
+        })
         $('.designerDashboardPage').css({
           opacity: 0.3
         });
@@ -1923,7 +1947,16 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     }
     /////end of navbar dropdown logic/////////////
     ////////////////////////////////////////////////
+    $('body, html').ready(function(){
+      console.log('ready');
 
+    })
+    setTimeout(function(){
+      if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
+        self.tourCounter = 0;///keeps track of where we are in the dashboard tour
+        dashboardTour();
+      }
+    }, 2000)
   /////end dash controller
   ////////////////////////
   ////////////////////////
