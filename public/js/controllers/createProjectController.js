@@ -775,7 +775,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         }
       })
     });
-    $('.new_product_save').on('click', sendNewProject);
+    $('.new_product_save').on('click', sendNewProject(evt));
 
     //////this is the function to submit photos, which are added turned into url links on the api, and added to the product object we make previously to submitting the photos
     function submitPhotos(productToUpdate){
@@ -784,7 +784,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         "</form>"
       )
       ///////check each of the photos individually for to see if it has a photo
-      for (var i = 0; i < 7; i++) {
+      for (var i = 0; i < 9; i++) {
         if(self.tempPhotoHTMLCache[i]){
           $('.tempForm').append(self.tempPhotoHTMLCache[i]);
         }
@@ -794,7 +794,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       );
       var newProjectInfo = productToUpdate;
         ////now we make a post request to create a new conversation, which we do for every single project that is made. It's here in the submit photos simply because this is the last stop on a callback series, and this should probably go last
-        newConversation(newProjectInfo);
+      newConversation(newProjectInfo);
     }
 
     function newConversation(newProjectInfo){
@@ -805,6 +805,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,data: {productName: newProjectInfo.name, productId: newProjectInfo._id, dateCreate: new Date(), comments: [], ownerId: self.userId, ownerName: self.currentUser.name, photoUrl: newProjectInfo.images[0]}
       })
       .then(function(newConvo){
+        console.log($('.tempForm'));
         $('.tempForm').submit();
       })
     }
