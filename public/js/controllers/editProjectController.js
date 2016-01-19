@@ -330,14 +330,11 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
 
     function loadData(productObject){
-
-      console.log(productObject);
       productName = productObject.name.toLowerCase().replace(/\b[a-z]/g, function(letter) {
           return letter.toUpperCase();
       });
-
       //////load text inputs
-      $('.newProductTitle').val(productName)
+      $('.newProductTitle').val(productName);
       $('.newProductDescription').val(productObject.description);
       $('.newProductTagsInput').val(productObject.tags.join(', '))
       $('.newProductCollectionsInput').val(productObject.collections.join(', '))

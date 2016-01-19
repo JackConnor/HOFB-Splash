@@ -734,7 +734,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
       var userId = self.userId;
       var collections = $('.newProductCollectionsInput').val().split(',');
-      console.log(collections);
       var productType = window.location.hash.split('/')[4];
       var tags = $('.newProductTagsInput').val().split(' ');
       var vendor = $('.newProductVendor').val();
@@ -766,7 +765,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var accessories = accessoriesFunc();
       var statusVar = $(evt.target)[0].className.split('_')[2];
       var otherStatus = $(evt.target)[0].classList[2];
-      console.log(statusVar);
       if(statusVar == 'send' || otherStatus == 'send'){
         var status = 'submitted to curator'
       } else if(statusVar == 'save'){
@@ -899,7 +897,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.new_product_save').on('mouseleave', function(){
       $('.new_product_save').css({
         backgroundColor: ''
-        ,color: 'black'
+        ,color: '#666'
       })
     })
     $('.new_product_send').on('mouseenter', function(){
@@ -912,7 +910,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.new_product_send').on('mouseleave', function(){
       $('.new_product_send').css({
         backgroundColor: ''
-        ,color: 'black'
+        ,color: '#666'
       })
     })
     ////////end hover states
@@ -922,7 +920,13 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////////Logic to load intial params name//////
     function loadName(){
       var name = window.location.hash.split('/')[3].split('_').join(' ');
-      $('.newProductTitle').val(name);
+      console.log(name);
+      productName = name.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+          return letter.toUpperCase();
+      });
+      console.log(productName);
+      //////load text inputs
+      $('.newProductTitle').val(productName);
     }
     loadName();
 
