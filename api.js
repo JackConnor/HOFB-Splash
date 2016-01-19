@@ -565,7 +565,7 @@ module.exports = function(app){
         eager: [
            { width: 150, height: 150,
              crop: "fill", format: "png" },
-           { width: 560, height: 700,
+           { width: 500, height: 500,
             crop: 'fill', format: "png" }
         ]
        })

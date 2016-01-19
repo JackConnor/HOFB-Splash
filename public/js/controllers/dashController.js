@@ -256,21 +256,21 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               "<h4>Let's start with these small details.</h4>"+
               "<input class='newProductName' placeholder='Project Name'>"+
               '<select class="target newProductModalDropdownSeason">'+
-                '<option selected="selected">Season</option>'+
+                '<option disabled selected>Season</option>'+
                 '<option value="summer">Summer</option>'+
               '  <option value="spring" disabled>Spring</option>'+
               '  <option value="fall" disabled>Fall</option>'+
               '  <option value="winter" disabled>Winter</option>'+
               '</select>'+
-              '<select class="target newProductModalDropdown" id="newProductModalDropdown">'+
-                '<option selected="selected">Product Type</option>'+
+              '<select placeholder="yo dude" class="target newProductModalDropdown" id="newProductModalDropdown">'+
+                '<option disabled selected>Product Type</option>'+
                 '<option value="dress">Dress</option>'+
               '  <option value="pants" disabled>Pants</option>'+
               '  <option value="skirt" disabled>Skirt</option>'+
               '  <option value="shirt" disabled>Shirt</option>'+
               '</select>'+
               '<select class="target newProductModalDropdownStyle">'+
-                '<option>Style</option>'+
+                '<option disabled selected>Style</option>'+
                 '<option value="formal">Formal</option>'+
                 '<option value="cocktail">Cocktail & Party</option>'+
               '  <option value="evening">Evening</option>'+
