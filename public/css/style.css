@@ -153,11 +153,11 @@
 }
 
 .circle0 {
-  margin-left: 75px;
+  margin-left: 10%;
 }
 
 .circle2 {
-  margin-left: 35px;
+  margin-left: 5px;
 }
 
 .circleContainer {
@@ -2263,7 +2263,7 @@ input#signUpCheckBox {
 
 .newProductTitle {
   height: 55px;
-  background-color: white;
+  background-color: #FEFDFA;
   color: #2a2a2a;
   font-weight: 300;
   outline: none;
