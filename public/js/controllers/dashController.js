@@ -1634,6 +1634,20 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             scrollTop: 0
           }, 800)
         })
+        $('body').keypress(function(evt){
+          if($('.tourElem') && $(evt)[0].charCode == 13){
+            $('.tourTriangle').remove();
+            $('.tourProjectCellNewInner').remove();
+            $('.projectCellNewInner').css({
+              opacity: 1
+            });
+            self.tourCounter++;
+            dashboardTour();
+            // $('html, body').animate({
+            //   scrollTop: 0
+            // }, 800)
+          }
+        });
         $('.dashTourBack').on('click', function(){
           $('.tourElem').remove();
           $('.tourTriangle').remove();
@@ -1649,6 +1663,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         })
       }
       else if (self.tourCounter == 2){
+        $('html, body').animate({
+          scrollTop: 0
+        }, 800)
         $('.tourElem').remove();
         $('.bodyview').prepend(
           '<div class="dashTour2 tourElem">'+
@@ -1729,6 +1746,16 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           self.tourCounter++;
           dashboardTour();
         })
+        // $('body').keypress(function(evt){
+        //   if($('.tourElem') && $(evt)[0].charCode == 13){
+        //     $('.tourDesignerDashCurated').remove();
+        //     $('.designerDashCurated').css({
+        //       opacity: 1
+        //     })
+        //     self.tourCounter++;
+        //     dashboardTour();
+        //   }
+        // });
         $('.dashTourBack').on('click', function(){
           $('.tourDesignerDashCurated').remove();
           $('.designerDashCurated').css({
@@ -1819,6 +1846,17 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           self.tourCounter++;
           dashboardTour();
         })
+        $('body').keypress(function(evt){
+          if($('.tourElem') && $(evt)[0].charCode == 13){
+            $('.tourDesignerDashCollections').remove();
+            $('.tourProjectCellNewInner').remove();
+            $('.designerDashCollections').css({
+              opacity: 1
+            });
+            self.tourCounter++;
+            dashboardTour();
+          }
+        });
         $('.dashTourBack').on('click', function(){
           $('.tourDesignerDashCollections').remove();
           $('.designerDashCollections').css({
@@ -1913,7 +1951,20 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             opacity: 1
           });
           self.tourCounter = 7;
-        })
+        });
+        $('body').keypress(function(evt){
+          if($('.tourElem') && $(evt)[0].charCode == 13){
+            $('.tourDesignerDashCollectionAddMore').remove();
+            $('.designerDashCollectionAddMore').css({
+              opacity: 1
+            });
+            $('.tourElem').remove();
+            $('.designerDashboardPage').css({
+              opacity: 1
+            });
+            self.tourCounter = 7;
+          }
+        });
         $('.dashTourBack').on('click', function(){
           $('.designerDashCollectionAddMore').css({
             opacity: 1
