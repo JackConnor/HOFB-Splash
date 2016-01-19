@@ -292,9 +292,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         var name = $('.newProductName').val().split(' ').join('_');
         var season = $('.newProductModalDropdownSeason').val();
         var type = $('.newProductModalDropdown').val();
-        console.log(name);
-        console.log(type);
-        console.log(season);
         if(name.split('').join(' ').split('').length > 0 && type != null && season != null){
           window.location.hash = "#/create/product/"+name+"/"+type+"/"+season;
         }
@@ -304,10 +301,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       });
       $('body').keypress(function(evt){
         if($('.newProductModalHolder') && $(evt)[0].charCode == 13){
-          console.log("returned");
           var name = $('.newProductName').val().split(' ').join('_');
           var season = $('.newProductModalDropdownSeason').val();
-          console.log(season);
           var type = $('.newProductModalDropdown').val();
           if(name.split('').join(' ').split('').length > 0 && type != null && season != null){
             window.location.hash = "#/create/product/"+name+"/"+type+"/"+season;

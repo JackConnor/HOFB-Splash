@@ -431,13 +431,20 @@ module.exports = function(app){
         //////situation where no user is found (aka email is unique)
 				//AUTHENTICATE USER HERE
         var product = new Product();
+        var productSub = new Product();
         var newUser = new User();
         var conversation = new Conversation();
 
         product.name = "Demo Product";
         product.status = 'saved';
         product.timestamp = new Date();
+        product.description = "A new product yoooooooooooooo";
         product.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
+
+        productSub.name = "Submitted Demo Product";
+        productSub.status = 'submitted to curator';
+        productSub.timestamp = new Date();
+        productSub.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
 
         newUser.email = req.body.email;
         newUser.firstname = req.body.firstname;
@@ -449,18 +456,22 @@ module.exports = function(app){
           console.log('testing');
           console.log(newUserData);
           product.userId = newUserData._id;
+          productSub.userId = newUserData._id;
           product.save(function(err, newProductData){
             console.log(newProductData);
+            productSub.save(function(err, newSubmittedProduct){
+              console.log(newSubmittedProduct);
+              conversation.productName = newProductData.name;
+              conversation.productId = newProductData._id;
+              conversation.dateCreated = new Date();
+              conversation.comments = [{sender: "Admin", receiver: newUserData._id, date: new Date(), text: "Hello, welcome to your first comment"}];
+              conversation.save(function(err, newConvo){
+                if(err){console.log(err)}
+                res.json(newUserData)
+              })
+            })
             // res.json(newProductData)
             /////now we make the Conversation that goes with every product
-            conversation.productName = newProductData.name;
-            conversation.productId = newProductData._id;
-            conversation.dateCreated = new Date();
-            conversation.comments = [{sender: "Admin", receiver: newUserData._id, date: new Date(), text: "Hello, welcome to your first comment"}];
-            conversation.save(function(err, newConvo){
-              if(err){console.log(err)}
-              res.json(newUserData)
-            })
           });
         })
   		}
