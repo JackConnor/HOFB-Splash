@@ -126,10 +126,10 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory', 'si
     }
     allMessagesFunc(addEmailHtml);/////call the function to load all messages
 
-    ///logout button functionality
+    // logout button functionality
     $('.logoutButton').on('click', function(){
       window.localStorage.hofbToken = "";
-      window.location.hash = "#/signin";
+      window.location.hash = "#/designer/loginportal"
     })
 
     //////////////////////////////////////
@@ -204,7 +204,7 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory', 'si
     }
     /////end of navbar dropdown logic/////////////
     ////////////////////////////////////////////////
-    
+
   /////////end of the messages controller
   ///////////////////////////////////////
   ///////////////////////////////////////
