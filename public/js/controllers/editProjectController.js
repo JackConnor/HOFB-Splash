@@ -682,28 +682,22 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       console.log(this.width);
       console.log(this.height);
       var ratio = (this.width/this.height);
-      console.log(ratio);
-      if(ratio > .7 && ratio <= .725){
-        $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
-        self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
-        self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-        $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-        var sourceArray = [];
-        var sourceNum = [];
-        for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
-          if(!$($('.newProductMiniImageImage')[i]).attr('src')){
-            sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
-            sourceNum.push(i);
-          }
+      $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
+      self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
+      self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
+      $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
+      var sourceArray = [];
+      var sourceNum = [];
+      for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+        if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+          sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
+          sourceNum.push(i);
         }
-        var source = sourceArray[0];
-        self.miniPhotoCounter = sourceNum[0];
-        frontBackSide(self.miniPhotoCounter);
-        highlightMini();
       }
-      else {
-          alert('Please Uploadf a photo that is in a 5/7 ratio');
-      }
+      var source = sourceArray[0];
+      self.miniPhotoCounter = sourceNum[0];
+      frontBackSide(self.miniPhotoCounter);
+      highlightMini();
     }
   }
   //////function to delete the photo inside of a mini photo on click
