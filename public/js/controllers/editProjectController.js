@@ -286,6 +286,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
 
     function loadData(productObject){
+
       console.log(productObject);
       //////load text inputs
       $('.newProductTitle').val(productObject.name)
@@ -297,7 +298,11 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       /////add photos
       var addImgsFunc = function(){
         console.log(productObject);
-        $('.newProductCurrentImage').attr('src', productObject.images[0])
+        if(productObject.images.length < 5){
+          frontBackSide(productObject.images.length);
+          $('.newProductCurrentImage').attr('src', '')
+        }
+        // $('.newProductCurrentImage').attr('src', productObject.images[0])
         for (var i = 0; i < productObject.images.length; i++) {
           $('#newProductMiniImage'+i).attr('src' , productObject.images[i]);
           ////////load photo and html caches
@@ -305,9 +310,6 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           self.tempPhotoHTMLCache.push($('#newProductMiniImage'+i));
         }
         console.log(self.miniPhotoCounter);
-        if(self.tempPhotoHTMLCache < 4){
-          frontBackSide(self.miniPhotoCounter);
-        }
       }
       addImgsFunc();
       //////functions for addding swatches to the html once its' loaded
@@ -1048,6 +1050,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
             outline: "none"
           })
         })
+        ///////this only is relevant on load, but gets over ridden on change events
         $('.fileUploadWrapper').on('mouseenter', function(){
           $('.fileUploadWrapper').css({
             outline: "2px solid gray"

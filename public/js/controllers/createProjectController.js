@@ -1016,7 +1016,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         $('.fileUploadWrapper').on('mouseenter', function(){
           console.log(self.miniPhotoCounter);
           $('.fileUploadWrapper').css({
-            outline: "2px solid green"
+            outline: "2px solid gray"
           })
         })
         $('.fileUploadWrapper').on('mouseleave', function(){
