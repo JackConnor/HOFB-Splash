@@ -433,6 +433,7 @@ module.exports = function(app){
 				//AUTHENTICATE USER HERE
         var product = new Product();
         var productSub = new Product();
+        var productCurateTab = new Product();
         var newUser = new User();
         var conversation = new Conversation();
 
@@ -447,6 +448,11 @@ module.exports = function(app){
         productSub.timestamp = new Date();
         productSub.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
 
+        productCurateTab.name = "Submitted Demo Product";
+        productCurateTab.status = 'submitted to curator';
+        productCurateTab.timestamp = new Date();
+        productCurateTab.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
+
         newUser.email = req.body.email;
         newUser.firstname = req.body.firstname;
         newUser.lastname = req.body.lastname;
@@ -458,6 +464,8 @@ module.exports = function(app){
           console.log(newUserData);
           product.userId = newUserData._id;
           productSub.userId = newUserData._id;
+          productCurateTab.userId = newUserData._id;
+
           product.save(function(err, newProductData){
             console.log(newProductData);
             productSub.save(function(err, newSubmittedProduct){
