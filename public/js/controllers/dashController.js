@@ -124,17 +124,17 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     }
 
     //////simple function to return just the unique items from an array, very useful for many purposes
-    function unique(list) {
-      var result = [];
-      $.each(list, function(i, e) {
-        if ($.inArray(e, result) == -1) result.push(e);
-      });
-      return result;
-    }
+    // function unique(list) {
+    //   var result = [];
+    //   $.each(list, function(i, e) {
+    //     if ($.inArray(e, result) == -1) result.push(e);
+    //   });
+    //   return result;
+    // }
 
     function checkDuplicate(){
       //////must make sure there are no duplicates
-      self.allCollections = unique(self.allCollectionsRaw);
+      self.allCollections = self.allCollectionsRaw;
       loadCollection(self.allCollections);
     }
 

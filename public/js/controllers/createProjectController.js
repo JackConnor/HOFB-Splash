@@ -36,7 +36,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     self.tempPhotoHTMLCache = [];
     self.allSwatches = allSwatches;
     /////end global variables
-
+    toggleDeleteHover();
     ////////set our global variables for our our html to create the swatches from
 /// correct code
     function setSwatches(){
@@ -775,7 +775,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         }
       })
     });
-    $('.new_product_save').on('click', sendNewProject(evt));
+    $('.new_product_save').on('click', sendNewProject);
 
     //////this is the function to submit photos, which are added turned into url links on the api, and added to the product object we make previously to submitting the photos
     function submitPhotos(productToUpdate){
@@ -1007,16 +1007,53 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     ////////////////////////////////////////////////
 
     ///////functions to add outline to edit tools on hover
-    $('.newProductDeleteMini').on('mouseenter', function(){
-      $('.newProductDeleteMini').css({
-        outline: "2px solid gray"
+    function toggleDeleteHover(){
+      console.log('rloaded baby');
+      $('.fileUploadWrapper').css({
+        opacity: 1
       })
-    })
-    $('.newProductDeleteMini').on('mouseleave', function(){
-      $('.newProductDeleteMini').css({
-        outline: "none"
-      })
-    })
+      if(self.miniPhotoCounter >= 4){
+        $('.fileUploadWrapper').on('mouseenter', function(){
+          console.log(self.miniPhotoCounter);
+          $('.fileUploadWrapper').css({
+            outline: "2px solid green"
+          })
+        })
+        $('.fileUploadWrapper').on('mouseleave', function(){
+          $('.fileUploadWrapper').css({
+            outline: "none"
+          })
+        })
+      }
+      else {
+        console.log('below four');
+        $('.fileUploadWrapper').css({
+          opacity: 0
+        })
+        $('.fontChallenge').on('mouseenter', function(){
+          console.log(self.miniPhotoCounter);
+          $('.fontChallenge').css({
+            backgroundColor: "#138592"
+          })
+        })
+        $('.fontChallenge').on('mouseleave', function(){
+          $('.fontChallenge').css({
+            backgroundColor: ""
+          })
+        })
+        $('#i_file').on('mouseenter', function(){
+          $('.fontChallenge').css({
+            backgroundColor: "#138592"
+          })
+        })
+        $('#i_file').on('mouseleave', function(){
+          $('.fontChallenge').css({
+            backgroundColor: ""
+          })
+        })
+      }
+    }
+
     $('.expandPhoto').on('mouseenter', function(){
       $('.expandPhoto').css({
         outline: "2px solid gray"
@@ -1027,20 +1064,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         outline: "none"
       })
     })
-    $('.fileUploadWrapper').on('mouseenter', function(){
-      $('.fileUploadWrapper').css({
-        outline: "2px solid gray"
-      })
-    })
-    $('.fileUploadWrapper').on('mouseleave', function(){
-      $('.fileUploadWrapper').css({
-        outline: "none"
-      })
-    })
+
 
     /////////////////////////////////////////////////////////
     //////////functions to add the front-side-back html to the page as a user uploads photos
     function frontBackSide(counter){
+      console.log(counter);
       ////make sure there is no previous html from this guide before we precede
       $('.fontChallenge').remove();
       $('.sideBanner').remove();
@@ -1085,18 +1114,21 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         var view = "FORWARD";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
+        toggleDeleteHover();
       }
       else if(counter == 1){
         $('.newProductCurrentImage').attr('src', '');
         var view = "LEFT SIDE";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
+        toggleDeleteHover();
       }
       else if(counter == 2){
         $('.newProductCurrentImage').attr('src', '');
         var view = "RIGHT SIDE";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
+        toggleDeleteHover();
 
       }
       else if(counter == 3){
@@ -1104,8 +1136,10 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         var view = "BACK";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
+        toggleDeleteHover();
       }
       else {
+        toggleDeleteHover();
         $('#i_file').css({
           height: ""
           ,width: '50px'
