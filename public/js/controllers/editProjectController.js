@@ -88,14 +88,44 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         for(drawCord in allSwatches.accessories.drawCords){
           allAccessories.push(drawCord);
           $('.drawCords').after(
-            "<img src='"+allSwatches.accessories.drawCords[drawCord]+"' class='createAccessory create"+drawCord+" createAccessoryCellHolder col-xs-4'/>"
+            "<div class='createAccessory create"+drawCord+" createAccessoryCellHolder col-xs-4'>"+
+            "<span class='hoverText hoverText"+drawCord+"'><p>"+drawCord.split('_').join(' ').toUpperCase()+"</p></span>"+
+              "<img src='"+allSwatches.accessories.drawCords[drawCord]+"'/>"+
+            "</div>"
           )
+          $('.hoverText'+drawCord).on('mouseenter', function(evt){
+            console.log($(evt.target));
+            $(evt.target).css({
+              opacity: 0.58
+            })
+          })
+          $('.hoverText'+drawCord).on('mouseleave', function(evt){
+            console.log($(evt.target));
+            $(evt.target).css({
+              opacity: 0
+            })
+          })
         }
         for(metalTrim in allSwatches.accessories.metalTrims){
           allAccessories.push(metalTrim);
           $('.metalTrims').after(
-            "<img src='"+allSwatches.accessories.metalTrims[metalTrim]+"' class='createAccessory create"+metalTrim+" createAccessoryCellHolder col-xs-4'/>"
+            "<div class='createAccessory create"+metalTrim+" createAccessoryCellHolder col-xs-4'>"+
+              "<span class='hoverText hoverText"+metalTrim+"'><p>"+metalTrim.split('_').join(' ').toUpperCase()+"</p></span>"+
+              "<img src='"+allSwatches.accessories.metalTrims[metalTrim]+"'/>"+
+            "</div>"
           )
+          $('.hoverText'+metalTrim).on('mouseenter', function(evt){
+            console.log($(evt.target));
+            $(evt.target).css({
+              opacity: 0.58
+            })
+          })
+          $('.hoverText'+metalTrim).on('mouseleave', function(evt){
+            console.log($(evt.target));
+            $(evt.target).css({
+              opacity: 0
+            })
+          })
         }
         return allAccessories;
       }

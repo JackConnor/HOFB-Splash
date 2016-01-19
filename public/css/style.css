@@ -441,15 +441,14 @@
 
 .createAccessory {
   height: 130px;
-  border: 1px solid silver;
 }
 
 .createAccessory img{
-  height: 90%;
-  width: 90%;
-  margin-left: 5%;
-  margin-top: 5%;
-  outline: 1px solid silver;
+  height: 95%;
+  width: 95%;
+  margin-left: 2.5%;
+  margin-top: 2.5%;
+  /*outline: 1px solid silver;*/
 }
 
 .createAccessoryContainer {
