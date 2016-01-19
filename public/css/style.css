@@ -713,11 +713,12 @@
 
 .curatedTopBar {
   background-color: #232730;
-  height: 50px;
+  height: 40px;
   margin-top: 10px;
   margin-bottom: 10px;
   color: white;
-  font-size: 20px;
+  font-size: 17px;
+  border-radius: 3px;
 }
 
 .curatedTopBar p {
@@ -1070,7 +1071,7 @@
 
 .designerDashCollectionsContainer {
   background-color: #F9F7F5;
-  height: 700px;
+  height: 100vh;
   text-align:justify;
   margin-top: 10px;
   outline: 1px solid #EFEEEC;
@@ -3094,7 +3095,6 @@ input#signUpCheckBox {
 
 .signinReturning {
   font-size: 15px;
-  font-weight: 800;
   margin-top: 30px;
   color: #666666;
   margin-bottom: -10px;
@@ -3122,7 +3122,6 @@ input#signUpCheckBox {
 .signinToggleLink {
   margin-top: 17px;
   font-size: 15px;
-  font-weight: bold;
   color: #666;
 }
 
@@ -3162,7 +3161,6 @@ input#signUpCheckBox {
   margin-top: 15px;
   margin-bottom:-15px;
   color: #666666;
-  font-weight: bold;
 }
 
 .signupInput {
@@ -3191,6 +3189,7 @@ input#signUpCheckBox {
 .signupTos {
   color: #169aa9;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .singleContentHolder {
