@@ -112,6 +112,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controller: 'userProfileCtrl'
       ,controllerAs: 'userProfile'
     })
+
+    .when('/demo/designer/submitted/project', {
+      templateUrl: 'templates/_demoDesignerSubmittedProject.html'
+      ,controller: 'demoProjectCtrl'
+      ,controllerAs: 'demoProject'
+    })
     /////////default to home
     .otherwise('/');
 
