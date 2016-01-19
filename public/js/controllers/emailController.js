@@ -18,7 +18,7 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
     function checkBetaUrl(){
       var clip = window.location.host.split('').slice(0,4).join('');
       var clipWWW = window.location.host.split('').slice(0,8).join('');
-      if((clip == 'beta' || clipWWW = "www.beta" ) && window.location.hash.split('/')[1] != "beta"){
+      if((clip == 'beta' || clipWWW == "www.beta" ) && window.location.hash.split('/')[1] != "beta"){
         window.location.hash = "/beta";
         window.location.reload();
       }
