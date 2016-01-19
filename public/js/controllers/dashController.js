@@ -769,20 +769,56 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       loadInitialList(function(){console.log('boom')});
       $('.sectionTitle').text('listing all active projects')
     }
+    $('.designerDashActive').on('mouseenter', function(){
+      console.log('yooy');
+      $(".tabTextActive").css({
+        color: "#414141"
+      })
+    })
+    $('.designerDashActive').on('mouseleave', function(){
+      console.log('yooy');
+      $(".tabTextActive").css({
+        color: '#7d7c7c'
+      })
+    })
+    $('.designerDashCurated').on('mouseenter', function(){
+      console.log('yooy');
+      $(".tabTextCurated").css({
+        color: "#414141"
+      })
+    })
+    $('.designerDashCurated').on('mouseleave', function(){
+      console.log('yooy');
+      $(".tabTextCurated").css({
+        color: '#7d7c7c'
+      })
+    })
+    $('.designerDashSubmitted').on('mouseenter', function(){
+      console.log('yooy');
+      $(".tabTextSubmitted").css({
+        color: "#414141"
+      })
+    })
+    $('.designerDashSubmitted').on('mouseleave', function(){
+      console.log('yooy');
+      $(".tabTextSubmitted").css({
+        color: '#7d7c7c'
+      })
+    })
 
     /////////////////////////////////////////////////////////
     //////////click functions for toggling designer dashboard
     //////hover startSession
-    $('.designerDashCurated').on('mouseenter', function(){
-      $('.tabTextCurated').css({
-        fontWeight: 700
-      })
-    })
-    $('.designerDashCurated').on('mouseleave', function(){
-      $('.tabTextCurated').css({
-        fontWeight: 400
-      })
-    })
+    // $('.designerDashCurated').on('mouseenter', function(){
+    //   $('.tabTextCurated').css({
+    //     fontWeight: 700
+    //   })
+    // })
+    // $('.designerDashCurated').on('mouseleave', function(){
+    //   $('.tabTextCurated').css({
+    //     fontWeight: 400
+    //   })
+    // })
     ////////toggle to curated view
     $('.designerDashCurated').on('click', function(){
       $('.designerDashCurated').css({
