@@ -3531,14 +3531,17 @@ textarea#styled {
   position: absolute;
   margin-top: -205px;
   display: none;
+  background-image: 'img/badge.png'
 }
 .userProfileImageRound{
-  height:180px;
-  width:180px;
+  height: 162px;
+  width: 162px;
   margin-top: -500px;
   margin-right: 60px;
   margin-bottom: -250px;
-  background-image:url('http://vignette1.wikia.nocookie.net/vsbattles/images/a/a3/Black-windows_542931.jpg/revision/latest?cb=20150317090032');
+  background-image: url('/img/badge.png');
+  border:0;
+  outline:0;
 }
 .userProfilePwdContainer{
   border: 1px solid #CCCCCC;
