@@ -562,6 +562,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           )
           changeEffect();
           self.miniPhotoCounter = self.tempPhotoCache.length;
+          toggleDeleteHover(self.miniPhotoCounter);
           adjustMiniMarginUpload();
           frontBackSide(self.miniPhotoCounter);
         }
@@ -588,6 +589,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
         self.miniPhotoCounter++;
         frontBackSide(self.miniPhotoCounter);
+        toggleDeleteHover(self.miniPhotoCounter);
         highlightMini();
       }
     }
@@ -810,21 +812,21 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       })
     }
 
-    function newForm(){
-
-      $('.appendDiv').append(
-        "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
-        "</form>"
-      )
-      $('.tempForm').append($('#i_file0')[0]);
-      $('.tempForm').append($('#i_file1')[0]);
-      $('.tempForm').append($('#i_file2')[0]);
-      $('.tempForm').append($('#i_file3')[0]);
-      $('.tempForm').append($('#i_name')[0]);
-      $('.tempForm').submit();
-      // $(formNew).submit();
-    }
-    $("#i_submit").on('click', newForm)
+    // function newForm(){
+    //
+    //   $('.appendDiv').append(
+    //     "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
+    //     "</form>"
+    //   )
+    //   $('.tempForm').append($('#i_file0')[0]);
+    //   $('.tempForm').append($('#i_file1')[0]);
+    //   $('.tempForm').append($('#i_file2')[0]);
+    //   $('.tempForm').append($('#i_file3')[0]);
+    //   $('.tempForm').append($('#i_name')[0]);
+    //   $('.tempForm').submit();
+    //   // $(formNew).submit();
+    // }
+    // $("#i_submit").on('click', newForm)
 
     ///////////////////////////////////////////////
     //////Begin logic for photo popup modal////////
@@ -1007,14 +1009,14 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     ////////////////////////////////////////////////
 
     ///////functions to add outline to edit tools on hover
-    function toggleDeleteHover(){
+    function toggleDeleteHover(counter){
       console.log('rloaded baby');
       $('.fileUploadWrapper').css({
         opacity: 1
       })
-      if(self.miniPhotoCounter >= 4){
+      if(counter >= 4){
         $('.fileUploadWrapper').on('mouseenter', function(){
-          console.log(self.miniPhotoCounter);
+          console.log(counter);
           $('.fileUploadWrapper').css({
             outline: "2px solid gray"
           })
@@ -1114,21 +1116,21 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         var view = "FORWARD";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
-        toggleDeleteHover();
+        toggleDeleteHover(self.miniPhotoCounter);
       }
       else if(counter == 1){
         $('.newProductCurrentImage').attr('src', '');
         var view = "LEFT SIDE";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
-        toggleDeleteHover();
+        toggleDeleteHover(self.miniPhotoCounter);
       }
       else if(counter == 2){
         $('.newProductCurrentImage').attr('src', '');
         var view = "RIGHT SIDE";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
-        toggleDeleteHover();
+        toggleDeleteHover(self.miniPhotoCounter);
 
       }
       else if(counter == 3){
@@ -1136,10 +1138,10 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         var view = "BACK";
         var imageCount = self.miniPhotoCounter + 1;
         addHtmlGuide(view, imageCount);
-        toggleDeleteHover();
+        toggleDeleteHover(self.miniPhotoCounter);
       }
       else {
-        toggleDeleteHover();
+        toggleDeleteHover(self.miniPhotoCounter);
         $('#i_file').css({
           height: ""
           ,width: '50px'
@@ -1150,6 +1152,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
     }
     frontBackSide(self.miniPhotoCounter);
+
 
     /////////////////////////////////////////////////////////
     //////////end functions to add the front-side-back html

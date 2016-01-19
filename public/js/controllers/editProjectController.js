@@ -667,6 +667,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         )
         changeEffect()
         self.miniPhotoCounter = self.tempPhotoCache.length;
+        frontBackSide(self.miniPhotoCounter);
       }
       else{
         alert('better delete some photos if you want to add more')
@@ -747,6 +748,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       var source = $(event.target)[0].src;
       var elId = $(event.target).attr('id');
       self.miniPhotoCounter = elId.split('').pop();
+      frontBackSide(self.miniPhotoCounter);
     } else {
       var sourceArray = [];
       var sourceNum = [];
@@ -783,6 +785,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       }
     }
     self.miniPhotoCounter = sourceNum[0];
+    frontBackSide(self.miniPhotoCounter);
     highlightMini();
   };
   setTimeout(miniPhotoCounterFunc, 1000);
@@ -1271,7 +1274,9 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       }
       ////////end hover events
       ////////////////////////
-
+      // setInterval(function(){
+      //   frontBackSide(self.miniPhotoCounter)
+      // }, 1000)
   ////////////////////////////////
   ///////////////////////////////
   ///////End all controller Code///
