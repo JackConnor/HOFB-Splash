@@ -235,7 +235,28 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
       window.location.hash = "#/designer/dashboard";
     });
     $('#navBarEnvelopeIcon').on('click', function(){
-      window.location.hash = "#/messages";
+      ///////////////////////////////////
+      ///////messages temporary popup///
+      $('.bodyview').prepend(
+          "<div class='messageMessageContainer'>"+
+            "<h3>Coming Soon</h3>"+
+            "<div class='messageMessageDescription'>"+
+              "<h4>Feedback on your designs is an important part of your experience at HOFB. We are in the process of providing a platform for real communication with our professional fashion experts, please check back soon."+
+            "</div>"+
+            "<div class='messageMessageButton'>"+
+              "BACK TO HOFB"+
+            "</div>"+
+          "</div>"
+      )
+      // window.location.hash = "#/messages";
+      $('body').keypress(function(evt){
+        if($('.messageMessageContainer') && $(evt)[0].charCode == 13){
+          $('.messageMessageContainer').remove();
+        }
+      });
+      $('.messageMessageButton').on('click', function(){
+        $('.messageMessageContainer').remove();
+      })
     })
 
     /////start of navbar dropdown logic/////////////
