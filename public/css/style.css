@@ -2593,7 +2593,7 @@ input#signUpCheckBox {
 .productContainer{
   font-family: 'Oxygen', sans-serif;
   position: relative;
-  background-color: #FEFDF9;
+  background-color: #fefdfa;
   height: 100%;
 }
 
@@ -3820,6 +3820,9 @@ textarea#styled {
 .viewProductBar {
   font-size: 20px;
   height: 50px;
+  box-shadow: 1px 4px 4px #D5D3D1;
+  margin-bottom: 5px;
+  background-color: #f6fdfa;
 }
 
 .viewProductColorBox, .viewProductAccessoryBox, .viewProductFabricBox, .viewProductStitchBox {
