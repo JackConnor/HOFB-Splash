@@ -32,6 +32,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
           ,url: '/api/'+decodedToken.data.name+'/products'
         })
         .then(function(products){
+          console.log(products);
           var allProjects = products.data;
           var allProjectsSaved = [];
           var curatedProjectsArray = [];
@@ -49,7 +50,6 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
             self.allProjects = allProjectsSaved;
             self.curatedProjects = curatedProjectsArray;
             self.submittedProjects = submittedProjectsArray;
-            console.log(self.submittedProjects);
           }
           //////add time-since-creation field
           var collectionName = ["All"];
@@ -140,7 +140,10 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
     /////load all active projects into the dashboard view
     function loadInitialList(arg){
+      $('.projectCell').remove();
+      // console.log(arg());
       var dataType = $('.dashDataType');
+      console.log(self.allProjects);
       dataType.text('Active Products, which have not been sent to curation');
       for (var i = 0; i < self.allProjects.length; i++) {
         $('.designerDashList').append(
@@ -1421,6 +1424,8 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         if(self.curatedToggleCounter == 'active'){
           if(collectionValue == 'All'){
             $('.designerDashList').html("");
+            console.log(self.allProjects);
+            self.allProjects = [];
             loadProjects(loadInitialList, addHoverToCell);
           }
           else {
