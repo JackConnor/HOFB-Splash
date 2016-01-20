@@ -905,11 +905,29 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       var status = 'saved'
     }
     /////putting together whole object to send
-    var realImages = function(){
-    for (var i = 0; i < self.tempPhotoCache.length; i++) {
-      console.log(self.tempPhotoCache.attr('type'));
+    console.log(self.tempPhotoCache);
+    console.log($(".newProductMiniImageImage"));
+    console.log($(".newProductMiniImageImage").length);
+    console.log($($(".newProductMiniImageImage")[0]).attr('src'));
+    var realImagesFunc = function(){
+      var imageArr = [];
+      for (var i = 0; i < $(".newProductMiniImageImage").length; i++) {
+        console.log($($(".newProductMiniImageImage")[i]).attr('src').split('')[0]);
+        if($($(".newProductMiniImageImage")[i]).attr('src').split('')[0] == 'b'){
+          console.log('blob source');
+        }
+        else if($($(".newProductMiniImageImage")[i]).attr('src').split('')[0] == 'h'){
+          console.log('real source ');
+          console.log($($(".newProductMiniImageImage")[i]).attr('src'));
+          imageArr.push($($(".newProductMiniImageImage")[i]).attr('src'));
+        }
+        else {
+          console.log('nadda');
+        }
+      }
+      return imageArr;
     }
-    }
+    var realImages = realImagesFunc();
     var newProjectObject = {
       projectId: window.location.hash.split('/')[3]
       ,name: name
@@ -920,7 +938,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       ,collections: collections
       ,vendor: vendor
       ,fabrics: fabrics
-      ,images: self.tempPhotoCache
+      ,images: realImages
       ,accessories: accessories
       ,status: status
     }
@@ -931,28 +949,23 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
         "</form>"
       )
+      $('.tempForm').append(
+        "<input name='productId' type='text' value='"+self.currentProduct._id+"'>"
+      );
       ///////check each of the photos individually for to see if it has a photo
-      for (var i = 0; i < 8; i++) {
-        console.log(self.tempPhotoCache[i]);
-        console.log(typeof self.tempPhotoCache[i]);
-        var typeElem = typeof self.tempPhotoCache[i];
-        console.log(typeElem);
-        console.log(self.tempPhotoHTMLCache);
-        if(self.tempPhotoCache[i] != null && typeElem == "object"){
+      for (var i = 0; i < self.tempPhotoHTMLCache.length; i++) {
+        if($(self.tempPhotoHTMLCache[i]).attr('id') == "i_file"){
           console.log(self.tempPhotoHTMLCache[i]);
           console.log(self.tempPhotoCache[i]);
           console.log('got a file');
-          // $('.tempForm').append(self.tempPhotoHTMLCache[i]);
+          $('.tempForm').append(self.tempPhotoHTMLCache[i]);
         }
       }
-      $('.tempForm').append(
-        "<input name='productId' type='text' value='"+self.currentProduct._id._id+"'>"
-      );
       var newProjectInfo = self.currentProduct._id;
       ////hardcaded works!!!
-      $('.tempForm').append(self.tempPhotoHTMLCache[15]);
+      // $('.tempForm').append(self.tempPhotoHTMLCache[15]);
       console.log($('.tempForm'));
-      // $('.tempForm').submit();
+      $('.tempForm').submit();
     })
   }
   $('.new_product_send').on('click', function(evt){

@@ -561,7 +561,6 @@ module.exports = function(app){
     console.log('yoyoyoyo');
     console.log('yoyoyoyo');
     console.log('yoyoyoyo');
-    console.log(req);
     console.log(req.files);
     console.log(req.body);
     for (var i = 0; i < req.files.length; i++) {
