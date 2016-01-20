@@ -6,6 +6,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
   function signupCtrl($http, checkstatus, signupUser, startSession, checkPw){
     var self = this;
 
+    self.signInUpCounter = "signin";
     self.viewToggle = "designer";////for controller whether buyer or designer portion of page are displayed
     // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
@@ -29,8 +30,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
         }
     }
 
-
-    $('.signupSubmit').on('click', function(){
+    function signupUser(){
       var email = $('.signupEmail').val();
       var firstName = $('.signupFirstName').val();
       var lastName = $('.signupLastName').val();
@@ -73,8 +73,72 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
         else{
             alert("You missed a field, please take a second look, thank you")
           }
+    }
+    ///////////event to trigger a user signup
+    $('.signupSubmit').on('click', function(){
+      signupUser();
+    })
+    // event to trigger starting a session from signin page
+    $('.signinSend').on('click', function(){
+      var email = $('.signinEmail').val();
+      var password = $('.signinPassword').val();
+      signinUser(email, password);
+    })
+    function keyboardSignin(){
+      $('body').on('keypress', function(evt){
+        console.log($(evt)[0].charCode);
+        if($(evt)[0].charCode == 13){
+          console.log(self.signInUpCounter);
+            if(self.signInUpCounter == "signin"){
+              var email = $('.signinEmail').val();
+              var password = $('.signinPassword').val();
+              signinUser(email, password);
+            }
+            else if(self.signInUpCounter == "signup"){
+              signupUser();
+            }
+        }
       })
+    }
+    keyboardSignin();
+    ////////set toggle to signin
+    $('.signinEmail').on('click', function(){
+      self.signInUpCounter = 'signin';
+      keyboardSignin();
+    })
+    $('.signinPassword').on('click', function(){
+      self.signInUpCounter = 'signin';
+      keyboardSignin();
+    })
+    //////set toggle to signup
+    $('.signupEmail').on('click', function(){
+      self.signInUpCounter = 'signup';
+      console.log(self.signInUpCounter);
+      keyboardSignin();
+    })
+    $('.signupFirstName').on('click', function(){
+      self.signInUpCounter = 'signup';
+      keyboardSignin();
+    })
+    $('.signupLastName').on('click', function(){
+      self.signInUpCounter = 'signup';
+    })
+    $('.signupPassword').on('click', function(){
+      self.signInUpCounter = 'signup';
+    })
+    $('.signupPasswordRepeat').on('click', function(){
+      self.signInUpCounter = 'signup';
+    })
+    $('.signupCheck').on('click', function(){
+      self.signInUpCounter = 'signup';
+    })
 
+    // var email = $('.signupEmail').val();
+    // var firstName = $('.signupFirstName').val();
+    // var lastName = $('.signupLastName').val();
+    // var password = $('.signupPassword').val();
+    // var rePassword = $('.signupPasswordRepeat').val();
+    // var checked = document.querySelector('.signupCheck').checked;
 
     /////a function to check that passwords are a-z 1-9
     function checkPassword(password){
@@ -95,18 +159,13 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
         })
         .then(function(decToken){
           var newUrl = "#/"+decToken.data.aud.split('-')[0]+"/dashboard";
-          window,localStorage.hofbTourOff = false;
+          window.localStorage.hofbTourOff = false;
           window.location.hash = newUrl;
+          window.location.reload();
         })
       });
     }
 
-    // event to trigger starting a session from signin page
-    $('.signinSend').on('click', function(){
-      var email = $('.signinEmail').val();
-      var password = $('.signinPassword').val();
-      signinUser(email, password);
-    })
     ///////////////////////////////////////////
     /////////logic for the navbar and toggle///
 

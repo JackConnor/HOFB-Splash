@@ -37,7 +37,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           $('.createFabricContainer').append(
             '<div class="createFabricCellHolder col-xs-4">'+
               "<span class='hoverText create"+fabric+" createFabric hoverText"+fabric+"'>"+fabric.split('_').join(' ').toUpperCase()+"</span>"+
-              '<img src='+allSwatches.fabrics[fabric].url+' class="createFabric create'+fabric+'">'+
+              '<img src='+allSwatches.fabrics[fabric].url+' class="createFabricImage create'+fabric+'">'+
             "</div>"
           )
           $('.hoverText'+fabric).on('mouseenter', function(evt){
@@ -144,6 +144,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         $('.create'+swatchType).on('click', function(evt){
           var target = $(evt.target);
           var fabricType = target[0].classList[1].slice(6, 100);
+          console.log(fabricType);
           var fabricDescription = allSwatches.fabrics[fabricType].description;
           var allColors = allSwatches.fabrics[fabricType].colors;
           console.log(allColors);
@@ -202,6 +203,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           })
           /////function to add colors to the popup
           for(color in allColors){
+            console.log(color);
             $('.colorModalColorContainer').append(
               "<div class='colorModalColorCell col-xs-6'>"+
                 "<div class='colorModalCellInner colorModal"+color+"' id='"+allSwatches.fabrics[fabricType].colors[color]+"'>"+
@@ -212,7 +214,9 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
               backgroundColor: allColors[color]
             })
             /////////function that changes css and adds a "colorPicked" class which we will use later to tally up the total colors
+            self.currentColors = [];
             $('.colorModal'+ color).on('click', function(evt){
+              console.log('uouoiuoihlkjhkjlh');
               if(!$(evt.target).hasClass('colorPicked')){
                 $('.colorModalMainImage').css({
                   backgroundColor: evt.target.id
@@ -221,6 +225,9 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
                 $(evt.target).css({
                   border: "4px solid #289DAE"
                 });
+                console.log($(evt.target)[0].classList[1].slice(10, 100));
+                self.currentColors.push($(evt.target)[0].classList[1].slice(10, 100))
+                console.log(self.currentColors);
               }
               else {
                 $('.colorModalMainImage').css({
@@ -230,6 +237,12 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
                 $(evt.target).css({
                   border: "1px solid #A4D4C7"
                 });
+                for (var i = 0; i < self.currentColors.length; i++) {
+                  if($(evt.target)[0].classList[1].slice(10, 100) == self.currentColors[i]){
+                    self.currentColors.splice(i, 1);
+                    console.log(self.currentColors);
+                  }
+                }
               }
             })
           }
@@ -243,11 +256,14 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
               for (var i = 0; i < $('.colorModalCellInner').length; i++) {
                 if($($('.colorModalCellInner')[i]).hasClass('colorPicked')){
                   var colorName = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
-                  var colorList = $(target[0])[0].classList[3];
+                  var colorList = $(target[0])[0].classList[5];
+                  console.log(colorList);
                   target.removeClass(colorList);
+                  ///////////////need to check if we're adding or subtracting
                   var colorList = colorList + "_" + colorName;
+                  console.log(colorList);
                   target.addClass(colorList);
-                  target.css({
+                  $(target[0].nextSibling).css({
                     border: "4px solid #289DAE"
                   })
                 }
@@ -255,17 +271,19 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
               target.attr('id', 'picked_'+swatchType+"_"+fabricType)
               target.addClass('picked');
               $('.invisModal').remove();
+              $('.colorModalCellInner').remove();
             })
           }
           else {
             ///////////////first we need to load up the already-picked colors
-            var colors = $(target[0])[0].classList[3].split("_").slice(1, 100);
+            var colors = $(target[0])[0].classList[5].split("_").slice(1, 100);
             console.log(colors);
             for (var i = 0; i < $('.colorModalCellInner').length; i++) {
               var swatchColorType = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
               console.log(swatchColorType);
               for (var k = 0; k < colors.length; k++) {
                 if(colors[k] == swatchColorType){
+                  self.currentColors.push(colors[k])
                   $($('.colorModalCellInner')[i]).css({
                     border: "4px solid #289DAE"
                   })
@@ -274,27 +292,25 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
               }
             }
             $('.colorModalSubmit').on('click', function(){
-              var newColorList = [];
-              for (var i = 0; i < $('.colorModalCellInner').length; i++) {
-                if($($('.colorModalCellInner')[i]).hasClass('colorPicked')){
-                  var colorName = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
-                  newColorList.push(colorName);
-                }
-              }
-              if(newColorList == 0){
+              if(self.currentColors.length == 0){
                 alert('Please select at least one color to continue');
                 return;
               }
-              target.removeClass('picked');
-              var colorList = $(target[0])[0].classList[3];
-              $(target[0]).removeClass(colorList);
-              var colorList = "fabricColorList"
-              for (var i = 0; i < newColorList.length; i++) {
-                colorList = colorList + "_" + newColorList[i]
+              else {
+                target.removeClass('picked');
+                var colorList = $(target[0])[0].classList[5];
+                //////function to make sure we'er eleiminating erasures
+
+                $(target[0]).removeClass(colorList);
+                var colorList = "fabricColorList"
+                for (var i = 0; i < self.currentColors.length; i++) {
+                  colorList = colorList + "_" + self.currentColors[i]
+                }
+                target.addClass(colorList);
+                target.addClass('picked');
+                $('.invisModal').remove();
+                self.currentColors = [];
               }
-              target.addClass(colorList);
-              target.addClass('picked');
-              $('.invisModal').remove();
             })
           }
         })
@@ -380,7 +396,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
               $(fabricsHtmlArray[i]).addClass(colorListClassName);
               $(fabricsHtmlArray[i]).addClass('picked');
               $(fabricsHtmlArray[i]).attr('id', "picked_Fabric_"+currentValues[j].name);
-              $(fabricsHtmlArray[i]).css({
+              $($(fabricsHtmlArray[i])[0].nextSibling).css({
                 border: "4px solid #289DAE"
               })
             }
@@ -789,25 +805,28 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
   function changeMiniPhoto(event){
-    if($($(event.target)[0]).attr('src') != ""){
-      var source = $(event.target)[0].src;
-      var elId = $(event.target).attr('id');
-      self.miniPhotoCounter = elId.split('').pop();
-      frontBackSide(self.miniPhotoCounter);
-    } else {
-      var sourceArray = [];
-      var sourceNum = [];
-      for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
-        if(!$($('.newProductMiniImageImage')[i]).attr('src')){
-          sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
-          sourceNum.push(i);
+    console.log(self.miniPhotoCounter);
+    if(self.miniPhotoCounter >= 4){
+      if($($(event.target)[0]).attr('src') != ""){
+        var source = $(event.target)[0].src;
+        var elId = $(event.target).attr('id');
+        self.miniPhotoCounter = elId.split('').pop();
+        frontBackSide(self.miniPhotoCounter);
+      } else {
+        var sourceArray = [];
+        var sourceNum = [];
+        for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+          if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+            sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
+            sourceNum.push(i);
+          }
         }
+        var source = sourceArray[0];
+        self.miniPhotoCounter = sourceNum[0];
       }
-      var source = sourceArray[0];
-      self.miniPhotoCounter = sourceNum[0];
+      $(".newProductCurrentImage").attr('src', source);
+      highlightMini();
     }
-    $(".newProductCurrentImage").attr('src', source);
-    highlightMini();
   }
   $('.newProductMiniImageImage').on('click', changeMiniPhoto)
 
@@ -1244,6 +1263,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         }
         else {
           toggleDeleteHover();
+          $('.newProductCurrentImage').attr('src', self.currentProduct.images[self.currentProduct.images.length - 1]);
           $('#i_file').css({
             height: ""
             ,width: '50px'

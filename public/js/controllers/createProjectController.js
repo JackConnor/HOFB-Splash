@@ -44,7 +44,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var fabricsfunc = function(){
         var allFabrics = [];
         for(fabric in allSwatches.fabrics){
-          console.log(fabric);
           allFabrics.push(fabric);
           $('.createFabricContainer').append(
             '<div class="createFabricCellHolder col-xs-4">'+
@@ -53,13 +52,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             "</div>"
           )
           $('.hoverText'+fabric).on('mouseenter', function(evt){
-            console.log($(evt.target));
             $(evt.target).css({
               opacity: 0.58
             })
           })
           $('.hoverText'+fabric).on('mouseleave', function(evt){
-            console.log($(evt.target));
             $(evt.target).css({
               opacity: 0
             })
@@ -107,13 +104,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             "</div>"
           )
           $('.hoverText'+drawCord).on('mouseenter', function(evt){
-            console.log($(evt.target));
             $(evt.target).css({
               opacity: 0.58
             })
           })
           $('.hoverText'+drawCord).on('mouseleave', function(evt){
-            console.log($(evt.target));
             $(evt.target).css({
               opacity: 0
             })
@@ -128,13 +123,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             "</div>"
           )
           $('.hoverText'+metalTrim).on('mouseenter', function(evt){
-            console.log($(evt.target));
             $(evt.target).css({
               opacity: 0.58
             })
           })
           $('.hoverText'+metalTrim).on('mouseleave', function(evt){
-            console.log($(evt.target));
             $(evt.target).css({
               opacity: 0
             })
@@ -152,11 +145,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     function swatchLogic(swatchType){
       console.log(swatchType);
       ///////note: swatchType needs to be added as a capital, i.e. "Season"
-
       ///////fabrics hav a color popup modal, which we take care of here
       if(swatchType == "Fabric"){
         $('.create'+swatchType).on('click', function(evt){
+          console.log('swatching');
           var target = $(evt.target);
+          console.log(target);
           var fabricType = target[0].classList[1].slice(6, 100);
           console.log(fabricType);
           var fabricDescription = allSwatches.fabrics[fabricType].description;
@@ -209,7 +203,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             target.removeClass('fabricColor');
             target.removeClass(colorListClass);
             target.attr('id', '')
-            target.css({
+            $(target[0].nextSibling).css({
               border: '0px'
             })
             $('.invisModal').remove();
@@ -250,18 +244,27 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           //////////now we split based on if the modal is being picked for the first time, or editing a previously picked choice
           /////if this is a first time color choice for this fabric......
           if(!target.hasClass('picked')){
+            console.log(target);
             $(evt.target).addClass('fabricColor');
             $(evt.target).addClass('fabricColorList');
             ////////function to submit the modal with all your color choices
             $('.colorModalSubmit').on('click', function(){
+              console.log('yo');
+              console.log(target);
               for (var i = 0; i < $('.colorModalCellInner').length; i++) {
                 if($($('.colorModalCellInner')[i]).hasClass('colorPicked')){
                   var colorName = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
-                  var colorList = $(target[0])[0].classList[3];
+                  console.log(colorName);
+                  var colorList = $(target[0])[0].classList[5];
                   target.removeClass(colorList);
                   var colorList = colorList + "_" + colorName;
+                  console.log(colorList);
                   target.addClass(colorList);
-                  target.css({
+                  console.log(target);
+                  console.log(target[0]);
+                  console.log(target.parentNode);
+                  console.log(target[0].parentNode);
+                  $(target[0].nextSibling).css({
                     border: "4px solid #289DAE"
                   })
                 }
@@ -673,24 +676,26 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
     function changeMiniPhoto(event){
-      if($($(event.target)[0]).attr('src') != ""){
-        var source = $(event.target)[0].src;
-        var elId = $(event.target).attr('id');
-        self.miniPhotoCounter = elId.split('').pop();
-      } else {
-        var sourceArray = [];
-        var sourceNum = [];
-        for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
-          if(!$($('.newProductMiniImageImage')[i]).attr('src')){
-            sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
-            sourceNum.push(i);
+      if(self.miniPhotoCounter >= 4){
+        if($($(event.target)[0]).attr('src') != ""){
+          var source = $(event.target)[0].src;
+          var elId = $(event.target).attr('id');
+          self.miniPhotoCounter = elId.split('').pop();
+        } else {
+          var sourceArray = [];
+          var sourceNum = [];
+          for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+            if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+              sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
+              sourceNum.push(i);
+            }
           }
+          var source = sourceArray[0];
+          self.miniPhotoCounter = sourceNum[0];
         }
-        var source = sourceArray[0];
-        self.miniPhotoCounter = sourceNum[0];
+        $(".newProductCurrentImage").attr('src', source);
+        highlightMini();  
       }
-      $(".newProductCurrentImage").attr('src', source);
-      highlightMini();
     }
     $('.newProductMiniImageImage').on('click', changeMiniPhoto)
 
@@ -740,12 +745,13 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var description = $('.newProductDescription').val();
       var fabricsFunc = function(){
         var allPicked = $(".picked");
+        console.log(allPicked);
         var fabricsArray = [];
         for (var i = 0; i < allPicked.length; i++) {
           if(allPicked[i].id.split('_')[1] == 'Fabric'){
             var name = allPicked[i].id.split('_').slice(2, 100).join("_");
-            fabricsArray.push({name: name,  colors: []})
-            var colorString = $(allPicked[i])[0].classList[3];
+            fabricsArray.push({name: name,  colors: []});
+            var colorString = $(allPicked[i])[0].classList[5];
             var colorArray = colorString.split('_').slice(1, 100);
           }
           fabricsArray[i].colors = colorArray;
