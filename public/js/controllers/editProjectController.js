@@ -805,25 +805,28 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
   $('.newProductDeleteMini').on('click', deleteMiniPhoto);///Make all the small photo x buttons work
 
   function changeMiniPhoto(event){
-    if($($(event.target)[0]).attr('src') != ""){
-      var source = $(event.target)[0].src;
-      var elId = $(event.target).attr('id');
-      self.miniPhotoCounter = elId.split('').pop();
-      frontBackSide(self.miniPhotoCounter);
-    } else {
-      var sourceArray = [];
-      var sourceNum = [];
-      for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
-        if(!$($('.newProductMiniImageImage')[i]).attr('src')){
-          sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
-          sourceNum.push(i);
+    console.log(self.miniPhotoCounter);
+    if(self.miniPhotoCounter >= 4){
+      if($($(event.target)[0]).attr('src') != ""){
+        var source = $(event.target)[0].src;
+        var elId = $(event.target).attr('id');
+        self.miniPhotoCounter = elId.split('').pop();
+        frontBackSide(self.miniPhotoCounter);
+      } else {
+        var sourceArray = [];
+        var sourceNum = [];
+        for (var i = 0; i < $('.newProductMiniImageImage').length; i++) {
+          if(!$($('.newProductMiniImageImage')[i]).attr('src')){
+            sourceArray.push($($('.newProductMiniImageImage')[i-1]).attr('src'))
+            sourceNum.push(i);
+          }
         }
+        var source = sourceArray[0];
+        self.miniPhotoCounter = sourceNum[0];
       }
-      var source = sourceArray[0];
-      self.miniPhotoCounter = sourceNum[0];
+      $(".newProductCurrentImage").attr('src', source);
+      highlightMini();
     }
-    $(".newProductCurrentImage").attr('src', source);
-    highlightMini();
   }
   $('.newProductMiniImageImage').on('click', changeMiniPhoto)
 
