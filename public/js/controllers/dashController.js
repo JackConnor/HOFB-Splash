@@ -2103,9 +2103,9 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
 
     })
     setTimeout(function(){
-      if(self.decodedToken.data.sub <= 3){////this if statement controls how many times a client uses our app before they stop getting the tutorial
+      if(self.decodedToken.data.sub <= 3 && self.curatedToggleCounter == "active"){////this if statement controls how many times a client uses our app before they stop getting the tutorial
         self.tourCounter = 0;///keeps track of where we are in the dashboard tour
-        dashboardTour();
+        $(document).ready(dashboardTour())
       }
     }, 2000)
 
