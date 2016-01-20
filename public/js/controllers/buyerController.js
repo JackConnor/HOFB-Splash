@@ -28,7 +28,6 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           for (var i = 0; i < allColors.length; i++) {
             $('.purchaseColorRow').append(
               "<div class='purchaseColor' id='"+allColors[i]+"'>"+
-                // allColors[i]+
               "</div>"
             )
             //////add color to the master array
@@ -184,17 +183,13 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           })
           .then(function(currentUser){
             self.currentUser = currentUser.data;
-            console.log(self.currentUser);
             for (var i = 0; i < self.currentUser.samplesRequested.length; i++) {
               self.userSamples.push(self.currentUser.samplesRequested[i])
             }
-            console.log(self.userSamples);
-            /////////
-            console.log(products);
             var allProjects = products.data;
             var allProjectsAlreadyCurated = [];
             for (var i = 0; i < allProjects.length; i++) {
-              if(allProjects[i].status == "curated" || allProjects[i].status == "sampleRequested"){
+              if((allProjects[i].status == "curated" || allProjects[i].status == "sampleRequested") && allProjects[i].name != 'Curated Demo Product'){
                 allProjectsAlreadyCurated.push(allProjects[i]);
               }
               self.alreadyCurated = allProjectsAlreadyCurated;
