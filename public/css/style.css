@@ -1224,7 +1224,7 @@
     position: absolute;
     top: 0;
     margin-top: 10px;
-    margin-left: 130px;
+    margin-left: 155px;
     font-size: 17px;
     padding-bottom: 11px;
     border-bottom: 4px solid #169aa9;
@@ -1313,6 +1313,48 @@
     margin:15px 50px 50px 50px;
     border-radius: 3px;
 }
+
+.dropbtn {
+    background-color: #FEFDFA;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    padding-top: 12px;
+    opacity: 0;
+    margin-left: -75px;
+  }
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+    float: right;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin-left: -147px;
+  }
+
+.dropdown-content a {
+    color: black;
+    padding: 9px 36px;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
 
 .expandPhoto {
   display: inline-block;
@@ -1819,48 +1861,6 @@ input#signUpCheckBox {
   margin-right: auto;
 }
 
-.dropbtn {
-    background-color: #FEFDFA;
-    color: white;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    padding-top: 10px;
-    opacity: 0;
-    margin-left: -72px;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    z-index: 1;
-    float: right;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    margin-left: -147px;
-  }
-
-.dropdown-content a {
-    color: black;
-    padding: 9px 36px;
-    text-decoration: none;
-    display: block;
-    font-size: 20px;
-}
-
-.dropdown a:hover {background-color: #f1f1f1}
-
 .show {display:block;}
 /*/*/
 /*/*/
@@ -1887,10 +1887,13 @@ input#signUpCheckBox {
 #navBarCircleIcon{
   display: inline-block;
   float: right;
-  padding-right: 22px;
-  font-size: 30px;
-  padding-top: 5px;
-  color:#FDFDFD;
+  padding-right: 31px;
+  margin-top: 5px;
+  padding-top: 0px;
+  color: #232730;
+  background-image: url('/img/badge.png');
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
 }
 #navBarTriangleDown{
   display: inline-block;
