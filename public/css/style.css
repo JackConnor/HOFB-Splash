@@ -521,6 +521,12 @@
   width: 80%;
 }
 
+.createFabricImage {
+  width: 95%;
+  height: 95%;
+  margin: 2.5%;
+  cursor:pointer;
+}
 .createGroups {
   height: 40px;
   margin-top: 30px;
@@ -913,7 +919,7 @@
 .deleteButton {
   color: white;
   font-size: 20px;
-  /*padding-top: 5px;*/
+  cursor: pointer;
   border-radius: 3px;
   width: 25%;
   height: 40px;

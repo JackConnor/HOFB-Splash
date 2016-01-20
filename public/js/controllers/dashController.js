@@ -246,6 +246,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
     ///////will set self.allProjects as all our projects
     setTimeout(loadProjects(loadInitialList, addHoverToCell), 300)
     function newProductPop(){
+      $('.tourProjectCellNewInner').remove();
       $('.bodyview').prepend(
         '<div class="invisModal">'+
           "<div class='newProductModalHolder'>"+
@@ -1884,7 +1885,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                   "PREVIOUS"+
                 "</div>"+
                 "<div class='dashTourNext'>"+
-                  "NEXT"+
+                  "FINISH"+
                 "</div>"+
               "</div>"+
             "</div>"+

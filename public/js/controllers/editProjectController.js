@@ -37,7 +37,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           $('.createFabricContainer').append(
             '<div class="createFabricCellHolder col-xs-4">'+
               "<span class='hoverText create"+fabric+" createFabric hoverText"+fabric+"'>"+fabric.split('_').join(' ').toUpperCase()+"</span>"+
-              '<img src='+allSwatches.fabrics[fabric].url+' class="createFabric create'+fabric+'">'+
+              '<img src='+allSwatches.fabrics[fabric].url+' class="createFabricImage create'+fabric+'">'+
             "</div>"
           )
           $('.hoverText'+fabric).on('mouseenter', function(evt){
@@ -144,6 +144,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         $('.create'+swatchType).on('click', function(evt){
           var target = $(evt.target);
           var fabricType = target[0].classList[1].slice(6, 100);
+          console.log(fabricType);
           var fabricDescription = allSwatches.fabrics[fabricType].description;
           var allColors = allSwatches.fabrics[fabricType].colors;
           console.log(allColors);
@@ -259,7 +260,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           }
           else {
             ///////////////first we need to load up the already-picked colors
-            var colors = $(target[0])[0].classList[3].split("_").slice(1, 100);
+            var colors = $(target[0])[0].classList[5].split("_").slice(1, 100);
             console.log(colors);
             for (var i = 0; i < $('.colorModalCellInner').length; i++) {
               var swatchColorType = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
@@ -380,7 +381,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
               $(fabricsHtmlArray[i]).addClass(colorListClassName);
               $(fabricsHtmlArray[i]).addClass('picked');
               $(fabricsHtmlArray[i]).attr('id', "picked_Fabric_"+currentValues[j].name);
-              $(fabricsHtmlArray[i]).css({
+              $($(fabricsHtmlArray[i])[0].nextSibling).css({
                 border: "4px solid #289DAE"
               })
             }
