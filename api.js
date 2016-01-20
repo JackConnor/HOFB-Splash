@@ -152,6 +152,9 @@ module.exports = function(app){
       if(req.body.status){
         user.status = req.body.status;
       }
+      if(req.body.samplesRequested){
+        user.samplesRequested.push(req.body.samplesRequested);
+      }
       if(req.body.username){
         user.username = req.body.username
       }

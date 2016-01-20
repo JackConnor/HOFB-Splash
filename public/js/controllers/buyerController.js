@@ -7,6 +7,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
     var self = this;
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
+    self.userSamples = [];
     self.collectionCounter = true;///so we only load collections once
     // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
@@ -176,42 +177,56 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           ,url: '/api/buyer/products'
         })
         .then(function(products){
-          console.log(products);
-          var allProjects = products.data;
-          var allProjectsAlreadyCurated = [];
-          for (var i = 0; i < allProjects.length; i++) {
-            if(allProjects[i].status == "curated" || allProjects[i].status == "sampleRequested"){
-              allProjectsAlreadyCurated.push(allProjects[i]);
+          /////look up user, get samples list, push to array, nest everything else inside
+          $http({
+            method: "GET"
+            ,url: "/api/users/"+self.buyerId
+          })
+          .then(function(currentUser){
+            self.currentUser = currentUser.data;
+            console.log(self.currentUser);
+            for (var i = 0; i < self.currentUser.samplesRequested.length; i++) {
+              self.userSamples.push(self.currentUser.samplesRequested[i])
             }
-            self.alreadyCurated = allProjectsAlreadyCurated;
-          }
-          //////add time-since-creation field
-          var collectionName = ["All"];
-          for (var i = 0; i < self.alreadyCurated.length; i++) {
-            function timeSince(){
-              var nowDate = new Date();
-              var timeProj = self.alreadyCurated[i].timestamp;
-              var projYear = timeProj.split('-')[0];
-              var projMonth = timeProj.split('-')[1];
-              var projDay = timeProj.split('-')[2];
-              var yearsSince = nowDate.getFullYear() - projYear;
-              var monthsSince = nowDate.getMonth() - projMonth;
-              var daysSince = nowDate.getDate() - projDay;
-              if(yearsSince > 0){
-                return yearsSince+" years";
+            console.log(self.userSamples);
+            /////////
+            console.log(products);
+            var allProjects = products.data;
+            var allProjectsAlreadyCurated = [];
+            for (var i = 0; i < allProjects.length; i++) {
+              if(allProjects[i].status == "curated" || allProjects[i].status == "sampleRequested"){
+                allProjectsAlreadyCurated.push(allProjects[i]);
               }
-              else if(monthsSince > 0){
-                return monthsSince+" months";
-              }
-              else if(daysSince > 0 ){
-                return daysSince+" days"
-              } else {
-                return "Less Than 1 day";
-              }
+              self.alreadyCurated = allProjectsAlreadyCurated;
             }
-            self.alreadyCurated[i].TimeSinceCreation = timeSince();
-          }
-          callback(arg)
+            //////add time-since-creation field
+            var collectionName = ["All"];
+            for (var i = 0; i < self.alreadyCurated.length; i++) {
+              function timeSince(){
+                var nowDate = new Date();
+                var timeProj = self.alreadyCurated[i].timestamp;
+                var projYear = timeProj.split('-')[0];
+                var projMonth = timeProj.split('-')[1];
+                var projDay = timeProj.split('-')[2];
+                var yearsSince = nowDate.getFullYear() - projYear;
+                var monthsSince = nowDate.getMonth() - projMonth;
+                var daysSince = nowDate.getDate() - projDay;
+                if(yearsSince > 0){
+                  return yearsSince+" years";
+                }
+                else if(monthsSince > 0){
+                  return monthsSince+" months";
+                }
+                else if(daysSince > 0 ){
+                  return daysSince+" days"
+                } else {
+                  return "Less Than 1 day";
+                }
+              }
+              self.alreadyCurated[i].TimeSinceCreation = timeSince();
+            }
+            callback(arg)
+          })
         })
       })
     }
@@ -273,55 +288,38 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
 
     ////function for appending active list
     function loadSampleList(){
-      var dataType = $('.dashDataType');
-      dataType.text('Products which you have purchased');
-      var buyerId = self.buyerId;
-      for (var i = 0; i < self.boughtProducts.length; i++) {
-        function timeSince(){
-          var nowDate = new Date();
-          var timeProj = self.boughtProducts[i].timestamp;
-          var projYear = timeProj.split('-')[0];
-          var projMonth = timeProj.split('-')[1];
-          var projDay = timeProj.split('-')[2];
-          var yearsSince = nowDate.getFullYear() - projYear;
-          var monthsSince = nowDate.getMonth() - projMonth;
-          var daysSince = nowDate.getDate() - projDay;
-          if(yearsSince > 0){
-            return yearsSince+" years";
-          }
-          else if(monthsSince > 0){
-            return monthsSince+" months";
-          }
-          else if(daysSince > 0 ){
-            return daysSince+" days"
-          } else {
-            return "Less Than 1 day";
-          }
+      console.log(self.userSamples);
+      for (var i = 0; i < self.userSamples.length; i++) {
+        if(self.userSamples[i]!=null){
+          $http({
+            method: "GET"
+            ,url: "/api/product/"+self.userSamples[i]
+          })
+          .then(function(productToSample){
+            console.log(productToSample.data);
+            if(productToSample.data != null){
+              $('.bodyview').append(
+                "<div class='curatedCell' id='"+productToSample.data._id+"'>"+
+                  "<div class='curatedCellImage' id='"+productToSample.data._id+"'>"+
+                    "<img src='"+productToSample.data.thumbnails[0]+"' id='"+productToSample.data._id+"'>"+
+                  "</div>"+
+                  "<div class='curatedCellName' id='"+productToSample.data._id+"'>"+
+                    "<p class='curatedTitle' id='"+productToSample.data._id+"'>"+productToSample.data.name+"</p>"+
+                    "<p class='curatedTime' id='"+productToSample.data._id+"'>"+productToSample.data.TimeSinceCreation+"</p>"+
+                  "</div>"+
+                  "<div class='curatedCellOrders'>"+
+                    "Coming Soon"+
+                  "</div>"+
+                  "<div class='curatedCellStatus'>"+
+                    productToSample.data.status+
+                  "</div>"+
+                "</div>"
+              )
+            }
+          })
         }
-        self.boughtProducts[i].TimeSinceCreation = timeSince();
       }
-      for (var i = 0; i < self.boughtProducts.length; i++) {
-        $('.designerDashList').append(
-          "<div class='col-md-4 col-xs-12 projectCell'>"+
-            "<div class='projectCellInner'>"+
-              "<div class='projectCellImageHolder'>"+
-                "<img class='projectCellImage' id='"+self.boughtProducts[i]._id+"'"+
-              "src='"+self.boughtProducts[i].images[0]+"'>"+
-              "</div>"+
-              "<div class='projectCellMinis' id='mini"+i+"'>"+
-              "</div>"+
-              "<div class='projectCellContent'>"+
-                "<span class='glyphicon glyphicon-heart projectCellHeart'></span>"+
-                "<p class='projectCellContentName'>"+self.boughtProducts[i].name+"</p>"+
-                "<p class='projectCellContentTime'>"+self.boughtProducts[i].TimeSinceCreation+"</p>"+
-              "</div>"+
-            "</div>"+
-          "</div>"
-        )
-      }
-      addFavorites(self.buyerId);
-      // moveDashMinis();
-      addFavorites(self.buyerId);
+      ///////add in soon
     }
     function getBoughtList(){
       $http({
@@ -591,10 +589,21 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
                 ,data: {requesterId: self.buyerId, productId: updatedProd.data._id, status: "sampleRequest"}
               })
               .then(function(updatedSample){
+                //////now we need to update the user's array of samples requsted
                 console.log(updatedSample);
-                console.log(self.buyerId);;
+                console.log(self.buyerId);
+                $http({
+                  method: "POST"
+                  ,url: "/api/users/update"
+                  ,data: {userId: self.buyerId, samplesRequested: updatedProd.data._id}
+                })
+                .then(function(updatedUser){
+                  console.log(updatedUser);
+                  self.userSamples.push(updatedProd.data._id);
+                  console.log(self.userSamples);
+                })
                 $('.invisModal').remove();
-                // window.location.reload();
+                window.location.reload();
               })
 
             })
