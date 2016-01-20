@@ -437,7 +437,7 @@ module.exports = function(app){
         product.name = "Demo Product";
         product.status = 'saved';
         product.timestamp = new Date();
-        product.description = "A new product yoooooooooooooo";
+        product.description = "Detailed description of product will be shown here";
         product.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
         product.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png'];
 
