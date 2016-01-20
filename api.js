@@ -447,11 +447,12 @@ module.exports = function(app){
         productSub.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
         productSub.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png'];
 
-        productCurateTab.name = "Submitted Demo Product";
+        productCurateTab.name = "Curated Demo Product";
         productCurateTab.status = 'curated';
         productCurateTab.timestamp = new Date();
         productCurateTab.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
-        productCurateTab.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png'];
+        productCurateTab.thumbnails = ['img/demo/demoImageFrontThumbnail.jpg','img/demo/demoImageSideThumbnail.jpg','img/demo/demoImageBackThumbnail.jpg','img/demo/demoImageFourthThumbnail.jpg'];
+
 
         newUser.email = req.body.email;
         newUser.firstname = req.body.firstname;
@@ -470,13 +471,16 @@ module.exports = function(app){
             console.log(newProductData);
             productSub.save(function(err, newSubmittedProduct){
               console.log(newSubmittedProduct);
-              conversation.productName = newProductData.name;
-              conversation.productId = newProductData._id;
-              conversation.dateCreated = new Date();
-              conversation.comments = [{sender: "Admin", receiver: newUserData._id, date: new Date(), text: "Hello, welcome to your first comment"}];
-              conversation.save(function(err, newConvo){
-                if(err){console.log(err)}
-                res.json(newUserData)
+              productCurateTab.save(function(err, newCuratedProduct){
+                console.log(newCuratedProduct);
+                conversation.productName = newProductData.name;
+                conversation.productId = newProductData._id;
+                conversation.dateCreated = new Date();
+                conversation.comments = [{sender: "Admin", receiver: newUserData._id, date: new Date(), text: "Hello, welcome to your first comment"}];
+                conversation.save(function(err, newConvo){
+                  if(err){console.log(err)}
+                  res.json(newUserData)
+                })
               })
             })
           });
