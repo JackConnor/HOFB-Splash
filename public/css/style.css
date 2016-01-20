@@ -1804,10 +1804,13 @@ input#signUpCheckBox {
 #navBarCircleIcon{
   display: inline-block;
   float: right;
-  padding-right: 22px;
-  font-size: 30px;
-  padding-top: 5px;
-  color:#FDFDFD;
+  padding-right: 31px;
+  margin-top: 5px;
+  padding-top: 0px;
+  color: #232730;
+  background-image: url('/img/badge.png');
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
 }
 #navBarTriangleDown{
   display: inline-block;
