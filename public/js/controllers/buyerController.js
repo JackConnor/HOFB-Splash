@@ -303,8 +303,11 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
                   "<div class='curatedCellImage' id='"+productToSample.data._id+"'>"+
                     "<img src='"+productToSample.data.thumbnails[0]+"' id='"+productToSample.data._id+"'>"+
                   "</div>"+
+                  "<div class='sampleCellOrders'>"+
+                    productToSample.data.name+
+                  "</div>"+
                   "<div class='curatedCellStatus'>"+
-                    productToSample.data.status+
+                    "processing"+
                   "</div>"+
                 "</div>"
               )

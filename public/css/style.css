@@ -2978,6 +2978,16 @@ input#signUpCheckBox {
   font-size: 25px;
 }
 
+.sampleCellOrders {
+  margin-left: 30px;
+  font-size: 17px;
+  font-weight: 400;
+  width: 150px;
+  vertical-align: top;
+  display: inline-block;
+  padding-top: 40px;
+}
+
 .sampleCompany {
   width: 100%;
   height: 40px;
