@@ -452,6 +452,7 @@ module.exports = function(app){
         productCurateTab.status = 'curated';
         productCurateTab.timestamp = new Date();
         productCurateTab.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
+        productCurateTab.thumbnails = ['img/demo/demoImageFrontThumbnail.jpg','img/demo/demoImageSideThumbnail.jpg','img/demo/demoImageBackThumbnail.jpg','img/demo/demoImageFourthThumbnail.jpg'];
 
         newUser.email = req.body.email;
         newUser.firstname = req.body.firstname;
