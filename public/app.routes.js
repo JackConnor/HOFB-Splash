@@ -88,6 +88,13 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'message'
     })
 
+    //////go to all messages
+    .when('/getemails', {
+      templateUrl: 'templates/_getemails.html'
+      ,controller: 'emailCtrl'
+      ,controllerAs: 'email'
+    })
+
     .when('/purchase/:product_id', {
       templateUrl: 'templates/_purchaseOrder.html'
       ,controller: 'buyerCtrl'

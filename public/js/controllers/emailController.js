@@ -42,7 +42,7 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
       newEmail({email: emailAddress, date: date});
     })
 
-    if(window.location.hash.split('/')[1] == 'getemail'){
+    if(window.location.hash.split('/')[1] == 'getemails'){
       $http({
         method: "GET"
         ,url: "/api/emailcaptures"
@@ -62,6 +62,9 @@ var app = angular.module('emailController', ['allusersfactory', 'singleuserfacto
         }
         self.allEmails = unique(allMail);
         console.log(self.allEmails);
+        for (var i = 0; i < self.allEmails.length; i++) {
+          $('.emailContainer').append("<h3>"+self.allEmails[i]+" </h3>");
+        }
 
       })
     }

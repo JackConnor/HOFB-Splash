@@ -1132,32 +1132,86 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       $('.accessoryFilter').remove();
       $(evt.target).append(
         "<div class='fabricFilter'>"+
-          "<div  id='filterSeersucker' class='fabricFilterCell col-xs-4'>"+
+          "<div  id='filterCotton_voile' class='fabricFilterCell col-xs-4'>"+
             "<img src='"+allSwatches.fabrics.cotton_voile.url+"'>" +
           "</div>"+
-          "<div  id='filterPleather' class='fabricFilterCell col-xs-4'>"+
+          "<div  id='filterCotton_lawn' class='fabricFilterCell col-xs-4'>"+
             "<img src='"+allSwatches.fabrics.cotton_lawn.url+"'>" +
           "</div>"+
-          "<div  id='filterDockers' class='fabricFilterCell col-xs-4'>"+
+          "<div  id='filterRayon_challis' class='fabricFilterCell col-xs-4'>"+
             "<img src='"+allSwatches.fabrics.rayon_challis.url+"'>" +
           "</div>"+
-          "<div  id='filterCamo' class='fabricFilterCell col-xs-4'>"+
+          "<div  id='filterDouble_gauze' class='fabricFilterCell col-xs-4'>"+
             "<img src='"+allSwatches.fabrics.double_gauze.url+"'>" +
           "</div>"+
-          "<div  id='filterVeneer' class='fabricFilterCell col-xs-4'>"+
+          "<div  id='filterKnit' class='fabricFilterCell col-xs-4'>"+
             "<img src='"+allSwatches.fabrics.knit.url+"'>" +
           "</div>"+
-          "<div  id='filterNylon' class='fabricFilterCell col-xs-4'>"+
+          "<div  id='filterSilk' class='fabricFilterCell col-xs-4'>"+
             "<img src='"+allSwatches.fabrics.silk.url+"'>" +
           "</div>"+
-          "<div  id='filterLeather' class='fabricFilterCell col-xs-4'>"+
+          "<div  id='filterSatin' class='fabricFilterCell col-xs-4'>"+
             "<img src='"+allSwatches.fabrics.satin.url+"'>" +
           "</div>"+
-          "<div  id='filterCotton' class='fabricFilterCell col-xs-4'>"+
+          "<div  id='filterLinen' class='fabricFilterCell col-xs-4'>"+
             "<img src='"+allSwatches.fabrics.linen.url+"'>" +
           "</div>"+
-          "<div  id='filterDenim' class='fabricFilterCell col-xs-4'>"+
+          "<div  id='filterWool' class='fabricFilterCell col-xs-4'>"+
             "<img src='"+allSwatches.fabrics.wool.url+"'>" +
+          "</div>"+
+        "</div>"
+      )
+      $('.fabricFilter').on('mouseleave', function(){
+        $('.fabricFilter').remove();
+      });
+
+      $('.fabricFilterCell').on('click', function(evt){
+        var fabric = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
+        $('.designerDashList').html('');
+        $('.fabricFilter').remove();
+        if(self.curatedToggleCounter == 'active'){
+          loadFilteredList("fabrics", fabric, self.allProjects);
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          loadFilteredList("fabrics", fabric, self.curatedProjects);
+        }
+      })
+    })
+
+    ////////filter Fabric
+    $('.designerDashAccessories').on('click', function(evt){
+      $('.colorFilter').remove();
+      $('.fabricFilter').remove();
+      $('.seasonFilter').remove();
+      $('.accessoryFilter').remove();
+      $(evt.target).append(
+        "<div class='fabricFilter'>"+
+          "<div  id='filterCotton' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.drawCords.cotton+"'>" +
+          "</div>"+
+          "<div  id='filterNylon' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.drawCords.nylon+"'>" +
+          "</div>"+
+          "<div  id='filterPolyester' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.drawCords.polyester+"'>" +
+          "</div>"+
+          "<div  id='filterButton' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.buttons+"'>" +
+          "</div>"+
+          "<div  id='filterRivets' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.rivets+"'>" +
+          "</div>"+
+          "<div  id='filterEyelets' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.eyelets+"'>" +
+          "</div>"+
+          "<div  id='filterBuckles' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.buckles+"'>" +
+          "</div>"+
+          "<div  id='filterZippers' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.zippers+"'>" +
+          "</div>"+
+          "<div  id='filterHookstoppers' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.hookstoppers+"'>" +
           "</div>"+
         "</div>"
       )

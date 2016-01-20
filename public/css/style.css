@@ -2,6 +2,15 @@
 
 
 /*Segmentation for Jacks css*/
+.accessoryFilterContainer {
+  height: 210px;
+  width: 210px;
+  margin: 20px 0 0 -50px;
+  position: absolute;
+  display: inline-block;
+  z-index: 3;
+}
+
 .actionBox {
     border-top:1px #bbb;
     padding:10px;
