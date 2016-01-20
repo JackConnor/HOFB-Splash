@@ -208,12 +208,12 @@ module.exports = function(app){
     })
   })
 
-  ////get all buyer's tier products
-  // app.get("/api/buyer/products/:tier", function(req, res){
-  //   Product.find({"tier":req.params.tier}, function(err, products){
-  //     res.json(products);
-  //   })
-  // })
+  //get all buyer's tier products
+  app.get("/api/buyer/products", function(req, res){
+    Product.find({}, function(err, products){
+      res.json(products);
+    })
+  })
 
   ////get all curated projects for beta buyers (this si all tiers)
   app.get("/api/buyer/products/curated", function(req, res){

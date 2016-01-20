@@ -932,22 +932,27 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         "</form>"
       )
       ///////check each of the photos individually for to see if it has a photo
-      for (var i = 0; i < self.tempPhotoCache.length; i++) {
+      for (var i = 0; i < 8; i++) {
         console.log(self.tempPhotoCache[i]);
         console.log(typeof self.tempPhotoCache[i]);
         var typeElem = typeof self.tempPhotoCache[i];
         console.log(typeElem);
-        if(self.tempPhotoCache[i] != null && typeElem == object){
+        console.log(self.tempPhotoHTMLCache);
+        if(self.tempPhotoCache[i] != null && typeElem == "object"){
+          console.log(self.tempPhotoHTMLCache[i]);
+          console.log(self.tempPhotoCache[i]);
           console.log('got a file');
-          $('.tempForm').append(self.tempPhotoCache[i]);
+          // $('.tempForm').append(self.tempPhotoHTMLCache[i]);
         }
       }
       $('.tempForm').append(
         "<input name='productId' type='text' value='"+self.currentProduct._id._id+"'>"
       );
       var newProjectInfo = self.currentProduct._id;
+      ////hardcaded works!!!
+      $('.tempForm').append(self.tempPhotoHTMLCache[15]);
       console.log($('.tempForm'));
-      $('.tempForm').submit();
+      // $('.tempForm').submit();
     })
   }
   $('.new_product_send').on('click', function(evt){
