@@ -7,6 +7,9 @@ angular.module('messageController', ['allMessagesFactory', 'checkPwFactory', 'si
     var self = this;
     // window.localStorage.checkPw = false;
     // checkPw.checkPassword();
+    if(window.location.host == "beta" || window.location.host == "hofb"){
+      window.location.hash = "#/designer/loginportal"
+    }
     function allMessagesFunc(setHtmlCallback){
       $http({
         method: "GET"

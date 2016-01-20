@@ -353,7 +353,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       $('.newProductTitle').val(productName);
       $('.newProductDescription').val(productObject.description);
       $('.newProductTagsInput').val(productObject.tags.join(', '))
-      $('.newProductCollectionsInput').val(productObject.collections.join(', '))
+      $('.newProductCollectionsInput').val(productObject.collections.join(' '))
       $('.newProductType').val(productObject.productType);
       $('.newProductVendor').val(productObject.vendor);
       /////add photos
