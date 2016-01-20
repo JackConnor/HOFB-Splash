@@ -442,16 +442,19 @@ module.exports = function(app){
         product.timestamp = new Date();
         product.description = "A new product yoooooooooooooo";
         product.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
+        product.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png'];
 
         productSub.name = "Submitted Demo Product";
         productSub.status = 'submitted to curator';
         productSub.timestamp = new Date();
         productSub.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
+        productSub.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png'];
 
         productCurateTab.name = "Submitted Demo Product";
         productCurateTab.status = 'curated';
         productCurateTab.timestamp = new Date();
         productCurateTab.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453154719/ediufrhbkiikt8asobf1.png'];
+        productCurateTab.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453256609/i5josxyuel5rnvfnimpi.png'];
 
         newUser.email = req.body.email;
         newUser.firstname = req.body.firstname;
