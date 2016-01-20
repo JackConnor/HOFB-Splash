@@ -180,7 +180,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           var allProjects = products.data;
           var allProjectsAlreadyCurated = [];
           for (var i = 0; i < allProjects.length; i++) {
-            if(allProjects[i].status == "curated"){
+            if(allProjects[i].status == "curated" || allProjects[i].status == "sampleRequested"){
               allProjectsAlreadyCurated.push(allProjects[i]);
             }
             self.alreadyCurated = allProjectsAlreadyCurated;
@@ -226,7 +226,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       })
       .then(function(user){
         self.allFavorites = user.data.favorites;
-        console.log(self.allFavorites);
+        //////load based on the curated list
         for (var i = 0; i < self.alreadyCurated.length; i++) {
           $('.designerDashList').append(
             "<div class='col-md-4 col-xs-12 projectCell'>"+
@@ -272,7 +272,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
 
 
     ////function for appending active list
-    function loadBoughtList(){
+    function loadSampleList(){
       var dataType = $('.dashDataType');
       dataType.text('Products which you have purchased');
       var buyerId = self.buyerId;
@@ -427,25 +427,24 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
     //////Toggle Logic/////////
 
     ////see all curated projects
-    function toggleCurated(){
+    function toggleSample(){
+      console.log('about ot lad the sample listing');
       $('.designerDashList').html('');
-      loadBoughtList();
-      $('.sectionTitle').text('listing all bought projects')
+      loadSampleList();
     }
 
     ////see all active projects
     function toggleActive(){
       $('.designerDashList').html('');
       loadInitialList(addHoverToCell);
-      $('.sectionTitle').text('listing all active projects')
     }
 
     /////////////////////////////////////////////////////////
     //////////click functions for toggling designer dashboard
 
     ////////toggle to curated view
-    $('.designerDashCurated').on('click', function(){
-      $('.designerDashCurated').css({
+    $('.designerDashSample').on('click', function(){
+      $('.designerDashSample').css({
         backgroundColor: "#FEFDFA"
         ,borderTop: "1px solid #EFEEEC"
         ,borderLeft: '1px solid #EFEEEC'
@@ -459,13 +458,13 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         ,borderRight: '0px solid #EFEEEC'
       })
       self.curatedToggleCounter = 'curated';
-      toggleCurated();
+      toggleSample();
       addHoverToCell();
     })
 
     ////////toggle to active view
     $('.designerDashActive').on('click', function(){
-      $('.designerDashCurated').css({
+      $('.designerDashSample').css({
         backgroundColor: "#EBEBE9"
         ,borderTop: "0px solid #EFEEEC"
         ,borderLeft: '0px solid #EFEEEC'
@@ -589,12 +588,13 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
               $http({
                 url: '/api/new/sample'
                 ,method: "POST"
-                ,data: {requesterId: self.buyerId, productId: updatedProd.data._id, status: "requestSent"}
+                ,data: {requesterId: self.buyerId, productId: updatedProd.data._id, status: "sampleRequest"}
               })
               .then(function(updatedSample){
                 console.log(updatedSample);
+                console.log(self.buyerId);;
                 $('.invisModal').remove();
-                window.location.reload();
+                // window.location.reload();
               })
 
             })
@@ -888,10 +888,10 @@ function loadCorrectHoverState(){
             loadFilteredList('collections', collectionValue, self.alreadyCurated);
           }
         }
-        else if(self.curatedToggleCounter == 'curated'){
+        else if(self.curatedToggleCounter == 'sample'){
           if(collectionValue == 'All'){
             $('.designerDashList').html("");
-            loadboughtList();
+            loadSampleList();
           }
           else {
             $('.designerDashList').html("");

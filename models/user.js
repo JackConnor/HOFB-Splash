@@ -21,6 +21,7 @@ var userSchema = new Schema({
   ,bio: String
   ,username: String
   ,photo: String
+  ,samplesRequested: Array
 })
 
 userSchema.methods.generateHash = function(password) {
