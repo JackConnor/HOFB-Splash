@@ -273,7 +273,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
         })
       }
       else if(userType == 'designer'){
-        $('.signinToggle').html('retailer');
+        $('.signinToggle').html('retail buyer');
         $('.signinToggleActive').html('retailer login');
         $('.signinToggleActive').on('click', function(){
           window.location.hash = "#/buyer/loginportal";
