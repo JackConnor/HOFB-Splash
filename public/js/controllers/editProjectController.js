@@ -728,6 +728,9 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         )
         changeEffect()
         self.miniPhotoCounter = self.tempPhotoCache.length;
+        console.log(self.tempPhotoCache);
+        console.log(self.tempPhotoCache[self.tempPhotoCache.length - 1]);
+        // console.log(self.tempPhotoCache[self.tempPhotoCache.length - 1].type);
         frontBackSide(self.miniPhotoCounter);
       }
       else{
@@ -902,6 +905,11 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       var status = 'saved'
     }
     /////putting together whole object to send
+    var realImages = function(){
+    for (var i = 0; i < self.tempPhotoCache.length; i++) {
+      console.log(self.tempPhotoCache.attr('type'));
+    }
+    }
     var newProjectObject = {
       projectId: window.location.hash.split('/')[3]
       ,name: name
@@ -917,12 +925,33 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       ,status: status
     }
     console.log(newProjectObject);
-    editProjectToDb(newProjectObject, function(){
-      window.location.hash = "#/designer/dashboard";
+    editProjectToDb(newProjectObject, function(blah){
+      console.log('yooooo');
+      $(".bodyview").append(
+        "<form class='tempForm' action='/api/pictures' method='POST' enctype='multipart/form-data'>"+
+        "</form>"
+      )
+      ///////check each of the photos individually for to see if it has a photo
+      for (var i = 0; i < self.tempPhotoCache.length; i++) {
+        console.log(self.tempPhotoCache[i]);
+        console.log(typeof self.tempPhotoCache[i]);
+        var typeElem = typeof self.tempPhotoCache[i];
+        console.log(typeElem);
+        if(self.tempPhotoCache[i] != null && typeElem == object){
+          console.log('got a file');
+          $('.tempForm').append(self.tempPhotoCache[i]);
+        }
+      }
+      $('.tempForm').append(
+        "<input name='productId' type='text' value='"+self.currentProduct._id._id+"'>"
+      );
+      var newProjectInfo = self.currentProduct._id;
+      console.log($('.tempForm'));
+      $('.tempForm').submit();
     })
   }
   $('.new_product_send').on('click', function(evt){
-    if(self.tempPhotoHTMLCache.length < 4){
+    if(self.tempPhotoCache.length < 4){
       alert('Must include at least four photos from four front, back, and both sides to save a project');
       $('.invisModal').remove();
       return;
@@ -1263,7 +1292,12 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         }
         else {
           toggleDeleteHover();
-          $('.newProductCurrentImage').attr('src', self.currentProduct.images[self.currentProduct.images.length - 1]);
+          if(self.currentProduct.images[self.currentProduct.images.length - 1] != null){
+            $('.newProductCurrentImage').attr('src', self.currentProduct.images[self.currentProduct.images.length - 1]);
+          }
+          else{
+            $('.newProductCurrentImage').attr('src', self.currentProduct.images[self.currentProduct.images.length - 2]);
+          }
           $('#i_file').css({
             height: ""
             ,width: '50px'

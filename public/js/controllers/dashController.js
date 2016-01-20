@@ -1230,34 +1230,36 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       if(self.collectionCounter){
         console.log('adding');
         console.log(collections);
-        for (var i = 0; i < collections.length; i++) {
-          if(collections[i] != ''){
-            $('.designerDashCollectionDropdown').append(
-              '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
-                collections[i]+
-              "</div>"
-            )
-            if(i == 0){
-              $('#'+collections[i]).css({
-                backgroundColor: 'black'
-                ,color: 'white'
-              })
-              $('#'+collections[i]).addClass('clicked');
-              $('.designerDashCollectionCell').on('mouseenter', function(evt){
-                if(!$(evt.target).hasClass('clicked')){
-                  $(evt.target).css({
-                      backgroundColor: '#BDBDBD'
-                  })
-                }
-              })
-              $('.designerDashCollectionCell').on('mouseleave', function(evt){
-                if(!$(evt.target).hasClass('clicked')){
-                  $(evt.target).css({
-                    backgroundColor: '#F9F7F5'
-                    ,color: "black"
-                  })
-                }
-              })
+        if(collections){
+          for (var i = 0; i < collections.length; i++) {
+            if(collections[i] != ''){
+              $('.designerDashCollectionDropdown').append(
+                '<div class="designerDashCollectionCell" id="'+collections[i]+'">'+
+                  collections[i]+
+                "</div>"
+              )
+              if(i == 0){
+                $('#'+collections[i]).css({
+                  backgroundColor: 'black'
+                  ,color: 'white'
+                })
+                $('#'+collections[i]).addClass('clicked');
+                $('.designerDashCollectionCell').on('mouseenter', function(evt){
+                  if(!$(evt.target).hasClass('clicked')){
+                    $(evt.target).css({
+                        backgroundColor: '#BDBDBD'
+                    })
+                  }
+                })
+                $('.designerDashCollectionCell').on('mouseleave', function(evt){
+                  if(!$(evt.target).hasClass('clicked')){
+                    $(evt.target).css({
+                      backgroundColor: '#F9F7F5'
+                      ,color: "black"
+                    })
+                  }
+                })
+              }
             }
           }
         }

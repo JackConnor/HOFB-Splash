@@ -14,9 +14,7 @@ var multer         = require('multer');
 var upload         = multer({ dest: './uploads/'});
 var cloudinary     = require('cloudinary');
 var https = require('https');
-console.log(https);
 var fs = require('fs');
-console.log(fs);
 
 cloudinary.config({
   cloud_name: 'hofb'
@@ -257,7 +255,6 @@ module.exports = function(app){
   /////update a product
   app.post('/api/product/update', function(req, res){
     console.log(req.body);
-    console.log(typeof(req.body.collections));
     Product.findOne({"_id":req.body.projectId}, function(err, product){
       if(err){console.log(err)}
       if (req.body.name) {
@@ -552,6 +549,17 @@ module.exports = function(app){
   })
 
   app.post('/api/pictures', upload.array('files', 8), function(req,res){
+    console.log('yoyoyoyo');
+    console.log('yoyoyoyo');
+    console.log('yoyoyoyo');
+    console.log('yoyoyoyo');
+    console.log('yoyoyoyo');
+    console.log('yoyoyoyo');
+    console.log('yoyoyoyo');
+    console.log('yoyoyoyo');
+    console.log(req);
+    console.log(req.files);
+    console.log(req.body);
     for (var i = 0; i < req.files.length; i++) {
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination

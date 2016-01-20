@@ -694,7 +694,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           self.miniPhotoCounter = sourceNum[0];
         }
         $(".newProductCurrentImage").attr('src', source);
-        highlightMini();  
+        highlightMini();
       }
     }
     $('.newProductMiniImageImage').on('click', changeMiniPhoto)
