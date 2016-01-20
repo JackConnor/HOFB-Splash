@@ -298,21 +298,25 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           .then(function(productToSample){
             console.log(productToSample.data);
             if(productToSample.data != null){
-              var source = productToSample.data.thumbnails[0];
+              var source = productToSample.data.images[0];
               console.log(source);
               $('.designerDashList').append(
                 "<div class='curatedCell' id='"+productToSample.data._id+"'>"+
-                  "<div class='curatedCellImage' id='"+productToSample.data._id+"'>"+
+                  "<div class='sampleCellImage' id='"+productToSample.data._id+"'>"+
                     "<img src='"+source+"' id='"+productToSample.data._id+"'>"+
                   "</div>"+
                   "<div class='sampleCellOrders'>"+
                     productToSample.data.name+
+                  "</div>"+
+                  "<div class='samplePlaceOrder'>"+
+                    "PURCHASE ORDER"+
                   "</div>"+
                   "<div class='curatedCellStatus'>"+
                     "processing"+
                   "</div>"+
                 "</div>"
               )
+              clickPurchaseModal($('.samplePlaceOrder'));
             }
           })
         }
@@ -534,7 +538,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           window.location.hash = "#/view/product/"+productId;
         })
         ////activate purchase modal on click
-        clickPurchaseModal();
+        clickPurchaseModal($('.projectCellButtonOrder'));
         $('.projectCellButtonSample').on('click', function(evt){
           var productId = $(evt.target)[0].parentNode.id;
           console.log(productId);
@@ -913,13 +917,12 @@ function loadCorrectHoverState(){
 
 
     //////function to load modal which allows buyer to make a purchase
-    function clickPurchaseModal(){
-      $('.projectCellButtonOrder').on('click', function(evt){
+    function clickPurchaseModal($element){
+      $element.on('click', function(evt){
         $('.bodyview').append(
           "<div class='purchaseModal'>"+
             '<div class="purchaseHolder">'+
-              '<div class="purchaseCloseModal">'+
-                'X'+
+              '<div class="purchaseCloseModal fa fa-times">'+
               "</div>"+
               '<div class="purchaseStatistics">'+
                 '<div class="col-xs-3 purchaseStat">'+
@@ -1047,12 +1050,35 @@ function loadCorrectHoverState(){
             '</div>'+
           "</div>"
         )
+        $('.purchaseOrderButton').on('mouseenter', function(){
+          $('.purchaseOrderButton').css({
+            border: "5px solid #999"
+            ,opacity: 0.4
+            ,fontSize: '19px'
+          })
+          $('.purchaseOrderButton').html("COMING SOON");
+        })
+        $('.purchaseOrderButton').on('mouseleave', function(){
+          $('.purchaseOrderButton').css({
+            border: ""
+            ,opacity: 1
+            ,fontSize: '24px'
+          })
+          $('.purchaseOrderButton').html("ORDER");
+        })
         activatePurchaseSliders();
         var prodId = $($(evt.target)[0].parentNode)[0].id;
         addColorsToOrder(prodId);
         console.log($($(evt.target)[0].parentNode)[0].id);
         $('.purchaseCloseModal').on('click', function(){
           $('.purchaseModal').remove();
+        })
+        $('.purchaseModal').on('click', function(evt){
+          console.log('yoyoy');
+          console.log($(evt.target));
+          if($(evt.target)[0].classList[0] == "purchaseModal"){
+            $('.purchaseModal').remove();
+          }
         })
         /////////function to collect and submit purchase
 

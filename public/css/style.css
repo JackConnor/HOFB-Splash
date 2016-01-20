@@ -655,6 +655,7 @@
   background-color: #EFE9EB;
   margin-top: 3px;
   cursor:pointer;
+  border: 1px solid silver;
 }
 
 .curatedCellImage {
@@ -2816,7 +2817,8 @@ input#signUpCheckBox {
   font-size: 25px;
   float: right;
   position: relative;
-  margin-right: 20px;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
 .purchaseColor {
@@ -2979,6 +2981,15 @@ input#signUpCheckBox {
   font-size: 25px;
 }
 
+.sampleCellImage {
+  display: inline-block;
+  height: 100%;
+}
+
+.sampleCellImage img {
+  height: 100%;
+}
+
 .sampleCellOrders {
   margin-left: 30px;
   font-size: 17px;
@@ -3044,6 +3055,25 @@ input#signUpCheckBox {
   width: 100%;
   height: 40px;
   font-size: 25px;
+}
+
+.samplePlaceOrder {
+  width: 200px;
+  height: 42px;
+  background-color: #3cb878;
+  margin-top: 20px;
+  margin-left: 150px;
+  color: white;
+  border: 1px solid #007236;
+  border-radius: 3px;
+  padding-top: 7px;
+  font-family: 'Oxygen', sans-serif;
+  cursor:pointer;
+  font-size: 17px;
+  border: 1px solid #598527;
+  text-align: center;
+  top: 0;
+  display: inline-block;
 }
 
 .sampleRequestAboutHofb {
@@ -3843,6 +3873,8 @@ textarea#styled {
 .viewProductImageMain {
     width: 450px;
     height: 562.5px;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
 }
 
 .viewProductLeftHolder {
