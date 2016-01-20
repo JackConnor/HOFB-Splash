@@ -714,8 +714,8 @@ module.exports = function(app){
         ,html:
         "<div>"+
           "<img src='http://i.imgur.com/f5T6U5B.png' style='width:250px'>"+
-          "<h2 style='color:#737373'>Welcome to HOFB beta.<br><br>Thank you for signing up to use HOFB portal and we appreciate your patience. We have been hard at work building beautiful and necessary useful fashion technology products for independent fashion designers and retailers. <br><br>In building HOFB interactive technology to make your fashion life easier, we need your feedback during this beta to roll out additional features in a timely manner.. All feedback is valuable to our continuing development. <br><br> Enjoy!<h2 style='color:#293d3d'>HOFB</h2><h3 style='color:#293d3d'>Los Angeles</h3>."+
-          // "<h2>Signup Here:"+signupLink+"</h2>"+
+          "<h2 style='color:#737373'>Welcome to HOFB beta.<br><br>Thank you for signing up to use HOFB portal and we appreciate your patience. We have been hard at work building beautiful and necessary useful fashion technology products for independent fashion designers and retailers. <br><br>In building HOFB interactive technology to make your fashion life easier, we need your feedback during this beta to roll out additional features in a timely manner.. All feedback is valuable to our continuing development. <br><br> Enjoy!<h2 style='color:#293d3d'>HOFB</h2><h3 style='color:#293d3d'>Los Angeles</h3>"+
+          "<h2>Signup Here:"+signupLink+"</h2>"+
         "</div>"
         ,subject: "HOFB Signup"
         ,to:[{

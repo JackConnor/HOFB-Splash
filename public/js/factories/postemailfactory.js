@@ -16,11 +16,12 @@ angular.module('newemailfactory', [])
         $http({
           method: "POST"
           ,url: "/api/email/betasignup"
-          ,data: {email: email.data.email, signupLink: 'beta.hofb.com/#/designer/loginportal/'+email.data.email}
+          ,data: {email: email.data.email, signupLink: 'beta.hofb.com/#/'}
         })
         .then(function(email){
           console.log(email);
-          window.location.reload();
+          window.location.href = "http://beta.hofb.com/#/"
+          // window.location.reload();
         })
       })
     }
