@@ -3808,6 +3808,8 @@ textarea#styled {
 
  .viewMiniImage {
    width: 100%;
+   border-top: 1px solid #999999;
+   border-bottom: 1px solid #999999;
  }
 
 .viewPictureImageIcon {

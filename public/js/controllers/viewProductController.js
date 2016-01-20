@@ -220,6 +220,14 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
         var bigSource = $(evt.target)[0].id;
         console.log(bigSource);
         $(".viewProductImageMain").attr('src', bigSource);
+        for (var i = 0; i < $('.viewMiniImage').length; i++) {
+          $($('.viewMiniImage')[i]).css({
+            outline: ''
+          })
+        }
+        $(evt.target).css({
+          outline: "3px solid #999999"
+        })
       })
     }
     //////navbar click events
@@ -261,12 +269,6 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     /////end of navbar dropdown logic/////////////
     ////////////////////////////////////////////////
 
-    ///viewUserProfile button functionality
-
-    // $('.viewUserProfile').on('click', function(){
-    //   window.localStorage.hofbToken = "";
-    //   window.location.hash = "#/signin"
-    // })
     $('.tempMessagesImage').on('mouseenter', function(){
       console.log('entered');
       $(this).css({
