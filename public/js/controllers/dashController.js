@@ -384,7 +384,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
         $('.designerDashList').append(
           "<div class='curatedCell' id='"+self.curatedProjects[i]._id+"'>"+
             "<div class='curatedCellImage' id='"+self.curatedProjects[i]._id+"'>"+
-              "<img src='"+self.curatedProjects[i].thumbnails[0]+"'>"+
+              "<img src='"+self.curatedProjects[i].thumbnails[0]+"' id='"+self.curatedProjects[i]._id+"'>"+
             "</div>"+
             "<div class='curatedCellName' id='"+self.curatedProjects[i]._id+"'>"+
               "<p class='curatedTitle' id='"+self.curatedProjects[i]._id+"'>"+self.curatedProjects[i].name+"</p>"+

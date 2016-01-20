@@ -40,39 +40,39 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       var status = window.location.hash.split('/')[1];
       var validatedEmail = checkEmail(email);
 
-        if (validatedEmail == false) {
+      if (validatedEmail == false) {
         alert("You must enter a valid email address.");
-       }
-        if (validatedEmail == true){
-          if(email != '' && firstName != '' && lastName != '' && password != '' && rePassword != '' && checked){
-            ///////throught first layer to check that all firelds were filled
-            if(checkPassword(password) && checkPassword(rePassword) && (password == rePassword)){
-              ////checked that passwords matched and passed our password filters
-              $http({
-                method: "POST"
-                ,url: "/api/signup"
-                ,data: {email: email, password: $('.signupPassword').val(), firstname: firstName, lastname: lastName, status: status}
-              })
-              .then(function(newUser){
+      }
+       else if (validatedEmail == true){
+        if(email != '' && firstName != '' && lastName != '' && password != '' && rePassword != '' && checked){
+          ///////throught first layer to check that all firelds were filled
+          if(checkPassword(password) && checkPassword(rePassword) && (password == rePassword)){
+            ////checked that passwords matched and passed our password filters
+            $http({
+              method: "POST"
+              ,url: "/api/signup"
+              ,data: {email: email, password: $('.signupPassword').val(), firstname: firstName, lastname: lastName, status: status}
+            })
+            .then(function(newUser){
+              console.log(newUser);
+              if(newUser.data == "user exists"){
+                alert('That email is already in our system, please try a new email');
+                window.location.reload();
+              }
+              else{
                 console.log(newUser);
-                if(newUser.data == "user exists"){
-                  alert('That email is already in our system, please try a new email');
-                  window.location.reload();
-                }
-                else{
-                  console.log(newUser);
-                  signinUser(newUser.data.email, $('.signupPassword').val());
-                }
-              })
-            }
-            else {
-              alert('whoops, looks like those two passwords dont match')
-            }
+                signinUser(newUser.data.email, $('.signupPassword').val());
+              }
+            })
+          }
+          else {
+            alert('whoops, looks like those two passwords dont match')
           }
         }
         else{
-            alert("You missed a field, please take a second look, thank you")
-          }
+          alert("You missed a field, please take a second look, thank you")
+        }
+      }
     }
     ///////////event to trigger a user signup
     $('.signupSubmit').on('click', function(){
