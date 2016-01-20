@@ -873,12 +873,13 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     var description = $('.newProductDescription').val();
     var fabricsFunc = function(){
       var allPicked = $(".picked");
+      console.log(allPicked);
       var fabricsArray = [];
       for (var i = 0; i < allPicked.length; i++) {
         if(allPicked[i].id.split('_')[1] == 'Fabric'){
           var name = allPicked[i].id.split('_').slice(2, 100).join("_");
-          fabricsArray.push({name: name,  colors: []})
-          var colorString = $(allPicked[i])[0].classList[3];
+          fabricsArray.push({name: name,  colors: []});
+          var colorString = $(allPicked[i])[0].classList[5];
           var colorArray = colorString.split('_').slice(1, 100);
         }
         fabricsArray[i].colors = colorArray;
