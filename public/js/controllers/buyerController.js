@@ -298,10 +298,12 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           .then(function(productToSample){
             console.log(productToSample.data);
             if(productToSample.data != null){
+              var source = productToSample.data.thumbnails[0];
+              console.log(source);
               $('.designerDashList').append(
                 "<div class='curatedCell' id='"+productToSample.data._id+"'>"+
                   "<div class='curatedCellImage' id='"+productToSample.data._id+"'>"+
-                    "<img src='"+productToSample.data.thumbnails[0]+"' id='"+productToSample.data._id+"'>"+
+                    "<img src='"+source+"' id='"+productToSample.data._id+"'>"+
                   "</div>"+
                   "<div class='sampleCellOrders'>"+
                     productToSample.data.name+
