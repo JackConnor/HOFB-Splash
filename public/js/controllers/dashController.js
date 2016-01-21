@@ -515,9 +515,13 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
                     ,data: {sampleProducer: sampleProducer, status: "inProduction", productId: productId}
                   })
                   .then(function(updatedSample){
-                    $('.invisModal').remove();
-                    window.location.reload();
-
+                    if(updatedSample.data == 'no product'){
+                      alert('there was a problem, please try back later');
+                    }
+                    else {
+                      $('.invisModal').remove();
+                      window.location.reload();  
+                    }
                   })
                 })
               }
