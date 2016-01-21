@@ -537,26 +537,31 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               else if($('.sampleRequestHofb').prop('checked') == true){
                 ////////////we're making it
                 var productId = this.id;
-                $http({
-                  method: "POST"
-                  ,url: "/api/product/update"
-                  ,data: {projectId: productId, status: "sampleSent"}
-                })
-                .then(function(updatedProduct){
+                var productName = $($('.curatedTitle')[1]).text();
+                console.log(productName);
+                console.log(productId);
+                if(productName != "Curated Sample Product"){
                   $http({
                     method: "POST"
-                    ,url: "/api/update/sample"
-                    ,data: {sampleProducer: "HOFB", status: "inProduction", productId: productId}
+                    ,url: "/api/product/update"
+                    ,data: {projectId: productId, status: "sampleSent"}
                   })
-                  .then(function(updatedSample){
-                    $('.invisModal').remove();
-                    window.location.reload();
+                  .then(function(updatedProduct){
+                    $http({
+                      method: "POST"
+                      ,url: "/api/update/sample"
+                      ,data: {sampleProducer: "HOFB", status: "inProduction", productId: productId}
+                    })
+                    .then(function(updatedSample){
+                      $('.invisModal').remove();
+                      window.location.reload();
 
+                    })
                   })
-                })
-              }
-              else {
-                alert("You need to select who will create the sample, just click on one of the buttons below");
+                }
+                else {
+                  alert("You need to select who will create the sample, just click on one of the buttons below");
+                }
               }
             })
             ///////function to make sure only one radio button is checked at a time
