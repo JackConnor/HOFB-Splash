@@ -120,6 +120,13 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'userProfile'
     })
     /////////default to home
+
+    //Get single user profile info
+    .when('/tos', {
+      templateUrl: 'templates/_tos.html'
+      ,controller: 'tosCtrl'
+      ,controllerAs: 'tos'
+    })
     .otherwise('/');
 
   ////////and of api routes///////
