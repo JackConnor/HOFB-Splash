@@ -501,29 +501,38 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
               if($('.sampleRequestMe').prop('checked') == true){
                 ///////they're making it themselves
                 var productId = this.id;
+                var productName = $($('.curatedTitle')[1]).text();
+                console.log(productName);
                 console.log(productId);
-                $http({
-                  method: "POST"
-                  ,url: "/api/product/update"
-                  ,data: {projectId: productId, status: "sampleSent"}
-                })
-                .then(function(updatedProduct){
-                  var sampleProducer = self.decodedToken.data.name;
+                if(productName != "Curated Sample Product"){
                   $http({
                     method: "POST"
-                    ,url: "/api/update/sample"
-                    ,data: {sampleProducer: sampleProducer, status: "inProduction", productId: productId}
+                    ,url: "/api/product/update"
+                    ,data: {projectId: productId, status: "sampleSent"}
                   })
-                  .then(function(updatedSample){
-                    if(updatedSample.data == 'no product'){
-                      alert('there was a problem, please try back later');
-                    }
-                    else {
-                      $('.invisModal').remove();
-                      window.location.reload();  
-                    }
+                  .then(function(updatedProduct){
+                    var sampleProducer = self.decodedToken.data.name;
+                    $http({
+                      method: "POST"
+                      ,url: "/api/update/sample"
+                      ,data: {sampleProducer: sampleProducer, status: "inProduction", productId: productId}
+                    })
+                    .then(function(updatedSample){
+                      if(updatedSample.data == 'no product'){
+                        alert('there was a problem, make sure this is not an example product, and try again');
+                        setTimeout($('.invisModal').remove(), 3000);
+                      }
+                      else {
+                        $('.invisModal').remove();
+                        window.location.reload();
+                      }
+                    })
                   })
-                })
+                }
+                else {
+                  alert('This is a demo product, but please make some real products of your own to submit to our curators!')
+                  $('.invisModal').remove();
+                }
               }
               else if($('.sampleRequestHofb').prop('checked') == true){
                 ////////////we're making it
