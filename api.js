@@ -434,6 +434,7 @@ module.exports = function(app){
         var product = new Product();
         var productSub = new Product();
         var productCurateTab = new Product();
+        var productCurateSample = new Product();
         var newUser = new User();
         var conversation = new Conversation();
 
@@ -456,32 +457,50 @@ module.exports = function(app){
         productCurateTab.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
         productCurateTab.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
 
+        productCurateSample.name = "Curated Sample Product";
+        productCurateSample.status = 'sampleRequested';
+        productCurateSample.timestamp = new Date();
+        productCurateSample.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
+        productCurateSample.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
+
         newUser.email = req.body.email;
         newUser.firstname = req.body.firstname;
         newUser.lastname = req.body.lastname;
         newUser.passwordDigest = newUser.generateHash( req.body.password );
         newUser.products.push(product);
         newUser.status = req.body.status;
+        newUser.samplesRequested.push()
         newUser.save(function(err, newUserData){
           console.log('testing');
           console.log(newUserData);
           product.userId = newUserData._id;
           productSub.userId = newUserData._id;
           productCurateTab.userId = newUserData._id;
+          productCurateSample.userId = newUserData._id;
 
           product.save(function(err, newProductData){
             console.log(newProductData);
             productSub.save(function(err, newSubmittedProduct){
               console.log(newSubmittedProduct);
               productCurateTab.save(function(err, newCuratedProduct){
-                console.log(newCuratedProduct);
-                conversation.productName = newProductData.name;
-                conversation.productId = newProductData._id;
-                conversation.dateCreated = new Date();
-                conversation.comments = [{sender: "Admin", receiver: newUserData._id, date: new Date(), text: "Hello, welcome to your first comment"}];
-                conversation.save(function(err, newConvo){
-                  if(err){console.log(err)}
-                  res.json(newUserData)
+                productCurateSample.save(function(err, newCurateSample){
+                  console.log(newCurateSample);
+                  User.findOne( { email: req.body.email }, function(err, user){
+                    console.log(user);
+                    user.samplesRequested.push(newCurateSample._id)
+                    user.save(function(err, user){
+                      console.log(user);
+                      console.log(newCuratedProduct);
+                      conversation.productName = newProductData.name;
+                      conversation.productId = newProductData._id;
+                      conversation.dateCreated = new Date();
+                      conversation.comments = [{sender: "Admin", receiver: newUserData._id, date: new Date(), text: "Hello, welcome to your first comment"}];
+                      conversation.save(function(err, newConvo){
+                        if(err){console.log(err)}
+                        res.json(newUserData)
+                      })
+                    })
+                  })
                 })
               })
             })

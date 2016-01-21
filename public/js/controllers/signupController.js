@@ -162,6 +162,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
           window.localStorage.hofbTourOff = false;
           window.location.hash = newUrl;
           window.location.reload();
+          window.location.reload();
         })
       });
     }
