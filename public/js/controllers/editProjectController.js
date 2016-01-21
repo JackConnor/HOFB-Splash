@@ -360,7 +360,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       var addImgsFunc = function(){
         console.log(productObject);
         if(productObject.images.length < 5){
-          frontBackSide(productObject.images.length);
+          // frontBackSide(productObject.images.length);
           $('.newProductCurrentImage').attr('src', '')
         }
         // $('.newProductCurrentImage').attr('src', productObject.images[0])
@@ -371,6 +371,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
           self.tempPhotoHTMLCache.push($('#newProductMiniImage'+i));
         }
         console.log(self.miniPhotoCounter);
+        // frontBackSide(self.miniPhotoCounter);
       }
       addImgsFunc();
       //////functions for addding swatches to the html once its' loaded
@@ -731,7 +732,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         console.log(self.tempPhotoCache);
         console.log(self.tempPhotoCache[self.tempPhotoCache.length - 1]);
         // console.log(self.tempPhotoCache[self.tempPhotoCache.length - 1].type);
-        frontBackSide(self.miniPhotoCounter);
+        // frontBackSide(self.miniPhotoCounter);
       }
       else{
         alert('better delete some photos if you want to add more')
@@ -763,7 +764,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       }
       var source = sourceArray[0];
       self.miniPhotoCounter = sourceNum[0];
-      frontBackSide(self.miniPhotoCounter);
+      // frontBackSide(self.miniPhotoCounter);
       highlightMini();
     }
   }
@@ -786,7 +787,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
     console.log(self.tempPhotoHTMLCache);
     $('.newProductCurrentImage').attr('src', self.tempPhotoCache[self.tempPhotoCache.length-1]);
     self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
-    frontBackSide(self.miniPhotoCounter);
+    // frontBackSide(self.miniPhotoCounter);
     ///////now we need to reorder all of the remaining mini photos so that there are no spaces
     var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
     for(var i = 0; i < allMiniPhotosLength; i++) {
@@ -814,7 +815,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         var source = $(event.target)[0].src;
         var elId = $(event.target).attr('id');
         self.miniPhotoCounter = elId.split('').pop();
-        frontBackSide(self.miniPhotoCounter);
+        // frontBackSide(self.miniPhotoCounter);
       } else {
         var sourceArray = [];
         var sourceNum = [];
@@ -852,7 +853,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       }
     }
     self.miniPhotoCounter = sourceNum[0];
-    frontBackSide(self.miniPhotoCounter);
+    // frontBackSide(self.miniPhotoCounter);
     highlightMini();
   };
   setTimeout(miniPhotoCounterFunc, 1000);
@@ -1262,91 +1263,92 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
 
       /////////////////////////////////////////////////////////
       //////////functions to add the front-side-back html to the page as a user uploads photos
-      function frontBackSide(counter){
-        ////make sure there is no previous html from this guide before we precede
-        $('.fontChallenge').remove();
-        $('.sideBanner').remove();
-        /////html we will be adding for each of or four first photos;
-        function addHtmlGuide(view, imageCount){
-          var htmlToPrepend =
-                  '<div class="fontChallenge">'+
-                    '<div class="imageBox">'+
-                      '<i class="fa fa-file-image-o"></i>'+
-                    '</div>'+
-                    '<div class="plusBox">'+
-                      '<i class="fa fa-plus"></i>'+
-                    '</div>'+
-                    "<div class='sideText'>Image Upload</div>"+
-                    "<div class='imageUploadInfoEdit'>"+
-                      "Suggested upload photo size: 561px by 700px"+
-                    "</div>"+
-                  "</div>"+
-                  "<div class='sideBanner'>"+
-                    "<div class='bannerTop'>"+
-                      "Facing "+ view +
-                    "</div>"+
-                    "<div class='bannerBottom'>"+
-                      imageCount+" of 4 Required Images"+
-                    "</div>"+
-                  '</div>'
-          ////now we run the function
-          $(".newProductImageHolder").prepend(htmlToPrepend);
-          $('#i_file').css({
-            height: "120px"
-            ,width: '89px'
-            ,marginLeft: '-45%'
-            ,marginTop: 0
-          })
-        }
-
-        console.log('in the guide function');
-        console.log(counter);
-        if(counter == 0){
-          $('.newProductCurrentImage').attr('src', '');
-          var view = "Forward";
-          var imageCount = self.miniPhotoCounter + 1;
-          addHtmlGuide(view, imageCount);
-          toggleDeleteHover();
-        }
-        else if(counter == 1){
-          $('.newProductCurrentImage').attr('src', '');
-          var view = "Left Side";
-          var imageCount = self.miniPhotoCounter + 1;
-          addHtmlGuide(view, imageCount);
-          toggleDeleteHover();
-        }
-        else if(counter == 2){
-          $('.newProductCurrentImage').attr('src', '');
-          var view = "Right Side";
-          var imageCount = self.miniPhotoCounter + 1;
-          addHtmlGuide(view, imageCount);
-          toggleDeleteHover();
-
-        }
-        else if(counter == 3){
-          $('.newProductCurrentImage').attr('src', '');
-          var view = "Back";
-          var imageCount = self.miniPhotoCounter + 1;
-          addHtmlGuide(view, imageCount);
-          toggleDeleteHover();
-        }
-        else {
-          toggleDeleteHover();
-          if(self.currentProduct.images[self.currentProduct.images.length - 1] != null){
-            $('.newProductCurrentImage').attr('src', self.currentProduct.images[self.currentProduct.images.length - 1]);
-          }
-          else{
-            $('.newProductCurrentImage').attr('src', self.currentProduct.images[self.currentProduct.images.length - 2]);
-          }
-          $('#i_file').css({
-            height: ""
-            ,width: '50px'
-            ,marginLeft: '-38px'
-            ,marginTop: 0
-          })
-          return null;
-        }
-      }
+      // function frontBackSide(counter){
+      //   ////make sure there is no previous html from this guide before we precede
+      //   $('.fontChallenge').remove();
+      //   $('.sideBanner').remove();
+      //   /////html we will be adding for each of or four first photos;
+      //   function addHtmlGuide(view, imageCount){
+      //     var htmlToPrepend =
+      //             '<div class="fontChallenge">'+
+      //               '<div class="imageBox">'+
+      //                 '<i class="fa fa-file-image-o"></i>'+
+      //               '</div>'+
+      //               '<div class="plusBox">'+
+      //                 '<i class="fa fa-plus"></i>'+
+      //               '</div>'+
+      //               "<div class='sideText'>Image Upload</div>"+
+      //               "<div class='imageUploadInfoEdit'>"+
+      //                 "Suggested upload photo size: 561px by 700px"+
+      //               "</div>"+
+      //             "</div>"+
+      //             "<div class='sideBanner'>"+
+      //               "<div class='bannerTop'>"+
+      //                 "Facing "+ view +
+      //               "</div>"+
+      //               "<div class='bannerBottom'>"+
+      //                 imageCount+" of 4 Required Images"+
+      //               "</div>"+
+      //             '</div>'
+      //     ////now we run the function
+      //     $(".newProductImageHolder").prepend(htmlToPrepend);
+      //     $('#i_file').css({
+      //       height: "120px"
+      //       ,width: '89px'
+      //       ,marginLeft: '-45%'
+      //       ,marginTop: 0
+      //     })
+      //   }
+      //
+      //   console.log('in the guide function');
+      //   console.log(counter);
+      //   var counter = self.miniPhotoCounter;
+      //   if(counter == 0){
+      //     $('.newProductCurrentImage').attr('src', '');
+      //     var view = "Forward";
+      //     var imageCount = self.miniPhotoCounter + 1;
+      //     addHtmlGuide(view, imageCount);
+      //     toggleDeleteHover();
+      //   }
+      //   else if(counter == 1){
+      //     $('.newProductCurrentImage').attr('src', '');
+      //     var view = "Left Side";
+      //     var imageCount = self.miniPhotoCounter + 1;
+      //     addHtmlGuide(view, imageCount);
+      //     toggleDeleteHover();
+      //   }
+      //   else if(counter == 2){
+      //     $('.newProductCurrentImage').attr('src', '');
+      //     var view = "Right Side";
+      //     var imageCount = self.miniPhotoCounter + 1;
+      //     addHtmlGuide(view, imageCount);
+      //     toggleDeleteHover();
+      //
+      //   }
+      //   else if(counter == 3){
+      //     $('.newProductCurrentImage').attr('src', '');
+      //     var view = "Back";
+      //     var imageCount = self.miniPhotoCounter + 1;
+      //     addHtmlGuide(view, imageCount);
+      //     toggleDeleteHover();
+      //   }
+      //   else {
+      //     toggleDeleteHover();
+      //     if(self.currentProduct.images[self.currentProduct.images.length - 1] != null){
+      //       $('.newProductCurrentImage').attr('src', self.currentProduct.images[self.currentProduct.images.length - 1]);
+      //     }
+      //     else{
+      //       $('.newProductCurrentImage').attr('src', self.currentProduct.images[self.currentProduct.images.length - 2]);
+      //     }
+      //     $('#i_file').css({
+      //       height: ""
+      //       ,width: '50px'
+      //       ,marginLeft: '-38px'
+      //       ,marginTop: 0
+      //     })
+      //     return null;
+      //   }
+      // }
       /////////////////////////////////////////////////////////
       //////////end functions to add the front-side-back html
 
