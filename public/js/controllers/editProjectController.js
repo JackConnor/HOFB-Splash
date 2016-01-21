@@ -1386,7 +1386,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
         else {
           console.log('below four');
           $('.fileUploadWrapper').css({
-            opacity: 0
+            opacity: 1
           })
           $('.fontChallenge').on('mouseenter', function(){
             console.log(self.miniPhotoCounter);

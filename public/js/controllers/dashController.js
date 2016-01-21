@@ -1196,7 +1196,7 @@ angular.module('dashController', ['allProjectsFactory', 'checkPwFactory', 'getSw
       })
     })
 
-    ////////filter Fabric
+    ////////accessories Fabric
     $('.designerDashAccessories').on('click', function(evt){
       $('.colorFilter').remove();
       $('.fabricFilter').remove();

@@ -638,23 +638,17 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
       $('.seasonFilter').remove();
       $(evt.target).append(
         "<div class='colorFilter'>"+
-          "<div  id='filterRed' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.red+">"+
+          "<div  id='filterRed' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.red+">"+
           "</div>"+
-          "<div id='filterBlue' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.blue+">"+
+          "<div id='filterBlue' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.blue+">"+
           "</div>"+
-          "<div id='filterWhite' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.white+">"+
+          "<div id='filterWhite' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.white+">"+
           "</div>"+
-          "<div id='filterBlack' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.black+">"+
+          "<div id='filterBlack' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.black+">"+
           "</div>"+
-          "<div id='filterOrange' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.orange+">"+
+          "<div id='filterYellow' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.yellow+">"+
           "</div>"+
-          "<div id='filterYellow' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.yellow+">"+
-          "</div>"+
-          "<div id='filterMagenta' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.magenta+">"+
-          "</div>"+
-          "<div id='filterAqua' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.aqua+">"+
-          "</div>"+
-          "<div id='filterGreen' class='colorFilterCell col-xs-4' style=background-color:"+allSwatches.colors.green+">"+
+          "<div id='filterGreen' class='colorFilterCell col-xs-6' style=background-color:"+allSwatches.colors.green+">"+
           "</div>"+
         "</div>"
       )
@@ -750,32 +744,32 @@ function loadCorrectHoverState(){
       $('.seasonFilter').remove();
       $(evt.target).append(
         "<div class='fabricFilter'>"+
-          "<div  id='filterSeersucker' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.seersucker+"'>" +
+          "<div  id='filterCotton_voile' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.fabrics.cotton_voile.url+"'>" +
           "</div>"+
-          "<div  id='filterPleather' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.pleather+"'>" +
+          "<div  id='filterCotton_lawn' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.fabrics.cotton_lawn.url+"'>" +
           "</div>"+
-          "<div  id='filterDockers' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.dockers+"'>" +
+          "<div  id='filterRayon_challis' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.fabrics.rayon_challis.url+"'>" +
           "</div>"+
-          "<div  id='filterCamo' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.camo+"'>" +
+          "<div  id='filterDouble_gauze' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.fabrics.double_gauze.url+"'>" +
           "</div>"+
-          "<div  id='filterVeneer' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.veneer+"'>" +
+          "<div  id='filterKnit' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.fabrics.knit.url+"'>" +
           "</div>"+
-          "<div  id='filterNylon' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.nylon+"'>" +
+          "<div  id='filterSilk' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.fabrics.silk.url+"'>" +
           "</div>"+
-          "<div  id='filterLeather' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.leather+"'>" +
+          "<div  id='filterSatin' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.fabrics.satin.url+"'>" +
           "</div>"+
-          "<div  id='filterCotton' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.cotton+"'>" +
+          "<div  id='filterLinen' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.fabrics.linen.url+"'>" +
           "</div>"+
-          "<div  id='filterDenim' class='fabricFilterCell col-xs-4'>"+
-            "<img src='"+allSwatches.fabrics.denim+"'>" +
+          "<div  id='filterWool' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.fabrics.wool.url+"'>" +
           "</div>"+
         "</div>"
       )
@@ -831,6 +825,60 @@ function loadCorrectHoverState(){
         }
         else if(self.curatedToggleCounter == 'curated'){
           loadFilteredList("seasons", season, self.boughtProducts);
+        }
+      })
+    })
+
+    ////////accessories Fabric
+    $('.designerDashAccessories').on('click', function(evt){
+      $('.colorFilter').remove();
+      $('.fabricFilter').remove();
+      $('.seasonFilter').remove();
+      $('.accessoryFilter').remove();
+      $(evt.target).append(
+        "<div class='fabricFilter'>"+
+          "<div  id='filterCotton' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.drawCords.cotton+"'>" +
+          "</div>"+
+          "<div  id='filterNylon' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.drawCords.nylon+"'>" +
+          "</div>"+
+          "<div  id='filterPolyester' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.drawCords.polyester+"'>" +
+          "</div>"+
+          "<div  id='filterButton' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.buttons+"'>" +
+          "</div>"+
+          "<div  id='filterRivets' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.rivets+"'>" +
+          "</div>"+
+          "<div  id='filterEyelets' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.eyelets+"'>" +
+          "</div>"+
+          "<div  id='filterBuckles' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.buckles+"'>" +
+          "</div>"+
+          "<div  id='filterZippers' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.zippers+"'>" +
+          "</div>"+
+          "<div  id='filterHookstoppers' class='fabricFilterCell col-xs-4'>"+
+            "<img src='"+allSwatches.accessories.metalTrims.hookstoppers+"'>" +
+          "</div>"+
+        "</div>"
+      )
+      $('.fabricFilter').on('mouseleave', function(){
+        $('.fabricFilter').remove();
+      });
+
+      $('.fabricFilterCell').on('click', function(evt){
+        var fabric = $($(evt.target)[0].parentNode)[0].id.slice(6, 25);
+        $('.designerDashList').html('');
+        $('.fabricFilter').remove();
+        if(self.curatedToggleCounter == 'active'){
+          loadFilteredList("fabrics", fabric, self.allProjects);
+        }
+        else if(self.curatedToggleCounter == 'curated'){
+          loadFilteredList("fabrics", fabric, self.curatedProjects);
         }
       })
     })
