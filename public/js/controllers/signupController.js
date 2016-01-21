@@ -67,6 +67,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
           }
           else {
             alert('whoops, looks like those two passwords dont match')
+            window.location.reload();
           }
         }
         else{
