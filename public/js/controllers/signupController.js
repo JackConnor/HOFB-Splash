@@ -283,6 +283,13 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
       }
     }
     buyerDesigner();
+
+    $(".signupTos").on("click",function(){
+      // var tos = window.location.hash = "#/tos";
+      var tos = 'http://beta.hofb.com/#/tos'
+             window.open(tos,'_blank');
+         });
+
   //////////////End signup controller////
   ///////////////////////////////////////
   ///////////////////////////////////////
