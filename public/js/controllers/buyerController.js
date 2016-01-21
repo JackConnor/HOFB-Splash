@@ -1091,7 +1091,7 @@ function loadCorrectHoverState(){
             // location.reload();
       });
       $('.navTitle').on('click', function(){
-        window.location.hash = "#/designer/dashboard";
+        window.location.hash = "#/buyer/dashboard";
       });
       $('#navBarEnvelopeIcon').on('click', function(){
         ///////////////////////////////////

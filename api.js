@@ -442,24 +442,72 @@ module.exports = function(app){
         product.status = 'saved';
         product.timestamp = new Date();
         product.description = "Detailed description of product will be shown here";
+        product.fabrics = [{
+          name: 'rayon_challis'
+          ,colors: ['red', 'blue', 'white', 'black']
+        }
+        ,{
+          name: 'double_gauze'
+          ,colors: ['red', 'black', 'white']
+        }
+        ,{
+          name: 'silk'
+          ,colors: ['red', 'yellow', 'blue', 'red']
+        }]
         product.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
         product.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
 
         productSub.name = "Submitted Demo Product";
         productSub.status = 'submitted to curator';
         productSub.timestamp = new Date();
+        productSub.fabrics = [{
+          name: 'rayon_challis'
+          ,colors: ['red', 'blue', 'white', 'black']
+        }
+        ,{
+          name: 'double_gauze'
+          ,colors: ['red', 'black', 'white']
+        }
+        ,{
+          name: 'silk'
+          ,colors: ['red', 'yellow', 'blue', 'red']
+        }]
         productSub.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
         productSub.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
 
         productCurateTab.name = "Curated Demo Product";
         productCurateTab.status = 'curated';
         productCurateTab.timestamp = new Date();
+        productCurateTab.fabrics = [{
+          name: 'rayon_challis'
+          ,colors: ['red', 'blue', 'white', 'black']
+        }
+        ,{
+          name: 'double_gauze'
+          ,colors: ['red', 'black', 'white']
+        }
+        ,{
+          name: 'silk'
+          ,colors: ['red', 'yellow', 'blue', 'red']
+        }]
         productCurateTab.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
         productCurateTab.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
 
         productCurateSample.name = "Curated Sample Product";
         productCurateSample.status = 'sampleRequested';
         productCurateSample.timestamp = new Date();
+        productCurateSample.fabrics = [{
+          name: 'rayon_challis'
+          ,colors: ['red', 'blue', 'white', 'black']
+        }
+        ,{
+          name: 'double_gauze'
+          ,colors: ['red', 'black', 'white']
+        }
+        ,{
+          name: 'silk'
+          ,colors: ['red', 'yellow', 'blue', 'red']
+        }]
         productCurateSample.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
         productCurateSample.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
 

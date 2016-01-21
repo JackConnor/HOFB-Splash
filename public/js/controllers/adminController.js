@@ -756,7 +756,7 @@ angular.module('adminController', ['allProjectsFactory', 'checkPwFactory', 'getS
     /////end of navbar dropdown logic/////////////
     ////////////////////////////////////////////////
     $('.navTitle').on('click', function(){
-      window.location.hash = "#/designer/dashboard";
+      window.location.hash = "#/admin/dashboard";
     });
     $('#navBarEnvelopeIcon').on('click', function(){
       ///////////////////////////////////

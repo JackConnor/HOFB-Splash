@@ -232,7 +232,7 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
     }
     //////navbar click events
     $('.navTitle').on('click', function(){
-      window.location.hash = "#/designer/dashboard";
+      window.location.reload();
     });
     $('#navBarEnvelopeIcon').on('click', function(){
       ///////////////////////////////////
