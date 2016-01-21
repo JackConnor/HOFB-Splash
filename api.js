@@ -456,6 +456,11 @@ module.exports = function(app){
         }]
         product.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
         product.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
+        // product.fabrics = {
+        //   color: 'red', 'blue', 'white', 'black', 'green', 'yellow'
+        //   ,name: "cotton_voile"
+        //   [color: 'red','blue','white', 'black', 'green', 'yellow' ,name: "cotton_lawn"]
+        // }
 
         productSub.name = "Submitted Demo Product";
         productSub.status = 'submitted to curator';
