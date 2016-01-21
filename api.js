@@ -454,8 +454,8 @@ module.exports = function(app){
           name: 'silk'
           ,colors: ['red', 'yellow', 'blue', 'red']
         }]
-        product.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
-        product.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
+        product.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/yyunfu5yrokt6kdvbysj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/uvah7pd0jvgfjnck9hao.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/kvndgmk4duot6xgwcosz.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/jnmx7pvni2c8cxd4nunt.png'];
+        product.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/yyunfu5yrokt6kdvbysj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/uvah7pd0jvgfjnck9hao.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/kvndgmk4duot6xgwcosz.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/jnmx7pvni2c8cxd4nunt.png'];
 
         productSub.name = "Submitted Demo Product";
         productSub.status = 'submitted to curator';
@@ -472,8 +472,8 @@ module.exports = function(app){
           name: 'silk'
           ,colors: ['red', 'yellow', 'blue', 'red']
         }]
-        productSub.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
-        productSub.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
+        productSub.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/yyunfu5yrokt6kdvbysj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/uvah7pd0jvgfjnck9hao.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/kvndgmk4duot6xgwcosz.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/jnmx7pvni2c8cxd4nunt.png'];
+        productSub.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/yyunfu5yrokt6kdvbysj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/uvah7pd0jvgfjnck9hao.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/kvndgmk4duot6xgwcosz.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/jnmx7pvni2c8cxd4nunt.png'];
 
         productCurateTab.name = "Curated Demo Product";
         productCurateTab.status = 'curated';
@@ -490,8 +490,8 @@ module.exports = function(app){
           name: 'silk'
           ,colors: ['red', 'yellow', 'blue', 'red']
         }]
-        productCurateTab.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
-        productCurateTab.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
+        productCurateTab.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/yyunfu5yrokt6kdvbysj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/uvah7pd0jvgfjnck9hao.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/kvndgmk4duot6xgwcosz.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/jnmx7pvni2c8cxd4nunt.png'];
+        productCurateTab.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/yyunfu5yrokt6kdvbysj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/uvah7pd0jvgfjnck9hao.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/kvndgmk4duot6xgwcosz.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/jnmx7pvni2c8cxd4nunt.png'];
 
         productCurateSample.name = "Curated Sample Product";
         productCurateSample.status = 'sampleRequested';
@@ -508,8 +508,8 @@ module.exports = function(app){
           name: 'silk'
           ,colors: ['red', 'yellow', 'blue', 'red']
         }]
-        productCurateSample.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/stcints08kyvqgdndaiv.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/dowmgimw7gmgrlx15dvj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/iuxqkznaiqg1uozjhvcg.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453330616/yhorq95f4p3cfmkbgel0.png'];
-        productCurateSample.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/stcints08kyvqgdndaiv.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/dowmgimw7gmgrlx15dvj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/iuxqkznaiqg1uozjhvcg.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453330616/yhorq95f4p3cfmkbgel0.png'];
+        productCurateSample.images = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/yyunfu5yrokt6kdvbysj.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/uvah7pd0jvgfjnck9hao.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/kvndgmk4duot6xgwcosz.png', 'https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/jnmx7pvni2c8cxd4nunt.png'];
+        productCurateSample.thumbnails = ['https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/yyunfu5yrokt6kdvbysj.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/uvah7pd0jvgfjnck9hao.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/kvndgmk4duot6xgwcosz.png','https://res.cloudinary.com/hofb/image/upload/c_fill,h_150,w_150/v1453362010/jnmx7pvni2c8cxd4nunt.png'];
 
         newUser.email = req.body.email;
         newUser.firstname = req.body.firstname;
