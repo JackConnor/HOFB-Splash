@@ -285,7 +285,7 @@ angular.module('signupController', ['checkStatusFactory', 'signupUserFactory', '
     buyerDesigner();
 
     $(".signupTos").on("click",function(){
-      // var tos = window.location.hash = "#/tos";
+      // var tos = window.location.hash = "#/tos";  // this works but causes the page to load the TOS page, along with opening a tab of the TOS
       var tos = 'http://beta.hofb.com/#/tos'
              window.open(tos,'_blank');
          });
