@@ -1444,6 +1444,10 @@
 
 .goToBetaText.splashPageTopRightText {
     margin-top: -495px;
+    background-color: #232730;
+    height: 127px;
+    padding: 5px;
+    border-radius: 3px;
 }
 
 .goToHolder {
