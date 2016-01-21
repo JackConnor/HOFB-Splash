@@ -573,37 +573,41 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           })
           ///////we change the status on the product
           $('.submitSampleModal').on('click', function(){
-            $http({
-              method: "POST"
-              ,url: "/api/product/update"
-              ,data: {projectId: productId, status: "sampleRequested"}
-            })
-            .then(function(updatedProd){
-              console.log(updatedProd);
+            if($('.sampleName').val() == "" || $('.sampleCompany').val() == "" || $('.sampleAddress').val() == '' || $('.sampleState').val() == '' || $('.sampleZip').val() == '' || $('.samplePhone').val() == ''){
+              alert('missing a field')
+            }
+            else {
               $http({
-                url: '/api/new/sample'
-                ,method: "POST"
-                ,data: {requesterId: self.buyerId, productId: updatedProd.data._id, status: "sampleRequest"}
+                method: "POST"
+                ,url: "/api/product/update"
+                ,data: {projectId: productId, status: "sampleRequested"}
               })
-              .then(function(updatedSample){
-                //////now we need to update the user's array of samples requsted
-                console.log(updatedSample);
-                console.log(self.buyerId);
+              .then(function(updatedProd){
+                console.log(updatedProd);
                 $http({
-                  method: "POST"
-                  ,url: "/api/users/update"
-                  ,data: {userId: self.buyerId, samplesRequested: updatedProd.data._id}
+                  url: '/api/new/sample'
+                  ,method: "POST"
+                  ,data: {requesterId: self.buyerId, productId: updatedProd.data._id, status: "sampleRequest"}
                 })
-                .then(function(updatedUser){
-                  console.log(updatedUser);
-                  self.userSamples.push(updatedProd.data._id);
-                  console.log(self.userSamples);
-                })
+                .then(function(updatedSample){
+                  //////now we need to update the user's array of samples requsted
+                  console.log(updatedSample);
+                  console.log(self.buyerId);
+                  $http({
+                    method: "POST"
+                    ,url: "/api/users/update"
+                    ,data: {userId: self.buyerId, samplesRequested: updatedProd.data._id}
+                  })
+                  .then(function(updatedUser){
+                    console.log(updatedUser);
+                    self.userSamples.push(updatedProd.data._id);
+                    console.log(self.userSamples);
+                  })
                 $('.invisModal').remove();
-                window.location.reload();
+                  window.location.reload();
+                })
               })
-
-            })
+            }
           })
           //////////submit the sample request, changing the product's status
         })
