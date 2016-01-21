@@ -596,7 +596,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////listens for change to file upload, creating an event every time there is a change
     function changeEffect(){
       $('#i_file').change( function(event) {
-        if(self.miniPhotoCounter >= 5 && self.miniPhotoCounter < 8){
+        if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 8){
           //////so now we add the modal here, where they have to select their area before they can move on;
           frontendPhotoDisplay(event);
           $('#i_file').remove();
@@ -607,8 +607,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           self.miniPhotoCounter = self.tempPhotoCache.length;
           toggleDeleteHover(self.miniPhotoCounter);
           adjustMiniMarginUpload();
-        }
-        else if(self.miniPhotoCounter >= 0 && self.miniPhotoCounter < 5){
           frontBackSide(self.miniPhotoCounter);
         }
         else{
@@ -633,7 +631,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
         $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
         self.miniPhotoCounter++;
-        // frontBackSide(self.miniPhotoCounter);
+        frontBackSide(self.miniPhotoCounter);
         toggleDeleteHover(self.miniPhotoCounter);
         highlightMini();
       }
@@ -697,9 +695,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         }
         $(".newProductCurrentImage").attr('src', source);
         highlightMini();
-      }
-      else{
-        frontBackSide(self.miniPhotoCounter)
       }
     }
     $('.newProductMiniImageImage').on('click', changeMiniPhoto)
@@ -1106,7 +1101,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       else {
         console.log('below four');
         $('.fileUploadWrapper').css({
-          opacity: 1
+          opacity: 0
         })
         $('.fontChallenge').on('mouseenter', function(){
           console.log(self.miniPhotoCounter);
@@ -1227,7 +1222,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         return null;
       }
     }
-    // frontBackSide(self.miniPhotoCounter);
+    frontBackSide(self.miniPhotoCounter);
     /////////////////////////////////////////////////////////
     //////////end functions to add the front-side-back html
 
