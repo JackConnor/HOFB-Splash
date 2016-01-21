@@ -1,6 +1,8 @@
 # Empty CSS file for your own CSS
 
 
+
+
 /*Segmentation for Jacks css*/
 .accessoryFilterContainer {
   height: 210px;
@@ -1438,6 +1440,10 @@
   margin-right: 20px;
   margin-top: 20px;
   font-size: 12px;
+}
+
+.goToBetaText.splashPageTopRightText {
+    margin-top: -495px;
 }
 
 .goToHolder {
