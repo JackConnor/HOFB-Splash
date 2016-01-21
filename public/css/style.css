@@ -1444,7 +1444,7 @@
 
 .goToBetaText.splashPageTopRightText {
     margin-top: -495px;
-    background-color: #232730;
+    background-color: rgba(51, 51, 51, 0.3);
     height: 127px;
     padding: 5px;
     border-radius: 3px;
