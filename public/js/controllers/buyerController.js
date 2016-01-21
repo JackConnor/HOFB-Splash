@@ -189,7 +189,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
             var allProjects = products.data;
             var allProjectsAlreadyCurated = [];
             for (var i = 0; i < allProjects.length; i++) {
-              if((allProjects[i].status == "curated" || allProjects[i].status == "sampleRequested") && allProjects[i].name != 'Curated Demo Product'){
+              if((allProjects[i].status == "curated" || allProjects[i].status == "sampleRequested") && (allProjects[i].name != 'Curated Demo Product' && allProjects[i].name != 'Curated Sample Product')){
                 allProjectsAlreadyCurated.push(allProjects[i]);
               }
               self.alreadyCurated = allProjectsAlreadyCurated;
