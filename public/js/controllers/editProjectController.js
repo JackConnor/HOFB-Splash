@@ -814,7 +814,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       if($($(event.target)[0]).attr('src') != ""){
         var source = $(event.target)[0].src;
         var elId = $(event.target).attr('id');
-        self.miniPhotoCounter = elId.split('').pop();
+        // self.miniPhotoCounter = elId.split('').pop();
         // frontBackSide(self.miniPhotoCounter);
       } else {
         var sourceArray = [];
