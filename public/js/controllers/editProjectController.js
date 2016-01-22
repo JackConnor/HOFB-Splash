@@ -814,7 +814,7 @@ var app = angular.module('editProjectController', ['postProjectFactory', 'getPro
       if($($(event.target)[0]).attr('src') != ""){
         var source = $(event.target)[0].src;
         var elId = $(event.target).attr('id');
-        // self.miniPhotoCounter = elId.split('').pop();
+        // self.miniPhotoCounter = elId.split('').pop(); // this caused a bug where users were not able to click through mini images
         // frontBackSide(self.miniPhotoCounter);
       } else {
         var sourceArray = [];

@@ -677,21 +677,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     function changeMiniPhoto(event){
       if(self.miniPhotoCounter >= 4){
-        console.log('change mini photo event IF');
-        console.log('change mini photo event IF');
-        console.log('change mini photo event IF');
-        console.log('change mini photo event IF');
-        console.log('change mini photo event IF');
-        console.log('change mini photo event IF');
+
 
         if($($(event.target)[0]).attr('src') != ""){
-          console.log('change mini photo event IF2');
-          console.log('change mini photo event IF2');
-          console.log('change mini photo event IF2');
-          console.log('change mini photo event IF2');
           var source = $(event.target)[0].src;
           var elId = $(event.target).attr('id');
-          // self.miniPhotoCounter = elId.split('').pop();
+          // self.miniPhotoCounter = elId.split('').pop(); // this caused a bug where users were not able to click through mini images
         } else {
           var sourceArray = [];
           var sourceNum = [];
@@ -704,12 +695,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           var source = sourceArray[0];
           // self.miniPhotoCounter = sourceNum[0];
         }
-        ////This function is not firing off.
-        console.log('change mini photo event else');
-        console.log('change mini photo event else');
-        console.log('change mini photo event else');
-        console.log('change mini photo event else');
-        console.log('change mini photo event else');
         $(".newProductCurrentImage").attr('src', source);
         highlightMini();
       }
