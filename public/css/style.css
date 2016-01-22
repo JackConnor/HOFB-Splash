@@ -1,6 +1,8 @@
 # Empty CSS file for your own CSS
 
-
+.highlight{
+  border: 5px solid blue;
+}
 
 
 /*Segmentation for Jacks css*/

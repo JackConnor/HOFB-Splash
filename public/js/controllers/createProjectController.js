@@ -677,10 +677,21 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     function changeMiniPhoto(event){
       if(self.miniPhotoCounter >= 4){
+        console.log('change mini photo event IF');
+        console.log('change mini photo event IF');
+        console.log('change mini photo event IF');
+        console.log('change mini photo event IF');
+        console.log('change mini photo event IF');
+        console.log('change mini photo event IF');
+
         if($($(event.target)[0]).attr('src') != ""){
+          console.log('change mini photo event IF2');
+          console.log('change mini photo event IF2');
+          console.log('change mini photo event IF2');
+          console.log('change mini photo event IF2');
           var source = $(event.target)[0].src;
           var elId = $(event.target).attr('id');
-          self.miniPhotoCounter = elId.split('').pop();
+          // self.miniPhotoCounter = elId.split('').pop();
         } else {
           var sourceArray = [];
           var sourceNum = [];
@@ -691,13 +702,27 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             }
           }
           var source = sourceArray[0];
-          self.miniPhotoCounter = sourceNum[0];
+          // self.miniPhotoCounter = sourceNum[0];
         }
+        ////This function is not firing off.
+        console.log('change mini photo event else');
+        console.log('change mini photo event else');
+        console.log('change mini photo event else');
+        console.log('change mini photo event else');
+        console.log('change mini photo event else');
         $(".newProductCurrentImage").attr('src', source);
         highlightMini();
       }
     }
-    $('.newProductMiniImageImage').on('click', changeMiniPhoto)
+    $('.newProductMiniImage').on('click', changeMiniPhoto)
+
+//this isn't functioning as of yet, plan to use it as a replacement for highlighting border logic.
+    function hightLightClick(){
+      // $('img').click(function (e) {
+        $('.newProductMiniImage.highlight').not(e.target).removeClass('highlight');
+        $(this).toggleClass('highlight');
+      // });
+    }
 
     ///create function to highlight mini image that's about to be updated
     function highlightMini(){
