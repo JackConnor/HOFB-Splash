@@ -26,6 +26,12 @@ angular.module('app.routes', ['ngRoute'])
       ,controllerAs: 'admin'
     })
 
+    .when('/admin/curate', {
+      templateUrl: 'templates/_adminCurate.html'
+      ,controller: 'adminCurateCtrl'
+      ,controllerAs: 'adminCurate'
+    })
+
     .when('/designer/dashboard', {
       templateUrl: 'templates/_designerDashboard.html'
       ,controller: 'dashCtrl'
