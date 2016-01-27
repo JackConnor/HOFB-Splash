@@ -1,0 +1,120 @@
+<script>
+  // Google Analytics Tracking
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72529727-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+<!-- Navigation Bar -->
+<div class="navigationBar">
+  <div class="navTitle">
+    <img class='navbarLogoImg' src='/img/web_logo.png'/>
+  </div>
+  <div class='navTitleRightLine'></div>
+  <div class="dropdown">
+    <button  class="dropbtn">Dropdown</button>
+    <div id="myDropdown" class="dropdown-content">
+      <a class="logoutButton">
+        Logout
+      </a>
+    </div>
+  </div>
+  <div class="fa fa-caret-down" id='navBarTriangleDown'></div>
+  <div  id='navBarCircleIcon'>_</div>
+  <div class="fa fa-envelope" id='navBarEnvelopeIcon'></div>
+</div>
+<!-- end nav bar -->
+<div class="curateProductPageBreadCrumb">
+
+</div>
+<div class="curateProductContainer">
+  <div class="curateProductContainerLeft col-md-5">
+    <div class="curateProductLeftNav col-md-3">
+    </div>
+    <div class="curateProductImageContainer">
+      <img class='curateProductImage'src="https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/yyunfu5yrokt6kdvbysj.png"/>
+    </div>
+  </div>
+   <div class="curateProductContainerRight col-md-7">
+     <div class="curateProductMiniImageContainer">
+       <div class="col-md-5 viewProductImageContainer">
+           <!-- <i class="glyphicon glyphicon-resize-full viewPictureImageIcon"></i> -->
+           <div class="viewProductImage">
+             <img class='viewProductImageMain' src="{{viewProduct.allImages[0]}}">
+           </div>
+           <div class="viewProductMiniHolder">
+           </div>
+           <!-- <div class="" ng-repeat='image in viewProduct.allImages'>
+             <div class="viewMiniCell" >
+               <img src=image alt="" />
+             </div>
+           </div> -->
+         </div>
+     </div>
+     <div class="curateProductSwatchesContainer">
+       <div class='productDescriptionBox'>
+         <div class='viewProductDescriptionTitle'>Description</div>
+         <p class='wordwrap viewProductDescription'>{{viewProduct.productData.description}}</p>
+       </div>
+
+       <div class='productAccessoryBox'>
+         <div class="viewProductSwatchCell">
+           <h3 class='productAccessoryBoxCatagories'>Colors</h3>
+           <div class="viewColorHolder" ng-repeat='color in viewProduct.allColors'>
+             <div class="viewProductColorBox" style="background-color:{{color}}">
+             </div>
+           </div>
+         </div>
+         <div class="viewProductSwatchCell">
+           <h3 class='productAccessoryBoxCatagories'>Fabrics</h3>
+           <div class="viewProductHolder" ng-repeat='fabric in viewProduct.allFabrics'>
+             <img class="viewProductFabricBox" src='{{fabric}}'></img>
+           </div>
+         </div>
+         <div class="viewProductSwatchCell">
+           <h3 class='productAccessoryBoxCatagories'>Accessories</h3>
+           <div class="viewProductAccessoryBox" style="background-color:#B9B1AF;"></div>
+           <div class="viewProductAccessoryBox" style="background-color:#A7A39F;"></div>
+           <div class="viewProductAccessoryBox" style="background-color:#ECE9EF;"></div>
+         </div>
+       </div>
+     </div>
+     <div class="curateProductChecklist">
+       <div class="curateProductTopChecklist">
+         <div class="checkbox curateProductNameCheckbox">
+          <label><input class='curateProductCheckbox' type="checkbox" value="">Name is acceptable</label>
+         </div>
+         <div class="checkbox curateProductDescriptionCheckbox">
+          <label><input class='curateProductCheckbox' type="checkbox" value="">Description is professional</label>
+         </div>
+         <div class="checkbox curateProductFabricsCheckbox">
+          <label><input class='curateProductCheckbox' type="checkbox" value="">Fabrics are correct</label>
+         </div>
+         <div class="checkbox curateProductImagesCheckbox">
+          <label><input class='curateProductCheckbox' type="checkbox" value="">4 images are easy to understand</label>
+         </div>
+       </div>
+       <div class="curateProductTierChecklist">
+         <div class="checkbox curateT1Checkbox">
+          <label><input class='curateProductCheckbox' type="checkbox" value="">Tier 1</label>
+         </div>
+         <div class="checkbox curateT2Checkbox">
+          <label><input class='curateProductCheckbox' type="checkbox" value="">Tier 2</label>
+         </div>
+         <div class="checkbox curateT3Checkbox">
+          <label><input class='curateProductCheckbox' type="checkbox" value="">Tier 3</label>
+         </div>
+       </div>
+       <div class="curateProductSubmitButtons">
+         <button type="button" class="curateProductSubmitAccept btn btn-primary btn-block">Approved</button>
+         <button type="button" class="curateProductSubmitDecline btn btn-primary btn-block">Decline</button>
+       </div>
+     </div>
+   </div>
+</div>
