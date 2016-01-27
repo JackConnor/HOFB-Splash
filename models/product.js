@@ -5,7 +5,7 @@ var productSchema = new Schema({
   name: String
   ,userId: String
   ,curatorId: String
-  ,purchaserInformation: Array
+  // ,purchaserInformation: Array
   ,timestamp: String
   ,images: Array
   ,thumbnails: Array
