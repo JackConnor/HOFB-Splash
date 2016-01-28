@@ -10,12 +10,12 @@ var userSchema = new Schema({
   ,passwordDigest: String
   ,status: String
   ,location: Object  //////this will hold all address, street, city, zip, etc
-  ,products: Array
+  ,products: [{type: Schema.Types.ObjectId, ref: 'Product'}]
   ,favorites: Array
   ,signins: Number
   ,bio: String
-  ,photos: Array
-  ,bioPhoto: Array
+  ,photos: [{type: Schema.Types.ObjectId, ref: 'Photo'}]
+  ,bioPhotos: [{type: Schema.Types.ObjectId, ref: 'Photo'}]
   ,samplesRequested: Array //////this is a list of current samples requests that the user needs to respond to
 })
 

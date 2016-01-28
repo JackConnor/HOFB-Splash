@@ -101,7 +101,6 @@ module.exports = function(app){
   app.post('/api/users/update', function(req, res){
     console.log(req.body);
     User.findOne({"_id":req.body.userId}, function(err, user){
-      console.log(user);
       if(err){console.log(err)}
       if(req.body.email){
         user.email = req.body.email
@@ -137,6 +136,12 @@ module.exports = function(app){
       if(req.body.profession){
         user.profession = req.body.profession;
       }
+      if(req.body.productId){
+        console.log(user.products);
+        console.log(req.body.productId);
+        user.products.push(req.body.productId);
+        console.log(user.products);
+      }
       if(req.body.status){
         user.status = req.body.status;
       }
@@ -149,7 +154,12 @@ module.exports = function(app){
       if(req.body.bio){
         user.bio = req.body.bio
       }
+      if(req.body.bioPhoto){
+        user.bioPhoto[0] = req.body.bioPhoto
+      }
       user.save(function(err, user){
+        if(err){console.log(err)}
+        console.log(user);
         res.json(user)
       });
     })

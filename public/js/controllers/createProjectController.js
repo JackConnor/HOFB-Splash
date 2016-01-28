@@ -804,7 +804,17 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
       postProject.postProject(newProjectObject)///post the object
       .then(function(newProjectInfo){
-        submitPhotos(newProjectInfo.data);
+        /////let's add this product to the user model here, and then submit photos inside of that
+        $http({
+          method: "POST"
+          ,url: "api/users/update"
+          ,data: {productId: newProjectInfo.data._id, userId: userId}
+        })
+        .then(function(updatedUser){
+          console.log(updatedUser.data);
+          alert(updatedUser.data.products);
+          submitPhotos(newProjectInfo.data);
+        })
       })
     }
     $('.new_product_send').on('click', function(){
