@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var productCommentSchema = new Schema({
   sender: String
-  ,receiver: String
+  // ,receiver: String
   ,date: Date
   ,commentText: String
 })

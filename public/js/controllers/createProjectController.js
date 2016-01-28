@@ -812,7 +812,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         })
         .then(function(updatedUser){
           console.log(updatedUser.data);
-          alert(updatedUser.data.products);
           submitPhotos(newProjectInfo.data);
         })
       })

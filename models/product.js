@@ -5,12 +5,12 @@ var productSchema = new Schema({
   name: String
   ,userId: String
   ,curatorId: String
-  // ,purchaserInformation: Array
   ,timestamp: String
   ,images: Array
   ,thumbnails: Array
   ,collections: Array
   ,description: String
+  ,comments: [{type: Schema.Types.ObjectId, ref: "productComment"}]
   ,productType: String
   ,tags: Array
   ,vendor: String

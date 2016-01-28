@@ -262,7 +262,18 @@ module.exports = function(app){
     console.log(req.body);
     Product.create(req.body, function(err, product){
       if(err) throw err;
-      res.json(product);
+      var comment = new productComment();
+      comment.date = new Date();
+      comment.sender = req.body.userId;
+      comment.commentText = "Welcome, this is where you will be communicating with our team of curators about your product"
+      comment.save(function(err, newComment){
+        console.log(newComment);
+        product.comments.push(newComment._id)
+        product.save(function(err, updatedProduct){
+          console.log(updatedProduct);
+          res.json(updatedProduct);
+        })
+      })
     })
   })
 
