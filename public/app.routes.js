@@ -127,7 +127,6 @@ angular.module('app.routes', ['ngRoute'])
     })
     /////////default to home
 
-    //Get single user profile info
     .when('/tos', {
       templateUrl: 'templates/_tos.html'
       ,controller: 'tosCtrl'
