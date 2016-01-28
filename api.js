@@ -596,8 +596,10 @@ module.exports = function(app){
             user.signins = 0;
           }
           user.signins += 1;
-          user.save(function(err, user){
-            var userId = user._id;
+          user.save(function(err, updatedUser){
+            if(err){console.log(err)}
+            console.log(updatedUser);
+            var userId = updatedUser._id;
             var status = user.status;
             var secret = process.env.JWT_TOKEN_SECRET;
             ///////iss == issuer (us), name = the user's id, and sub = the number of times they've logged in
