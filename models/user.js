@@ -4,24 +4,19 @@ var bcrypt = require('bcrypt');
 
 var userSchema = new Schema({
   email: String
-  ,passwordDigest: String
-  ,status: String
-  // ,token: String
-  ,location: String
   ,firstname: String
   ,lastname: String
-  ,address: String
-  ,city: String
-  ,profession: String
-  ,submittedProducts: Array
-  ,acceptedProducts: Array
+  ,username: String
+  ,passwordDigest: String
+  ,status: String
+  ,location: Object  //////this will hold all address, street, city, zip, etc
   ,products: Array
   ,favorites: Array
   ,signins: Number
   ,bio: String
-  ,username: String
-  ,photo: String
-  ,samplesRequested: Array
+  ,photos: Array
+  ,bioPhoto: Array
+  ,samplesRequested: Array //////this is a list of current samples requests that the user needs to respond to
 })
 
 userSchema.methods.generateHash = function(password) {

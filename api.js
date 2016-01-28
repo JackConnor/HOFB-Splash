@@ -28,10 +28,7 @@ cloudinary.config({
 /////////////////////////////
 var Emailcapture       = require('./models/emailCapture.js');
 var User               = require('./models/user.js');
-var userProfile        = require('./models/userProfile.js');
 var Product            = require('./models/product.js');
-var Project            = require('./models/createProject.js');
-var viewProduct        = require('./models/viewProduct.js');
 var Photo              = require('./models/photo.js');
 var productComment     = require('./models/productComment.js');
 var Conversation       = require('./models/conversation.js');
@@ -46,15 +43,6 @@ module.exports = function(app){
 
   /////////////////////////////////
   ////////begin user api requests////
-
-  //get all createProjects
-  app.get('/api/createprojects', function(req, res){
-    Project.find({}, function(err, projects){
-      if(err) console.log(err)
-      res.json(projects)
-    })
-    res.json(projects)
-  })
 
 
   //get all users
