@@ -627,6 +627,7 @@
   width: 60%;
   margin-left: 20%;
 }
+
 /*Admin curate product page*/
 .curateProductChecklist{
   background-color: #232730;
@@ -1966,6 +1967,14 @@ input#signUpCheckBox {
   font-size: 14px;
   width: 90%;
   margin-left: 5%;
+}
+
+.modalFillerCrop {
+  height: 600px;
+  width: 900px;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .modalImage {

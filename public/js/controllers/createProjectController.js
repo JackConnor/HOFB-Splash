@@ -602,6 +602,96 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     function frontendPhotoDisplay(event){
       var tmppath = URL.createObjectURL(event.target.files[0]);//new temp url
       /////let's check for blob ratio, then just nota ccept and ask for a new on eif it's not a proper ratio
+
+      ///add modal
+      $('.bodyview').prepend(
+        '<div class="photoModal">'+
+          "<div class='modalFillerCrop'>"+
+            "<img class='modalCropImage' src='"+tmppath+"'/>"+
+          "</div>"+
+          "<button class='modalCrop'></button>"+
+        '</div>'
+      );
+      ////////////////////////////////////////////////
+      //////begin photo cropping stuff////////////////
+      //
+      $('.modalCropImage').cropper({
+        aspectRatio: 4/5
+        ,viewMode: 1
+        ,zoomOnWheel: false
+        ,zoomOnTouch: false
+        // ,background: false
+        ,crop: function(e) {
+          console.log(e);
+        }
+        ,built: function(){
+          var image = $('.modalCropImage').cropper('getImageData');
+          console.log(image);
+
+          ///////click function to get all that stuff
+          $('.modalCrop').on('click', function(){
+            var getImageData = $('.modalCropImage').cropper('getImageData');
+            console.log(getImageData);
+            var getCrop = $('.modalCropImage').cropper('getCropBoxData');
+            console.log(getCrop);
+            var cropPhotoData = {
+              x: getCrop.left
+              ,y: getCrop.top
+              ,imageWidth: getImageData.width
+              ,imageHeight: getImageData.height
+              ,cropWidth: getCrop.width
+              ,cropHeight: getCrop.height
+              ,imageNaturalHeight: getImageData.naturalHeight
+              ,imageNaturalWidth: getImageData.naturalWidth
+              ,widthMultiple: getImageData.naturalWidth/getImageData.width
+              ,heightMultiple: getImageData.naturalHeight/getImageData.height
+            }
+            self.croppedPhotoList.push(cropPhotoData);///store all of these for later
+            console.log(cropPhotoData);
+            $(".newProductCurrentImage").attr('src', tmppath);////turn big image to what was just picked
+            console.log(-(cropPhotoData.y)*cropPhotoData.heightMultiple);
+            console.log(-(cropPhotoData.x*cropPhotoData.widthMultiple));
+            console.log(-(cropPhotoData.x));
+            ///new shot at ratios
+            var cropNatural = (cropPhotoData.imageNaturalWidth/cropPhotoData.imageWidth)*cropPhotoData.cropWidth;///returns natural width of the crop on the phtoo full sized
+            console.log(cropNatural);
+            var naturalToDomWidth = $('.newProductImageFrame').width()/cropNatural;////return ratio of our existing currentPhoto width, and the natural width of the crop
+            console.log(naturalToDomWidth);
+
+
+            $('.newProductCurrentImage').css({
+              marginTop: -(cropPhotoData.y)*cropPhotoData.heightMultiple
+              // ,marginLeft: -(cropPhotoData.x)*cropPhotoData.widthMultiple
+              ,marginLeft: "1108px"
+              // ,width: $('#newProductMiniImage'+self.miniPhotoCounter).width()*naturalToDomWidth
+            })
+            ///////now we need to figure out how to scale down for the mini
+            var miniWidth = $('#newProductMiniImage'+self.miniPhotoCounter).width();
+            console.log(miniWidth);
+            var bigWidth = $('.newProductImageFrame').width();
+            console.log(bigWidth);
+            console.log(bigWidth/miniWidth);
+            var miniRatio = (bigWidth/miniWidth);
+            console.log(miniRatio);
+            $('#newProductMiniImage'+self.miniPhotoCounter).width('#newProductMiniImage'+self.miniPhotoCounter/miniRatio);
+            self.tempPhotoCache[self.miniPhotoCounter] = tmppath;////add photo to the cache so we can send later
+            self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
+            $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath);
+            /////adjust the photo ratio for the photo thumbnail
+            // $('#newProductMiniImage'+self.miniPhotoCounter).css({
+            //   marginTop: -(cropPhotoData.y)*cropPhotoData.heightMultiple
+            //   ,marginLeft: -(cropPhotoData.x)*cropPhotoData.widthMultiple
+            // })
+            $('.photoModal').remove();
+            self.miniPhotoCounter++;
+            highlightMini();
+          })
+        }
+      })
+      //////now we return the cropped image
+
+      //////end cropping stuff////////////////////////
+      ////////////////////////////////////////////////
       var blob = new Image();
       blob.src = tmppath;
       blob.onload = function(){
