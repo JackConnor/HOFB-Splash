@@ -23,4 +23,4 @@ var productSchema = new Schema({
   ,tier: Number
 })
 
-module.exports = mongoose.model('product', productSchema)
+module.exports = mongoose.model('Product', productSchema)

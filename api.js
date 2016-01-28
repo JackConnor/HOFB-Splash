@@ -62,6 +62,19 @@ module.exports = function(app){
     })
   })
 
+  //get a single user with all products populated
+  app.get("/api/users/:id/products", function(req, res){
+    console.log(req.params);
+    User.findOne({"_id":req.params.id})
+    .populate('products')
+    .exec(function(err, user){
+      if(err){console.log(err)}
+      console.log(user.products[0]);
+      console.log(user.products[1]);
+      res.json(user);
+    })
+  })
+
   //get a single user profile
   app.get("/api/user/profile/:id", function(req, res){
     console.log(req.params);
