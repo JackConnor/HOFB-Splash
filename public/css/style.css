@@ -2243,7 +2243,7 @@ input#signUpCheckBox {
 
 .newProductImageFrame {
   overflow: hidden;
-  border-right: 1px solid silver;
+  /*border-right: 1px solid silver;*/
   width: 100%;
   height: 100%;
 }
@@ -2275,6 +2275,7 @@ input#signUpCheckBox {
   height: 100%;
   width: 71.5px;
   display: inline-block;
+  overflow: hidden;
 }
 
 .newProductMiniImage img {
