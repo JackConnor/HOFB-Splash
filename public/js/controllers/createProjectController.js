@@ -637,16 +637,25 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             ,imageNaturalWidth: getImageData.naturalWidth
             ,naturalMultiple: (600/getImageData.naturalHeight)
             ,frontendMultiple: (750/(getCrop.height/(600/getImageData.naturalHeight)))
+            ,frontendMiniMultiple: (71.5/(getCrop.width/(600/getImageData.naturalHeight)))
           }
           console.log(cropPhotoDataRaw);
           var finalMultiple = (cropPhotoDataRaw.frontendMultiple/cropPhotoDataRaw.naturalMultiple);
+          var finalMiniMultiple = (cropPhotoDataRaw.frontendMiniMultiple/cropPhotoDataRaw.naturalMultiple);
           var finalCropData = {
             xOffset: (cropPhotoDataRaw.x * finalMultiple)
             ,yOffset: (cropPhotoDataRaw.y * finalMultiple)
             ,frontendFullImageHeight: (cropPhotoDataRaw.imageNaturalHeight * finalMultiple)
             ,frontendFullImageWidth: (cropPhotoDataRaw.imageNaturalWidth * finalMultiple)
           }
+          var finalMiniData = {
+            xOffset: (cropPhotoDataRaw.x * finalMiniMultiple)
+            ,yOffset: (cropPhotoDataRaw.y * finalMiniMultiple)
+            ,frontendFullImageHeight: (cropPhotoDataRaw.imageNaturalHeight * finalMiniMultiple)
+            ,frontendFullImageWidth: (cropPhotoDataRaw.imageNaturalWidth * finalMiniMultiple)
+          }
           self.finalCropData = finalCropData
+          self.finalMiniData = finalMiniData
           console.log(finalCropData);
           $('.modalCropSubmit').on('click', function(){
             console.log(self.finalCropData);
@@ -660,12 +669,14 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             $('.newProductCurrentImage').attr('src', tmppath);
             self.tempPhotoCache[self.miniPhotoCounter] = tmppath;////add photo to the cache so we can send later
             self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-            $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath);
+            $('#newProductMiniImage0').attr('src', tmppath);
             /////adjust the photo ratio for the photo thumbnail
-            // $('#newProductMiniImage'+self.miniPhotoCounter).css({
-            //   marginTop: -(cropPhotoData.y)*cropPhotoData.heightMultiple
-            //   ,marginLeft: -(cropPhotoData.x)*cropPhotoData.widthMultiple
-            // })
+            $('#newProductMiniImage0').css({
+              height: self.finalMiniData.frontendFullImageHeight
+              ,width: self.finalMiniData.frontendFullImageWidth
+              ,marginTop: -(self.finalMiniData.yOffset)
+              ,marginLeft: -(self.finalMiniData.xOffset)
+            })
             $('.photoModal').remove();
             self.miniPhotoCounter++;
             highlightMini();
