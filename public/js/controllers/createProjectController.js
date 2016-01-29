@@ -622,58 +622,42 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,zoomOnTouch: false
         ,background: false
         ,crop: function(e) {
-          console.log(e);
-        }
-        ,built: function(){
-          var image = $('.modalCropImage').cropper('getImageData');
-          console.log(image);
-
-          ///////click function to get all that stuff
-          $('.modalCrop').on('click', function(){
-            var getImageData = $('.modalCropImage').cropper('getImageData');
-            console.log(getImageData);
-            var getCrop = $('.modalCropImage').cropper('getCropBoxData');
-            console.log(getCrop);
-            var cropPhotoData = {
-              x: getCrop.left
-              ,y: getCrop.top
-              ,imageWidth: getImageData.width
-              ,imageHeight: getImageData.height
-              ,cropWidth: getCrop.width
-              ,cropHeight: getCrop.height
-              ,imageNaturalHeight: getImageData.naturalHeight
-              ,imageNaturalWidth: getImageData.naturalWidth
-              ,widthMultiple: getImageData.naturalWidth/getImageData.width
-              ,heightMultiple: getImageData.naturalHeight/getImageData.height
-            }
-            self.croppedPhotoList.push(cropPhotoData);///store all of these for later
-            console.log(cropPhotoData);
-            $(".newProductCurrentImage").attr('src', tmppath);////turn big image to what was just picked
-            console.log(-(cropPhotoData.y)*cropPhotoData.heightMultiple);
-            console.log(-(cropPhotoData.x*cropPhotoData.widthMultiple));
-            console.log(-(cropPhotoData.x));
-            ///new shot at ratios
-            var cropNatural = (cropPhotoData.imageNaturalWidth/cropPhotoData.imageWidth)*cropPhotoData.cropWidth;///returns natural width of the crop on the phtoo full sized
-            console.log(cropNatural);
-            var naturalToDomWidth = $('.newProductImageFrame').width()/cropNatural;////return ratio of our existing currentPhoto width, and the natural width of the crop
-            console.log(naturalToDomWidth);
-
-
+          var getImageData = $('.modalCropImage').cropper('getImageData');
+          console.log(getImageData);
+          var getCrop = $('.modalCropImage').cropper('getData');
+          console.log(getCrop);
+          var cropPhotoDataRaw = {
+            x: getCrop.x
+            ,y: getCrop.y
+            ,imageWidth: getImageData.width
+            ,imageHeight: getImageData.height
+            ,cropWidth: getCrop.width
+            ,cropHeight: getCrop.height
+            ,imageNaturalHeight: getImageData.naturalHeight
+            ,imageNaturalWidth: getImageData.naturalWidth
+            ,naturalMultiple: (600/getImageData.naturalHeight)
+            ,frontendMultiple: (750/(getCrop.height/(600/getImageData.naturalHeight)))
+          }
+          console.log(cropPhotoDataRaw);
+          var finalMultiple = (cropPhotoDataRaw.frontendMultiple/cropPhotoDataRaw.naturalMultiple);
+          var finalCropData = {
+            xOffset: (cropPhotoDataRaw.x * finalMultiple)
+            ,yOffset: (cropPhotoDataRaw.y * finalMultiple)
+            ,frontendFullImageHeight: (cropPhotoDataRaw.imageNaturalHeight * finalMultiple)
+            ,frontendFullImageWidth: (cropPhotoDataRaw.imageNaturalWidth * finalMultiple)
+          }
+          self.finalCropData = finalCropData
+          console.log(finalCropData);
+          $('.modalCropSubmit').on('click', function(){
+            console.log(self.finalCropData);
             $('.newProductCurrentImage').css({
-              marginTop: -(cropPhotoData.y)*cropPhotoData.heightMultiple
-              // ,marginLeft: -(cropPhotoData.x)*cropPhotoData.widthMultiple
-              ,marginLeft: "1108px"
-              // ,width: $('#newProductMiniImage'+self.miniPhotoCounter).width()*naturalToDomWidth
+              /////we modify the css for the main image here
+              height: self.finalCropData.frontendFullImageHeight
+              ,width: self.finalCropData.frontendFullImageWidth
+              ,marginTop: -(self.finalCropData.yOffset)
+              ,marginLeft: -(self.finalCropData.xOffset)
             })
-            ///////now we need to figure out how to scale down for the mini
-            var miniWidth = $('#newProductMiniImage'+self.miniPhotoCounter).width();
-            console.log(miniWidth);
-            var bigWidth = $('.newProductImageFrame').width();
-            console.log(bigWidth);
-            console.log(bigWidth/miniWidth);
-            var miniRatio = (bigWidth/miniWidth);
-            console.log(miniRatio);
-            $('#newProductMiniImage'+self.miniPhotoCounter).width('#newProductMiniImage'+self.miniPhotoCounter/miniRatio);
+            $('.newProductCurrentImage').attr('src', tmppath);
             self.tempPhotoCache[self.miniPhotoCounter] = tmppath;////add photo to the cache so we can send later
             self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
             $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath);
@@ -687,24 +671,77 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             highlightMini();
           })
         }
+        // ,built: function(){
+        //   var image = $('.modalCropImage').cropper('getImageData');
+        //   console.log(image);
+        //   var getImageData = $('.modalCropImage').cropper('getImageData');
+        //   console.log(getImageData);
+        //   var getCrop = $('.modalCropImage').cropper('getData');
+        //   console.log(getCrop);
+        //   var cropPhotoDataRaw = {
+        //     x: getCrop.x
+        //     ,y: getCrop.y
+        //     ,imageWidth: getImageData.width
+        //     ,imageHeight: getImageData.height
+        //     ,cropWidth: getCrop.width
+        //     ,cropHeight: getCrop.height
+        //     ,imageNaturalHeight: getImageData.naturalHeight
+        //     ,imageNaturalWidth: getImageData.naturalWidth
+        //     ,naturalMultiple: (600/getImageData.naturalHeight)
+        //     ,frontendMultiple: (750/(getCrop.height/(600/getImageData.naturalHeight)))
+        //   }
+        //   console.log(cropPhotoDataRaw);
+        //   var finalMultiple = (cropPhotoDataRaw.frontendMultiple/cropPhotoDataRaw.naturalMultiple);
+        //   var finalCropData = {
+        //     xOffset: (cropPhotoDataRaw.x * finalMultiple)
+        //     ,yOffset: (cropPhotoDataRaw.y * finalMultiple)
+        //     ,frontendFullImageHeight: (cropPhotoDataRaw.imageNaturalHeight * finalMultiple)
+        //   }
+        //   self.finalCropData = finalCropData;
+        //   console.log(finalCropData);
+        //
+        //   ///////click function to get all that stuff
+        //   $('.modalCropSubmit').on('click', function(){
+        //     console.log(self.finalCropData);
+        //     $('.newProductCurrentImage').css({
+        //       /////we modify the css for the main image here
+        //       height: self.finalCropData.frontendFullImageHeight
+        //       ,marginTop: -(self.finalCropData.yOffset)
+        //       ,marginLeft: -(self.finalCropData.xOffset)
+        //       ,width: ''
+        //     })
+        //     $('.newProductCurrentImage').attr('src', tmppath);
+        //     self.tempPhotoCache[self.miniPhotoCounter] = tmppath;////add photo to the cache so we can send later
+        //     self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
+        //     $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath);
+        //     /////adjust the photo ratio for the photo thumbnail
+        //     // $('#newProductMiniImage'+self.miniPhotoCounter).css({
+        //     //   marginTop: -(cropPhotoData.y)*cropPhotoData.heightMultiple
+        //     //   ,marginLeft: -(cropPhotoData.x)*cropPhotoData.widthMultiple
+        //     // })
+        //     $('.photoModal').remove();
+        //     self.miniPhotoCounter++;
+        //     highlightMini();
+        //   })
+        // }
       })
       //////now we return the cropped image
 
       //////end cropping stuff////////////////////////
       ////////////////////////////////////////////////
-      var blob = new Image();
-      blob.src = tmppath;
-      blob.onload = function(){
-        var ratio = 0.7
-        $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
-        self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
-        self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-        $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-        self.miniPhotoCounter++;
-        frontBackSide(self.miniPhotoCounter);
-        toggleDeleteHover(self.miniPhotoCounter);
-        highlightMini();
-      }
+      // var blob = new Image();
+      // blob.src = tmppath;
+      // blob.onload = function(){
+      //   var ratio = 0.7
+      //   $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
+      //   self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
+      //   self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
+      //   $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
+      //   self.miniPhotoCounter++;
+      //   frontBackSide(self.miniPhotoCounter);
+      //   toggleDeleteHover(self.miniPhotoCounter);
+      //   highlightMini();
+      // }
     }
     //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
