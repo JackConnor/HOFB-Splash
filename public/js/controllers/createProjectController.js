@@ -609,7 +609,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           "<div class='modalFillerCrop'>"+
             "<img class='modalCropImage' src='"+tmppath+"'/>"+
           "</div>"+
-          "<button class='modalCrop'></button>"+
+          "<div class='modalCropSubmit'>CROP</div>"+
         '</div>'
       );
       ////////////////////////////////////////////////
@@ -620,7 +620,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,viewMode: 1
         ,zoomOnWheel: false
         ,zoomOnTouch: false
-        // ,background: false
+        ,background: false
         ,crop: function(e) {
           console.log(e);
         }

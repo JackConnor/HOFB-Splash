@@ -1969,6 +1969,19 @@ input#signUpCheckBox {
   margin-left: 5%;
 }
 
+.modalCropSubmit {
+  width: 145px;
+  height: 42px;
+  background-color: #3cb878;
+  color: white;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 20px;
+  padding-top: 7px;
+}
+
 .modalFillerCrop {
   height: 600px;
   width: 900px;
