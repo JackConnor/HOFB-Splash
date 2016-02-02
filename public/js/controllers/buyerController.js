@@ -525,6 +525,7 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         var parentContainer = $hoverTarget.parent().parent()[0];
         $(parentContainer).prepend(
           "<div class='projectCellHoverContainer' id='"+$(evt.target)[0].id+"'>"+
+            "<div class='hoverBall'></div>"+
             '<div class="projectCellButtonSample">Request A Sample'+
             '</div>'+
             '<div class="projectCellButtonOrder">Place an '+orderType+'</div>'+
