@@ -514,6 +514,10 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
         $hoverTarget.css({
           opacity: 0.5
         })
+
+        $hoverTarget.parent().css({
+          border: "4px solid #3cb878"
+        })
         ////////
         if(self.curatedToggleCounter == 'active'){
           var orderType = "Order";
@@ -621,8 +625,11 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
           $hoverTarget.css({
             opacity: 1
           })
-          ////we drill up in order to get the parent, so we can append the html buttons to it
-          // var parentContainer = $hoverTarget.parent().parent()[0];
+          $hoverTarget.parent().css({
+            border: ""
+          })
+          //we drill up in order to get the parent, so we can append the html buttons to it
+          var parentContainer = $hoverTarget.parent().parent()[0];
           $('.projectCellHoverContainer').remove();
         })
       })
