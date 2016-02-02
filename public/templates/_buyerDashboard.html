@@ -12,7 +12,7 @@
 
 </script>
 <!-- Navigation Bar -->
-<div class="navigationBar">
+<div class="navigationBar" ng-click='buyer.allClick($event)'>
   <div class="navTitle">
     <img class='navbarLogoImg' src='/img/web_logo.png'/>
   </div>
@@ -33,12 +33,17 @@
 <div class='designerDashDashTitle'>Buying Room</div>
 <div class="designerDashCollectionsContainer col-xs-2">
   <div class="designerDashAll">
-    <p>
+    <p class='buyerDashSidebarCell'>
       All
     </p>
   </div>
+  <div class="designerDashPopular">
+    <p class='buyerDashSidebarCell'>
+      <span class='glyphicon glyphicon-heart navbarHeart'></span>Popular
+    </p>
+  </div>
   <div class="designerDashFavorites">
-    <p>
+    <p class='buyerDashSidebarCell'>
       <span class='glyphicon glyphicon-heart navbarHeart'></span>Favorites
     </p>
   </div>

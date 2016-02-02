@@ -2,9 +2,13 @@ angular.module('buyerController', ['allProjectsFactory', 'checkPwFactory', 'getS
 
   .controller('buyerCtrl', buyerCtrl)
 
-  buyerCtrl.$inject = ['$http', 'allProjects', 'checkPw', 'allSwatches', 'getProduct'];
-  function buyerCtrl($http, allProjects, checkPw, allSwatches, getProduct){
+  buyerCtrl.$inject = ['$http', 'allProjects', 'checkPw', 'allSwatches', 'getProduct', '$scope'];
+  function buyerCtrl($http, allProjects, checkPw, allSwatches, getProduct, $scope){
     var self = this;
+    function allClick($event){
+      console.log($event.currentTarget);
+    }
+    self.allClick = allClick;
     //////counter to keep track of active or curated list being shown
     self.curatedToggleCounter = 'active'
     self.userSamples = [];
@@ -1261,6 +1265,7 @@ function loadCorrectHoverState(){
 
     $('.designerDashFavorites').on('click', loadFavorites);
 
+    ////this is a function to add add all the buyers favorites to the dashboard, when clicked
     function addFavorites(buyerId){
       $('.projectCellHeart').on('click', function(evt){
         var favorite = $(evt.target)[0].id;
@@ -1300,41 +1305,23 @@ function loadCorrectHoverState(){
     }
     ///////////end favorites////////////////////////
     ////////////////////////////////////////////////
-    // function moveDashMinis() {
-    //   //////We create the logic for the mini photos. these run on an interval, that switches to the photos being move (margin-left being added)
-    //   setInterval(function(){
-    //     if(self.intervalCounter == 0){
-    //       self.miniMarg = 0;
-    //     }
-    //     else {
-    //       var imageCount = $(self.activeMinis)[0].children.length;
-    //       var totalLengthPhotos = ((imageCount+.3)*64);
-    //       var viewWindow = $('.projectCellImageHolder').width();
-    //       var maxMovement = (-totalLengthPhotos) + viewWindow;
-    //       if(self.miniMarg >= maxMovement && maxMovement < 0){
-    //         $(self.activeMinis).css({
-    //           marginLeft: self.miniMarg
-    //         })
-    //         self.miniMarg += -1;
-    //       }
-    //       else {
-    //       }
-    //     }
-    //   }, 20)
-    //   $('.projectCellMinis').on('mouseenter', function(evt){
-    //     self.intervalCounter = 1;
-    //     if($(evt.target)[0].classList[0] == 'projectCellMinis'){
-    //       self.activeMinis = $(evt.target)[0];
-    //     }
-    //     else {
-    //       self.activeMinis = $(evt.target)[0].parentNode;
-    //     }
-    //   })
-    //   $('.projectCellMinis').on('mouseleave', function(){
-    //     self.intervalCounter = 0;
-    //     self.activeMinis = "none";
-    //   })
-    // }
+
+    ////////////////////side bar background-change function on click////
+    $('.buyerDashSidebarCell').on('click', function(evt){
+      /////beginning function
+      /////
+      for (var i = 0; i < $('.buyerDashSidebarCell').length; i++) {
+        $($('.buyerDashSidebarCell')[i]).css({
+          backgroundColor: 	"#F8F7F5"
+        })
+      }
+      $(evt.target).css({
+        backgroundColor: '#6D6B6C'
+      })
+
+      ///
+    })
+
   /////end admin controller
   ////////////////////////
   ////////////////////////

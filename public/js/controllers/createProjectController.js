@@ -601,6 +601,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     function frontendPhotoDisplay(event){
       var tmppath = URL.createObjectURL(event.target.files[0]);//new temp url
+      self.tmppath = tmppath;
       /////let's check for blob ratio, then just nota ccept and ask for a new on eif it's not a proper ratio
 
       ///add modal
@@ -622,10 +623,9 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,zoomOnTouch: false
         ,background: false
         ,crop: function(e) {
+          console.log(self.miniPhotoCounter);
           var getImageData = $('.modalCropImage').cropper('getImageData');
-          console.log(getImageData);
           var getCrop = $('.modalCropImage').cropper('getData');
-          console.log(getCrop);
           var cropPhotoDataRaw = {
             x: getCrop.x
             ,y: getCrop.y
@@ -657,6 +657,9 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           self.finalCropData = finalCropData
           self.finalMiniData = finalMiniData
           console.log(finalCropData);
+          console.log(self.miniPhotoCounter);
+        }
+        ,built: function(){
           $('.modalCropSubmit').on('click', function(){
             console.log(self.finalCropData);
             $('.newProductCurrentImage').css({
@@ -666,23 +669,23 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
               ,marginTop: -(self.finalCropData.yOffset)
               ,marginLeft: -(self.finalCropData.xOffset)
             })
-            $('.newProductCurrentImage').attr('src', tmppath);
-            self.tempPhotoCache[self.miniPhotoCounter] = tmppath;////add photo to the cache so we can send later
+            $('.newProductCurrentImage').attr('src', self.tmppath);
+            self.tempPhotoCache[self.miniPhotoCounter] = self.tmppath;////add photo to the cache so we can send later
             self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-            $('#newProductMiniImage0').attr('src', tmppath);
+            $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', self.tmppath);
+            console.log(self.miniPhotoCounter);
             /////adjust the photo ratio for the photo thumbnail
-            $('#newProductMiniImage0').css({
+            $('#newProductMiniImage'+self.miniPhotoCounter).css({
               height: self.finalMiniData.frontendFullImageHeight
               ,width: self.finalMiniData.frontendFullImageWidth
               ,marginTop: -(self.finalMiniData.yOffset)
               ,marginLeft: -(self.finalMiniData.xOffset)
             })
             $('.photoModal').remove();
-            self.miniPhotoCounter++;
+            frontBackSide(self.miniPhotoCounter);
+            toggleDeleteHover(self.miniPhotoCounter);
             highlightMini();
           })
-        }
-        // ,built: function(){
         //   var image = $('.modalCropImage').cropper('getImageData');
         //   console.log(image);
         //   var getImageData = $('.modalCropImage').cropper('getImageData');
@@ -734,7 +737,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         //     self.miniPhotoCounter++;
         //     highlightMini();
         //   })
-        // }
+        }
       })
       //////now we return the cropped image
 
@@ -832,19 +835,19 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var arrLength = $('.newProductMiniImage').length;
       for (var i = 0; i < 8; i++) {
         $('#newProductMiniImage'+i).css({
-          border: "1px solid white"
+          // border: "1px solid white"
         })
       }
       for (var i = 0; i < 8; i++) {
         if($($('.newProductMiniImageImage')[i]).attr('src') == '' && i != 0){
           $('#newProductMiniImage'+self.miniPhotoCounter).css({
-            border: "5px solid #858585"
+            // border: "5px solid #858585"
           })
           return;
         }
         else if($($('.newProductMiniImageImage')[i]).attr('src') == '' && i == 0){
           $('#newProductMiniImage0').css({
-            border: "5px solid #858585"
+            // border: "5px solid #858585"
           })
           return;
         }
