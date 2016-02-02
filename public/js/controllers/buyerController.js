@@ -1329,6 +1329,13 @@ function loadCorrectHoverState(){
       ///
     })
 
+    ////close the alertClose
+    function alertClose(){
+
+    }
+    $('.alertClose').on('click', function(){
+      $('.dashAlert').remove();
+    })
   /////end admin controller
   ////////////////////////
   ////////////////////////
