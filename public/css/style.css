@@ -628,6 +628,7 @@
   margin-left: 20%;
 }
 /*Admin curate product page*/
+/*
 .curateProductChecklist{
   background-color: #232730;
   color: white;
@@ -635,11 +636,14 @@
   height: 600px;
   float: right;
   margin-right: -15px;
-  margin-top: -474px;
+  margin-top: -409px;
   border-radius: 5px;
   font-size: 20px;
 }
-
+.curateProductImageContainer{
+margin-right:-23%;
+padding-right: 23%;
+}
 .curateProductImage{
   display: inline-block;
   float: right;
@@ -662,12 +666,18 @@
 }
 
 .curateProductContainer{
+  height: 100%;
 }
 .curateProductContainerLeft{
   background-color: #FEFDFA;
 }
+
 .curateProductContainerRight{
   background-color: #FEFDFA;
+}
+.curateProductListItem {
+    font-size: 15px;
+    cursor: pointer;
 }
 .curateProductSubmitAccept{
   background-color: #3CB878;
@@ -728,7 +738,7 @@
   padding-left: 40px;
   padding-top: 35px;
 }
-
+*/
 /*End of Admin curate product page*/
 .curatedBarProduct {
   margin-left: 140px;
@@ -3923,6 +3933,19 @@ textarea#styled {
    min-height: 100%;
  }
 
+
+
+.curateProductPhotoMiniCell{
+  margin-top: 3px;
+  width: 10%;
+  height: 10%;
+}
+
+
+
+
+
+
  .viewMiniImage {
    width: 100%;
    border-top: 1px solid #999999;
@@ -3944,7 +3967,7 @@ textarea#styled {
   background-color: #f6fdfa;
 }
 
-.viewProductColorBox, .viewProductAccessoryBox, .viewProductFabricBox, .viewProductStitchBox {
+.viewProductColorBox, .viewProductAccessoryBox, .viewProductFabricBox, .viewProductStitchBox, .curateProductFabricBox, .curateProductAccessoryBox, .curateProductColorBox {
     float: left;
     width: 40px;
     height: 40px;

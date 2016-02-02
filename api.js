@@ -32,7 +32,6 @@ var userProfile        = require('./models/userProfile.js');
 var Product            = require('./models/product.js');
 var Project            = require('./models/createProject.js');
 var viewProduct        = require('./models/viewProduct.js');
-var curateProduct      = require('./models/curateProduct.js');
 var Photo              = require('./models/photo.js');
 var productComment     = require('./models/productComment.js');
 var Conversation       = require('./models/conversation.js');

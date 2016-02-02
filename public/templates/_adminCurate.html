@@ -36,52 +36,49 @@
 <div class="curateProductContainer">
   <div class="curateProductContainerLeft col-md-5">
     <div class="curateProductLeftNav col-md-3">
+      <div class="curateProductListContainer" >
+        <div class="curateProductListName" ng-repeat='curateProductName in adminCurate.alreadyCurated'>
+          <div class="curateProductListItem" ng-click="adminCurate.getId($event)" id='{{curateProductName._id}}'>{{curateProductName.name}}</div>
+        </div>
+      </div>
     </div>
     <div class="curateProductImageContainer">
-      <img class='curateProductImage'src="https://res.cloudinary.com/hofb/image/upload/c_fill,h_700,w_560/v1453362010/yyunfu5yrokt6kdvbysj.png"/>
+      <img class='curateProductImage'src="{{adminCurate.curatedData.images[0]}}"/>
     </div>
   </div>
    <div class="curateProductContainerRight col-md-7">
-     <div class="curateProductMiniImageContainer">
-       <div class="col-md-5 viewProductImageContainer">
-           <!-- <i class="glyphicon glyphicon-resize-full viewPictureImageIcon"></i> -->
-           <div class="viewProductImage">
-             <img class='viewProductImageMain' src="{{viewProduct.allImages[0]}}">
-           </div>
-           <div class="viewProductMiniHolder">
-           </div>
-           <!-- <div class="" ng-repeat='image in viewProduct.allImages'>
-             <div class="viewMiniCell" >
-               <img src=image alt="" />
-             </div>
-           </div> -->
-         </div>
+     <div class="" ng-repeat='image in adminCurate.curatedData.images'>
+       <div class="curateProductPhotoMiniCellContainer" >
+         <img class='curateProductPhotoMiniCell'src={{image}} alt="" />
+       </div>
      </div>
      <div class="curateProductSwatchesContainer">
        <div class='productDescriptionBox'>
-         <div class='viewProductDescriptionTitle'>Description</div>
-         <p class='wordwrap viewProductDescription'>{{viewProduct.productData.description}}</p>
+         <div class='curateProductDescriptionTitle'>Description</div>
+         <p class='wordwrap curateProductDescription'>{{adminCurate.curatedData.description}}</p>
        </div>
-
+       <br>
        <div class='productAccessoryBox'>
-         <div class="viewProductSwatchCell">
+         <div class="curateProductSwatchCell">
            <h3 class='productAccessoryBoxCatagories'>Colors</h3>
-           <div class="viewColorHolder" ng-repeat='color in viewProduct.allColors'>
-             <div class="viewProductColorBox" style="background-color:{{color}}">
+           <div class="viewColorHolder" ng-repeat='color in adminCurate.allColors'>
+             <div class="curateProductColorBox" style="background-color:{{color}}">
              </div>
            </div>
          </div>
-         <div class="viewProductSwatchCell">
+         <br>
+         <div class="curateProductSwatchCell">
            <h3 class='productAccessoryBoxCatagories'>Fabrics</h3>
-           <div class="viewProductHolder" ng-repeat='fabric in viewProduct.allFabrics'>
-             <img class="viewProductFabricBox" src='{{fabric}}'></img>
+           <div class="curateProductHolder" ng-repeat='fabric in adminCurate.allFabrics'>
+             <img class="curateProductFabricBox" src='{{fabric}}'></img>
            </div>
          </div>
-         <div class="viewProductSwatchCell">
+         <br>
+         <div class="curateProductSwatchCell">
            <h3 class='productAccessoryBoxCatagories'>Accessories</h3>
-           <div class="viewProductAccessoryBox" style="background-color:#B9B1AF;"></div>
-           <div class="viewProductAccessoryBox" style="background-color:#A7A39F;"></div>
-           <div class="viewProductAccessoryBox" style="background-color:#ECE9EF;"></div>
+           <div class="curateProductAccessoryBox" style="background-color:#B9B1AF;"></div>
+           <div class="curateProductAccessoryBox" style="background-color:#A7A39F;"></div>
+           <div class="curateProductAccessoryBox" style="background-color:#ECE9EF;"></div>
          </div>
        </div>
      </div>
