@@ -1313,10 +1313,17 @@ function loadCorrectHoverState(){
       for (var i = 0; i < $('.buyerDashSidebarCell').length; i++) {
         $($('.buyerDashSidebarCell')[i]).css({
           backgroundColor: 	"#F8F7F5"
+          ,color:	"#343331"
+        })
+      }
+      for (var i = 0; i < $('.buyerSideArrow').length; i++) {
+        $($('.buyerSideArrow')[i]).css({
+          color: "#F8F7F5"
         })
       }
       $(evt.target).css({
         backgroundColor: '#6D6B6C'
+        ,color:	"white"
       })
 
       ///

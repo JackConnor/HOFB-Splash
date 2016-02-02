@@ -84,8 +84,40 @@
   background-color: black;
 }
 
+.buyerDashAll {
+
+}
+
+.buyerDashFavorites {
+
+}
+
+.buyerDashPopular {
+
+}
+
 .buyerDashSidebarCell {
-  
+  border-bottom: 1px solid #F0EFED;
+  height: 35px;
+  display: block;
+  /*text-align: center;*/
+  font-size: 17px;
+  cursor: pointer;
+  margin: 0px 0 0 0px;
+  padding-top: 5px;
+  padding-left: 40px;
+}
+
+.buyerIconAll {
+  padding-right: 10px;
+}
+
+.buyerSideArrow {
+  float: right;
+  margin-right: 20px;
+  font-size: 20px;
+  font-weight: 900;
+  color: #F8F7F5;
 }
 
 .carouselBacking {
@@ -858,6 +890,15 @@
     color: #BB516C;
 }
 
+.dashAlert {
+  margin-top: 15px;
+  height: 35px;
+  background-color: #3CB878;
+  border-radius: 3px;
+  margin-top: 15px;
+  margin-left: 40px;
+}
+
 .dashFilter {
   -webkit-appearance: none;  /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
   -moz-appearance: none;  /*REMOVES DEFAULT FIREFOX STYLE*/
@@ -1131,8 +1172,7 @@
   border-left: 1px solid #EFEEEC;
   border-right: 1px solid #EFEEEC;
   vertical-align: bottom;
-  margin-left: 37px;
-  margin-top: 22px;
+  margin-left: 40px;
   color: #7d7c7c;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -1203,9 +1243,9 @@
   background-color: #F9F7F5;
   height: 100vh;
   text-align:justify;
-  margin-top: 10px;
+  margin-top: 5px;
   outline: 1px solid #EFEEEC;
-  padding-top: 80px;
+  padding-top: 10px;
 }
 
 .designerDashCollectionsContainer p{
@@ -1213,7 +1253,6 @@
 }
 
 .designerDashContainer{
-    margin-top: 35px;
 }
 
 .designerDashContests {
@@ -1253,7 +1292,6 @@
   width: 185px;
   background-color: #EBEBE9;
   margin-left: 8px;
-  margin-top: 22px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-top: 1px solid #EFEEEC;
@@ -1275,7 +1313,6 @@
   background-color: #F6FDFA;
   box-shadow: 1px 4px 4px #D5D3D1;
   z-index: 1;
-  position: absolute;
   width: 100%;
   padding-left: 40px;
   padding-top:  15px;
@@ -1305,7 +1342,7 @@
   display: inline-block;
   height: 46px;
   width: 94%;
-  margin-left: 2%;
+  margin-left: 40px;
   margin-top: -5px;
   vertical-align: top;
   background-color: #FEFDFA;
@@ -1327,7 +1364,7 @@
 
 .designerDashList {
   width: 94%;
-  margin-left: 2%;
+  margin-left: 40px;
 }
 
 .designerDashListContainer {
@@ -1418,11 +1455,11 @@
 }
 
 .designerDashDashTitle {
-  font-size:
+
 }
 
 .designerDashToggleContainer {
-  height: 65px;
+  height: 38px;
   width: 100%;
   display: block;
   margin-top: 15px;
