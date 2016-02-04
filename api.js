@@ -985,5 +985,5 @@ module.exports = function(app){
 
 
 
-var db = process.env.DB_URL_HOFB;
+var db = process.env.DB_URL_HOFB_DEVELOPMENT;
 mongoose.connect(db);

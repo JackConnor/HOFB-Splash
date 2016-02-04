@@ -12,7 +12,7 @@
 
 </script>
 <!-- Navigation Bar -->
-<div class="navigationBar">
+<div class="navigationBar" ng-click='buyer.allClick($event)'>
   <div class="navTitle">
     <img class='navbarLogoImg' src='/img/web_logo.png'/>
   </div>
@@ -32,20 +32,31 @@
 <!-- end nav bar -->
 <div class='designerDashDashTitle'>Buying Room</div>
 <div class="designerDashCollectionsContainer col-xs-2">
-  <div class="designerDashAll">
-    <p>
-      All
+  <div class="buyerDashAll">
+    <p class='buyerDashSidebarCell'>
+      <span class="fa fa-th buyerIconAll"></span>All<span class='fa fa-angle-right buyerSideArrow'></span>
     </p>
   </div>
-  <div class="designerDashFavorites">
-    <p>
-      <span class='glyphicon glyphicon-heart navbarHeart'></span>Favorites
+  <div class="buyerDashPopular">
+    <p class='buyerDashSidebarCell'>
+      <span class='fa fa-thumbs-up buyerIconAll'></span>Popular<span class='fa fa-angle-right buyerSideArrow'></span>
+    </p>
+  </div>
+  <div class="buyerDashFavorites">
+    <p class='buyerDashSidebarCell'>
+      <span class='glyphicon glyphicon-heart buyerIconAll'></span>Favorites<span class='fa fa-angle-right buyerSideArrow'></span>
     </p>
   </div>
   <div class="designerDashCollectionDropdown" >
   </div>
 </div>
 <div class="designerDashContainer col-xs-10">
+  <div class="dashAlert">
+    <div class="fa fa-times alertClose"></div>
+    <p class='dashAlertMessage'>
+      Welcome to House of Fashion Brands, where we bring the merch to you. If you need any help, please feel free to click on the help icon or use our chart below
+    </p>
+  </div>
   <div class="designerDashToggleContainer">
     <div class="designerDashActive" id='designsTabClicked'>
       <div class="tabSquare tabSquareBlue"></div>
