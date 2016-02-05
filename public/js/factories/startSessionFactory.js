@@ -6,18 +6,12 @@ angular.module('startSessionFactory', [])
   function startSession($http){
 
     function start(email, password, callback){
-      console.log('in the factory');
-      console.log(email);
-      console.log(password);
       $http({
         method: "POST"
         ,url: "/api/startsession"
         ,data: {email: email, password: password}
       })
       .then(function(sessionToken){
-        console.log('made it?');
-        console.log(sessionToken);
-        console.log(sessionToken.data);
         var tokenStatus = sessionToken.data;
         if(tokenStatus == "no user"){
           alert('we cannot find that user, please try again');

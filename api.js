@@ -32,8 +32,8 @@ var Product            = require('./models/product.js');
 var Photo              = require('./models/photo.js');
 var productComment     = require('./models/productComment.js');
 var Conversation       = require('./models/conversation.js');
-var Purchase           = require('./models/purchase.js')
-var Sample             = require('./models/sample.js')
+var Purchase           = require('./models/purchase.js');
+var Sample             = require('./models/sample.js');
 console.log("david");
 console.log('bowie');
 ///////finish bringing models////
@@ -49,7 +49,7 @@ module.exports = function(app){
   app.get('/api/users', function(req, res){
     User.find({}, function(err, users){
       if(err) throw err;
-      res.json(users)
+      res.json(users);
     })
   })
 
@@ -67,6 +67,7 @@ module.exports = function(app){
     console.log(req.params);
     User.findOne({"_id":req.params.id})
     .populate('products')
+    // .populate('photos')
     .exec(function(err, user){
       if(err){console.log(err)}
       console.log(user.products[0]);
@@ -646,16 +647,6 @@ module.exports = function(app){
   })
 
   app.post('/api/pictures', upload.array('files', 8), function(req,res){
-    console.log('yoyoyoyo');
-    console.log('yoyoyoyo');
-    console.log('yoyoyoyo');
-    console.log('yoyoyoyo');
-    console.log('yoyoyoyo');
-    console.log('yoyoyoyo');
-    console.log('yoyoyoyo');
-    console.log('yoyoyoyo');
-    console.log(req.files);
-    console.log(req.body);
     for (var i = 0; i < req.files.length; i++) {
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination
