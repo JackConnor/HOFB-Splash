@@ -184,14 +184,14 @@ angular.module('viewProductController', ['checkPwFactory', 'getProductFactory', 
           if(i <= 4){
             $('.viewProductModalMiniHolder').append(
               "<div class='viewProductModalMiniCell'>"+
-                "<img class='viewProductModalMiniCellImage' src='"+self.allThumbs[i]+"'>"+
+                "<img class='viewProductModalMiniCellImage' src='"+self.allImages[i]+"'>"+
               '</div>'
             )
           }
           else {
             $('.viewProductModalMiniHolder1').append(
               "<div class='viewProductModalMiniCell'>"+
-                "<img class='viewProductModalMiniCellImage' src='"+self.allThumbs[i]+"'>"+
+                "<img class='viewProductModalMiniCellImage' src='"+self.allImages[i]+"'>"+
               '</div>'
             )
           }
