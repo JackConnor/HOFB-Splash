@@ -33,6 +33,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     self.miniPhotoCounter = 0;
     self.tempPhotoCache = []; //////stores just photo files
     self.tempPhotoHTMLCache = [];/////stores uploaded photos plus html
+    self.photoCropSizes = [];
     self.allSwatches = allSwatches;
     /////end global variables
     toggleDeleteHover();
@@ -624,7 +625,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,zoomOnTouch: false
         ,background: false
         ,crop: function(e) {
-          console.log(self.miniPhotoCounter);
           var getImageData = $('.modalCropImage').cropper('getImageData');
           var getCrop = $('.modalCropImage').cropper('getData');
           var cropPhotoDataRaw = {
@@ -640,7 +640,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             ,frontendMultiple: (750/(getCrop.height/(600/getImageData.naturalHeight)))
             ,frontendMiniMultiple: (71.5/(getCrop.width/(600/getImageData.naturalHeight)))
           }
-          console.log(cropPhotoDataRaw);
           var finalMultiple = (cropPhotoDataRaw.frontendMultiple/cropPhotoDataRaw.naturalMultiple);
           var finalMiniMultiple = (cropPhotoDataRaw.frontendMiniMultiple/cropPhotoDataRaw.naturalMultiple);
           var finalCropData = {
@@ -655,14 +654,21 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             ,frontendFullImageHeight: (cropPhotoDataRaw.imageNaturalHeight * finalMiniMultiple)
             ,frontendFullImageWidth: (cropPhotoDataRaw.imageNaturalWidth * finalMiniMultiple)
           }
+          var cropBackendData = {
+            naturalX: cropPhotoDataRaw.cropHeight/cropPhotoDataRaw.naturalMultiple
+            ,naturalY: cropPhotoDataRaw.cropWidth/cropPhotoDataRaw.naturalMultiple
+            ,naturalCropHeight: cropPhotoDataRaw.getCropX/cropPhotoDataRaw.naturalMultiple
+            ,naturalCropWidth: cropPhotoDataRaw.getCropX/cropPhotoDataRaw.naturalMultiple
+          }
+          self.cropBackendData = cropBackendData;
           self.finalCropData = finalCropData
           self.finalMiniData = finalMiniData
-          console.log(finalCropData);
-          console.log(self.miniPhotoCounter);
         }
         ,built: function(){
           $('.modalCropSubmit').on('click', function(){
             console.log(self.finalCropData);
+            console.log(self.finalMiniData);
+            console.log(self.cropBackendData);
             $('.newProductCurrentImage').css({
               /////we modify the css for the main image here
               height: self.finalCropData.frontendFullImageHeight
@@ -674,7 +680,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             self.tempPhotoCache[self.miniPhotoCounter] = self.tmppath;////add photo to the cache so we can send later
             self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
             $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', self.tmppath);
-            console.log(self.miniPhotoCounter);
             /////adjust the photo ratio for the photo thumbnail
             $('#newProductMiniImage'+self.miniPhotoCounter).css({
               height: self.finalMiniData.frontendFullImageHeight
@@ -687,76 +692,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             toggleDeleteHover(self.miniPhotoCounter);
             highlightMini();
           })
-        //   var image = $('.modalCropImage').cropper('getImageData');
-        //   console.log(image);
-        //   var getImageData = $('.modalCropImage').cropper('getImageData');
-        //   console.log(getImageData);
-        //   var getCrop = $('.modalCropImage').cropper('getData');
-        //   console.log(getCrop);
-        //   var cropPhotoDataRaw = {
-        //     x: getCrop.x
-        //     ,y: getCrop.y
-        //     ,imageWidth: getImageData.width
-        //     ,imageHeight: getImageData.height
-        //     ,cropWidth: getCrop.width
-        //     ,cropHeight: getCrop.height
-        //     ,imageNaturalHeight: getImageData.naturalHeight
-        //     ,imageNaturalWidth: getImageData.naturalWidth
-        //     ,naturalMultiple: (600/getImageData.naturalHeight)
-        //     ,frontendMultiple: (750/(getCrop.height/(600/getImageData.naturalHeight)))
-        //   }
-        //   console.log(cropPhotoDataRaw);
-        //   var finalMultiple = (cropPhotoDataRaw.frontendMultiple/cropPhotoDataRaw.naturalMultiple);
-        //   var finalCropData = {
-        //     xOffset: (cropPhotoDataRaw.x * finalMultiple)
-        //     ,yOffset: (cropPhotoDataRaw.y * finalMultiple)
-        //     ,frontendFullImageHeight: (cropPhotoDataRaw.imageNaturalHeight * finalMultiple)
-        //   }
-        //   self.finalCropData = finalCropData;
-        //   console.log(finalCropData);
-        //
-        //   ///////click function to get all that stuff
-        //   $('.modalCropSubmit').on('click', function(){
-        //     console.log(self.finalCropData);
-        //     $('.newProductCurrentImage').css({
-        //       /////we modify the css for the main image here
-        //       height: self.finalCropData.frontendFullImageHeight
-        //       ,marginTop: -(self.finalCropData.yOffset)
-        //       ,marginLeft: -(self.finalCropData.xOffset)
-        //       ,width: ''
-        //     })
-        //     $('.newProductCurrentImage').attr('src', tmppath);
-        //     self.tempPhotoCache[self.miniPhotoCounter] = tmppath;////add photo to the cache so we can send later
-        //     self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-        //     $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath);
-        //     /////adjust the photo ratio for the photo thumbnail
-        //     // $('#newProductMiniImage'+self.miniPhotoCounter).css({
-        //     //   marginTop: -(cropPhotoData.y)*cropPhotoData.heightMultiple
-        //     //   ,marginLeft: -(cropPhotoData.x)*cropPhotoData.widthMultiple
-        //     // })
-        //     $('.photoModal').remove();
-        //     self.miniPhotoCounter++;
-        //     highlightMini();
-        //   })
         }
       })
-      //////now we return the cropped image
 
       //////end cropping stuff////////////////////////
       ////////////////////////////////////////////////
-      // var blob = new Image();
-      // blob.src = tmppath;
-      // blob.onload = function(){
-      //   var ratio = 0.7
-      //   $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
-      //   self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
-      //   self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-      //   $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-      //   self.miniPhotoCounter++;
-      //   frontBackSide(self.miniPhotoCounter);
-      //   toggleDeleteHover(self.miniPhotoCounter);
-      //   highlightMini();
-      // }
     }
     //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
@@ -1080,26 +1020,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     /////End Logic to load intial params name//////
     ///////////////////////////////////////////////
-
-    ////////////////////////////////////////////////
-    //////begin photo cropping stuff////////////////
-    //
-    $('.newProductCurrentImage').cropper({
-      aspectRatio: 1 / 1,
-      crop: function(e) {
-        // Output the result data for cropping image.
-        console.log(e.x);
-        console.log(e.y);
-        console.log(e.width);
-        console.log(e.height);
-        console.log(e.rotate);
-        console.log(e.scaleX);
-        console.log(e.scaleY);
-      }
-    })
-
-    //////end cropping stuff////////////////////////
-    ////////////////////////////////////////////////
 
     //////function to keep scroll-right for mini images in the right placeholder
     self.imageHolderMargin = 0;
