@@ -7,6 +7,7 @@ var userSchema = new Schema({
   ,firstname: String
   ,lastname: String
   ,username: String
+  ,mostPickedClothing: Array
   ,passwordDigest: String
   ,status: String
   ,location: Object  //////this will hold all address, street, city, zip, etc

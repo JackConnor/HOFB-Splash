@@ -27,11 +27,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       })
 
     })
+    //////global variables
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
     self.miniPhotoCounter = 0;
-    self.tempPhotoCache = [];
-    self.tempPhotoHTMLCache = [];
+    self.tempPhotoCache = []; //////stores just photo files
+    self.tempPhotoHTMLCache = [];/////stores uploaded photos plus html
     self.allSwatches = allSwatches;
     /////end global variables
     toggleDeleteHover();
@@ -760,14 +761,20 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
       var potSource = $('#newProductMiniImage'+self.miniPhotoCounter).attr('src');
+      console.log(potSource);
       if(!potSource){
         self.miniPhotoCounter = self.tempPhotoCache.length-1;
       }
       var targetImage = $('#newProductMiniImage'+self.miniPhotoCounter)
       var placeInLine = targetImage[0].id.split('').pop();
       self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
+      console.log(self.tempPhotoCache);
       self.tempPhotoHTMLCache.splice(placeInLine, 1);///our master photo array should be adjusted
-      $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[self.tempPhotoCache.length-1]));
+      console.log(self.tempPhotoCache[self.tempPhotoCache.length-1]);
+      console.log(self.miniPhotoCounter);
+      if(self.miniPhotoCounter >= 4){
+        $('.newProductCurrentImage').attr('src', self.tempPhotoCache[self.tempPhotoCache.length-1]);
+      }
       self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
       ///////now we need to reorder all of the remaining mini photos so that there are no spaces
       var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
@@ -775,7 +782,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         $('#newProductMiniImage'+i).attr('src', '');
         if(i < self.tempPhotoCache.length){
           var imageShift = $('#newProductMiniImage'+i)[0];
-          $(imageShift).attr('src', URL.createObjectURL(self.tempPhotoCache[i]))
+          $(imageShift).attr('src', self.tempPhotoCache[i])
           // $('#newProductMiniImage'+i).src( URL.createObjectURL(self.tempPhotoCache[i]))
         }
         else if(i >= self.tempPhotoCache.length){
@@ -972,6 +979,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           $('.tempForm').append(self.tempPhotoHTMLCache[i]);
         }
       }
+      console.log(self.tempPhotoHTMLCache);
       $('.tempForm').append(
         "<input name='productId' type='text' value='"+productToUpdate._id+"'>"
       );
