@@ -654,11 +654,14 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             ,frontendFullImageHeight: (cropPhotoDataRaw.imageNaturalHeight * finalMiniMultiple)
             ,frontendFullImageWidth: (cropPhotoDataRaw.imageNaturalWidth * finalMiniMultiple)
           }
+          console.log(cropPhotoDataRaw.naturalMultiple);
+          console.log(cropPhotoDataRaw.cropHeight);
+          console.log(cropPhotoDataRaw.cropWidth);
           var cropBackendData = {
-            naturalX: cropPhotoDataRaw.cropHeight/cropPhotoDataRaw.naturalMultiple
-            ,naturalY: cropPhotoDataRaw.cropWidth/cropPhotoDataRaw.naturalMultiple
-            ,naturalCropHeight: cropPhotoDataRaw.getCropX/cropPhotoDataRaw.naturalMultiple
-            ,naturalCropWidth: cropPhotoDataRaw.getCropX/cropPhotoDataRaw.naturalMultiple
+            naturalCropHeight: cropPhotoDataRaw.cropHeight/cropPhotoDataRaw.naturalMultiple
+            ,naturalCropWidth: cropPhotoDataRaw.cropWidth/cropPhotoDataRaw.naturalMultiple
+            ,naturalX: (cropPhotoDataRaw.x/cropPhotoDataRaw.naturalMultiple)
+            ,naturalY: (cropPhotoDataRaw.y/cropPhotoDataRaw.naturalMultiple)
           }
           self.cropBackendData = cropBackendData;
           self.finalCropData = finalCropData
@@ -678,7 +681,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
             })
             $('.newProductCurrentImage').attr('src', self.tmppath);
             self.tempPhotoCache[self.miniPhotoCounter] = self.tmppath;////add photo to the cache so we can send later
-            self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
+            self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target/////store input field with fil to submit via Multer later
+            self.photoCropSizes[self.miniPhotoCounter] = self.cropBackendData;
             $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', self.tmppath);
             /////adjust the photo ratio for the photo thumbnail
             $('#newProductMiniImage'+self.miniPhotoCounter).css({
@@ -917,6 +921,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       for (var i = 0; i < 9; i++) {
         if(self.tempPhotoHTMLCache[i]){
           $('.tempForm').append(self.tempPhotoHTMLCache[i]);
+          $('.tempForm').append(
+            "<input name='"+i+"cropInfoHeight' type='text' value='"+self.photoCropSizes[i].naturalCropHeight+"'>"+
+            "<input name='"+i+"cropInfoWidth' type='text' value='"+self.photoCropSizes[i].naturalCropWidth+"'>"+
+            "<input name='"+i+"cropInfoX' type='text' value='"+self.photoCropSizes[i].naturalX+"'>"+
+            "<input name='"+i+"cropInfoY' type='text' value='"+self.photoCropSizes[i].naturalY+"'>"
+          )
         }
       }
       console.log(self.tempPhotoHTMLCache);

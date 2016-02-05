@@ -260,7 +260,6 @@ module.exports = function(app){
 
   ////post a single product
   app.post('/api/products', function(req, res){
-    console.log(req.body);
     Product.create(req.body, function(err, product){
       if(err) throw err;
       var comment = new productComment();
@@ -268,10 +267,8 @@ module.exports = function(app){
       comment.sender = req.body.userId;
       comment.commentText = "Welcome, this is where you will be communicating with our team of curators about your product"
       comment.save(function(err, newComment){
-        console.log(newComment);
         product.comments.push(newComment._id)
         product.save(function(err, updatedProduct){
-          console.log(updatedProduct);
           res.json(updatedProduct);
         })
       })
@@ -647,19 +644,50 @@ module.exports = function(app){
   })
 
   app.post('/api/pictures', upload.array('files', 8), function(req,res){
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log('yoyoyoyoyoyoyoyoyoyoyoyoy');
+    console.log(req.body);
     for (var i = 0; i < req.files.length; i++) {
+      console.log(req.body[i+"cropInfoHeight"]);
+      var picWidth = parseInt(req.body[i+"cropInfoWidth"]);
+      console.log(picWidth);
+      var picHeight = parseInt(req.body[i+"cropInfoHeight"]);
+      console.log(picHeight);
+      var xOffset = parseInt(req.body[i+"cropInfoX"]);
+      console.log(xOffset);
+      var yOffset = parseInt(req.body[i+"cropInfoY"]);
+      console.log(yOffset);
       var fileName = req.files[i].filename;
       var destination = req.files[i].destination
       //Uploads to cloudinary, returns URL -> uploadResult is the new photo URL
       cloudinary.uploader.upload(destination+fileName, function(uploadResult){
-        console.log(uploadResult);
         var id = req.body.productId;
         //grabs ID from above line, does a search on DB with that ID below
+        console.log('url coming soon');
+        console.log(uploadResult);
         Product.findOne({"_id": id}, function(err, product){
           if(err){console.log(err)}
           //push 500x700 adn 150x150 images for all images
-          product.thumbnails.push(uploadResult.eager[0].secure_url);
-          product.images.push(uploadResult.eager[1].secure_url);
+          product.images.push(uploadResult.eager[0].secure_url);
           //user.photo = uploadResult.secure_url
           //consol.log uploadResult.secure_url for userProfile
           product.save({}, function(err, updatedProduct){
@@ -667,7 +695,6 @@ module.exports = function(app){
             Conversation.findOne({productId: updatedProduct._id}, function(err, convo){
               // console.log(convo);
               // console.log(432);
-              console.log(updatedProduct);
               convo.photoUrl = updatedProduct.images[0];
               convo.save({}, function(err, newConvo){
                 // console.log(newConvo);
@@ -678,10 +705,7 @@ module.exports = function(app){
       },
       {
         eager: [
-           { width: 150, height: 150,
-             crop: "fill", format: "png" },
-           { width: 560, height: 700,
-            crop: 'fill', format: "png" }
+           { width: picWidth, height: picHeight, x: xOffset, y: yOffset, crop: 'crop'}
         ]
        })
     }
@@ -895,7 +919,6 @@ module.exports = function(app){
 
   //////logic for getting all conversations of a specific Product
   app.get('/api/conversation/:product_id', function(req, res){
-    console.log(req.body);
     Conversation.findOne({'productId': req.params.product_id}, function(err, conversations){
       res.json(conversations);
     })
@@ -905,17 +928,14 @@ module.exports = function(app){
   app.post('/api/new/conversation', function(req, res){
     Conversation.create(req.body, function(err, newConvo){
       if(err){console.log(err)}
-      console.log(newConvo);
       res.json(newConvo)
     })
   })
 
   /////Update a new message to a conversation
   app.post('/api/conversation', function(req, res){
-    console.log(req.body);
     Conversation.findOne({"productId": req.body.productId}, function(err, conversation){
       if(err){console.log(err)}
-      console.log(conversation);
       conversation.comments.push({sender: req.body.sender, commentText: req.body.commentText, date: new Date(), receiver: 'admin'})
       conversation.save(function(err, newConversation){
         res.json(newConversation);
@@ -946,19 +966,15 @@ module.exports = function(app){
   /////////Begin Routes for Sampling and Purchasing
   app.post('/api/new/sample', function(req, res){
     Sample.create(req.body, function(err, newSample){
-      console.log(newSample);
       res.json(newSample);
     })
   })
 
   app.post('/api/update/sample', function(req, res){
-    console.log(req.body);
     if(req.body)
     Sample.findOne({"productId":req.body.productId}, function(err, sample){
       if(err){console.log(err)}
       else if(sample != null){
-        console.log('before');
-        console.log(sample);
         sample.status = req.body.status;
         sample.sampleCreator = req.body.sampleCreator;
         sample.save(function(){
