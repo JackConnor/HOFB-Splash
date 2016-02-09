@@ -14,8 +14,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       ,url: '/api/checkstatus/'+ window.localStorage.hofbToken
     })
     .then(function(decodedToken){
-      console.log(decodedToken);
-      console.log(decodedToken);
       if(decodedToken.data.aud != 'designer'){
         alert('You must signin with the proper credentials to view this page');
         window.location.hash = "#/designer/loginportal";
@@ -29,11 +27,13 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       })
 
     })
+    //////global variables
     var carouselMargin = 0; ///keeps track of carousel's margin
     var carouselCounter = 0;///keeps track of carousel's postion in the queue
     self.miniPhotoCounter = 0;
-    self.tempPhotoCache = [];
-    self.tempPhotoHTMLCache = [];
+    self.tempPhotoCache = []; //////stores just photo files
+    self.tempPhotoHTMLCache = [];/////stores uploaded photos plus html
+    self.photoCropSizes = [];
     self.allSwatches = allSwatches;
     /////end global variables
     toggleDeleteHover();
@@ -143,16 +143,12 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////////Effects for carousel//////////
     ////click effect for highlighting
     function swatchLogic(swatchType){
-      console.log(swatchType);
       ///////note: swatchType needs to be added as a capital, i.e. "Season"
       ///////fabrics hav a color popup modal, which we take care of here
       if(swatchType == "Fabric"){
         $('.create'+swatchType).on('click', function(evt){
-          console.log('swatching');
           var target = $(evt.target);
-          console.log(target);
           var fabricType = target[0].classList[1].slice(6, 100);
-          console.log(fabricType);
           var fabricDescription = allSwatches.fabrics[fabricType].description;
           var allColors = allSwatches.fabrics[fabricType].colors;
           ////////we add the color picking modal
@@ -244,26 +240,17 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           //////////now we split based on if the modal is being picked for the first time, or editing a previously picked choice
           /////if this is a first time color choice for this fabric......
           if(!target.hasClass('picked')){
-            console.log(target);
             $(evt.target).addClass('fabricColor');
             $(evt.target).addClass('fabricColorList');
             ////////function to submit the modal with all your color choices
             $('.colorModalSubmit').on('click', function(){
-              console.log('yo');
-              console.log(target);
               for (var i = 0; i < $('.colorModalCellInner').length; i++) {
                 if($($('.colorModalCellInner')[i]).hasClass('colorPicked')){
                   var colorName = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
-                  console.log(colorName);
                   var colorList = $(target[0])[0].classList[5];
                   target.removeClass(colorList);
                   var colorList = colorList + "_" + colorName;
-                  console.log(colorList);
                   target.addClass(colorList);
-                  console.log(target);
-                  console.log(target[0]);
-                  console.log(target.parentNode);
-                  console.log(target[0].parentNode);
                   $(target[0].nextSibling).css({
                     border: "4px solid #289DAE"
                   })
@@ -277,10 +264,8 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
           else {
             ///////////////first we need to load up the already-picked colors
             var colors = $(target[0])[0].classList[3].split("_").slice(1, 100);
-            console.log(colors);
             for (var i = 0; i < $('.colorModalCellInner').length; i++) {
               var swatchColorType = $($('.colorModalCellInner')[i])[0].classList[1].slice(10, 100);
-              console.log(swatchColorType);
               for (var k = 0; k < colors.length; k++) {
                 if(colors[k] == swatchColorType){
                   $($('.colorModalCellInner')[i]).css({
@@ -618,35 +603,122 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     function frontendPhotoDisplay(event){
       var tmppath = URL.createObjectURL(event.target.files[0]);//new temp url
+      self.tmppath = tmppath;
       /////let's check for blob ratio, then just nota ccept and ask for a new on eif it's not a proper ratio
-      var blob = new Image();
-      blob.src = tmppath;
-      blob.onload = function(){
-        console.log(this.width);
-        console.log(this.height);
-        var ratio = 0.7
-        console.log(ratio);
-        $(".newProductCurrentImage").attr('src',tmppath);////turn big image to what was just picked
-        self.tempPhotoCache[self.miniPhotoCounter] = event.target.files[0]////add photo to the cache so we can send later
-        self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target
-        $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', tmppath)
-        self.miniPhotoCounter++;
-        frontBackSide(self.miniPhotoCounter);
-        toggleDeleteHover(self.miniPhotoCounter);
-        highlightMini();
-      }
+
+      ///add modal
+      $('.bodyview').prepend(
+        '<div class="photoModal">'+
+          "<div class='modalFillerCrop'>"+
+            "<img class='modalCropImage' src='"+tmppath+"'/>"+
+          "</div>"+
+          "<div class='modalCropSubmit'>CROP</div>"+
+        '</div>'
+      );
+      ////////////////////////////////////////////////
+      //////begin photo cropping stuff////////////////
+      //
+      $('.modalCropImage').cropper({
+        aspectRatio: 4/5
+        ,viewMode: 1
+        ,zoomOnWheel: false
+        ,zoomOnTouch: false
+        ,background: false
+        ,crop: function(e) {
+          var getImageData = $('.modalCropImage').cropper('getImageData');
+          var getCrop = $('.modalCropImage').cropper('getData');
+          var cropPhotoDataRaw = {
+            x: getCrop.x
+            ,y: getCrop.y
+            ,imageWidth: getImageData.width
+            ,imageHeight: getImageData.height
+            ,cropWidth: getCrop.width
+            ,cropHeight: getCrop.height
+            ,imageNaturalHeight: getImageData.naturalHeight
+            ,imageNaturalWidth: getImageData.naturalWidth
+            ,naturalMultiple: (600/getImageData.naturalHeight)
+            ,frontendMultiple: (750/(getCrop.height/(600/getImageData.naturalHeight)))
+            ,frontendMiniMultiple: (71.5/(getCrop.width/(600/getImageData.naturalHeight)))
+          }
+          var finalMultiple = (cropPhotoDataRaw.frontendMultiple/cropPhotoDataRaw.naturalMultiple);
+          var finalMiniMultiple = (cropPhotoDataRaw.frontendMiniMultiple/cropPhotoDataRaw.naturalMultiple);
+          var finalCropData = {
+            xOffset: (cropPhotoDataRaw.x * finalMultiple)
+            ,yOffset: (cropPhotoDataRaw.y * finalMultiple)
+            ,frontendFullImageHeight: (cropPhotoDataRaw.imageNaturalHeight * finalMultiple)
+            ,frontendFullImageWidth: (cropPhotoDataRaw.imageNaturalWidth * finalMultiple)
+          }
+          var finalMiniData = {
+            xOffset: (cropPhotoDataRaw.x * finalMiniMultiple)
+            ,yOffset: (cropPhotoDataRaw.y * finalMiniMultiple)
+            ,frontendFullImageHeight: (cropPhotoDataRaw.imageNaturalHeight * finalMiniMultiple)
+            ,frontendFullImageWidth: (cropPhotoDataRaw.imageNaturalWidth * finalMiniMultiple)
+          }
+          console.log(cropPhotoDataRaw.naturalMultiple);
+          console.log(cropPhotoDataRaw.cropHeight);
+          console.log(cropPhotoDataRaw.cropWidth);
+          var cropBackendData = {
+            naturalCropHeight: cropPhotoDataRaw.cropHeight/cropPhotoDataRaw.naturalMultiple
+            ,naturalCropWidth: cropPhotoDataRaw.cropWidth/cropPhotoDataRaw.naturalMultiple
+            ,naturalX: (cropPhotoDataRaw.x/cropPhotoDataRaw.naturalMultiple)
+            ,naturalY: (cropPhotoDataRaw.y/cropPhotoDataRaw.naturalMultiple)
+          }
+          self.cropBackendData = cropBackendData;
+          self.finalCropData = finalCropData
+          self.finalMiniData = finalMiniData
+        }
+        ,built: function(){
+          $('.modalCropSubmit').on('click', function(){
+            console.log(self.finalCropData);
+            console.log(self.finalMiniData);
+            console.log(self.cropBackendData);
+            $('.newProductCurrentImage').css({
+              /////we modify the css for the main image here
+              height: self.finalCropData.frontendFullImageHeight
+              ,width: self.finalCropData.frontendFullImageWidth
+              ,marginTop: -(self.finalCropData.yOffset)
+              ,marginLeft: -(self.finalCropData.xOffset)
+            })
+            $('.newProductCurrentImage').attr('src', self.tmppath);
+            self.tempPhotoCache[self.miniPhotoCounter] = self.tmppath;////add photo to the cache so we can send later
+            self.tempPhotoHTMLCache[self.miniPhotoCounter] = event.target/////store input field with fil to submit via Multer later
+            self.photoCropSizes[self.miniPhotoCounter] = self.cropBackendData;
+            $('#newProductMiniImage'+self.miniPhotoCounter).attr('src', self.tmppath);
+            /////adjust the photo ratio for the photo thumbnail
+            $('#newProductMiniImage'+self.miniPhotoCounter).css({
+              height: self.finalMiniData.frontendFullImageHeight
+              ,width: self.finalMiniData.frontendFullImageWidth
+              ,marginTop: -(self.finalMiniData.yOffset)
+              ,marginLeft: -(self.finalMiniData.xOffset)
+            })
+            $('.photoModal').remove();
+            frontBackSide(self.miniPhotoCounter);
+            toggleDeleteHover(self.miniPhotoCounter);
+            highlightMini();
+          })
+        }
+      })
+
+      //////end cropping stuff////////////////////////
+      ////////////////////////////////////////////////
     }
     //////function to delete the photo inside of a mini photo on click
     function deleteMiniPhoto(evt){
       var potSource = $('#newProductMiniImage'+self.miniPhotoCounter).attr('src');
+      console.log(potSource);
       if(!potSource){
         self.miniPhotoCounter = self.tempPhotoCache.length-1;
       }
       var targetImage = $('#newProductMiniImage'+self.miniPhotoCounter)
       var placeInLine = targetImage[0].id.split('').pop();
       self.tempPhotoCache.splice(placeInLine, 1);///our master photo array should be adjusted
+      console.log(self.tempPhotoCache);
       self.tempPhotoHTMLCache.splice(placeInLine, 1);///our master photo array should be adjusted
-      $('.newProductCurrentImage').attr('src', URL.createObjectURL(self.tempPhotoCache[self.tempPhotoCache.length-1]));
+      console.log(self.tempPhotoCache[self.tempPhotoCache.length-1]);
+      console.log(self.miniPhotoCounter);
+      if(self.miniPhotoCounter >= 4){
+        $('.newProductCurrentImage').attr('src', self.tempPhotoCache[self.tempPhotoCache.length-1]);
+      }
       self.miniPhotoCounter = self.tempPhotoCache.length//sets this to the slot one after our last active upload;
       ///////now we need to reorder all of the remaining mini photos so that there are no spaces
       var allMiniPhotosLength = $('.newProductMiniImage').length;//array of all photos as elements
@@ -654,7 +726,7 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         $('#newProductMiniImage'+i).attr('src', '');
         if(i < self.tempPhotoCache.length){
           var imageShift = $('#newProductMiniImage'+i)[0];
-          $(imageShift).attr('src', URL.createObjectURL(self.tempPhotoCache[i]))
+          $(imageShift).attr('src', self.tempPhotoCache[i])
           // $('#newProductMiniImage'+i).src( URL.createObjectURL(self.tempPhotoCache[i]))
         }
         else if(i >= self.tempPhotoCache.length){
@@ -714,19 +786,19 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var arrLength = $('.newProductMiniImage').length;
       for (var i = 0; i < 8; i++) {
         $('#newProductMiniImage'+i).css({
-          border: "1px solid white"
+          // border: "1px solid white"
         })
       }
       for (var i = 0; i < 8; i++) {
         if($($('.newProductMiniImageImage')[i]).attr('src') == '' && i != 0){
           $('#newProductMiniImage'+self.miniPhotoCounter).css({
-            border: "5px solid #858585"
+            // border: "5px solid #858585"
           })
           return;
         }
         else if($($('.newProductMiniImageImage')[i]).attr('src') == '' && i == 0){
           $('#newProductMiniImage0').css({
-            border: "5px solid #858585"
+            // border: "5px solid #858585"
           })
           return;
         }
@@ -755,7 +827,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       var description = $('.newProductDescription').val();
       var fabricsFunc = function(){
         var allPicked = $(".picked");
-        console.log(allPicked);
         var fabricsArray = [];
         for (var i = 0; i < allPicked.length; i++) {
           if(allPicked[i].id.split('_')[1] == 'Fabric'){
@@ -804,7 +875,15 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       }
       postProject.postProject(newProjectObject)///post the object
       .then(function(newProjectInfo){
-        submitPhotos(newProjectInfo.data);
+        /////let's add this product to the user model here, and then submit photos inside of that
+        $http({
+          method: "POST"
+          ,url: "api/users/update"
+          ,data: {productId: newProjectInfo.data._id, userId: userId}
+        })
+        .then(function(updatedUser){
+          submitPhotos(newProjectInfo.data);
+        })
       })
     }
     $('.new_product_send').on('click', function(){
@@ -819,7 +898,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         "</div>"
       )
       $('.submitProject').on('click', function(evt){
-        console.log('yoooo');
         sendNewProject(evt);
       })
       $('.deleteCurateModal').on('click', function(){
@@ -843,8 +921,15 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
       for (var i = 0; i < 9; i++) {
         if(self.tempPhotoHTMLCache[i]){
           $('.tempForm').append(self.tempPhotoHTMLCache[i]);
+          $('.tempForm').append(
+            "<input name='"+i+"cropInfoHeight' type='text' value='"+self.photoCropSizes[i].naturalCropHeight+"'>"+
+            "<input name='"+i+"cropInfoWidth' type='text' value='"+self.photoCropSizes[i].naturalCropWidth+"'>"+
+            "<input name='"+i+"cropInfoX' type='text' value='"+self.photoCropSizes[i].naturalX+"'>"+
+            "<input name='"+i+"cropInfoY' type='text' value='"+self.photoCropSizes[i].naturalY+"'>"
+          )
         }
       }
+      console.log(self.tempPhotoHTMLCache);
       $('.tempForm').append(
         "<input name='productId' type='text' value='"+productToUpdate._id+"'>"
       );
@@ -861,7 +946,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         ,data: {productName: newProjectInfo.name, productId: newProjectInfo._id, dateCreate: new Date(), comments: [], ownerId: self.userId, ownerName: self.currentUser.name, photoUrl: newProjectInfo.images[0]}
       })
       .then(function(newConvo){
-        console.log($('.tempForm'));
         $('.tempForm').submit();
       })
     }
@@ -936,11 +1020,9 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////////Logic to load intial params name//////
     function loadName(){
       var name = window.location.hash.split('/')[3].split('_').join(' ');
-      console.log(name);
       productName = name.toLowerCase().replace(/\b[a-z]/g, function(letter) {
           return letter.toUpperCase();
       });
-      console.log(productName);
       //////load text inputs
       $('.newProductTitle').val(productName);
     }
@@ -948,26 +1030,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     /////End Logic to load intial params name//////
     ///////////////////////////////////////////////
-
-    ////////////////////////////////////////////////
-    //////begin photo cropping stuff////////////////
-    //
-    // $('.newProductCurrentImage').cropper({
-    //   aspectRatio: 1 / 1,
-    //   crop: function(e) {
-    //     // Output the result data for cropping image.
-    //     console.log(e.x);
-    //     console.log(e.y);
-    //     console.log(e.width);
-    //     console.log(e.height);
-    //     console.log(e.rotate);
-    //     console.log(e.scaleX);
-    //     console.log(e.scaleY);
-    //   }
-    // })
-
-    //////end cropping stuff////////////////////////
-    ////////////////////////////////////////////////
 
     //////function to keep scroll-right for mini images in the right placeholder
     self.imageHolderMargin = 0;
@@ -1061,15 +1123,14 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////start of navbar dropdown logic/////////////
     ////////////////////////////////////////////////
     $(".dropbtn").on('click', function(){
-      console.log('dropbtn is working');
-            myFunction();
-            // location.reload();
-      });
+      myFunction();
+      // location.reload();
+    });
 
     /* When the user clicks on the button,
     toggle between hiding and showing the dropdown content */
     function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
+      document.getElementById("myDropdown").classList.toggle("show");
     }
 
     // Close the dropdown if the user clicks outside of it
@@ -1091,13 +1152,11 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
 
     ///////functions to add outline to edit tools on hover
     function toggleDeleteHover(counter){
-      console.log('rloaded baby');
       $('.fileUploadWrapper').css({
         opacity: 1
       })
       if(counter >= 4){
         $('.fileUploadWrapper').on('mouseenter', function(){
-          console.log(counter);
           $('.fileUploadWrapper').css({
             outline: "2px solid gray"
           })
@@ -1109,12 +1168,10 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         })
       }
       else {
-        console.log('below four');
         $('.fileUploadWrapper').css({
           opacity: 1
         })
         $('.fontChallenge').on('mouseenter', function(){
-          console.log(self.miniPhotoCounter);
           $('.fontChallenge').css({
             backgroundColor: "#138592"
           })
@@ -1152,7 +1209,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
     /////////////////////////////////////////////////////////
     //////////functions to add the front-side-back html to the page as a user uploads photos
     function frontBackSide(counter){
-      console.log(counter);
       ////make sure there is no previous html from this guide before we precede
       $('.fontChallenge').remove();
       $('.sideBanner').remove();
@@ -1190,8 +1246,6 @@ var app = angular.module('createProjectController', ['postProjectFactory', 'chec
         })
       }
 
-      console.log('in the guide function');
-      console.log(counter);
       if(counter == 0){
         $('.newProductCurrentImage').attr('src', '');
         var view = "FORWARD";
