@@ -17,6 +17,9 @@
     <img class='navbarLogoImg' src='/img/web_logo.png'/>
   </div>
   <div class='navTitleRightLine'></div>
+  <div class='adminDashNavBarCurate'>Curation</div>
+  <div class='adminDashNavBarShipping'>Shipping</div>
+  <div class='adminDashNavBarManage'>Management</div>
   <div class="dropdown">
     <button  class="dropbtn">Dropdown</button>
     <div id="myDropdown" class="dropdown-content">
@@ -34,7 +37,7 @@
 
 </div>
 <div class="curateProductContainer">
-  <div class="curateProductContainerLeft col-md-5">
+  <div class="curateProductContainerLeft col-md-7">
     <div class="curateProductLeftNav col-md-3">
       <div class="curateProductListContainer" >
         <div class="curateProductListName" ng-repeat='curateProductName in adminCurate.alreadyCurated'>
@@ -44,21 +47,18 @@
     </div>
     <div class="curateProductImageContainer">
       <img class='curateProductImage'src="{{adminCurate.curatedData.images[0]}}"/>
+      <div class='productDescriptionBox text-center'>
+        <p class='wordwrap curateProductDescription'>{{adminCurate.curatedData.description}}</p>
+      </div>
     </div>
   </div>
-   <div class="curateProductContainerRight col-md-7">
+   <div class="curateProductContainerRight col-md-5">
      <div class="" ng-repeat='image in adminCurate.curatedData.images'>
        <div class="curateProductPhotoMiniCellContainer" >
          <img class='curateProductPhotoMiniCell'src={{image}} alt="" />
        </div>
      </div>
      <div class="curateProductSwatchesContainer">
-       <div class='productDescriptionBox'>
-         <div class='curateProductDescriptionTitle'>Description</div>
-         <p class='wordwrap curateProductDescription'>{{adminCurate.curatedData.description}}</p>
-       </div>
-       <br>
-       <div class='productAccessoryBox'>
          <div class="curateProductSwatchCell">
            <h3 class='productAccessoryBoxCatagories'>Colors</h3>
            <div class="viewColorHolder" ng-repeat='color in adminCurate.allColors'>
@@ -80,7 +80,6 @@
            <div class="curateProductAccessoryBox" style="background-color:#A7A39F;"></div>
            <div class="curateProductAccessoryBox" style="background-color:#ECE9EF;"></div>
          </div>
-       </div>
      </div>
      <div class="curateProductChecklist">
        <div class="curateProductTopChecklist">
